@@ -10,3 +10,5 @@
 3. Profile to show how many images tagged,and the list of storms/archives a user can tag
 4. Ability to edit/request to edit
 5. API to give csv
+
+Use MongoDB Atlas for data storage.
