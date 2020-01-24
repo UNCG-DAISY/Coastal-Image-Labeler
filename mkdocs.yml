@@ -1,0 +1,44 @@
+site_name: Post Storm Image Classification Dashboard and Node Server
+repo_url: https://github.com/UNCG-DAISY/psi-dashboard
+
+nav:
+    - Home: index.md
+
+theme:
+  name: 'material'
+  custom_dir: 'theme'
+  font:
+    text: 'Ubuntu'
+    code: 'Ubuntu Mono'
+  palette:
+    primary: 'light green'
+    accent: 'orange'
+
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/squidfunk'    
+  
+# plugins:
+#     - search
+#     - git-revision-date
+
+markdown_extensions:
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.mark
+  - pymdownx.critic
+  - pymdownx.tilde
+  - codehilite:
+      linenums: true
+      guess_lang: False
+      use_pygments: True
+      #noclasses: True
+      pygments_style: monokai
+      
+
+extra_css:
+  - stylesheets/dark_theme.css
+  - stylesheets/codehilite.css
+  - stylesheets/custom.css
