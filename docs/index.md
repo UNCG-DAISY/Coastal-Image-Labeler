@@ -11,4 +11,4 @@
 4. Ability to edit/request to edit
 5. API to give csv
 
-Use MongoDB Atlas for data storage.
+Use MongoDB Atlas for data storage. This will allow scalability and some compatibility since our current dashboard saves the tagging data as a sort of JSON object.
