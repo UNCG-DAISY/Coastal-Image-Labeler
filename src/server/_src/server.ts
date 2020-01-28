@@ -1,10 +1,13 @@
 //imports
 import express, { Application } from 'express'
-import colors from 'colors'
+//import path from 'path'
 import dotenv from 'dotenv'
+import morgan from 'morgan'
+//import fileupload from 'express-fileupload'
+import colors from 'colors'
 colors
 import {connectDB} from './db'
-
+import {errorHandler} from './middleware/error'
 
 // Load env vars
 dotenv.config({  
@@ -14,10 +17,26 @@ dotenv.config({
 //Connect to DB via Mongoose
 connectDB()
 
+//Load route files
+import images from './routes/images'
+
 const app: Application = express();
 
-// Body parser, so that json can be sent to server
+// Body parser so that json can be recieved
 app.use(express.json())
+
+//Log all traffic
+app.use(morgan('dev'))
+
+//File upload
+// app.use(fileupload())
+//app.use(express.static(path.join(__dirname,'../public')))
+
+// Mount routers
+app.use('/api/v1/images',images)
+
+// This handles errors that happen during API calls
+app.use(errorHandler)
 
 const PORT = process.env.PORT ?? 5000;
 
@@ -29,4 +48,13 @@ const server = app.listen(
     }
 )
 
+//Handle unhandled promise rejections
+process.on('unhandledRejection', (err:any,promise: Promise<any>) => {
 
+    console.log(`Error: ${err?.message ?? 'undefined error'}`.red)
+    
+    //Exit server on fail
+    server.close(() => {
+        process.exit(1)
+    })
+})

@@ -3,6 +3,9 @@ repo_url: https://github.com/UNCG-DAISY/psi-dashboard
 
 nav:
     - Home: index.md
+    - Models:
+      - Image: models/image.md
+      - Tag: models/tag.md
 
 theme:
   name: 'material'
