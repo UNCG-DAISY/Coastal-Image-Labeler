@@ -1,11 +1,12 @@
 {
-  "name": "nextjs-with-typescript",
+  "name": "nextjs",
   "version": "4.0.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "latest",
     "clsx": "latest",
     "next": "latest",
+    "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest"
   },
@@ -13,12 +14,5 @@
     "dev": "next",
     "build": "next build",
     "start": "next start"
-  },
-  "devDependencies": {
-    "@types/next": "latest",
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "typescript": "latest"
   }
 }
