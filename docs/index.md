@@ -1,6 +1,6 @@
 # Post Storm Image Classification Dashboard and Node Server
 
-## Plan
+## Goals
 
 1. Recreate current features
     - Login and be given a image
@@ -12,3 +12,14 @@
 5. API to give csv
 
 Use MongoDB Atlas for data storage. This will allow scalability and some compatibility since our current dashboard saves the tagging data as a sort of JSON object.
+
+## Plan
+
+1. Get auth0 and MongoDb to playnice
+2. Get initial nextjs and ui set up
+
+## Database
+
+- Use mongodb
+- centeral models will be user,image,tag,archive. 
+- Make sure that auth0 and mongoDb work together for users, found [here](https://auth0.com/blog/auth0-tutorials-using-mongodb-atlas-as-a-custom-database/)

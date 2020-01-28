@@ -2,13 +2,17 @@
 import express, { Application } from 'express'
 import colors from 'colors'
 import dotenv from 'dotenv'
-//This specific lib has to be ran like this before use
 colors
+import {connectDB} from './db'
+
 
 // Load env vars
 dotenv.config({  
     path: './_config/config.env'
 });
+
+//Connect to DB via Mongoose
+connectDB()
 
 const app: Application = express();
 
@@ -24,3 +28,5 @@ const server = app.listen(
         console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold) 
     }
 )
+
+
