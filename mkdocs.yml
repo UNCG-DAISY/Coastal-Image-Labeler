@@ -17,10 +17,10 @@ theme:
     primary: 'light green'
     accent: 'orange'
 
-extra:
-  social:
-    - type: 'github'
-      link: 'https://github.com/squidfunk'    
+# extra:
+#   social:
+#     - type: 'github'
+#       link: ''    
   
 # plugins:
 #     - search
