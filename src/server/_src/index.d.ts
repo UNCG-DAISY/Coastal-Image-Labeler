@@ -1,23 +1,16 @@
-// declare module "psiDashboard" {
-//     export type careers = 
-//     'Web Development'|
-//     'Mobile Development'|
-//     'UI/UX'|
-//     'Data Science'|
-//     'Business'|
-//     'Other'
-//     export function text2(x:careers): string; 
-
-//     export interface tagCatagory {
-//         name:string
-//     }
-    
-// }
+import { Document,Types} from 'mongoose'
 
 declare namespace psiDashboard  {
-    // interface tagCatagory {
-    //     name:string
-    // }
+    export interface ImageTag extends Document {
+        taggerId:String,
+        tag:{
+            developmentType :'developed'|'undeveloped'
+            washoverType:'washover'|'nowashover'
+            impactType:'n/a'|'swash'|'collision'|'overwash'|'inundation'
+            terrianType:['river','marsh','sandyCoastline']
+        },
+        timeOfTag:Date
+    }
 }
 
 export = psiDashboard
