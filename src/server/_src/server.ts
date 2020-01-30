@@ -8,11 +8,18 @@ import colors from 'colors'
 colors
 import {connectDB} from './db'
 import {errorHandler} from './middleware/error'
+//These are so that we have server side rendering for material ui
+import {
+    handleRender
+} from './utils/nextjs_render'
+
 
 // Load env vars
 dotenv.config({  
     path: './_config/config.env'
 });
+
+const isDev = process?.env?.NODE_ENV === 'development' ? true:false
 
 //Connect to DB via Mongoose
 connectDB()
@@ -21,6 +28,12 @@ connectDB()
 import images from './routes/images'
 
 const app: Application = express();
+
+//Nextjs path?
+app.use('/_site', express.static('build'));
+
+// This is fired every time the server-side receives a request.
+app.use(handleRender);
 
 // Body parser so that json can be recieved
 app.use(express.json())
