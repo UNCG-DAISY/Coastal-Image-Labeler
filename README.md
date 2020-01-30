@@ -10,16 +10,6 @@ Collection, aggregation, and cataloging of NOAA post-storm emergency response im
 [![Documentation](https://img.shields.io/badge/Documentation-Click%20Me-brightgreen)](
 https://psi-dashboard.readthedocs.io/en/latest/)
 
-## Team Members
-
-- [**Shah Nafis Rafique**](https://github.com/ShahNafisRafique)
-- [**Matthew Moretz**](https://github.com/Matmorcat)
-- [**John Weber**](https://github.com/JWeb56)
-- [**Daniel Foster**](https://github.com/dlfosterbot)
-- [**Rinty Chowdhury**](https://github.com/rintychy)
-- [**Evan Goldstein**](https://github.com/ebgoldstein)
-- [**Somya Mohanty**](https://github.com/somyamohanty)
-
 ## Contributing / Developing
 
 ### Code of Conduct
