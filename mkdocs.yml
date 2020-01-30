@@ -3,6 +3,7 @@ repo_url: https://github.com/UNCG-DAISY/psi-dashboard
 
 nav:
     - Home: index.md
+    - Code of Conduct: code_of_conduct.md
     - Models:
       - Image: models/image.md
       - Tag: models/tag.md
