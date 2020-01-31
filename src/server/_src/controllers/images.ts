@@ -17,7 +17,21 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
     })
 })
 
+const test = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    
+    
+    //Send data back
+    res.status(201).json({
+        success:true,
+        data:{
+            num:Math.random(),
+            date:Date()
+        }
+    })
+})
+
 
 export {
-    tagImage
+    tagImage,
+    test
 }

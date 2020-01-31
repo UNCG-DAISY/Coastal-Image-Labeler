@@ -25,19 +25,20 @@ app.prepare()
         if (err) throw err
         console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold)  
     })
+
+    //Handle unhandled promise rejections
+    process.on('unhandledRejection', (err,promise) => {
+
+        console.log(`Error: ${err.message || 'undefined error'}`.red)
+        
+        //Exit server on fail
+        server.close(() => {
+            process.exit(1)
+        })
+    })
 })
 .catch((ex) => {
     console.error(ex.stack)
     process.exit(1)
 })
 
-//Handle unhandled promise rejections
-process.on('unhandledRejection', (err,promise) => {
-
-    console.log(`Error: ${err.message || 'undefined error'}`.red)
-    
-    //Exit server on fail
-    server.close(() => {
-        process.exit(1)
-    })
-})
