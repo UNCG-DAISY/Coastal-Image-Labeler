@@ -1,0 +1,1 @@
+- Why nextjs does client redirect and not server and how to force, [here](https://stackoverflow.com/questions/57376992/in-nextjs-how-to-programatically-trigger-server-side-rendering)
