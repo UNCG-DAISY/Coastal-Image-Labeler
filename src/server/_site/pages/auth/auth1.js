@@ -24,7 +24,7 @@ export default function About({user}) {
     <Container maxWidth="sm">
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
-          I am auth2
+          Next.js example
         </Typography>
         <Test user={user} />
         

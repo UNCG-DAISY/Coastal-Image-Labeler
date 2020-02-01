@@ -76,8 +76,8 @@ nextApp.prepare()
 
     // 6 - you are restricting access to some routes
     const restrictAccess = (req: Request, res: Response, next: NextFunction) => {
-        console.log('CALLED----------------------------------------------------')
-        console.log(Object.keys(req?.user))
+        // console.log('CALLED----------------------------------------------------')
+        // console.log(Object.keys(req?.user))
         if (!req.isAuthenticated()) return res.redirect("/login");
         next();
     };
