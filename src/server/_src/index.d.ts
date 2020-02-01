@@ -1,4 +1,5 @@
 import { Document,Types} from 'mongoose'
+import express from 'express';
 
 declare namespace psiDashboard  {
     export interface ImageTag extends Document {
@@ -11,6 +12,13 @@ declare namespace psiDashboard  {
         },
         timeOfTag:Date
     }
+}
+
+//So that we can access user in req.user.xxx
+declare module 'express' {
+  export interface Request {
+    user?: any;
+  }
 }
 
 export = psiDashboard
