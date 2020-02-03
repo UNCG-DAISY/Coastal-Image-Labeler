@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import MuiLink from '@material-ui/core/Link';
 
 import Test from '../../components/test'
+import {hasUser} from '../../components/checkIfUser'
 
 function Copyright() {
   return (
@@ -19,12 +20,12 @@ function Copyright() {
   );
 }
 
-export default function About({user}) {
+function About({user}) {
   return (
     <Container maxWidth="sm">
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Next.js example
+          About.js
         </Typography>
         <Test user={user} />
         
@@ -33,3 +34,14 @@ export default function About({user}) {
     </Container>
   );
 }
+
+About.getInitialProps = async ctx => {
+  const {req,res} = ctx
+  console.log( '' ?? 1111)
+
+  hasUser(req)
+ 
+  return {}
+}
+
+export default About

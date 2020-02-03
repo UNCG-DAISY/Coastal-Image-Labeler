@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Test from '../components/test'
+// import Link from '../components/Link'
 
 export default function Index({user}) {
   return (
@@ -12,7 +13,6 @@ export default function Index({user}) {
           Next.js example
         </Typography>
         <Test user/>
-
       </Box>
     </Container>
   );

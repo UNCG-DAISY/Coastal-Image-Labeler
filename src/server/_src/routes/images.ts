@@ -5,6 +5,8 @@ import {
     test
 } from '../controllers/images'
 
+import {protect} from '../middleware/auth'
+
 // "/api/v1/images"
 const router = express.Router();
 
@@ -14,6 +16,6 @@ router
 
 router
     .route('/test')
-    .get(test)
+    .get(protect,test)
 
 export default router;
