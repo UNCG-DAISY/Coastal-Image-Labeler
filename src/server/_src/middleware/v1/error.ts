@@ -1,7 +1,7 @@
 //This file handles errors during API calls
 
 import { Request,Response,NextFunction } from "express"
-import {ErrorResponse} from '../../utils/errorResponse'
+import {ErrorResponse} from '../../utils/v1/errorResponse'
 
 //Couldnt find the err type, atleast the one that works
 export const errorHandler = (err:any ,req: Request, res: Response, next: NextFunction) => {

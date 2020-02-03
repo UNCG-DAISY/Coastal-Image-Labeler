@@ -1,6 +1,6 @@
 import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition} from 'mongoose'
 import slugify from 'slugify'
-import {geocoder} from '../utils/geocoder'
+import {geocoder} from '../utils/v1/geocoder'
 import { Entry } from 'node-geocoder'
 import {ImageTag} from '../index'
 
