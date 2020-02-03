@@ -2,11 +2,9 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import MuiLink from '@material-ui/core/Link';
-
-import Test from '../../components/test'
-import {hasUser} from '../../components/checkIfUser'
-import Drawer from '../../components/drawer'
+import Test from '../../components/utils/test'
+import {hasUser} from '../../components/utils/checkIfUser'
+import Drawer from '../../components/layouts/drawer'
 
 function About(props) {
   return (

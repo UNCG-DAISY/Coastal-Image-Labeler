@@ -16,11 +16,15 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-
+import {uiConstants} from '../constants'
 //Adds swiping
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 
-const drawerWidth = 240;
+//Desktop drawer display
+import ShowDesktopDrawer from './drawer/showDesktopDrawer'
+import ShowMobileDrawer from './drawer/showMobileDrawer'
+
+const drawerWidth = uiConstants.drawerWidth;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,6 +41,7 @@ const useStyles = makeStyles(theme => ({
     //   width: `calc(100% - ${drawerWidth}px)`,
     //   marginLeft: drawerWidth,
     // },
+    backgroundColor:'#7db343',
     zIndex: theme.zIndex.drawer + 1,
   },
   menuButton: {
@@ -88,41 +93,21 @@ function ResponsiveDrawer(props) {
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
 
         {/* Phone mode */}
-        <Hidden smUp implementation="css">
-          <SwipeableDrawer
-            container={container}
-            variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            onOpen={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-              {props.SideContent}
-          </SwipeableDrawer>
-        </Hidden>
+        <ShowMobileDrawer handleDrawerToggle ={handleDrawerToggle} mobileOpen={mobileOpen}>
+        {props.SideContent}  
+        </ShowMobileDrawer>
 
         {/* Desktop mode */}
-        <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            {props.SideContent}
-          </Drawer>
-        </Hidden>
+        <ShowDesktopDrawer>
+          {props.SideContent}
+        </ShowDesktopDrawer>
+        
+      
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {props.children}
+        
         
         
       </main>
