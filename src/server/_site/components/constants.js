@@ -7,9 +7,14 @@ const apiCall = (route) => {
     return `${protocal}://${myIp}:${port}${route}`
 }
 
+const uiConstants = {
+    drawerWidth:240
+}
+
 export {
     myIp,
     port,
     protocal,
-    apiCall
+    apiCall,
+    uiConstants
 }
