@@ -17,14 +17,7 @@ Use MongoDB Atlas for data storage. This will allow scalability and some compati
 
 1. Have Node api and Nextjs be on the same server. ✔️
 2. User auth. ✔️
-3. Ensure that if a page that should be auth is loaded without a user, to quit.
-4. Have auth0 register user to MongoDB.
-5. Create user roles
-6. Have different roles show different menus.
-7. Create a few archives and show to different users based off their roles.
-
-## Database
-
-- Use mongodb
-- centeral models will be user,image,tag,archive. 
-- Make sure that auth0 and mongoDb work together for users, found [here](https://auth0.com/blog/auth0-tutorials-using-mongodb-atlas-as-a-custom-database/)
+3. Ensure that if a page that should be auth is loaded without a user, redirect to home. ✔️
+4. Have auth0 register user to MongoDB. ✔️
+5. Create user roles ✔️
+6. Create models

@@ -6,7 +6,8 @@ nav:
     - Code of Conduct: code_of_conduct.md
     - Models:
       - Image: models/image.md
-      - Tag: models/tag.md
+      - TagData: models/tagData.md
+      - User: models/user.md
 
 theme:
   name: 'material'

@@ -2,7 +2,8 @@ import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition} fro
 import slugify from 'slugify'
 import {geocoder} from '../utils/v1/geocoder'
 import { Entry } from 'node-geocoder'
-import {ImageTag} from '../index'
+import {UserDocument} from '../index'
+import { number } from 'prop-types'
 
 
 const userSchema: Schema = new Schema({
@@ -10,35 +11,25 @@ const userSchema: Schema = new Schema({
         required:[true,'UserId not passed'],
         type:String
     },
-    tag:{
-        //required:[true,'Must pass tag data'],
-        developmentType :{
-            required:[true,'No development type passed'],
-            type:String,
-            enum:['developed','undeveloped']
-        },
-        washoverType:{
-            required:[true,'No washover type passed'],
-            type:String,
-            enum:['washover','nowashover']
-        },
-        impactType:{
-            required:[true,'No impact type passed'],
-            type:String,
-            enum:['n/a','swash','collision','overwash','inundation']
-        },
-        terrianType:{
-            required:[true,'No terrian type passed'],
-            type:[String],
-            enum:['river','marsh','sandyCoastline']
-        }
+    userName: {
+        required:[true,'Username not passed'],
+        type:String
     },
-    timeOfTag:{
-        type:Date,
-        required:[true,'No time of tag passed']
+    imagesTagged: {
+        type: [String],
+        default: []
+    },
+    numberOfImagesTagged: {
+        type: Number,
+        default: 0
+    },
+    roles:{
+        type:[String],
+        enum: ['defaultRole', 'taggerRole'],
+        default:'defaultRole'
     }
 })
 
 
 
-export const ImageTagModel: Model<ImageTag> =  model('ImageTag', imageTagSchema);
+export const UserModel: Model<UserDocument> =  model('User', userSchema);

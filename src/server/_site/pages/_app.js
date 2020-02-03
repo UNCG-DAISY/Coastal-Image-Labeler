@@ -6,6 +6,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../components/theme';
 import { throws } from 'assert';
 import axios from 'axios'
+import { 
+  myIp,
+  port,
+  protocal,
+  apiCall
+} from '../components/constants'
 
 export default class MyApp extends App {
 
@@ -18,12 +24,20 @@ export default class MyApp extends App {
 
     if (ctx.req && ctx.req.session.passport) {
       pageProps.user = ctx.req.session.passport.user
-      const userRoles = await axios.post('http://localhost:5000/api/v1/images/test/1',{
+
+      //Get the user role if there is any
+      const userRoles = await axios.post(apiCall('/api/v1/images/test/1'),{
         id:'google-oauth2|100613204270669384478'
+      })
+
+      const mongoUser = await axios.post(apiCall('/api/v1/users/isUser'),{
+        id:ctx.req.session.passport.user.id,
+        username:ctx.req.session.passport.user.displayName
       })
       
       pageProps.user.roles = userRoles.data.data.roles
-
+      pageProps.user.mongoUser = mongoUser.data.data.user
+      console.log(mongoUser?.data?.data?.message?.america)
     }
 
    

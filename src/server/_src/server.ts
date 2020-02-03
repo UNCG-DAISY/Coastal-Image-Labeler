@@ -13,6 +13,8 @@ import {errorHandler} from './middleware/v1/error'
 import next from 'next'
 //Load route files
 import images from './routes/v1/test'
+import users from './routes/v1/user'
+//Import the react/server shared constants
 
 // 1 - importing dependencies
 import session from "express-session";
@@ -101,6 +103,8 @@ nextApp.prepare()
 
     // Mount routers
     app.use('/api/v1/images',images)
+    app.use('/api/v1/users',users)
+    
 
     // This handles errors that happen during API calls
     app.use(errorHandler)
@@ -114,7 +118,6 @@ nextApp.prepare()
     })
 
     const PORT = process.env.PORT ?? 5000;
-
     const server = app.listen(PORT,() => {
         console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold)
     })

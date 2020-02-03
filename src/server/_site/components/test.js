@@ -14,7 +14,9 @@ const useStyles = makeStyles(theme => ({
 
 
 function renderRoles(roles) {
-
+  if(!roles) {
+    roles=[]
+  }
   return roles.map((element, index) => {
     const { role } = element //destructuring
     return (
@@ -47,6 +49,9 @@ export default function Test({user}) {
         Roles
         {renderRoles(user.roles)}
        
+      </div>
+      <div>
+        Mongo user: {JSON.stringify(user.mongoUser)}
       </div>
       
       <a href='\login' className= {classes.link}>
