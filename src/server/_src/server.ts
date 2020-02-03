@@ -19,8 +19,8 @@ import session from "express-session";
 import passport from "passport";
 import Auth0Strategy from"passport-auth0";
 import uid from 'uid-safe';
-import {authRoutes} from "./utils/auth-routes"
-import {getManagementTokens} from './utils/auth0_tokens'
+import {authRoutes} from "./utils/v1/auth-routes"
+import {getManagementTokens} from './utils/v1/auth0_tokens'
 import * as types from './index'
 
 
