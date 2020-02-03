@@ -17,7 +17,19 @@ declare namespace psiDashboard  {
 //So that we can access user in req.user.xxx
 declare module 'express' {
   export interface Request {
-    user?: any;
+      user?: any;
+  }
+}
+
+//Global variables
+declare global {
+  namespace NodeJS {
+    interface Global {
+       document: Document;
+       window: Window;
+       navigator: Navigator;
+       MANGAGEMENT_TOKEN:string
+    } 
   }
 }
 

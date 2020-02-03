@@ -5,18 +5,32 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../components/theme';
 import { throws } from 'assert';
+import axios from 'axios'
 
 export default class MyApp extends App {
 
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
+
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
+
     if (ctx.req && ctx.req.session.passport) {
-      pageProps.user = ctx.req.session.passport.user;
+      pageProps.user = ctx.req.session.passport.user
+      const userRoles = await axios.post('http://localhost:5000/api/v1/images/test/1',{
+        id:'google-oauth2|100613204270669384478'
+      })
+      
+      pageProps.user.roles = userRoles.data.data.roles
+
     }
+
+   
+
+    //userRoles
     return { pageProps };
+
   }
 
   constructor(props) {
