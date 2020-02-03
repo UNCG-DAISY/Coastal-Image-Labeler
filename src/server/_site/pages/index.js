@@ -4,19 +4,12 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Drawer from '../components/layouts/drawer'
 import LoginSideDrawer from '../components/layouts/loginSideDrawerContent'
+import MyAppBar from '../components/layouts/appBar'
 // import Link from '../components/Link'
 
 export default function Index(props) {
   return (
-    // <Container maxWidth="sm">
-    //   <Box my={4}>
-    //     <Typography variant="h4" component="h1" gutterBottom>
-    //       Next.js example
-    //     </Typography>
-    //     <Test user/>
-    //   </Box>
-    // </Container>
-    <Drawer SideContent = {<LoginSideDrawer/>}{...props}>
+    <Drawer SideContent = {<LoginSideDrawer/>}{...props} AppBar = {<MyAppBar pageTitle = 'Home Page'/>}>
       <Container maxWidth="md">
         <Box my={4}>
           <Typography paragraph>
