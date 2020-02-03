@@ -20,4 +20,4 @@ Use MongoDB Atlas for data storage. This will allow scalability and some compati
 3. Ensure that if a page that should be auth is loaded without a user, redirect to home. ✔️
 4. Have auth0 register user to MongoDB. ✔️
 5. Create user roles ✔️
-6. Create models
+6. Create models ✔️
