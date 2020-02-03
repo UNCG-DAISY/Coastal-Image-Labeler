@@ -30,7 +30,6 @@ function About({user}) {
         <Test user={user} />
         
       </Box>
-      {user.id}
     </Container>
   );
 }

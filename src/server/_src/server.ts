@@ -20,7 +20,8 @@ import passport from "passport";
 import Auth0Strategy from"passport-auth0";
 import uid from 'uid-safe';
 import {authRoutes} from "./utils/auth-routes"
-
+import {getManagementTokens} from './utils/auth0_tokens'
+import * as types from './index'
 
 
 // Load env vars
@@ -35,7 +36,13 @@ const nextApp = next({ dev,dir:'./_site' })
 const handle = nextApp.getRequestHandler()
 
 nextApp.prepare()
-.then(() => {
+.then(async () => {
+    
+    global.MANGAGEMENT_TOKEN = await getManagementTokens()
+
+    if(global.MANGAGEMENT_TOKEN) {
+        console.log("Management token recieved".magenta)
+    }
     //Connect to DB via Mongoose
     connectDB()
 
@@ -54,13 +61,13 @@ nextApp.prepare()
     // 3 - configuring Auth0Strategy
     const auth0Strategy = new Auth0Strategy(
         {
-        domain: process.env.AUTH0_DOMAIN,
-        clientID: process.env.AUTH0_CLIENT_ID,
-        clientSecret: process.env.AUTH0_CLIENT_SECRET,
-        callbackURL: process.env.AUTH0_CALLBACK_URL
+            domain: process.env.AUTH0_DOMAIN,
+            clientID: process.env.AUTH0_CLIENT_ID,
+            clientSecret: process.env.AUTH0_CLIENT_SECRET,
+            callbackURL: process.env.AUTH0_CALLBACK_URL
         },
         function(accessToken, refreshToken, extraParams, profile, done) {
-        return done(null, profile);
+            return done(null, profile);
         }
     );
 
@@ -122,6 +129,8 @@ nextApp.prepare()
             process.exit(1)
         })
     })
+
+    //Test getting roles lol
     
 })
 .catch((ex) => {

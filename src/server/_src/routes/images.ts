@@ -2,8 +2,9 @@ import express from 'express'
 
 import {
     tagImage,
-    test
-} from '../controllers/images'
+    test,
+    getRoleTest
+} from '../controllers/test'
 
 import {protect} from '../middleware/auth'
 
@@ -17,5 +18,9 @@ router
 router
     .route('/test')
     .get(protect,test)
+
+    router
+    .route('/test/:id')
+    .post(getRoleTest)
 
 export default router;

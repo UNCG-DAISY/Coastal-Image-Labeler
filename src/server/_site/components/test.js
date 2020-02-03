@@ -12,8 +12,23 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
+function renderRoles(roles) {
+
+  return roles.map((element, index) => {
+    const { role } = element //destructuring
+    return (
+       <div key={role}>
+          <div>{role}</div>
+       </div>
+    )
+ })
+}
 export default function Test({user}) {
   const classes = useStyles();
+
+ 
+
   return (
     <>
       <div>
@@ -22,6 +37,16 @@ export default function Test({user}) {
 
       <div>
         You are user: {user.displayName}
+      </div>
+
+      <div>
+        id: {user.id}
+      </div>
+
+      <div>
+        Roles
+        {renderRoles(user.roles)}
+       
       </div>
       
       <a href='\login' className= {classes.link}>
