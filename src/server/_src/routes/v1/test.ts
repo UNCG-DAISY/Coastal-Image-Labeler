@@ -4,9 +4,9 @@ import {
     tagImage,
     test,
     getRoleTest
-} from '../controllers/test'
+} from '../../controllers/v1/test'
 
-import {protect} from '../middleware/auth'
+import {protect} from '../../middleware/v1/auth'
 
 // "/api/v1/images"
 const router = express.Router();
