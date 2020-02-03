@@ -6,31 +6,23 @@ import MuiLink from '@material-ui/core/Link';
 
 import Test from '../../components/test'
 import {hasUser} from '../../components/checkIfUser'
+import Drawer from '../../components/drawer'
 
-function Copyright() {
+function About(props) {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <MuiLink color="inherit" href="https://material-ui.com/">
-        Your Website
-      </MuiLink>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
-function About({user}) {
-  return (
-    <Container maxWidth="sm">
+    <Drawer {...props}>
+     <Container maxWidth="md">
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
           About.js
         </Typography>
-        <Test user={user} />
+        <Test user={props.user} />
         
       </Box>
     </Container>
+    </Drawer>
+    
   );
 }
 

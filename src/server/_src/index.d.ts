@@ -34,6 +34,7 @@ declare namespace psiDashboard  {
   }
 
   export interface UserDocument extends Document {
+    dateAdded: number;
     userId:string,
     userName: string,
     imagesTagged?: [string]

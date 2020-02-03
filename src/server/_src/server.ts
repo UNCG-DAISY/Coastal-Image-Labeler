@@ -1,10 +1,10 @@
 //imports
 import express, { Application } from 'express'
 import { Request,Response,NextFunction } from "express"
-//import path from 'path'
+import path from 'path'
 import dotenv from 'dotenv'
 import morgan from 'morgan'
-//import fileupload from 'express-fileupload'
+import fileupload from 'express-fileupload'
 import colors from 'colors'
 colors
 import {connectDB} from './db'
@@ -12,19 +12,17 @@ import {errorHandler} from './middleware/v1/error'
 //Next js module that allows us to run nextjs and server
 import next from 'next'
 //Load route files
-import images from './routes/v1/test'
 import users from './routes/v1/user'
 //Import the react/server shared constants
 
 // 1 - importing dependencies
 import session from "express-session";
 import passport from "passport";
-import Auth0Strategy from"passport-auth0";
+import Auth0Strategy from "passport-auth0";
 import uid from 'uid-safe';
 import {authRoutes} from "./utils/v1/auth-routes"
 import {getManagementTokens} from './utils/v1/auth0_tokens'
-import * as types from './index'
-
+// import * as types from './index'
 
 // Load env vars
 dotenv.config({  
@@ -98,11 +96,11 @@ nextApp.prepare()
     //app.use(morgan('dev'))
 
     //File upload
-    // app.use(fileupload())
-    //app.use(express.static(path.join(__dirname,'../public')))
+    app.use(fileupload())
+    app.use(express.static(path.join(__dirname,'../public')))
 
     // Mount routers
-    app.use('/api/v1/images',images)
+
     app.use('/api/v1/users',users)
     
 

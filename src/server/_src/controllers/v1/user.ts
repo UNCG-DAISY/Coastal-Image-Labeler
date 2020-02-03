@@ -29,7 +29,8 @@ const isInMongoDB = asyncHandler(async (req: Request, res: Response, next: NextF
         const user_entry = await UserModel.create({
             userId:data.id,
             userName:data.username,
-            roles:['taggerRole']
+            roles:['taggerRole'],
+            //dateAdded: Date.now()
         })
 
         res.status(201).json({
@@ -52,6 +53,52 @@ const isInMongoDB = asyncHandler(async (req: Request, res: Response, next: NextF
     }
 })
 
+/**
+ * @desc        Gets all roles of a user
+ * @route       GET /api/v1/user/isUser
+ * @access      Public
+ * @returns     yes
+ */
+const getUserRoles = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    
+    const userId = req?.body?.id
+
+    //If no user id sent
+    if(!userId) {
+        return next(new ErrorResponse(`Please send a userId`,400))
+    }
+  
+    const options:any = {
+        method: 'GET',
+        url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${userId}/roles`,
+        headers:{
+            authorization: `Bearer ${global.MANGAGEMENT_TOKEN}`
+        }
+    };
+    
+    //Call auth0 api for user roles
+    const role_data:[any] = (await axios.get(options.url,options)).data
+    
+    let roles = []
+
+    //Since array of roles,just get the important stuff
+    role_data.forEach(role => {
+        roles.push({
+            role:role.name,
+            role_description:role.description
+        })
+    });
+
+    res.status(200).json({
+        success:true,
+        data:{
+           roles:roles
+        }
+    })
+   
+})
+
 export {
-    isInMongoDB
+    isInMongoDB,
+    getUserRoles
 }

@@ -26,13 +26,13 @@ export default class MyApp extends App {
       pageProps.user = ctx.req.session.passport.user
 
       //Get the user role if there is any
-      const userRoles = await axios.post(apiCall('/api/v1/images/test/1'),{
-        id:'google-oauth2|100613204270669384478'
+      const userRoles = await axios.post(apiCall('/api/v1/users/getRoles'),{
+        id:pageProps?.user?.id
       })
 
       const mongoUser = await axios.post(apiCall('/api/v1/users/isUser'),{
-        id:ctx.req.session.passport.user.id,
-        username:ctx.req.session.passport.user.displayName
+        id:ctx?.req?.session?.passport?.user?.id,
+        username:ctx?.req?.session?.passport?.user?.displayName
       })
       
       pageProps.user.roles = userRoles.data.data.roles
