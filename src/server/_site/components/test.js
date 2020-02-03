@@ -4,7 +4,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   link: {
-    textDecoration: 'none'
+    textDecoration: 'none',
+    margin: theme.spacing(1),
+  },
+  redButton : {
+    backgroundColor:'#FF5733'
   }
 }));
 
@@ -24,8 +28,8 @@ export default function Test({user}) {
         <Button variant="contained">Login</Button>
       </a>
 
-      <a href='\logout'  className= {classes.link}>
-        <Button variant="contained">Logout</Button>
+      <a href='\logout'  className= {`${classes.link} ${classes.redButton}`} styles={{backgroundColor:'red'}}>
+        <Button variant="contained" className= {`${classes.redButton}`}>Logout</Button>
       </a>
 
       <a href='\auth\auth1'  className= {classes.link}>
@@ -34,11 +38,11 @@ export default function Test({user}) {
         </Button>
       </a>
 
-      <a href='\auth\auth2'  className= {classes.link}>
+      {/* <a href='\auth\auth2'  className= {classes.link}>
         <Button variant="contained" color="primary">
           Auth 2
         </Button>
-      </a>        
+      </a>         */}
     </>
   );
 }
