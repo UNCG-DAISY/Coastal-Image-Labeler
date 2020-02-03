@@ -7,6 +7,9 @@ import { number } from 'prop-types'
 
 
 const userSchema: Schema = new Schema({
+    dateAdded:{
+        type:Date
+    },
     userId:{
         required:[true,'UserId not passed'],
         type:String
@@ -30,6 +33,13 @@ const userSchema: Schema = new Schema({
     }
 })
 
+//before saving
+// Create bootcamp slug from the name
+userSchema.pre<UserDocument>('save', function(next:HookNextFunction) {
+    this.dateAdded = Date.now()
+
+    next();
+});
 
 
 export const UserModel: Model<UserDocument> =  model('User', userSchema);

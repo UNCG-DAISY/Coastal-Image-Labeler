@@ -8,6 +8,9 @@ The user model will contain PSI related information such as which images they ha
 
 ```ts
 {
+    dateAdded:{
+        type:Date
+    },
     userId:{
         required:[true,'UserId not passed'],
         type:String
@@ -21,7 +24,7 @@ The user model will contain PSI related information such as which images they ha
         default: []
     },
     numberOfImagesTagged: {
-        type: number,
+        type: Number,
         default: 0
     },
     roles:{
