@@ -1,6 +1,6 @@
 
 import {asyncHandler} from './async'  
-import {ErrorResponse} from '../utils/errorResponse'
+import {ErrorResponse} from '../../utils/errorResponse'
 import { Request,Response,NextFunction } from "express"
 
 //protect routes

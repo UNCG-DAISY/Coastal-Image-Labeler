@@ -1,6 +1,6 @@
 import { Request,Response,NextFunction } from "express"
-import {asyncHandler} from '../middleware/async' //to avoid putting try catch everywhere
-import {ImageTagModel} from '../models/Tag'
+import {asyncHandler} from '../../middleware/v1/async' //to avoid putting try catch everywhere
+import {ImageTagModel} from '../../models/Tag'
 import axios from 'axios'
 
 /**

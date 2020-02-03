@@ -8,11 +8,11 @@ import morgan from 'morgan'
 import colors from 'colors'
 colors
 import {connectDB} from './db'
-import {errorHandler} from './middleware/error'
+import {errorHandler} from './middleware/v1/error'
 //Next js module that allows us to run nextjs and server
 import next from 'next'
 //Load route files
-import images from './routes/images'
+import images from './routes/v1/test'
 
 // 1 - importing dependencies
 import session from "express-session";
