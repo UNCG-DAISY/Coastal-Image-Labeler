@@ -2,8 +2,9 @@ import { Document,Types} from 'mongoose'
 import express from 'express';
 
 declare namespace psiDashboard  {
-    export interface ImageTag extends Document {
-        taggerId:String,
+
+    export interface TagDataDocument extends Document {
+        taggerId:string,
         tag:{
             developmentType :'developed'|'undeveloped'
             washoverType:'washover'|'nowashover'
@@ -12,6 +13,33 @@ declare namespace psiDashboard  {
         },
         timeOfTag:Date
     }
+
+    export interface ImageDocument extends Document {
+      archive:string,
+      compressed:boolean,
+      dateAdded:Date,
+      finishedTagging: boolean,
+      location:{
+          upperLeft:[number],
+          upperRight:[number],
+          lowerLeft:[number],
+          lowerRight:[number]
+      },
+      id :string,
+      path : string,
+      taggable:boolean,
+      taggedTimes:[Date],
+      tags:[Object],
+      tillComplete:number
+  }
+
+  export interface UserDocument extends Document {
+    userId:string,
+    userName: string,
+    imagesTagged?: [string]
+    numberOfImagesTagged?: number
+    roles?:[string]
+  }
 }
 
 //So that we can access user in req.user.xxx

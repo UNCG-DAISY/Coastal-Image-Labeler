@@ -1,6 +1,6 @@
 import { Request,Response,NextFunction } from "express"
 import {asyncHandler} from '../../middleware/v1/async' //to avoid putting try catch everywhere
-import {ImageTagModel} from '../../models/Tag'
+import {TagDataModel} from '../../models/TagData'
 import axios from 'axios'
 
 /**
@@ -11,7 +11,7 @@ import axios from 'axios'
  */
 const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     
-    const image_entry = await ImageTagModel.create(req.body)
+    const image_entry = await TagDataModel.create(req.body)
     //Send data back
     res.status(201).json({
         success:true,
