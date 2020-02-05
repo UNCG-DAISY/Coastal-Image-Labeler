@@ -11,8 +11,11 @@ import {connectDB} from './db'
 import {errorHandler} from './middleware/v1/error'
 //Next js module that allows us to run nextjs and server
 import next from 'next'
+
 //Load route files
 import users from './routes/v1/user'
+import archives from './routes/v1/archives'
+import storms from './routes/v1/storms'
 //Import the react/server shared constants
 
 // 1 - importing dependencies
@@ -100,10 +103,11 @@ nextApp.prepare()
     app.use(express.static(path.join(__dirname,'../public')))
 
     // Mount routers
-
     app.use('/api/v1/users',users)
+    app.use('/api/v1/archives',archives)
+    app.use('/api/v1/storms',storms)
     
-
+    
     // This handles errors that happen during API calls
     app.use(errorHandler)
 

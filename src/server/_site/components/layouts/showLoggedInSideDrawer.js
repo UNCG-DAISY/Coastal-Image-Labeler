@@ -18,10 +18,11 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import LinkIcon from '@material-ui/icons/Link';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 //Adds swiping
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-
+import LogoutListButton from '../buttons/logoutListButton'
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -131,6 +132,11 @@ function LoginSideDrawer(props) {
 
             <List>
                 {generateSideContent(extraContentePages,classes)}
+            </List>
+
+            <Divider />
+            <List>
+              <LogoutListButton/>
             </List>
         </div>
     
