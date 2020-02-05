@@ -3,7 +3,7 @@ import express from 'express';
 
 declare namespace psiDashboard  {
 
-    export interface TagDataDocument extends Document {
+  export interface TagDataDocument extends Document {
         taggerId:string,
         tag:{
             developmentType :'developed'|'undeveloped'
@@ -14,7 +14,7 @@ declare namespace psiDashboard  {
         timeOfTag:Date
     }
 
-    export interface ImageDocument extends Document {
+  export interface ImageDocument extends Document {
       archive:string,
       compressed:boolean,
       dateAdded:Date,
@@ -39,7 +39,24 @@ declare namespace psiDashboard  {
     userName: string,
     imagesTagged?: [string]
     numberOfImagesTagged?: number
-    roles?:[string]
+    roles?:[string],
+    storm:[Types.ObjectId]
+  }
+
+  export interface ArchiveDocument extends Document {
+    dateAdded?:Date,
+    name : String,
+    path : String,
+    storm:Types.ObjectId,
+    taggable: Boolean
+  }
+
+  export interface StormDocument extends Document {
+    archives: [Types.ObjectId],
+    dateAdded?:Date,
+    name : String,
+    path : String,
+    taggable:Boolean
   }
 }
 

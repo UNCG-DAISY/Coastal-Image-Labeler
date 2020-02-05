@@ -1,4 +1,4 @@
-import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition} from 'mongoose'
+import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Types} from 'mongoose'
 import slugify from 'slugify'
 import {geocoder} from '../utils/v1/geocoder'
 import { Entry } from 'node-geocoder'
@@ -7,6 +7,7 @@ import { number } from 'prop-types'
 
 
 const userSchema: Schema = new Schema({
+    
     dateAdded:{
         type:Date
     },
@@ -30,6 +31,11 @@ const userSchema: Schema = new Schema({
         type:[String],
         enum: ['defaultRole', 'taggerRole'],
         default:'defaultRole'
+    },
+    storm: {
+        type: [Types.ObjectId],
+        ref: 'Storm',
+        default: []
     }
 })
 

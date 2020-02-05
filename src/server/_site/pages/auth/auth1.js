@@ -8,6 +8,8 @@ import Drawer from '../../components/layouts/drawer'
 import MyAppBar from '../../components/layouts/appBar'
 import ShowLoggedInSideDrawer from '../../components/layouts/showLoggedInSideDrawer'
 
+
+
 function About(props) {
   return (
     <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
@@ -16,7 +18,10 @@ function About(props) {
           <Typography variant="h4" component="h1" gutterBottom>
             About.js
           </Typography>
-          <Test user={props.user} />
+          <a href ='/auth/showArchives?title=memed'>
+            aaaa
+          </a>
+          {/* <Test user={props.user} /> */}
         </Box>
       </Container>
     </Drawer>
