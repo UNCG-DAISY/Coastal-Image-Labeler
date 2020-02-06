@@ -13,10 +13,12 @@ const userSchema: Schema = new Schema({
     },
     userId:{
         required:[true,'UserId not passed'],
+        unique: true,
         type:String
     },
     userName: {
         required:[true,'Username not passed'],
+        unique: true,
         type:String
     },
     imagesTagged: {

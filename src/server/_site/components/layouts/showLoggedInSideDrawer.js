@@ -19,6 +19,7 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import LinkIcon from '@material-ui/icons/Link';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import LabelIcon from '@material-ui/icons/Label';
 
 //Adds swiping
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -74,8 +75,12 @@ const sideContentPages = [
       title: 'My Profile',
       icon: <AccountBoxIcon/>,
       href:'/auth/myProfile'
-
-  }
+    },
+    {
+      title: 'Start Tagging',
+      icon: <LabelIcon/>,
+      href:'/auth/myProfile'
+    }
     
 ]
 
