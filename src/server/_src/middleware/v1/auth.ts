@@ -20,7 +20,11 @@ const protect = asyncHandler(async(req: Request, res: Response, next: NextFuncti
 //Grant access to specific roles
 const authorize = (...roles:string[]) => {
     return (req: Request, res: Response, next: NextFunction) => {
-        if(!roles.includes(req?.user?.role)) {
+        const userId = req.user.id
+        const mongoUser = req.user.mongoUser
+        const userRoles = mongoUser.roles
+
+        if(!roles.includes(userRoles)) {
             return next(new ErrorResponse(`User role ${req?.user?.role} is not authorized to access this route`,403))
         }
         next()

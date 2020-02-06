@@ -2,28 +2,34 @@ import express from 'express'
 
 import {
     getAllStorms,
-    getStorm
+    getStorm,
+    //createStorm
 } from '../../controllers/v1/storms'
 
-import {protect} from '../../middleware/v1/auth'
+import {protect,authorize} from '../../middleware/v1/auth'
 
 // "/api/v1/storms/"
 const router = express.Router();
 
 router
     .route('/')
-    .post(getAllStorms)
+    .get(getAllStorms)
 
 router
     .route('/:userId')
-    .post(getAllStorms)
+    .get(getAllStorms)
     
+// router
+//     .route('/storm/')
+//     .post(createStorm)//authorize('admin')
+
+
 router
     .route('/storm/:stormId')
-    .post(getStorm)
+    .get(getStorm)
 
 router
     .route('/storm/:stormId/:userId')
-    .post(getStorm)
+    .get(getStorm)
 
 export default router;

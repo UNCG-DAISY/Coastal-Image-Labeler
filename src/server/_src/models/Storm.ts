@@ -10,6 +10,10 @@ const stormSchema: Schema = new Schema({
         ref: 'Archive',
         default: []
     },
+    creator: {
+        type: Types.ObjectId,
+        required: [true,'Please provide the creator id'],
+    },
     dateAdded:{
         type:Date
     },
