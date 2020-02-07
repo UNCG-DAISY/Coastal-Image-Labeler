@@ -1,15 +1,12 @@
 import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Types} from 'mongoose'
-import slugify from 'slugify'
-import {geocoder} from '../utils/v1/geocoder'
-import { Entry } from 'node-geocoder'
 import {StormDocument} from '../index'
 
 const stormSchema: Schema = new Schema({
-    archives: {
-        type: [Types.ObjectId],
-        ref: 'Archive',
-        default: []
-    },
+    // archives: {
+    //     type: [Types.ObjectId],
+    //     ref: 'Archive',
+    //     default: []
+    // },
     creator: {
         type: Types.ObjectId,
         required: [true,'Please provide the creator id'],
@@ -35,6 +32,20 @@ const stormSchema: Schema = new Schema({
     },
 
     
-})
+},{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+}
+
+)
+
+// Reverse populate with virtuals
+stormSchema.virtual('archives', {
+    ref: 'Archive',
+    localField: '_id',
+    foreignField: 'storm',
+    justOne: false
+});
+
 
 export const StormModel: Model<StormDocument> =  model('Storm', stormSchema);

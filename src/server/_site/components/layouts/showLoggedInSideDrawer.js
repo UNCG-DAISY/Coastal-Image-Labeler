@@ -79,7 +79,7 @@ const sideContentPages = [
     {
       title: 'Start Tagging',
       icon: <LabelIcon/>,
-      href:'/auth/myProfile'
+      href:'/auth/startTagging'
     }
     
 ]

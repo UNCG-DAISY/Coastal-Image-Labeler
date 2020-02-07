@@ -10,7 +10,9 @@
     "dev": "nodemon --exec ts-node ./_src/server.ts",
     "start": "tsc && SET NODE_ENV=production&& node ./_dist/server.js",
     "start2": "SET NODE_ENV=production&& node ./_dist/server.js",
-    "seederCreate": "ts-node ./_src/seeder.ts -i"
+    "seederCreate": "ts-node ./_src/seeder.ts -i",
+    "seederDel": "ts-node ./_src/seeder.ts -d",
+    "seeder": "npm run seederDel && npm run seederCreate"
   },
   "author": "Shah Nafis Rafique",
   "license": "MIT",

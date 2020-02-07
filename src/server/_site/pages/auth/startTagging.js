@@ -17,16 +17,26 @@ import {
   } from '../../components/constants'
 
 
+  function generateSideContent(list,classes) {
+    return list.map((item, index) => {
+        return (
+           <div>{item.name}</div>
+        )
+    })
+}
+
 function ShowArchives(props) {
     const router = useRouter();
+    const {storms} = props.data
     return (
         <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
             <Container maxWidth="md">
             <Box my={4}>
                 <Typography variant="h4" component="h1" gutterBottom>
-                About.js
+                Start Tagging
                 </Typography>
-            
+                {router.query.title}
+                {generateSideContent(storms)}
                 {/* <Test user={props.user} /> */}
             </Box>
             </Container>
@@ -43,10 +53,16 @@ ShowArchives.getInitialProps = async ctx => {
 
     //Then get all archives for such user
     const {id} = user
+    const mongoId = user.mongoUser[0]._id
+    
+    const get_archives = await axios.get(apiCall(`/api/v1/storms/${mongoId}`))
+    const data = get_archives.data.data
+    console.log(Object.keys(data))
+    //console.log(req.query.title)
 
-    //const archives = await axios.post(apiCall(`/api/v1/users/archives/${id}`))
-
-    return {}
+    return {
+        data
+    }
 }
 
 export default ShowArchives
