@@ -1,6 +1,7 @@
 import { Request,Response,NextFunction } from "express"
 import {asyncHandler} from '../../middleware/v1/async' //to avoid putting try catch everywhere
 import {UserModel} from '../../models/User'
+import {ArchiveModel} from '../../models/Archive'
 import {ErrorResponse} from '../../utils/v1/errorResponse'
 import axios from 'axios'
 
@@ -11,24 +12,14 @@ import axios from 'axios'
  * @returns     yes
  */
 const getAllArchives = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    if(req?.params?.id) {
-        //get by user
-
-        res.status(200).json({
-            success:true,
-            data:{
-                
-            }
-        })        
-    }
-
-    //else get all storms
+    const archives = await ArchiveModel.find()
+    
     res.status(200).json({
         success:true,
         data:{
-            
+            archives
         }
-    })        
+    })                
 })
 
 /**

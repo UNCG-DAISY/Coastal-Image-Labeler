@@ -3,7 +3,7 @@ import express from 'express'
 import {
     getAllStorms,
     getStorm,
-    //createStorm
+    createStorm
 } from '../../controllers/v1/storms'
 
 import {protect,authorize} from '../../middleware/v1/auth'
@@ -11,6 +11,7 @@ import {protect,authorize} from '../../middleware/v1/auth'
 // "/api/v1/storms/"
 const router = express.Router();
 
+//Get all storms
 router
     .route('/')
     .get(getAllStorms)
@@ -18,18 +19,10 @@ router
 router
     .route('/:userId')
     .get(getAllStorms)
-    
-// router
-//     .route('/storm/')
-//     .post(createStorm)//authorize('admin')
 
-
+//Creating a storm
 router
-    .route('/storm/:stormId')
-    .get(getStorm)
-
-router
-    .route('/storm/:stormId/:userId')
-    .get(getStorm)
+    .route("/storm")
+    .post(authorize('admin','stormCreator'),createStorm)
 
 export default router;

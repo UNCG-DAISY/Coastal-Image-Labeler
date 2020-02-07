@@ -18,7 +18,7 @@ function About(props) {
           <Typography variant="h4" component="h1" gutterBottom>
             About.js
           </Typography>
-          <a href ='/auth/showArchives?title=memed'>
+          <a href ='/auth/startTagging?title=memed'>
             aaaa
           </a>
           {/* <Test user={props.user} /> */}

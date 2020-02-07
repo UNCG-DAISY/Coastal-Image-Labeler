@@ -22,9 +22,8 @@ const archiveScehma: Schema = new Schema({
     },
     storm: {
         type: Types.ObjectId,
-        required: [true,'Please provide what storm this archive is part of'],
-        ref: 'Storm',
-        default: []
+        required: true,
+        ref: 'Storm'
     },
     taggable: {
         type:Boolean,
