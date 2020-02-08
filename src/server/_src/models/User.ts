@@ -4,6 +4,7 @@ import {geocoder} from '../utils/v1/geocoder'
 import { Entry } from 'node-geocoder'
 import {UserDocument} from '../index'
 import { number } from 'prop-types'
+import {RoleModel} from './Role'
 
 
 const userSchema: Schema = new Schema({
@@ -25,28 +26,33 @@ const userSchema: Schema = new Schema({
         type: [String],
         default: []
     },
-    numberOfImagesTagged: {
-        type: Number,
-        default: 0
-    },
-    roles:{
-        type:[String],
-        enum: ['defaultRole', 'taggerRole'],
-        default:'defaultRole'
-    },
-    storm: {
-        type: [Types.ObjectId],
-        ref: 'Storm',
-        default: []
+    role:{
+        type:[Types.ObjectId],
+        default:[]
     }
+    // storm: {
+    //     type: [Types.ObjectId],
+    //     ref: 'Storm',
+    //     default: []
+    // }
+},{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 })
 
 //before saving
-// Create bootcamp slug from the name
-userSchema.pre<UserDocument>('save', function(next:HookNextFunction) {
+// Add date created
+userSchema.pre<UserDocument>('save', async function(next:HookNextFunction) {
     this.dateAdded = Date.now()
-
     next();
+});
+
+// Reverse populate with virtuals
+userSchema.virtual('roleName', {
+    ref: 'Role',
+    localField: 'role',
+    foreignField: '_id',
+    justOne: false
 });
 
 

@@ -38,17 +38,22 @@ declare namespace psiDashboard  {
     userId:string,
     userName: string,
     imagesTagged?: [string]
-    numberOfImagesTagged?: number
-    roles:[string],
-    storm:[Types.ObjectId]
+    //numberOfImagesTagged?: number
+    roles:[string]
+    //storm:[Types.ObjectId]
   }
 
   export interface ArchiveDocument extends Document {
     dateAdded?:Date,
     name : String,
     path : String,
+    role: [Types.ObjectId],
     storm:Types.ObjectId,
     taggable: Boolean
+  }
+
+  export interface RoleDocument extends Document {
+    name:String
   }
 
   export interface StormDocument extends Document {

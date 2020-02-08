@@ -1,6 +1,8 @@
 import { Request,Response,NextFunction } from "express"
 import {asyncHandler} from '../../middleware/v1/async' //to avoid putting try catch everywhere
 import {UserModel} from '../../models/User'
+import {RoleModel} from '../../models/Role'
+RoleModel
 import {ErrorResponse} from '../../utils/v1/errorResponse'
 import axios from 'axios'
 
@@ -22,16 +24,19 @@ const isInMongoDB = asyncHandler(async (req: Request, res: Response, next: NextF
 
     const user = await UserModel.find({
         userId:data.id
-    })
+    }).populate('roleName')
 
     if(user.length === 0) {
 
-        const user_entry = await UserModel.create({
+        let user_entry = await UserModel.create({
             userId:data.id,
             userName:data.username,
-            roles:['taggerRole'],
             //dateAdded: Date.now()
         })
+
+        user_entry = await UserModel.findOne({
+            userId:data.id
+        }).populate('roleName')
 
         res.status(201).json({
             success:true,
