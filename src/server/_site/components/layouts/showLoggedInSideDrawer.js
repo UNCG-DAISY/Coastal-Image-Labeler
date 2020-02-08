@@ -20,6 +20,8 @@ import LinkIcon from '@material-ui/icons/Link';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import LabelIcon from '@material-ui/icons/Label';
+import CloudIcon from '@material-ui/icons/Cloud';
+import FolderIcon from '@material-ui/icons/Folder';
 
 //Adds swiping
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -79,6 +81,16 @@ const sideContentPages = [
     {
       title: 'Start Tagging',
       icon: <LabelIcon/>,
+      href:'/auth/startTagging'
+    },
+    {
+      title: 'Make a Storm',
+      icon: <CloudIcon/>,
+      href:'/auth/startTagging'
+    },
+    {
+      title: 'Make an Archive',
+      icon: <FolderIcon/>,
       href:'/auth/startTagging'
     }
     
