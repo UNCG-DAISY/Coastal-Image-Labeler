@@ -53,6 +53,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function genRoleNames(roles) {
+  return roles.map((role, index) => {
+      return (
+          <>{role.name}</>
+      )
+  })
+}
+
 function MyProfile(props) {
   const classes = useStyles();
   const user = props.user
@@ -62,6 +70,8 @@ function MyProfile(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+
 
   return (
     <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer/> }AppBar = {<MyAppBar pageTitle = 'My Profile'/>}>
@@ -123,7 +133,7 @@ function MyProfile(props) {
             <Typography paragraph>
               {console.log(user.mongoUser[0])}
               Number of images tagged: {mongoUser.numberOfImagesTagged}<br/>
-              Roles: {mongoUser.roles.join(',')}
+              Roles: {genRoleNames(mongoUser.roleName)}
             </Typography>
           </CardContent>
         </Collapse>

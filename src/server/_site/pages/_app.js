@@ -28,17 +28,17 @@ export default class MyApp extends App {
       //If there is indeed a user,get role and check if in mongo
       if(pageProps?.user?.id) {
         //Get the user role if there is any
-        const userRoles = await axios.post(apiCall('/api/v1/users/getRoles'),{
-          id:pageProps?.user?.id
-        })
-
+        // const userRoles = await axios.post(apiCall('/api/v1/users/getRoles'),{
+        //   id:pageProps?.user?.id
+        // })
         
+        //Get the mongo user. if none create and send back
         const mongoUser = await axios.post(apiCall('/api/v1/users/isUser'),{
           id:ctx?.req?.session?.passport?.user?.id || '',
           username:ctx?.req?.session?.passport?.user?.displayName
         })
         
-        pageProps.user.roles = userRoles.data.data.roles
+        //pageProps.user.roles = userRoles.data.data.roles
         pageProps.user.mongoUser = mongoUser.data.data.user
         console.log(mongoUser?.data?.data?.message?.america)
       }
@@ -78,7 +78,7 @@ export default class MyApp extends App {
     return (
       <React.Fragment>
         <Head>
-          <title>My page</title>
+          <title>PSI Dashboard</title>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
         </Head>
         <ThemeProvider theme={theme}>

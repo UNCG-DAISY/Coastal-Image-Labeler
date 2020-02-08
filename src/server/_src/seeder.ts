@@ -12,6 +12,7 @@ dotenv.config({
 //Load models
 import {StormModel} from './models/Storm'
 import {ArchiveModel} from './models/Archive'
+import {RoleModel} from './models/Role'
 
 
 connect(process?.env?.MONGO_URI_DEV as string, {
@@ -28,6 +29,10 @@ const storms = JSON.parse(
 
 const archives = JSON.parse(
     fs.readFileSync(`${__dirname}/_data/archives.json`,'utf-8')
+)
+
+const roles = JSON.parse(
+    fs.readFileSync(`${__dirname}/_data/roles.json`,'utf-8')
 )
 
 
@@ -49,7 +54,19 @@ const deleteData = async () => {
     try {
         await StormModel.deleteMany({})
         await ArchiveModel.deleteMany({})
+        await RoleModel.deleteMany({})
         console.log('Data destroyed...'.red.inverse)
+        process.exit()
+    }
+    catch(err) {
+        console.log(err)
+    }
+}
+
+const createRoles = async () => {
+    try {
+        await RoleModel.create(roles)
+        console.log('Roles imported...'.green.inverse)
         process.exit()
     }
     catch(err) {
@@ -62,4 +79,6 @@ if(process.argv[2] === '-i') {
     importData()
 } else if(process.argv[2] === '-d') {
     deleteData()
+} else if(process.argv[2] === '-r') {
+    createRoles()
 }

@@ -12,6 +12,7 @@
     "start2": "SET NODE_ENV=production&& node ./_dist/server.js",
     "seederCreate": "ts-node ./_src/seeder.ts -i",
     "seederDel": "ts-node ./_src/seeder.ts -d",
+    "seederRole": "ts-node ./_src/seeder.ts -r",
     "seeder": "npm run seederDel && npm run seederCreate"
   },
   "author": "Shah Nafis Rafique",
