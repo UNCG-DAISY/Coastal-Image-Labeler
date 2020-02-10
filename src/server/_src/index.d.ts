@@ -40,6 +40,8 @@ declare namespace psiDashboard  {
     imagesTagged?: [string]
     //numberOfImagesTagged?: number
     roles:[string]
+    roleData?:[any]
+    roleNames?:[string]
     //storm:[Types.ObjectId]
   }
 

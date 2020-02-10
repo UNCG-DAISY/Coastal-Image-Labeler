@@ -39,7 +39,7 @@ export default class MyApp extends App {
         })
         
         //pageProps.user.roles = userRoles.data.data.roles
-        pageProps.user.mongoUser = mongoUser.data.data.user
+        pageProps.user.mongoUser = mongoUser.data.data.user[0]
         console.log(mongoUser?.data?.data?.message?.america)
       }
      

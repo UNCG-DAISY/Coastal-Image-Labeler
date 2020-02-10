@@ -16,6 +16,7 @@ import next from 'next'
 import users from './routes/v1/user'
 import archives from './routes/v1/archives'
 import storms from './routes/v1/storms'
+import roles from './routes/v1/roles'
 //Import the react/server shared constants
 
 // 1 - importing dependencies
@@ -106,6 +107,7 @@ nextApp.prepare()
     app.use('/api/v1/users',users)
     app.use('/api/v1/archives',archives)
     app.use('/api/v1/storms',storms)
+    app.use('/api/v1/roles',roles)
     
     
     // This handles errors that happen during API calls

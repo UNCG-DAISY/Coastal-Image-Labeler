@@ -66,35 +66,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const sideContentPages = [
-    {
-        title: 'Home',
-        icon: <HomeIcon/>,
-        href:'/auth/auth1'
 
-    },
-    {
-      title: 'My Profile',
-      icon: <AccountBoxIcon/>,
-      href:'/auth/myProfile'
-    },
-    {
-      title: 'Start Tagging',
-      icon: <LabelIcon/>,
-      href:'/auth/startTagging'
-    },
-    {
-      title: 'Make a Storm',
-      icon: <CloudIcon/>,
-      href:'/auth/startTagging'
-    },
-    {
-      title: 'Make an Archive',
-      icon: <FolderIcon/>,
-      href:'/auth/startTagging'
-    }
-    
-]
 
 const extraContentePages = [
     {
@@ -138,7 +110,42 @@ function LoginSideDrawer(props) {
             <div className={classes.toolbar} />
             <Divider />
                 <List>
-                    {generateSideContent(sideContentPages,classes)}
+                    {/* {generateSideContent(sideContentPages,classes)} */}
+                    <a href={'/auth/auth1'} className= {classes.link} key={'Home'}>
+                        <ListItem button >
+                            <ListItemIcon><HomeIcon/></ListItemIcon>
+                            <ListItemText primary={'Home'} />
+                        </ListItem>
+                    </a>
+
+                    <a href={'/auth/myProfile'} className= {classes.link} key={'My Profile'}>
+                        <ListItem button >
+                            <ListItemIcon><AccountBoxIcon/></ListItemIcon>
+                            <ListItemText primary={'My Profile'} />
+                        </ListItem>
+                    </a>
+
+                    {props.allowedPages.tagger && <a href={'/auth/startTagging'} className= {classes.link} key={'Start Tagging'}>
+                        <ListItem button >
+                            <ListItemIcon><LabelIcon/></ListItemIcon>
+                            <ListItemText primary={'Start Tagging'} />
+                        </ListItem>
+                    </a>}
+
+                    {props.allowedPages.stormMaker && <a href={'/auth/startTagging'} className= {classes.link} key={'Make a Storm'}>
+                        <ListItem button >
+                            <ListItemIcon><CloudIcon/></ListItemIcon>
+                            <ListItemText primary={'Make a Storm'} />
+                        </ListItem>
+                    </a>}
+
+                    {props.allowedPages.archiveMaker && <a href={'/auth/startTagging'} className= {classes.link} key={'Make an Archive'}>
+                        <ListItem button >
+                            <ListItemIcon><FolderIcon/></ListItemIcon>
+                            <ListItemText primary={'Make an Archive'} />
+                        </ListItem>
+                    </a>}
+
                 </List>
                 
             <Divider />
