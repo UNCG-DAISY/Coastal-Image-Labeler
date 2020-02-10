@@ -48,11 +48,27 @@ userSchema.pre<UserDocument>('save', async function(next:HookNextFunction) {
 });
 
 // Reverse populate with virtuals
-userSchema.virtual('roleName', {
+userSchema.virtual('roleData', {
     ref: 'Role',
     localField: 'role',
     foreignField: '_id',
     justOne: false
+})
+
+//This runs everytime
+userSchema
+.virtual('roleNames')
+.get(function () {
+    let roleNames:string[] = []
+    if(this.roleData) {
+        for(let i =0;i<this.roleData.length;i++) {
+            let role = this.roleData[i]
+            roleNames.push(role.name)
+        }
+    }
+    
+
+    return roleNames
 });
 
 

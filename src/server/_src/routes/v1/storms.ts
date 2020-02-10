@@ -23,6 +23,6 @@ router
 //Creating a storm
 router
     .route("/storm")
-    .post(authorize('admin','stormCreator'),createStorm)
+    .post(createStorm)
 
 export default router;

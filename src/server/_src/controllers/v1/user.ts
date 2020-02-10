@@ -2,7 +2,6 @@ import { Request,Response,NextFunction } from "express"
 import {asyncHandler} from '../../middleware/v1/async' //to avoid putting try catch everywhere
 import {UserModel} from '../../models/User'
 import {RoleModel} from '../../models/Role'
-RoleModel
 import {ErrorResponse} from '../../utils/v1/errorResponse'
 import axios from 'axios'
 
@@ -24,7 +23,7 @@ const isInMongoDB = asyncHandler(async (req: Request, res: Response, next: NextF
 
     const user = await UserModel.find({
         userId:data.id
-    }).populate('roleName')
+    }).populate('roleData')
 
     if(user.length === 0) {
 
@@ -36,7 +35,7 @@ const isInMongoDB = asyncHandler(async (req: Request, res: Response, next: NextF
 
         user_entry = await UserModel.findOne({
             userId:data.id
-        }).populate('roleName')
+        }).populate('roleData')
 
         res.status(201).json({
             success:true,
@@ -103,7 +102,69 @@ const getUserRoles = asyncHandler(async (req: Request, res: Response, next: Next
    
 })
 
+/**
+ * @desc        Gets a user
+ * @route       GET /api/v1/user/:id
+ * @access      Public
+ * @returns     yes
+ */
+const getUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    
+    const user  = await UserModel.findById(req?.params?.id).populate('roleData')
+
+    res.status(200).json({
+        success:true,
+        data:{
+            user
+        }
+    }) 
+})
+
+/**
+ * @desc        Given a user id, and 
+ * @route       GET /api/v1/user/:id
+ * @access      Public
+ * @returns     yes
+ */
+const checkUserRoles = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    
+    const user  = await UserModel.findById(req?.params?.id).populate('roleData')
+    const userRoles = user.roleNames
+
+    const allowedRoles = req?.body?.allowedRoles ?? []
+
+    const user_roles_set:Set<string> = new Set(userRoles)
+    const roles_set:Set<string> = new Set(allowedRoles)
+
+    const role_intersection:Set<string> = new Set(
+        [...user_roles_set].filter(x => roles_set.has(x)));
+
+    
+    if(role_intersection.size === 0) {
+        res.status(200).json({
+            success:true,
+            data:{
+                message: 'Denied',
+                allowed:false
+            }
+        }) 
+    }
+    else {
+        res.status(200).json({
+            success:true,
+            data:{
+                message: 'Allowed',
+                allowed:true
+            }
+        }) 
+    }
+    
+    
+})
+
 export {
     isInMongoDB,
-    getUserRoles
+    getUserRoles,
+    getUser,
+    checkUserRoles
 }

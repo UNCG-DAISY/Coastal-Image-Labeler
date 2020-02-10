@@ -16,6 +16,13 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import axios from 'axios'
+import { 
+  myIp,
+  port,
+  protocal,
+  apiCall
+} from '../../components/constants'
 
 import Container from '@material-ui/core/Container';
 
@@ -54,9 +61,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function genRoleNames(roles) {
+  roles = roles ?? []
+
   return roles.map((role, index) => {
       return (
-          <>{role.name}</>
+          <p key={role}>{role}</p>
       )
   })
 }
@@ -74,7 +83,7 @@ function MyProfile(props) {
 
 
   return (
-    <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer/> }AppBar = {<MyAppBar pageTitle = 'My Profile'/>}>
+    <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={props.allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'My Profile'/>}>
 
       <Card className={classes.root}>
         <CardHeader
@@ -87,7 +96,7 @@ function MyProfile(props) {
           //   </IconButton>
           // }
           title={user.displayName}
-          subheader={<Moment format="MM/DD/YYYY">{user.mongoUser[0].dateAdded}</Moment>}
+          subheader={<Moment format="MM/DD/YYYY">{user.mongoUser.dateAdded}</Moment>}
         />
         <CardMedia
           className={classes.media}
@@ -131,9 +140,10 @@ function MyProfile(props) {
               MongoDB Profile
             </Typography>
             <Typography paragraph>
-              {console.log(user.mongoUser[0])}
-              Number of images tagged: {mongoUser.numberOfImagesTagged}<br/>
-              Roles: {genRoleNames(mongoUser.roleName)}
+              {console.log(user.mongoUser)}
+              {console.log(user)}
+              Number of images tagged: {user.mongoUser?.imagesTagged.length}<br/>
+              Roles: {genRoleNames(user.mongoUser?.roleNames)}
             </Typography>
           </CardContent>
         </Collapse>
@@ -150,7 +160,37 @@ MyProfile.getInitialProps = async ctx => {
 
   hasUser(req)
   
-  return {}
+  const user = req.user.mongoUser
+
+  let allowedPages ={
+    tagger:false,
+    stormMaker:false,
+    archiveMaker:false
+  }
+
+  if(user?._id) {
+    const allowedRoles1 = (await axios.post(apiCall(`/api/v1/users/auth/${user?._id}`),{
+      allowedRoles:['tagger']
+    })).data
+  
+    const allowedRoles2 = (await axios.post(apiCall(`/api/v1/users/auth/${user?._id}`),{
+      allowedRoles:['stormMaker']
+    })).data
+  
+    const allowedRoles3 = (await axios.post(apiCall(`/api/v1/users/auth/${user?._id}`),{
+      allowedRoles:['archiveMaker']
+    })).data
+    
+  
+    allowedPages.tagger = allowedRoles1.data.allowed
+    allowedPages.stormMaker = allowedRoles2.data.allowed
+    allowedPages.archiveMaker = allowedRoles3.data.allowed
+  }
+  
+
+  console.log(allowedPages)
+
+  return {allowedPages}
 }
 
 export default MyProfile
