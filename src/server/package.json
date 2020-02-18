@@ -8,6 +8,7 @@
     "test": "tsc && node ./_dist/test.js",
     "test2": "tsc && SET NODE_ENV=production&&node ./_dist/test.js",
     "dev": "nodemon --exec ts-node ./_src/server.ts",
+    "dev2": "ts-node ./_src/server.ts",
     "start": "tsc && SET NODE_ENV=production&& node ./_dist/server.js",
     "start2": "SET NODE_ENV=production&& node ./_dist/server.js",
     "seederCreate": "ts-node ./_src/seeder.ts -i",

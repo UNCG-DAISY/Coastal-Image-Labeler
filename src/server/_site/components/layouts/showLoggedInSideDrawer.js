@@ -118,28 +118,35 @@ function LoginSideDrawer(props) {
                         </ListItem>
                     </a>
 
-                    <a href={'/auth/myProfile'} className= {classes.link} key={'My Profile'}>
+                    <a href={'/auth/tagImage'} className= {classes.link} key={'Home2'}>
+                        <ListItem button >
+                            <ListItemIcon><HomeIcon/></ListItemIcon>
+                            <ListItemText primary={'Image Tag'} />
+                        </ListItem>
+                    </a>
+
+                    {/* <a href={'/auth/myProfile'} className= {classes.link} key={'My Profile'}>
                         <ListItem button >
                             <ListItemIcon><AccountBoxIcon/></ListItemIcon>
                             <ListItemText primary={'My Profile'} />
                         </ListItem>
-                    </a>
+                    </a> */}
 
-                    {props.allowedPages.tagger && <a href={'/auth/startTagging'} className= {classes.link} key={'Start Tagging'}>
+                    {props?.allowedPages?.tagger && <a href={'/auth/startTagging'} className= {classes.link} key={'Start Tagging'}>
                         <ListItem button >
                             <ListItemIcon><LabelIcon/></ListItemIcon>
                             <ListItemText primary={'Start Tagging'} />
                         </ListItem>
                     </a>}
 
-                    {props.allowedPages.stormMaker && <a href={'/auth/startTagging'} className= {classes.link} key={'Make a Storm'}>
+                    {props?.allowedPages?.stormMaker && <a href={'/auth/startTagging'} className= {classes.link} key={'Make a Storm'}>
                         <ListItem button >
                             <ListItemIcon><CloudIcon/></ListItemIcon>
                             <ListItemText primary={'Make a Storm'} />
                         </ListItem>
                     </a>}
 
-                    {props.allowedPages.archiveMaker && <a href={'/auth/startTagging'} className= {classes.link} key={'Make an Archive'}>
+                    {props?.allowedPages?.archiveMaker && <a href={'/auth/startTagging'} className= {classes.link} key={'Make an Archive'}>
                         <ListItem button >
                             <ListItemIcon><FolderIcon/></ListItemIcon>
                             <ListItemText primary={'Make an Archive'} />
