@@ -23,9 +23,9 @@ function About(props) {
           <Typography variant="h4" component="h1" gutterBottom>
             About.js
           </Typography>
-          <a href ='/auth/startTagging?title=memed'>
-            aaaa
-          </a>
+          {/* <a href ='/auth/startTagging?title=memed'>
+            startTagging
+          </a> */}
           {/* <Test user={props.user} /> */}
         </Box>
       </Container>
