@@ -98,7 +98,7 @@ const useStyles = makeStyles(theme  => ({
                 <CardMedia
                     component="img"
                     alt="No image found"
-                    // height="140"               
+                    height="140"               
                     image={props.imagePath}
                     title="Image to tag"
                 />
@@ -123,14 +123,14 @@ const useStyles = makeStyles(theme  => ({
                             value="0"
                             control={<Radio color="primary" />}
                             label="Undeveloped"
-                            labelPlacement="right"
+                            labelPlacement="end"
                          
                         />
                         <FormControlLabel
                             value="1"
                             control={<Radio color="primary" />}
                             label="Developed"
-                            labelPlacement="right"
+                            labelPlacement="end"
                         />
                     </RadioGroup>
 
@@ -146,14 +146,14 @@ const useStyles = makeStyles(theme  => ({
                             value="0"
                             control={<Radio color="primary" />}
                             label="No Impact"
-                            labelPlacement="right"
+                            labelPlacement="end"
                          
                         />
                         <FormControlLabel
                             value="1"
                             control={<Radio color="primary" />}
                             label="Impact"
-                            labelPlacement="right"
+                            labelPlacement="end"
                         />
                     </RadioGroup>
                 </FormControl>
