@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 import TagImageCard from '../../components/cards/imageTagCard'
-
+import ImageTagStepper from '../../components/steppers/imageTagStepper'
 const useStyles = makeStyles(theme  => ({
   
 }));
@@ -25,7 +25,8 @@ function TagImage(props) {
     <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={props.allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
       <Container maxWidth="md">
         <Box my={4}>
-          <TagImageCard imagePath = "/stormImages/storm1.jpg"/>
+          {/* <TagImageCard imagePath = "/stormImages/storm1.jpg"/> */}
+          <ImageTagStepper/>
         </Box>
       </Container>
     </Drawer>
