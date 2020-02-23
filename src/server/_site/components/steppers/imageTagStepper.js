@@ -18,6 +18,10 @@ import clsx from 'clsx';
 
 import TagImageCard from '../cards/imageTagCard'
 import CustomRadioButton from '../radio/customRadioButton'
+import DevRadio from '../radio/imageTag/devRadio'
+import WashoverRadio from '../radio/imageTag/washoverRadio'
+import ImpactRadio from '../radio/imageTag/impactRadio'
+import theme from '../theme'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,8 +31,14 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
   },
   instructions: {
-    marginTop: theme.spacing(1),
+    paddingTop: theme.spacing(2),
     marginBottom: theme.spacing(1),
+    paddingLeft:theme.spacing(2)
+  },
+  instructions2: {
+    paddingTop: theme.spacing(4),
+    marginBottom: theme.spacing(2),
+    paddingLeft:theme.spacing(4)
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -42,10 +52,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-
-
-export default function ImageTagStepper() {
+export default function ImageTagStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -82,90 +89,15 @@ export default function ImageTagStepper() {
     switch (stepIndex) {
       case 0:
         return (
-            <CustomRadioButton 
-                value = {devType} 
-                onChange = {(event) => handleChange(event,setDevType)}
-                style = {{color:colors.amber[500]}}
-                title = {`Development Type = ${devType}`}
-                ariaLabel = "devType" 
-                name = "devType"
-                buttons={[
-                    {
-                        value:'0',
-                        control: <Radio color="primary" />,
-                        label: "Undeveloped",
-                        labelPlacement:"end"
-                    },
-                    {
-                        value:'1',
-                        control: <Radio color="primary" />,
-                        label: "Developed",
-                        labelPlacement:"end"
-                    }
-                ]}
-            />
+            <DevRadio devType = {devType} setDevType={setDevType} handleChange={handleChange}/>          
         );
       case 1:
         return (
-            <CustomRadioButton 
-                value = {washoverType} 
-                onChange = {(event) => handleChange(event,setWashoverType)}
-                style = {{color:colors.amber[500]}}
-                title = {`Washover Type = ${washoverType}`}
-                ariaLabel = "washoverType" 
-                name = "washoverType"
-                buttons={[
-                    {
-                        value:'0',
-                        control: <Radio color="primary" />,
-                        label: "Visible Washover",
-                        labelPlacement:"end"
-                    },
-                    {
-                        value:'1',
-                        control: <Radio color="primary" />,
-                        label: "No Washover",
-                        labelPlacement:"end"
-                    }
-                ]}
-            />
+            <WashoverRadio washoverType={washoverType} setWashoverType={setWashoverType} handleChange={handleChange}/>      
         )
       case 2:
         return (
-            <CustomRadioButton 
-                value = {impactType} 
-                onChange = {(event) => handleChange(event,setImpactType)}
-                style = {{color:colors.amber[500]}}
-                title = {`Impact Type = ${impactType}`}
-                ariaLabel = "impactType" 
-                name = "impactType"
-                buttons={[
-                    {
-                        value:'0',
-                        control: <Radio color="primary" />,
-                        label: "Storm",
-                        labelPlacement:"end"
-                    },
-                    {
-                        value:'1',
-                        control: <Radio color="primary" />,
-                        label: "Collision",
-                        labelPlacement:"end"
-                    },
-                    {
-                        value:'2',
-                        control: <Radio color="primary" />,
-                        label: "Overwash",
-                        labelPlacement:"end"
-                    },
-                    {
-                        value:'3',
-                        control: <Radio color="primary" />,
-                        label: "Inundation",
-                        labelPlacement:"end"
-                    }
-                ]}
-            />
+            <ImpactRadio impactType={impactType} setImpactType={setImpactType} handleChange={handleChange}/>
         );
     //   case 2:
     //     return 'Select terrian type(s)';
@@ -197,9 +129,7 @@ export default function ImageTagStepper() {
 
   return (
     <div className={classes.root}>
-      devtype = {devType}
-      wasType = {washoverType}
-      impType = {impactType}
+      
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map(label => (
           <Step key={label}>
@@ -208,7 +138,9 @@ export default function ImageTagStepper() {
         ))}
       </Stepper>
       <div>
-        <CardActions disableSpacing>
+        
+        {/* Allows to hide image */}
+        <CardActions disableSpacing style={{backgroundColor:'grey'}}>
                 
             <IconButton
             onClick={handleExpandClick}
@@ -220,6 +152,8 @@ export default function ImageTagStepper() {
             })} />
             </IconButton>
         </CardActions>
+        
+        {/* The image */}
         <CardActionArea 
             onClick = {() => {
                 window.open( "/stormImages/storm1.jpg", "/stormImages/storm1.jpg"); 
@@ -236,29 +170,39 @@ export default function ImageTagStepper() {
                 />
             </Collapse>
         </CardActionArea>
+
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>All steps completed</Typography>
-            <Button onClick={handleReset}>Reset</Button>
+            <Typography className={classes.instructions}>Here is the tag information that will be sent</Typography>
+            <Typography className={classes.instructions}>
+                devtype = {devType} <br/>
+                wasType = {washoverType} <br/>
+                impType = {impactType}
+            </Typography>
+            <Button variant="contained" color="danger" onClick={handleReset} style={{backgroundColor:'red'}}>
+                Reset
+            </Button>
+            <Button variant="contained" color="primary"  onClick={() => {props.submitTag({devType,washoverType,impactType})}}>
+               Submit
+            </Button>
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>
-                {getStepContent(activeStep)}
-                
-            </Typography>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
+            <CardActionArea className={classes.instructions2}style={{backgroundColor:'#424242'}}>
+                    {getStepContent(activeStep)} 
+            </CardActionArea>
+          
+            <Button
+            disabled={activeStep === 0}
+            onClick={handleBack}
+            className={classes.backButton}
+            >
                 Back
-              </Button>
-              <Button variant="contained" color="primary" onClick={handleNext} disabled={allowNextStep[activeStep] == -1}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Button>
-            </div>
+            </Button>
+            <Button variant="contained" color="primary" onClick={handleNext} disabled={allowNextStep[activeStep] == -1}>
+                {activeStep === steps.length - 1 ? 'Review' : 'Next'}
+            </Button>
+       
           </div>
         )}
       </div>
