@@ -23,9 +23,13 @@ export default function CustomRadioButton(props) {
                 row
             >
                 {props.buttons.map(button => (
-                     <FormControlLabel
-                        {...button}
-                     />  
+                  
+                         <FormControlLabel
+                             key = {button.label}
+                            {...button}
+                            />  
+                  
+                    
                 ))}
                 {/* <FormControlLabel
                     value="0"

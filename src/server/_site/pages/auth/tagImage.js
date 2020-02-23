@@ -20,13 +20,17 @@ function TagImage(props) {
   const {query:queryParams} = props
   const classes = useStyles();
 
+  function submitTags(tags) {
+    alert('Tag!')
+    console.log(tags)
+  }
 
   return (
     <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={props.allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
       <Container maxWidth="md">
         <Box my={4}>
           {/* <TagImageCard imagePath = "/stormImages/storm1.jpg"/> */}
-          <ImageTagStepper/>
+          <ImageTagStepper submitTag={submitTags}/>
         </Box>
       </Container>
     </Drawer>
