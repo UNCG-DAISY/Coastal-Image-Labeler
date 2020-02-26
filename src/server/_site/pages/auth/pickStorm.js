@@ -1,0 +1,107 @@
+import React from 'react';
+import Container from '@material-ui/core/Container';
+import {hasUser} from '../../components/utils/checkIfUser'
+import Drawer from '../../components/layouts/drawer'
+import MyAppBar from '../../components/layouts/appBar'
+import ShowLoggedInSideDrawer from '../../components/layouts/showLoggedInSideDrawer'
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import { useRouter } from 'next/router'
+import Button from '@material-ui/core/Button';
+import PickStormStepper from '../../components/steppers/pickStormStepper'
+
+
+const useStyles = makeStyles(theme  => ({
+  paper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(1),
+      padding: theme.spacing(2),
+      // width: theme.spacing(72),
+      // height: theme.spacing(64),
+    },
+  },
+}));
+
+
+function TagImage(props) {
+  const {storms} = props
+  const classes = useStyles();
+  const router = useRouter()
+
+  function submitTags(tags) {
+    alert('Tag!')
+    console.log(tags)
+  }
+
+  return (
+    <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={props.allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
+      <Container maxWidth="md">
+      <div className={classes.paper}>
+        <Paper elevation={13} >
+          <PickStormStepper storms = {storms}/>
+        </Paper>
+        
+      </div>
+      </Container>
+    </Drawer>
+    
+  );
+}
+
+TagImage.getInitialProps = async ctx => {
+  const {req,res} = ctx
+  
+  const {query} = req
+
+  const storms ={
+    stormA:{
+      A_Arc1: {
+        name:'Storm A Archive 1',
+        images:[
+          'A_Arc1_img1',
+          'A_Arc1_img2'
+        ],
+      },
+
+      A_Arc2: {
+        name:'Storm A Archive 2',
+        images:[
+          'A_Arc2_img1',
+          'A_Arc2_img2'
+        ],
+      },
+
+      A_Arc3: {
+        name:'Storm C Archive 3',
+        images:[
+          'A_Arc3_img1',
+          'A_Arc3_img2'
+        ],
+      },   
+    },
+
+    stormB:{
+      B_Arc1: {
+        name:'Storm B Archive 1',
+        images:[
+          'B_Arc1_img1',
+          'B_Arc1_img2'
+        ],
+      },
+
+      B_Arc2: {
+        name:'Storm B Archive 2',
+        images:[
+          'B_Arc2_img1',
+          'B_Arc2_img2'
+        ],
+      }
+
+    }
+  }
+  return {storms}
+}
+
+export default TagImage

@@ -15,7 +15,8 @@ import {
 
 export default class MyApp extends App {
 
-  static async getInitialProps({ Component, ctx }) {
+  static async getInitialProps(context) {
+    const { Component, ctx } =context
     let pageProps = {};
 
     if (Component.getInitialProps) {
