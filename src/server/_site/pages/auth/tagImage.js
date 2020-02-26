@@ -31,6 +31,7 @@ function TagImage(props) {
         <Box my={4}>
           {/* <TagImageCard imagePath = "/stormImages/storm1.jpg"/> */}
           <ImageTagStepper submitTag={submitTags}/>
+          {JSON.stringify(queryParams)}
         </Box>
       </Container>
     </Drawer>
@@ -39,8 +40,8 @@ function TagImage(props) {
 }
 
 TagImage.getInitialProps = async ctx => {
+
   const {req,res} = ctx
-  
   const {query} = req
   return {query}
 }

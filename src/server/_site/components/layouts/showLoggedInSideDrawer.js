@@ -118,7 +118,7 @@ function LoginSideDrawer(props) {
                         </ListItem>
                     </a>
 
-                    <a href={'/auth/tagImage'} className= {classes.link} key={'Home2'}>
+                    <a href={'/auth/pickStorm'} className= {classes.link} key={'PickStorm'}>
                         <ListItem button >
                             <ListItemIcon><HomeIcon/></ListItemIcon>
                             <ListItemText primary={'Image Tag'} />
