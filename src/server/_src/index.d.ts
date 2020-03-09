@@ -15,11 +15,11 @@ declare namespace psiDashboard  {
     }
 
   export interface ImageDocument extends Document {
-      archive:string,
-      compressed:boolean,
-      dateAdded:Date,
+      archive:Types.ObjectId,
+      compressed?:boolean,
+      dateAdded?:Date,
       finishedTagging: boolean,
-      location:{
+      location?:{
           upperLeft:[number],
           upperRight:[number],
           lowerLeft:[number],
@@ -28,8 +28,8 @@ declare namespace psiDashboard  {
       id :string,
       path : string,
       taggable:boolean,
-      taggedTimes:[Date],
-      tags:[Object],
+      taggedTimes?:[Date],
+      tags?:[Object],
       tillComplete:number
   }
 

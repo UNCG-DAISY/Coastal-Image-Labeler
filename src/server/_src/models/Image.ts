@@ -1,14 +1,13 @@
-import { Schema, model, Model, Document, HookNextFunction} from 'mongoose'
+import { Schema, model, Model, Document, HookNextFunction, Types} from 'mongoose'
 // import slugify from 'slugify'
 // import {geocoder} from '../utils/v1/geocoder'
 // import { Entry } from 'node-geocoder'
-import { number } from 'prop-types';
 import {ImageDocument} from '../index'
 
 const ImageSchema: Schema  = new Schema(
     {
         archive:{
-            type:String[],
+            type:[Types.ObjectId],
             required: [true,'Please which archives this image is in'],
         },
         compressed: {
@@ -26,16 +25,16 @@ const ImageSchema: Schema  = new Schema(
         },
         location:{
             upperLeft:{
-                type:[number]
+                type:[Number]
             },
             upperRight:{
-                type:[number]
+                type:[Number]
             },
             lowerLeft:{
-                type:[number]
+                type:[Number]
             },
             lowerRight:{
-                type:[number]
+                type:[Number]
             }
         },
         id : {
@@ -63,7 +62,7 @@ const ImageSchema: Schema  = new Schema(
             type:[Object]
         },
         tillComplete:{
-            type:number,
+            type:Number,
             required:[true,'Please tell how many times two or more taggers must agree till complete'],
         } 
        
@@ -75,4 +74,4 @@ const ImageSchema: Schema  = new Schema(
     }
 );
 
-export const Image: Model<ImageDocument> =  model('Image', ImageSchema);
+export const ImageModel: Model<ImageDocument> =  model('Image', ImageSchema);
