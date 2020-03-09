@@ -15,7 +15,7 @@ router.get("/callback", (req, res, next) => {
     if (!user) return res.redirect("/login");//on login fail
     req.logIn(user, (err) => {
       if (err) return next(err);
-      res.redirect("/auth/auth1");//on successful login
+      res.redirect("/auth/home");//on successful login
     });
   })(req, res, next);
 });
