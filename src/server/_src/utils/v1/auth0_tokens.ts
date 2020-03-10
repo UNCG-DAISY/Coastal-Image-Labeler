@@ -42,15 +42,3 @@ const getManagementTokens = async ():Promise<string> => {
 export {
     getManagementTokens
 }
-// const testid = 'google-oauth2|100613204270669384478'
-
-// const options = {
-//     method: 'GET',
-//     url: `https://dev-omczj0l4.auth0.com/api/v2/users/${testid}/roles`,
-//     headers: {authorization: 'Bearer MGMT_API_ACCESS_TOKEN'}
-//     };
-// request(options, function (error, response, body) {
-//     if (error) throw new Error(error);
-    
-//     console.log(body);
-// });
