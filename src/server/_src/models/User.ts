@@ -8,7 +8,9 @@ import {RoleModel} from './Role'
 
 
 const userSchema: Schema = new Schema({
-    
+    storms:{
+        type:[Types.ObjectId]
+    },
     dateAdded:{
         type:Date
     },
