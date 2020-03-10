@@ -34,12 +34,13 @@ declare namespace psiDashboard  {
   }
 
   export interface UserDocument extends Document {
+    storms:[Types.ObjectId]
     dateAdded: number;
     userId:string,
     userName: string,
     imagesTagged?: [string]
     //numberOfImagesTagged?: number
-    roles:[string]
+    role:[Types.ObjectId]
     roleData?:[any]
     roleNames?:[string]
     //storm:[Types.ObjectId]
@@ -59,13 +60,23 @@ declare namespace psiDashboard  {
   }
 
   export interface StormDocument extends Document {
-    archives: [Types.ObjectId],
+    archives: any,
     dateAdded?:Date,
     name : String,
     path : String,
     taggable:Boolean
   }
+
+  type allDocuments = 
+    TagDataDocument | 
+    ImageDocument | 
+    UserDocument |
+    ArchiveDocument |
+    RoleDocument |
+    StormDocument 
 }
+
+
 
 //So that we can access user in req.user.xxx
 declare module 'express' {
@@ -76,6 +87,11 @@ declare module 'express' {
 
 //Global variables
 declare global {
+  namespace Express {
+      export interface Response {
+          advancedResults: any;
+      }
+  }
   namespace NodeJS {
     interface Global {
        document: Document;

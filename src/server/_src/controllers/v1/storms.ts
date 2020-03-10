@@ -8,6 +8,9 @@ import {StormModel} from '../../models/Storm'
 import axios from 'axios'
 import { ObjectID } from "mongodb"
 
+import {UserDocument,StormDocument,ArchiveDocument} from '../../index'
+import { promises } from "dns"
+
 /**
  * @desc        Gets all storms
  * @route       GET /api/v1/storms/:userId
@@ -15,34 +18,46 @@ import { ObjectID } from "mongodb"
  * @returns     yes
  */
 const getAllStorms = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    if(req?.params?.userId) {
-        //get by user
-        const user = await UserModel.findById(req?.params?.userId)
-        const storms_of_user = await StormModel.find({
-            creator:req?.params?.userId
-        }).populate('archives')
+    res.status(200).json(res.advancedResults)
+})
 
- 
-        res.status(200).json({
-            success:true,
-            data:{
-                user:req?.params?.userId, 
-                storms:storms_of_user
+
+/**
+ * @desc        Gets all storms
+ * @route       GET /api/v1/storms/:userId
+ * @access      Public
+ * @returns     yes
+ */
+const getStormsOfUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    
+    const storms = res.advancedResults.data
+    const userId = req?.params?.userId
+    const user:UserDocument = (await UserModel.find({
+        "_id":userId
+    }))[0]
+    const taggableFilter= req?.query?.taggable ?? false
+
+    const stormsOfUser = user.storms
+    let data = []
+
+    await Promise.all(storms.map((storm:StormDocument,index:number)=>{
+        if(stormsOfUser.includes(storm._id)) {
+            let stormOfUser = storm
+            let archivesOfStorm:[ArchiveDocument] = stormOfUser.archives
+            let taggableArchives:ArchiveDocument[] =archivesOfStorm
+
+            if(taggableFilter) {
+                taggableArchives = archivesOfStorm.filter(function(archive) {
+                    return archive?.taggable;
+                });
+                
             }
-        })        
-    }
-    else 
-    {
-        const storms_of_user = await StormModel.find()
-         //else get all storms
-        res.status(200).json({
-            success:true,
-            data:{
-                storms:storms_of_user
-            }
-        })        
-    }
-   
+            stormOfUser.archives = taggableArchives
+            data.push(stormOfUser)
+        }
+    }))
+    res.advancedResults.data=data
+    res.status(200).json(res.advancedResults)
 })
 
 /**
@@ -52,46 +67,33 @@ const getAllStorms = asyncHandler(async (req: Request, res: Response, next: Next
  * @returns     yes
  */
 const getStorm = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    if(req?.params?.stormId) {
-        //get a storm
-
-        res.status(200).json({
-            success:true,
-            data:{
-                
-            }
-        })        
-    }
-
-    res.status(201).json({
-        success:false,
-        data:{
-            
-        }
-    })        
-})
-
-/**
- * @desc        creates a storm
- * @route       POST /api/v1/storms/storm/
- * @access      Public
- * @returns     yes
- */
-const createStorm = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    console.log(res.advancedResults)
     
-    // req.body.id = req.user.id
-    // const new_storm = await StormModel.create(req.body)
-
-    res.status(201).json({
-        success:false,
-        data:{
-            smile:':}'
-        }
-    })        
+    res.status(200).json(res.advancedResults)
 })
+
+// /**
+//  * @desc        creates a storm
+//  * @route       POST /api/v1/storms/storm/
+//  * @access      Public
+//  * @returns     yes
+//  */
+// const createStorm = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    
+//     // req.body.id = req.user.id
+//     // const new_storm = await StormModel.create(req.body)
+
+//     res.status(201).json({
+//         success:false,
+//         data:{
+//             smile:':}'
+//         }
+//     })        
+// })
 
 export {
     getAllStorms,
     getStorm,
-    createStorm
+    getStormsOfUser
+    //createStorm
 }
