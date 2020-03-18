@@ -1,3 +1,8 @@
+/*
+    Model for storms.
+*/
+
+
 import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Types} from 'mongoose'
 import {StormDocument} from '../index'
 

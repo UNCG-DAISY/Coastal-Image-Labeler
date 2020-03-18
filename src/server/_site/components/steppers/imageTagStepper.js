@@ -1,3 +1,5 @@
+// This file asks the user the values of the tag for an image
+
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';

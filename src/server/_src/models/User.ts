@@ -1,10 +1,15 @@
+/*
+    Model for users. Contains a link to each role the user has and what storms they can tag
+*/
+
+
 import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Types} from 'mongoose'
-import slugify from 'slugify'
-import {geocoder} from '../utils/v1/geocoder'
-import { Entry } from 'node-geocoder'
 import {UserDocument} from '../index'
-import { number } from 'prop-types'
-import {RoleModel} from './Role'
+// import slugify from 'slugify'
+// import {geocoder} from '../utils/v1/geocoder'
+// import { Entry } from 'node-geocoder'
+// import { number } from 'prop-types'
+// import {RoleModel} from './Role'
 
 
 const userSchema: Schema = new Schema({
@@ -32,11 +37,6 @@ const userSchema: Schema = new Schema({
         type:[Types.ObjectId],
         default:[]
     }
-    // storm: {
-    //     type: [Types.ObjectId],
-    //     ref: 'Storm',
-    //     default: []
-    // }
 },{
     toJSON: { virtuals: true },
     toObject: { virtuals: true }

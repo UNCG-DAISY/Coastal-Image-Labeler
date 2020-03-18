@@ -1,3 +1,10 @@
+/*
+    This function provides for pagination and filtering based of query
+    parameters and also does reverse virtuals population. For example for
+    getting all storms this function limits the number of returned entires by
+    15, or by some value passed in the api url or if reverse ordering is needed.
+*/
+
 import { Request,Response,NextFunction } from "express"
 import {allDocuments} from '../../index'
 import { DocumentQuery,Model } from "mongoose"
@@ -52,6 +59,7 @@ async (req: Request, res: Response, next: NextFunction) => {
 
     query = query.skip(startIndex).limit(limit)
 
+    //If there is a populate field
     if(populate) {
         query = query.populate(populate)
     }
@@ -78,6 +86,7 @@ async (req: Request, res: Response, next: NextFunction) => {
         }
     }
 
+    //Create the advResults property
     res.advancedResults = {
         success:true,
         count:query_result.length,

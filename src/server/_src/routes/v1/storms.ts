@@ -1,3 +1,7 @@
+/*
+    Storm related Api calls
+*/
+
 import express from 'express'
 
 import {
@@ -6,9 +10,13 @@ import {
     getStormsOfUser
     //createStorm
 } from '../../controllers/v1/storms'
+
+//Perform advanced results which means filtering, pagination, and query parameters
 import {advancedResults} from '../../middleware/v1/advancedResults'
+
 import {protect,authorize} from '../../middleware/v1/auth'
 import {StormModel} from '../../models/Storm'
+
 // "/api/v1/storms/"
 const router = express.Router();
 
@@ -17,13 +25,9 @@ router
     .route('/')
     .get(advancedResults(StormModel,'archives'),getAllStorms)
 
+//Get all storms that a user can tag
 router
     .route('/user/:userId')
     .get(advancedResults(StormModel,'archives'),getStormsOfUser)
-
-// //Creating a storm
-// router
-//     .route("/storm")
-//     .post(createStorm)
 
 export default router;

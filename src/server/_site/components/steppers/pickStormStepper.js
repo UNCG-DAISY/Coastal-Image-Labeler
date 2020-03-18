@@ -1,3 +1,5 @@
+// This is the stepper that asks the user what storm and archive they wanna tag
+
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';

@@ -1,3 +1,8 @@
+/*
+    This file is much like /stormSeeder.ts but istead uses json data in /_data
+    to create entries in the DB
+*/
+
 import fs from 'fs'
 import {connect} from 'mongoose'
 import colors from 'colors'
@@ -14,7 +19,7 @@ import {StormModel} from './models/Storm'
 import {ArchiveModel} from './models/Archive'
 import {RoleModel} from './models/Role'
 
-
+//Connect to DB
 connect(process?.env?.MONGO_URI_DEV as string, {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -36,7 +41,7 @@ const roles = JSON.parse(
 )
 
 
-//Import into DB
+//Function to import into DB
 const importData = async () => {
     try {
         await StormModel.create(storms)
@@ -49,7 +54,7 @@ const importData = async () => {
     }
 }
 
-//Delete data
+//Function to delete data
 const deleteData = async () => {
     try {
         await StormModel.deleteMany({})
@@ -63,6 +68,7 @@ const deleteData = async () => {
     }
 }
 
+//Function that creates roles
 const createRoles = async () => {
     try {
         await RoleModel.create(roles)
@@ -74,7 +80,8 @@ const createRoles = async () => {
     }
 }
 
-//Too much work to get an argv package
+//This is a very simple way to get command line argv. If in the future theres a
+//need I might use a better way
 if(process.argv[2] === '-i') {
     importData()
 } else if(process.argv[2] === '-d') {

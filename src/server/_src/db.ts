@@ -1,8 +1,12 @@
-import { connect} from 'mongoose'
+/*
+    This exported function connectDB is used to connect to the cloud Mongo DB
+*/
+
+import { connect, Mongoose} from 'mongoose'
 
 export const connectDB = async () => {
-    //Cant find type of connect(), ik its Mongoose but .host doesnt work
 
+    //Get the uri to connect from the enviroment variables. Assume by default to use the development db
     let db_uri:string = process?.env?.MONGO_URI_DEV
 
     //If in production mode, use production db
@@ -10,14 +14,18 @@ export const connectDB = async () => {
         db_uri = process?.env?.MONGO_URI_PRODUCTION
     }
     
+    //Inform which DB using
     console.log(`Using ${process.env.NODE_ENV === 'production'? 'production': 'development'} database`.magenta)
-    const conn: any = await (connect(db_uri as string, {
+
+    //Connect
+    const conn: Mongoose = (await (connect(db_uri as string, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useFindAndModify: false,
         useUnifiedTopology: true
-    }))
+    })))
     
+    //Inform that the connection has been made
     console.log(`MongoDB connected: ${conn?.connection?.host}`.cyan.underline.bold)
    
     

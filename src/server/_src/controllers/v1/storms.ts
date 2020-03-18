@@ -1,15 +1,19 @@
+/*
+    All functions related to storm api calls
+*/
+
 import { Request,Response,NextFunction } from "express"
 import {asyncHandler} from '../../middleware/v1/async' //to avoid putting try catch everywhere
 import {UserModel} from '../../models/User'
-import {ArchiveModel} from '../../models/Archive'
+//import {ArchiveModel} from '../../models/Archive'
 
-import {ErrorResponse} from '../../utils/v1/errorResponse'
-import {StormModel} from '../../models/Storm'
-import axios from 'axios'
-import { ObjectID } from "mongodb"
+//import {ErrorResponse} from '../../utils/v1/errorResponse'
+//import {StormModel} from '../../models/Storm'
+//import axios from 'axios'
+//import { ObjectID } from "mongodb"
 
 import {UserDocument,StormDocument,ArchiveDocument} from '../../index'
-import { promises } from "dns"
+//import { promises } from "dns"
 
 /**
  * @desc        Gets all storms
@@ -23,36 +27,49 @@ const getAllStorms = asyncHandler(async (req: Request, res: Response, next: Next
 
 
 /**
- * @desc        Gets all storms
+ * @desc        Gets all storms of a user 
  * @route       GET /api/v1/storms/:userId
  * @access      Public
  * @returns     yes
  */
 const getStormsOfUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    
+
+    //Get all storms that gets completed in advResults
     const storms = res.advancedResults.data
     const userId = req?.params?.userId
+
+    //Find the user by id
     const user:UserDocument = (await UserModel.find({
         "_id":userId
     }))[0]
+
+    //Do we want to get all taggable storms/archives of this user, or just all
     const taggableFilter= req?.query?.taggable ?? false
 
     const stormsOfUser = user.storms
     let data = []
 
+    //For each storm that exists
     await Promise.all(storms.map((storm:StormDocument,index:number)=>{
+
+        //If that storm is part of the users storms,add it to the data to be returned
         if(stormsOfUser.includes(storm._id)) {
             let stormOfUser = storm
+            
+            //Get all archives
             let archivesOfStorm:[ArchiveDocument] = stormOfUser.archives
-            let taggableArchives:ArchiveDocument[] =archivesOfStorm
+            let archivesToReturn:ArchiveDocument[] = archivesOfStorm
 
+            //If we just want taggalbe archives, filter
             if(taggableFilter) {
-                taggableArchives = archivesOfStorm.filter(function(archive) {
+                archivesToReturn = archivesOfStorm.filter(function(archive) {
                     return archive?.taggable;
                 });
                 
             }
-            stormOfUser.archives = taggableArchives
+
+            //Push this data on to the user and the data to return
+            stormOfUser.archives = archivesToReturn
             data.push(stormOfUser)
         }
     }))
@@ -61,7 +78,7 @@ const getStormsOfUser = asyncHandler(async (req: Request, res: Response, next: N
 })
 
 /**
- * @desc        Gets a storm
+ * @desc        Gets a storm by Id
  * @route       GET /api/v1/storms/storm/:stormId/:userId
  * @access      Public
  * @returns     yes

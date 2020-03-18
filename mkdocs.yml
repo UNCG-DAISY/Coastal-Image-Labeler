@@ -1,13 +1,16 @@
-site_name: Post Storm Image Classification Dashboard and Node Server
+site_name: PSI Dashboard
 repo_url: https://github.com/UNCG-DAISY/psi-dashboard
 
 nav:
     - Home: index.md
     - Code of Conduct: code_of_conduct.md
-    - Models:
-      - Image: models/image.md
-      - TagData: models/tagData.md
-      - User: models/user.md
+    - Code Documentation: 
+      - Overview: code_documentation/overview.md
+    - User Documentation: 
+      - Overview: user_documentation/overview.md
+      # - Image: models/image.md
+      # - TagData: models/tagData.md
+      # - User: models/user.md
 
 theme:
   name: 'material'

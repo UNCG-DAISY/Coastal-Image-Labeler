@@ -1,3 +1,7 @@
+/*
+  This file contains all the typing of all possible values used in this project.
+*/
+
 import { Document,Types} from 'mongoose'
 import express from 'express';
 

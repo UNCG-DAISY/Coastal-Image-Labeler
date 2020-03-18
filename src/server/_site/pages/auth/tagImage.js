@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme  => ({
   
 }));
 
+// This page shows an image to tag
 
 function TagImage(props) {
   const {query:queryParams} = props

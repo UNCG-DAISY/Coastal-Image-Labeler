@@ -1,3 +1,5 @@
+//Constants of the project
+
 import ip from 'ip';
 
 const myIp = ip.address()
