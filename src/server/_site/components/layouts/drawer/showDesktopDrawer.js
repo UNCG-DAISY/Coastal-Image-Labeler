@@ -1,3 +1,5 @@
+// Drawer for desktop users
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Hidden from '@material-ui/core/Hidden';
