@@ -1,7 +1,9 @@
+/*
+    Model for images. Contains a link to the archive it falls under
+*/
+
+
 import { Schema, model, Model, Document, HookNextFunction, Types} from 'mongoose'
-// import slugify from 'slugify'
-// import {geocoder} from '../utils/v1/geocoder'
-// import { Entry } from 'node-geocoder'
 import {ImageDocument} from '../index'
 
 const ImageSchema: Schema  = new Schema(

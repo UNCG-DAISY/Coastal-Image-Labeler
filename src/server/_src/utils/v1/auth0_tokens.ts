@@ -1,7 +1,14 @@
+/*
+  This file is used to get the management token so that we can get user roles
+  and access information from auth0. This token changes every so offten
+*/
+
 import request from "request"
 import axios from 'axios'
 
 const getManagementTokens = async ():Promise<string> => {
+
+    //Settings for api POST request
     const options:any = {
         method: 'POST',
         url: process.env.AUTH0_TOKEN_URL,
@@ -15,28 +22,12 @@ const getManagementTokens = async ():Promise<string> => {
       };
     
     console.log("Getting Auth0 management token".magenta)
-
+    
+    //Api call to get the token
     const management_data = (await axios.post(options.url,options.form)).data
+
+    console.log("Got Auth0 management token".bgMagenta)
     return management_data.access_token
-    // request(options, function (error, response, body) {
-    //     if (error) throw new Error(error);
-    //     console.log("Got token".magenta)
-    //     console.log(JSON.parse(body).access_token)
-    //     //return body.access_token
-
-    //     // const testid2 = 'google-oauth2|100613204270669384478'
-
-    //     // const options2 = {
-    //     //     method: 'GET',
-    //     //     url: `https://dev-omczj0l4.auth0.com/api/v2/users/${testid2}/roles`,
-    //     //     headers: {authorization: `Bearer ${JSON.parse(body).access_token}`}
-    //     //   };
-    //     // request(options2, function (error, response, body) {
-    //     //     if (error) throw new Error(error);
-            
-    //     //     console.log(body);
-    //     // });
-    // });
 }
 
 export {

@@ -1,3 +1,9 @@
+/*
+  Both _app.js and _document.js are on each page. This page gets the user and
+  makes it so that its accessable in the whole program. I think it would be best
+  to use useMemo for the user.
+*/
+
 import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
@@ -27,12 +33,7 @@ export default class MyApp extends App {
       pageProps.user = ctx.req.session.passport.user
       
       //If there is indeed a user,get role and check if in mongo
-      if(pageProps?.user?.id) {
-        //Get the user role if there is any
-        // const userRoles = await axios.post(apiCall('/api/v1/users/getRoles'),{
-        //   id:pageProps?.user?.id
-        // })
-        
+      if(pageProps?.user?.id) {   
         //Get the mongo user. if none create and send back
         const mongoUser = await axios.post(apiCall('/api/v1/users/isUser'),{
           id:ctx?.req?.session?.passport?.user?.id || '',
@@ -46,8 +47,6 @@ export default class MyApp extends App {
      
     }
 
-   
-
     //userRoles
     return { pageProps };
 
@@ -55,6 +54,7 @@ export default class MyApp extends App {
 
   constructor(props) {
     super(props);
+    //Add user to state
     this.state = {
       user: props.pageProps.user
     };

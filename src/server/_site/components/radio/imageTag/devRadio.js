@@ -1,3 +1,5 @@
+//Configuration for development radio
+
 import React from 'react';
 import CustomRadioButton from '../customRadioButton'
 import * as colors from '@material-ui/core/colors/';

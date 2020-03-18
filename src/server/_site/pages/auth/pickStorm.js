@@ -24,6 +24,9 @@ const useStyles = makeStyles(theme  => ({
   },
 }));
 
+// This page shows a stepper that asks a series of questions on what strom to
+// tag, what archive of that storm and then redirects to a page to show that
+// image
 
 function TagImage(props) {
   const {storms} = props

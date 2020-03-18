@@ -1,31 +1,36 @@
+/*
+    This is the main server file.
+*/
+
 //imports
-import express, { Application } from 'express'
-import { Request,Response,NextFunction } from "express"
+import express, { Application } from 'express' //God tier package for web framework
+import { Request,Response,NextFunction } from "express" //Used for typing
 import path from 'path'
-import dotenv from 'dotenv'
-import morgan from 'morgan'
+import dotenv from 'dotenv' //Loads enviroment variables
+//import morgan from 'morgan'
 import fileupload from 'express-fileupload'
-import colors from 'colors'
+import colors from 'colors' //Allows for color in the terminal
 colors
-import {connectDB} from './db'
-import {errorHandler} from './middleware/v1/error'
+import {connectDB} from './db' //Function that connects to the DB
+import {errorHandler} from './middleware/v1/error' //Generic function to handle erros
 //Next js module that allows us to run nextjs and server
 import next from 'next'
 
 //Load route files
-import users from './routes/v1/user'
-import archives from './routes/v1/archives'
-import storms from './routes/v1/storms'
-import roles from './routes/v1/roles'
+import users from './routes/v1/user' //Api calls for user
+import archives from './routes/v1/archives'//Api calls for archives
+import storms from './routes/v1/storms'//Api calls for storms
+import roles from './routes/v1/roles'//Api calls for roles
 //Import the react/server shared constants
 
+//Packages for security
 // 1 - importing dependencies
 import session from "express-session";
 import passport from "passport";
 import Auth0Strategy from "passport-auth0";
 import uid from 'uid-safe';
-import {authRoutes} from "./utils/v1/auth-routes"
-import {getManagementTokens} from './utils/v1/auth0_tokens'
+import {authRoutes} from "./utils/v1/auth-routes"//Handles login and logout
+import {getManagementTokens} from './utils/v1/auth0_tokens'//Gets the mangagement token form Auth0 so we can access information
 // import * as types from './index'
 
 // Load env vars
@@ -33,25 +38,31 @@ dotenv.config({
     path: './_config/config.env'
 });
 
+//Determine what enviroment mode we are in.
 const dev = process.env.NODE_ENV !== 'production'
 
-//relative to package.json
-const nextApp = next({ dev,dir:'./_site' })
+//This is telling to let next.js, the react server side rendering package, to handle routing
+const nextApp = next({ dev,dir:'./_site' })//relative to package.json
 const handle = nextApp.getRequestHandler()
 
 nextApp.prepare()
 .then(async () => {
     
+    //Get the token from Auth0 and allow it to be globally used.
+    //Note: im note sure if this is the best way.
     global.MANGAGEMENT_TOKEN = await getManagementTokens()
 
     if(global.MANGAGEMENT_TOKEN) {
         console.log("Management token recieved".magenta)
     }
+
     //Connect to DB via Mongoose
     connectDB()
 
+    //Create our application
     const app: Application = express();
 
+    //Security
     // 2 - add session management to Express
     const sessionConfig = {
         secret: uid.sync(18),
@@ -62,6 +73,7 @@ nextApp.prepare()
         saveUninitialized: true
     };
     app.use(session(sessionConfig));
+
     // 3 - configuring Auth0Strategy
     const auth0Strategy = new Auth0Strategy(
         {
@@ -87,23 +99,21 @@ nextApp.prepare()
 
     // 6 - you are restricting access to some routes
     const restrictAccess = (req: Request, res: Response, next: NextFunction) => {
-        // console.log('CALLED----------------------------------------------------')
-        // console.log(Object.keys(req?.user))
         if (!req.isAuthenticated()) return res.redirect("/login");
         next();
     };
 
-    // Body parser so that json can be recieved
+    // Body parser so that json can be recieved on Api calls
     app.use(express.json())
 
-    //Log all traffic
-    //app.use(morgan('dev'))
-
-    //File upload
+    //Allow for File upload
     app.use(fileupload())
     app.use(express.static(path.join(__dirname,'../public')))
 
-    // Mount routers
+    //Mount routers, appi calls
+    //The first parameter is the name of the path and the 2nd is the file to use if an Api call with that path is received
+    //For example
+    ///api/v1/users/getUsername would be in the users.
     app.use('/api/v1/users',users)
     app.use('/api/v1/archives',archives)
     app.use('/api/v1/storms',storms)
@@ -113,7 +123,7 @@ nextApp.prepare()
     // This handles errors that happen during API calls
     app.use(errorHandler)
 
-    //Auth these pages
+    //Only pages with /auth at the beginning need to be restricted
     app.use("/auth/*", restrictAccess);
 
     //Everything else is a webpage
@@ -121,6 +131,7 @@ nextApp.prepare()
         return handle(req, res)
     })
 
+    //Get the port and have the site on that port
     const PORT = process.env.PORT ?? 5000;
     const server = app.listen(PORT,() => {
         console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold)
@@ -136,11 +147,10 @@ nextApp.prepare()
             process.exit(1)
         })
     })
-
-    //Test getting roles lol
-    
+  
 })
 .catch((ex) => {
+    //If any error, exit
     console.error(ex.stack)
     process.exit(1)
 })

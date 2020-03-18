@@ -1,9 +1,13 @@
+/*
+    All functions related to archive api calls
+*/
+
 import { Request,Response,NextFunction } from "express"
 import {asyncHandler} from '../../middleware/v1/async' //to avoid putting try catch everywhere
-import {UserModel} from '../../models/User'
+//import {UserModel} from '../../models/User'
 import {ArchiveModel} from '../../models/Archive'
-import {ErrorResponse} from '../../utils/v1/errorResponse'
-import axios from 'axios'
+//import {ErrorResponse} from '../../utils/v1/errorResponse'
+//import axios from 'axios'
 
 /**
  * @desc        Gets all archives
@@ -23,7 +27,7 @@ const getAllArchives = asyncHandler(async (req: Request, res: Response, next: Ne
 })
 
 /**
- * @desc        Gets a archive
+ * @desc        Gets a archive by ID
  * @route       GET /api/v1/archives/archive/:archiveId/:userId
  * @access      Public
  * @returns     yes

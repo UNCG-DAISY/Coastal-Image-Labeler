@@ -1,8 +1,12 @@
+/*
+    All functions related to roles api calls
+*/
+
 import { Request,Response,NextFunction } from "express"
 import {asyncHandler} from '../../middleware/v1/async' //to avoid putting try catch everywhere
 import {RoleModel} from '../../models/Role'
-import {ErrorResponse} from '../../utils/v1/errorResponse'
-import axios from 'axios'
+//import {ErrorResponse} from '../../utils/v1/errorResponse'
+//import axios from 'axios'
 
 /**
  * @desc        Gets all roles of a user

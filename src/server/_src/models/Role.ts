@@ -1,3 +1,8 @@
+/*
+    Model for roles.
+*/
+
+
 import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Types} from 'mongoose'
 import {RoleDocument} from '../index'
 

@@ -1,3 +1,7 @@
+/*
+    Model for archives. Contains a link to the storm it falls under
+*/
+
 import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Types} from 'mongoose'
 import slugify from 'slugify'
 import {geocoder} from '../utils/v1/geocoder'

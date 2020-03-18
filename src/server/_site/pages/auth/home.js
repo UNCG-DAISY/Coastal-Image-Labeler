@@ -15,6 +15,7 @@ import {
   apiCall
 } from '../../components/constants'
 
+// Home page after logging in
 function About(props) {
   return (
     <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={props.allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
@@ -23,10 +24,6 @@ function About(props) {
           <Typography variant="h4" component="h1" gutterBottom>
             About.js
           </Typography>
-          {/* <a href ='/auth/startTagging?title=memed'>
-            startTagging
-          </a> */}
-          {/* <Test user={props.user} /> */}
         </Box>
       </Container>
     </Drawer>
@@ -46,7 +43,7 @@ About.getInitialProps = async ctx => {
     stormMaker:false,
     archiveMaker:false
   }
-
+  
   if(user?._id) {
     const allowedRoles1 = (await axios.post(apiCall(`/api/v1/users/auth/${user?._id}`),{
       allowedRoles:['tagger']
