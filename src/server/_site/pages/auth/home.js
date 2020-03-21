@@ -22,7 +22,7 @@ function About(props) {
       <Container maxWidth="md">
         <Box my={4}>
           <Typography variant="h4" component="h1" gutterBottom>
-            About.js
+            Home.js
           </Typography>
         </Box>
       </Container>

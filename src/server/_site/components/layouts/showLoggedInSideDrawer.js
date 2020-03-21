@@ -111,7 +111,7 @@ function LoginSideDrawer(props) {
             <Divider />
                 <List>
                     {/* {generateSideContent(sideContentPages,classes)} */}
-                    <a href={'/auth/auth1'} className= {classes.link} key={'Home'}>
+                    <a href={'/auth/home'} className= {classes.link} key={'Home'}>
                         <ListItem button >
                             <ListItemIcon><HomeIcon/></ListItemIcon>
                             <ListItemText primary={'Home'} />

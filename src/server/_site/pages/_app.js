@@ -29,31 +29,54 @@ export default class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
 
+    //If there is a passport session
     if (ctx.req && ctx.req.session.passport) {
+
+      //Then get the passport user
       pageProps.user = ctx.req.session.passport.user
       
       //If there is indeed a user,get role and check if in mongo
       if(pageProps?.user?.id) {   
-        //Get the mongo user. if none create and send back
-        const mongoUser = await axios.post(apiCall('/api/v1/users/isUser'),{
-          id:ctx?.req?.session?.passport?.user?.id || '',
-          username:ctx?.req?.session?.passport?.user?.displayName
-        })
+       
+        //First using the passportId, see if this passport user is in mongoDb already
+        let getMongoUserById = await axios.post(
+          apiCall(
+            `/api/v1/users/findUser`
+          ),
+          {
+            userId: ctx?.req?.session?.passport?.user?.id
+          }
+        )
         
-        //pageProps.user.roles = userRoles.data.data.roles
-        pageProps.user.mongoUser = mongoUser.data.data.user[0]
-        console.log(mongoUser?.data?.data?.message?.america)
+        //If the returned user is undefined, that means this is a user who has
+        //recently register and not been entered into the db So enter them into
+        //the DB
+        if(!getMongoUserById.data.data.user) {
+          console.log('New registered user not in mongoDB, adding now...'.bgRed)
+
+          //Get the newly created user
+          getMongoUserById = await axios.post(apiCall('/api/v1/users/createUser'),{
+            passportUser:pageProps?.user
+          })
+  
+        }
+
+        //Add this to the user prop so other may use.
+        pageProps.user.mongoUser = getMongoUserById.data.data.user
+
+        //Show a message
+        console.log(getMongoUserById.data.data.message.green)
       }
      
     }
 
-    //userRoles
     return { pageProps };
 
   }
 
   constructor(props) {
     super(props);
+    
     //Add user to state
     this.state = {
       user: props.pageProps.user

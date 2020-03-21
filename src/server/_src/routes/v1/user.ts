@@ -5,26 +5,21 @@
 import express from 'express'
 
 import {
-    isInMongoDB,
     getUserRoles,
-    getUser,
-    checkUserRoles
+    findUser,
+    checkUserRoles,
+    createNewUser
 } from '../../controllers/v1/user'
 
 import {protect} from '../../middleware/v1/auth'
 
-// "/api/v1/user/isUser"
+// "/api/v1/users/"
 const router = express.Router();
 
-//Get a user by ID
+//Get a user by post data sent
 router
-    .route('/:id')
-    .get(getUser)
-
-//Checks if someone is a user
-router
-    .route('/isUser')
-    .post(isInMongoDB)
+    .route('/findUser')
+    .post(findUser)
 
 //Gets all roles of a user
 router
@@ -35,5 +30,10 @@ router
 router
     .route('/auth/:id')
     .post(checkUserRoles)
+
+//Creates a user with just id and displayName and creation date
+router
+    .route('/createUser')
+    .post(createNewUser)
 
 export default router;
