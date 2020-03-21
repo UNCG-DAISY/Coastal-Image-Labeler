@@ -1,0 +1,13 @@
+{
+  "name": "dataExporting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jsonToBetterJson.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "convert":"node jsonToBetterJson.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
