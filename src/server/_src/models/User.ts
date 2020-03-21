@@ -45,7 +45,11 @@ const userSchema: Schema = new Schema({
 //before saving
 // Add date created
 userSchema.pre<UserDocument>('save', async function(next:HookNextFunction) {
-    this.dateAdded = Date.now()
+    //if there is no dateAdded, add one
+    if(!this.dateAdded) {
+        this.dateAdded = Date.now()
+    }
+    
     next();
 });
 

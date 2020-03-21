@@ -9,67 +9,6 @@ import {RoleModel} from '../../models/Role'
 import {ErrorResponse} from '../../utils/v1/errorResponse'
 import axios from 'axios'
 
-//TODO Split into two parts
-/**
- * @desc        Checks to see if a user is in the MongoDB
- * @route       GET /api/v1/user/isUser
- * @access      Public
- * @returns     yes
- */
-const isInMongoDB = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-
-    //Make sure theres a body sent
-    const data = req?.body
-    if(!data.id) {
-        return next(new ErrorResponse(`Please send a userId`,400))
-    }
-
-    //Make sure theres a username sent
-    if(!data.username) {
-        return next(new ErrorResponse(`Please send a username`,400))
-    }
-
-    //Get a user by the id sent
-    const user = await UserModel.find({
-        userId:data.id
-    }).populate('roleData')
-
-    //if no user is sent, that means create a new user
-    if(user.length === 0) {
-
-        //Create user
-        let user_entry = await UserModel.create({
-            userId:data.id,
-            userName:data.username,
-            //dateAdded: Date.now()
-        })
-
-        //Get this user again,but also get the roles
-        user_entry = await UserModel.findOne({
-            userId:data.id
-        }).populate('roleData')
-
-        //Send back the new user
-        res.status(201).json({
-            success:true,
-            data:{
-                message:'User made',
-                user:user_entry
-            }
-        })
-
-    }
-    else {
-        res.status(200).json({
-            success:true,
-            data:{
-                message:'User exists',
-                user:user
-            }
-        })        
-    }
-})
-
 //This is probablly a deprecated function
 /**
  * @desc        Gets all roles of a user
@@ -119,20 +58,39 @@ const getUserRoles = asyncHandler(async (req: Request, res: Response, next: Next
 
 /**
  * @desc        Gets a user by id
- * @route       GET /api/v1/user/:id
+ * @route       GET /api/v1/user/findUser
  * @access      Public
  * @returns     yes
  */
-const getUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    
-    const user  = await UserModel.findById(req?.params?.id).populate('roleData')
+const findUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
 
-    res.status(200).json({
-        success:true,
-        data:{
-            user
+    //if a body data was sent
+    if(req.body) {
+        const user  = (await UserModel.find(req.body).populate('roleData'))[0]
+
+        let message = 'User does not exist'
+        if(user) {
+            message = 'User exists in DB'
         }
-    }) 
+
+        res.status(200).json({
+            success:true,
+            data:{
+                message,
+                user
+            }
+        }) 
+    }
+    else {
+    //if no body data was sent
+        res.status(400).json({
+            success:true,
+            data:{
+                message:'No body data sent'
+            }
+        }) 
+    }
+    
 })
 
 /**
@@ -181,9 +139,48 @@ const checkUserRoles = asyncHandler(async (req: Request, res: Response, next: Ne
     
 })
 
+//Perhaps this should be only allowed by logged in users
+/**
+ * @desc        Creates a user with the given passport user properties
+ * @route       POST /api/v1/user/:id
+ * @access      Private
+ * @returns     yes
+ */
+const createNewUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    
+    console.log(req.body)
+    const {passportUser} = req.body
+    const {displayName,id} = passportUser
+
+    //console.log(`${displayName} ${id}`.green)
+    //if no displayName or id passed
+    if(!displayName || !id) {
+        res.status(400).json({
+            success:true,
+            data:null
+        }) 
+    }
+   
+    let user_entry = await UserModel.create({
+        userId:id,
+        userName: displayName
+        //dateAdded:Date.now()
+    })
+
+    console.log('New user made'.bgMagenta)
+
+    res.status(200).json({
+        success:true,
+        data:{
+            message:'New User made',
+            user:user_entry
+        }
+    }) 
+})
+
 export {
-    isInMongoDB,
     getUserRoles,
-    getUser,
-    checkUserRoles
+    findUser,
+    checkUserRoles,
+    createNewUser
 }
