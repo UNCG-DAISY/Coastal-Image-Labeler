@@ -8,7 +8,8 @@ import {UserModel} from '../../models/User'
 import {RoleModel} from '../../models/Role'
 import {ErrorResponse} from '../../utils/v1/errorResponse'
 import axios from 'axios'
-
+import {RBAC} from '../../middleware/v1/auth'
+//import {rbacJson,UserDocument} from '../../index'
 //This is probablly a deprecated function
 /**
  * @desc        Gets all roles of a user
@@ -66,8 +67,8 @@ const findUser = asyncHandler(async (req: Request, res: Response, next: NextFunc
 
     //if a body data was sent
     if(req.body) {
-        const user  = (await UserModel.find(req.body).populate('roleData'))[0]
-
+        const user  = await UserModel.findOne(req.body).populate('roleData')
+        console.log(user)
         let message = 'User does not exist'
         if(user) {
             message = 'User exists in DB'

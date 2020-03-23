@@ -46,7 +46,7 @@ declare namespace psiDashboard  {
     //numberOfImagesTagged?: number
     role:[Types.ObjectId]
     roleData?:[any]
-    roleNames?:[string]
+    roleNames?:string[]
     //storm:[Types.ObjectId]
   }
 
@@ -78,6 +78,13 @@ declare namespace psiDashboard  {
     ArchiveDocument |
     RoleDocument |
     StormDocument 
+
+  type rbacJson = {
+    all:string[] | undefined[],
+    one:any[] | undefined[]
+  }
+
+  //type id = { _id:string} | {userId:string}
 }
 
 
