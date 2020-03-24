@@ -64,11 +64,11 @@ const getUserRoles = asyncHandler(async (req: Request, res: Response, next: Next
  * @returns     yes
  */
 const findUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-
+    //console.log(Object.keys(req),'---')
     //if a body data was sent
     if(req.body) {
         const user  = await UserModel.findOne(req.body).populate('roleData')
-        console.log(user)
+        
         let message = 'User does not exist'
         if(user) {
             message = 'User exists in DB'
@@ -149,7 +149,7 @@ const checkUserRoles = asyncHandler(async (req: Request, res: Response, next: Ne
  */
 const createNewUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     
-    console.log(req.body)
+    //console.log(req.body)
     const {passportUser} = req.body
     const {displayName,id} = passportUser
 

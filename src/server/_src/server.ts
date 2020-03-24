@@ -21,6 +21,7 @@ import users from './routes/v1/user' //Api calls for user
 import archives from './routes/v1/archives'//Api calls for archives
 import storms from './routes/v1/storms'//Api calls for storms
 import roles from './routes/v1/roles'//Api calls for roles
+import testApi from './routes/v1/testApi' 
 //Import the react/server shared constants
 
 //Packages for security
@@ -118,6 +119,7 @@ nextApp.prepare()
     app.use('/api/v1/archives',archives)
     app.use('/api/v1/storms',storms)
     app.use('/api/v1/roles',roles)
+    app.use('/api/v1/test',testApi)
     
     
     // This handles errors that happen during API calls
