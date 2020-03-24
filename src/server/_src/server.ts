@@ -102,7 +102,7 @@ nextApp.prepare()
         if (!req.isAuthenticated()) return res.redirect("/login");
         next();
     };
-
+ 
     // Body parser so that json can be recieved on Api calls
     app.use(express.json())
 
