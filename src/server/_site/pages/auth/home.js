@@ -7,6 +7,10 @@ import {hasUser} from '../../components/utils/checkIfUser'
 import Drawer from '../../components/layouts/drawer'
 import MyAppBar from '../../components/layouts/appBar'
 import ShowLoggedInSideDrawer from '../../components/layouts/showLoggedInSideDrawer'
+import fetch from "isomorphic-fetch";
+
+import Button from '@material-ui/core/Button';
+
 import axios from 'axios'
 import { 
   myIp,
@@ -14,6 +18,18 @@ import {
   protocal,
   apiCall
 } from '../../components/constants'
+
+async function test() {
+ 
+  await fetch("/api/v1/test/post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  
+}
+
 
 // Home page after logging in
 function About(props) {
@@ -24,6 +40,9 @@ function About(props) {
           <Typography variant="h4" component="h1" gutterBottom>
             Home.js
           </Typography>
+          <Button variant="contained" color="primary" onClick={test}>
+            Primary
+          </Button>
         </Box>
       </Container>
     </Drawer>
@@ -36,6 +55,7 @@ About.getInitialProps = async ctx => {
 
   hasUser(req)
 
+  //console.log(req.user)
   const user = req.user.mongoUser
 
   let allowedPages ={
@@ -43,7 +63,21 @@ About.getInitialProps = async ctx => {
     stormMaker:false,
     archiveMaker:false
   }
-  
+
+  const test = await fetch(apiCall("/api/v1/test/post"), {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "credentials": "include",
+      "cookie": ctx.req ? ctx.req.headers.cookie : null ,
+    },
+    body:JSON.stringify({
+      message:'hi'
+    })
+  });
+
+  console.log((await test.json()).data.message)
+
   if(user?._id) {
     const allowedRoles1 = (await axios.post(apiCall(`/api/v1/users/auth/${user?._id}`),{
       allowedRoles:['tagger']
@@ -64,7 +98,7 @@ About.getInitialProps = async ctx => {
   }
   
 
-  console.log(allowedPages)
+  //console.log(allowedPages)
 
   return {allowedPages}
 }

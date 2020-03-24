@@ -47,6 +47,8 @@ export default class MyApp extends App {
             userId: ctx?.req?.session?.passport?.user?.id
           }
         )
+
+        
         
         //If the returned user is undefined, that means this is a user who has
         //recently register and not been entered into the db So enter them into
@@ -65,7 +67,7 @@ export default class MyApp extends App {
         pageProps.user.mongoUser = getMongoUserById.data.data.user
 
         //Show a message
-        console.log(getMongoUserById.data.data.message.green)
+        console.log(getMongoUserById.data.data.message.green,'--------')
       }
      
     }
