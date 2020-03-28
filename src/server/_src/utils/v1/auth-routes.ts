@@ -26,6 +26,7 @@ router.get("/callback", (req, res, next) => {
     //Log the user that exists in
     req.logIn(user, (err) => {
       if (err) return next(err);
+      //window.location.replace('/auth/home')
       res.redirect("/auth/home");//on successful login  @1
     });
 
