@@ -179,9 +179,53 @@ const createNewUser = asyncHandler(async (req: Request, res: Response, next: Nex
     }) 
 })
 
+/**
+ * @desc        Gets allowedPages of this user
+ * @route       GET /api/v1/user/isUser
+ * @access      Public
+ * @returns     yes
+ */
+const allowedPages = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    // console.log(req?.params?.id)
+
+    const id = req?.params?.id || undefined
+    const defaultAllowed = {
+        tagger:false
+    }
+
+    //if no id sent
+    if(id === undefined) {
+        res.status(400).json({
+            success:false,
+            data:{
+               allowedPages:defaultAllowed
+            }
+        })
+    }
+    else {
+        const user = await UserModel.findOne({userId:id}).populate('roleData')
+        //console.log(user)
+
+        const {roleNames} = user
+
+        const pagesAllowed = {
+            tagger: roleNames.includes("tagger")
+        }
+        res.status(200).json({
+            success:true,
+            data:{
+                allowedPages:pagesAllowed
+            }
+        })
+    }
+
+   
+})
+
 export {
     getUserRoles,
     findUser,
     checkUserRoles,
-    createNewUser
+    createNewUser,
+    allowedPages
 }

@@ -66,8 +66,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-
 const extraContentePages = [
     {
         title:'Date Source - NOAA',
@@ -105,6 +103,7 @@ function LoginSideDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const allowedPages = props.allowedPages
     return (
         <div>
             <div className={classes.toolbar} />
@@ -118,12 +117,16 @@ function LoginSideDrawer(props) {
                         </ListItem>
                     </a>
 
-                    <a href={'/auth/pickStorm'} className= {classes.link} key={'PickStorm'}>
-                        <ListItem button >
-                            <ListItemIcon><HomeIcon/></ListItemIcon>
-                            <ListItemText primary={'Image Tag'} />
-                        </ListItem>
-                    </a>
+                    {
+                      allowedPages?.tagger && 
+                      <a href={'/auth/pickStorm'} className= {classes.link} key={'PickStorm'}>
+                          <ListItem button >
+                              <ListItemIcon><HomeIcon/></ListItemIcon>
+                              <ListItemText primary={'Image Tag'} />
+                          </ListItem>
+                      </a>
+                    }
+                    
 
                     {/* <a href={'/auth/myProfile'} className= {classes.link} key={'My Profile'}>
                         <ListItem button >
@@ -132,7 +135,7 @@ function LoginSideDrawer(props) {
                         </ListItem>
                     </a> */}
 
-                    {props?.allowedPages?.tagger && <a href={'/auth/startTagging'} className= {classes.link} key={'Start Tagging'}>
+                    {/* {props?.allowedPages?.tagger && <a href={'/auth/startTagging'} className= {classes.link} key={'Start Tagging'}>
                         <ListItem button >
                             <ListItemIcon><LabelIcon/></ListItemIcon>
                             <ListItemText primary={'Start Tagging'} />
@@ -151,7 +154,7 @@ function LoginSideDrawer(props) {
                             <ListItemIcon><FolderIcon/></ListItemIcon>
                             <ListItemText primary={'Make an Archive'} />
                         </ListItem>
-                    </a>}
+                    </a>} */}
 
                 </List>
                 
@@ -181,5 +184,7 @@ LoginSideDrawer.propTypes = {
    */
   container: PropTypes.instanceOf(typeof Element === 'undefined' ? Object : Element),
 };
+
+
 
 export default LoginSideDrawer;

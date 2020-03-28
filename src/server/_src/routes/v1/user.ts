@@ -8,7 +8,8 @@ import {
     getUserRoles,
     findUser,
     checkUserRoles,
-    createNewUser
+    createNewUser,
+    allowedPages
 } from '../../controllers/v1/user'
 
 import {protect} from '../../middleware/v1/auth'
@@ -35,5 +36,9 @@ router
 router
     .route('/createUser')
     .post(createNewUser)
+
+router
+    .route('/allowedPages/:id')
+    .get(allowedPages)
 
 export default router;

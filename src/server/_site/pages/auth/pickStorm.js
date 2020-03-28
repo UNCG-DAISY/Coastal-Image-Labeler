@@ -9,7 +9,11 @@ import Paper from '@material-ui/core/Paper';
 import { useRouter } from 'next/router'
 import Button from '@material-ui/core/Button';
 import PickStormStepper from '../../components/steppers/pickStormStepper'
-
+import {getAllowedPages} from '../../components/utils/getAllowedPages'
+import { 
+  apiCall
+} from '../../components/constants'
+import fetch from "isomorphic-fetch";
 
 const useStyles = makeStyles(theme  => ({
   paper: {
@@ -104,7 +108,12 @@ TagImage.getInitialProps = async ctx => {
 
     }
   }
-  return {storms}
+  const allowedPages = await getAllowedPages(req.user,ctx)
+
+  if(allowedPages.tagger === false) {
+    res.redirect("/auth/home")
+  }
+  return {storms,allowedPages}
 }
 
 export default TagImage

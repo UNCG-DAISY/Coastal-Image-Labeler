@@ -7,7 +7,11 @@ import Drawer from '../../components/layouts/drawer'
 import MyAppBar from '../../components/layouts/appBar'
 import ShowLoggedInSideDrawer from '../../components/layouts/showLoggedInSideDrawer'
 import { makeStyles } from '@material-ui/core/styles';
-
+import {getAllowedPages} from '../../components/utils/getAllowedPages'
+import { 
+  apiCall
+} from '../../components/constants'
+import fetch from "isomorphic-fetch";
 
 import TagImageCard from '../../components/cards/imageTagCard'
 import ImageTagStepper from '../../components/steppers/imageTagStepper'
@@ -44,7 +48,11 @@ TagImage.getInitialProps = async ctx => {
 
   const {req,res} = ctx
   const {query} = req
-  return {query}
+  const allowedPages = await getAllowedPages(req.user,ctx)
+  if(allowedPages.tagger === false) {
+    res.redirect("/auth/home")
+  }
+  return {query,allowedPages}
 }
 
 export default TagImage
