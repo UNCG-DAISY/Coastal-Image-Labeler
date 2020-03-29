@@ -14,6 +14,7 @@ import {
   apiCall
 } from '../../components/constants'
 import fetch from "isomorphic-fetch";
+import axios from 'axios'
 
 const useStyles = makeStyles(theme  => ({
   paper: {
@@ -33,7 +34,7 @@ const useStyles = makeStyles(theme  => ({
 // image
 
 function TagImage(props) {
-  const {storms} = props
+  const {storms,stormList} = props
   const classes = useStyles();
   const router = useRouter()
 
@@ -47,7 +48,7 @@ function TagImage(props) {
       <Container maxWidth="md">
       <div className={classes.paper}>
         <Paper elevation={13} >
-          <PickStormStepper storms = {storms}/>
+          <PickStormStepper storms = {stormList}/>
         </Paper>
         
       </div>
@@ -108,12 +109,37 @@ TagImage.getInitialProps = async ctx => {
 
     }
   }
+
   const allowedPages = await getAllowedPages(req.user,ctx)
 
   if(allowedPages.tagger === false) {
     res.redirect("/auth/home")
   }
-  return {storms,allowedPages}
+
+  const getStorms = (await axios.get(
+    apiCall(
+      `/api/v1/storms/user/${req.user.mongoUser._id}`
+    )
+  )).data
+
+  let stormList = {}
+ 
+  getStorms.data.forEach(storm => {
+      let newEntry = {
+      };
+
+      stormList[storm.name] = {}
+      
+      let archiveList = []
+      storm.archives.forEach(archive => {
+        stormList[storm.name][archive.name] = {}
+      });
+  });
+
+  console.log(stormList)
+
+
+  return {storms,allowedPages,stormList}
 }
 
 export default TagImage
