@@ -38,10 +38,13 @@ export default function PickStormStepper(props) {
   const Router = useRouter()
 
   const storms = props?.storms || {}
+
   const stormsKey = Object.keys(storms)
 
   const [selectedStorm, setSelectedStorm] = React.useState(-1);
   const [selectedArchive, setselectedArchive] = React.useState(-1);
+
+
 
 
   function getArchiveName(stormKey,archive) {
@@ -53,7 +56,7 @@ export default function PickStormStepper(props) {
   const handleNext = () => {
       if(activeStep == steps.length-1) {
         
-        alert(`Getting image for ${selectedStorm} under archive ${selectedArchive}`)
+        alert(`Getting image for storm ${selectedStorm} under archive ${selectedArchive}`)
         // Router.push(
         //   `/auth/tagImage?storm=${selectedStorm}&archive=${selectedArchive}`,
         //   `/auth/tagImage?storm=${selectedStorm}&archive=${selectedArchive}`
@@ -85,7 +88,6 @@ export default function PickStormStepper(props) {
             <CreateStormPickerDropdown 
                 data={storms} 
                 stateFunctions = {[selectedStorm, setSelectedStorm]} 
-               
                 label = 'Pick a storm'
             />
         );

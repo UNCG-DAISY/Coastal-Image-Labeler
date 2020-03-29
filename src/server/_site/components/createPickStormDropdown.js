@@ -20,8 +20,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function CreateStormPickerDropdown(props) {
     const classes = useStyles();
-
     const dataValues = Object.keys(props.data)
+    
     const [selectedValue, setselectedValue] = props.stateFunctions
 
     
