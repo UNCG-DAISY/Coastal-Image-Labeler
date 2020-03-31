@@ -39,7 +39,7 @@
     "moment-timezone": "^0.5.27",
     "mongoose": "^5.8.3",
     "morgan": "^1.9.1",
-    "next": "^9.3.2",
+    "next": ">=9.3.2",
     "node-fetch": "^2.6.0",
     "node-geocoder": "^3.25.0",
     "passport": "^0.4.1",
