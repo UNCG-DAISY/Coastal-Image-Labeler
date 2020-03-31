@@ -25,12 +25,18 @@ import WashoverRadio from '../radio/imageTag/washoverRadio'
 import ImpactRadio from '../radio/imageTag/impactRadio'
 import theme from '../theme'
 
+import { red, blue } from '@material-ui/core/colors';
+
+import Paper from '@material-ui/core/Paper';
+import { func } from 'prop-types';
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
   backButton: {
     marginRight: theme.spacing(1),
+
   },
   instructions: {
     paddingTop: theme.spacing(2),
@@ -38,9 +44,14 @@ const useStyles = makeStyles(theme => ({
     paddingLeft:theme.spacing(2)
   },
   instructions2: {
-    paddingTop: theme.spacing(4),
-    marginBottom: theme.spacing(2),
-    paddingLeft:theme.spacing(4)
+    // paddingTop: theme.spacing(4),
+    // marginBottom: theme.spacing(2),
+    // paddingLeft:theme.spacing(4)
+    marginTop: theme.spacing(1),
+    padding: theme.spacing(2),
+  },
+  controllerButtons: {
+    paddingTop: theme.spacing(1),
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -52,6 +63,30 @@ const useStyles = makeStyles(theme => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
+  buttons: {
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(1),
+      //padding: theme.spacing(2),
+    //   width: theme.spacing(16),
+    //   height: theme.spacing(16),
+    },
+  },
+  skipButtonColor: {
+    color: theme.palette.getContrastText(red[500]),
+    backgroundColor: red[500],
+    '&:hover': {
+      backgroundColor: red[700],
+    },
+  },
+  waterButtonColor: {
+    color: theme.palette.getContrastText(blue[500]),
+    backgroundColor: blue[500],
+    '&:hover': {
+      backgroundColor: blue[700],
+    },
+  }
 }));
 
 export default function ImageTagStepper(props) {
@@ -62,8 +97,11 @@ export default function ImageTagStepper(props) {
   const [devType,setDevType] = React.useState("-1");
   const [washoverType,setWashoverType] = React.useState("-1");
   const [impactType,setImpactType] = React.useState("-1");
-  const [terrianType,setTerrianType] = React.useState("-1");
+  const [terrianType,setTerrianType] = React.useState("0");
+  const [waterOrOther,setWaterOrOther] = React.useState("0");
   const [expanded, setExpanded] = React.useState(true);
+
+  const imagePath = props.imagePath || '/stormImages/storm1.jpg'
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -71,36 +109,47 @@ export default function ImageTagStepper(props) {
 
   function getSteps() {
     return [
+        'Water or N/A',
         'Development type', 
         'Washover visibility', 
         'Impact type', 
-        //'Terrian type(s)'
+        'Terrian type(s)'
     ];
   }
   function getAllowNextStepVar() {
       return [
+        waterOrOther,
         devType,
         washoverType,
         impactType,
-        //terrianType
+        terrianType
       ]
   }
   const allowNextStep = getAllowNextStepVar()
   
   function getStepContent(stepIndex) {
     switch (stepIndex) {
-      case 0:
+      case 0: 
+        return (
+          <WaterOrOtherQuestions/>
+
+        )
+      case 1:
         return (
             <DevRadio devType = {devType} setDevType={setDevType} handleChange={handleChange}/>          
         );
-      case 1:
+      case 2:
         return (
             <WashoverRadio washoverType={washoverType} setWashoverType={setWashoverType} handleChange={handleChange}/>      
         )
-      case 2:
+      case 3:
         return (
             <ImpactRadio impactType={impactType} setImpactType={setImpactType} handleChange={handleChange}/>
         );
+      case 4: 
+        return (
+          'Terrian types'
+        )
     //   case 2:
     //     return 'Select terrian type(s)';
       default:
@@ -108,6 +157,41 @@ export default function ImageTagStepper(props) {
     }
   }
 
+  function WaterOrOtherQuestions() {
+    return (
+      <div className = {classes.buttons}>
+        <div>
+          <Button variant="contained" color="primary" className = {classes.waterButtonColor} onClick={handleWaterImage} >
+            Water Image
+          </Button>
+          <Typography>
+            Click the above button if the current image on display is just an 
+            image of water or mostly water and thus contains no useful information.
+          </Typography>
+        </div>
+
+        <div>
+        <Button variant="contained" color="secondary" className = {classes.skipButtonColor} onClick={handleSkipImage}>
+          Skip Image
+        </Button>
+          <Typography>
+            Click the above button if you do not wish to tag the 
+            current image and we will give you another one.
+          </Typography>
+        </div>
+        
+        
+      </div>
+    )
+  }
+
+  function handleWaterImage() {
+    alert('This is water image');
+  }
+
+  function handleSkipImage() {
+    alert('image skipped');
+  }
  
 
   const handleChange = (event,fnc) => {
@@ -152,22 +236,23 @@ export default function ImageTagStepper(props) {
             <ExpandMoreIcon  className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
             })} />
+            <Typography>{expanded? 'Close image':'Open image'}</Typography>
+            
             </IconButton>
         </CardActions>
         
         {/* The image */}
         <CardActionArea 
             onClick = {() => {
-                window.open( "/stormImages/storm1.jpg", "/stormImages/storm1.jpg"); 
+                window.open( imagePath, imagePath); 
             }}
-        >
-            
+        >   
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardMedia
                     component="img"
                     alt="No image found"
                                    
-                    image={"/stormImages/storm1.jpg"}
+                    image={imagePath}
                     title="Image to tag"
                 />
             </Collapse>
@@ -181,29 +266,48 @@ export default function ImageTagStepper(props) {
                 wasType = {washoverType} <br/>
                 impType = {impactType}
             </Typography>
-            <Button variant="contained" color="danger" onClick={handleReset} style={{backgroundColor:'red'}}>
-                Reset
-            </Button>
-            <Button variant="contained" color="primary"  onClick={() => {props.submitTag({devType,washoverType,impactType})}}>
-               Submit
-            </Button>
+            {/* <div className={classes.controllerButtons}>
+              <Button
+                color="danger" onClick={handleReset}
+                onClick={handleBack}
+              >
+                  Reset
+              </Button>
+              <Button variant="contained" color="primary"  onClick={() => {props.submitTag({devType,washoverType,impactType})}}>
+              Submit
+              </Button>
+            </div> */}
+            <div className={classes.controllerButtons}> 
+              <Button
+                color="danger" onClick={handleReset}
+                onClick={handleBack}
+                className={classes.backButton}
+              >
+                  Reset
+              </Button>
+              <Button variant="contained" color="primary"  onClick={() => {props.submitTag({devType,washoverType,impactType})}}>
+              Submit
+              </Button>
+            </div>
+            
           </div>
         ) : (
-          <div>
-            <CardActionArea className={classes.instructions2}style={{backgroundColor:'#424242'}}>
+          <div >
+            <Paper className={classes.instructions2} style={{backgroundColor:'#424242'}}>
                     {getStepContent(activeStep)} 
-            </CardActionArea>
-          
-            <Button
-            disabled={activeStep === 0}
-            onClick={handleBack}
-            className={classes.backButton}
-            >
-                Back
-            </Button>
-            <Button variant="contained" color="primary" onClick={handleNext} disabled={allowNextStep[activeStep] == -1}>
-                {activeStep === steps.length - 1 ? 'Review' : 'Next'}
-            </Button>
+            </Paper>
+            <div className={classes.controllerButtons}> 
+              <Button
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                className={classes.backButton}
+              >
+                  Back
+              </Button>
+              <Button variant="contained" color="primary" onClick={handleNext} disabled={allowNextStep[activeStep] == -1}>
+                  {activeStep === steps.length - 1 ? 'Review' : 'Next'}
+              </Button>
+            </div>
        
           </div>
         )}

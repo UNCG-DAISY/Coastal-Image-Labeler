@@ -15,6 +15,7 @@ import fetch from "isomorphic-fetch";
 
 import TagImageCard from '../../components/cards/imageTagCard'
 import ImageTagStepper from '../../components/steppers/imageTagStepper'
+import ImageTaggingStepper from '../../components/steppers/imageTaggingStepper'
 const useStyles = makeStyles(theme  => ({
   
 }));
@@ -35,9 +36,9 @@ function TagImage(props) {
       <Container maxWidth="md">
         <Box my={4}>
           {/* <TagImageCard imagePath = "/stormImages/storm1.jpg"/> */}
-          <ImageTagStepper submitTag={submitTags}/>
-          {JSON.stringify(queryParams)}
+          <ImageTagStepper submitTag={submitTags} imagePath = "http://localhost:5000/amenadiel/a420/420_test.png" />
         </Box>
+        {JSON.stringify(queryParams)}
       </Container>
     </Drawer>
     
@@ -48,10 +49,12 @@ TagImage.getInitialProps = async ctx => {
 
   const {req,res} = ctx
   const {query} = req
+
   const allowedPages = await getAllowedPages(req.user,ctx)
   if(allowedPages.tagger === false) {
     res.redirect("/auth/home")
   }
+
   return {query,allowedPages}
 }
 
