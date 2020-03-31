@@ -109,7 +109,9 @@ nextApp.prepare()
 
     //Allow for File upload
     app.use(fileupload())
-    app.use(express.static(path.join(__dirname,'../public')))
+    //Static files
+    //Example: amenadiel/a420/420_test.png
+    app.use(express.static(path.join(__dirname,'./_data/storms')))
 
     //Mount routers, appi calls
     //The first parameter is the name of the path and the 2nd is the file to use if an Api call with that path is received
