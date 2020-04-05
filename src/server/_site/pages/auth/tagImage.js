@@ -15,7 +15,7 @@ import fetch from "isomorphic-fetch";
 
 import TagImageCard from '../../components/cards/imageTagCard'
 import ImageTagStepper from '../../components/steppers/imageTagStepper'
-import ImageTaggingStepper from '../../components/steppers/imageTaggingStepper'
+
 const useStyles = makeStyles(theme  => ({
   
 }));
@@ -31,12 +31,25 @@ function TagImage(props) {
     console.log(tags)
   }
 
+  function tagAsWater(imageId) {
+    console.log('water',Object.keys(props),imageId)
+  }
+
+  function skipImage(imageId) {
+    console.log('skip',Object.keys(props),imageId)
+  }
+
   return (
     <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={props.allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
       <Container maxWidth="md">
         <Box my={4}>
           {/* <TagImageCard imagePath = "/stormImages/storm1.jpg"/> */}
-          <ImageTagStepper submitTag={submitTags} imagePath = "http://localhost:5000/amenadiel/a420/420_test.png" />
+          <ImageTagStepper 
+            submitTag={submitTags} 
+            tagAsWater={tagAsWater}
+            skipImage={skipImage}
+            imagePath = "http://localhost:5000/amenadiel/a420/420_test.png" 
+          />
         </Box>
         {JSON.stringify(queryParams)}
       </Container>
