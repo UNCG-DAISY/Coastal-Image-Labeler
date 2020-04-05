@@ -1,30 +1,30 @@
-//Configuration for development radio
+//Configuration for washover type radio
 
 import React from 'react';
 import CustomRadioButton from '../customRadioButton'
 import * as colors from '@material-ui/core/colors/';
 import Radio from '@material-ui/core/Radio';
 
-export default function DevRadio(props) {
+export default function DamageRadio(props) {
     return(
         <CustomRadioButton 
-            value = {props.devType} 
-            onChange = {(event) => props.handleChange(event,props.setDevType)}
-            style = {{color:colors.green[500]}}
-            title = {`Development Type = ${props.devType}`}
-            ariaLabel = "devType" 
-            name = "devType"
+            value = {props.damageType} 
+            onChange = {(event) => props.handleChange(event,props.setDamageType)}
+            style = {{color:colors.orange[500]}}
+            title = {`Damage Type = ${props.damageType}`}
+            ariaLabel = "damageType" 
+            name = "damageType"
             buttons={[
                 {
                     value:'0',
                     control: <Radio color="primary" />,
-                    label: "Undeveloped",
+                    label: "Visible Damage",
                     labelPlacement:"end"
                 },
                 {
                     value:'1',
                     control: <Radio color="primary" />,
-                    label: "Developed",
+                    label: "No Damage",
                     labelPlacement:"end"
                 }
             ]}

@@ -23,6 +23,7 @@ import CustomRadioButton from '../radio/customRadioButton'
 import DevRadio from '../radio/imageTag/devRadio'
 import WashoverRadio from '../radio/imageTag/washoverRadio'
 import ImpactRadio from '../radio/imageTag/impactRadio'
+import DamageRadio from '../radio/imageTag/damageType'
 import theme from '../theme'
 
 import { red, blue } from '@material-ui/core/colors';
@@ -97,6 +98,7 @@ export default function ImageTagStepper(props) {
   const [devType,setDevType] = React.useState("-1");
   const [washoverType,setWashoverType] = React.useState("-1");
   const [impactType,setImpactType] = React.useState("-1");
+  const [damageType,setDamageType] = React.useState("-1");
   const [terrianType,setTerrianType] = React.useState("0");
   const [waterOrOther,setWaterOrOther] = React.useState("0");
   const [expanded, setExpanded] = React.useState(true);
@@ -113,7 +115,8 @@ export default function ImageTagStepper(props) {
         'Development type', 
         'Washover visibility', 
         'Impact type', 
-        'Terrian type(s)'
+        'Terrian type(s)',
+        'Damage type'
     ];
   }
   function getAllowNextStepVar() {
@@ -122,7 +125,8 @@ export default function ImageTagStepper(props) {
         devType,
         washoverType,
         impactType,
-        terrianType
+        terrianType,
+        damageType
       ]
   }
   const allowNextStep = getAllowNextStepVar()
@@ -132,7 +136,6 @@ export default function ImageTagStepper(props) {
       case 0: 
         return (
           <WaterOrOtherQuestions/>
-
         )
       case 1:
         return (
@@ -150,6 +153,10 @@ export default function ImageTagStepper(props) {
         return (
           'Terrian types'
         )
+      case 5: 
+        return (
+          <DamageRadio damageType={damageType} setDamageType={setDamageType} handleChange={handleChange}/>
+        );
     //   case 2:
     //     return 'Select terrian type(s)';
       default:
@@ -264,7 +271,8 @@ export default function ImageTagStepper(props) {
             <Typography className={classes.instructions}>
                 devtype = {devType} <br/>
                 wasType = {washoverType} <br/>
-                impType = {impactType}
+                impType = {impactType} <br/>
+                dmgType = {damageType}
             </Typography>
             {/* <div className={classes.controllerButtons}>
               <Button

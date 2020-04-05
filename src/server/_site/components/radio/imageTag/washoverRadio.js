@@ -10,7 +10,7 @@ export default function WashoverRadio(props) {
         <CustomRadioButton 
             value = {props.washoverType} 
             onChange = {(event) => props.handleChange(event,props.setWashoverType)}
-            style = {{color:colors.amber[500]}}
+            style = {{color:colors.yellow[500]}}
             title = {`Washover Type = ${props.washoverType}`}
             ariaLabel = "washoverType" 
             name = "washoverType"
