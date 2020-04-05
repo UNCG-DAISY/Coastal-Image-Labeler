@@ -22,6 +22,7 @@ import archives from './routes/v1/archives'//Api calls for archives
 import storms from './routes/v1/storms'//Api calls for storms
 import roles from './routes/v1/roles'//Api calls for roles
 import testApi from './routes/v1/testApi' 
+import image from './routes/v1/image' 
 //Import the react/server shared constants
 
 //Packages for security
@@ -103,6 +104,13 @@ nextApp.prepare()
         if (!req.isAuthenticated()) return res.redirect("/login");
         next();
     };
+
+    app.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+        res.header("Access-Control-Allow-Headers", "*");
+        next();
+    });
  
     // Body parser so that json can be recieved on Api calls
     app.use(express.json())
@@ -122,6 +130,7 @@ nextApp.prepare()
     app.use('/api/v1/storms',storms)
     app.use('/api/v1/roles',roles)
     app.use('/api/v1/test',testApi)
+    app.use('/api/v1/images',image)
     
     
     // This handles errors that happen during API calls
@@ -136,8 +145,8 @@ nextApp.prepare()
     })
 
     //Get the port and have the site on that port
-    const PORT = process.env.PORT ?? 5000;
-    const server = app.listen(PORT,() => {
+    const PORT = (process.env.PORT as unknown as number) ?? 5000;
+    const server = app.listen(PORT,'0.0.0.0',() => {
         console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold)
     })
 

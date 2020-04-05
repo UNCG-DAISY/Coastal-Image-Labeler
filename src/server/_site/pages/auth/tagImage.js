@@ -12,6 +12,7 @@ import {
   apiCall
 } from '../../components/constants'
 import fetch from "isomorphic-fetch";
+import axios from 'axios'
 
 import TagImageCard from '../../components/cards/imageTagCard'
 import ImageTagStepper from '../../components/steppers/imageTagStepper'
@@ -23,19 +24,41 @@ const useStyles = makeStyles(theme  => ({
 // This page shows an image to tag
 
 function TagImage(props) {
-  const {query:queryParams} = props
+  const {query:queryParams,imageId} = props
   const classes = useStyles();
 
-  function submitTags(tags) {
+  async function submitTags(tags) {
     alert('Tag!')
-    console.log(tags)
+    console.log(tags,imageId)
+    await axios.post(
+      apiCall(
+        '/api/v1/images/tagImage'
+      ),
+      { type: 'water',
+        imageId: '5e669584b9a86b631c8cc511',
+        tags:
+        { 
+          impactType: tags.impactType,
+          devType: tags.devType,
+          washoverType: tags.washoverType,
+          damageType: tags.damageType 
+        } 
+      },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
+      
+    )
+    // '/api/v1/images/tagImage'
   }
 
-  function tagAsWater(imageId) {
+  function tagAsWater() {
     console.log('water',Object.keys(props),imageId)
   }
 
-  function skipImage(imageId) {
+  function skipImage() {
     console.log('skip',Object.keys(props),imageId)
   }
 
@@ -68,7 +91,9 @@ TagImage.getInitialProps = async ctx => {
     res.redirect("/auth/home")
   }
 
-  return {query,allowedPages}
+  //console.log(query)
+  const imageId = query.storm+'-'+query.archive
+  return {query,allowedPages,imageId}
 }
 
 export default TagImage
