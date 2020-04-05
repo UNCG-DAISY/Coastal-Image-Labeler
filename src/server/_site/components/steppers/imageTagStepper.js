@@ -287,14 +287,27 @@ export default function ImageTagStepper(props) {
             </div> */}
             <div className={classes.controllerButtons}> 
               <Button
-                color="danger" onClick={handleReset}
+                color="secondary" onClick={handleReset}
                 onClick={handleBack}
                 className={classes.backButton}
               >
                   Reset
               </Button>
-              <Button variant="contained" color="primary"  onClick={() => {props.submitTag({devType,washoverType,impactType})}}>
-              Submit
+
+              <Button 
+                variant="contained" 
+                color="primary"  
+                onClick={() => {
+                  props.submitTag({
+                    devType,
+                    washoverType,
+                    impactType,
+                    terrianType,
+                    damageType
+                  })
+                }}
+              >
+                Submit
               </Button>
             </div>
             
