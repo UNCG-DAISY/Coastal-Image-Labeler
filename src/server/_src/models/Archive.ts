@@ -39,6 +39,24 @@ const archiveScehma: Schema = new Schema({
     }
 
     
+},{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 })
+
+archiveScehma.virtual('allImages', {
+    ref: 'Image',
+    localField: '_id',
+    foreignField: 'archive',
+    justOne: false
+})
+
+archiveScehma.virtual('Stormie', {
+    ref: 'Storm',
+    localField: 'storm',
+    foreignField: '_id',
+    justOne: false
+})
+
 
 export const ArchiveModel: Model<ArchiveDocument> =  model('Archive', archiveScehma);

@@ -47,6 +47,7 @@ declare namespace psiDashboard  {
     role:[Types.ObjectId]
     roleData?:[any]
     roleNames?:string[]
+    assignedImages?:any
     //storm:[Types.ObjectId]
   }
 
@@ -56,7 +57,8 @@ declare namespace psiDashboard  {
     path : String,
     role: [Types.ObjectId],
     storm:Types.ObjectId,
-    taggable: Boolean
+    taggable: Boolean,
+    allImages?:any
   }
 
   export interface RoleDocument extends Document {

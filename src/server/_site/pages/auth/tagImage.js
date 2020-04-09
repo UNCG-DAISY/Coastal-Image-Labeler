@@ -30,6 +30,8 @@ function TagImage(props) {
   async function submitTags(tags) {
     alert('Tag!')
     console.log(tags,imageId)
+
+    
     await axios.post(
       apiCall(
         '/api/v1/images/tagImage'
@@ -48,6 +50,7 @@ function TagImage(props) {
         headers: {
           'Access-Control-Allow-Origin': '*',
         },
+        withCredentials: false,
       }
       
     )
@@ -91,7 +94,16 @@ TagImage.getInitialProps = async ctx => {
     res.redirect("/auth/home")
   }
 
-  //console.log(query)
+  const responseData = await (await fetch(apiCall('/api/v1/users/getImage/amenadiel/a1234'), {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "credentials": "include",
+      "cookie": ctx?.req?.headers?.cookie ?? null 
+    }
+  })).json();
+
+  console.log('Assigned image = ',responseData?.data)
   const imageId = query.storm+'-'+query.archive
   return {query,allowedPages,imageId}
 }

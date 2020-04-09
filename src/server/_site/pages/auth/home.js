@@ -66,6 +66,18 @@ Home.getInitialProps = async ctx => {
   const allowedPages = await getAllowedPages(req.user,ctx)
   //console.log(allowedPages, 'getinitprop')
 
+  // const test = await fetch(apiCall("/api/v1/test/post"), {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "credentials": "include",
+  //     "cookie": ctx.req ? ctx.req.headers.cookie : null ,
+  //   },
+  //   body:JSON.stringify({
+  //     message:'hi'
+  //   })
+  // });
+
   return {allowedPages}
 }
 

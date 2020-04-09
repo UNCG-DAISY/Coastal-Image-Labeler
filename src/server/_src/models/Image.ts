@@ -9,7 +9,7 @@ import {ImageDocument} from '../index'
 const ImageSchema: Schema  = new Schema(
     {
         archive:{
-            type:[Types.ObjectId],
+            type:Types.ObjectId,
             required: [true,'Please which archives this image is in'],
         },
         compressed: {
