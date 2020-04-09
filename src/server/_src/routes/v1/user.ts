@@ -9,7 +9,8 @@ import {
     findUser,
     checkUserRoles,
     createNewUser,
-    allowedPages
+    allowedPages,
+    getImageFromStorm
 } from '../../controllers/v1/user'
 
 import {protect} from '../../middleware/v1/auth'
@@ -40,5 +41,9 @@ router
 router
     .route('/allowedPages/:id')
     .get(allowedPages)
+
+router
+    .route('/getImage/:storm/:archive')
+    .get(getImageFromStorm)
 
 export default router;

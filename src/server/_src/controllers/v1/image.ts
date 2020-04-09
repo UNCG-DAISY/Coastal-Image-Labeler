@@ -10,6 +10,26 @@ import axios from 'axios'
 import {RBAC} from '../../middleware/v1/auth'
 import {UserModel} from '../../models/User'
 
+// async function test() {
+//     const allImages = await ImageModel.find();
+    
+//     //@ts-ignore
+//     allImages.forEach(async image => {
+//         console.log('Updating',image.id,image.archive[0])
+        
+//         const x = await ImageModel.findByIdAndUpdate(
+//             image._id,
+//             {
+//                archive:image.archive 
+//             },
+//             {
+//                 new:true
+//             }
+//         )
+//         console.log(image.archive,x.archive)
+//     });
+// }
+// test()
 /**
  * @desc        Tags an image
  * @route       POST /api/v1/images/tagImage

@@ -136,7 +136,7 @@ TagImage.getInitialProps = async ctx => {
       });
   });
 
-  console.log(stormList)
+  //console.log(stormList)
 
 
   return {storms,allowedPages,stormList}

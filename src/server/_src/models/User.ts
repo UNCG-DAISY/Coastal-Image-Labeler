@@ -13,6 +13,9 @@ import {UserDocument} from '../index'
 
 
 const userSchema: Schema = new Schema({
+    assignedImages:{
+        type:Object
+    },
     storms:{
         type:[Types.ObjectId]
     },

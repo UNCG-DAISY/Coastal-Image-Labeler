@@ -101,7 +101,7 @@ async function Main() {
                 const fileName = images[i]
                 //create image model
                 const imageEntry = await ImageModel.create({
-                    "archive":[archiveEntry._id],
+                    "archive":archiveEntry._id,
                     "compressed" : true,
                     "dateAdded" : Date.now(),
                     "finishedTagging": false,
