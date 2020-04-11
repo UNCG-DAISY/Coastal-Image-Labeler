@@ -15,7 +15,7 @@ function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
 }
 
 function ensureAuthenticated2(req: Request, res: Response, next: NextFunction) {
-    console.log(req.isAuthenticated())
+    console.log('ensure auth = ',req.isAuthenticated())
     return next()
 }
 

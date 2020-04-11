@@ -19,8 +19,8 @@ let cards = [
  * @returns     yes
  */
 const testGet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    console.log('GET',req.isAuthenticated())
-    console.log('USER',req.user)
+    console.log('--TEST-- GET, is auth = ',req.isAuthenticated())
+    console.log('--TEST-- USER',Object.keys(req.user).length)
     res.status(200).json({
         success:true,
         data:{

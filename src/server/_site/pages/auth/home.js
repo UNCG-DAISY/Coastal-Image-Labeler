@@ -20,8 +20,8 @@ import {getAllowedPages} from '../../components/utils/getAllowedPages'
 
 async function test() {
  
-  await fetch("/api/v1/test/post", {
-    method: "POST",
+  await fetch("/api/v1/test/get", {
+    method: "GET",
     headers: {
       "Content-Type": "application/json"
     }
