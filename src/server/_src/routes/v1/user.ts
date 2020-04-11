@@ -10,7 +10,8 @@ import {
     checkUserRoles,
     createNewUser,
     allowedPages,
-    getImageFromStorm
+    getAssignedImage,
+    TEST_assignNextImage
 } from '../../controllers/v1/user'
 
 import {protect} from '../../middleware/v1/auth'
@@ -43,7 +44,11 @@ router
     .get(allowedPages)
 
 router
-    .route('/getImage/:storm/:archive')
-    .get(getImageFromStorm)
+    .route('/getImage/:archive')
+    .get(getAssignedImage)
+
+router
+    .route('/TEST_nextImage/:archive')
+    .get(TEST_assignNextImage)
 
 export default router;

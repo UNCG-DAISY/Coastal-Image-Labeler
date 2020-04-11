@@ -231,81 +231,119 @@ const allowedPages = asyncHandler(async (req: Request, res: Response, next: Next
  * @access      Public
  * @returns     yes
  */
-const getImageFromStorm = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    
-    const {storm,archive} = req?.params
-    //console.log(storm,archive,'server')
+const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
 
-    //@ts-ignore
-    //console.log(Object.keys(req))
+    
+
+    const {archive} = req?.params
     const {user} = req
 
-    const _id = user.mongoUser._id;
 
-    //console.log(user.mongoUser,'serverrrrr',_id)
-    const userEntry = (await UserModel.findById(_id))
-    
-    let assignedImageProperty = userEntry?.assignedImages
-    let assignedImage = undefined;
-
-    if(assignedImageProperty) {
-        assignedImage = assignedImageProperty[archive]
-    }
-
-    let foundImage = false
-    //no image from this archive assigned to user
-    if(!assignedImage) {
-        console.log('Looking for archive by name',archive)
-
-        //const imagesOfArchive = 
-        const archiveEntry = (await ArchiveModel.findOne({name:archive}).populate('allImages'))
-        const imagesOfArchive = archiveEntry.allImages;
-
-        
-        for(let i =0;i<imagesOfArchive.length;i=i+1) {
-            if(imagesOfArchive[i].taggable && imagesOfArchive[i].tillComplete > 0) {
-                
-                foundImage = true
-                const imageToAssign = (imagesOfArchive[i])._id
-
-                if(userEntry.assignedImages === undefined) {
-                    userEntry.assignedImages = {}
-                }
-                userEntry.assignedImages[archive] = imageToAssign
-                const newUser = await UserModel.findByIdAndUpdate(_id,{
-                    assignedImages: {
-                        ...userEntry.assignedImages,
-                        [archive]:imageToAssign
-                    }
-                },{new:true,runValidators:true})
-            
-                console.log(newUser)
-                assignedImage = imageToAssign
-                i = imagesOfArchive.length +1;
+    if(!user) {
+        res.status(400).json({
+            success:true,
+            data:{
+            message:"No user sent",
             }
-            // console.log(imagesOfArchive[i].id)
-        }
-        
-        //@ts-ignore
-        //console.log(archive,archiveEntry)
-    }
+        })    
+    } else {
+        const userId = user.mongoUser._id;
+        const userDocument = (await UserModel.findById(userId))
+        let getAssignedImages = userDocument.assignedImages
 
-    const userEntry2 = (await UserModel.findById(_id))
+        //If theres no assignedImages property
+        if(!getAssignedImages) {
+            getAssignedImages = (await UserModel.findByIdAndUpdate(
+                userId,
+                {
+                    assignedImages:{}
+                },
+                {
+                    new:true,
+                    runValidators:true
+                }
+            )).assignedImages
+        } 
+
+        let assignedImageOfArchive = getAssignedImages[archive]
+
+        //If there is an image assigned already, send it back
+        if(assignedImageOfArchive) {
+
+            const assignedImageDocument = await ImageModel.findById(assignedImageOfArchive)
+            res.status(200).json({
+                success:true,
+                message:"Assigned Image found",
+                data:{
+                    image:assignedImageDocument
+                }
+            })
+        } else {
+            //If theres no image assigned
+
+            //First find the archive with this name
+            const archiveDocument = (await ArchiveModel.find({name:archive}))[0]
+
+            //We need to make sure that we dont give an image already tagged by the user
+            const listOfTaggedImagesOfUser = userDocument.imagesTagged
+
+            const listOfPossibleTaggableImages = (await ImageModel.find({
+                archive:archiveDocument._id,
+                taggable:true,
+                tillComplete: { $gt: 0 }
+            }))
+
+            var newImagesForUser = listOfPossibleTaggableImages.filter(function (image) {
+                return !listOfTaggedImagesOfUser.includes(image._id)
+            });
+
+            console.log('Images not tagged by user are length',newImagesForUser.length)
+            const firstPossibleTaggableImage = newImagesForUser[0];
+            //console.log(firstPossibleTaggableImage)
+
+            //Now update user document
+            (await UserModel.findByIdAndUpdate(
+                userId,
+                {
+                    assignedImages:{
+                        [archive]:firstPossibleTaggableImage._id,
+                        ...getAssignedImages
+                    }
+                },
+                {
+                    runValidators:true
+                }
+            ))
+
+            res.status(200).json({
+                success:true,
+                message:"No image was assigned therefore assigned image",
+                data:{
+                    image:firstPossibleTaggableImage
+                }
+            })
+        }
+
+    }
     
-    const imageEntry = await ImageModel.findById(userEntry2.assignedImages[archive]);
-    //console.log(userEntry)
+   
+})
+
+const TEST_assignNextImage = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const {user} = req
+    const {archive} = req?.params
+    const userDocument = (await UserModel.findById(user._id))
+
+    const newListOfTaggedImages = userDocument.imagesTagged.push(
+        userDocument.assignedImages[archive]
+    )
+
+    console.log(newListOfTaggedImages)
+
     res.status(200).json({
         success:true,
-        data:{
-        message:"Hello",
-        data:{
-            assignedImage:imageEntry
-        }
-        }
+        message:"Cycled to next image",
     })
-   
-    
-   
 })
 
 export {
@@ -314,5 +352,6 @@ export {
     checkUserRoles,
     createNewUser,
     allowedPages,
-    getImageFromStorm
+    getAssignedImage,
+    TEST_assignNextImage
 }
