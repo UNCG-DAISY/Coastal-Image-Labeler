@@ -24,36 +24,48 @@ const useStyles = makeStyles(theme  => ({
 // This page shows an image to tag
 
 function TagImage(props) {
-  const {query:queryParams,imageId} = props
+  const {query:queryParams,imageId,imageDocument,allowedPages} = props
   const classes = useStyles();
+  //amenadiel/a420/420_test.png
+  const imgUrl = `${queryParams.storm}/${queryParams.archive}/${imageDocument.id}`
+  console.log(imgUrl)
 
   async function submitTags(tags) {
-    alert('Tag!')
-    console.log(tags,imageId)
+    alert(`You are tagging image id = ${imageDocument._id}`)
 
-    
-    await axios.post(
-      apiCall(
-        '/api/v1/images/tagImage'
-      ),
-      { type: 'water',
-        imageId: '5e669584b9a86b631c8cc511',
-        tags:
-        { 
-          impactType: tags.impactType,
-          devType: tags.devType,
-          washoverType: tags.washoverType,
-          damageType: tags.damageType 
-        } 
-      },
-      {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-        withCredentials: false,
+    const responseData = await (await fetch(apiCall(`/api/v1/users/TEST_nextImage/${query.archive}`), {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "credentials": "include",
+        "cookie": ctx?.req?.headers?.cookie ?? null 
       }
+    })).json();
+    
+
+    alert(responseData.message)
+    // await axios.post(
+    //   apiCall(
+    //     '/api/v1/images/tagImage'
+    //   ),
+    //   { type: 'water',
+    //     imageId: '5e669584b9a86b631c8cc511',
+    //     tags:
+    //     { 
+    //       impactType: tags.impactType,
+    //       devType: tags.devType,
+    //       washoverType: tags.washoverType,
+    //       damageType: tags.damageType 
+    //     } 
+    //   },
+    //   {
+    //     headers: {
+    //       'Access-Control-Allow-Origin': '*',
+    //     },
+    //     withCredentials: false,
+    //   }
       
-    )
+    // )
     // '/api/v1/images/tagImage'
   }
 
@@ -66,7 +78,7 @@ function TagImage(props) {
   }
 
   return (
-    <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={props.allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
+    <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
       <Container maxWidth="md">
         <Box my={4}>
           {/* <TagImageCard imagePath = "/stormImages/storm1.jpg"/> */}
@@ -74,7 +86,7 @@ function TagImage(props) {
             submitTag={submitTags} 
             tagAsWater={tagAsWater}
             skipImage={skipImage}
-            imagePath = "http://localhost:5000/amenadiel/a420/420_test.png" 
+            imagePath = {`http://localhost:5000/${imgUrl}`} //amenadiel/a420/420_test.png
           />
         </Box>
         {JSON.stringify(queryParams)}
@@ -94,7 +106,8 @@ TagImage.getInitialProps = async ctx => {
     res.redirect("/auth/home")
   }
 
-  const responseData = await (await fetch(apiCall('/api/v1/users/getImage/amenadiel/a1234'), {
+  //amenadiel
+  const responseData = await (await fetch(apiCall(`/api/v1/users/getImage/${query.archive}`), {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -103,9 +116,16 @@ TagImage.getInitialProps = async ctx => {
     }
   })).json();
 
-  console.log('Assigned image = ',responseData?.data)
-  const imageId = query.storm+'-'+query.archive
-  return {query,allowedPages,imageId}
+  const imageDocument = responseData?.data?.image
+
+  console.log('Message = ',responseData?.message)
+  
+  return {
+    query,
+    allowedPages,
+    imageId:imageDocument._id,
+    imageDocument:imageDocument
+  }
 }
 
 export default TagImage
