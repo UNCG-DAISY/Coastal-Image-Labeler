@@ -7,6 +7,7 @@ import Drawer from '../../components/layouts/drawer'
 import MyAppBar from '../../components/layouts/appBar'
 import ShowLoggedInSideDrawer from '../../components/layouts/showLoggedInSideDrawer'
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button'
 import {getAllowedPages} from '../../components/utils/getAllowedPages'
 import { 
   apiCall
@@ -27,46 +28,22 @@ function TagImage(props) {
   const {query:queryParams,imageId,imageDocument,allowedPages} = props
   const classes = useStyles();
   //amenadiel/a420/420_test.png
-  const imgUrl = `${queryParams.storm}/${queryParams.archive}/${imageDocument.id}`
+  const imgUrl = `${queryParams.storm}/${queryParams.archive}/${imageDocument?.id}`
   console.log(imgUrl)
 
   async function submitTags(tags) {
-    alert(`You are tagging image id = ${imageDocument._id}`)
+    alert(`You are about to tag image id = ${imageDocument._id}`)
 
-    const responseData = await (await fetch(apiCall(`/api/v1/users/TEST_nextImage/${query.archive}`), {
+    const responseData = await (await fetch(`/api/v1/users/TEST_nextImage/${queryParams.archive}`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-        "credentials": "include",
-        "cookie": ctx?.req?.headers?.cookie ?? null 
+        "Content-Type": "application/json"
       }
     })).json();
-    
 
-    alert(responseData.message)
-    // await axios.post(
-    //   apiCall(
-    //     '/api/v1/images/tagImage'
-    //   ),
-    //   { type: 'water',
-    //     imageId: '5e669584b9a86b631c8cc511',
-    //     tags:
-    //     { 
-    //       impactType: tags.impactType,
-    //       devType: tags.devType,
-    //       washoverType: tags.washoverType,
-    //       damageType: tags.damageType 
-    //     } 
-    //   },
-    //   {
-    //     headers: {
-    //       'Access-Control-Allow-Origin': '*',
-    //     },
-    //     withCredentials: false,
-    //   }
-      
-    // )
-    // '/api/v1/images/tagImage'
+    alert(responseData?.message)
+
+    
   }
 
   function tagAsWater() {
@@ -88,6 +65,7 @@ function TagImage(props) {
             skipImage={skipImage}
             imagePath = {`http://localhost:5000/${imgUrl}`} //amenadiel/a420/420_test.png
           />
+          <Button variant="contained" onClick={()=>submitTags(5)}>Default</Button>
         </Box>
         {JSON.stringify(queryParams)}
       </Container>
@@ -119,12 +97,22 @@ TagImage.getInitialProps = async ctx => {
   const imageDocument = responseData?.data?.image
 
   console.log('Message = ',responseData?.message)
+
+  // const test = await (await fetch(apiCall(`/api/v1/test/get`), {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "credentials": "include",
+  //     "cookie": ctx?.req?.headers?.cookie ?? null 
+  //   }
+  // })).json();
   
   return {
     query,
     allowedPages,
-    imageId:imageDocument._id,
-    imageDocument:imageDocument
+    imageId:imageDocument?._id,
+    imageDocument:imageDocument,
+    cookie:ctx?.req?.headers?.cookie ?? null 
   }
 }
 

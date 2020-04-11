@@ -14,7 +14,10 @@ import {
     TEST_assignNextImage
 } from '../../controllers/v1/user'
 
-import {protect} from '../../middleware/v1/auth'
+import {
+    ensureAuthenticated,
+    ensureAuthenticated2
+} from '../../middleware/v1/authentucated'
 
 // "/api/v1/users/"
 const router = express.Router();
@@ -49,6 +52,6 @@ router
 
 router
     .route('/TEST_nextImage/:archive')
-    .get(TEST_assignNextImage)
+    .get(ensureAuthenticated2,TEST_assignNextImage)
 
 export default router;

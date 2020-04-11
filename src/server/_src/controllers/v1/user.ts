@@ -332,13 +332,33 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
 const TEST_assignNextImage = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const {user} = req
     const {archive} = req?.params
-    const userDocument = (await UserModel.findById(user._id))
+    const userId = user.mongoUser._id
+    //console.log('User = ',user)
+    console.log('User = ',req.isAuthenticated())
+    //console.log(Object.keys(req))
+    const userDocument = (await UserModel.findById(userId))
 
-    const newListOfTaggedImages = userDocument.imagesTagged.push(
-        userDocument.assignedImages[archive]
-    )
+    
+    //console.log(userDocument.userName)
+    let newListOfTaggedImages = userDocument.imagesTagged
+    //const imageAdding = userDocument.assignedImages[archive]
+    newListOfTaggedImages.push(userDocument.assignedImages[archive]);
 
-    console.log(newListOfTaggedImages)
+    let newAssignedImages = userDocument.assignedImages
+    delete newAssignedImages[archive];
+
+    (await UserModel.findByIdAndUpdate(
+        userId,
+        {
+            assignedImages:{
+                ...newAssignedImages
+            },
+            imagesTagged:newListOfTaggedImages
+        },
+        {
+            runValidators:true
+        }
+    ));
 
     res.status(200).json({
         success:true,
