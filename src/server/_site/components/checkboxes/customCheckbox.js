@@ -24,42 +24,35 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomCheckboxButton(props) {
 
-    console.log('state',props.state)
+    // console.log('state',props.state)
+    // console.log('buttons',props.buttons)
 
     const classes = useStyles();
 
-    const [state, setState] = React.useState({
-      gilad: false,
-      jason: false,
-      antoine: false,
-    });
-  
-    const handleChange = (event) => {
-      setState({ ...state, [event.target.name]: event.target.checked });
-    };
-  
-    const { gilad, jason, antoine } = state;
-    const error = [gilad, jason, antoine].filter((v) => v).length !== 1;
-  
+   
+    //const { gilad, jason, antoine } = props.state;
+    //const {onChange:handleChange} = props
+
+    // Object.keys(props.states).forEach(element => {
+        
+    // });
+    const error = Object.keys(props.states).filter((element) => props.states[element]).length < props.howManyReq;
+    //const error = false
     return (
       <div className={classes.root}>
         <FormControl required error={error} component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">Pick one</FormLabel>
+          <FormLabel component="legend">Pick {props.howManyReq}</FormLabel>
           <FormGroup>
-            <FormControlLabel
-              control={<Checkbox checked={gilad} onChange={handleChange} name="gilad" />}
-              label="Gilad Gray"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={jason} onChange={handleChange} name="jason" />}
-              label="Jason Killian"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={antoine} onChange={handleChange} name="antoine" />}
-              label="Antoine Llorca"
-            />
+           
+            {props.buttons.map(button => (
+                <FormControlLabel
+                key = {button.label}
+                {...button}
+                />  
+
+            ))}
           </FormGroup>
-          <FormHelperText>You can display an error</FormHelperText>
+            {error && <FormHelperText>Please select atleast {props.howManyReq} options</FormHelperText>}
         </FormControl>
       </div>
     );
