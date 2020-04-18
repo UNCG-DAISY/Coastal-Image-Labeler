@@ -20,6 +20,7 @@ import clsx from 'clsx';
 
 import TagImageCard from '../cards/imageTagCard'
 import CustomRadioButton from '../radio/customRadioButton'
+import CustomCheckboxButton from '../checkboxes/customCheckbox'
 import DevRadio from '../radio/imageTag/devRadio'
 import WashoverRadio from '../radio/imageTag/washoverRadio'
 import ImpactRadio from '../radio/imageTag/impactRadio'
@@ -29,7 +30,11 @@ import theme from '../theme'
 import { red, blue } from '@material-ui/core/colors';
 
 import Paper from '@material-ui/core/Paper';
-import { func } from 'prop-types';
+// import { func } from 'prop-types';
+// import { set } from 'mongoose';
+
+import Checkbox from '@material-ui/core/Checkbox'
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -90,6 +95,31 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const initalTagState = {
+  devType: -1,
+  washoverType: -1,
+  impactType: [],
+  damageType: -1,
+  terrianType: [],
+  waterOrOther: 0,
+};
+
+function tagStateReducer(state, action) {
+  switch (action.type) {
+    case 'updateTerrian':
+
+      const currentValue = state.terrianType
+      currentValue.push(action.value)
+
+      return {
+        ...state,
+        terrianType: [...new Set(currentValue)]
+      };
+    default:
+      throw new Error();
+  }
+}
+
 export default function ImageTagStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -101,7 +131,11 @@ export default function ImageTagStepper(props) {
   const [damageType,setDamageType] = React.useState("-1");
   const [terrianType,setTerrianType] = React.useState("0");
   const [waterOrOther,setWaterOrOther] = React.useState("0");
-  const [expanded, setExpanded] = React.useState(true);
+  const [expanded, setExpanded] = React.useState(false);
+
+
+
+  const [tagState, updateTagState] = React.useReducer(tagStateReducer, initalTagState);
 
   const imagePath = props.imagePath || '/stormImages/storm1.jpg'
 
@@ -328,11 +362,36 @@ export default function ImageTagStepper(props) {
               <Button variant="contained" color="primary" onClick={handleNext} disabled={allowNextStep[activeStep] == -1}>
                   {activeStep === steps.length - 1 ? 'Review' : 'Next'}
               </Button>
+
+              <Button  onClick={() => updateTagState({type: 'updateTerrian', value:69})}>
+                  hello
+              </Button>
+
+              <CustomCheckboxButton
+                state = {tagState.terrianType}
+                onChange = {updateTagState}
+                buttons = {[
+                  {
+                    value:'0',
+                    control: <Checkbox onChange={ updateTagState} color="primary" />,
+                    label: "Impact 1",
+                    labelPlacement:"end"
+                  },
+                  // {
+                  //   value:'1',
+                  //   control: <Checkbox onChange={ updateTagState({type: 'updateTerrian', value:1})} color="primary" />,
+                  //   label: "Impact 2",
+                  //   labelPlacement:"end"
+                  // }
+
+                ]}
+              />
             </div>
        
           </div>
         )}
       </div>
+      {JSON.stringify(tagState)}
     </div>
   );
 }

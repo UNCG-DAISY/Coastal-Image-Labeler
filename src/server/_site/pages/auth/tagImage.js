@@ -15,7 +15,7 @@ import {
 import fetch from "isomorphic-fetch";
 import axios from 'axios'
 
-import TagImageCard from '../../components/cards/imageTagCard'
+// import TagImageCard from '../../components/cards/imageTagCard'
 import ImageTagStepper from '../../components/steppers/imageTagStepper'
 
 const useStyles = makeStyles(theme  => ({
@@ -65,7 +65,7 @@ function TagImage(props) {
             skipImage={skipImage}
             imagePath = {`http://localhost:5000/${imgUrl}`} //amenadiel/a420/420_test.png
           />
-          <Button variant="contained" onClick={()=>submitTags(5)}>Default</Button>
+          {/* <Button variant="contained" onClick={()=>submitTags(5)}>Default</Button> */}
         </Box>
         {JSON.stringify(queryParams)}
       </Container>
