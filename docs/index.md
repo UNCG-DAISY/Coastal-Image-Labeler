@@ -1,4 +1,4 @@
-# Post Storm Image Classification Dashboard and Node Server
+# PSI Dashboard
 
 ## Goals
 
