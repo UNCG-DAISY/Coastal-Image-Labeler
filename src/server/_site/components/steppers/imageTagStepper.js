@@ -34,7 +34,7 @@ import Paper from '@material-ui/core/Paper';
 // import { set } from 'mongoose';
 
 import Checkbox from '@material-ui/core/Checkbox'
-
+import ImpactCheckbox from '../checkboxes/impactCheckbox'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -98,22 +98,29 @@ const useStyles = makeStyles(theme => ({
 const initalTagState = {
   devType: -1,
   washoverType: -1,
-  impactType: [],
+  impactType: {
+    waterImpact:0,
+    windImpact:0
+  },
   damageType: -1,
-  terrianType: [],
+  terrianType: {
+    swash:0, 
+    collision:0, 
+    overwash:0, 
+    inundation:0
+  },
   waterOrOther: 0,
 };
 
 function tagStateReducer(state, action) {
   switch (action.type) {
-    case 'updateTerrian':
-
-      const currentValue = state.terrianType
-      currentValue.push(action.value)
-
+    case 'updateImpact':
       return {
         ...state,
-        terrianType: [...new Set(currentValue)]
+        impactType: {
+          ...state.impactType,
+          [action.key]:action.value
+        }
       };
     default:
       throw new Error();
@@ -132,6 +139,25 @@ export default function ImageTagStepper(props) {
   const [terrianType,setTerrianType] = React.useState("0");
   const [waterOrOther,setWaterOrOther] = React.useState("0");
   const [expanded, setExpanded] = React.useState(false);
+
+
+  const handleCheckboxChange = (event) => {
+    //alert(event.target.name)
+
+    const target = event.target
+
+    if(target.eventType = 'impact') {
+
+      updateTagState({
+        type:'updateImpact',
+        key:event.target.name,
+        value: event.target.checked? 1:0
+      })
+     
+    }
+   
+  };
+
 
 
 
@@ -308,17 +334,6 @@ export default function ImageTagStepper(props) {
                 impType = {impactType} <br/>
                 dmgType = {damageType}
             </Typography>
-            {/* <div className={classes.controllerButtons}>
-              <Button
-                color="danger" onClick={handleReset}
-                onClick={handleBack}
-              >
-                  Reset
-              </Button>
-              <Button variant="contained" color="primary"  onClick={() => {props.submitTag({devType,washoverType,impactType})}}>
-              Submit
-              </Button>
-            </div> */}
             <div className={classes.controllerButtons}> 
               <Button
                 color="secondary" onClick={handleReset}
@@ -367,24 +382,12 @@ export default function ImageTagStepper(props) {
                   hello
               </Button>
 
-              <CustomCheckboxButton
-                state = {tagState.terrianType}
-                onChange = {updateTagState}
-                buttons = {[
-                  {
-                    value:'0',
-                    control: <Checkbox onChange={ updateTagState} color="primary" />,
-                    label: "Impact 1",
-                    labelPlacement:"end"
-                  },
-                  // {
-                  //   value:'1',
-                  //   control: <Checkbox onChange={ updateTagState({type: 'updateTerrian', value:1})} color="primary" />,
-                  //   label: "Impact 2",
-                  //   labelPlacement:"end"
-                  // }
+            
 
-                ]}
+              <ImpactCheckbox
+                states = {tagState.impactType}
+                howManyReq = {1}
+                handleChange = {handleCheckboxChange}
               />
             </div>
        
@@ -392,6 +395,8 @@ export default function ImageTagStepper(props) {
         )}
       </div>
       {JSON.stringify(tagState)}
+      <br/>
+      {/* {JSON.stringify(stateX)} */}
     </div>
   );
 }

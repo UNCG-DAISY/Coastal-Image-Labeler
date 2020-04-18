@@ -67,7 +67,7 @@ function TagImage(props) {
           />
           {/* <Button variant="contained" onClick={()=>submitTags(5)}>Default</Button> */}
         </Box>
-        {JSON.stringify(queryParams)}
+        {/* {JSON.stringify(queryParams)} */}
       </Container>
     </Drawer>
     
