@@ -11,12 +11,13 @@ export default function ImpactCheckbox(props) {
         <CustomCheckboxButton
             howManyReq = {howManyReq}
             states = {states}
+            label = "Impact Type"
             buttons = {[
                 {
                 control:
                     <Checkbox 
                     value = "0" 
-                    checked={states.waterImpact} 
+                    checked={states.waterImpact == 1} 
                     onChange={handleChange} 
                     name="waterImpact" 
                     eventType = "impact"
@@ -27,7 +28,7 @@ export default function ImpactCheckbox(props) {
                 control:
                     <Checkbox 
                     value = "1" 
-                    checked={states.windImpact} 
+                    checked={states.windImpact == 1} 
                     onChange={handleChange} 
                     name="windImpact" 
                     eventType = "impact"

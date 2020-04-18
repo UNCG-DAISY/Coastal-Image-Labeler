@@ -178,13 +178,26 @@ export default function ImageTagStepper(props) {
         'Terrian type(s)',
         'Damage type'
     ];
+
+
   }
+
+  function isCheckboxAllowedToContinue(states,required = 0) {
+    const selected = Object.keys(states).filter((element) =>{
+      if(states[element] > 0) {
+        return true
+      }
+    })
+
+    return selected.length >=required? 1:-1
+  }
+  
   function getAllowNextStepVar() {
       return [
         waterOrOther,
         devType,
         washoverType,
-        impactType,
+        isCheckboxAllowedToContinue(tagState.impactType,1),
         terrianType,
         damageType
       ]
@@ -207,7 +220,12 @@ export default function ImageTagStepper(props) {
         )
       case 3:
         return (
-            <ImpactRadio impactType={impactType} setImpactType={setImpactType} handleChange={handleChange}/>
+            // <ImpactRadio impactType={impactType} setImpactType={setImpactType} handleChange={handleChange}/>
+            <ImpactCheckbox
+              states = {tagState.impactType}
+              howManyReq = {1}
+              handleChange = {handleCheckboxChange}
+            />
         );
       case 4: 
         return (
@@ -281,8 +299,9 @@ export default function ImageTagStepper(props) {
   };
 
   return (
+    
     <div className={classes.root}>
-      
+  
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map(label => (
           <Step key={label}>
@@ -374,21 +393,17 @@ export default function ImageTagStepper(props) {
               >
                   Back
               </Button>
-              <Button variant="contained" color="primary" onClick={handleNext} disabled={allowNextStep[activeStep] == -1}>
+              <Button variant="contained" color="primary" onClick={handleNext} disabled={getAllowNextStepVar()[activeStep] == -1}>
                   {activeStep === steps.length - 1 ? 'Review' : 'Next'}
               </Button>
 
-              <Button  onClick={() => updateTagState({type: 'updateTerrian', value:69})}>
+              {/* <Button  onClick={() => updateTagState({type: 'updateTerrian', value:69})}>
                   hello
-              </Button>
+              </Button> */}
 
             
 
-              <ImpactCheckbox
-                states = {tagState.impactType}
-                howManyReq = {1}
-                handleChange = {handleCheckboxChange}
-              />
+              
             </div>
        
           </div>
