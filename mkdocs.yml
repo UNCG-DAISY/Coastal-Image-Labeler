@@ -7,6 +7,10 @@ nav:
     - Code Documentation: 
       - Overview: code_documentation/overview.md
       - 1 - Packages: code_documentation/packages.md
+      - 2 - Project Structure: code_documentation/project_structure.md
+      - 3 - Auth0: code_documentation/auth0.md
+      - 4 - Data export: code_documentation/data_export.md
+      - 5 - Maintenance: code_documentation/maintenance.md
     - User Documentation: 
       - Overview: user_documentation/overview.md
       # - Image: models/image.md
