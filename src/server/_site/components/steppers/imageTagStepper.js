@@ -35,6 +35,7 @@ import Paper from '@material-ui/core/Paper';
 
 import Checkbox from '@material-ui/core/Checkbox'
 import ImpactCheckbox from '../checkboxes/impactCheckbox'
+import TerrianCheckbox from '../checkboxes/terrianCheckbox'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -122,6 +123,14 @@ function tagStateReducer(state, action) {
           [action.key]:action.value
         }
       };
+    case 'updateTerrian':
+      return {
+        ...state,
+        terrianType: {
+          ...state.terrianType,
+          [action.key]:action.value
+        }
+      };
     default:
       throw new Error();
   }
@@ -141,15 +150,30 @@ export default function ImageTagStepper(props) {
   const [expanded, setExpanded] = React.useState(false);
 
 
-  const handleCheckboxChange = (event) => {
+  // function extenedHandleChangeX(event) {
+  //     console.log(props.eventType,'aaaaaaaaaaa')
+  //     handleChange(event,props.eventType)
+  // }
+
+  const handleCheckboxChange = (event,eventType) => {
     //alert(event.target.name)
 
     const target = event.target
-
-    if(target.eventType = 'impact') {
+    
+    if(eventType == 'impact') {
 
       updateTagState({
         type:'updateImpact',
+        key:event.target.name,
+        value: event.target.checked? 1:0
+      })
+     
+    }
+
+    if(eventType == 'terrian') {
+
+      updateTagState({
+        type:'updateTerrian',
         key:event.target.name,
         value: event.target.checked? 1:0
       })
@@ -198,7 +222,7 @@ export default function ImageTagStepper(props) {
         devType,
         washoverType,
         isCheckboxAllowedToContinue(tagState.impactType,1),
-        terrianType,
+        isCheckboxAllowedToContinue(tagState.terrianType,0),
         damageType
       ]
   }
@@ -225,11 +249,17 @@ export default function ImageTagStepper(props) {
               states = {tagState.impactType}
               howManyReq = {1}
               handleChange = {handleCheckboxChange}
+              eventType = 'impact'
             />
         );
       case 4: 
         return (
-          'Terrian types'
+          <TerrianCheckbox
+            states = {tagState.terrianType}
+            howManyReq = {0}
+            handleChange = {handleCheckboxChange}
+            eventType = 'terrian'
+          />
         )
       case 5: 
         return (

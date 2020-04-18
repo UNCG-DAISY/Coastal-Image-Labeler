@@ -4,39 +4,37 @@ import * as colors from '@material-ui/core/colors/';
 import Checkbox from '@material-ui/core/Checkbox'
 
 
-export default function ImpactCheckbox(props) {
+export default function TerrianCheckbox(props) {
 
     const {states,howManyReq,handleChange} = props
-
-   
 
     return (
         <CustomCheckboxButton
             howManyReq = {howManyReq}
             states = {states}
-            label = "Impact Type"
+            label = "Terrian Type"
             buttons = {[
                 {
                 control:
                     <Checkbox 
                     value = "0" 
-                    checked={states.waterImpact == 1} 
+                    checked={states.swash == 1} 
                     onChange={(event)=>handleChange(event,props.eventType)} 
-                    name="waterImpact" 
-                    eventtype = "impact"
+                    name="swash" 
+                    eventType = "terrian"
                     />,
-                label:"Water Impact"
+                label:"swash"
                 },
                 {
                 control:
                     <Checkbox 
                     value = "1" 
-                    checked={states.windImpact == 1} 
+                    checked={states.collision == 1} 
                     onChange={(event)=>handleChange(event,props.eventType)} 
-                    name="windImpact" 
-                    eventtype = "impact"
+                    name="collision" 
+                    eventType = "terrian"
                     />,
-                label:"Wind Impact"
+                label:"collision"
                 }
 
             ]}
