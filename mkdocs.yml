@@ -6,6 +6,7 @@ nav:
     - Code of Conduct: code_of_conduct.md
     - Code Documentation: 
       - Overview: code_documentation/overview.md
+      - 1 - Packages: code_documentation/packages.md
     - User Documentation: 
       - Overview: user_documentation/overview.md
       # - Image: models/image.md
@@ -47,6 +48,6 @@ markdown_extensions:
       
 
 extra_css:
-  - stylesheets/dark_theme.css
+  # - stylesheets/dark_theme.css
   - stylesheets/codehilite.css
   - stylesheets/custom.css
