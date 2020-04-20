@@ -68,7 +68,6 @@ export default function ImageTagStepper(props) {
 
   return (
     <div className={classes.root}>
-      {activeStep}
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map(label => (
           <Step key={label}>
@@ -227,4 +226,3 @@ const useStyles = makeStyles(theme => ({
     },
   }
 }));
-
