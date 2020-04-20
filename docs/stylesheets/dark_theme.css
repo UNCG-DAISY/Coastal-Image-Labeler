@@ -10,7 +10,7 @@ and background color
 */
 .md-main {
   color: #F5F5F5 !important;
-  background-color: #212121 !important;
+  background-color: #202124 !important; /*212121*/
 }
 
 /*
@@ -56,7 +56,7 @@ Left and right toc scrollbar
 
 .md-nav {
   color: #F5F5F5 !important;
-  background-color: #212121 !important;
+  background-color: #202124 !important;
 }
 
 /*
@@ -68,7 +68,7 @@ html .md-nav--primary .md-nav__title:before {
 
 .md-nav__title {
   color: rgba(255,255,255,1) !important;
-  background-color: #212121 !important;
+  background-color: #202124 !important;
 }
 
 /*
@@ -80,12 +80,12 @@ Arrow Right Icon
 
 .md-nav__list {
   color: rgba(255,255,255,1) !important;
-  background-color: #212121 !important;
+  background-color: #202124 !important;
 }
 
 .md-nav__item {
   color: rgba(255,255,255,1) !important;
-  background-color: #212121 !important;
+  background-color: #202124 !important;
 }
 
 .md-nav__link[data-md-state=blur] {
@@ -127,7 +127,7 @@ result list background
 */
 .md-search-result__list {
   color: #EEEEEE !important;
-  background-color: #212121 !important;
+  background-color: #202124 !important;
 }
 
 /*
