@@ -9,7 +9,13 @@ export default function DamageRadio(props) {
     return(
         <CustomRadioButton 
             value = {props.damageType} 
-            onChange = {(event) => props.handleChange(event,props.setDamageType)}
+            onChange = {(event) => {
+                props.update({
+                    type:'updateRadio',
+                    key:'damageType',
+                    value:event.target.value
+                })
+            }}
             style = {{color:colors.orange[500]}}
             title = {`Damage Type = ${props.damageType}`}
             ariaLabel = "damageType" 

@@ -6,10 +6,18 @@ import * as colors from '@material-ui/core/colors/';
 import Radio from '@material-ui/core/Radio';
 
 export default function DevRadio(props) {
+
+    
     return(
         <CustomRadioButton 
             value = {props.devType} 
-            onChange = {(event) => props.handleChange(event,props.setDevType)}
+            onChange = {(event) => {
+                props.update({
+                    type:'updateRadio',
+                    key:'devType',
+                    value:event.target.value
+                })
+            }}
             style = {{color:colors.green[500]}}
             title = {`Development Type = ${props.devType}`}
             ariaLabel = "devType" 
@@ -31,3 +39,5 @@ export default function DevRadio(props) {
         />
     )
 }
+
+// props.handleChange(event,props.setDevType)
