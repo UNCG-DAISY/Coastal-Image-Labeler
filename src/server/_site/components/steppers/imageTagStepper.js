@@ -7,9 +7,6 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import * as colors from '@material-ui/core/colors/';
-import Radio from '@material-ui/core/Radio';
-
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Collapse from '@material-ui/core/Collapse';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -17,295 +14,37 @@ import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
-
-import TagImageCard from '../cards/imageTagCard'
-import CustomRadioButton from '../radio/customRadioButton'
-import CustomCheckboxButton from '../checkboxes/customCheckbox'
-import DevRadio from '../radio/imageTag/devRadio'
-import WashoverRadio from '../radio/imageTag/washoverRadio'
-import ImpactRadio from '../radio/imageTag/impactRadio'
-import DamageRadio from '../radio/imageTag/damageType'
-import theme from '../theme'
-
 import { red, blue } from '@material-ui/core/colors';
-
 import Paper from '@material-ui/core/Paper';
-// import { func } from 'prop-types';
-// import { set } from 'mongoose';
 
-import Checkbox from '@material-ui/core/Checkbox'
-import ImpactCheckbox from '../checkboxes/impactCheckbox'
-import TerrianCheckbox from '../checkboxes/terrianCheckbox'
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-  },
-  backButton: {
-    marginRight: theme.spacing(1),
-
-  },
-  instructions: {
-    paddingTop: theme.spacing(2),
-    marginBottom: theme.spacing(1),
-    paddingLeft:theme.spacing(2)
-  },
-  instructions2: {
-    // paddingTop: theme.spacing(4),
-    // marginBottom: theme.spacing(2),
-    // paddingLeft:theme.spacing(4)
-    marginTop: theme.spacing(1),
-    padding: theme.spacing(2),
-  },
-  controllerButtons: {
-    paddingTop: theme.spacing(1),
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'left',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  buttons: {
-    // display: 'flex',
-    // flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(1),
-      //padding: theme.spacing(2),
-    //   width: theme.spacing(16),
-    //   height: theme.spacing(16),
-    },
-  },
-  skipButtonColor: {
-    color: theme.palette.getContrastText(red[500]),
-    backgroundColor: red[500],
-    '&:hover': {
-      backgroundColor: red[700],
-    },
-  },
-  waterButtonColor: {
-    color: theme.palette.getContrastText(blue[500]),
-    backgroundColor: blue[500],
-    '&:hover': {
-      backgroundColor: blue[700],
-    },
-  }
-}));
-
-const initalTagState = {
-  devType: -1,
-  washoverType: -1,
-  impactType: {
-    waterImpact:0,
-    windImpact:0
-  },
-  damageType: -1,
-  terrianType: {
-    swash:0, 
-    collision:0, 
-    overwash:0, 
-    inundation:0
-  },
-  waterOrOther: 0,
-};
-
-function tagStateReducer(state, action) {
-  switch (action.type) {
-    case 'updateRadio':
-      return {
-        ...state,
-        [action.key]: action.value
-      }
-    case 'updateImpact':
-      return {
-        ...state,
-        impactType: {
-          ...state.impactType,
-          [action.key]:action.value
-        }
-      };
-    case 'updateTerrian':
-      return {
-        ...state,
-        terrianType: {
-          ...state.terrianType,
-          [action.key]:action.value
-        }
-      };
-    default:
-      throw new Error();
-  }
-}
+import tagStateReducer from './tagStateReducer'
+import initalTagState from './initalTagState'
+import getSteps from './getSteps'
+import getAllowNextStepVar from './getAllowNextStepVar'
+import getStepContent from './getStepContent'
 
 export default function ImageTagStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
-
-  const [waterOrOther,setWaterOrOther] = React.useState("0");
+  //For the image
   const [expanded, setExpanded] = React.useState(false);
-
-
-  // function extenedHandleChangeX(event) {
-  //     console.log(props.eventType,'aaaaaaaaaaa')
-  //     handleChange(event,props.eventType)
-  // }
-
-  const handleCheckboxChange = (event,eventType) => {
-    //alert(event.target.name)
-
-    const target = event.target
-    
-    if(eventType == 'impact') {
-
-      updateTagState({
-        type:'updateImpact',
-        key:event.target.name,
-        value: event.target.checked? 1:0
-      })
-     
-    }
-
-    if(eventType == 'terrian') {
-
-      updateTagState({
-        type:'updateTerrian',
-        key:event.target.name,
-        value: event.target.checked? 1:0
-      })
-     
-    }
-   
-  };
-
   const [tagState, updateTagState] = React.useReducer(tagStateReducer, initalTagState);
-
+  
   const imagePath = props.imagePath || '/stormImages/storm1.jpg'
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  function getSteps() {
-    return [
-        'Water or N/A',
-        'Development type', 
-        'Washover visibility', 
-        'Impact type', 
-        'Terrian type(s)',
-        'Damage type'
-    ];
+  getAllowNextStepVar.tagState = tagState
 
-
-  }
-
-  function isCheckboxAllowedToContinue(states,required = 0) {
-    const selected = Object.keys(states).filter((element) =>{
-      if(states[element] > 0) {
-        return true
-      }
-    })
-
-    return selected.length >=required? 1:-1
-  }
-  
-  function getAllowNextStepVar() {
-      return [
-        tagState.waterOrOther,
-        tagState.devType,
-        tagState.washoverType,
-        isCheckboxAllowedToContinue(tagState.impactType,1),
-        isCheckboxAllowedToContinue(tagState.terrianType,0),
-        tagState.damageType
-      ]
-  }
   const allowNextStep = getAllowNextStepVar()
   
-  function getStepContent(stepIndex) {
-    switch (stepIndex) {
-      case 0: 
-        return (
-          <WaterOrOtherQuestions/>
-        )
-      case 1:
-        return (
-            <DevRadio devType = {tagState.devType} update = {updateTagState}/>          
-        );
-      case 2:
-        return (
-            <WashoverRadio washoverType={tagState.washoverType} update = {updateTagState}/>      
-        )
-      case 3:
-        return (
-            // <ImpactRadio impactType={impactType} setImpactType={setImpactType} handleChange={handleChange}/>
-            <ImpactCheckbox
-              states = {tagState.impactType}
-              howManyReq = {1}
-              handleChange = {handleCheckboxChange}
-              eventType = 'impact'
-            />
-        );
-      case 4: 
-        return (
-          <TerrianCheckbox
-            states = {tagState.terrianType}
-            howManyReq = {0}
-            handleChange = {handleCheckboxChange}
-            eventType = 'terrian'
-          />
-        )
-      case 5: 
-        return (
-          <DamageRadio damageType={tagState.damageType} update = {updateTagState}/>
-        );
-    //   case 2:
-    //     return 'Select terrian type(s)';
-      default:
-        return 'Unknown stepIndex';
-    }
-  }
-
-  function WaterOrOtherQuestions() {
-    return (
-      <div className = {classes.buttons}>
-        <div>
-          <Button variant="contained" color="primary" className = {classes.waterButtonColor} onClick={handleWaterImage} >
-            Water Image
-          </Button>
-          <Typography>
-            Click the above button if the current image on display is just an 
-            image of water or mostly water and thus contains no useful information.
-          </Typography>
-        </div>
-
-        <div>
-        <Button variant="contained" color="secondary" className = {classes.skipButtonColor} onClick={handleSkipImage}>
-          Skip Image
-        </Button>
-          <Typography>
-            Click the above button if you do not wish to tag the 
-            current image and we will give you another one.
-          </Typography>
-        </div>
-        
-        
-      </div>
-    )
-  }
-
-  function handleWaterImage() {
-    alert('This is water image');
-  }
-
-  function handleSkipImage() {
-    alert('image skipped');
-  }
- 
+  getStepContent.tagState = tagState
+  getStepContent.updateTagState = updateTagState
+  getStepContent.handleCheckboxChange
 
   const handleChange = (event,fnc) => {
     alert(event.target.value)
@@ -328,7 +67,6 @@ export default function ImageTagStepper(props) {
   };
 
   return (
-    
     <div className={classes.root}>
       {activeStep}
       <Stepper activeStep={activeStep} alternativeLabel>
@@ -420,16 +158,7 @@ export default function ImageTagStepper(props) {
               <Button variant="contained" color="primary" onClick={handleNext} disabled={getAllowNextStepVar()[activeStep] == -1}>
                   {activeStep === steps.length - 1 ? 'Review' : 'Next'}
               </Button>
-
-              {/* <Button  onClick={() => updateTagState({type: 'updateTerrian', value:69})}>
-                  hello
-              </Button> */}
-
-            
-
-              
-            </div>
-       
+            </div>   
           </div>
         )}
       </div>
@@ -439,3 +168,63 @@ export default function ImageTagStepper(props) {
     </div>
   );
 }
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+  },
+  backButton: {
+    marginRight: theme.spacing(1),
+
+  },
+  instructions: {
+    paddingTop: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+    paddingLeft:theme.spacing(2)
+  },
+  instructions2: {
+    // paddingTop: theme.spacing(4),
+    // marginBottom: theme.spacing(2),
+    // paddingLeft:theme.spacing(4)
+    marginTop: theme.spacing(1),
+    padding: theme.spacing(2),
+  },
+  controllerButtons: {
+    paddingTop: theme.spacing(1),
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'left',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+  buttons: {
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(1),
+      //padding: theme.spacing(2),
+    //   width: theme.spacing(16),
+    //   height: theme.spacing(16),
+    },
+  },
+  skipButtonColor: {
+    color: theme.palette.getContrastText(red[500]),
+    backgroundColor: red[500],
+    '&:hover': {
+      backgroundColor: red[700],
+    },
+  },
+  waterButtonColor: {
+    color: theme.palette.getContrastText(blue[500]),
+    backgroundColor: blue[500],
+    '&:hover': {
+      backgroundColor: blue[700],
+    },
+  }
+}));
+
