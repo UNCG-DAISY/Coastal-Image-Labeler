@@ -146,11 +146,7 @@ export default function ImageTagStepper(props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
-  const [devType,setDevType] = React.useState("-1");
-  const [washoverType,setWashoverType] = React.useState("-1");
-  const [impactType,setImpactType] = React.useState("-1");
-  const [damageType,setDamageType] = React.useState("-1");
-  const [terrianType,setTerrianType] = React.useState("0");
+
   const [waterOrOther,setWaterOrOther] = React.useState("0");
   const [expanded, setExpanded] = React.useState(false);
 
@@ -220,7 +216,7 @@ export default function ImageTagStepper(props) {
   
   function getAllowNextStepVar() {
       return [
-        waterOrOther,
+        tagState.waterOrOther,
         tagState.devType,
         tagState.washoverType,
         isCheckboxAllowedToContinue(tagState.impactType,1),
@@ -400,13 +396,7 @@ export default function ImageTagStepper(props) {
                 variant="contained" 
                 color="primary"  
                 onClick={() => {
-                  props.submitTag({
-                    devType,
-                    washoverType,
-                    impactType,
-                    terrianType,
-                    damageType
-                  })
+                  props.submitTag(tagState)
                 }}
               >
                 Submit
