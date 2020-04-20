@@ -115,6 +115,11 @@ const initalTagState = {
 
 function tagStateReducer(state, action) {
   switch (action.type) {
+    case 'updateRadio':
+      return {
+        ...state,
+        [action.key]: action.value
+      }
     case 'updateImpact':
       return {
         ...state,
@@ -182,9 +187,6 @@ export default function ImageTagStepper(props) {
    
   };
 
-
-
-
   const [tagState, updateTagState] = React.useReducer(tagStateReducer, initalTagState);
 
   const imagePath = props.imagePath || '/stormImages/storm1.jpg'
@@ -219,11 +221,11 @@ export default function ImageTagStepper(props) {
   function getAllowNextStepVar() {
       return [
         waterOrOther,
-        devType,
-        washoverType,
+        tagState.devType,
+        tagState.washoverType,
         isCheckboxAllowedToContinue(tagState.impactType,1),
         isCheckboxAllowedToContinue(tagState.terrianType,0),
-        damageType
+        tagState.damageType
       ]
   }
   const allowNextStep = getAllowNextStepVar()
@@ -236,11 +238,11 @@ export default function ImageTagStepper(props) {
         )
       case 1:
         return (
-            <DevRadio devType = {devType} setDevType={setDevType} handleChange={handleChange}/>          
+            <DevRadio devType = {tagState.devType} update = {updateTagState}/>          
         );
       case 2:
         return (
-            <WashoverRadio washoverType={washoverType} setWashoverType={setWashoverType} handleChange={handleChange}/>      
+            <WashoverRadio washoverType={tagState.washoverType} update = {updateTagState}/>      
         )
       case 3:
         return (
@@ -263,7 +265,7 @@ export default function ImageTagStepper(props) {
         )
       case 5: 
         return (
-          <DamageRadio damageType={damageType} setDamageType={setDamageType} handleChange={handleChange}/>
+          <DamageRadio damageType={tagState.damageType} update = {updateTagState}/>
         );
     //   case 2:
     //     return 'Select terrian type(s)';
@@ -310,6 +312,7 @@ export default function ImageTagStepper(props) {
  
 
   const handleChange = (event,fnc) => {
+    alert(event.target.value)
     fnc(event.target.value);
   };
 
@@ -331,7 +334,7 @@ export default function ImageTagStepper(props) {
   return (
     
     <div className={classes.root}>
-  
+      {activeStep}
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map(label => (
           <Step key={label}>
@@ -378,15 +381,16 @@ export default function ImageTagStepper(props) {
           <div>
             <Typography className={classes.instructions}>Here is the tag information that will be sent</Typography>
             <Typography className={classes.instructions}>
-                devtype = {devType} <br/>
-                wasType = {washoverType} <br/>
-                impType = {impactType} <br/>
-                dmgType = {damageType}
+                {
+                  Object.keys(tagState).map((value,index) =>{
+                  return (<div>{value}:{JSON.stringify(tagState[value])}</div>)
+                  })
+                }
             </Typography>
             <div className={classes.controllerButtons}> 
               <Button
-                color="secondary" onClick={handleReset}
-                onClick={handleBack}
+                color="secondary" 
+                onClick={handleReset}
                 className={classes.backButton}
               >
                   Reset
