@@ -54,18 +54,30 @@ function TagImage(props) {
     console.log('skip',Object.keys(props),imageId)
   }
 
+  
   return (
     <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
       <Container maxWidth="md">
         <Box my={4}>
           {/* <TagImageCard imagePath = "/stormImages/storm1.jpg"/> */}
-          <ImageTagStepper 
-            submitTag={submitTags} 
-            tagAsWater={tagAsWater}
-            skipImage={skipImage}
-            imagePath = {`http://localhost:5000/${imgUrl}`} //amenadiel/a420/420_test.png
-          />
-          {/* <Button variant="contained" onClick={()=>submitTags(5)}>Default</Button> */}
+          {
+            imageDocument?.id?
+            <React.Fragment>
+              <ImageTagStepper 
+                submitTag={submitTags} 
+                tagAsWater={tagAsWater}
+                skipImage={skipImage}
+                imagePath = {`http://localhost:5000/${imgUrl}`} //amenadiel/a420/420_test.png
+              /> 
+              <Button variant="contained" onClick={()=>submitTags(5)}>Default</Button>
+            </React.Fragment>
+            :
+            <Typography>
+              No new images to tag, you have tagged all images in archive {queryParams.archive}. Please select another archive to tag
+            </Typography>
+          }
+          
+          
         </Box>
         {/* {JSON.stringify(queryParams)} */}
       </Container>
