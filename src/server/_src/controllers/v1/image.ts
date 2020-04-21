@@ -52,6 +52,7 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
             _id:body.imageId
         }, 
         {
+        //@ts-ignore
            tags:[
                ...imageToUpdate.tags,
                 {
