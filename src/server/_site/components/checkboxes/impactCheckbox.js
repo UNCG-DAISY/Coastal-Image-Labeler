@@ -20,23 +20,45 @@ export default function ImpactCheckbox(props) {
                 control:
                     <Checkbox 
                     value = "0" 
-                    checked={states.waterImpact == 1} 
+                    checked={states.swash == 1} 
                     onChange={(event)=>handleChange(event,props.eventType)} 
-                    name="waterImpact" 
+                    name="swash" 
                     eventtype = "impact"
                     />,
-                label:"Water Impact"
+                label:"swash"
                 },
                 {
                 control:
                     <Checkbox 
                     value = "1" 
-                    checked={states.windImpact == 1} 
+                    checked={states.collision == 1} 
                     onChange={(event)=>handleChange(event,props.eventType)} 
-                    name="windImpact" 
+                    name="collision" 
                     eventtype = "impact"
                     />,
-                label:"Wind Impact"
+                label:"collision"
+                },
+                {
+                control:
+                    <Checkbox 
+                    value = "1" 
+                    checked={states.overwash == 1} 
+                    onChange={(event)=>handleChange(event,props.eventType)} 
+                    name="overwash" 
+                    eventtype = "impact"
+                    />,
+                label:"overwash"
+                },
+                {
+                control:
+                    <Checkbox 
+                    value = "1" 
+                    checked={states.inundation == 1} 
+                    onChange={(event)=>handleChange(event,props.eventType)} 
+                    name="inundation" 
+                    eventtype = "impact"
+                    />,
+                label:"inundation"
                 }
 
             ]}

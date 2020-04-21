@@ -32,7 +32,7 @@ function getStepContent(stepIndex) {
             // <ImpactRadio impactType={impactType} setImpactType={setImpactType} handleChange={handleChange}/>
             <ImpactCheckbox
               states = {tagState.impactType}
-              howManyReq = {1}
+              howManyReq = {'0 or more'}
               handleChange = {handleCheckboxChange}
               eventType = 'impact'
             />
@@ -41,7 +41,7 @@ function getStepContent(stepIndex) {
         return (
           <TerrianCheckbox
             states = {tagState.terrianType}
-            howManyReq = {0}
+            howManyReq = {'0 or more'}
             handleChange = {handleCheckboxChange}
             eventType = 'terrian'
           />
