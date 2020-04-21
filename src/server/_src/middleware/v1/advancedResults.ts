@@ -37,13 +37,14 @@ async (req: Request, res: Response, next: NextFunction) => {
 
     // Select fields
     if(req?.query?.select) {
-        const fields = req.query.select.split(',').join(' ')
+
+        const fields = (req.query.select as String).split(',').join(' ')
         query = query.select(fields)
     }
 
     //Sort
     if(req?.query?.sort) {
-        const sortBy = req.query.sort.split(',').join(' ')
+        const sortBy = (req.query.sort as String).split(',').join(' ')
         query = query.sort(sortBy)
     } else {
         //Default sort by date
@@ -51,8 +52,8 @@ async (req: Request, res: Response, next: NextFunction) => {
     }
     
     //Pagination 
-    const page:number = parseInt(req.query.page ?? 1,10) 
-    const limit:number = parseInt(req.query.limit ?? 15,10) 
+    const page:number = parseInt(req.query.page as string ?? '1',10) 
+    const limit:number = parseInt(req.query.limit as string ?? '15',10) 
     const startIndex:number = (page - 1) * limit
     const endIndex:number = page*limit
     const totalDocs:number = await model.countDocuments()
