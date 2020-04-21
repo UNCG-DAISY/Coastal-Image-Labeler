@@ -14,6 +14,7 @@ import {
 } from '../../components/constants'
 import fetch from "isomorphic-fetch";
 import axios from 'axios'
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 // import TagImageCard from '../../components/cards/imageTagCard'
 import ImageTagStepper from '../../components/steppers/imageTagStepper'
@@ -73,7 +74,12 @@ function TagImage(props) {
             </React.Fragment>
             :
             <Typography>
-              No new images to tag, you have tagged all images in archive {queryParams.archive}. Please select another archive to tag
+              <Alert severity="error" variant="outlined">
+                <AlertTitle > No new images to tag</AlertTitle>
+                You have tagged all images in archive  <strong>{queryParams.archive}</strong>. Please select another archive to tag
+                or contact admin to determine which archive to tag next.
+              </Alert>
+              
             </Typography>
           }
           
