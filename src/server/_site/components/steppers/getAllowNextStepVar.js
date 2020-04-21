@@ -7,7 +7,7 @@ function getAllowNextStepVar() {
       getAllowNextStepVar.tagState.waterOrOther,
       getAllowNextStepVar.tagState.devType,
       getAllowNextStepVar.tagState.washoverType,
-      getAllowNextStepVar.isCheckboxAllowedToContinue(getAllowNextStepVar.tagState.impactType,1),
+      getAllowNextStepVar.isCheckboxAllowedToContinue(getAllowNextStepVar.tagState.impactType,0),
       getAllowNextStepVar.isCheckboxAllowedToContinue(getAllowNextStepVar.tagState.terrianType,0),
       getAllowNextStepVar.tagState.damageType
     ]

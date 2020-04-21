@@ -18,23 +18,45 @@ export default function TerrianCheckbox(props) {
                 control:
                     <Checkbox 
                     value = "0" 
-                    checked={states.swash == 1} 
+                    checked={states.sandyCoastline == 1} 
                     onChange={(event)=>handleChange(event,props.eventType)} 
-                    name="swash" 
+                    name="sandyCoastline" 
                     eventType = "terrian"
                     />,
-                label:"swash"
+                label:"Sandy Coastline"
                 },
                 {
                 control:
                     <Checkbox 
                     value = "1" 
-                    checked={states.collision == 1} 
+                    checked={states.marsh == 1} 
                     onChange={(event)=>handleChange(event,props.eventType)} 
-                    name="collision" 
+                    name="marsh" 
                     eventType = "terrian"
                     />,
-                label:"collision"
+                label:"Marsh"
+                },
+                {
+                    control:
+                        <Checkbox 
+                        value = "1" 
+                        checked={states.inland == 1} 
+                        onChange={(event)=>handleChange(event,props.eventType)} 
+                        name="inland" 
+                        eventType = "terrian"
+                        />,
+                    label:"Inland"
+                }
+                ,{
+                    control:
+                        <Checkbox 
+                        value = "1" 
+                        checked={states.river == 1} 
+                        onChange={(event)=>handleChange(event,props.eventType)} 
+                        name="river" 
+                        eventType = "terrian"
+                        />,
+                    label:"River"
                 }
 
             ]}
