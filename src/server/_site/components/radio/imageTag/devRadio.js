@@ -24,7 +24,7 @@ export default function DevRadio(props) {
             name = "devType"
             buttons={[
                 {
-                    value:'0',
+                    value:"0",
                     control: <Radio color="primary" />,
                     label: "Undeveloped",
                     labelPlacement:"end"

@@ -35,6 +35,21 @@ function TagImage(props) {
   async function submitTags(tags) {
     alert(`You are about to tag image id = ${imageDocument._id}`)
 
+    const payload = {
+      _id : imageDocument._id,
+      tags: tags,
+      timeEnd:Date.now(),
+      timeStart: props.timeStart
+    }
+
+    const responseData = await (await fetch(`/api/v1/images/tagImage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body:JSON.stringify(payload)
+    })).json();
+
     // const responseData = await (await fetch(`/api/v1/users/TEST_nextImage/${queryParams.archive}`, {
     //   method: "GET",
     //   headers: {
@@ -42,9 +57,9 @@ function TagImage(props) {
     //   }
     // })).json();
 
-    // alert(responseData?.message)
+    alert(responseData?.message ? responseData?.message : 'No message')
 
-    console.log(tags)
+    console.log(responseData)
 
     
   }
@@ -132,7 +147,8 @@ TagImage.getInitialProps = async ctx => {
     allowedPages,
     imageId:imageDocument?._id,
     imageDocument:imageDocument,
-    cookie:ctx?.req?.headers?.cookie ?? null 
+    cookie:ctx?.req?.headers?.cookie ?? null ,
+    timeStart:Date.now()
   }
 }
 
