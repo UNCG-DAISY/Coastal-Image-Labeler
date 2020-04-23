@@ -19,7 +19,7 @@ export default function DevRadio(props) {
                 })
             }}
             style = {{color:colors.green[500]}}
-            title = {`Development Type = ${props.devType}`}
+            title = {`Development Type`}
             ariaLabel = "devType" 
             name = "devType"
             buttons={[

@@ -35,14 +35,16 @@ function TagImage(props) {
   async function submitTags(tags) {
     alert(`You are about to tag image id = ${imageDocument._id}`)
 
-    const responseData = await (await fetch(`/api/v1/users/TEST_nextImage/${queryParams.archive}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })).json();
+    // const responseData = await (await fetch(`/api/v1/users/TEST_nextImage/${queryParams.archive}`, {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   }
+    // })).json();
 
-    alert(responseData?.message)
+    // alert(responseData?.message)
+
+    console.log(tags)
 
     
   }
@@ -70,7 +72,7 @@ function TagImage(props) {
                 skipImage={skipImage}
                 imagePath = {`http://localhost:5000/${imgUrl}`} //amenadiel/a420/420_test.png
               /> 
-              <Button variant="contained" onClick={()=>submitTags(5)}>Default</Button>
+              {/* <Button variant="contained" onClick={()=>submitTags(5)}>Default</Button> */}
             </React.Fragment>
             :
             <Typography>

@@ -17,7 +17,7 @@ export default function DamageRadio(props) {
                 })
             }}
             style = {{color:colors.orange[500]}}
-            title = {`Damage Type = ${props.damageType}`}
+            title = {`Damage Type`} // = ${props.damageType}
             ariaLabel = "damageType" 
             name = "damageType"
             buttons={[

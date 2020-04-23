@@ -12,7 +12,7 @@ export default function TerrianCheckbox(props) {
         <CustomCheckboxButton
             howManyReq = {howManyReq}
             states = {states}
-            label = "Terrian Type"
+            label = "Terrian Type, pick any, none required"
             buttons = {[
                 {
                 control:
@@ -21,7 +21,7 @@ export default function TerrianCheckbox(props) {
                     checked={states.sandyCoastline == 1} 
                     onChange={(event)=>handleChange(event,props.eventType)} 
                     name="sandyCoastline" 
-                    eventType = "terrian"
+                    eventtype = "terrian"
                     />,
                 label:"Sandy Coastline"
                 },
@@ -32,7 +32,7 @@ export default function TerrianCheckbox(props) {
                     checked={states.marsh == 1} 
                     onChange={(event)=>handleChange(event,props.eventType)} 
                     name="marsh" 
-                    eventType = "terrian"
+                    eventtype = "terrian"
                     />,
                 label:"Marsh"
                 },
@@ -43,7 +43,7 @@ export default function TerrianCheckbox(props) {
                         checked={states.inland == 1} 
                         onChange={(event)=>handleChange(event,props.eventType)} 
                         name="inland" 
-                        eventType = "terrian"
+                        eventtype = "terrian"
                         />,
                     label:"Inland"
                 }
@@ -54,7 +54,7 @@ export default function TerrianCheckbox(props) {
                         checked={states.river == 1} 
                         onChange={(event)=>handleChange(event,props.eventType)} 
                         name="river" 
-                        eventType = "terrian"
+                        eventtype = "terrian"
                         />,
                     label:"River"
                 }

@@ -17,7 +17,7 @@ export default function WashoverRadio(props) {
                 })
             }}
             style = {{color:colors.yellow[500]}}
-            title = {`Washover Type = ${props.washoverType}`}
+            title = {`Washover Type`}
             ariaLabel = "washoverType" 
             name = "washoverType"
             buttons={[
