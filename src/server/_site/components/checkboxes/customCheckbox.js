@@ -41,7 +41,7 @@ export default function CustomCheckboxButton(props) {
     return (
       <div className={classes.root}>
         <FormControl required error={error} component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend">{props.label} Pick {props.howManyReq}</FormLabel>
+        <FormLabel component="legend">{props.label}</FormLabel>
           <FormGroup>
            
             {props.buttons.map(button => (

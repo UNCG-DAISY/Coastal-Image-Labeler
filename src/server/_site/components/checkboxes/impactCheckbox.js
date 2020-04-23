@@ -14,7 +14,7 @@ export default function ImpactCheckbox(props) {
         <CustomCheckboxButton
             howManyReq = {howManyReq}
             states = {states}
-            label = "Impact Type"
+            label = "Impact Type, pick any, none required"
             buttons = {[
                 {
                 control:

@@ -11,7 +11,7 @@ export default function ImpactRadio(props) {
             value = {props.impactType} 
             onChange = {(event) => props.handleChange(event,props.setImpactType)}
             style = {{color:colors.blue[500]}}
-            title = {`Impact Type = ${props.impactType}`}
+            title = {`Impact Type`}
             ariaLabel = "impactType" 
             name = "impactType"
             buttons={[

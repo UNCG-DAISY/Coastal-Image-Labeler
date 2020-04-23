@@ -17,6 +17,7 @@ import clsx from 'clsx';
 import { red, blue } from '@material-ui/core/colors';
 import Paper from '@material-ui/core/Paper';
 
+
 import tagStateReducer from './tagStateReducer'
 import initalTagState from './initalTagState'
 import getSteps from './getSteps'
@@ -113,13 +114,46 @@ export default function ImageTagStepper(props) {
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>Here is the tag information that will be sent</Typography>
-            <Typography className={classes.instructions}>
-                {
+            {/* <Typography className={classes.instructions}> */}
+                {/* {
                   Object.keys(tagState).map((value,index) =>{
-                  return (<div>{value}:{JSON.stringify(tagState[value])}</div>)
+                    return (
+                      <p key={index} className={classes.instructions}>
+                        {value}:{JSON.stringify(tagState[value])}
+                      </p>
+                    )
+                  })
+                } */}
+            <Typography className={classes.instructions}>
+            
+                Dev Type: {tagState.devType == 1? 'Developed':'Undeveloped'} <br/>
+                Washover Type: {tagState.washoverType == 1? 'No washover': 'Visible Washover'} <br/>
+                terrian Type: <br/> {
+                  Object.keys(tagState.impactType).map((value,index) =>{
+                    return (
+                      <React.Fragment key={index} >
+                        {value}: {tagState.impactType[value] == 1? 'yes':'no'}
+                        <br/>
+                      </React.Fragment>
+                    )
                   })
                 }
+                <br/>
+                Damage Type: {tagState.damageType == 0? 'Visible Damage':'No Damage'} <br/>
+                terrian Type: <br/> {
+                  Object.keys(tagState.terrianType).map((value,index) =>{
+                    return (
+                      <React.Fragment key={index} >
+                        {value}: {tagState.terrianType[value] == 1? 'yes':'no'}
+                        <br/>
+                      </React.Fragment>
+                    )
+                  })
+                }
+                <br/>
             </Typography>
+              
+            {/* </Typography> */}
             <div className={classes.controllerButtons}> 
               <Button
                 color="secondary" 
@@ -161,7 +195,7 @@ export default function ImageTagStepper(props) {
           </div>
         )}
       </div>
-      {JSON.stringify(tagState)}
+      {/* {JSON.stringify(tagState)} */}
       <br/>
       {/* {JSON.stringify(stateX)} */}
     </div>
