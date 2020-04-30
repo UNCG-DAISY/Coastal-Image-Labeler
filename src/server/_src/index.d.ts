@@ -22,6 +22,7 @@ declare namespace psiDashboard  {
       archive:Types.ObjectId,
       compressed?:boolean,
       dateAdded?:Date,
+      finalTag?:Object,
       finishedTagging: boolean,
       location?:{
           upperLeft:[number],

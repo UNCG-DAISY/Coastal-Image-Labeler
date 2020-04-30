@@ -20,6 +20,9 @@ const ImageSchema: Schema  = new Schema(
         dateAdded:{
             type:Date
         },
+        finalTag:{
+            type:Object
+        },
         finishedTagging: {
             type: Boolean,
             required: [true,'Please tell if compressed or not'],

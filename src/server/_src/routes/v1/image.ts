@@ -9,7 +9,7 @@ import {
 } from '../../controllers/v1/image'
 
 import {
-    TEST_assignNextImage
+    updatedTaggedImages
 } from '../../controllers/v1/user'
 
 import {protect} from '../../middleware/v1/auth'
@@ -20,6 +20,6 @@ const router = express.Router();
 
 router
     .route('/tagImage')
-    .post(tagImage) // ,TEST_assignNextImage
+    .post(tagImage,updatedTaggedImages) // ,TEST_assignNextImage
 
 export default router;

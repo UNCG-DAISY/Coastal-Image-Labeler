@@ -11,7 +11,7 @@ import {
     createNewUser,
     allowedPages,
     getAssignedImage,
-    TEST_assignNextImage
+    updatedTaggedImages
 } from '../../controllers/v1/user'
 
 import {
@@ -52,6 +52,6 @@ router
 
 router
     .route('/TEST_nextImage/:archive')
-    .get(ensureAuthenticated2,TEST_assignNextImage)
+    .get(ensureAuthenticated2,updatedTaggedImages)
 
 export default router;
