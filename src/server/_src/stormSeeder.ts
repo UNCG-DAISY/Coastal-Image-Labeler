@@ -108,7 +108,7 @@ async function Main() {
                     "id": fileName,
                     "path":`/${fileName}`,
                     "taggable":true,
-                    "tillComplete":4
+                    "tillComplete":2
 
                 })
             }

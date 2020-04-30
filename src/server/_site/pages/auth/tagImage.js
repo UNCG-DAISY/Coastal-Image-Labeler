@@ -33,7 +33,7 @@ function TagImage(props) {
   console.log(imgUrl)
 
   async function submitTags(tags) {
-    alert(`You are about to tag image id = ${imageDocument._id}`)
+    alert(`You are about to tag to image ${imageDocument._id}`)
 
     const payload = {
       _id : imageDocument._id,
