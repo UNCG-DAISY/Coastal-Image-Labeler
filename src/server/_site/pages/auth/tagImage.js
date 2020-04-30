@@ -50,13 +50,6 @@ function TagImage(props) {
       body:JSON.stringify(payload)
     })).json();
 
-    // const responseData = await (await fetch(`/api/v1/users/TEST_nextImage/${queryParams.archive}`, {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   }
-    // })).json();
-
     alert(responseData?.message ? responseData?.message : 'No message')
 
     console.log(responseData)
