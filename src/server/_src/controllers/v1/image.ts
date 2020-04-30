@@ -11,7 +11,7 @@ import axios from 'axios'
 import {RBAC} from '../../middleware/v1/auth'
 import {UserModel} from '../../models/User'
 
-import {TEST_assignNextImage} from './user'
+//import {TEST_assignNextImage} from './user'
 
 // async function test() {
 //     const allImages = await ImageModel.find();
@@ -92,6 +92,18 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
             new:true
         }
     )
+    
+    //This means the latest tag can be the final tag
+    if(stillTaggable == false) {
+        upadtedImage = await ImageModel.updateOne(
+            {_id:body._id},
+            { finalTag:updatePayload },
+            {
+                runValidators:true,
+                new:true
+            }
+        )
+    }
     upadtedImage = await ImageModel.findById(body._id) 
 
 
