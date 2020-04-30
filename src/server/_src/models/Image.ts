@@ -76,4 +76,8 @@ const ImageSchema: Schema  = new Schema(
     }
 );
 
+// ImageSchema.post('save', function(doc) {
+//     console.log('%s has been saved', doc._id);
+//   });
+
 export const ImageModel: Model<ImageDocument> =  model('Image', ImageSchema);
