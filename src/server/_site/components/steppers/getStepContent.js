@@ -9,15 +9,16 @@ import WaterOrOtherQuestions from './WaterOrOther'
 import ImpactCheckbox from '../checkboxes/impactCheckbox'
 import TerrianCheckbox from '../checkboxes/terrianCheckbox'
 
-function getStepContent(stepIndex) {
+function getStepContent(stepIndex,extraData) {
     handleCheckboxChange.updateTagState = getStepContent.updateTagState
 
+    let {waterFnc,skipFnc} = extraData
     let tagState = getStepContent.tagState
     let updateTagState = getStepContent.updateTagState
     switch (stepIndex) {
       case 0: 
         return (
-          <WaterOrOtherQuestions/>
+          <WaterOrOtherQuestions functions={{waterFnc,skipFnc}}/>
         )
       case 1:
         return (

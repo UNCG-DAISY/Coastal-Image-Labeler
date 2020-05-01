@@ -233,8 +233,6 @@ const allowedPages = asyncHandler(async (req: Request, res: Response, next: Next
  */
 const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
 
-    
-
     const {archive} = req?.params
     const {user} = req
 
@@ -299,29 +297,53 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
 
             console.log('Images not tagged by user are length',newImagesForUser.length)
             const firstPossibleTaggableImage = newImagesForUser[0];
-            //console.log(firstPossibleTaggableImage)
+            // console.log('FIRST POSSIBLE TAGABLE IMAGE',firstPossibleTaggableImage);
 
-            //Now update user document
-            (await UserModel.findByIdAndUpdate(
-                userId,
-                {
-                    assignedImages:{
-                        [archive]:firstPossibleTaggableImage._id,
-                        ...getAssignedImages
+            if(firstPossibleTaggableImage) {
+                 //Now update user document
+                (await UserModel.findByIdAndUpdate(
+                    userId,
+                    {
+                        assignedImages:{
+                            [archive]:firstPossibleTaggableImage._id,
+                            ...getAssignedImages
+                        }
+                    },
+                    {
+                        runValidators:true
                     }
-                },
-                {
-                    runValidators:true
-                }
-            ))
+                ))
 
-            res.status(200).json({
-                success:true,
-                message:"No image was assigned therefore assigned image",
-                data:{
-                    image:firstPossibleTaggableImage
-                }
-            })
+                res.status(200).json({
+                    success:true,
+                    message:"No image was assigned therefore assigned image",
+                    data:{
+                        image:firstPossibleTaggableImage
+                    }
+                })
+            } else {
+                (await UserModel.findByIdAndUpdate(
+                    userId,
+                    {
+                        assignedImages:{
+                            [archive]:undefined,
+                            ...getAssignedImages
+                        }
+                    },
+                    {
+                        runValidators:true
+                    }
+                ))
+
+                res.status(200).json({
+                    success:true,
+                    message:"No more images to tag in this archive",
+                    data:{
+                        image:undefined
+                    }
+                })
+            }
+           
         }
 
     }
@@ -332,10 +354,8 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
 const updatedTaggedImages = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const {user} = req
     const {archive} = req?.params
-    const userId = user.mongoUser._id
-    //console.log('User = ',user)
-    //console.log('User = ',req.isAuthenticated())
-    //console.log(Object.keys(req))
+    const userId = user?.mongoUser._id
+  
     const userDocument = (await UserModel.findById(userId))
 
     
