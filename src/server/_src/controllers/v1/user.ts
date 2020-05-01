@@ -333,7 +333,7 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
                     },
                     {
                         runValidators:true
-                    }
+                    } 
                 ))
 
                 res.status(200).json({
