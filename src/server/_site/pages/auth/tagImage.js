@@ -15,9 +15,12 @@ import {
 import fetch from "isomorphic-fetch";
 import axios from 'axios'
 import { Alert, AlertTitle } from '@material-ui/lab';
-
+import Router from "next/router";
 // import TagImageCard from '../../components/cards/imageTagCard'
 import ImageTagStepper from '../../components/steppers/imageTagStepper'
+
+import initalTagState from '../../components/steppers/initalTagState'
+
 
 const useStyles = makeStyles(theme  => ({
   
@@ -53,16 +56,26 @@ function TagImage(props) {
     alert(responseData?.message ? responseData?.message : 'No message')
 
     console.log(responseData)
-
+    Router.reload()
     
   }
 
   function tagAsWater() {
-    console.log('water',Object.keys(props),imageId)
+    let tag = initalTagState
+    tag.water = 1
+    //alert("Tagging image as water")
+    submitTags(tag)
   }
 
-  function skipImage() {
-    console.log('skip',Object.keys(props),imageId)
+  async function skipImage() {
+    alert('Skipping image')
+    const responseData = await (await fetch(`/api/v1/images/skipImage/${queryParams.archive}`, {
+      method: "GET",
+   
+    })).json();
+    
+    alert(responseData?.message ? responseData?.message : 'No message')
+    Router.reload()
   }
 
   
@@ -83,14 +96,11 @@ function TagImage(props) {
               {/* <Button variant="contained" onClick={()=>submitTags(5)}>Default</Button> */}
             </React.Fragment>
             :
-            <Typography>
-              <Alert severity="error" variant="outlined">
-                <AlertTitle > No new images to tag</AlertTitle>
-                You have tagged all images in archive  <strong>{queryParams.archive}</strong>. Please select another archive to tag
-                or contact admin to determine which archive to tag next.
-              </Alert>
-              
-            </Typography>
+            <Alert severity="error" variant="outlined">
+              <AlertTitle > No new images to tag</AlertTitle>
+              You have tagged all images in archive  <strong>{queryParams.archive}</strong>. Please select another archive to tag
+              or contact admin to determine which archive to tag next.
+            </Alert>
           }
           
           

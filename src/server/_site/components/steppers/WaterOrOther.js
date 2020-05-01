@@ -3,15 +3,16 @@ import { red, blue } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import handleWaterImage from './handleWaterImage'
-import  handleSkipImage from './handleSkipImage'
+// import handleWaterImage from './handleWaterImage'
+// import  handleSkipImage from './handleSkipImage'
 
-export default function WaterOrOtherQuestions() {
+export default function WaterOrOtherQuestions(props) {
+    let {waterFnc,skipFnc} = props.functions
     const classes = useStyles();
     return (
       <div className = {classes.buttons}>
         <div>
-          <Button variant="contained" color="primary" className = {classes.waterButtonColor} onClick={handleWaterImage} >
+          <Button variant="contained" color="primary" className = {classes.waterButtonColor} onClick={waterFnc} >
             Water Image
           </Button>
           <Typography>
@@ -21,7 +22,7 @@ export default function WaterOrOtherQuestions() {
         </div>
 
         <div>
-        <Button variant="contained" color="secondary" className = {classes.skipButtonColor} onClick={handleSkipImage}>
+        <Button variant="contained" color="secondary" className = {classes.skipButtonColor} onClick={skipFnc}>
           Skip Image
         </Button>
           <Typography>

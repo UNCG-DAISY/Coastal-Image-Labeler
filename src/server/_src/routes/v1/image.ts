@@ -20,6 +20,9 @@ const router = express.Router();
 
 router
     .route('/tagImage')
-    .post(tagImage,updatedTaggedImages) // ,TEST_assignNextImage
+    .post(tagImage,updatedTaggedImages)
+router
+    .route('/skipImage/:archive')
+    .get(updatedTaggedImages)
 
 export default router;

@@ -114,16 +114,6 @@ export default function ImageTagStepper(props) {
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>Here is the tag information that will be sent</Typography>
-            {/* <Typography className={classes.instructions}> */}
-                {/* {
-                  Object.keys(tagState).map((value,index) =>{
-                    return (
-                      <p key={index} className={classes.instructions}>
-                        {value}:{JSON.stringify(tagState[value])}
-                      </p>
-                    )
-                  })
-                } */}
             <Typography className={classes.instructions}>
             
                 Dev Type: {tagState.devType == 1? 'Developed':'Undeveloped'} <br/>
@@ -178,7 +168,10 @@ export default function ImageTagStepper(props) {
         ) : (
           <div >
             <Paper className={classes.instructions2} style={{backgroundColor:'#424242'}}>
-                    {getStepContent(activeStep)} 
+                    {getStepContent(activeStep,{
+                      waterFnc:props.tagAsWater,
+                      skipFnc:props.skipImage
+                    })} 
             </Paper>
             <div className={classes.controllerButtons}> 
               <Button

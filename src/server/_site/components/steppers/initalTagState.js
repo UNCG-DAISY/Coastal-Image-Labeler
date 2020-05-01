@@ -15,7 +15,7 @@ const initalTagState = {
       inland:'0', 
       river:'0'
     },
-    waterOrOther: 0,
+    water: 0,
 };
 
 export default initalTagState
