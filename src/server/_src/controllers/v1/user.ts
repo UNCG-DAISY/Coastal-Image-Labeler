@@ -236,7 +236,7 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
     const {archive} = req?.params
     const {user} = req
 
-
+    //If no user was passed
     if(!user) {
         res.status(400).json({
             success:true,
@@ -297,8 +297,9 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
 
             console.log('Images not tagged by user are length',newImagesForUser.length)
             const firstPossibleTaggableImage = newImagesForUser[0];
-            // console.log('FIRST POSSIBLE TAGABLE IMAGE',firstPossibleTaggableImage);
-
+           
+            //If there is a image that can be tagged, give it back, else tell them 
+            //theres no more images to tag.
             if(firstPossibleTaggableImage) {
                  //Now update user document
                 (await UserModel.findByIdAndUpdate(
