@@ -24,13 +24,13 @@ export default function DamageRadio(props) {
                 {
                     value:'0',
                     control: <Radio color="primary" />,
-                    label: "Visible Damage",
+                    label: "Visible Damage To Infrastructure",
                     labelPlacement:"end"
                 },
                 {
                     value:'1',
                     control: <Radio color="primary" />,
-                    label: "No Damage",
+                    label: "No Visible Damage To Infrastructure",
                     labelPlacement:"end"
                 }
             ]}
