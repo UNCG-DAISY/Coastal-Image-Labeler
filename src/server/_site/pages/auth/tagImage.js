@@ -18,7 +18,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import Router from "next/router";
 // import TagImageCard from '../../components/cards/imageTagCard'
 import ImageTagStepper from '../../components/steppers/imageTagStepper'
-
+import TaggingForm from '../../components/taggingForm/TaggingForm'
 import initalTagState from '../../components/steppers/initalTagState'
 
 
@@ -87,12 +87,16 @@ function TagImage(props) {
           {
             imageDocument?.id?
             <React.Fragment>
-              <ImageTagStepper 
+              <TaggingForm
+              imageUrl = {`http://localhost:5000/${imgUrl}`}
+              />
+              
+              {/* <ImageTagStepper 
                 submitTag={submitTags} 
                 tagAsWater={tagAsWater}
                 skipImage={skipImage}
                 imagePath = {`http://localhost:5000/${imgUrl}`} //amenadiel/a420/420_test.png
-              /> 
+              />  */}
               {/* <Button variant="contained" onClick={()=>submitTags(5)}>Default</Button> */}
             </React.Fragment>
             :
