@@ -12,6 +12,9 @@ const archiveScehma: Schema = new Schema({
     dateAdded:{
         type:Date
     },
+    description:{
+        type:String
+    },
     name : {
         type: String,
         required: [true,'Please provide archive name'],

@@ -31,6 +31,21 @@ const stormSchema: Schema = new Schema({
         unique: true,
         maxlength: [128,'Name can not be longer than 128 characters']
     },
+    stormInfo:{
+        year:{
+            type:Number,
+            required:false
+        },
+        link:{
+            type:String,
+            required:false,
+        },
+        description:{
+            type:String,
+            required:false
+        },
+
+    },
     taggable: {
         type:Boolean,
         required: [true,'Please provide if storm is taggable or not.'],
