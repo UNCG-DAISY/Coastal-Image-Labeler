@@ -44,12 +44,12 @@ export default class Form extends React.Component {
                     updateFunction = {this.updateRadio}
                 />
 
-                <CheckboxQuestions
+                {/* <CheckboxQuestions
                     state = {
                         this.state
                     }
                     updateFunction = {this.updateCheckbox}
-                />
+                /> */}
                 
             </CardContent>
         )
