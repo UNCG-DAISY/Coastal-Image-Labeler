@@ -4,16 +4,16 @@ const initalTagState = {
     washoverType: -1,
     damageType: -1,
     impactType: {
-      swash:'0',
-      collision:'0',
-      overwash:'0',
-      inundation:'0'
+      swash:false,
+      collision:false,
+      overwash:false,
+      inundation:false
     },
     terrianType: {
-      sandyCoastline:'0', 
-      marsh:'0', 
-      inland:'0', 
-      river:'0'
+      sandyCoastline:false, 
+      marsh:false, 
+      inland:false, 
+      river:false
     },
     water: 0,
     comments:''

@@ -21,6 +21,19 @@ export default class Form extends React.Component {
             [params.key]:params.value
         })
     }
+
+    updateCheckbox = (params) => {
+        // this.setState({
+        //     [params.key]:{
+        //         ...this.state[params.key],
+        //         ...params.value
+        //     }
+        // })
+        console.log({[params.key]:{
+            ...this.state[params.key],
+            ...params.value
+        }})
+    }
     render() {
         return (
             <CardContent>
@@ -39,6 +52,7 @@ export default class Form extends React.Component {
                     state = {
                         this.state
                     }
+                    updateFunction = {this.updateCheckbox}
                 />
                 
             </CardContent>
