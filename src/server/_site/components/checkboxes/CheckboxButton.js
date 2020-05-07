@@ -9,7 +9,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox'
-
+import Typography from '@material-ui/core/Typography';
 import * as colors from '@material-ui/core/colors/';
 
 
@@ -35,7 +35,7 @@ export default function CheckboxButton(props) {
     return (
       <div className={classes.root}>
         <FormControl required  component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend" style={{color:labelColor}}>{label}</FormLabel>
+          <Typography variant="h6" style={{color:labelColor}}>{label}</Typography>
           <FormGroup>
 
             <div >
