@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
       //color:'red'
     },
     formControl: {
-      display: 'flex',
+      //display: 'flex',
       //margin: theme.spacing(3),
     },
 }));
@@ -27,15 +27,19 @@ const useStyles = makeStyles((theme) => ({
 export default function CheckboxButton(props) {
     const classes = useStyles();
     // const error = Object.keys(props.states).filter((element) => props.states[element]).length < props.howManyReq;
-
+    const {
+      label,
+      buttons,
+      labelColor 
+    } = props
     return (
       <div className={classes.root}>
         <FormControl required  component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend">{props.label}</FormLabel>
+        <FormLabel component="legend" style={{color:labelColor}}>{label}</FormLabel>
           <FormGroup>
 
-            <div className = {classes.formControl}>
-              {props.buttons.map(button => (
+            <div >
+              {buttons.map(button => (
                   <FormControlLabel
                     key = {button.label}
                     
