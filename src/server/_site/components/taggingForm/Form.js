@@ -8,6 +8,8 @@ import Radio from '@material-ui/core/Radio';
 import RadioButtonGroup from '../radio/RadioButtonGroup'
 
 import RadioButtonQuestions from './RadioButtonQuestions'
+import CheckboxQuestions from './CheckboxQuestions'
+
 export default class Form extends React.Component {
     state = {
         ...this.props.tags
@@ -28,9 +30,15 @@ export default class Form extends React.Component {
                 </Typography>
                 <RadioButtonQuestions
                     state = {
-                        this.state.devType
+                        this.state
                     }
                     updateFunction = {this.updateRadio}
+                />
+
+                <CheckboxQuestions
+                    state = {
+                        this.state
+                    }
                 />
                 
             </CardContent>
