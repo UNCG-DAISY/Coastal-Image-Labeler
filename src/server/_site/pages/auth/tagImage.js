@@ -17,7 +17,7 @@ import axios from 'axios'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import Router from "next/router";
 // import TagImageCard from '../../components/cards/imageTagCard'
-import ImageTagStepper from '../../components/steppers/imageTagStepper'
+//import ImageTagStepper from '../../components/steppers/imageTagStepper'
 import TaggingForm from '../../components/taggingForm/TaggingForm'
 import initalTagState from '../../components/steppers/initalTagState'
 
