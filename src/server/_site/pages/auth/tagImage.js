@@ -16,10 +16,9 @@ import fetch from "isomorphic-fetch";
 import axios from 'axios'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import Router from "next/router";
-// import TagImageCard from '../../components/cards/imageTagCard'
-//import ImageTagStepper from '../../components/steppers/imageTagStepper'
+
 import TaggingForm from '../../components/taggingForm/TaggingForm'
-import initalTagState from '../../components/steppers/initalTagState'
+import initalTagState from '../../../_archiveCode/steppers/initalTagState'
 
 
 const useStyles = makeStyles(theme  => ({
@@ -63,7 +62,6 @@ function TagImage(props) {
   function tagAsWater() {
     let tag = initalTagState
     tag.water = 1
-    //alert("Tagging image as water")
     submitTags(tag)
   }
 
@@ -78,7 +76,7 @@ function TagImage(props) {
     Router.reload()
   }
 
-  
+
   return (
     <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
       <Container maxWidth="md">
@@ -88,15 +86,14 @@ function TagImage(props) {
             imageDocument?.id?
             <React.Fragment>
               <TaggingForm
-              imageUrl = {`http://localhost:5000/${imgUrl}`}
+                imageUrl = {`http://localhost:5000/${imgUrl}`}
+                submitTags = {submitTags}
+                tagAsWater = {tagAsWater}
+                skipImage = {skipImage}
+                imageDoc = {imageDocument}
+                queryParams = {queryParams}
               />
               
-              {/* <ImageTagStepper 
-                submitTag={submitTags} 
-                tagAsWater={tagAsWater}
-                skipImage={skipImage}
-                imagePath = {`http://localhost:5000/${imgUrl}`} //amenadiel/a420/420_test.png
-              />  */}
               {/* <Button variant="contained" onClick={()=>submitTags(5)}>Default</Button> */}
             </React.Fragment>
             :
