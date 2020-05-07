@@ -23,16 +23,12 @@ export default class Form extends React.Component {
     }
 
     updateCheckbox = (params) => {
-        // this.setState({
-        //     [params.key]:{
-        //         ...this.state[params.key],
-        //         ...params.value
-        //     }
-        // })
-        console.log({[params.key]:{
-            ...this.state[params.key],
-            ...params.value
-        }})
+        this.setState({
+            [params.key]:{
+                ...this.state[params.key],
+                ...params.value
+            }
+        })
     }
     render() {
         return (
