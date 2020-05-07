@@ -15,8 +15,9 @@ export default class CheckboxQuestions extends React.Component {
 
         return (
             <React.Fragment>
+              
                 <CheckboxButton
-                    howManyReq = {1}
+                    //howManyReq = {1}
                     states = {state}
                     label = "Impact Type, pick zero or more"
                     labelColor = {colors.teal[500]}
@@ -25,10 +26,9 @@ export default class CheckboxQuestions extends React.Component {
                             control:
                                 <ColoredBox 
                                     value = "0" 
-                                    checked={state.swash == true ? true : false} 
+                                    checked={state.impactType.swash == true ? true : false} 
                                     onChange = {(event) => {
-                                        updateFunction({key:'impactType',value:{swash:!state.swash}})
-                                        //this.setState({test:1})
+                                        updateFunction({key:'impactType',value:{swash:!state.impactType.swash}})
                                     }}
                                     name="swash" 
                                     eventtype = "impact"
@@ -39,13 +39,103 @@ export default class CheckboxQuestions extends React.Component {
                             control:
                                 <ColoredBox 
                                     value = "1" 
-                                    checked={state.collision == 1} 
-                                    //onChange={(event)=>handleChange(event,props.eventType)} 
+                                    checked={state.impactType.collision == 1} 
+                                    onChange = {(event) => {
+                                        updateFunction({key:'impactType',value:{collision:!state.impactType.collision}})
+                                    }}
                                     name="collision" 
                                     eventtype = "impact"
                                 />,
                             label:"collision"
                         },
+                        {
+                            control:
+                                <ColoredBox 
+                                    value = "2" 
+                                    checked={state.impactType.overwash == 1} 
+                                    onChange = {(event) => {
+                                        updateFunction({key:'impactType',value:{overwash:!state.impactType.overwash}})
+                                    }}
+                                    name="overwash" 
+                                    eventtype = "impact"
+                                />,
+                            label:"overwash"
+                            },
+                            {
+                            control:
+                                <ColoredBox 
+                                    value = "3" 
+                                    checked={state.impactType.inundation == 1} 
+                                    onChange = {(event) => {
+                                        updateFunction({key:'impactType',value:{inundation:!state.impactType.inundation}})
+                                    }}
+                                    name="inundation" 
+                                    eventtype = "impact"
+                                />,
+                            label:"inundation"
+                            }
+                    
+                    ]}
+                />
+
+                <CheckboxButton
+                    //howManyReq = {1}
+                    states = {state}
+                    label = "Impact Type, pick zero or more"
+                    labelColor = {colors.amber[500]}
+                    buttons = {[
+                        {
+                            control:
+                                <ColoredBox 
+                                    value = "0" 
+                                    checked={state.terrianType.sandyCoastline == 1} 
+                                    onChange = {(event) => {
+                                        updateFunction({key:'terrianType',value:{sandyCoastline:!state.terrianType.sandyCoastline}})
+                                    }}
+                                    name="sandyCoastline" 
+                                    eventtype = "terrian"
+                                />,
+                            label:"Sandy Coastline"
+                        },
+                        {
+                            control:
+                                <ColoredBox 
+                                    value = "1" 
+                                    checked={state.terrianType.marsh == 1} 
+                                    onChange = {(event) => {
+                                        updateFunction({key:'terrianType',value:{marsh:!state.terrianType.marsh}})
+                                    }}
+                                    name="marsh" 
+                                    eventtype = "terrian"
+                                />,
+                            label:"Marsh"
+                        },
+                        {
+                            control:
+                                <ColoredBox 
+                                    value = "1" 
+                                    checked={state.terrianType.inland == 1} 
+                                    onChange = {(event) => {
+                                        updateFunction({key:'terrianType',value:{inland:!state.terrianType.inland}})
+                                    }}
+                                    name="inland" 
+                                    eventtype = "terrian"
+                                />,
+                            label:"Inland"
+                        }
+                        ,{
+                            control:
+                                <ColoredBox 
+                                    value = "1" 
+                                    checked={state.terrianType.river == 1} 
+                                    onChange = {(event) => {
+                                        updateFunction({key:'terrianType',value:{river:!state.terrianType.river}})
+                                    }}
+                                    name="river" 
+                                    eventtype = "terrian"
+                                />,
+                            label:"River"
+                        }
                     
                     ]}
                 />
