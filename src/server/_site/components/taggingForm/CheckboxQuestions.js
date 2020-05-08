@@ -142,7 +142,7 @@ export default class CheckboxQuestions extends React.Component {
                     ]}
                 />
 
-                <CheckboxButton
+                {/* <CheckboxButton
                     //howManyReq = {1}
                     states = {state}
                     label = "Sand type" //Display text
@@ -185,7 +185,7 @@ export default class CheckboxQuestions extends React.Component {
                             label:"Gets everywhere"
                         },
                     ]}
-                />
+                /> */}
             </React.Fragment>
         )
     }

@@ -16,11 +16,11 @@ const initalTagState = {
       inland:false, 
       river:false
     },
-    sandType:{
-      rough:false,//default values, unchecked
-      coarse:false,
-      getsEverywhere:false
-    },
+    // sandType:{
+    //   rough:false,//default values, unchecked
+    //   coarse:false,
+    //   getsEverywhere:false
+    // },
     water: 0,
     comments:''
 };

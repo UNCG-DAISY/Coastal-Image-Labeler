@@ -45,7 +45,7 @@ class TaggingForm extends React.Component {
         if(state.tags.devType < 0) return true;
         if(state.tags.washoverType < 0) return true;
         if(state.tags.damageType < 0) return true; 
-        if(!(this.checkboxHasEnoughSelected(state.tags.sandType,3))) return true;
+        //if(!(this.checkboxHasEnoughSelected(state.tags.sandType,3))) return true;
         //if(state.tags.hasSand < 0) return true; 
     
         return false;
