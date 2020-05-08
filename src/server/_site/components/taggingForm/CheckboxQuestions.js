@@ -15,7 +15,8 @@ export default class CheckboxQuestions extends React.Component {
 
         return (
             <React.Fragment>
-              
+                
+                {/* Impact type */}
                 <CheckboxButton
                     //howManyReq = {1}
                     states = {state}
@@ -78,22 +79,23 @@ export default class CheckboxQuestions extends React.Component {
                     ]}
                 />
 
+                {/* Terrian type */}
                 <CheckboxButton
                     //howManyReq = {1}
                     states = {state}
-                    label = "Impact Type, pick zero or more"
+                    label = "Terrian Type, pick zero or more"
                     labelColor = {colors.amber[500]}
                     buttons = {[
                         {
                             control:
                                 <ColoredBox 
                                     value = "0" 
-                                    checked={state.terrianType.sandyCoastline == 1} 
+                                    checked={state.terrianType.sandyCoastline} 
                                     onChange = {(event) => {
                                         updateFunction({key:'terrianType',value:{sandyCoastline:!state.terrianType.sandyCoastline}})
                                     }}
-                                    name="sandyCoastline" 
-                                    eventtype = "terrian"
+                                    // name="sandyCoastline" 
+                                    // eventtype = "terrian"
                                 />,
                             label:"Sandy Coastline"
                         },
@@ -101,12 +103,12 @@ export default class CheckboxQuestions extends React.Component {
                             control:
                                 <ColoredBox 
                                     value = "1" 
-                                    checked={state.terrianType.marsh == 1} 
+                                    checked={state.terrianType.marsh} 
                                     onChange = {(event) => {
                                         updateFunction({key:'terrianType',value:{marsh:!state.terrianType.marsh}})
                                     }}
-                                    name="marsh" 
-                                    eventtype = "terrian"
+                                    // name="marsh" 
+                                    // eventtype = "terrian"
                                 />,
                             label:"Marsh"
                         },
@@ -114,12 +116,12 @@ export default class CheckboxQuestions extends React.Component {
                             control:
                                 <ColoredBox 
                                     value = "1" 
-                                    checked={state.terrianType.inland == 1} 
+                                    checked={state.terrianType.inland} 
                                     onChange = {(event) => {
                                         updateFunction({key:'terrianType',value:{inland:!state.terrianType.inland}})
                                     }}
-                                    name="inland" 
-                                    eventtype = "terrian"
+                                    // name="inland" 
+                                    // eventtype = "terrian"
                                 />,
                             label:"Inland"
                         }
@@ -127,16 +129,61 @@ export default class CheckboxQuestions extends React.Component {
                             control:
                                 <ColoredBox 
                                     value = "1" 
-                                    checked={state.terrianType.river == 1} 
+                                    checked={state.terrianType.river} 
                                     onChange = {(event) => {
                                         updateFunction({key:'terrianType',value:{river:!state.terrianType.river}})
                                     }}
-                                    name="river" 
-                                    eventtype = "terrian"
+                                    // name="river" 
+                                    // eventtype = "terrian"
                                 />,
                             label:"River"
                         }
                     
+                    ]}
+                />
+
+                <CheckboxButton
+                    //howManyReq = {1}
+                    states = {state}
+                    label = "Sand type" //Display text
+                    labelColor = {colors.amber[500]}
+                    buttons = {[ //These are the buttons, we will have 3
+                        {
+                            control:
+                                <ColoredBox 
+                                    value = "0" 
+                                    checked={state.sandType.rough} //Has to match what we put in initialTagState.js
+                                    onChange = {(event) => {
+                                        //Keys here have to match
+                                        updateFunction({key:'sandType',value:{rough:!state.sandType.rough}})
+                                    }}
+                                />,
+                            label:"Rough"
+                        },
+                        {
+                            control:
+                                <ColoredBox 
+                                    value = "0" 
+                                    checked={state.sandType.coarse} //Has to match what we put in initialTagState.js
+                                    onChange = {(event) => {
+                                        //Keys here have to match
+                                        updateFunction({key:'sandType',value:{coarse:!state.sandType.coarse}})
+                                    }}
+                                />,
+                            label:"Coarse"
+                        },
+                        {
+                            control:
+                                <ColoredBox 
+                                    value = "0" 
+                                    checked={state.sandType.getsEverywhere} //Has to match what we put in initialTagState.js
+                                    onChange = {(event) => {
+                                        //Keys here have to match
+                                        updateFunction({key:'sandType',value:{getsEverywhere:!state.sandType.getsEverywhere}})
+                                    }}
+                                />,
+                            label:"Gets everywhere"
+                        },
                     ]}
                 />
             </React.Fragment>

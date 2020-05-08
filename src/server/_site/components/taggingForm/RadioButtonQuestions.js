@@ -13,6 +13,8 @@ export default class RadioButtonQuestions extends React.Component {
         } = this.props
         return (
             <React.Fragment>
+
+                {/* Development Type */}
                 <RadioButtonGroup
                     onChange={updateFunction}
                     style={{color:colors.purple[400]}}
@@ -35,6 +37,7 @@ export default class RadioButtonQuestions extends React.Component {
                     ]}
                 />
 
+                {/* Washover Type */}
                 <RadioButtonGroup
                     onChange={updateFunction}
                     style={{color:colors.blue[500]}}
@@ -57,6 +60,7 @@ export default class RadioButtonQuestions extends React.Component {
                     ]}
                 />
 
+                {/* Damage Type */}
                 <RadioButtonGroup
                     onChange={updateFunction}
                     style={{color:colors.orange[500]}}
@@ -79,7 +83,32 @@ export default class RadioButtonQuestions extends React.Component {
                     ]}
                 />
                 
-  
+                {/* Example extension */}
+                {/* <RadioButtonGroup
+                    onChange={updateFunction}
+                    //Pick any color, https://material-ui.com/customization/color/#color
+                    style={{color:colors.purple[400]}} //Color of the title
+                    title={`Contains Sand`}
+                    //has to be the same as the key we set in initalTagState.js 
+                    keyValue={'hasSand'} 
+                    //has to be the same as the key we set in initalTagState.js 
+                    state={state.hasSand}
+                    buttons={[
+                        {
+                            value:"0",//What value does it change hasSand to
+                            control: <RedRadio/>,
+                            label: "No", //Display text
+                            labelPlacement:"end"
+                        },
+                        {
+                            value:'1',//What value does it change hasSand to
+                            control: <GreenRadio />,
+                            label: "Yes",//Display text
+                            labelPlacement:"end"
+                        }
+                    ]}
+                />
+   */}
                 
             </React.Fragment>
         )
