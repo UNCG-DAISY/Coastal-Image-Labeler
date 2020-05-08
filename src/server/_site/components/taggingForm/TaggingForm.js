@@ -30,11 +30,24 @@ class TaggingForm extends React.Component {
         this.setState({tags:state})
     }
     
+    checkboxHasEnoughSelected(state,req) {
+        let numSelected = 0
+        Object.keys(state).forEach((value) => {
+            if(state[value] == 1) {
+                numSelected ++
+            }
+        })
+
+        return numSelected >= req
+    }
+
     isSubmittable(state) {          
         if(state.tags.devType < 0) return true;
         if(state.tags.washoverType < 0) return true;
         if(state.tags.damageType < 0) return true; 
-
+        if(!(this.checkboxHasEnoughSelected(state.tags.sandType,3))) return true;
+        //if(state.tags.hasSand < 0) return true; 
+    
         return false;
     }
 
@@ -78,7 +91,7 @@ class TaggingForm extends React.Component {
 
         return (
             <React.Fragment>
-                {/* {JSON.stringify(this.state.tags)} */}
+                {JSON.stringify(this.state.tags)}
                 <div className={classes.center}>
                     
                     <Card className={classes.root}>
