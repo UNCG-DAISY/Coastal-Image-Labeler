@@ -20,7 +20,10 @@ const theme = createMuiTheme({
       // '"Apple Color Emoji"',
       // '"Segoe UI Emoji"',
       // '"Segoe UI Symbol"',
-      'Roboto Mono','monospace'
+      //'Roboto Mono'
+      //'monospace'
+      'Roboto Mono'
+      //'Roboto'
     ].join(','),
   },
   palette: {

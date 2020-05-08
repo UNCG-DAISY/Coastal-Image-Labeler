@@ -9,7 +9,9 @@ import * as colors from '@material-ui/core/colors/';
 import { makeStyles,withStyles  } from '@material-ui/core/styles';
 
 export default class ImageContainer extends React.Component{
+
     render() {
+
         const  {
             classes,
             state,
@@ -19,8 +21,21 @@ export default class ImageContainer extends React.Component{
         return (
             <React.Fragment>
                 <CardActions disableSpacing className={classes.dropdownStyles}>
-                    <ViewFullImage color="primary" variant="outlined" style={{marginRight:10}}>View compressed image</ViewFullImage>
-                    <ViewCompressedImage color="secondary" variant="outlined">View full image</ViewCompressedImage>
+                    <ViewFullImage 
+                        color="primary" 
+                        variant="outlined" 
+                        style={{marginRight:10}}
+                        onClick = {()=>{
+                            window.open(  imageUrl, 'Full Image')
+                        }}
+                    >View compressed image</ViewFullImage>
+                    <ViewCompressedImage 
+                        color="secondary" 
+                        variant="outlined"
+                        onClick = {()=>{
+                            window.open( imageUrl, 'Compressed Image')
+                        }}
+                    >View full image</ViewCompressedImage>
                     <IconButton
                         className={clsx(classes.expand, {
                             [classes.expandOpen]: state.expanded,

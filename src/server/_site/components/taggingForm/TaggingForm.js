@@ -11,7 +11,7 @@ import * as colors from '@material-ui/core/colors/';
 import ImageContainer from './ImageContainer'
 import initalTagState from './initalTagState'
 import Header from './Header'
-import Form from './Form'
+import ClassificationQuestions from './ClassificationQuestions'
 class TaggingForm extends React.Component {
     state ={
         expanded:false,
@@ -57,6 +57,14 @@ class TaggingForm extends React.Component {
         }})
     }
     
+    updateComment = (value) => {
+        this.setState({
+            tags:{
+                ...this.state.tags,
+                comments:value
+            }
+        })
+    }
     render() {
         
         const { 
@@ -70,7 +78,7 @@ class TaggingForm extends React.Component {
 
         return (
             <React.Fragment>
-                {JSON.stringify(this.state.tags)}
+                {/* {JSON.stringify(this.state.tags)} */}
                 <div className={classes.center}>
                     
                     <Card className={classes.root}>
@@ -82,24 +90,25 @@ class TaggingForm extends React.Component {
                             handleExpandClick={this.handleExpandClick}
                            
                         />
-                        <Form 
+                        <ClassificationQuestions 
                             tags={this.state.tags}
                             updateRadio = {this.updateRadio}
                             updateCheckbox = {this.updateCheckbox}
+                            updateComment = {this.updateComment}
                         />
                     </Card>
                    
                 </div>
                 <div style={{marginTop:10,display: 'flex', justifyContent: 'space-between'}} >
                     <div style={{display: 'flex', justifyContent: 'space-between'}} >
-                        <SkipButton onClick={() => alert('aa')} className = {classes.formControl}>
+                        <SkipButton onClick={() => skipImage()} className = {classes.formControl}>
                             Skip
                         </SkipButton>
-                        <WaterButton onClick={() => alert('aa')} className = {classes.formControl}>
+                        <WaterButton onClick={() => tagAsWater()} className = {classes.formControl}>
                             Tag as water
                         </WaterButton>
                     </div>
-                    <SubmitButton onClick={() => alert('aa')} disabled={this.isSubmittable(this.state)}>
+                    <SubmitButton onClick={() => submitTags(this.state.tags)} disabled={this.isSubmittable(this.state)}>
                         Submit 
                     </SubmitButton>
                 </div>
