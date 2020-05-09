@@ -5,7 +5,9 @@
 import express from 'express'
 
 import {
-    getAllArchives
+    getAllArchives,
+    getArchive,
+    findArchive
 } from '../../controllers/v1/archives'
 
 //function that makes it so that you have to be logged in to call this api
@@ -18,5 +20,9 @@ const router = express.Router();
 router
     .route('/')
     .get(getAllArchives)
+
+router
+    .route('/FindArchive')
+    .post(findArchive)
 
 export default router;
