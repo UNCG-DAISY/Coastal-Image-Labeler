@@ -7,10 +7,10 @@ import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Typ
 import {StormDocument} from '../index'
 
 const stormSchema: Schema = new Schema({
-    creator: {
-        type: Types.ObjectId,
-        required: [true,'Please provide the creator id'],
-    },
+    // creator: {
+    //     type: Types.ObjectId,
+    //     required: [true,'Please provide the creator id'],
+    // },
     dateAdded:{
         type:Date
     },
