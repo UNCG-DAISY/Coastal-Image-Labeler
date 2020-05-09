@@ -7,11 +7,6 @@ import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Typ
 import {StormDocument} from '../index'
 
 const stormSchema: Schema = new Schema({
-    // archives: {
-    //     type: [Types.ObjectId],
-    //     ref: 'Archive',
-    //     default: []
-    // },
     creator: {
         type: Types.ObjectId,
         required: [true,'Please provide the creator id'],

@@ -27,6 +27,10 @@ const userSchema: Schema = new Schema({
         unique: true,
         type:String
     },
+    userMessage:{
+        required:false,
+        type:String
+    },
     userName: {
         required:[true,'Username not passed'],
         unique: true,

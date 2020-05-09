@@ -11,7 +11,7 @@ import {ArchiveModel} from '../../models/Archive'
 
 /**
  * @desc        Gets all archives
- * @route       GET /api/v1/archives/:userId
+ * @route       GET /api/v1/archives/
  * @access      Public
  * @returns     yes
  */
@@ -28,7 +28,7 @@ const getAllArchives = asyncHandler(async (req: Request, res: Response, next: Ne
 
 /**
  * @desc        Gets a archive by ID
- * @route       GET /api/v1/archives/archive/:archiveId/:userId
+ * @route       GET /api/v1/archives/archive/:archiveId
  * @access      Public
  * @returns     yes
  */
@@ -52,7 +52,25 @@ const getArchive = asyncHandler(async (req: Request, res: Response, next: NextFu
     })        
 })
 
+/**
+ * @desc        Finds an archive 
+ * @route       POST /api/v1/archives/FindArchive/
+ * @access      Public
+ * @returns     yes
+ */
+const findArchive = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const archives = await ArchiveModel.find(req.body)
+    
+    res.status(200).json({
+        success:true,
+        data:{
+            archives
+        }
+    })                
+})
+
 export {
     getAllArchives,
-    getArchive
+    getArchive,
+    findArchive
 }

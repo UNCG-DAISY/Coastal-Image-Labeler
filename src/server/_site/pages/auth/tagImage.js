@@ -18,7 +18,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import Router from "next/router";
 
 import TaggingForm from '../../components/taggingForm/TaggingForm'
-import initalTagState from '../../../_archiveCode/steppers/initalTagState'
+import initalTagState from '../../components/taggingForm/initalTagState'
 
 
 const useStyles = makeStyles(theme  => ({
