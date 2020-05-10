@@ -19,6 +19,8 @@ import axios from 'axios'
 const useStyles = makeStyles(theme  => ({
   paper: {
     display: 'flex',
+    justifyContent: "center",
+    alignItems: "center",
     flexWrap: 'wrap',
     '& > *': {
       margin: theme.spacing(1),
@@ -125,19 +127,16 @@ TagImage.getInitialProps = async ctx => {
   let stormList = {}
  
   getStorms.data.forEach(storm => {
-      let newEntry = {
-      };
+      
 
       stormList[storm.name] = {}
-      
+     
+      stormList[storm.name].info = storm.stormInfo
       let archiveList = []
       storm.archives.forEach(archive => {
         stormList[storm.name][archive.name] = {}
       });
   });
-
-  //console.log(stormList)
-
 
   return {storms,allowedPages,stormList}
 }
