@@ -12,17 +12,21 @@ import {
     updatedTaggedImages
 } from '../../controllers/v1/user'
 
-//import {protect} from '../../middleware/v1/auth'
-
+import {
+    ensureAuthenticated
+} from '../../middleware/v1/isAuthenticated'
+import {
+    authorize
+} from '../../middleware/v1/auth'
 // "/api/v1/images/"
 const router = express.Router();
 
 
 router
     .route('/tagImage')
-    .post(tagImage,updatedTaggedImages)
+    .post(ensureAuthenticated,authorize('5e3e60207362e721e430ea6d'),tagImage,updatedTaggedImages)
 router
     .route('/skipImage/:archive')
-    .get(updatedTaggedImages)
+    .get(ensureAuthenticated,authorize('5e3e60207362e721e430ea6d'),updatedTaggedImages)
 
 export default router;
