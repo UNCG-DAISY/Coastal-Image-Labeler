@@ -29,10 +29,10 @@ const authorize = (...roles:string[]) => {
 
         console.log('Must have role = ',roles)
         console.log('User has = ',req?.user?.mongoUser?.role)
-      
+        console.log(Object.keys(req.user))
 
         if(!req?.user?.mongoUser?.role.includes( ...roles)) {
-            return next(new ErrorResponse(`User role ${req?.user?.role} is not authorized to access this route`,403))
+            return next(new ErrorResponse(`User/User role ${req?.user?.displayName} is not authorized to access this route`,403))
         }
        
         next()
