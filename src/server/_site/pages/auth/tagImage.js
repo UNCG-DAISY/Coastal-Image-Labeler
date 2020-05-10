@@ -35,7 +35,7 @@ function TagImage(props) {
   console.log(imgUrl)
 
   async function submitTags(tags) {
-    alert(`You are about to tag to image ${imageDocument._id}`)
+    //alert(`You are about to tag to image ${imageDocument._id}`)
 
     const payload = {
       _id : imageDocument._id,
@@ -66,7 +66,7 @@ function TagImage(props) {
   }
 
   async function skipImage() {
-    alert('Skipping image')
+    //alert('Skipping image')
     const responseData = await (await fetch(`/api/v1/images/skipImage/${queryParams.archive}`, {
       method: "GET",
    
