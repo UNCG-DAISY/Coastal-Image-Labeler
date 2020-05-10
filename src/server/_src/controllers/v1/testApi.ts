@@ -19,12 +19,11 @@ let cards = [
  * @returns     yes
  */
 const testGet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    console.log('--TEST-- GET, is auth = ',req.isAuthenticated())
-    console.log('--TEST-- USER',Object.keys(req.user).length)
+    console.log('TEST GET')
     res.status(200).json({
         success:true,
         data:{
-           message: `Test get done at ${Date.now()}`,
+           message: `Test get done at ${Date.now()} with user ${req.user.id}`,
            cards
         }
     })

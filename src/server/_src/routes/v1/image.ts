@@ -12,7 +12,7 @@ import {
     updatedTaggedImages
 } from '../../controllers/v1/user'
 
-import {protect} from '../../middleware/v1/auth'
+//import {protect} from '../../middleware/v1/auth'
 
 // "/api/v1/images/"
 const router = express.Router();

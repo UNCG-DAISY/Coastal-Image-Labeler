@@ -6,18 +6,26 @@ import {
 } from '../../controllers/v1/testApi'
 
 import {
-    ensureAuthenticated,
-    ensureAuthenticated2
-} from '../../middleware/v1/authentucated'
+    ensureAuthenticated
+} from '../../middleware/v1/isAuthenticated'
 
+import {
+    authorize
+} from '../../middleware/v1/auth'
+// /api/v1/test
 const router = express.Router();
 
+ 
 router
-    .route('/get')
-    .get(ensureAuthenticated2,testGet)
-    
+    .route('/ensureAuthenticated')
+    .get(ensureAuthenticated,testGet)
+
 router
-    .route('/post')
-    .post(ensureAuthenticated,testPost)
+    .route('/authorize')
+    .get(ensureAuthenticated,authorize('5e3e60207362e721e430ea6d'),testGet)
+
+router
+    .route('/authorize2')
+    .get(ensureAuthenticated,authorize('5e3e60207362e721e430ea6e'),testGet)
 
 export default router;

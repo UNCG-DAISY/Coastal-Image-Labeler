@@ -1,9 +1,11 @@
 import { Request,Response,NextFunction } from "express"
 
 function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
+    console.log('REQ OBJECT = ',Object.keys(req))
+    console.log('IS AUTH? = ',req.isAuthenticated())
     if (req.isAuthenticated()) return next();
 
-    console.log(Object.keys(req))
+    
     
     res.status(401).json({
         success:true,
@@ -19,5 +21,4 @@ function ensureAuthenticated2(req: Request, res: Response, next: NextFunction) {
     return next()
 }
 
-
-export{ensureAuthenticated,ensureAuthenticated2}
+export{ensureAuthenticated}

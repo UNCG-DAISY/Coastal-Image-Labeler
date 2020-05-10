@@ -14,7 +14,7 @@ import {
 //Perform advanced results which means filtering, pagination, and query parameters
 import {advancedResults} from '../../middleware/v1/advancedResults'
 
-import {protect,authorize} from '../../middleware/v1/auth'
+import {authorize} from '../../middleware/v1/auth'
 import {StormModel} from '../../models/Storm'
 
 // "/api/v1/storms/"
