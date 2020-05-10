@@ -1,30 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 import LinkIcon from '@material-ui/icons/Link';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import LabelIcon from '@material-ui/icons/Label';
-import CloudIcon from '@material-ui/icons/Cloud';
-import FolderIcon from '@material-ui/icons/Folder';
+
 
 //Adds swiping
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+//import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import LogoutListButton from '../buttons/logoutListButton'
 const drawerWidth = 240;
 
@@ -121,41 +109,11 @@ function LoginSideDrawer(props) {
                       allowedPages?.tagger && 
                       <a href={'/auth/pickStorm'} className= {classes.link} key={'PickStorm'}>
                           <ListItem button >
-                              <ListItemIcon><HomeIcon/></ListItemIcon>
+                              <ListItemIcon><LabelIcon/></ListItemIcon>
                               <ListItemText primary={'Image Tag'} />
                           </ListItem>
                       </a>
                     }
-                    
-
-                    {/* <a href={'/auth/myProfile'} className= {classes.link} key={'My Profile'}>
-                        <ListItem button >
-                            <ListItemIcon><AccountBoxIcon/></ListItemIcon>
-                            <ListItemText primary={'My Profile'} />
-                        </ListItem>
-                    </a> */}
-
-                    {/* {props?.allowedPages?.tagger && <a href={'/auth/startTagging'} className= {classes.link} key={'Start Tagging'}>
-                        <ListItem button >
-                            <ListItemIcon><LabelIcon/></ListItemIcon>
-                            <ListItemText primary={'Start Tagging'} />
-                        </ListItem>
-                    </a>}
-
-                    {props?.allowedPages?.stormMaker && <a href={'/auth/startTagging'} className= {classes.link} key={'Make a Storm'}>
-                        <ListItem button >
-                            <ListItemIcon><CloudIcon/></ListItemIcon>
-                            <ListItemText primary={'Make a Storm'} />
-                        </ListItem>
-                    </a>}
-
-                    {props?.allowedPages?.archiveMaker && <a href={'/auth/startTagging'} className= {classes.link} key={'Make an Archive'}>
-                        <ListItem button >
-                            <ListItemIcon><FolderIcon/></ListItemIcon>
-                            <ListItemText primary={'Make an Archive'} />
-                        </ListItem>
-                    </a>} */}
-
                 </List>
                 
             <Divider />
