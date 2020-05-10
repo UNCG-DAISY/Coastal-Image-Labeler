@@ -27,9 +27,9 @@ import {UserModel} from '../../models/User'
 const authorize = (...roles:string[]) => {
     return (req: Request, res: Response, next: NextFunction) => {
 
-        console.log('Must have role = ',roles)
-        console.log('User has = ',req?.user?.mongoUser?.role)
-        console.log(Object.keys(req.user))
+        // console.log('Must have role = ',roles)
+        // console.log('User has = ',req?.user?.mongoUser?.role)
+        // console.log(Object.keys(req.user))
 
         if(!req?.user?.mongoUser?.role.includes( ...roles)) {
             return next(new ErrorResponse(`User/User role ${req?.user?.displayName} is not authorized to access this route`,403))
