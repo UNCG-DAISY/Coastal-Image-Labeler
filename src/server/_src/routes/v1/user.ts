@@ -37,9 +37,9 @@ router
     .post(checkUserRoles)
 
 //Creates a user with just id and displayName and creation date
-router
-    .route('/createUser')
-    .post(createNewUser)
+// router
+//     .route('/createUser')
+//     .post(createNewUser)
 
 router
     .route('/allowedPages/:id')
@@ -49,8 +49,8 @@ router
     .route('/getImage/:archive')
     .get(getAssignedImage)
 
-router
-    .route('/TEST_nextImage/:archive')
-    .get(updatedTaggedImages)
+// router
+//     .route('/TEST_nextImage/:archive')
+//     .get(updatedTaggedImages)
 
 export default router;
