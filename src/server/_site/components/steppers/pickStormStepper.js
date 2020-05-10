@@ -15,6 +15,10 @@ import CreateStormPickerDropdown from '../createPickStormDropdown'
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
+    // display: "flex",
+    // justifyContent: "center",
+    // alignItems: "center",
+
   },
   backButton: {
     marginRight: theme.spacing(1),
@@ -117,6 +121,7 @@ export default function PickStormStepper(props) {
 
   return (
     <div className={classes.root}>
+      {JSON.stringify(storms[selectedStorm])}
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map(label => (
           <Step key={label}>
