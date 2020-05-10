@@ -8,7 +8,7 @@ import {ImageModel} from '../../models/Image'
 import {ArchiveModel} from '../../models/Archive'
 import {ErrorResponse} from '../../utils/v1/errorResponse'
 import axios from 'axios'
-import {RBAC} from '../../middleware/v1/auth'
+//import {RBAC} from '../../middleware/v1/auth'
 import {UserModel} from '../../models/User'
 
 //import {TEST_assignNextImage} from './user'

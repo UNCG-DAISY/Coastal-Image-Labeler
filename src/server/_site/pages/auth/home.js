@@ -84,6 +84,20 @@ function Home(props) {
 
   const classes = useStyles();
 
+  async function testRoles(url) {
+    console.log(url)
+    const res = await fetch(`${url}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+    });
+
+    const resData = (await res.json())
+    console.log(resData)
+    //alert(resData.data.message)
+  }
+
   return (
     <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={props.allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
       <Container maxWidth="md">
@@ -122,6 +136,9 @@ function Home(props) {
               </Grid>
             </Grid>
           </Paper>
+
+          <Button variant="contained" onClick = {() => testRoles('/api/v1/test/authorize2')}>Test is tagger</Button>
+          <Button variant="contained">Test is admin</Button>
           
 
           

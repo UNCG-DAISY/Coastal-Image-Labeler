@@ -36,6 +36,7 @@ export const errorHandler = (err:any ,req: Request, res: Response, next: NextFun
 
     res.status(error.statusCode ?? 500).json({
         success:false,
+        message:error.message,
         error:error.message ?? 'Server Error'
     })
 }

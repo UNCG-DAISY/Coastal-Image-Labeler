@@ -8,7 +8,6 @@ import {UserModel} from '../../models/User'
 import {RoleModel} from '../../models/Role'
 import {ErrorResponse} from '../../utils/v1/errorResponse'
 import axios from 'axios'
-import {RBAC} from '../../middleware/v1/auth'
 import {ArchiveModel} from '../../models/Archive'
 import {ImageModel} from '../../models/Image'
 

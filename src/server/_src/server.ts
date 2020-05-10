@@ -124,7 +124,7 @@ nextApp.prepare()
     //Mount routers, appi calls
     //The first parameter is the name of the path and the 2nd is the file to use if an Api call with that path is received
     //For example
-    ///api/v1/users/getUsername would be in the users.
+    // /api/v1/users/getUsername would be in the users.
     app.use('/api/v1/users',users)
     app.use('/api/v1/archives',archives)
     app.use('/api/v1/storms',storms)
