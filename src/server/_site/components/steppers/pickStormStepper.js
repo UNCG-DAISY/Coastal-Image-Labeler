@@ -9,6 +9,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import { useRouter } from 'next/router'
+import Box from '@material-ui/core/Box';
+import Skeleton from '@material-ui/lab/Skeleton';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 import CreateStormPickerDropdown from '../createPickStormDropdown'
 
@@ -58,19 +61,9 @@ export default function PickStormStepper(props) {
       return Object.keys(selectedStorm)[archive]
   }
   const handleNext = () => {
-      if(activeStep == steps.length-1) {
-        
-        alert(`Getting image for storm ${selectedStorm} under archive ${selectedArchive}`)
-        // Router.push(
-        //   `/auth/tagImage?storm=${selectedStorm}&archive=${selectedArchive}`,
-        //   `/auth/tagImage?storm=${selectedStorm}&archive=${selectedArchive}`
-        // )
-        console.log(window.location.href=`/auth/tagImage?storm=${selectedStorm}&archive=${selectedArchive}`)
-        // router.replace(
-        //     `/auth/tagImage?storm=${selectedStorm}&archive=${selectedArchive}`
-        // )
-        
-        //window.location(`/auth/tagImage?storm=${selectedStorm}&archive=${selectedArchive}`)
+      if(activeStep == steps.length-1) {  
+        //alert(`Getting image for storm ${selectedStorm} under archive ${selectedArchive}`) 
+        window.location.href=`/auth/tagImage?storm=${selectedStorm}&archive=${selectedArchive}`
       }
       else {
         setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -99,7 +92,7 @@ export default function PickStormStepper(props) {
       case 1:
         return (
             <CreateStormPickerDropdown 
-                data={storms[selectedStorm]} 
+                data={storms[selectedStorm].archives} 
                 stateFunctions = {[selectedArchive, setselectedArchive]}
                 label = 'Pick a storm'
             />
@@ -121,7 +114,7 @@ export default function PickStormStepper(props) {
 
   return (
     <div className={classes.root}>
-      {JSON.stringify(storms[selectedStorm])}
+      {/* {JSON.stringify(storms[selectedStorm])} */}
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map(label => (
           <Step key={label}>
@@ -129,14 +122,36 @@ export default function PickStormStepper(props) {
           </Step>
         ))}
       </Stepper>
-      <div>
+      <div style={{width:`500px`}}>
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>All steps completed</Typography>
             {/* <Button onClick={handleReset}>Reset</Button> */}
           </div>
         ) : (
-          <div>
+          <React.Fragment>
+            <Divider />
+              
+                <Alert severity="info" variant="outlined" >
+                    <AlertTitle>Info</AlertTitle>
+                    {
+                        storms[selectedStorm]?
+                        (
+                            <React.Fragment>
+                                <strong>Description</strong>: {storms[selectedStorm].info.description}
+                                <br/>
+                                <strong>Year</strong>: {storms[selectedStorm].info.year}
+                                <br/>
+                                <a href={storms[selectedStorm].info.link} style={{textDecoration:'none',color:'inherit'}}>Link to wiki</a>
+                            </React.Fragment>
+                        ):
+                        'Please select a storm'
+                    }
+                    
+                    <br/>
+                    <br/>
+                </Alert>
+ 
             <Divider />
             <div className={classes.instructions}>{getStepContent(activeStep)}</div>
             <div>
@@ -152,7 +167,7 @@ export default function PickStormStepper(props) {
               </Button>
             
             </div>
-          </div>
+          </React.Fragment>
         )}
       </div>
     </div>

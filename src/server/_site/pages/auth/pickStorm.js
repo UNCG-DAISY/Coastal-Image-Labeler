@@ -134,7 +134,10 @@ TagImage.getInitialProps = async ctx => {
       stormList[storm.name].info = storm.stormInfo
       let archiveList = []
       storm.archives.forEach(archive => {
-        stormList[storm.name][archive.name] = {}
+        stormList[storm.name].archives= {
+          ...stormList[storm.name].archives
+        }
+        stormList[storm.name].archives[archive.name] = {}
       });
   });
 
