@@ -1,7 +1,7 @@
 import Checkbox from '@material-ui/core/Checkbox'
 import { withStyles } from '@material-ui/core/styles';
 import * as colors from '@material-ui/core/colors/';
-
+import theme from '../theme';
 import CheckboxButton from '../checkboxes/CheckboxButton'
 export default class CheckboxQuestions extends React.Component {
     state = {
@@ -21,7 +21,7 @@ export default class CheckboxQuestions extends React.Component {
                     //howManyReq = {1}
                     states = {state}
                     label = "Impact Type, pick zero or more"
-                    labelColor = {colors.teal[500]}
+                    labelColor = {theme.palette.customColors.orange}
                     buttons = {[
                         {
                             control:
@@ -84,7 +84,7 @@ export default class CheckboxQuestions extends React.Component {
                     //howManyReq = {1}
                     states = {state}
                     label = "Terrian Type, pick zero or more"
-                    labelColor = {colors.amber[500]}
+                    labelColor = {theme.palette.customColors.orange}
                     buttons = {[
                         {
                             control:
