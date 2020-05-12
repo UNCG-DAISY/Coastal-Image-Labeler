@@ -7,7 +7,7 @@ import { red } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import * as colors from '@material-ui/core/colors/';
 
-
+import theme from '../theme';
 import ImageContainer from './ImageContainer'
 import initalTagState from './initalTagState'
 import Header from './Header'
@@ -91,11 +91,16 @@ class TaggingForm extends React.Component {
 
         return (
             <React.Fragment>
-                {JSON.stringify(this.state.tags)}
+                {/* {JSON.stringify(this.state.tags)} */}
                 <div className={classes.center}>
                     
                     <Card className={classes.root}>
-                        <Header title={`Storm ${queryParams.storm}`} subheader={`Archive ${queryParams.archive} - ${imageDoc.id}`}/>
+                        <Header 
+                            title={`Storm ${queryParams.storm}`} 
+                            subheader={`Archive ${queryParams.archive} - ${imageDoc.id}`}
+                            style={{color:theme.palette.customColors.yellow}}
+                            styleSubheader = {{color:theme.palette.customColors.pink}} 
+                        />
                         <ImageContainer
                             classes={classes}
                             state={this.state}
@@ -138,20 +143,25 @@ const ColorizeButton = (color,theme) => {
             '&:hover': {
                 backgroundColor: color.hover,
             },
+            '&:disabled': {
+                backgroundColor: color.hover,
+                color:'#000000'
+            },
         },
     }
 }
 
 const SkipButton = withStyles((theme) => (
-    ColorizeButton({color:colors.red[400],background:colors.red[600],hover:colors.red[800]},theme)
+    // ColorizeButton({color:colors.red[400],background:colors.red[600],hover:colors.red[800]},theme)
+    ColorizeButton({color:theme.palette.customColors.red,background:theme.palette.customColors.red,hover:colors.red[800]},theme)
 ))(Button);
 
 const WaterButton = withStyles((theme) => (
-    ColorizeButton({color:colors.blue[400],background:colors.blue[600],hover:colors.blue[800]},theme)
+    ColorizeButton({color:theme.palette.customColors.cyan,background:theme.palette.customColors.cyan,hover:colors.cyan[800]},theme)
 ))(Button);
 
 const SubmitButton = withStyles((theme) => (
-    ColorizeButton({color:'#000000',background:colors.green[600],hover:colors.green[800]},theme)
+    ColorizeButton({color:'#ff0000',background:theme.palette.customColors.green,hover:theme.palette.customColors.green},theme)
 ))(Button);
 
 
