@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import CardMedia from '@material-ui/core/CardMedia';
 import * as colors from '@material-ui/core/colors/';
 import { makeStyles,withStyles  } from '@material-ui/core/styles';
+import theme from '../theme';
 
 export default class ImageContainer extends React.Component{
 
@@ -76,9 +77,10 @@ const ColorizeButton = (color,theme) => {
     }
 }
 const ViewFullImage = withStyles((theme) => (
-    ColorizeButton({color:colors.orange[600],background:colors.orange[600],hover:colors.orange[800]},theme)
+    //ColorizeButton({color:colors.orange[600],background:colors.orange[600],hover:colors.orange[800]},theme)
+    ColorizeButton({color:theme.palette.customColors.green,background:colors.green[600],hover:theme.palette.customColors.green},theme)
 ))(Button);
 
 const ViewCompressedImage = withStyles((theme) => (
-    ColorizeButton({color:colors.yellow[600],background:colors.yellow[600],hover:colors.yellow[800]},theme)
+    ColorizeButton({color:theme.palette.customColors.green,background:colors.green[600],hover:theme.palette.customColors.green},theme)
 ))(Button);

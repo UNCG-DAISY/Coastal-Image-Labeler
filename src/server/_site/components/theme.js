@@ -48,7 +48,9 @@ const theme = createMuiTheme({
       main: red.A400,
     },
     // background: {
-    //   default: '#fff',
+    //   default:'#282A36',
+    //   paper:'#353743'
+     
     // },
   },
 });
