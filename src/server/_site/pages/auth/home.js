@@ -108,7 +108,8 @@ function Home(props) {
 
           <Typography variant="body1" component="h1" gutterBottom>
             <Paper elevation={3} variant="outlined" style={{paddingLeft:10}}>
-              {userMessage}
+              Welcome! You can start tagging by clicking on "Image Tag" on the left, or resume an archive you have
+              begun by pressing the buttons below
             </Paper>
           </Typography> 
 
@@ -119,7 +120,7 @@ function Home(props) {
           <Paper elevation={3} variant="outlined" style={{paddingLeft:10,paddingBottom:10,paddingTop:10}}>
             <Grid container className={classes.root} spacing={2}>
               <Grid item xs={12}>
-                <Grid container justify="flex-start" spacing={2}>
+                <Grid container justify="center" spacing={2}>
                   {
                     Object.keys(assignedImages).map((value,index)=>{
                       return (
@@ -137,11 +138,11 @@ function Home(props) {
             </Grid>
           </Paper>
 
-          <Button variant="contained" onClick = {() => testRoles('/api/v1/test/authorize2')}>Test is tagger</Button>
+          {/* <Button variant="contained" onClick = {() => testRoles('/api/v1/test/authorize2')}>Test is tagger</Button>
           <Button variant="contained">Test is admin</Button>
           
 
-          
+           */}
           
         </Box>
       </Container>

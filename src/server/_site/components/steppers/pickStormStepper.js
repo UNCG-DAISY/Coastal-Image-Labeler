@@ -29,6 +29,12 @@ const useStyles = makeStyles(theme => ({
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
+    display:'flex',
+    justifyContent:'center',
+  },
+  controls: {
+    display:'flex',
+    justifyContent:'space-between',
   },
 }));
 
@@ -153,18 +159,26 @@ export default function PickStormStepper(props) {
                 </Alert>
  
             <Divider />
-            <div className={classes.instructions}>{getStepContent(activeStep)}</div>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
-                Back
-              </Button>
-              <Button variant="contained" color="primary" onClick={handleNext} disabled={shouldDisable()}>
-                {activeStep === steps.length - 1 ? 'Get Image' : 'Next'}
-              </Button>
+
+            <div className={classes.instructions}>
+              {getStepContent(activeStep)}
+            </div>
+            <div className={classes.controls}>
+              <div/>
+              
+              <div>
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  className={classes.backButton}
+                >
+                  Back
+                </Button>
+                <Button variant="contained" color="primary" onClick={handleNext} disabled={shouldDisable()}>
+                  {activeStep === steps.length - 1 ? 'Get Image' : 'Next'}
+                </Button>
+              </div>
+            
             
             </div>
           </React.Fragment>
