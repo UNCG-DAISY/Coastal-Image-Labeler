@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
+import Layout from '../../components/layouts/Layout'
 import { useRouter } from 'next/router'
 
 import FormLabel from '@material-ui/core/FormLabel';
@@ -25,26 +26,21 @@ import {
 
 import {getAllowedPages} from '../../components/utils/getAllowedPages'
 
-async function test() {
+
+// async function test() {
  
-  await fetch("/api/v1/test/get", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
+//   await fetch("/api/v1/test/get", {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json"
+//     }
+//   });
   
-}
+// }
 
 
 // Home page after logging in
 function Home(props) {
-  //console.log(props.allowedPages)
-  // if(props.allowedPages === undefined) {
-  //   console.log('aaaa')
-  //   window.location('/home')
-  // }
-  //console.log(Object.keys())
   const router = useRouter()
   async function continueTagging(archive,imageId) {
     const  reqBody ={
@@ -99,7 +95,7 @@ function Home(props) {
   }
 
   return (
-    <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={props.allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
+    <Layout user={props.user} pageTitle="Home">
       <Container maxWidth="md">
         <Box my={4}>
           <Typography variant="h4" component="h1" gutterBottom>
@@ -143,10 +139,10 @@ function Home(props) {
           
 
            */}
-          
+         
         </Box>
       </Container>
-    </Drawer>
+    </Layout>
     
   );
 }
@@ -168,25 +164,9 @@ Home.getInitialProps = async ctx => {
   const {req,res} = ctx
 
   hasUser(req)
-
   
-  const user = req.user.mongoUser
-  
-  //console.log(Object.keys(req.user)) // no mongo user on first render
   const allowedPages = await getAllowedPages(req.user,ctx)
-  //console.log(allowedPages, 'getinitprop')
-
-  // const test = await fetch(apiCall("/api/v1/test/post"), {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     "credentials": "include",
-  //     "cookie": ctx.req ? ctx.req.headers.cookie : null ,
-  //   },
-  //   body:JSON.stringify({
-  //     message:'hi'
-  //   })
-  // });
+  
 
   return {allowedPages}
 }
