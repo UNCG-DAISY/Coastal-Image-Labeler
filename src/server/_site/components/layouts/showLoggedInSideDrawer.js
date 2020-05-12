@@ -60,11 +60,11 @@ const extraContentePages = [
         icon: <LinkIcon/>,
         href:'https://storms.ngs.noaa.gov/'
     },
-    {
-        title:'Date Source - USGS',
-        icon: <LinkIcon/>,
-        href:'https://coastal.er.usgs.gov/hurricanes/tools/oblique.php'
-    },
+    // {
+    //     title:'Date Source - USGS',
+    //     icon: <LinkIcon/>,
+    //     href:'https://coastal.er.usgs.gov/hurricanes/tools/oblique.php'
+    // },
 
 ]
 
