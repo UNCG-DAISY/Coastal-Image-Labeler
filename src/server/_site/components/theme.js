@@ -47,11 +47,11 @@ const theme = createMuiTheme({
     error: {
       main: red.A400,
     },
-    // background: {
-    //   default:'#282A36',
-    //   paper:'#353743'
+    background: {
+      default:'#282A36',
+      paper:'#353743'
      
-    // },
+    },
   },
 });
 
