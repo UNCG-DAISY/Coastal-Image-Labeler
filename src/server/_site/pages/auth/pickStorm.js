@@ -15,6 +15,7 @@ import {
 } from '../../components/constants'
 import fetch from "isomorphic-fetch";
 import axios from 'axios'
+import Layout from '../../components/layouts/Layout'
 
 const useStyles = makeStyles(theme  => ({
   paper: {
@@ -46,7 +47,7 @@ function TagImage(props) {
   }
 
   return (
-    <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={props.allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
+    <Layout user={props.user} pageTitle="Start Tagging">
       <Container maxWidth="md">
       <div className={classes.paper}>
         <Paper elevation={13} >
@@ -55,7 +56,7 @@ function TagImage(props) {
         
       </div>
       </Container>
-    </Drawer>
+    </Layout>
     
   );
 }

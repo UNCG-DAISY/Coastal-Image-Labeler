@@ -148,7 +148,7 @@ export default function PickStormStepper(props) {
                                 <br/>
                                 <strong>Year</strong>: {storms[selectedStorm].info.year}
                                 <br/>
-                                <a href={storms[selectedStorm].info.link} style={{textDecoration:'none',color:'inherit'}}>Link to wiki</a>
+                                <Button variant="outlined" href={storms[selectedStorm].info.link} style={{textDecoration:'none',color:'inherit'}}>Link to wiki</Button>
                             </React.Fragment>
                         ):
                         'Please select a storm'

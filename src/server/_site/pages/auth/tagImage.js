@@ -20,6 +20,7 @@ import Router from "next/router";
 import TaggingForm from '../../components/taggingForm/TaggingForm'
 import initalTagState from '../../components/taggingForm/initalTagState'
 
+import Layout from '../../components/layouts/Layout'
 
 const useStyles = makeStyles(theme  => ({
   
@@ -78,7 +79,7 @@ function TagImage(props) {
 
 
   return (
-    <Drawer {...props} SideContent = {<ShowLoggedInSideDrawer allowedPages={allowedPages}/> }AppBar = {<MyAppBar pageTitle = 'Tagging Dashboard'/>}>
+    <Layout user={props.user} pageTitle={`Tagging Session: ${imageDocument.id}`}>
       <Container maxWidth="md">
         <Box my={4}>
           {/* <TagImageCard imagePath = "/stormImages/storm1.jpg"/> */}
@@ -108,7 +109,7 @@ function TagImage(props) {
         </Box>
         {/* {JSON.stringify(queryParams)} */}
       </Container>
-    </Drawer>
+    </Layout>
     
   );
 }

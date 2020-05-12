@@ -16,8 +16,8 @@ async function getAllowedPages(user,ctx) {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "credentials": "include",
-                "cookie": ctx.req ? ctx.req.headers.cookie : null ,
+                //"credentials": "include",
+                //"cookie": ctx.req ? ctx.req.headers.cookie : null ,
             }
         })).json();
 

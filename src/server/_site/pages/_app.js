@@ -18,6 +18,8 @@ import {
   protocal,
   apiCall
 } from '../components/constants'
+import {getAllowedPages} from '../components/utils/getAllowedPages'
+
 
 export default class MyApp extends App {
 
@@ -48,8 +50,6 @@ export default class MyApp extends App {
           }
         )
 
-        
-        
         //If the returned user is undefined, that means this is a user who has
         //recently register and not been entered into the db So enter them into
         //the DB
@@ -66,8 +66,11 @@ export default class MyApp extends App {
         //Add this to the user prop so other may use.
         pageProps.user.mongoUser = getMongoUserById.data.data.user
 
+        //Add on the allowed pages for this user.
+        //const allowedPages = await getAllowedPages(pageProps.user,ctx)
+        //pageProps.user.allowedPages = allowedPages
         //Show a message
-        console.log(getMongoUserById.data.data.message.green,'--------')
+        //console.log(getMongoUserById.data.data.message.green,'--------')
       }
      
     }
