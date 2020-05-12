@@ -1,7 +1,7 @@
 import Radio from '@material-ui/core/Radio';
 import * as colors from '@material-ui/core/colors/';
 import Divider from '@material-ui/core/Divider';
-
+import theme from '../theme';
 import RadioButtonGroup from '../radio/RadioButtonGroup'
 import { withStyles } from '@material-ui/core/styles';
 
@@ -17,7 +17,7 @@ export default class RadioButtonQuestions extends React.Component {
                 {/* Development Type */}
                 <RadioButtonGroup
                     onChange={updateFunction}
-                    style={{color:colors.purple[400]}}
+                    style={{color:theme.palette.customColors.purple}}
                     title={`Development Type`}
                     keyValue={'devType'}
                     state={state.devType}
@@ -40,7 +40,7 @@ export default class RadioButtonQuestions extends React.Component {
                 {/* Washover Type */}
                 <RadioButtonGroup
                     onChange={updateFunction}
-                    style={{color:colors.blue[500]}}
+                    style={{color:theme.palette.customColors.purple}}
                     title={`Washover Type`}
                     keyValue={'washoverType'}
                     state={state.washoverType}
@@ -63,7 +63,7 @@ export default class RadioButtonQuestions extends React.Component {
                 {/* Damage Type */}
                 <RadioButtonGroup
                     onChange={updateFunction}
-                    style={{color:colors.orange[500]}}
+                    style={{color:theme.palette.customColors.purple}}
                     title={`Damage Type`}
                     keyValue={'damageType'}
                     state={state.damageType}

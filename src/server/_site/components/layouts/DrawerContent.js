@@ -13,6 +13,8 @@ import LabelIcon from '@material-ui/icons/Label';
 
 import LogoutListButton from '../buttons/logoutListButton'
 
+import theme from '../theme';
+
 
 class DrawerContent extends React.Component{
     
@@ -73,17 +75,17 @@ function LoggedInLinks(props) {
     } = props
     return (
         <React.Fragment>
-            <a href={'/auth/home'} className= {classes.link} key={'Home'}>
-                <ListItem button >
-                    <ListItemIcon><HomeIcon/></ListItemIcon>
+            <a href={'/auth/home'} className= {classes.link} key={'Home'} >
+                <ListItem button style={{color:theme.palette.customColors.cyan}}>
+                    <ListItemIcon style={{color:'inherit'}}><HomeIcon/></ListItemIcon>
                     <ListItemText primary={'Home'} />
                 </ListItem>
             </a>
             {
                 allowedPages.tagger &&
                  <a href={'/auth/pickStorm'} className= {classes.link} key={'PickStorm'}>
-                    <ListItem button >
-                        <ListItemIcon><LabelIcon/></ListItemIcon>
+                    <ListItem button style={{color:theme.palette.customColors.purple}}>
+                        <ListItemIcon style={{color:'inherit'}}><LabelIcon/></ListItemIcon>
                         <ListItemText primary={'Image Tag'} />
                     </ListItem>
                 </a>
@@ -91,8 +93,8 @@ function LoggedInLinks(props) {
             {
                 allowedPages.admin &&
                  <a href={'/auth/pickStorm'} className= {classes.link} key={'AdminPage'}>
-                    <ListItem button >
-                        <ListItemIcon><LabelIcon/></ListItemIcon>
+                    <ListItem button style={{color:theme.palette.customColors.pink}}>
+                        <ListItemIcon style={{color:'inherit'}}><LabelIcon/></ListItemIcon>
                         <ListItemText primary={'Admin'} />
                     </ListItem>
                 </a>
@@ -105,8 +107,8 @@ function generateSideContent(pages,classes) {
     return pages.map((page, index) => {
         return (
             <a href={page.href} className= {classes.link} key={page.title}>
-                <ListItem button >
-                    <ListItemIcon>{page.icon}</ListItemIcon>
+                <ListItem button style={{color:theme.palette.customColors.orange}}>
+                    <ListItemIcon style={{color:'inherit'}}>{page.icon}</ListItemIcon>
                     <ListItemText primary={page.title} />
                 </ListItem>
             </a>

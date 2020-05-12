@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import {uiConstants} from '../constants'
+import theme from '../theme';
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles(theme => ({
         //   width: `calc(100% - ${drawerWidth}px)`,
         //   marginLeft: drawerWidth,
         // },
-        backgroundColor:'#7db343',
+        backgroundColor:theme.palette.customColors.mainGreen,
         zIndex: theme.zIndex.drawer + 1,
     },
     menuButton: {

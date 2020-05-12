@@ -5,6 +5,7 @@ import * as colors from '@material-ui/core/colors/';
 import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
+import theme from '../theme';
 
 import RadioButtonQuestions from './RadioButtonQuestions'
 import CheckboxQuestions from './CheckboxQuestions'
@@ -17,7 +18,7 @@ export default class ClassificationQuestions extends React.Component {
             <React.Fragment>
                 <CardContent>
                     {/* {JSON.stringify(this.state)} */}
-                    <Typography variant="h5" color="textSecondary" component="p">
+                    <Typography variant="h5" color="textSecondary" component="p" style={{color:theme.palette.customColors.cyan}}>
                         Image Classification Categories
                     </Typography>
                     <Divider style={{marginBottom:20}}/>
