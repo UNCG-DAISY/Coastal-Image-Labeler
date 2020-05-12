@@ -13,7 +13,7 @@ import Box from '@material-ui/core/Box';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
-import CreateStormPickerDropdown from '../createPickStormDropdown'
+import CreateStormPickerDropdown from './createPickStormDropdown'
 
 const useStyles = makeStyles(theme => ({
   root: {
