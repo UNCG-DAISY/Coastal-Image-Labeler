@@ -17,7 +17,7 @@ export default class RadioButtonQuestions extends React.Component {
                 {/* Development Type */}
                 <RadioButtonGroup
                     onChange={updateFunction}
-                    style={{color:theme.palette.customColors.purple}}
+                    style={{color:theme.palette.secondary.main}}
                     title={`Development Type`}
                     keyValue={'devType'}
                     state={state.devType}
@@ -40,7 +40,7 @@ export default class RadioButtonQuestions extends React.Component {
                 {/* Washover Type */}
                 <RadioButtonGroup
                     onChange={updateFunction}
-                    style={{color:theme.palette.customColors.purple}}
+                    style={{color:theme.palette.secondary.main}}
                     title={`Washover Type`}
                     keyValue={'washoverType'}
                     state={state.washoverType}
@@ -63,7 +63,7 @@ export default class RadioButtonQuestions extends React.Component {
                 {/* Damage Type */}
                 <RadioButtonGroup
                     onChange={updateFunction}
-                    style={{color:theme.palette.customColors.purple}}
+                    style={{color:theme.palette.secondary.main}}
                     title={`Damage Type`}
                     keyValue={'damageType'}
                     state={state.damageType}

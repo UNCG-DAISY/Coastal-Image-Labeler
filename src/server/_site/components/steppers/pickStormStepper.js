@@ -14,6 +14,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 import CreateStormPickerDropdown from './createPickStormDropdown'
+import theme from '../theme'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -138,17 +139,25 @@ export default function PickStormStepper(props) {
           <React.Fragment>
             <Divider />
               
-                <Alert severity="info" variant="outlined" >
+                <Alert severity="info" color="warning"variant="outlined" >
                     <AlertTitle>Info</AlertTitle>
                     {
                         storms[selectedStorm]?
                         (
                             <React.Fragment>
-                                <strong>Description</strong>: {storms[selectedStorm].info.description}
+                                <div>
+                                  <strong style={{color:theme.palette.secondary.main}}>Description</strong>: 
+                                  {storms[selectedStorm].info.description}
+                                </div>
+                                
                                 <br/>
-                                <strong>Year</strong>: {storms[selectedStorm].info.year}
+                                <div>
+                                  <strong style={{color:theme.palette.secondary.main}}>Year</strong>: 
+                                  {storms[selectedStorm].info.year}
+                                </div>
+                                
                                 <br/>
-                                <Button variant="outlined" href={storms[selectedStorm].info.link} style={{textDecoration:'none',color:'inherit'}}>Link to wiki</Button>
+                                <Button variant="outlined" href={storms[selectedStorm].info.link} style={{textDecoration:'none'}} color="secondary">Link to wiki</Button>
                             </React.Fragment>
                         ):
                         'Please select a storm'

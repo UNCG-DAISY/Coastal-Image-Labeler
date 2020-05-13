@@ -98,7 +98,7 @@ function Home(props) {
     <Layout user={props.user} pageTitle="Home">
       <Container maxWidth="md">
         <Box my={4}>
-          <Typography variant="h4" component="h1" gutterBottom>
+          <Typography variant="h4" component="h1" gutterBottom color="secondary">
             Home.js
           </Typography>
 
@@ -109,7 +109,7 @@ function Home(props) {
             </Paper>
           </Typography> 
 
-          <Typography variant="h6" component="h1" gutterBottom>
+          <Typography variant="h6" component="h1" gutterBottom color="secondary">
             Continue tagging
           </Typography>
 
