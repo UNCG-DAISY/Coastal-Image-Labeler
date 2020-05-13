@@ -98,8 +98,8 @@ class TaggingForm extends React.Component {
                         <Header 
                             title={`Storm ${queryParams.storm}`} 
                             subheader={`Archive ${queryParams.archive} - ${imageDoc.id}`}
-                            style={{color:theme.palette.customColors.yellow}}
-                            styleSubheader = {{color:theme.palette.customColors.pink}} 
+                            style={{color:theme.palette.primary.light}}
+                            styleSubheader = {{color:theme.palette.secondary.main}} 
                         />
                         <ImageContainer
                             classes={classes}
@@ -144,7 +144,7 @@ const ColorizeButton = (color,theme) => {
                 backgroundColor: color.hover,
             },
             '&:disabled': {
-                backgroundColor: color.hover,
+                backgroundColor: 'grey',
                 color:'#000000'
             },
         },
@@ -157,11 +157,19 @@ const SkipButton = withStyles((theme) => (
 ))(Button);
 
 const WaterButton = withStyles((theme) => (
-    ColorizeButton({color:theme.palette.customColors.cyan,background:theme.palette.customColors.cyan,hover:colors.cyan[800]},theme)
+    ColorizeButton({
+        color:theme.palette.customColors.cyan,
+        background:theme.palette.customColors.cyan,
+        hover:colors.cyan[800]
+    },theme)
 ))(Button);
 
 const SubmitButton = withStyles((theme) => (
-    ColorizeButton({color:'#ff0000',background:theme.palette.customColors.green,hover:theme.palette.customColors.green},theme)
+    ColorizeButton({
+        color:'#ffffff',
+        background:theme.palette.primary.main,
+        hover:theme.palette.primary.light
+    },theme)
 ))(Button);
 
 

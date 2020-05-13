@@ -29,14 +29,18 @@ export default class ImageContainer extends React.Component{
                         onClick = {()=>{
                             window.open(  imageUrl, 'Full Image')
                         }}
-                    >View compressed image</ViewFullImage>
+                    >
+                        View compressed image
+                    </ViewFullImage>
                     <ViewCompressedImage 
                         color="secondary" 
                         variant="outlined"
                         onClick = {()=>{
                             window.open( imageUrl, 'Compressed Image')
                         }}
-                    >View full image</ViewCompressedImage>
+                    >
+                        View full image
+                    </ViewCompressedImage>
                     <IconButton
                         className={clsx(classes.expand, {
                             [classes.expandOpen]: state.expanded,
@@ -55,7 +59,7 @@ export default class ImageContainer extends React.Component{
                     <CardMedia
                         className={classes.media}
                         image={imageUrl}
-                        title="Paella dish"
+                        title={`Image ${imageUrl}`}
                     />
                 </Collapse>
             </React.Fragment>
@@ -78,9 +82,17 @@ const ColorizeButton = (color,theme) => {
 }
 const ViewFullImage = withStyles((theme) => (
     //ColorizeButton({color:colors.orange[600],background:colors.orange[600],hover:colors.orange[800]},theme)
-    ColorizeButton({color:theme.palette.customColors.green,background:colors.green[600],hover:theme.palette.customColors.green},theme)
+    ColorizeButton({
+        color:theme.palette.primary.light,
+        background:theme.palette.primary.main,
+        hover:theme.palette.primary.main
+    },theme)
 ))(Button);
 
 const ViewCompressedImage = withStyles((theme) => (
-    ColorizeButton({color:theme.palette.customColors.green,background:colors.green[600],hover:theme.palette.customColors.green},theme)
+    ColorizeButton({
+        color:theme.palette.primary.light,
+        background:theme.palette.primary.main,
+        hover:theme.palette.primary.main
+    },theme)
 ))(Button);

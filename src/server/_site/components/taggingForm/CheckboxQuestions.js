@@ -21,7 +21,7 @@ export default class CheckboxQuestions extends React.Component {
                     //howManyReq = {1}
                     states = {state}
                     label = "Impact Type, pick zero or more"
-                    labelColor = {theme.palette.customColors.orange}
+                    labelColor = {theme.palette.secondary.main}
                     buttons = {[
                         {
                             control:
@@ -84,7 +84,7 @@ export default class CheckboxQuestions extends React.Component {
                     //howManyReq = {1}
                     states = {state}
                     label = "Terrian Type, pick zero or more"
-                    labelColor = {theme.palette.customColors.orange}
+                    labelColor = {theme.palette.secondary.main}
                     buttons = {[
                         {
                             control:

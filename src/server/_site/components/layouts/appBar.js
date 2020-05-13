@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
         //   width: `calc(100% - ${drawerWidth}px)`,
         //   marginLeft: drawerWidth,
         // },
-        backgroundColor:theme.palette.customColors.mainGreen,
+        //backgroundColor:theme.palette.customColors.mainGreen,
         zIndex: theme.zIndex.drawer + 1,
     },
     menuButton: {
@@ -34,7 +34,7 @@ function MyAppBar(props) {
 
     
     return (
-        <AppBar position="fixed" className={classes.appBar}>
+        <AppBar position="fixed" className={classes.appBar} color = "primary">
             <Toolbar>
             <IconButton
                 color="inherit"

@@ -15,7 +15,7 @@ import LogoutListButton from '../buttons/logoutListButton'
 
 import theme from '../theme';
 
-
+const colorOfLinks = theme.palette.secondary.main
 class DrawerContent extends React.Component{
     
     render() {
@@ -23,15 +23,24 @@ class DrawerContent extends React.Component{
             user,
             classes
         } = this.props
-
-        console.log(Object.keys(user))
-        console.log(user.allowedPages)
+        if(user) {
+            console.log(Object.keys(user))
+            console.log(user.allowedPages)
+        }
+       
         return (
             <React.Fragment>
-                <div>
-                    <div className={classes.toolbar} />
-                    <Divider />
+                <div style={{
+                    height:"100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection:'column',
+                }}>
                     
+                    <div>
+                        <div className={classes.toolbar} />
+                        <Divider />
+                        
                         <List>
                             {
                                 user?
@@ -42,22 +51,26 @@ class DrawerContent extends React.Component{
                                     generateSideContent(notLoggedInLinks,classes)
                             }
                         </List>     
-                    <Divider />
-                            
-                    <ListItem>
-                        <ListItemText primary={'External Links'} />
-                    </ListItem>
-                    
-                    {/* Links to other sites */}
-                    <List>
-                        {generateSideContent(extraContentePages,classes)}
-                    </List>
+                        <Divider />
+                                
+                        <ListItem>
+                            <ListItemText primary={'External Links'} />
+                        </ListItem>
+                        
+                        {/* Links to other sites */}
+                        <List>
+                            {generateSideContent(extraContentePages,classes)}
+                        </List>
 
-                    {/* Logout button         */}
-                    <Divider />
-                    <List>
-                        <LogoutListButton/>
-                    </List>
+                        {/* Logout button         */}
+                        <Divider />
+                    </div>
+                    <div>
+                        <List>
+                            <LogoutListButton/>
+                        </List>
+                    </div>
+                  
                     
                   
                 </div>
@@ -73,27 +86,29 @@ function LoggedInLinks(props) {
         allowedPages,
         classes
     } = props
+
+    
     return (
         <React.Fragment>
             <a href={'/auth/home'} className= {classes.link} key={'Home'} >
-                <ListItem button style={{color:theme.palette.customColors.cyan}}>
+                <ListItem button utton style={{color:colorOfLinks}}>
                     <ListItemIcon style={{color:'inherit'}}><HomeIcon/></ListItemIcon>
                     <ListItemText primary={'Home'} />
                 </ListItem>
             </a>
             {
-                allowedPages.tagger &&
+                allowedPages?.tagger &&
                  <a href={'/auth/pickStorm'} className= {classes.link} key={'PickStorm'}>
-                    <ListItem button style={{color:theme.palette.customColors.purple}}>
+                    <ListItem button utton style={{color:colorOfLinks}}>
                         <ListItemIcon style={{color:'inherit'}}><LabelIcon/></ListItemIcon>
                         <ListItemText primary={'Image Tag'} />
                     </ListItem>
                 </a>
             }
             {
-                allowedPages.admin &&
+                allowedPages?.admin &&
                  <a href={'/auth/pickStorm'} className= {classes.link} key={'AdminPage'}>
-                    <ListItem button style={{color:theme.palette.customColors.pink}}>
+                    <ListItem button utton style={{color:colorOfLinks}}>
                         <ListItemIcon style={{color:'inherit'}}><LabelIcon/></ListItemIcon>
                         <ListItemText primary={'Admin'} />
                     </ListItem>
@@ -107,7 +122,7 @@ function generateSideContent(pages,classes) {
     return pages.map((page, index) => {
         return (
             <a href={page.href} className= {classes.link} key={page.title}>
-                <ListItem button style={{color:theme.palette.customColors.orange}}>
+                <ListItem button style={{color:colorOfLinks}}>
                     <ListItemIcon style={{color:'inherit'}}>{page.icon}</ListItemIcon>
                     <ListItemText primary={page.title} />
                 </ListItem>

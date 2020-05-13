@@ -18,7 +18,7 @@ export default class ClassificationQuestions extends React.Component {
             <React.Fragment>
                 <CardContent>
                     {/* {JSON.stringify(this.state)} */}
-                    <Typography variant="h5" color="textSecondary" component="p" style={{color:theme.palette.customColors.cyan}}>
+                    <Typography variant="h5" color="textSecondary" component="p" style={{color:'#7D9B43'}}>
                         Image Classification Categories
                     </Typography>
                     <Divider style={{marginBottom:20}}/>
@@ -39,11 +39,16 @@ export default class ClassificationQuestions extends React.Component {
 
                     <Divider style={{marginBottom:20}}/>
                     <AdditionalCommentsTextfield
+                        TextField
                         id="additionalComments"
                         label="Additional Comments"
                         defaultValue=""
+                        multiline
+                        rows={5}
+                        size='small'
                         //helperText="Not required"
                         variant="outlined"
+                        style={{width:'100%'}}
                         onChange= {(event)=> this.props.updateComment(event.target.value)}
                     />
                 </CardContent>
@@ -63,13 +68,13 @@ const AdditionalCommentsTextfield = withStyles({
       },
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
-          borderColor: colors.green[500],
+          borderColor: theme.palette.primary.main,
         },
         '&:hover fieldset': {
-          borderColor: colors.green[900],
+          borderColor: theme.palette.primary.main,
         },
         '&.Mui-focused fieldset': {
-          borderColor: colors.green[500],
+          borderColor: theme.palette.primary.main,
         },
       },
     },

@@ -66,9 +66,8 @@ export default class MyApp extends App {
         //Add this to the user prop so other may use.
         pageProps.user.mongoUser = getMongoUserById.data.data.user
 
-        //Add on the allowed pages for this user.
-        //const allowedPages = await getAllowedPages(pageProps.user,ctx)
-        //pageProps.user.allowedPages = allowedPages
+        //Add on the allowed pages for this user. 
+        pageProps.user.allowedPages = await getAllowedPages(pageProps.user,ctx)
         //Show a message
         //console.log(getMongoUserById.data.data.message.green,'--------')
       }
