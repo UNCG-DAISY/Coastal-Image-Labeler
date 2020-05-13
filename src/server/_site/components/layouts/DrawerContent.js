@@ -23,10 +23,10 @@ class DrawerContent extends React.Component{
             user,
             classes
         } = this.props
-        if(user) {
-            console.log(Object.keys(user))
-            console.log(user.allowedPages)
-        }
+        // if(user) {
+        //     console.log(Object.keys(user))
+        //     console.log(user.allowedPages)
+        // }
        
         return (
             <React.Fragment>

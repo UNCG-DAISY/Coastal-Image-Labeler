@@ -16,6 +16,49 @@ import {
 import fetch from "isomorphic-fetch";
 import axios from 'axios'
 import Layout from '../../components/layouts/Layout'
+import { Alert, AlertTitle } from '@material-ui/lab';
+
+
+
+// This page shows a stepper that asks a series of questions on what strom to
+// tag, what archive of that storm and then redirects to a page to show that
+// image
+
+function TagImage(props) {
+  const {stormList} = props
+  const classes = useStyles();
+
+  function submitTags(tags) {
+    alert('Tag!')
+    console.log(tags)
+  }
+
+  return (
+    <Layout user={props.user} pageTitle="Start Tagging">
+      <Container maxWidth="md">
+      <div className={classes.paper}>
+        <Paper elevation={13} >
+          {
+            props.notTagger?
+            <React.Fragment>
+              <Alert severity="warning" color="warning"variant="outlined" >
+                  <AlertTitle>Not a tagger</AlertTitle>
+                  You do not have permissions to tag any archives. Please contact an admin to get permissions.
+              </Alert>
+            </React.Fragment> :
+            <React.Fragment>
+              <PickStormStepper storms = {stormList}/>
+            </React.Fragment>
+          }
+          
+        </Paper>
+        
+      </div>
+      </Container>
+    </Layout>
+    
+  );
+}
 
 const useStyles = makeStyles(theme  => ({
   paper: {
@@ -32,91 +75,15 @@ const useStyles = makeStyles(theme  => ({
   },
 }));
 
-// This page shows a stepper that asks a series of questions on what strom to
-// tag, what archive of that storm and then redirects to a page to show that
-// image
-
-function TagImage(props) {
-  const {storms,stormList} = props
-  const classes = useStyles();
-  const router = useRouter()
-
-  function submitTags(tags) {
-    alert('Tag!')
-    console.log(tags)
-  }
-
-  return (
-    <Layout user={props.user} pageTitle="Start Tagging">
-      <Container maxWidth="md">
-      <div className={classes.paper}>
-        <Paper elevation={13} >
-          <PickStormStepper storms = {stormList}/>
-        </Paper>
-        
-      </div>
-      </Container>
-    </Layout>
-    
-  );
-}
-
 TagImage.getInitialProps = async ctx => {
   const {req,res} = ctx
   
   const {query} = req
 
-  const storms ={
-    stormA:{
-      A_Arc1: {
-        name:'Storm A Archive 1',
-        images:[
-          'A_Arc1_img1',
-          'A_Arc1_img2'
-        ],
-      },
-
-      A_Arc2: {
-        name:'Storm A Archive 2',
-        images:[
-          'A_Arc2_img1',
-          'A_Arc2_img2'
-        ],
-      },
-
-      A_Arc3: {
-        name:'Storm C Archive 3',
-        images:[
-          'A_Arc3_img1',
-          'A_Arc3_img2'
-        ],
-      },   
-    },
-
-    stormB:{
-      B_Arc1: {
-        name:'Storm B Archive 1',
-        images:[
-          'B_Arc1_img1',
-          'B_Arc1_img2'
-        ],
-      },
-
-      B_Arc2: {
-        name:'Storm B Archive 2',
-        images:[
-          'B_Arc2_img1',
-          'B_Arc2_img2'
-        ],
-      }
-
-    }
-  }
-
   const allowedPages = await getAllowedPages(req.user,ctx)
 
   if(allowedPages.tagger === false) {
-    res.redirect("/auth/home")
+    return {notTagger:true}
   }
 
   const getStorms = (await axios.get(
@@ -142,7 +109,7 @@ TagImage.getInitialProps = async ctx => {
       });
   });
 
-  return {storms,allowedPages,stormList}
+  return {allowedPages,stormList}
 }
 
 export default TagImage

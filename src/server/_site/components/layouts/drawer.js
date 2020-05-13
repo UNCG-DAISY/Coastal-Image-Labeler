@@ -30,7 +30,7 @@ function ResponsiveDrawer(props) {
     user
   } = props
 
-  console.log(pageTitle)
+  //console.log(pageTitle)
 
   return (
     <div className={classes.root}>

@@ -103,36 +103,46 @@ function Home(props) {
           </Typography>
 
           <Typography variant="body1" component="h1" gutterBottom>
-            <Paper elevation={3} variant="outlined" style={{paddingLeft:10}}>
+            <Paper elevation={3} variant="outlined" style={{padding:10}}>
               Welcome! You can start tagging by clicking on "Image Tag" on the left, or resume an archive you have
               begun by pressing the buttons below
             </Paper>
           </Typography> 
 
-          <Typography variant="h6" component="h1" gutterBottom color="secondary">
-            Continue tagging
-          </Typography>
-
-          <Paper elevation={3} variant="outlined" style={{paddingLeft:10,paddingBottom:10,paddingTop:10}}>
-            <Grid container className={classes.root} spacing={2}>
-              <Grid item xs={12}>
-                <Grid container justify="center" spacing={2}>
-                  {
-                    Object.keys(assignedImages).map((value,index)=>{
-                      return (
-                        <Grid key={`${index}-${value}`} item>
-                          <Button variant="contained" color="primary" onClick ={()=>continueTagging(value,assignedImages[value])}>
-                            {value}
-                          </Button>
-                        </Grid>
-                        
-                      )
-                    })
-                  } 
+         
+          {
+            assignedImages?
+            <React.Fragment>
+              <Typography variant="h6" component="h1" gutterBottom color="secondary">
+                Continue tagging
+              </Typography>
+              <Paper elevation={3} variant="outlined" style={{paddingLeft:10,paddingBottom:10,paddingTop:10}}>
+                <Grid container className={classes.root} spacing={2}>
+                  <Grid item xs={12}>
+                    <Grid container justify="center" spacing={2}>
+                      {
+                      
+                        Object.keys(assignedImages).map((value,index)=>{
+                          return (
+                            <Grid key={`${index}-${value}`} item>
+                              <Button variant="contained" color="primary" onClick ={()=>continueTagging(value,assignedImages[value])}>
+                                {value}
+                              </Button>
+                            </Grid>
+                            
+                          )
+                        })
+                      } 
+                    </Grid>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Grid>
-          </Paper>
+              </Paper>
+            </React.Fragment>:
+              
+            <></>
+          }
+
+          
 
           {/* <Button variant="contained" onClick = {() => testRoles('/api/v1/test/authorize2')}>Test is tagger</Button>
           <Button variant="contained">Test is admin</Button>
