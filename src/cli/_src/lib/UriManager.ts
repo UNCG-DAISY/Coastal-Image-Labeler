@@ -18,7 +18,7 @@ class UriManager {
         if (!key) {
             throw new Error('No mongoURI Found ');
         }
-
+        
         return key;
     }
     
@@ -30,7 +30,6 @@ class UriManager {
         }
 
         this.conf.delete('mongoUriKey');
-
         return;
     }
 }

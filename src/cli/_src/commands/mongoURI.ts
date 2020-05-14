@@ -7,7 +7,9 @@ import {isRequired} from '../utils/validation'
 
 const mongoURI = {
     async set() {
+        //Use the mangager to set the key
         const uriManager = new UriManager();
+        //ask the user a series of questions
         const input = await inquirer.prompt([
             {
                 type:'input',
@@ -16,7 +18,8 @@ const mongoURI = {
                 validate: isRequired
             }
         ])
-
+        
+        //Store the key
         const uri = uriManager.setKey(input.mongoURI)
 
         if(uri) {
@@ -26,18 +29,20 @@ const mongoURI = {
     },
     show() {
         try {
+            //Use manager to get current key
             const uriManager = new UriManager();
             const uri = uriManager.getKey()
             console.log(`Current MongoURI ${uri.yellow}`)      
         } catch (error) {
+            //if an error
             console.error(error.message.red)
         }
     },
     remove() {
         try {
+            //Use manager to delete current key
             const uriManager = new UriManager();
             uriManager.deleteKey()
-
             console.log(`Deleted MongoURI key`.blue)      
         } catch (error) {
             console.error(error.message.red)
