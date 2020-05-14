@@ -188,3 +188,4 @@ dist
 ### Project-specific rules
 config.env
 src/server/_dist
+src/cli/_dist
