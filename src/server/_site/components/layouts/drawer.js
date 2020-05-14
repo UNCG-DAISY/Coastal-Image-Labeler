@@ -39,7 +39,7 @@ function ResponsiveDrawer(props) {
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* Phone mode */}
         <ShowMobileDrawer handleDrawerToggle ={handleDrawerToggle} mobileOpen={mobileOpen} container={container}>
-         
+          <DrawerContent user={user}/> 
         </ShowMobileDrawer>
 
         {/* Desktop mode */}
