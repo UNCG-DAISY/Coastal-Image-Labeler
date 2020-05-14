@@ -17,4 +17,6 @@ commander_1.default
     .command('remove')
     .description('Remove current MongoURI')
     .action(mongoURI_1.default.remove);
+commander_1.default
+    .command('test', 'test sub sub command');
 commander_1.default.parse(process.argv);
