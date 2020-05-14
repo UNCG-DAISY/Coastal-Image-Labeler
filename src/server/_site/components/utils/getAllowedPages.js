@@ -1,10 +1,9 @@
-import axios from 'axios'
 import { 
     apiCall
   } from '../constants'
 
 async function getAllowedPages(user,ctx) {
-    //console.log(`in get allowed page fun ${user?.mongoUser?._id}`)
+    
     const id = user?.id || undefined
 
     const defaultAllowed = {

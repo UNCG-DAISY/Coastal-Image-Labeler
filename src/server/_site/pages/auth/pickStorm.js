@@ -1,13 +1,8 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import {hasUser} from '../../components/utils/checkIfUser'
-import Drawer from '../../components/layouts/drawer'
-import MyAppBar from '../../components/layouts/appBar'
-import ShowLoggedInSideDrawer from '../../components/layouts/showLoggedInSideDrawer'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { useRouter } from 'next/router'
-import Button from '@material-ui/core/Button';
 import PickStormStepper from '../../components/steppers/pickStormStepper'
 import {getAllowedPages} from '../../components/utils/getAllowedPages'
 import { 
@@ -25,12 +20,27 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 // image
 
 function TagImage(props) {
-  const {stormList} = props
+  const {stormList,notTagger} = props
   const classes = useStyles();
 
   function submitTags(tags) {
     alert('Tag!')
     console.log(tags)
+  }
+
+  function determineContent() {
+    if(notTagger == true) {
+      return (
+        <React.Fragment>
+          <Alert severity="warning" color="warning"variant="outlined" >
+              <AlertTitle>Not a tagger</AlertTitle>
+              You do not have permissions to tag any archives. Please contact an admin to get permissions.
+          </Alert>
+        </React.Fragment>
+      )
+    }
+
+    return <PickStormStepper storms = {stormList}/>
   }
 
   return (
@@ -39,16 +49,7 @@ function TagImage(props) {
       <div className={classes.paper}>
         <Paper elevation={13} >
           {
-            props.notTagger?
-            <React.Fragment>
-              <Alert severity="warning" color="warning"variant="outlined" >
-                  <AlertTitle>Not a tagger</AlertTitle>
-                  You do not have permissions to tag any archives. Please contact an admin to get permissions.
-              </Alert>
-            </React.Fragment> :
-            <React.Fragment>
-              <PickStormStepper storms = {stormList}/>
-            </React.Fragment>
+            determineContent()
           }
           
         </Paper>
@@ -77,13 +78,19 @@ const useStyles = makeStyles(theme  => ({
 
 TagImage.getInitialProps = async ctx => {
   const {req,res} = ctx
-  
-  const {query} = req
 
+  //First make sure theres a user
+  hasUser(req)
+  
   const allowedPages = await getAllowedPages(req.user,ctx)
 
+  //first check if the user is a tagger
+  //if they are not, just return notTagger
   if(allowedPages.tagger === false) {
-    return {notTagger:true}
+    return {
+      notTagger:true
+    }
+
   }
 
   const getStorms = (await axios.get(
@@ -109,7 +116,10 @@ TagImage.getInitialProps = async ctx => {
       });
   });
 
-  return {allowedPages,stormList}
+  return {
+    allowedPages,
+    stormList
+  }
 }
 
 export default TagImage

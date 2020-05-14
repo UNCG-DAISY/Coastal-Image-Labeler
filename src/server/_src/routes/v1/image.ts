@@ -27,6 +27,6 @@ router
     .post(ensureAuthenticated,authorize('5e3e60207362e721e430ea6d'),tagImage,updatedTaggedImages)
 router
     .route('/skipImage/:archive')
-    .get(ensureAuthenticated,authorize('5e3e60207362e721e430ea6dX'),updatedTaggedImages)
+    .get(ensureAuthenticated,authorize('5e3e60207362e721e430ea6d'),updatedTaggedImages)
 
 export default router;

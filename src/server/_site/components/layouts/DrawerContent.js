@@ -91,7 +91,7 @@ function LoggedInLinks(props) {
     return (
         <React.Fragment>
             <a href={'/auth/home'} className= {classes.link} key={'Home'} >
-                <ListItem button utton style={{color:colorOfLinks}}>
+                <ListItem button style={{color:colorOfLinks}}>
                     <ListItemIcon style={{color:'inherit'}}><HomeIcon/></ListItemIcon>
                     <ListItemText primary={'Home'} />
                 </ListItem>
@@ -99,7 +99,7 @@ function LoggedInLinks(props) {
             {
                 allowedPages?.tagger &&
                  <a href={'/auth/pickStorm'} className= {classes.link} key={'PickStorm'}>
-                    <ListItem button utton style={{color:colorOfLinks}}>
+                    <ListItem button style={{color:colorOfLinks}}>
                         <ListItemIcon style={{color:'inherit'}}><LabelIcon/></ListItemIcon>
                         <ListItemText primary={'Image Tag'} />
                     </ListItem>
@@ -108,7 +108,7 @@ function LoggedInLinks(props) {
             {
                 allowedPages?.admin &&
                  <a href={'/auth/pickStorm'} className= {classes.link} key={'AdminPage'}>
-                    <ListItem button utton style={{color:colorOfLinks}}>
+                    <ListItem button style={{color:colorOfLinks}}>
                         <ListItemIcon style={{color:'inherit'}}><LabelIcon/></ListItemIcon>
                         <ListItemText primary={'Admin'} />
                     </ListItem>
