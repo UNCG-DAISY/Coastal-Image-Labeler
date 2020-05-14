@@ -37,9 +37,10 @@ router
     .post(checkUserRoles)
 
 //Creates a user with just id and displayName and creation date
-// router
-//     .route('/createUser')
-//     .post(createNewUser)
+//This is at _app.js
+router
+    .route('/createUser')
+    .post(createNewUser)
 
 router
     .route('/allowedPages/:id')

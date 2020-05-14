@@ -6,6 +6,8 @@
   "scripts": {
     "buildServer": "tsc",
     "buildSite" :"next build ./_site",
+    "build":"npm run buildSite && npm run buildServer",
+    "bas": "npm run build && npm run start",
     "test": "tsc && node ./_dist/test.js",
     "test2": "tsc && SET NODE_ENV=production && node ./_dist/test.js",
     "dev": "nodemon --exec ts-node ./_src/server.ts",

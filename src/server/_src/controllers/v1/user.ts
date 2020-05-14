@@ -205,20 +205,33 @@ const allowedPages = asyncHandler(async (req: Request, res: Response, next: Next
         })
     }
     else {
+        //console.log(`${id}`.red)
         const user = await UserModel.findOne({userId:id}).populate('roleData')
+        //console.log(`${user}`.red)
         //console.log(user)
+        if(user) {
+            //console.log('user does exist'.red)
+            const {roleNames} = user
 
-        const {roleNames} = user
-
-        const pagesAllowed = {
-            tagger: roleNames.includes("tagger")
-        }
-        res.status(200).json({
-            success:true,
-            data:{
-                allowedPages:pagesAllowed
+            const pagesAllowed = {
+                tagger: roleNames.includes("tagger")
             }
-        })
+            res.status(200).json({
+                success:true,
+                data:{
+                    allowedPages:pagesAllowed
+                }
+            })
+        } else {
+            //console.log('NO user does exist'.red)
+            res.status(200).json({
+                success:true,
+                data:{
+                    allowedPages:defaultAllowed
+                }
+            })
+        }
+        
     }
 
    

@@ -76,7 +76,7 @@ function Home(props) {
   const {
     userMessage,
     assignedImages
-  } = props.user.mongoUser
+  } = props?.user?.mongoUser
 
   const classes = useStyles();
 

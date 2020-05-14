@@ -41,25 +41,35 @@ export default class MyApp extends App {
       if(pageProps?.user?.id) {   
        
         //First using the passportId, see if this passport user is in mongoDb already
-        let getMongoUserById = await axios.post(
-          apiCall(
-            `/api/v1/users/findUser`
-          ),
-          {
-            userId: ctx?.req?.session?.passport?.user?.id
-          }
-        )
+        let getMongoUserById = {};
+        try {
+          getMongoUserById = await axios.post(
+            apiCall(
+              `/api/v1/users/findUser`
+            ),
+            {
+              userId: ctx?.req?.session?.passport?.user?.id
+            }
+          )
+        } catch(error) {
+          console.log(error)
+        }
 
         //If the returned user is undefined, that means this is a user who has
         //recently register and not been entered into the db So enter them into
         //the DB
-        if(!getMongoUserById.data.data.user) {
+        if(!getMongoUserById?.data?.data?.user) {
           console.log('New registered user not in mongoDB, adding now...'.bgRed)
 
           //Get the newly created user
-          getMongoUserById = await axios.post(apiCall('/api/v1/users/createUser'),{
-            passportUser:pageProps?.user
-          })
+          try{
+            getMongoUserById = await axios.post(apiCall('/api/v1/users/createUser'),{
+              passportUser:pageProps?.user
+            })
+          } catch(error) {
+            console.log(error)
+          }
+        
   
         }
 
