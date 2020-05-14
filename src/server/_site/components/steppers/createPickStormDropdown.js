@@ -44,7 +44,7 @@ export default function CreateStormPickerDropdown(props) {
               onChange={(e)=>{setselectedValue(e.target.value)}}
               labelWidth={labelWidth}
             >
-              <MenuItem value='-1'>Please select a value</MenuItem>
+              <MenuItem value='-1'>{props.defaultValue ?? 'Please select a value'}</MenuItem>
               {
                 dataValues.map((value,index)=>{
                   return(

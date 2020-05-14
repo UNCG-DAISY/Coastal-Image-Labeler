@@ -5,7 +5,10 @@
 const debug = process.env.NODE_ENV !== "production";
 
 module.exports = {
-  exportPathMap: function () {
+  exportPathMap: async function(
+    defaultPathMap,
+    { dev, dir, outDir, distDir, buildId }
+  ) {
     return {
       "/": { page: "/" },
       "/auth/home": { page: "/auth/home" },

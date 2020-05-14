@@ -44,7 +44,10 @@ dotenv.config({
 const dev = process.env.NODE_ENV !== 'production'
 
 //This is telling to let next.js, the react server side rendering package, to handle routing
-const nextApp = next({ dev,dir:'./_site' })//relative to package.json
+const nextApp = next({ 
+    dev,
+    dir:dev ? './_site': './_site/' 
+})//relative to package.json
 const handle = nextApp.getRequestHandler()
 
 nextApp.prepare()

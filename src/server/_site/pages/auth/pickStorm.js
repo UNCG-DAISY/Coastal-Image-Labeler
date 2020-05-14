@@ -90,7 +90,6 @@ TagImage.getInitialProps = async ctx => {
     return {
       notTagger:true
     }
-
   }
 
   const getStorms = (await axios.get(

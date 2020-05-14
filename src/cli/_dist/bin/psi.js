@@ -13,7 +13,8 @@ const pkg = require('../../package.json');
 //and yes they have to follow that name style of
 // commandX = psi-commandX
 //Now mongoURI has subcommands aswell,but those resolve to direct actions.
-//FYI sub sub commands would follow psi-mongoURI-XXX-YYY-ZZZ
+//FYI sub sub commands would follow psi-mongoURI-XXX-YYY-ZZZ, also has to be
+//in this bin folder 
 commander_1.default
     .version(pkg.version)
     .command('mongoURI', 'URI to connect to MongoDB Atlas')
