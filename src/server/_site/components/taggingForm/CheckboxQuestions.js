@@ -20,7 +20,7 @@ export default class CheckboxQuestions extends React.Component {
                 <CheckboxButton
                     //howManyReq = {1}
                     states = {state}
-                    label = "Impact Type, pick zero or more"
+                    label = "Impact Type (pick 1 or more)"
                     labelColor = {theme.palette.secondary.main}
                     buttons = {[
                         {
@@ -83,7 +83,7 @@ export default class CheckboxQuestions extends React.Component {
                 <CheckboxButton
                     //howManyReq = {1}
                     states = {state}
-                    label = "Terrian Type, pick zero or more"
+                    label = "Terrian Type (pick 1 or more)"
                     labelColor = {theme.palette.secondary.main}
                     buttons = {[
                         {

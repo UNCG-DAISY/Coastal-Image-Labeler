@@ -41,11 +41,15 @@ class TaggingForm extends React.Component {
         return numSelected >= req
     }
 
-    isSubmittable(state) {          
+    isSubmittable(state) {       
+        //radios   
         if(state.tags.devType < 0) return true;
         if(state.tags.washoverType < 0) return true;
         if(state.tags.damageType < 0) return true; 
-        //if(!(this.checkboxHasEnoughSelected(state.tags.sandType,3))) return true;
+
+        //checkboxes
+        if(!(this.checkboxHasEnoughSelected(state.tags.impactType,1))) return true;
+        if(!(this.checkboxHasEnoughSelected(state.tags.terrianType,1))) return true;
         //if(state.tags.hasSand < 0) return true; 
     
         return false;
@@ -123,12 +127,22 @@ class TaggingForm extends React.Component {
                             Skip
                         </SkipButton>
                         <WaterButton onClick={() => tagAsWater()} className = {classes.formControl}>
-                            Tag as water
+                            Tag as all water and skip to next image
                         </WaterButton>
                     </div>
-                    <SubmitButton onClick={() => submitTags(this.state.tags)} disabled={this.isSubmittable(this.state)}>
-                        Submit 
-                    </SubmitButton>
+                    <div>   
+                        {
+                            this.isSubmittable(this.state)&&
+                            <Typography variant="caption" color="info" style={{paddingRight:5}}>
+                                Tag all categories to submit
+                            </Typography>
+                        }
+                       
+                        <SubmitButton onClick={() => submitTags(this.state.tags)} disabled={this.isSubmittable(this.state)}>
+                            Submit 
+                        </SubmitButton>
+                    </div>
+                   
                 </div>
             </React.Fragment>
         )

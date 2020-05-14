@@ -35,7 +35,8 @@ const useStyles = makeStyles(theme => ({
   },
   controls: {
     display:'flex',
-    justifyContent:'space-between',
+    justifyContent:'space-around',
+    paddingTop:10
   },
 }));
 
@@ -92,7 +93,8 @@ export default function PickStormStepper(props) {
             <CreateStormPickerDropdown 
                 data={storms} 
                 stateFunctions = {[selectedStorm, setSelectedStorm]} 
-                label = 'Pick a storm'
+                defaultValue="Please select an storm"
+                //label = 'Pick a storm'
             />
         );
         
@@ -101,7 +103,8 @@ export default function PickStormStepper(props) {
             <CreateStormPickerDropdown 
                 data={storms[selectedStorm].archives} 
                 stateFunctions = {[selectedArchive, setselectedArchive]}
-                label = 'Pick a storm'
+                defaultValue="Please select an archive"
+                //label = 'Pick a storm'
             />
         );
      
@@ -138,55 +141,53 @@ export default function PickStormStepper(props) {
         ) : (
           <React.Fragment>
             <Divider />
-              
-                <Alert severity="info" color="warning"variant="outlined" >
+                <div className={classes.instructions}>
+                  {getStepContent(activeStep)}
+                </div>
+                {
+                  storms[selectedStorm]?
+                  <Alert severity="info" color="info" variant="outlined" >
                     <AlertTitle>Info</AlertTitle>
-                    {
-                        storms[selectedStorm]?
-                        (
-                            <React.Fragment>
-                                <div>
-                                  <strong style={{color:theme.palette.secondary.main}}>Description</strong>: 
-                                  {storms[selectedStorm].info.description}
-                                </div>
-                                
-                                <br/>
-                                <div>
-                                  <strong style={{color:theme.palette.secondary.main}}>Year</strong>: 
-                                  {storms[selectedStorm].info.year}
-                                </div>
-                                
-                                <br/>
-                                <Button variant="outlined" href={storms[selectedStorm].info.link} style={{textDecoration:'none'}} color="secondary">Link to wiki</Button>
-                            </React.Fragment>
-                        ):
-                        'Please select a storm'
-                    }
-                    
-                    <br/>
-                    <br/>
-                </Alert>
+                   
+                      <React.Fragment>
+                          <div>
+                            <strong style={{color:theme.palette.secondary.main}}>Description</strong>: 
+                            {storms[selectedStorm].info.description}
+                            <Button variant="text" size="small" href={storms[selectedStorm].info.link} style={{textDecoration:'none'}} color="secondary">Link to Wikipedia</Button>
+                          </div>
+                          
+                          <br/>
+                          <div>
+                            <strong style={{color:theme.palette.secondary.main}}>Year</strong>: 
+                            {storms[selectedStorm].info.year}
+                          </div>                  
+                      </React.Fragment>
+                   
+                </Alert>:
+                <React.Fragment></React.Fragment>
+                }
+                
  
             <Divider />
 
-            <div className={classes.instructions}>
-              {getStepContent(activeStep)}
-            </div>
+            
             <div className={classes.controls}>
-              <div/>
-              
-              <div>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  className={classes.backButton}
-                >
-                  Back
-                </Button>
-                <Button variant="contained" color="primary" onClick={handleNext} disabled={shouldDisable()}>
-                  {activeStep === steps.length - 1 ? 'Get Image' : 'Next'}
-                </Button>
-              </div>
+           
+                
+              <center>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    className={classes.backButton}
+                  >
+                    Back
+                  </Button>
+                  <Button variant="contained" color="primary" onClick={handleNext} disabled={shouldDisable()}>
+                    {activeStep === steps.length - 1 ? 'Get Image' : 'Next'}
+                  </Button>
+                </div>
+              </center>
             
             
             </div>

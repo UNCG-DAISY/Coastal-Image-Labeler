@@ -99,7 +99,7 @@ function Home(props) {
       <Container maxWidth="md">
         <Box my={4}>
           <Typography variant="h4" component="h1" gutterBottom color="secondary">
-            Home.js
+            Welcome!
           </Typography>
 
           <Typography variant="body1" component="h1" gutterBottom>
@@ -113,8 +113,8 @@ function Home(props) {
           {
             assignedImages?
             <React.Fragment>
-              <Typography variant="h6" component="h1" gutterBottom color="secondary">
-                Continue tagging
+              <Typography variant="h6" component="h1" gutterBottom color="secondary" style={{paddingTop:20}}>
+                Continue tagging from collections below.
               </Typography>
               <Paper elevation={3} variant="outlined" style={{paddingLeft:10,paddingBottom:10,paddingTop:10}}>
                 <Grid container className={classes.root} spacing={2}>
