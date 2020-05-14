@@ -12,5 +12,3 @@ program
     .command('addStorm', 'Add a storm to the database')
     .command('addArchive', 'Add a archive to the database')
     .parse(process.argv)
-
-console.log('Main file')
