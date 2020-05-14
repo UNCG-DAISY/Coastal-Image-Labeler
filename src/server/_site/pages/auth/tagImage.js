@@ -119,16 +119,17 @@ function TagImage(props) {
       )
     }
 
-    //check if allowed to vist this archive
-
-    //if no imageDocs sent
-    if(!imageDocument?.id || !imageDocument) {
-      return <NoImageToTag/>
+    //check if allowed to tag this storm
+    if(props.notPartOfStorm === true) {
+      return <NotPartOfStorm/>
     }
 
+    //if no imageDocs sent
+    if(!imageDocument?.id) {
+      return <NoImageToTag/>
+    }
     
     return taggingForm
-    //return taggingForm
   }
 
   function NoImageToTag() {
@@ -137,6 +138,15 @@ function TagImage(props) {
         <AlertTitle > No new images to tag</AlertTitle>
         You have tagged all images in archive  <strong>{queryParams?.archive}</strong>. Please select another archive to tag
         or contact admin to determine which archive to tag next.
+      </Alert>
+    )
+  }
+
+  function NotPartOfStorm() {
+    return (
+      <Alert severity="error" variant="outlined">
+        <AlertTitle >No permissions to tag this storm</AlertTitle>
+        You do not have permissions to tag this storm, please contact an admin.
       </Alert>
     )
   }
@@ -159,26 +169,42 @@ function TagImage(props) {
 
 TagImage.getInitialProps = async ctx => {
 
+  //things to check
+
   const {req,res} = ctx
   const {query} = req
 
   const allowedPages = await getAllowedPages(req.user,ctx)
-  const defaultReturn = {
-    query:{
-      storm:'n/a',
-      archive:'n/a'
-    }
-  }
-
-  if(allowedPages.tagger === false) {
+  
+  //Is this user a tagger?
+  if(allowedPages?.tagger === false) {
     return {notTagger:true}
   }
 
-  
+  //Was any query params sent
   if(!query.archive || !query.storm) {
     return {noQueryParams:true}
   }
 
+  //Is this user part of this archive
+  const stormsOfUser = req.user.mongoUser.storms
+  const getQueryStormName = await (await fetch(apiCall(`/api/v1/storms?name=${query.storm}`), {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      //These two are needed for server side calls
+      "credentials": "include",
+      "cookie": ctx?.req?.headers?.cookie ?? null 
+    }
+  })).json();
+  const stormID = getQueryStormName.data[0]._id
+
+  if(!(stormsOfUser.includes(stormID))) {
+    return ({notPartOfStorm:true})
+  }
+
+  //If they are a tagger, and query params are sent and they are part of this storm
+  //get an image
   //amenadiel
   const responseData = await (await fetch(apiCall(`/api/v1/users/getImage/${query.archive}`), {
     method: "GET",
@@ -189,7 +215,7 @@ TagImage.getInitialProps = async ctx => {
       "cookie": ctx?.req?.headers?.cookie ?? null 
     }
   })).json();
-  console.log(responseData)
+  //console.log(responseData)
   const imageDocument = responseData?.data?.image
   
   return {

@@ -39,7 +39,6 @@ export default class ClassificationQuestions extends React.Component {
 
                     <Divider style={{marginBottom:20}}/>
                     <AdditionalCommentsTextfield
-                        TextField
                         id="additionalComments"
                         label="Additional Comments"
                         defaultValue=""
