@@ -20,10 +20,11 @@ import Router from "next/router";
 import TaggingForm from '../../components/taggingForm/TaggingForm'
 import initalTagState from '../../components/taggingForm/initalTagState'
 import Layout from '../../components/layouts/Layout'
+import Paper from '@material-ui/core/Paper';
 
-const useStyles = makeStyles(theme  => ({
-  
-}));
+import ErrorAlert from '../../components/ErrorAlert'
+
+
 
 // This page shows an image to tag
 
@@ -99,57 +100,21 @@ function TagImage(props) {
 
   function determineContent() {
 
-    //if you are not a tagger
-    if(props.notTagger === true) {
+    if(props.error) {
       return (
-        <Alert severity="warning" color="warning"variant="outlined" >
-            <AlertTitle>Not a tagger</AlertTitle>
-            You do not have permissions to tag any archives. Please contact an admin to get permissions.
-        </Alert>
+        <div className={classes.paper}>
+          <Paper elevation={13} >
+            <ErrorAlert errorTitle={props.errorTitle} errorMessage={props.errorMessage}/> 
+          </Paper>
+        
+      </div>
       )
     }
 
-    //if not all query params have been passed
-    if(props.noQueryParams) {
-      return (
-        <Alert severity="warning" color="warning"variant="outlined" >
-            <AlertTitle>No storm/archive given</AlertTitle>
-            Please enter a valid URL with a valid storm and archive.
-        </Alert>
-      )
-    }
-
-    //check if allowed to tag this storm
-    if(props.notPartOfStorm === true) {
-      return <NotPartOfStorm/>
-    }
-
-    //if no imageDocs sent
-    if(!imageDocument?.id) {
-      return <NoImageToTag/>
-    }
-    
     return taggingForm
   }
 
-  function NoImageToTag() {
-    return (
-      <Alert severity="error" variant="outlined">
-        <AlertTitle > No new images to tag</AlertTitle>
-        You have tagged all images in archive  <strong>{queryParams?.archive}</strong>. Please select another archive to tag
-        or contact admin to determine which archive to tag next.
-      </Alert>
-    )
-  }
-
-  function NotPartOfStorm() {
-    return (
-      <Alert severity="error" variant="outlined">
-        <AlertTitle >No permissions to tag this storm</AlertTitle>
-        You do not have permissions to tag this storm, please contact an admin.
-      </Alert>
-    )
-  }
+ 
 
   return (
     <Layout user={props.user} pageTitle={`Tagging Session: ${imageDocument?.id}`}>
@@ -158,7 +123,6 @@ function TagImage(props) {
           {       
             determineContent()
           }
- 
         </Box>
         {/* {JSON.stringify(queryParams)} */}
       </Container>
@@ -166,6 +130,21 @@ function TagImage(props) {
     
   );
 }
+
+const useStyles = makeStyles(theme  => ({
+  paper: {
+    display: 'flex',
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(1),
+      padding: theme.spacing(2),
+      // width: theme.spacing(72),
+      // height: theme.spacing(64),
+    },
+  },
+}));
 
 TagImage.getInitialProps = async ctx => {
 
@@ -178,16 +157,25 @@ TagImage.getInitialProps = async ctx => {
   
   //Is this user a tagger?
   if(allowedPages?.tagger === false) {
-    return {notTagger:true}
+    return ({
+      error:true,
+      errorTitle:'Not a tagger',
+      errorMessage:`You are not a tagger, please contact admin to get permissions to tag.`
+    })
   }
 
-  //Was any query params sent
+  //Is both query params sent
   if(!query.archive || !query.storm) {
-    return {noQueryParams:true}
+    return ({
+      error:true,
+      errorTitle:'Invalid query params',
+      errorMessage:`Please send a valid storm and archive in URL params.`
+    })
   }
+
+  
 
   //Is this user part of this archive
-  const stormsOfUser = req.user.mongoUser.storms
   const getQueryStormName = await (await fetch(apiCall(`/api/v1/storms?name=${query.storm}`), {
     method: "GET",
     headers: {
@@ -197,16 +185,29 @@ TagImage.getInitialProps = async ctx => {
       "cookie": ctx?.req?.headers?.cookie ?? null 
     }
   })).json();
-  const stormID = getQueryStormName.data[0]._id
+  const stormID = getQueryStormName.data[0]?._id
 
-  if(!(stormsOfUser.includes(stormID))) {
-    return ({notPartOfStorm:true})
+  //If the storm passed is invalid
+  if(!stormID) {
+    return {
+      error:true,
+      errorTitle:'Invalid Storm name',
+      errorMessage:`Storm name of ${query.storm} is an invalid storm name`
+    }
   }
 
-  //If they are a tagger, and query params are sent and they are part of this storm
-  //get an image
-  //amenadiel
-  const responseData = await (await fetch(apiCall(`/api/v1/users/getImage/${query.archive}`), {
+  //Compare the ID's of the storms a user is part of and the ID of this storm
+  const stormsOfUser = req.user.mongoUser.storms
+  if(!(stormsOfUser.includes(stormID))) {
+    return ({
+      error:true,
+      errorTitle:'Not allowed to tag',
+      errorMessage:`User is not allowed to tag storm ${query.storm}`
+    })
+  }
+
+  //Then get the image of the user
+  const getImageOfArchive = await (await fetch(apiCall(`/api/v1/users/getImage/${query.archive}`), {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -215,10 +216,17 @@ TagImage.getInitialProps = async ctx => {
       "cookie": ctx?.req?.headers?.cookie ?? null 
     }
   })).json();
-  //console.log(responseData)
-  const imageDocument = responseData?.data?.image
+  if(!getImageOfArchive.success) {
+    return ({
+      error:true,
+      errorTitle:'Invalid Archive',
+      errorMessage:`Archive ${query.archive} is a invalid archive name`
+    })
+  }
+  const imageDocument = getImageOfArchive?.data?.image
   
   return {
+    error:false,
     query,
     allowedPages,
     imageDocument:imageDocument,
