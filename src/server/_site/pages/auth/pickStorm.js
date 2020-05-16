@@ -8,11 +8,10 @@ import {getAllowedPages} from '../../components/utils/getAllowedPages'
 import { 
   apiCall
 } from '../../components/constants'
-import fetch from "isomorphic-fetch";
 import axios from 'axios'
 import Layout from '../../components/layouts/Layout'
-import { Alert, AlertTitle } from '@material-ui/lab';
 
+import ErrorAlert from '../../components/ErrorAlert'
 
 
 // This page shows a stepper that asks a series of questions on what strom to
@@ -20,26 +19,13 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 // image
 
 function TagImage(props) {
-  const {stormList,notTagger} = props
+  const {stormList} = props
   const classes = useStyles();
 
-  function submitTags(tags) {
-    alert('Tag!')
-    console.log(tags)
-  }
-
   function determineContent() {
-    if(notTagger == true) {
-      return (
-        <React.Fragment>
-          <Alert severity="warning" color="warning"variant="outlined" >
-              <AlertTitle>Not a tagger</AlertTitle>
-              You do not have permissions to tag any archives. Please contact an admin to get permissions.
-          </Alert>
-        </React.Fragment>
-      )
+    if(props.error) {
+      return <ErrorAlert errorTitle={props.errorTitle} errorMessage={props.errorMessage}/>
     }
-
     return <PickStormStepper storms = {stormList}/>
   }
 
@@ -82,14 +68,17 @@ TagImage.getInitialProps = async ctx => {
   //First make sure theres a user
   hasUser(req)
   
+  //get allowed pages
   const allowedPages = await getAllowedPages(req.user,ctx)
 
   //first check if the user is a tagger
   //if they are not, just return notTagger
   if(allowedPages.tagger === false) {
-    return {
-      notTagger:true
-    }
+    return ({
+      error:true,
+      errorTitle:'Not a tagger',
+      errorMessage:`You do not have permissions to tag any archives. Please contact an admin to get permissions.`
+    })
   }
 
   const getStorms = (await axios.get(
