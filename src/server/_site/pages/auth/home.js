@@ -95,7 +95,7 @@ function Home(props) {
     //alert(resData.data.message)
   }
 
-  console.log(assignedImages)
+  //console.log(assignedImages)
   return (
     <Layout user={props.user} pageTitle="Home">
       <Container maxWidth="md">
