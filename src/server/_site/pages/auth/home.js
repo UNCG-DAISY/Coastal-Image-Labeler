@@ -25,6 +25,7 @@ import {
 } from '../../components/constants'
 
 import {getAllowedPages} from '../../components/utils/getAllowedPages'
+import ResumeTaggingTable from '../../components/ResumeTaggingTable'
 
 
 // async function test() {
@@ -94,6 +95,7 @@ function Home(props) {
     //alert(resData.data.message)
   }
 
+  console.log(assignedImages)
   return (
     <Layout user={props.user} pageTitle="Home">
       <Container maxWidth="md">
@@ -116,27 +118,17 @@ function Home(props) {
               <Typography variant="h6" component="h1" gutterBottom color="secondary" style={{paddingTop:20}}>
                 Continue tagging from collections below.
               </Typography>
-              <Paper elevation={3} variant="outlined" style={{paddingLeft:10,paddingBottom:10,paddingTop:10}}>
+              {/* <Paper elevation={3} variant="outlined" style={{paddingBottom:10,paddingTop:10}}>
                 <Grid container className={classes.root} spacing={2}>
                   <Grid item xs={12}>
-                    <Grid container justify="center" spacing={2}>
-                      {
-                      
-                        Object.keys(assignedImages).map((value,index)=>{
-                          return (
-                            <Grid key={`${index}-${value}`} item>
-                              <Button variant="contained" color="primary" onClick ={()=>continueTagging(value,assignedImages[value])}>
-                                {value}
-                              </Button>
-                            </Grid>
-                            
-                          )
-                        })
-                      } 
-                    </Grid>
+                  
                   </Grid>
                 </Grid>
-              </Paper>
+              </Paper> */}
+              <div className={classes.center}>
+                <ResumeTaggingTable archives={assignedImages} onClick={continueTagging}/>
+              </div>
+               
             </React.Fragment>:
               
             <></>
@@ -168,6 +160,11 @@ const useStyles = makeStyles((theme) => ({
   control: {
     padding: theme.spacing(2),
   },
+  center:{
+    display:'flex',
+    justifyContent:'center',
+    flexDirection:'row'
+  }
 }));
 
 Home.getInitialProps = async ctx => {
