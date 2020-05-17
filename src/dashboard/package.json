@@ -4,16 +4,11 @@
   "description": "PSIC Node server",
   "main": "server.js",
   "scripts": {
-    "buildServer": "tsc",
-    "buildSite": "next build ./_site",
-    "build": "npm run buildSite && npm run buildServer",
+    "build": "next build ./_site && tsc",
     "bas": "npm run build && npm run start",
-    "test": "tsc && node ./_dist/test.js",
-    "test2": "tsc && SET NODE_ENV=production && node ./_dist/test.js",
     "dev": "nodemon --exec ts-node ./_server/server.ts",
-    "devNoRestart": "ts-node ./_server/server.ts",
     "start": "tsc && SET NODE_ENV=production&& node ./_dist/server.js",
-    "startNoTSC": "SET NODE_ENV=production && node ./_dist/server.js",
+    
     "seederCreate": "ts-node ./_server/jsonSeeder.ts -i",
     "seederDel": "ts-node ./_server/jsonSeeder.ts -d",
     "seederRole": "ts-node ./_server/jsonSeeder.ts -r",
