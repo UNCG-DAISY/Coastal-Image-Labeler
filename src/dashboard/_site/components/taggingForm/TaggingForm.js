@@ -133,7 +133,7 @@ class TaggingForm extends React.Component {
                     <div>   
                         {
                             this.isSubmittable(this.state)&&
-                            <Typography variant="caption" color="info" style={{paddingRight:5}}>
+                            <Typography variant="caption" style={{paddingRight:5}}>
                                 Tag all categories to submit
                             </Typography>
                         }
