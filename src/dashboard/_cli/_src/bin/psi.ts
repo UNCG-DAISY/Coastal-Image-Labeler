@@ -17,6 +17,6 @@ const pkg = require('../../package.json')
 program
     .version(pkg.version)
     .command('mongoURI', 'URI to connect to MongoDB Atlas')
-    .command('storm', 'Add a storm to the database')
-    .command('addArchive', 'Add a archive to the database')
+    .command('catalog', 'Add catalog(s) to the database')
+    .command('archive', 'Add an archive of a catalog to the database')
     .parse(process.argv)
