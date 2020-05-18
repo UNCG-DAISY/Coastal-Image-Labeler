@@ -1,5 +1,5 @@
 import program from 'commander'
-import storms from '../commands/storm'
+import catalog from '../commands/catalog'
 // program
 //     .command('default', {isDefault: true})
 //     .description('Default command, for whatever reason')
@@ -18,13 +18,10 @@ program
             all
         } = cmd
 
+        //make sure a path is given
         if(!path) return console.log('Please provide a path')
 
-        // console.log(`Path = ${cmd.path}`)
-        // console.log(`Add all as storms = ${cmd.all}`)
-
-        storms.addStorms(cmd.path,{all})
-        //console.log(Object.keys(cmd))
+        catalog.addCatalogs(cmd.path,{all})
     })
 
 
