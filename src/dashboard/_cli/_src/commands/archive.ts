@@ -16,6 +16,7 @@ const archive = {
         const dirs = getDirectories(path)
         colorize.info(`Archives are ${dirs.toString()}`)
 
+        //if no _id sent
         if(!catalogId) {
             return {
                 error:true,
@@ -23,7 +24,7 @@ const archive = {
             }
         }
 
-        //check catalogId
+        //check catalogId to see if valid archive
         const catalog = CatalogModel.findById(catalogId)
         if(!catalog) {
             return {
@@ -31,8 +32,6 @@ const archive = {
                 message:`No catalog found with _id ${catalogId}`
             } 
         }
-
-        //check path?
 
         //find out which archives to add
         const yesNoAns = [];
@@ -59,22 +58,14 @@ const archive = {
                 })
             }        
         }
-        //console.log(yesNoAns) 
-
-        //connect to db
-        const uriManager = new UriManager();
-        const mongoConnection = new MongoConnection(uriManager.getKey())
-        await mongoConnection.connect()
-        //await ImageModel.deleteMany({})
-        
 
         let entries = []
-        //For each catalog that the user said yes to,
+        //For each archive that the user said yes to,
         //insert them into the database
         await Promise.all(yesNoAns.map(async (element,index) =>{
             const {archive,input} = element
 
-            if(input === undefined) { return {error:true,message:'No input'}}
+            // if(input === undefined) { return {error:true,message:'No input'}}
 
             if(input) {
                  //first check if this catalog exits
@@ -104,8 +95,6 @@ const archive = {
             }
            
         }))
-        
-        await mongoConnection.close()
 
         //return the entries
         return {
