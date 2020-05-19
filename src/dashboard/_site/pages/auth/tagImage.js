@@ -1,20 +1,12 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import {hasUser} from '../../components/utils/checkIfUser'
-import Drawer from '../../components/layouts/drawer'
-import MyAppBar from '../../components/layouts/appBar'
-import ShowLoggedInSideDrawer from '../../components/layouts/showLoggedInSideDrawer'
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button'
 import {getAllowedPages} from '../../components/utils/getAllowedPages'
 import { 
   apiCall
 } from '../../components/constants'
 import fetch from "isomorphic-fetch";
-import axios from 'axios'
-import { Alert, AlertTitle } from '@material-ui/lab';
 import Router from "next/router";
 
 import TaggingForm from '../../components/taggingForm/TaggingForm'
