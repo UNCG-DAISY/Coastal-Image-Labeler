@@ -76,11 +76,11 @@ const archive = {
 
                 //Dont add if it exists
                 if(doesExistName[0] || doesExistPath[0]) {
-                    console.log(`Archive ${archive} already exists`.blue)
+                    colorize.warning(`Archive ${archive} already exists`)
                     return
                 }
 
-                //create storm model
+                //create archive model
                 const archiveEntry = await ArchiveModel.create({
                     "dateAdded":Date.now(),
                     "name" : archive,
@@ -88,6 +88,8 @@ const archive = {
                     "taggable": true,
                     "catlog": catalogId,
                 })
+                //Say when all catalogs have been made
+                colorize.info(`Archive ${archive} made`)
 
                 //if we want to populate the images aswell
                 if(options.images) {
@@ -95,10 +97,7 @@ const archive = {
                     await image.addImages(`${path}\\${archive}`,archiveEntry._id)
 
                 }
-
-                //Say when all catalogs have been made
-                colorize.info(`Archive ${archive} made`)
-
+                
                 entries.push(archiveEntry)    
             }
            
