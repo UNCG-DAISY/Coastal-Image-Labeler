@@ -38,6 +38,8 @@ const getStormsOfUser = asyncHandler(async (req: Request, res: Response, next: N
     const storms = res.advancedResults.data
     const userId = req?.params?.userId
 
+    /* Have mongo user ID be sent instead */
+
     //Find the user by id
     const user:UserDocument = (await UserModel.find({
         "_id":userId
@@ -49,7 +51,8 @@ const getStormsOfUser = asyncHandler(async (req: Request, res: Response, next: N
     const stormsOfUser = user.storms
     let data = []
 
-    //For each storm that exists
+    //We have a list of storm ids, we need to get
+    //the actual data from those storms
     await Promise.all(storms.map((storm:StormDocument,index:number)=>{
 
         //If that storm is part of the users storms,add it to the data to be returned
@@ -64,8 +67,7 @@ const getStormsOfUser = asyncHandler(async (req: Request, res: Response, next: N
             if(taggableFilter) {
                 archivesToReturn = archivesOfStorm.filter(function(archive) {
                     return archive?.taggable;
-                });
-                
+                });   
             }
 
             //Push this data on to the user and the data to return
@@ -77,40 +79,8 @@ const getStormsOfUser = asyncHandler(async (req: Request, res: Response, next: N
     res.status(200).json(res.advancedResults)
 })
 
-/**
- * @desc        Gets a storm by Id
- * @route       GET /api/v1/storms/storm/:stormId/:userId
- * @access      Public
- * @returns     yes
- */
-const getStorm = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    console.log(res.advancedResults)
-    
-    res.status(200).json(res.advancedResults)
-})
-
-// /**
-//  * @desc        creates a storm
-//  * @route       POST /api/v1/storms/storm/
-//  * @access      Public
-//  * @returns     yes
-//  */
-// const createStorm = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    
-//     // req.body.id = req.user.id
-//     // const new_storm = await StormModel.create(req.body)
-
-//     res.status(201).json({
-//         success:false,
-//         data:{
-//             smile:':}'
-//         }
-//     })        
-// })
 
 export {
     getAllStorms,
-    getStorm,
     getStormsOfUser
-    //createStorm
 }
