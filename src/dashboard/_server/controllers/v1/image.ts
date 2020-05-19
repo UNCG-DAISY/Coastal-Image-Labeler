@@ -81,7 +81,6 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
 
         //Go through each currentee tag and compare
         for(let i = 0; i<taggedImage.tags.length;i++) {
-            
             //Get the current tag and convert to a string
             //@ts-ignore
             const temp_tag = JSON.stringify(taggedImage.tags[i].tags)

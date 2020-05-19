@@ -6,9 +6,7 @@ import express from 'express'
 
 import {
     getAllStorms,
-    getStorm,
     getStormsOfUser
-    //createStorm
 } from '../../controllers/v1/storms'
 
 //Perform advanced results which means filtering, pagination, and query parameters
