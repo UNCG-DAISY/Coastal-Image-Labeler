@@ -3,13 +3,14 @@ import colors from 'colors'
 colors
 import inquirer from 'inquirer'
 import {isRequired,yesNoOnly,translateYesNoToBool} from '../utils/validation'
-import {getDirectories} from '../utils/file'
+import {getDirectories,getFiles} from '../utils/file'
 import MongoConnection from '../lib/MongoConnection'
 import UriManager from '../lib/UriManager'
 
 import {CatalogModel} from '../models/Catalog'
 import {ArchiveModel} from '../models/Archive'
 import colorize from '../utils/colorize'
+import image from './image'
 
 const archive = {
     async addArchives(path,catalogId,options) {
@@ -87,6 +88,13 @@ const archive = {
                     "taggable": true,
                     "catlog": catalogId,
                 })
+
+                //if we want to populate the images aswell
+                if(options.images) {
+                    //const imageFiles = getFiles(`${path}\\${archive}`)
+                    await image.addImages(`${path}\\${archive}`,archiveEntry._id)
+
+                }
 
                 //Say when all catalogs have been made
                 colorize.info(`Archive ${archive} made`)
