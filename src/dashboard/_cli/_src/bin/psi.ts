@@ -18,5 +18,6 @@ program
     .version(pkg.version)
     .command('mongoURI', 'URI to connect to MongoDB Atlas')
     .command('catalog', 'Add catalog(s) to the database')
-    .command('archive', 'Add an archive of a catalog to the database')
+    .command('archive', 'Add archive(s) of a catalog to the database')
+    // .command('image', 'Add image(s) of a archive to the database')
     .parse(process.argv)
