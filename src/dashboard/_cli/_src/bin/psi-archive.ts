@@ -13,11 +13,13 @@ program
     .option('-p, --path <type>','Give path to the archives',undefined)
     .option('-a, --all','Add all directories of --path as archives',false)
     .option('-i, --images','Add all images of the archive',false)
+    .option('-d, --dev','dev mode',false)
     .action(async (cmd) => {
         const {
             path,
             all,
-            images
+            images,
+            dev
         } = cmd
 
         //make sure a path is given
@@ -30,14 +32,16 @@ program
 
         //TEST COMMAND
             //await CatalogModel.deleteMany({})
-            await ArchiveModel.deleteMany({})
-            await ImageModel.deleteMany({})
+            if(dev) {
+                await ArchiveModel.deleteMany({})
+                await ImageModel.deleteMany({})
+            }
 
         //first check to see if the catalog exists
         const pathArray = path.split("\\")
         const catalogName = pathArray[pathArray.length-1]
 
-        console.log(images,'==============')
+        
         const catalog = await CatalogModel.findOne({name:catalogName})
         const archiveResult = await archive.addArchives(path,catalog._id,{all,images})
 
