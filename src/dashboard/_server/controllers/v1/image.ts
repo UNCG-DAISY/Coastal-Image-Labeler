@@ -33,88 +33,110 @@ import {UserModel} from '../../models/User'
 //     });
 // }
 // test()
+
 /**
  * @desc        Tags an image
  * @route       POST /api/v1/images/tagImage
  * @access      Public
- * @returns     yes
+ * @returns     no
  */
 const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    // console.log(req?.params?.id)
-    //console.log(req.body)
+    /* TAGGING PROCESS*/
+    /*
+        1. Error check inputs
+        2. Get the image that is being tagged
+        3. Check to see if any tags match the new tag
+        4. Update
+        5. See if can finalize tags
+        6. Update res object
+    */
 
+    /* Step 1 */
+    const {
+        _id,
+        tags,
+        timeEnd,
+        timeStart
+    } = req.body
+    
 
-    const body = req.body
+    //just take the stuff we need
+    let taggingPayload = {
+        _id,
+        tags,
+        timeEnd,
+        timeStart
+    }
 
-    let updatePayload = req.body
+    /* Step 2 */
+    let taggedImage = await ImageModel.findById(_id)
+    //Get the current tagging state(should be true) for future use
+    let stillTaggable = taggedImage.taggable
 
-    //console.log(req.user.mongoUser._id)
-    updatePayload.userId = req.user.mongoUser._id
+    /* Step 3 */
+    //if this image has tags
+    if(taggedImage.tags.length > 0) {
+        let stringifyedTaggingPayload = JSON.stringify(taggingPayload.tags)
+        let numMatched = 1 //image matches with self
 
-    const imageToUpdate = await ImageModel.findOne({_id:body._id})
-    let stillTaggable = true
-    console.log(`Updating image ${imageToUpdate._id}`)
-    console.log(`# Tags before ${imageToUpdate?.tags.length}`)
-
-    //Before we tag lets check and see if any tags match
-    if(imageToUpdate.tags.length > 0) {
-        let string_payload = JSON.stringify(updatePayload.tags)
-        let number_matched = 1 //image matches with self
-        for(let i = 0; i<imageToUpdate.tags.length;i++) {
+        //Go through each currentee tag and compare
+        for(let i = 0; i<taggedImage.tags.length;i++) {
             
+            //Get the current tag and convert to a string
             //@ts-ignore
-            const temp_tag = JSON.stringify(imageToUpdate.tags[i].tags)
+            const temp_tag = JSON.stringify(taggedImage.tags[i].tags)
 
-            //console.log(temp_tag,string_payload)
-            if(temp_tag === string_payload) {
-                number_matched = number_matched +1;
+            //Compare the new tag and the currently selected tag
+            if(temp_tag === stringifyedTaggingPayload) {
+                numMatched++;
             }
         }
         
-        //if enough match
-        if(number_matched == imageToUpdate.tillComplete) {
-            console.log(`image ${imageToUpdate._id} NOT LONGER taggable`)
-            stillTaggable = false
-            
+        //if enough match,then we can mark the image as complete
+        if(numMatched == taggedImage.tillComplete) {
+            console.log(`image ${_id} NOT LONGER taggable`)
+            stillTaggable = false     
         } else {
-            console.log(`image ${imageToUpdate._id} STILL taggable`)
+            console.log(`image ${_id} STILL taggable`)
         }
     } else {
         //if theres no tags, no need to even try
         console.log('ONLY 1 TAG EXISTS')
     }
-    
+
+    /* Step 4 */
+    //Update
     let upadtedImage = await ImageModel.updateOne(
-        {_id:body._id},
-        { $push: { tags: updatePayload },taggable:stillTaggable },
+        {_id:_id},
+        { $push: { tags: taggingPayload },taggable:stillTaggable },
         {
             runValidators:true,
             new:true
         }
     )
-    
-    //This means the latest tag can be the final tag
+
+    /* Step 5*/
     if(stillTaggable == false) {
         upadtedImage = await ImageModel.updateOne(
-            {_id:body._id},
-            { finalTag:updatePayload },
+            {_id:_id},
+            { finalTag:taggingPayload },
             {
                 runValidators:true,
                 new:true
             }
         )
     }
-    upadtedImage = await ImageModel.findById(body._id) 
-
-
-    console.log(`# Tags before ${upadtedImage?.tags?.length}`)
     
+    //Not sure if I need this, just getting the latest image
+    upadtedImage = await ImageModel.findById(_id) 
+
+    /* Step 6 */
+    //@ts-ignore
+    res.updatedImage = upadtedImage
     //@ts-ignore
     req.params.archive = (await ArchiveModel.findOne({_id:upadtedImage.archive})).name
+    //Attach the newly tagged image to the res object
     next()
-
-
-   
 })
 
 export {

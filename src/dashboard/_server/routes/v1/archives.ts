@@ -3,15 +3,12 @@
 */
 
 import express from 'express'
-
 import {
     getAllArchives,
-    getArchive,
     findArchive
 } from '../../controllers/v1/archives'
-
-//function that makes it so that you have to be logged in to call this api
-//import {protect} from '../../middleware/v1/auth'
+import {advancedResults} from '../../middleware/v1/advancedResults'
+import {ArchiveModel} from '../../models/Archive'
 
 // "/api/v1/archives/"
 const router = express.Router();
@@ -19,10 +16,10 @@ const router = express.Router();
 //Get all existing archives
 router
     .route('/')
-    .get(getAllArchives)
+    .get(advancedResults(ArchiveModel,''),getAllArchives)
 
 router
     .route('/FindArchive')
-    .post(findArchive)
+    .post(advancedResults(ArchiveModel,''),findArchive)
 
 export default router;
