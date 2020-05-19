@@ -1,5 +1,5 @@
 import { connect, Mongoose,connection} from 'mongoose'
-
+import colorize from '../utils/colorize'
 class MongoConnection {
     conn:Mongoose;
     uri:string
@@ -20,7 +20,7 @@ class MongoConnection {
             useFindAndModify: false,
             useUnifiedTopology: true
         }));
-        console.log('Connected to DB'.blue);
+        colorize.success('Connected to DB');
     }
 
     async close() {

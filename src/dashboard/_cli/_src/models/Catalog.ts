@@ -6,7 +6,7 @@
 import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Types} from 'mongoose'
 import {StormDocument} from '../index'
 
-const stormSchema: Schema = new Schema({
+const catalogScheme: Schema = new Schema({
     // creator: {
     //     type: Types.ObjectId,
     //     required: [true,'Please provide the creator id'],
@@ -55,7 +55,7 @@ const stormSchema: Schema = new Schema({
 )
 
 // Reverse populate with virtuals
-stormSchema.virtual('archives', {
+catalogScheme.virtual('archives', {
     ref: 'Archive',
     localField: '_id',
     foreignField: 'storm',
@@ -63,4 +63,4 @@ stormSchema.virtual('archives', {
 });
 
 
-export const StormModel: Model<StormDocument> =  model('Storm', stormSchema);
+export const CatalogModel: Model<StormDocument> =  model('Catalog', catalogScheme);

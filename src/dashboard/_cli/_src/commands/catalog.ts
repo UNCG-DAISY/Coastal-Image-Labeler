@@ -1,21 +1,20 @@
 
-import colors from 'colors'
-colors
 import inquirer from 'inquirer'
-import {isRequired,yesNoOnly,translateYesNoToBool} from '../utils/validation'
+import {yesNoOnly,translateYesNoToBool} from '../utils/validation'
 import {getDirectories} from '../utils/file'
 import MongoConnection from '../lib/MongoConnection'
 import UriManager from '../lib/UriManager'
 
-import {StormModel} from '../models/Storm'
+import {CatalogModel} from '../models/Catalog'
+import colorize from '../utils/colorize'
 
 const catalog = {
     async addCatalogs(path,options) {
         const dirs = getDirectories(path)
-        console.log(`Directories are ${dirs}`.blue)
+        colorize.info(`Directories are ${dirs.toString()}`)
 
         //find out which catalogs to add
-        const yesNoAns = [];
+        let yesNoAns = [];
         for(let i =0; i<dirs.length;i++)
         {   
             const element =dirs[i];
@@ -29,7 +28,7 @@ const catalog = {
                     }
                 ])
                 yesNoAns.push({
-                    storm:element,
+                    catalog:element,
                     input:translateYesNoToBool(input.shouldAdd)
                 })
             } else {
@@ -37,47 +36,66 @@ const catalog = {
                     catalog:element,
                     input:true
                 })
+                
             }        
         }
-        console.log(yesNoAns) 
+        //console.log(yesNoAns)
 
         //connect to db
         const uriManager = new UriManager();
         const mongoConnection = new MongoConnection(uriManager.getKey())
         await mongoConnection.connect()
         
-        
 
+        let entries = []
+        //For each catalog that the user said yes to,
+        //insert them into the database
         await Promise.all(yesNoAns.map(async (element,index) =>{
             const {catalog,input} = element
+          
 
-            if(!input) { return }
 
-            //first check if this catalog exits
-            const catalogPath=`${path}\\${catalog}`
-            const doesExistName = await StormModel.find({name:catalog})
-            const doesExistPath = await StormModel.find({path:catalogPath})
-
-            //Dont add if it exists
-            if(doesExistName[0] || doesExistPath[0]) {
-                console.log(`Catalog ${catalog} already exists`.blue)
-                return
+            if(!input) { 
+                await mongoConnection.close()
+                return {error:true,message:'No input'}
             }
 
-            //create storm model
-            const stormEntry = await StormModel.create({
-                "dateAdded":Date.now(),
-                "name" : catalog,
-                "path" : catalogPath,
-                "taggable": true
-            })
+            if(input) {
+                //first check if this catalog exits
+                const catalogPath=`${path}\\${catalog}`
+                const doesExistName = await CatalogModel.find({name:catalog})
+                const doesExistPath = await CatalogModel.find({path:catalogPath})
 
-            //Say when all catalogs have been made
-            console.log(`Catalog ${catalog} made`.magenta)
-           
+                //Dont add if it exists
+                if(doesExistName[0] || doesExistPath[0]) {
+                    await mongoConnection.close()
+                    colorize.info(`Catalog ${catalog} already exists`)
+                    return
+                }
+
+                //create catalog model
+                const catalogEntry = await CatalogModel.create({
+                    "dateAdded":Date.now(),
+                    "name" : catalog,
+                    "path" : catalogPath,
+                    "taggable": true
+                })
+
+                //Say when all catalogs have been made
+                colorize.info(`Catalog ${catalog} made`)
+                entries.push(catalogEntry)    
+            }
             
         }))
+        
         await mongoConnection.close()
+
+        //return the entries
+        return {
+            error:false,
+            message:`${entries.length} catalogs made`,
+            data:entries
+        }
 
          
     }

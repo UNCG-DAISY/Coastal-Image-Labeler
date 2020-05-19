@@ -1,4 +1,5 @@
 import program from 'commander'
+import colorize from '../utils/colorize'
 
 program
     .command('path')
