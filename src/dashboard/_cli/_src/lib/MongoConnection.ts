@@ -20,11 +20,12 @@ class MongoConnection {
             useFindAndModify: false,
             useUnifiedTopology: true
         }));
-        colorize.success('Connected to DB');
+        colorize.info('Connected to DB');
     }
 
     async close() {
         connection.close();
+        colorize.info('DB connection closed');
     }
 }
 
