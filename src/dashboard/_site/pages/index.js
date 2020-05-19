@@ -17,7 +17,7 @@ export default function Index(props) {
        <Container maxWidth="md">
         <Box my={4}>
           <Typography paragraph>
-            Welcome to PSI-Dashboard, please login
+            Welcome to Coastal Image Labeler Dashboard, please login
             
           </Typography>
         </Box>

@@ -116,7 +116,7 @@ export default class MyApp extends App {
     return (
       <React.Fragment>
         <Head>
-          <title>PSI Dashboard</title>
+          <title>CIL Dashboard</title>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
         </Head>
         <ThemeProvider theme={theme}>
