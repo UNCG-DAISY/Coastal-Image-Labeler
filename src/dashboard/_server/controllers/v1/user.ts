@@ -366,6 +366,7 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
 
 const updatedTaggedImages = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const {user} = req
+    //We need the archive so we know which image to cycle off into tagged list
     const {archive} = req?.params
     const userId = user?.mongoUser._id
   

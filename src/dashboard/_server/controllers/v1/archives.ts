@@ -3,21 +3,20 @@
 */
 
 import { Request,Response,NextFunction } from "express"
-import {asyncHandler} from '../../middleware/v1/async' //to avoid putting try catch everywhere
-//import {UserModel} from '../../models/User'
+ //to avoid putting try catch everywhere
+import {asyncHandler} from '../../middleware/v1/async'
 import {ArchiveModel} from '../../models/Archive'
-//import {ErrorResponse} from '../../utils/v1/errorResponse'
-//import axios from 'axios'
 
 /**
  * @desc        Gets all archives
  * @route       GET /api/v1/archives/
  * @access      Public
- * @returns     yes
+ * @returns     all archives
  */
 const getAllArchives = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    //get all archives
     const archives = await ArchiveModel.find()
-    
+
     res.status(200).json({
         success:true,
         data:{
@@ -27,36 +26,10 @@ const getAllArchives = asyncHandler(async (req: Request, res: Response, next: Ne
 })
 
 /**
- * @desc        Gets a archive by ID
- * @route       GET /api/v1/archives/archive/:archiveId
- * @access      Public
- * @returns     yes
- */
-const getArchive = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    if(req?.params?.archiveId) {
-        //get a storm
-
-        res.status(200).json({
-            success:true,
-            data:{
-                
-            }
-        })        
-    }
-
-    res.status(201).json({
-        success:false,
-        data:{
-            
-        }
-    })        
-})
-
-/**
  * @desc        Finds an archive 
  * @route       POST /api/v1/archives/FindArchive/
  * @access      Public
- * @returns     yes
+ * @returns     all archives specified with req.body
  */
 const findArchive = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const archives = await ArchiveModel.find(req.body)
@@ -71,6 +44,5 @@ const findArchive = asyncHandler(async (req: Request, res: Response, next: NextF
 
 export {
     getAllArchives,
-    getArchive,
     findArchive
 }
