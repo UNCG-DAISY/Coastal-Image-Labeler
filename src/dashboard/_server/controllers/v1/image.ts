@@ -6,10 +6,7 @@ import { Request,Response,NextFunction } from "express"
 import {asyncHandler} from '../../middleware/v1/async' //to avoid putting try catch everywhere
 import {ImageModel} from '../../models/Image'
 import {ArchiveModel} from '../../models/Archive'
-import {ErrorResponse} from '../../utils/v1/errorResponse'
-import axios from 'axios'
 //import {RBAC} from '../../middleware/v1/auth'
-import {UserModel} from '../../models/User'
 
 //import {TEST_assignNextImage} from './user'
 

@@ -19,8 +19,9 @@ const getAllArchives = asyncHandler(async (req: Request, res: Response, next: Ne
 
     res.status(200).json({
         success:true,
+        message:`${res.advancedResults.length} archives found`,
         data:{
-            archives
+            archives:res.advancedResults
         }
     })                
 })
@@ -36,6 +37,7 @@ const findArchive = asyncHandler(async (req: Request, res: Response, next: NextF
     
     res.status(200).json({
         success:true,
+        message:'Archive that was found',
         data:{
             archives
         }

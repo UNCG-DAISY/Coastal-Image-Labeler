@@ -20,6 +20,7 @@ const getRoles = asyncHandler(async (req: Request, res: Response, next: NextFunc
 
     res.status(200).json({
         success:true,
+        message:'Got roles',
         data:{
            roles:roles
         }
