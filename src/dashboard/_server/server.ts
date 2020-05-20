@@ -35,6 +35,64 @@ import {authRoutes} from "./utils/v1/auth-routes"//Handles login and logout
 import {getManagementTokens} from './utils/v1/auth0_tokens'//Gets the mangagement token form Auth0 so we can access information
 // import * as types from './index'
 
+//moment().format(); 
+//console.log(moment(moment.now(),'MM-DD-YYYY-hh:mm:ss').toString())
+// console.log(moment(moment.now(),"DD-MM-YYYY-hh:mm:ss").format("DD-MM-YYYY-hh:mm:ss"))
+// console.log(moment().format())
+
+import colorize from './utils/v1/colorize'
+
+import {
+    logger,
+    expressLogger
+} from './utils/v1/logger'
+
+// import pino from 'pino';
+// import expressPino from 'express-pino-logger';
+// import childProcess from 'child_process';
+// import stream from 'stream';
+
+
+
+ //multi file logging
+    //Environment variables
+    // const cwd = process.cwd();
+    // const {env} = process;
+    // const logPath = `${cwd}/logs`;
+
+    // //console.log(timeStart)
+
+    // // Create a stream where the logs will be written
+    // const logThrough = new stream.PassThrough();
+    // const log = pino({name: 'project',level: process.env.LOG_LEVEL || 'info'}, logThrough);
+    // const expressLogger = expressPino({ log });
+    
+    // // Log to multiple files using a separate process
+    // const child = childProcess.spawn(process.execPath, [
+    //     require.resolve('pino-tee'),
+    //     'warn', `${logPath}/${timeStart}_warn.log`,
+    //     'error', `${logPath}/${timeStart}_error.log`,
+    //     'fatal', `${logPath}/${timeStart}_fatal.log`,
+    //     'info',`${logPath}/${timeStart}_info.log`,
+    //     'debug',`${logPath}/${timeStart}_debug.log`,
+    //     'trace',`${logPath}/${timeStart}_trace.log`,
+    // ], {cwd, env});
+
+    // logThrough.pipe(child.stdin);
+
+    
+        // Log pretty messages to console (optional, for development purposes only)
+        // const pretty = pino.pretty();
+        // pretty.pipe(process.stdout);
+        // logThrough.pipe(pretty);
+
+//const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
+ //logger
+
+//logging package
+//https://www.twilio.com/blog/guide-node-js-logging
+
+
 // Load env vars
 dotenv.config({  
     path: './_config/config.env'
@@ -42,6 +100,7 @@ dotenv.config({
 
 //Determine what enviroment mode we are in.
 const dev = process.env.NODE_ENV !== 'production'
+
 
 //This is telling to let next.js, the react server side rendering package, to handle routing
 const nextApp = next({ 
@@ -58,7 +117,8 @@ nextApp.prepare()
     global.MANGAGEMENT_TOKEN = await getManagementTokens()
 
     if(global.MANGAGEMENT_TOKEN) {
-        console.log("Management token recieved".magenta)
+        //console.log("Management token recieved".magenta)
+        colorize.success("Management token recieved")
     }
 
     //Connect to DB via Mongoose
@@ -124,6 +184,10 @@ nextApp.prepare()
     //Example: amenadiel/a420/420_test.png
     app.use(express.static(path.join(__dirname,'./_data/storms')))
 
+    //logging
+    app.use(expressLogger)
+   
+
     //Mount routers, appi calls
     //The first parameter is the name of the path and the 2nd is the file to use if an Api call with that path is received
     //For example
@@ -147,16 +211,23 @@ nextApp.prepare()
         return handle(req, res)
     })
 
+    
+
     //Get the port and have the site on that port
     const PORT = (process.env.PORT as unknown as number) ?? 5000;
     const server = app.listen(PORT,'0.0.0.0',() => {
-        console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold)
+        //log.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+        //log.error('TEST')
+        //@ts-ignore
+        colorize.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+        //console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.green.bold.underline)
     })
 
     //Handle unhandled promise rejections
     process.on('unhandledRejection', (err:any,promise: Promise<any>) => {
 
-        console.log(`Error: ${err?.message ?? 'undefined error'}`.red)
+        // console.log(`Error: ${err?.message ?? 'undefined error'}`.red)
+        colorize.error(`Error: ${err?.message ?? 'undefined error'}`)
         
         //Exit server on fail
         server.close(() => {

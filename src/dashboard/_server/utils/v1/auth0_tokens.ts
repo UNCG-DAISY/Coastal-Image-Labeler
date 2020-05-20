@@ -5,6 +5,7 @@
 
 import request from "request"
 import axios from 'axios'
+import colorize from './colorize'
 
 const getManagementTokens = async ():Promise<string> => {
 
@@ -21,12 +22,13 @@ const getManagementTokens = async ():Promise<string> => {
         }
       };
     
-    console.log("Getting Auth0 management token".magenta)
+      colorize.log("Getting Auth0 management token")
     
     //Api call to get the token
     const management_data = (await axios.post(options.url,options.form)).data
 
-    console.log("Got Auth0 management token".bgMagenta)
+    // console.log("Got Auth0 management token".bgMagenta)
+    colorize.success("Got Auth0 management token")
     return management_data.access_token
 }
 

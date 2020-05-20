@@ -3,6 +3,7 @@
 */
 
 import { connect, Mongoose} from 'mongoose'
+import colorize from './utils/v1/colorize'
 
 export const connectDB = async () => {
 
@@ -15,8 +16,9 @@ export const connectDB = async () => {
     }
     
     //Inform which DB using
-    console.log(`Using ${process.env.NODE_ENV === 'production'? 'production': 'development'} database`.magenta)
-
+    //console.log(`Using ${process.env.NODE_ENV === 'production'? 'production': 'development'} database`.magenta)
+    colorize.info(`Using ${process.env.NODE_ENV === 'production'? 'production': 'development'} database`)
+    
     //Connect
     const conn: Mongoose = (await (connect(db_uri as string, {
         useNewUrlParser: true,
@@ -26,7 +28,8 @@ export const connectDB = async () => {
     })))
     
     //Inform that the connection has been made
-    console.log(`MongoDB connected: ${conn?.connection?.host}`.cyan.underline.bold)
+    //console.log(`MongoDB connected: ${conn?.connection?.host}`.cyan.underline.bold)
+    colorize.success(`MongoDB connected: ${conn?.connection?.host.underline}`)
    
     
 }
