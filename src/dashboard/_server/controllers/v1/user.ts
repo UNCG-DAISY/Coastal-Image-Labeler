@@ -12,51 +12,51 @@ import {ArchiveModel} from '../../models/Archive'
 import {ImageModel} from '../../models/Image'
 
 
-/**
- * @desc        Gets all roles of a user
- * @route       GET /api/v1/users/isUser
- * @access      Public
- * @returns     yes
- */
-const getUserRoles = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+// /**
+//  * @desc        Gets all roles of a user
+//  * @route       GET /api/v1/users/isUser
+//  * @access      Public
+//  * @returns     yes
+//  */
+// const getUserRoles = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     
-    const userId = req?.body?.id
+//     const userId = req?.body?.id
 
-    //If no user id sent
-    if(!userId) {
-        return next(new ErrorResponse(`Please send a userId`,400))
-    }
+//     //If no user id sent
+//     if(!userId) {
+//         return next(new ErrorResponse(`Please send a userId`,400))
+//     }
     
-    //Call the auth0 api to get uses of the user
-    const options:any = {
-        method: 'GET',
-        url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${userId}/roles`,
-        headers:{
-            authorization: `Bearer ${global.MANGAGEMENT_TOKEN}`
-        }
-    };
+//     //Call the auth0 api to get uses of the user
+//     const options:any = {
+//         method: 'GET',
+//         url: `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${userId}/roles`,
+//         headers:{
+//             authorization: `Bearer ${global.MANGAGEMENT_TOKEN}`
+//         }
+//     };
     
-    //Call auth0 api for user roles
-    const role_data:[any] = (await axios.get(options.url,options)).data
+//     //Call auth0 api for user roles
+//     const role_data:[any] = (await axios.get(options.url,options)).data
     
-    let roles = []
+//     let roles = []
 
-    //Since array of roles,just get the important stuff
-    role_data.forEach(role => {
-        roles.push({
-            role:role.name,
-            role_description:role.description
-        })
-    });
+//     //Since array of roles,just get the important stuff
+//     role_data.forEach(role => {
+//         roles.push({
+//             role:role.name,
+//             role_description:role.description
+//         })
+//     });
 
-    res.status(200).json({
-        success:true,
-        data:{
-           roles:roles
-        }
-    })
+//     res.status(200).json({
+//         success:true,
+//         data:{
+//            roles:roles
+//         }
+//     })
    
-})
+// })
 
 /**
  * @desc        Gets a user by id
@@ -65,20 +65,28 @@ const getUserRoles = asyncHandler(async (req: Request, res: Response, next: Next
  * @returns     yes
  */
 const findUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    //console.log(Object.keys(req),'---')
-    //if a body data was sent
+    
+    /* FIDNING USER PROCESS*/
+    /*
+        1. Check if a body was sent
+        2. Query with the body
+        3. Adjust return message
+    */
     if(req.body) {
+        //get user
         const user  = await UserModel.findOne(req.body).populate('roleData')
-        
         let message = 'User does not exist'
+
+        //if user does exist
         if(user) {
             message = 'User exists in DB'
         }
 
+        //return
         res.status(200).json({
             success:true,
+            message,
             data:{
-                message,
                 user
             }
         }) 
@@ -86,7 +94,7 @@ const findUser = asyncHandler(async (req: Request, res: Response, next: NextFunc
     else {
     //if no body data was sent
         res.status(400).json({
-            success:true,
+            success:false,
             data:{
                 message:'No body data sent'
             }
@@ -95,51 +103,51 @@ const findUser = asyncHandler(async (req: Request, res: Response, next: NextFunc
     
 })
 
-/**
- * @desc        Given a user id, and an array of roles, check if user has those roles
- * @route       GET /api/v1/users/:id
- * @access      Public
- * @returns     yes
- */
-const checkUserRoles = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+// /**
+//  * @desc        Given a user id, and an array of roles, check if user has those roles
+//  * @route       GET /api/v1/users/:id
+//  * @access      Public
+//  * @returns     yes
+//  */
+// const checkUserRoles = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     
-    //Get user and roles
-    const user  = await UserModel.findById(req?.params?.id).populate('roleData')
-    const userRoles = user.roleNames
+//     //Get user and roles
+//     const user  = await UserModel.findById(req?.params?.id).populate('roleData')
+//     const userRoles = user.roleNames
 
-    //get allowed roles
-    const allowedRoles = req?.body?.allowedRoles ?? []
+//     //get allowed roles
+//     const allowedRoles = req?.body?.allowedRoles ?? []
 
-    //Make allowed roles and user roles into set, do intersection and see whats result
-    const user_roles_set:Set<string> = new Set(userRoles)
-    const roles_set:Set<string> = new Set(allowedRoles)
+//     //Make allowed roles and user roles into set, do intersection and see whats result
+//     const user_roles_set:Set<string> = new Set(userRoles)
+//     const roles_set:Set<string> = new Set(allowedRoles)
 
-    const role_intersection:Set<string> = new Set(
-        [...user_roles_set].filter(x => roles_set.has(x)));
+//     const role_intersection:Set<string> = new Set(
+//         [...user_roles_set].filter(x => roles_set.has(x)));
 
-    //If theres no common roles, denied
-    if(role_intersection.size === 0) {
-        res.status(200).json({
-            success:true,
-            data:{
-                message: 'Denied',
-                allowed:false
-            }
-        }) 
-    }
-    else {
-        //If theres atleast 1 common role, allowed
-        res.status(200).json({
-            success:true,
-            data:{
-                message: 'Allowed',
-                allowed:true
-            }
-        }) 
-    }
+//     //If theres no common roles, denied
+//     if(role_intersection.size === 0) {
+//         res.status(200).json({
+//             success:true,
+//             data:{
+//                 message: 'Denied',
+//                 allowed:false
+//             }
+//         }) 
+//     }
+//     else {
+//         //If theres atleast 1 common role, allowed
+//         res.status(200).json({
+//             success:true,
+//             data:{
+//                 message: 'Allowed',
+//                 allowed:true
+//             }
+//         }) 
+//     }
     
     
-})
+// })
 
 //Perhaps this should be only allowed by logged in users
 /**
@@ -150,27 +158,45 @@ const checkUserRoles = asyncHandler(async (req: Request, res: Response, next: Ne
  */
 const createNewUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     
+    /* CREATING USER PROCESS*/
+    /*
+        1. Check if a body was sent
+        2. check if  displayName and id sent
+        3. create user
+        4. return
+    */
+
     //console.log(req.body)
     const {passportUser} = req.body
-    const {displayName,id} = passportUser
 
-    //console.log(`${displayName} ${id}`.green)
+    //no passport bbody
+    if(!passportUser) {
+        res.status(200).json({
+            success:false,
+            message:'No passport object sent'
+        }) 
+        return next()
+    }
+
+    const {displayName,id} = passportUser
     //if no displayName or id passed
     if(!displayName || !id) {
         res.status(400).json({
             success:true,
             data:null
         }) 
+        return next()
     }
-   
+
+    //create the user
     let user_entry = await UserModel.create({
         userId:id,
-        userName: displayName
-        //dateAdded:Date.now()
+        userName: displayName,
+        dateAdded:Date.now()
     })
 
+    //return
     console.log('New user made'.bgMagenta)
-
     res.status(200).json({
         success:true,
         data:{
@@ -187,7 +213,16 @@ const createNewUser = asyncHandler(async (req: Request, res: Response, next: Nex
  * @returns     yes
  */
 const allowedPages = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    // console.log(req?.params?.id)
+  
+
+     /* ALLOWED PAGES PROCESS*/
+    /*
+        1. check if id was sent
+        2. Get user
+        3. check if user
+        4. check rolenames
+        5. return
+    */
 
     const id = req?.params?.id || undefined
     const defaultAllowed = {
@@ -197,41 +232,44 @@ const allowedPages = asyncHandler(async (req: Request, res: Response, next: Next
     //if no id sent
     if(id === undefined) {
         res.status(400).json({
-            success:false,
+            success:true,
+            message:'No Id sent',
+            data:{
+               allowedPages:defaultAllowed
+            }
+        })
+        return next()
+    }
+    
+    //get user
+    const user = await UserModel.findOne({userId:id}).populate('roleData')
+    
+    //if no user
+    if(!user) {
+        res.status(400).json({
+            success:true,
+            message:'No user found',
             data:{
                allowedPages:defaultAllowed
             }
         })
     }
-    else {
-        //console.log(`${id}`.red)
-        const user = await UserModel.findOne({userId:id}).populate('roleData')
-        //console.log(`${user}`.red)
-        //console.log(user)
-        if(user) {
-            //console.log('user does exist'.red)
-            const {roleNames} = user
 
-            const pagesAllowed = {
-                tagger: roleNames.includes("tagger")
-            }
-            res.status(200).json({
-                success:true,
-                data:{
-                    allowedPages:pagesAllowed
-                }
-            })
-        } else {
-            //console.log('NO user does exist'.red)
-            res.status(200).json({
-                success:true,
-                data:{
-                    allowedPages:defaultAllowed
-                }
-            })
-        }
-        
+    //compare role names to pages needed
+    const {roleNames} = user
+    const pagesAllowed = {
+        tagger: roleNames.includes("tagger")
     }
+
+    res.status(200).json({
+        success:true,
+        message:'allowed pages found',
+        data:{
+            allowedPages:pagesAllowed
+        }
+    })
+    
+    
 
    
 })
@@ -363,7 +401,12 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
    
 })
 
-//this cycles to the next possible image to tag
+/**
+ * @desc        Cycles to users next taggable image of an archive
+ * @route       POST /api/v1/images/tagImage
+ * @access      Public
+ * @returns     yes
+ */
 const updatedTaggedImages = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const {user} = req
     //We need the archive so we know which image to cycle off into tagged list
@@ -401,9 +444,9 @@ const updatedTaggedImages = asyncHandler(async (req: Request, res: Response, nex
 })
 
 export {
-    getUserRoles,
+    //getUserRoles,
     findUser,
-    checkUserRoles,
+    //checkUserRoles,
     createNewUser,
     allowedPages,
     getAssignedImage,
