@@ -215,7 +215,7 @@ const createNewUser = asyncHandler(async (req: Request, res: Response, next: Nex
 const allowedPages = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   
 
-     /* ALLOWED PAGES PROCESS*/
+    /* ALLOWED PAGES PROCESS*/
     /*
         1. check if id was sent
         2. Get user
@@ -282,148 +282,201 @@ const allowedPages = asyncHandler(async (req: Request, res: Response, next: Next
  */
 const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
 
+    /* GET ASSINGED IMAGE PROCESS*/
+    /*
+        1. check if archive is sent
+        2. check if user is sent
+        3. get user object
+        4. check to see if there is an assignedImages prop
+        5. if there is no assingedImages prop, create one
+        6. Then check if there is an assinged image for archive, if
+        so send it back, if not then get one.
+
+        7. If no images are assigned, assign one by
+            a. Getting all images that can be tagged of that archive
+            b. Getting all images that have been tagged by this user
+            c. Filter .b out of .a
+        8. Then select the first taggable image and assign it
+        9. If there are none, then set undefined
+        10. return
+    */
+
+    //get passed in params
     const {archive} = req?.params
     const {user} = req
 
-    //If no user was passed
+    //check user and archive params
     if(!user) {
         res.status(400).json({
             success:true,
-            data:{
             message:"No user sent",
-            }
         })    
-    } else {
-        const userId = user.mongoUser._id;
-        const userDocument = (await UserModel.findById(userId))
-        let getAssignedImages = userDocument.assignedImages
-
-        //If theres no assignedImages property
-        if(!getAssignedImages) {
-            getAssignedImages = (await UserModel.findByIdAndUpdate(
-                userId,
-                {
-                    assignedImages:{}
-                },
-                {
-                    new:true,
-                    runValidators:true
-                }
-            )).assignedImages
-        } 
-
-        let assignedImageOfArchive = getAssignedImages[archive]
-
-        //If there is an image assigned already, send it back
-        if(assignedImageOfArchive) {
-
-            const assignedImageDocument = await ImageModel.findById(assignedImageOfArchive)
-            res.status(200).json({
-                success:true,
-                message:"Assigned Image found",
-                data:{
-                    image:assignedImageDocument
-                }
-            })
-        } else {
-            //If theres no image assigned
-
-            //First find the archive with this name
-            const archiveDocument = (await ArchiveModel.find({name:archive}))[0]
-
-            //We need to make sure that we dont give an image already tagged by the user
-            const listOfTaggedImagesOfUser = userDocument.imagesTagged
-
-            const listOfPossibleTaggableImages = (await ImageModel.find({
-                archive:archiveDocument._id,
-                taggable:true,
-                tillComplete: { $gt: 0 }
-            }))
-
-            var newImagesForUser = listOfPossibleTaggableImages.filter(function (image) {
-                return !listOfTaggedImagesOfUser.includes(image._id)
-            });
-
-            console.log('Images not tagged by user are length',newImagesForUser.length)
-            const firstPossibleTaggableImage = newImagesForUser[0];
-           
-            //If there is a image that can be tagged, give it back, else tell them 
-            //theres no more images to tag.
-            if(firstPossibleTaggableImage) {
-                 //Now update user document
-                (await UserModel.findByIdAndUpdate(
-                    userId,
-                    {
-                        assignedImages:{
-                            [archive]:firstPossibleTaggableImage._id,
-                            ...getAssignedImages
-                        }
-                    },
-                    {
-                        runValidators:true
-                    }
-                ))
-
-                res.status(200).json({
-                    success:true,
-                    message:"No image was assigned therefore assigned image",
-                    data:{
-                        image:firstPossibleTaggableImage
-                    }
-                })
-            } else {
-                (await UserModel.findByIdAndUpdate(
-                    userId,
-                    {
-                        assignedImages:{
-                            [archive]:undefined,
-                            ...getAssignedImages
-                        }
-                    },
-                    {
-                        runValidators:true
-                    } 
-                ))
-
-                res.status(200).json({
-                    success:true,
-                    message:"No more images to tag in this archive",
-                    data:{
-                        image:undefined
-                    }
-                })
-            }
-           
-        }
-
+        return next()
     }
+    if(!archive) {
+        res.status(400).json({
+            success:true,
+            message:"No archive sent",
+        })    
+        return next()
+    }
+
+    //get user
+    const userId = user.mongoUser._id;
+    const userDocument = (await UserModel.findById(userId))
+    //get all assigned images
+    let getAssignedImages = userDocument.assignedImages
+
+    //If theres no assignedImages property
+    //then create one
+    if(!getAssignedImages) {
+        getAssignedImages = (await UserModel.findByIdAndUpdate(
+            userId,
+            {
+                assignedImages:{}
+            },
+            {
+                new:true,
+                runValidators:true
+            }
+        )).assignedImages
+    } 
+
+    //Get the currently assigned image of the archive
+    let assignedImageOfArchive = getAssignedImages[archive]
+
+    //If there is an image assigned already, send it back
+    if(assignedImageOfArchive) {
+
+        const assignedImageDocument = await ImageModel.findById(assignedImageOfArchive)
+        res.status(200).json({
+            success:true,
+            message:"Assigned Image found",
+            data:{
+                image:assignedImageDocument
+            }
+        })
+        return next()
+    }
+
+    //If theres no image assigned
+
+    //First find the archive with this name
+    const archiveDocument = (await ArchiveModel.find({name:archive}))[0]
+
+    //Get the list of images already tagged by this user
+    const listOfTaggedImagesOfUser = userDocument.imagesTagged
+
+    //Get the list of all images that can be tagged
+    const listOfPossibleTaggableImages = (await ImageModel.find({
+        archive:archiveDocument._id,
+        taggable:true,
+        tillComplete: { $gt: 0 }
+    }))
+
+    //Filter out the images that have been tagged
+    let newImagesForUser = listOfPossibleTaggableImages.filter(function (image) {
+        return !listOfTaggedImagesOfUser.includes(image._id)
+    });
+
+    //of the images that can be tagged, get the first one
+    const firstPossibleTaggableImage = newImagesForUser[0];
     
+    //If there is a image that can be tagged, give it back, else tell them 
+    //theres no more images to tag.
+    if(firstPossibleTaggableImage) {
+        //Now update user document with the new image
+        (await UserModel.findByIdAndUpdate(
+            userId,
+            {
+                assignedImages:{
+                    [archive]:firstPossibleTaggableImage._id,
+                    ...getAssignedImages
+                }
+            },
+            {
+                runValidators:true
+            }
+        ))
+
+        //send back
+        res.status(200).json({
+            success:true,
+            message:"No image was assigned therefore assigned image",
+            data:{
+                image:firstPossibleTaggableImage
+            }
+        })
+    } else {
+        //No new images availible, so update user doc to reflect this
+        (await UserModel.findByIdAndUpdate(
+            userId,
+            {
+                assignedImages:{
+                    [archive]:undefined,
+                    ...getAssignedImages
+                }
+            },
+            {
+                runValidators:true
+            } 
+        ))
+
+        res.status(200).json({
+            success:true,
+            message:"No more images to tag in this archive",
+            data:{
+                image:undefined
+            }
+        })
+    }
    
 })
 
 /**
- * @desc        Cycles to users next taggable image of an archive
+ * @desc        Updates the list of tagged images,by taking the currently assigned and putting it in tagged list
  * @route       POST /api/v1/images/tagImage
  * @access      Public
  * @returns     yes
  */
 const updatedTaggedImages = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    
+    /* UPDATE TAGGED IMAGES PROCESS*/
+    /*
+        1. check if user is sent
+        2. check if archive is sent
+        3. add currently assigned image of archive to tagged list
+        4. remove that archive from assinged list
+        5. return
+    */
+
     const {user} = req
+    
     //We need the archive so we know which image to cycle off into tagged list
     const {archive} = req?.params
+
+    if(!user || !archive) {
+        res.status(200).json({
+            success:false,
+            message:"No user or archive sent",
+        })
+        return next()
+    }
+
+    //get user doc
     const userId = user?.mongoUser._id
-  
     const userDocument = (await UserModel.findById(userId))
 
-    
-    //console.log(userDocument.userName)
+    //get the current list of tagged images
     let newListOfTaggedImages = userDocument.imagesTagged
-    //const imageAdding = userDocument.assignedImages[archive]
+    //add the currently assigned image for the archive to the tagged list
     newListOfTaggedImages.push(userDocument.assignedImages[archive]);
 
+    //remove that archive, which means no image is assigned from that archive
     let newAssignedImages = userDocument.assignedImages
     delete newAssignedImages[archive];
 
+    //update model
     (await UserModel.findByIdAndUpdate(
         userId,
         {
