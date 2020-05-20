@@ -16,6 +16,7 @@ import Paper from '@material-ui/core/Paper';
 
 import ErrorAlert from '../../components/ErrorAlert'
 
+import endpoints from '../../components/endpoints'
 
 
 // This page shows an image to tag
@@ -34,7 +35,10 @@ function TagImage(props) {
 
   async function skipImage() {
     //alert('Skipping image')
-    const responseData = await (await fetch(`/api/v1/images/skipImage/${queryParams?.archive}`, {
+    const responseData = await (await fetch(apiCall(
+      endpoints.skipImage(queryParams?.archive)
+      //`/api/v1/images/skipImage/${queryParams?.archive}`
+      ), {
       method: "GET",
     
     })).json();
@@ -46,7 +50,7 @@ function TagImage(props) {
   const taggingForm = (
     <React.Fragment>
       <TaggingForm
-        imageUrl = {`http://localhost:5000/${imgUrl}`}
+        imageUrl = {`${apiCall(imgUrl)}`} //http://localhost:5000/${imgUrl}
         submitTags = {submitTags}
         tagAsWater = {tagAsWater}
         skipImage = {skipImage}
@@ -68,7 +72,10 @@ function TagImage(props) {
       timeStart: props.timeStart
     }
 
-    const responseData = await (await fetch(`/api/v1/images/tagImage`, {
+    const responseData = await (await fetch(apiCall(
+      endpoints.tagImage
+      //`/api/v1/images/tagImage`
+      ), {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

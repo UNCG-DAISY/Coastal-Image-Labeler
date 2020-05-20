@@ -11,8 +11,7 @@ import axios from 'axios'
 import {ArchiveModel} from '../../models/Archive'
 import {ImageModel} from '../../models/Image'
 
-//import {rbacJson,UserDocument} from '../../index'
-//This is probablly a deprecated function
+
 /**
  * @desc        Gets all roles of a user
  * @route       GET /api/v1/users/isUser

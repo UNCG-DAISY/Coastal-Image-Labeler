@@ -13,6 +13,7 @@ import Layout from '../../components/layouts/Layout'
 
 import ErrorAlert from '../../components/ErrorAlert'
 
+import endpoints from '../../components/endpoints'
 
 // This page shows a stepper that asks a series of questions on what strom to
 // tag, what archive of that storm and then redirects to a page to show that
@@ -81,9 +82,11 @@ TagImage.getInitialProps = async ctx => {
     })
   }
 
+  console.log('=======================================',endpoints.getStormOfUser(req.user.mongoUser._id))
   const getStorms = (await axios.get(
     apiCall(
-      `/api/v1/storms/user/${req.user.mongoUser._id}`
+      endpoints.getStormOfUser(req.user.mongoUser._id)
+      //`/api/v1/storms/user/${req.user.mongoUser._id}`
     )
   )).data
 
