@@ -22,8 +22,9 @@ const testGet = asyncHandler(async (req: Request, res: Response, next: NextFunct
     console.log('TEST GET')
     res.status(200).json({
         success:true,
+        message: `Test get done at ${Date.now()} with user ${req.user.id}`,,
         data:{
-           message: `Test get done at ${Date.now()} with user ${req.user.id}`,
+          
            cards
         }
     })
@@ -44,9 +45,7 @@ const testPost = asyncHandler(async (req: Request, res: Response, next: NextFunc
     
     res.status(200).json({
         success:true,
-        data:{
-           message: `Test POST, keys are ${keys} at time ${Date.now()}`
-        }
+        message: `Test POST, keys are ${keys} at time ${Date.now()}`
     })
 })
 

@@ -106,8 +106,8 @@ const createNewUser = asyncHandler(async (req: Request, res: Response, next: Nex
     console.log('New user made'.bgMagenta)
     res.status(200).json({
         success:true,
+        message:'New User made',
         data:{
-            message:'New User made',
             user:user_entry
         }
     }) 
@@ -174,11 +174,7 @@ const allowedPages = asyncHandler(async (req: Request, res: Response, next: Next
         data:{
             allowedPages:pagesAllowed
         }
-    })
-    
-    
-
-   
+    })  
 })
 
 /**
