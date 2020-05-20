@@ -6,6 +6,7 @@ import { Request,Response,NextFunction } from "express"
  //to avoid putting try catch everywhere
 import {asyncHandler} from '../../middleware/v1/async'
 import {ArchiveModel} from '../../models/Archive'
+import colorize from '../../utils/v1/colorize'
 
 /**
  * @desc        Gets all archives
@@ -16,7 +17,6 @@ import {ArchiveModel} from '../../models/Archive'
 const getAllArchives = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     //get all archives
     const archives = await ArchiveModel.find()
-
     res.status(200).json({
         success:true,
         message:`${res.advancedResults.length} archives found`,

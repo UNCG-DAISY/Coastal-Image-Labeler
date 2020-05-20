@@ -22,7 +22,7 @@ const testGet = asyncHandler(async (req: Request, res: Response, next: NextFunct
     console.log('TEST GET')
     res.status(200).json({
         success:true,
-        message: `Test get done at ${Date.now()} with user ${req.user.id}`,,
+        message: `Test get done at ${Date.now()} with user ${req.user.id}`,
         data:{
           
            cards
