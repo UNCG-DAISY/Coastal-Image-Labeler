@@ -172,10 +172,11 @@ TagImage.getInitialProps = async ctx => {
     })
   }
 
-  
-
   //Is this user part of this archive
-  const getQueryStormName = await (await fetch(apiCall(`/api/v1/storms?name=${query.storm}`), {
+  const getQueryStormName = await (await fetch(apiCall(
+    //`/api/v1/storms?name=${query.storm}`
+    endpoints.getStormByName(query.storm)
+    ), {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -206,7 +207,10 @@ TagImage.getInitialProps = async ctx => {
   }
 
   //Then get the image of the user
-  const getImageOfArchive = await (await fetch(apiCall(`/api/v1/users/getImage/${query.archive}`), {
+  const getImageOfArchive = await (await fetch(apiCall(
+    //`/api/v1/users/getImage/${query.archive}`
+    endpoints.getImage(query.archive)
+    ), {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
