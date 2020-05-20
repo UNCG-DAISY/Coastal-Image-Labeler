@@ -2,6 +2,8 @@ import {
     apiCall
   } from '../constants'
 
+import endpoints from '../endpoints'
+
 async function getAllowedPages(user,ctx) {
     
     const id = user?.id || undefined
@@ -11,7 +13,10 @@ async function getAllowedPages(user,ctx) {
     }
 
     if(id) {
-        const allowedPages = await (await fetch(apiCall(`/api/v1/users/allowedPages/${id}`), {
+        const allowedPages = await (await fetch(apiCall(
+            // `/api/v1/users/allowedPages/${id}`
+            endpoints.allowedPages(id)
+            ), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

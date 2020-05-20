@@ -5,11 +5,20 @@ const endpoints = {
     getStormById(id) {
         return `/api/v1/storms?_id=${id}`
     },
+    getStormByName(name) {
+        return `/api/v1/storms?name=${name}`
+    },
     getStormOfUser(id){
         return `/api/v1/storms/user/${id}`
     },
     skipImage(archive){
         return `/api/v1/images/skipImage/${archive}`
+    },
+    allowedPages(id){
+        return `/api/v1/users/allowedPages/${id}`
+    },
+    getImage(archive){
+        return `/api/v1/users/getImage/${archive}`
     },
     tagImage:`/api/v1/images/tagImage`
     

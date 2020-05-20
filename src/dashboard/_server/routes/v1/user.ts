@@ -27,14 +27,14 @@ router
     .post(findUser)
 
 //Gets all roles of a user
-router
-    .route('/getRoles')
-    .post(getUserRoles)
+// router
+//     .route('/getRoles')
+//     .post(getUserRoles)
 
 //Checks if a given user id is able to access certain features
-router
-    .route('/auth/:id')
-    .post(checkUserRoles)
+// router
+//     .route('/auth/:id')
+//     .post(checkUserRoles)
 
 //Creates a user with just id and displayName and creation date
 //This is at _app.js
