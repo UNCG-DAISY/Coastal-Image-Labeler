@@ -27,6 +27,8 @@ import {
 import {getAllowedPages} from '../../components/utils/getAllowedPages'
 import ResumeTaggingTable from '../../components/ResumeTaggingTable'
 
+import endpoints from '../../components/endpoints'
+
 
 // async function test() {
  
@@ -50,7 +52,7 @@ function Home(props) {
     
 
     //get storm
-    const res = await fetch(`/api/v1/archives/FindArchive`, {
+    const res = await fetch(apiCall(endpoints.findArchive), { //`/api/v1/archives/FindArchive`
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -62,7 +64,7 @@ function Home(props) {
     const dataArchive = ((await res.json()).data).archives[0]
     const {storm} = dataArchive
     
-    const resGetStorm = await fetch(`/api/v1/storms?_id=${storm}`, {
+    const resGetStorm = await fetch(endpoints.getStormById(storm), { //`/api/v1/storms?_id=${storm}`
       method: "GET",
       headers: {
         "Content-Type": "application/json"

@@ -19,6 +19,7 @@ import {
   apiCall
 } from '../components/constants'
 import {getAllowedPages} from '../components/utils/getAllowedPages'
+import endpoints from '../components/endpoints'
 
 
 export default class MyApp extends App {
@@ -45,7 +46,7 @@ export default class MyApp extends App {
         try {
           getMongoUserById = await axios.post(
             apiCall(
-              `/api/v1/users/findUser`
+              endpoints.findUser//`/api/v1/users/findUser`
             ),
             {
               userId: ctx?.req?.session?.passport?.user?.id
@@ -63,7 +64,7 @@ export default class MyApp extends App {
 
           //Get the newly created user
           try{
-            getMongoUserById = await axios.post(apiCall('/api/v1/users/createUser'),{
+            getMongoUserById = await axios.post(apiCall(endpoints.createUser),{ //'/api/v1/users/createUser'
               passportUser:pageProps?.user
             })
           } catch(error) {
