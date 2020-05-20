@@ -5,13 +5,12 @@
 import express from 'express'
 
 import {
-    getUserRoles,
+    //getUserRoles,
     findUser,
-    checkUserRoles,
+    //checkUserRoles,
     createNewUser,
     allowedPages,
     getAssignedImage,
-    updatedTaggedImages
 } from '../../controllers/v1/user'
 
 import {
