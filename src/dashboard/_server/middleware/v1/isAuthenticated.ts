@@ -1,17 +1,14 @@
 import { Request,Response,NextFunction } from "express"
 
 function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
-    // console.log('REQ OBJECT = ',Object.keys(req))
+    // console.log("HEADERS",req.headers)
     // console.log('IS AUTH? = ',req.isAuthenticated())
     if (req.isAuthenticated()) return next();
 
-    
-    
     res.status(401).json({
         success:true,
+        message: `Not authenticated`,
         data:{
-           message: `Not authenticated`,
-           cards:[]
         }
     })
 }
