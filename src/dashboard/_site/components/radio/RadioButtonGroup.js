@@ -30,7 +30,7 @@ export default function RadioButtonGroup(props) {
             <RadioButton
                 value = {state} 
                 onChange = {(event) => {  
-                    console.log(props)
+                    //console.log(props)
                     onChange({
                         key: keyValue,
                         value:event.target.value
