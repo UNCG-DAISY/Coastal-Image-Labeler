@@ -6,7 +6,12 @@ const myIp = ip.address()
 const port = 5000
 const protocal = 'http'
 const apiCall = (route) => {
-    return `${protocal}://${myIp}:${port}${route}`
+    if(myIp != '127.0.0.1') {
+        return `${protocal}://${myIp}:${port}${route}`
+    }
+
+    return `${route}`
+    
 }
 
 const uiConstants = {
