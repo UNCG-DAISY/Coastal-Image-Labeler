@@ -30,18 +30,6 @@ import ResumeTaggingTable from '../../components/ResumeTaggingTable'
 import endpoints from '../../components/endpoints'
 
 
-// async function test() {
- 
-//   await fetch("/api/v1/test/get", {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json"
-//     }
-//   });
-  
-// }
-
-
 // Home page after logging in
 function Home(props) {
   const router = useRouter()
@@ -83,18 +71,19 @@ function Home(props) {
 
   const classes = useStyles();
 
-  async function testRoles(url) {
-    console.log(url)
-    const res = await fetch(`${url}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      },
-    });
-
-    const resData = (await res.json())
-    console.log(resData)
-    //alert(resData.data.message)
+  async function testcall() {
+    const res = await (await fetch(apiCall(
+        endpoints.allowedPages(props.user.id)
+        ), {
+        method: "GET",
+        "credentials": "include",
+        headers: {
+            "Content-Type": "application/json",
+            "credentials": "include",
+            
+            //"mycookie": props.cookie ,
+        }
+    })).json();
   }
 
   //console.log(assignedImages)
@@ -108,7 +97,7 @@ function Home(props) {
 
           <Typography variant="body1" component="h1" gutterBottom>
             <Paper elevation={3} variant="outlined" style={{padding:10}}>
-              Welcome! You can start tagging by clicking on "Image Tag" on the left, or resume an archive you have
+              Welcome {props.user.displayName}! You can start tagging by clicking on "Image Tag" on the left, or resume an archive you have
               begun by pressing the buttons below
             </Paper>
           </Typography> 
@@ -138,11 +127,17 @@ function Home(props) {
 
           
 
-          {/* <Button variant="contained" onClick = {() => testRoles('/api/v1/test/authorize2')}>Test is tagger</Button>
-          <Button variant="contained">Test is admin</Button>
+          {/* <Button 
+            variant="contained" 
+            onClick = {() => {   
+              testcall()     
+            }}
+          >
+            Test is tagger
+          </Button> */}
           
-
-           */}
+          
+    
          
         </Box>
       </Container>
@@ -177,7 +172,7 @@ Home.getInitialProps = async ctx => {
   const allowedPages = await getAllowedPages(req.user,ctx)
   
 
-  return {allowedPages}
+  return {allowedPages,cookie:ctx.req.headers.cookie}
 }
 
 export default Home
