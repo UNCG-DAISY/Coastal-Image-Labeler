@@ -43,7 +43,7 @@ router
 
 router
     .route('/allowedPages/:id')
-    .get(allowedPages)
+    .get(ensureAuthenticated,allowedPages)
 
 router
     .route('/getImage/:archive')
