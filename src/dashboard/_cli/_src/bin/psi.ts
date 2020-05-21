@@ -19,5 +19,5 @@ program
     .command('mongoURI', 'URI to connect to MongoDB Atlas')
     .command('catalog', 'Add catalog(s) to the database')
     .command('archive', 'Add archive(s) of a catalog to the database')
-    // .command('image', 'Add image(s) of a archive to the database')
+    .command('export', 'Export the data for ML use.')
     .parse(process.argv)
