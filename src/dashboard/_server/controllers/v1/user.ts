@@ -5,7 +5,7 @@
 import { Request,Response,NextFunction } from "express"
 import {asyncHandler} from '../../middleware/v1/async' //to avoid putting try catch everywhere
 import {UserModel} from '../../models/User'
-import {RoleModel} from '../../models/Role'
+//import {RoleModel} from '../../models/Role'
 import {ErrorResponse} from '../../utils/v1/errorResponse'
 import axios from 'axios'
 import {ArchiveModel} from '../../models/Archive'
@@ -149,10 +149,10 @@ const allowedPages = asyncHandler(async (req: Request, res: Response, next: Next
     }
     
     //get user
-    const user = await UserModel.findOne({userId:id}).populate('roleData')
+    const user = await UserModel.findOne({userId:id})
     
     //if no user
-    if(!user) {
+    if(user == undefined || user == null) {
         res.status(400).json({
             success:true,
             message:'No user found',
@@ -162,10 +162,12 @@ const allowedPages = asyncHandler(async (req: Request, res: Response, next: Next
         })
     }
 
+    //console.log(user)
     //compare role names to pages needed
-    const {roleNames} = user
+    const {roles} = user
+    //console.log(roles,'------------------')
     const pagesAllowed = {
-        tagger: roleNames.includes("tagger")
+        tagger: roles.includes("tagger")
     }
 
     res.status(200).json({

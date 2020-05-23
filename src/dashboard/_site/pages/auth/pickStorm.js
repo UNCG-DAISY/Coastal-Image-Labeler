@@ -27,6 +27,17 @@ function TagImage(props) {
     if(props.error) {
       return <ErrorAlert errorTitle={props.errorTitle} errorMessage={props.errorMessage}/>
     }
+  
+    if(Object.keys(stormList).length == 0) {
+      return (
+        <ErrorAlert 
+          errorTitle={'No catalogs'} 
+          errorMessage={
+            'You do not have permissions to tag any catalogs, please contact an admin to get permissions.'
+          }
+        />
+      )
+    }
     return <PickStormStepper storms = {stormList}/>
   }
 

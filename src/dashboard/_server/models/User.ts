@@ -40,8 +40,8 @@ const userSchema: Schema = new Schema({
         type: [String],
         default: []
     },
-    role:{
-        type:[Types.ObjectId],
+    roles:{
+        type:[String],
         default:[]
     }
 },{
@@ -61,28 +61,28 @@ userSchema.pre<UserDocument>('save', async function(next:HookNextFunction) {
 });
 
 // Reverse populate with virtuals
-userSchema.virtual('roleData', {
-    ref: 'Role',
-    localField: 'role',
-    foreignField: '_id',
-    justOne: false
-})
+// userSchema.virtual('roleData', {
+//     ref: 'Role',
+//     localField: 'roles',
+//     foreignField: '_id',
+//     justOne: false
+// })
 
-//This runs everytime
-userSchema
-.virtual('roleNames')
-.get(function () {
-    let roleNames:string[] = []
-    if(this.roleData) {
-        for(let i =0;i<this.roleData.length;i++) {
-            let role = this.roleData[i]
-            roleNames.push(role.name)
-        }
-    }
+// //This runs everytime
+// userSchema
+// .virtual('roleNames')
+// .get(function () {
+//     let roleNames:string[] = []
+//     if(this.roleData) {
+//         for(let i =0;i<this.roleData.length;i++) {
+//             let role = this.roleData[i]
+//             roleNames.push(role.name)
+//         }
+//     }
     
 
-    return roleNames
-});
+//     return roleNames
+// });
 
 
 export const UserModel: Model<UserDocument> =  model('User', userSchema);

@@ -30,8 +30,8 @@ function TagImage(props) {
   const classes = useStyles();
   //amenadiel/a420/420_test.png
 
-  
-  const imgUrl = `${queryParams?.storm}/${queryParams?.archive}/${imageDocument?.id}`
+  console.log(imageDocument?.id)
+  const imgUrl = endpoints.showImage(imageDocument?.id)//`${queryParams?.storm}/${queryParams?.archive}/${imageDocument?.id}`
 
   async function skipImage() {
     //alert('Skipping image')
@@ -197,7 +197,8 @@ TagImage.getInitialProps = async ctx => {
   }
 
   //Compare the ID's of the storms a user is part of and the ID of this storm
-  const stormsOfUser = req.user.mongoUser.storms
+  const stormsOfUser = req?.user?.mongoUser?.catalogs ?? 
+  console.log(stormsOfUser,'----------------- ')
   if(!(stormsOfUser.includes(stormID))) {
     return ({
       error:true,
@@ -208,7 +209,6 @@ TagImage.getInitialProps = async ctx => {
 
   //Then get the image of the user
   const getImageOfArchive = await (await fetch(apiCall(
-    //`/api/v1/users/getImage/${query.archive}`
     endpoints.getImage(query.archive)
     ), {
     method: "GET",
@@ -226,6 +226,7 @@ TagImage.getInitialProps = async ctx => {
       errorMessage:`Archive ${query.archive} is a invalid archive name`
     })
   }
+  // console.log('@@@@@@@@@@@@@@@',getImageOfArchive)
   const imageDocument = getImageOfArchive?.data?.image
   
   return {

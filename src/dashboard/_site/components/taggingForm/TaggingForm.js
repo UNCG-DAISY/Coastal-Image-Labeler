@@ -101,7 +101,7 @@ class TaggingForm extends React.Component {
                     <Card className={classes.root}>
                         <Header 
                             title={`Storm ${queryParams.storm}`} 
-                            subheader={`Archive ${queryParams.archive} - ${imageDoc.id}`}
+                            subheader={`Archive ${queryParams.archive} - ${imageDoc?.id}`}
                             style={{color:theme.palette.primary.light}}
                             styleSubheader = {{color:theme.palette.secondary.main}} 
                         />

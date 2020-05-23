@@ -20,7 +20,7 @@ import next from 'next'
 import users from './routes/v1/user' //Api calls for user
 import archives from './routes/v1/archives'//Api calls for archives
 import catalogs from './routes/v1/catalogs'//Api calls for storms
-import roles from './routes/v1/roles'//Api calls for roles
+//import roles from './routes/v1/roles'//Api calls for roles
 import testApi from './routes/v1/testApi' 
 import image from './routes/v1/image' 
 //Import the react/server shared constants
@@ -151,7 +151,7 @@ nextApp.prepare()
     app.use('/api/v1/users',users)
     app.use('/api/v1/archives',archives)
     app.use('/api/v1/catalogs',catalogs)
-    app.use('/api/v1/roles',roles)
+    //app.use('/api/v1/roles',roles)
     app.use('/api/v1/test',testApi)
     app.use('/api/v1/images',image)
     
