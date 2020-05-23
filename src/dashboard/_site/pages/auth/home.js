@@ -84,6 +84,8 @@ function Home(props) {
             //"mycookie": props.cookie ,
         }
     })).json();
+
+    console.log(res)
   }
 
   //console.log(assignedImages)
@@ -127,14 +129,14 @@ function Home(props) {
 
           
 
-          {/* <Button 
+          <Button 
             variant="contained" 
             onClick = {() => {   
               testcall()     
             }}
           >
             Test is tagger
-          </Button> */}
+          </Button>
           
           
     
