@@ -3,13 +3,13 @@ const endpoints = {
     createUser:'/api/v1/users/createUser',
     findArchive:'/api/v1/archives/FindArchive',
     getStormById(id) {
-        return `/api/v1/storms?_id=${id}`
+        return `/api/v1/catalogs?_id=${id}`
     },
     getStormByName(name) {
-        return `/api/v1/storms?name=${name}`
+        return `/api/v1/catalogs?name=${name}`
     },
     getStormOfUser(id){
-        return `/api/v1/storms/user/${id}`
+        return `/api/v1/catalogs/user/${id}`
     },
     skipImage(archive){
         return `/api/v1/images/skipImage/${archive}`
@@ -20,7 +20,10 @@ const endpoints = {
     getImage(archive){
         return `/api/v1/users/getImage/${archive}`
     },
-    tagImage:`/api/v1/images/tagImage`
+    tagImage:`/api/v1/images/tagImage`,
+    showImage(name){
+        return `/api/v1/images/show/${name}`
+    }
     
 }
 

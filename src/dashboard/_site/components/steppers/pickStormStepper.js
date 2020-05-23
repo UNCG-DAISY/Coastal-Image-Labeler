@@ -152,14 +152,14 @@ export default function PickStormStepper(props) {
                       <React.Fragment>
                           <div>
                             <strong style={{color:theme.palette.secondary.main}}>Description</strong>: 
-                            {storms[selectedStorm].info.description}
-                            <Button variant="text" size="small" href={storms[selectedStorm].info.link} style={{textDecoration:'none'}} color="secondary">Link to Wikipedia</Button>
+                            {storms[selectedStorm]?.info?.description ?? 'N/A'}
+                            <Button variant="text" size="small" href={storms[selectedStorm]?.info?.link ?? ''} style={{textDecoration:'none'}} color="secondary">Link to Wikipedia</Button>
                           </div>
                           
                           <br/>
                           <div>
                             <strong style={{color:theme.palette.secondary.main}}>Year</strong>: 
-                            {storms[selectedStorm].info.year}
+                            {storms[selectedStorm]?.info?.year ?? 'N/A'}
                           </div>                  
                       </React.Fragment>
                    

@@ -87,7 +87,7 @@ const archive = {
                     "name" : archive,
                     "path" : archivePath,
                     "taggable": true,
-                    "catlog": catalogId,
+                    "catalog": catalogId,
                 })
                 //Say when all catalogs have been made
                 colorize.info(`Archive ${archive} made`)

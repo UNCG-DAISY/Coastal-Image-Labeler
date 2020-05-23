@@ -30,7 +30,7 @@ const archiveScehma: Schema = new Schema({
         type:[Types.ObjectId],
         default:[]
     },
-    catlog: {
+    catalog: {
         type: Types.ObjectId,
         required: true,
         ref: 'Catalog'

@@ -128,7 +128,7 @@ function Home(props) {
           }
 
           
-
+{/* 
           <Button 
             variant="contained" 
             onClick = {() => {   
@@ -137,7 +137,7 @@ function Home(props) {
           >
             Test is tagger
           </Button>
-          
+           */}
           
     
          
@@ -171,10 +171,10 @@ Home.getInitialProps = async ctx => {
 
   hasUser(req)
   
-  const allowedPages = await getAllowedPages(req.user,ctx)
+  //const allowedPages = {}//await getAllowedPages(req.user,ctx)
   
 
-  return {allowedPages,cookie:ctx.req.headers.cookie}
+  return {cookie:ctx.req.headers.cookie}
 }
 
 export default Home
