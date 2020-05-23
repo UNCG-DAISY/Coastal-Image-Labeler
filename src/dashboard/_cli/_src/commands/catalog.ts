@@ -3,14 +3,20 @@ import inquirer from 'inquirer'
 import {yesNoOnly,translateYesNoToBool} from '../utils/validation'
 import {getDirectories} from '../utils/file'
 import MongoConnection from '../lib/MongoConnection'
-import UriManager from '../lib/UriManager'
+import UriManager from '../lib/UriManager';
+import archive from './archive';
 
 import {CatalogModel} from '../models/Catalog'
 import colorize from '../utils/colorize'
 
+
 const catalog = {
     async addCatalogs(path,options) {
         const dirs = getDirectories(path)
+        const {
+            all,
+            archive:archiveFlag
+        } = options
         colorize.info(`Directories are ${dirs.toString()}`)
 
         //find out which catalogs to add
@@ -20,7 +26,7 @@ const catalog = {
             const element =dirs[i];
 
             //if the user wants to select which catalogs to add
-            if(!options.all) {
+            if(!all) {
                 const input = await inquirer.prompt([
                     {
                         type:'input',
@@ -48,11 +54,6 @@ const catalog = {
         //insert them into the database
         await Promise.all(yesNoAns.map(async (element,index) =>{
             const {catalog,input} = element
-
-            // if(!input) { 
-            //     return {error:true,message:'No input'}
-            // }
-
             //if this is catalog to add.
             if(input === true) {
                 //first check if this catalog exits
@@ -76,6 +77,25 @@ const catalog = {
 
                 //Say when all catalogs have been made
                 colorize.log(`Catalog ${catalog} made`)
+
+                //If archive flag is given
+                if(archiveFlag) {
+                    // const archiveFolders = getDirectories(catalogPath)
+                    // console.log(archiveFolders)
+                    const addingArchiveResult = await archive.addArchives(catalogPath,catalogEntry._id,{images:true,all:true})
+                        
+                    if(addingArchiveResult.error) {
+                        colorize.error(addingArchiveResult.message)
+                    } else {
+                        colorize.info(addingArchiveResult.message)
+                    }
+                    // await Promise.all(archiveFolders.map(async (archiveFolder,index) =>{
+                    //     const archivePaths = `${catalogPath}\\${archiveFolder}`
+                    //     console.log(`Archive paths ${archivePaths}`)
+                       
+                    
+                    // }))  
+                }
                 entries.push(catalogEntry)    
             }
             

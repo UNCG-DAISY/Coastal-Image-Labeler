@@ -7,9 +7,10 @@
   "scripts": {
     "build": "tsc",
     "link": "rimraf _dist && tsc && npm link",
-    "test": "npm run link && cls && npm run testCMD3",
-    "testCMD1": "psi-dashboard catalog add -p C:\\Users\\skool\\Documents\\GitHub\\psi-dashboard\\src\\dashboard\\_server\\_data\\storms",
-    "testCMD2": "psi-dashboard archive add -p C:\\Users\\skool\\Documents\\GitHub\\psi-dashboard\\src\\dashboard\\_server\\_data\\storms\\amenadiel -i",
+    "test": "npm run link && cls && npm run testAddCatalog",
+    "test2": "cls && npm run testAddCatalog && npm run testAddArchive",
+    "testAddCatalog": "psi-dashboard catalog add -p C:\\Users\\skool\\Desktop\\testCatalogs -a -d -r",
+    "testAddArchive": "psi-dashboard archive add -p C:\\Users\\skool\\Desktop\\testCatalogs -i",
     "testCMD3": "psi-dashboard export all -p C:\\Users\\skool\\Desktop"
   },
   "keywords": [],

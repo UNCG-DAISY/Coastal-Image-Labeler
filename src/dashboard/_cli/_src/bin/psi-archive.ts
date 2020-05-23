@@ -41,9 +41,10 @@ program
         const pathArray = path.split("\\")
         const catalogName = pathArray[pathArray.length-1]
 
-        
-        const catalog = await CatalogModel.findOne({name:catalogName})
-        const archiveResult = await archive.addArchives(path,catalog._id,{all,images})
+        console.log(catalogName,' ---- TEST')
+        console.log(pathArray)
+        //const catalog = await CatalogModel.findOne({name:catalogName})
+        //const archiveResult = await archive.addArchives(path,catalog._id,{all,images})
 
         await mongoConnection.close()
     })

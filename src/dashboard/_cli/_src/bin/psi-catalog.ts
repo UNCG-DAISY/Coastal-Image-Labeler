@@ -5,6 +5,7 @@ import colorize from '../utils/colorize'
 
 import {CatalogModel} from '../models/Catalog'
 import {ArchiveModel} from '../models/Archive'
+import {ImageModel} from '../models/Image'
 import UriManager from '../lib/UriManager'
 import MongoConnection from '../lib/MongoConnection'
 // program
@@ -19,12 +20,14 @@ program
     .description('Path to the storm data')
     .option('-p, --path <type>','Give path to the catalogs',undefined)
     .option('-a, --all','Add all directories of --path as a catalog',false)
+    .option('-r, --archive','Add all archive of each catalog of --path',false)
     .option('-d, --dev','dev mode',false)
     .action(async (cmd) => {
         const {
             path,
             all,
-            dev
+            dev,
+            archive
         } = cmd
 
         //make sure a path is given
@@ -38,12 +41,13 @@ program
         //TEST COMMAND
             if(dev) {
                 await CatalogModel.deleteMany({})
+                await ArchiveModel.deleteMany({})
+                await ImageModel.deleteMany({})
             }
-            //await ArchiveModel.deleteMany({})
-            //await ImageModel.deleteMany({})
+           
 
         //Add the catalogs
-        const catalogResult = await catalog.addCatalogs(cmd.path,{all})
+        const catalogResult = await catalog.addCatalogs(cmd.path,{all:all,archive:archive})
 
         //if an error, report it.
         if(catalogResult.error) {
@@ -51,6 +55,8 @@ program
         } else {
             colorize.info(catalogResult.message)
         }
+
+
         await mongoConnection.close()
     })
 
