@@ -28,20 +28,20 @@ const ImageSchema: Schema  = new Schema(
             required: [true,'Please tell if compressed or not'],
           
         },
-        location:{
-            upperLeft:{
-                type:[Number]
-            },
-            upperRight:{
-                type:[Number]
-            },
-            lowerLeft:{
-                type:[Number]
-            },
-            lowerRight:{
-                type:[Number]
-            }
-        },
+        // location:{
+        //     upperLeft:{
+        //         type:[Number]
+        //     },
+        //     upperRight:{
+        //         type:[Number]
+        //     },
+        //     lowerLeft:{
+        //         type:[Number]
+        //     },
+        //     lowerRight:{
+        //         type:[Number]
+        //     }
+        // },
         id : {
             type: String,
             required: [true,'Please add a name of image with its extension'],

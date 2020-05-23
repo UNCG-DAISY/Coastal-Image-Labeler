@@ -16,7 +16,7 @@ const userSchema: Schema = new Schema({
     assignedImages:{
         type:Object
     },
-    storms:{
+    catalogs:{
         type:[Types.ObjectId]
     },
     dateAdded:{

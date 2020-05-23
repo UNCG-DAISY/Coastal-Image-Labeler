@@ -5,27 +5,27 @@
 import express from 'express'
 
 import {
-    getAllStorms,
-    getStormsOfUser
+    getAllCatalogs,
+    getCatalogsOfUser
 } from '../../controllers/v1/storms'
 
 //Perform advanced results which means filtering, pagination, and query parameters
 import {advancedResults} from '../../middleware/v1/advancedResults'
 
 import {authorize} from '../../middleware/v1/auth'
-import {StormModel} from '../../models/Storm'
+import {CatalogModel} from '../../models/Catalog'
 
-// "/api/v1/storms/"
+// "/api/v1/catalogs/"
 const router = express.Router();
 
-//Get all storms
+//Get all catalogs
 router
     .route('/')
-    .get(advancedResults(StormModel,'archives'),getAllStorms)
+    .get(advancedResults(CatalogModel,'archives'),getAllCatalogs)
 
-//Get all storms that a user can tag
+//Get all catalogs that a user can tag
 router
     .route('/user/:userId')
-    .get(advancedResults(StormModel,'archives'),getStormsOfUser)
+    .get(advancedResults(CatalogModel,'archives'),getCatalogsOfUser)
 
 export default router;
