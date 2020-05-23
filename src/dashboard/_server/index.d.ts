@@ -39,7 +39,7 @@ declare namespace psiDashboard  {
   }
 
   export interface UserDocument extends Document {
-    storms:[Types.ObjectId]
+    catalogs:[Types.ObjectId]
     dateAdded: number;
     userId:string,
     userName: string,
@@ -57,7 +57,7 @@ declare namespace psiDashboard  {
     name : String,
     path : String,
     role: [Types.ObjectId],
-    storm:Types.ObjectId,
+    catalog:Types.ObjectId,
     taggable: Boolean,
     allImages?:any
   }
@@ -66,7 +66,7 @@ declare namespace psiDashboard  {
     name:String
   }
 
-  export interface StormDocument extends Document {
+  export interface CatalogDocument extends Document {
     archives: any,
     dateAdded?:Date,
     name : String,
@@ -80,7 +80,7 @@ declare namespace psiDashboard  {
     UserDocument |
     ArchiveDocument |
     RoleDocument |
-    StormDocument 
+    CatalogDocument 
 
   type rbacJson = {
     all:string[] | undefined[],

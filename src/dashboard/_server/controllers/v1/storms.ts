@@ -12,7 +12,7 @@ import {UserModel} from '../../models/User'
 //import axios from 'axios'
 //import { ObjectID } from "mongodb"
 
-import {UserDocument,StormDocument,ArchiveDocument} from '../../index'
+import {UserDocument,CatalogDocument,ArchiveDocument} from '../../index'
 //import { promises } from "dns"
 
 /**
@@ -21,7 +21,7 @@ import {UserDocument,StormDocument,ArchiveDocument} from '../../index'
  * @access      Public
  * @returns     yes
  */
-const getAllStorms = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+const getAllCatalogs = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     res.status(200).json(res.advancedResults)
 })
 
@@ -32,7 +32,7 @@ const getAllStorms = asyncHandler(async (req: Request, res: Response, next: Next
  * @access      Public
  * @returns     yes
  */
-const getStormsOfUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+const getCatalogsOfUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
 
     //Get all storms that gets completed in advResults
     const storms = res.advancedResults.data
@@ -48,12 +48,12 @@ const getStormsOfUser = asyncHandler(async (req: Request, res: Response, next: N
     //Do we want to get all taggable storms/archives of this user, or just all
     const taggableFilter= req?.query?.taggable ?? false
 
-    const stormsOfUser = user.storms
+    const stormsOfUser = user.catalogs
     let data = []
 
     //We have a list of storm ids, we need to get
     //the actual data from those storms
-    await Promise.all(storms.map((storm:StormDocument,index:number)=>{
+    await Promise.all(storms.map((storm:CatalogDocument,index:number)=>{
 
         //If that storm is part of the users storms,add it to the data to be returned
         if(stormsOfUser.includes(storm._id)) {
@@ -81,6 +81,6 @@ const getStormsOfUser = asyncHandler(async (req: Request, res: Response, next: N
 
 
 export {
-    getAllStorms,
-    getStormsOfUser
+    getAllCatalogs,
+    getCatalogsOfUser
 }

@@ -4,7 +4,6 @@
 
 import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Types} from 'mongoose'
 import slugify from 'slugify'
-import {geocoder} from '../utils/v1/geocoder'
 import { Entry } from 'node-geocoder'
 import {ArchiveDocument} from '../index'
 
@@ -31,10 +30,10 @@ const archiveScehma: Schema = new Schema({
         type:[Types.ObjectId],
         default:[]
     },
-    storm: {
+    catlog: {
         type: Types.ObjectId,
         required: true,
-        ref: 'Storm'
+        ref: 'Catalog'
     },
     taggable: {
         type:Boolean,
@@ -47,16 +46,16 @@ const archiveScehma: Schema = new Schema({
     toObject: { virtuals: true }
 })
 
-archiveScehma.virtual('allImages', {
-    ref: 'Image',
-    localField: '_id',
-    foreignField: 'archive',
-    justOne: false
-})
+// archiveScehma.virtual('allImages', {
+//     ref: 'Image',
+//     localField: '_id',
+//     foreignField: 'archive',
+//     justOne: false
+// })
 
-archiveScehma.virtual('Stormie', {
-    ref: 'Storm',
-    localField: 'storm',
+archiveScehma.virtual('getStorm', {
+    ref: 'Catalog',
+    localField: 'catalog',
     foreignField: '_id',
     justOne: false
 })
