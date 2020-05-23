@@ -15,6 +15,7 @@ import image from './image'
 const archive = {
     async addArchives(path,catalogId,options) {
         const dirs = getDirectories(path)
+        // console.log(path)
         colorize.info(`Archives are ${dirs.toString()}`)
 
         //if no _id sent
@@ -106,7 +107,7 @@ const archive = {
         //return the entries
         return {
             error:false,
-            message:`${entries.length} catalogs made`,
+            message:`${entries.length} archives made`,
             data:entries
         }
 

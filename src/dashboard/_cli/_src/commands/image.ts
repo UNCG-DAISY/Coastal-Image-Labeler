@@ -15,7 +15,8 @@ import colorize from '../utils/colorize'
 const image = {
     async addImages(path:string,archiveId) {
         const imageFiles = getFiles(path)
-        colorize.log(`Adding ${imageFiles.length} images for archive ${archiveId}`)
+        const archiveEntry = await ArchiveModel.findById(archiveId);
+        colorize.log(`Adding ${imageFiles.length} images for archive ${archiveEntry.name}`)
         await Promise.all(imageFiles.map(async (element,index) =>{
             const imageEntry = await ImageModel.create({
                 "archive":archiveId,
