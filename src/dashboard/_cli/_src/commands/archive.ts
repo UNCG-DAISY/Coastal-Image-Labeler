@@ -13,6 +13,55 @@ import colorize from '../utils/colorize'
 import image from './image'
 
 const archive = {
+    async createArchives(options) {
+        const {
+            path,
+            catalogId,
+            allImages
+        } = options
+
+        if(!path) {return {error:true,errorMessage:'no path passed'}}
+        if(!catalogId) {return {error:true,errorMessage:'no catalog id passed'}}
+
+        //get archives of catalog
+        const dirs = getDirectories(path)
+        colorize.info(`Archives are ${dirs.toString()}`)
+
+        //check catalogId to see if valid archive
+        const catalog = CatalogModel.findById(catalogId)
+        if(!catalog) {return {error:true,message:`No catalog found with _id ${catalogId}`}}
+
+        await Promise.all(dirs.map(async(archiveName,index)=> {
+            const archivePath = `\\${archiveName}`
+
+            //check if archive exists
+            const existingArchive = await ArchiveModel.find({ 
+                $or: [ 
+                    { name: archiveName }, 
+                    { path: archivePath } 
+                ] 
+            })
+            
+            //if exists
+            if(existingArchive.length>0) {
+                return colorize.warning(`Archive ${archiveName} exists`)
+            }
+
+            //if not make one
+            const archiveEntry = await ArchiveModel.create({
+                "dateAdded":Date.now(),
+                "name" : archiveName,
+                "path" : archivePath,
+                "taggable": true,
+                "catalog": catalogId,
+            })
+
+            if(allImages) {
+                colorize.log(`Make images for ${archiveEntry.name} archive`)
+            }
+        }))
+    },
+
     async addArchives(path,catalogId,options) {
         const dirs = getDirectories(path)
         // console.log(path)
@@ -113,6 +162,7 @@ const archive = {
 
          
     }
+    
 }
 
 export default archive;
