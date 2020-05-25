@@ -26,7 +26,7 @@ const catalogScheme: Schema = new Schema({
         unique: true,
         maxlength: [128,'Name can not be longer than 128 characters']
     },
-    stormInfo:{
+    catalogInfo:{
         year:{
             type:Number,
             required:false

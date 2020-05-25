@@ -4,7 +4,7 @@
 
 
 import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Types} from 'mongoose'
-import {CatalogDocument} from '../index'
+import {StormDocument} from '../index'
 
 const catalogScheme: Schema = new Schema({
     // creator: {
@@ -26,7 +26,7 @@ const catalogScheme: Schema = new Schema({
         unique: true,
         maxlength: [128,'Name can not be longer than 128 characters']
     },
-    stormInfo:{
+    catalogInfo:{
         year:{
             type:Number,
             required:false
@@ -63,4 +63,4 @@ catalogScheme.virtual('archives', {
 });
 
 
-export const CatalogModel: Model<CatalogDocument> =  model('Catalog', catalogScheme);
+export const CatalogModel: Model<StormDocument> =  model('Catalog', catalogScheme);
