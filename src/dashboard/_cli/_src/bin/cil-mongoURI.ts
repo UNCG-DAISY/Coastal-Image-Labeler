@@ -16,7 +16,4 @@ program
     .description('Remove current MongoURI')
     .action(mongoURI.remove)
 
-program
-    .command('test','test sub sub command')
-
 program.parse(process.argv)
