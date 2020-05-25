@@ -1,17 +1,17 @@
 {
-  "name": "psi-dashboard",
+  "name": "cil-dashboard",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "bin": "./_dist/bin/psi.js",
+  "bin": "./_dist/bin/cil.js",
   "scripts": {
     "build": "tsc",
     "link": "rimraf _dist && tsc && npm link",
     "test": "npm run link && cls && npm run testAddCatalog",
     "test2": "cls && npm run testAddCatalog && npm run testAddArchive",
-    "testAddCatalog": "psi-dashboard catalog add -p C:\\Users\\skool\\Desktop\\testCatalogs -a -d -r",
-    "testAddArchive": "psi-dashboard archive add -p C:\\Users\\skool\\Desktop\\testCatalogs -i",
-    "testCMD3": "psi-dashboard export all -p C:\\Users\\skool\\Desktop"
+    "testAddCatalog": "cil-dashboard catalog add -p C:\\Users\\skool\\Desktop\\testCatalogs -a -d -r",
+    "testAddArchive": "cil-dashboard archive add -p C:\\Users\\skool\\Desktop\\testCatalogs -i",
+    "testCMD3": "cil-dashboard export all -p C:\\Users\\skool\\Desktop"
   },
   "keywords": [],
   "author": "",
