@@ -1,0 +1,37 @@
+{
+    "catalogs":[
+        {
+            "path":"C:\\Users\\skool\\Desktop\\testCatalogs\\amenadiel",
+            "name":"amendadiel",
+            "taggable":true,
+            "year":1066,
+            "link":"www.google.com",
+            "description":"Hello world I am description!!!",
+            "createAllArchives":true,
+            "createAllImages":true
+        },
+        {
+            "path":"C:\\Users\\skool\\Desktop\\testCatalogs\\bratva",
+            "name":"bratva",
+            "taggable":true,
+            "year":1337,
+            "link":"www.google.com",
+            "description":"🚨 WEEEEEE WOOOOO WEEEEEE WOOOOO 🚨",
+
+            "createAllImages":true
+
+        },
+        {
+            "path":"C:\\Users\\skool\\Desktop\\testCatalogs\\corono",
+            "name":"corono",
+            "taggable":true,
+            "year":420,
+            "link":"www.google.com",
+            "description":"Beep Boop Bap!!!",
+            "createAllArchives":true,
+            "createAllImages":true
+
+        }
+    ]
+
+}
