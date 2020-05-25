@@ -53,7 +53,7 @@ const archiveScehma: Schema = new Schema({
 //     justOne: false
 // })
 
-archiveScehma.virtual('getStorm', {
+archiveScehma.virtual('getCatalog', {
     ref: 'Catalog',
     localField: 'catalog',
     foreignField: '_id',
