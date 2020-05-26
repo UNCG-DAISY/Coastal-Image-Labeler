@@ -12,7 +12,8 @@
     "testAddCatalog": "cil-dashboard catalog add -p C:\\Users\\skool\\Desktop\\testCatalogs -a -d -r",
     "testAddArchive": "cil-dashboard archive add -p C:\\Users\\skool\\Desktop\\testCatalogs -i",
     "testCMD3": "cil-dashboard export all -p C:\\Users\\skool\\Desktop",
-    "testCMD4": "cil-dashboard catalog add -p C:\\Users\\skool\\Documents\\GitHub\\psi-dashboard\\src\\dashboard\\_cli\\test.json"
+    "testCMD4": "cil-dashboard catalog add -p C:\\Users\\skool\\Documents\\GitHub\\psi-dashboard\\src\\dashboard\\_cli\\testCatalog.json",
+    "testCMD5": "cil-dashboard archive add -p C:\\Users\\skool\\Documents\\GitHub\\psi-dashboard\\src\\dashboard\\_cli\\testArchive.json"
   },
   "keywords": [],
   "author": "",
