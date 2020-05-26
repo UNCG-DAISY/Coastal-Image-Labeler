@@ -1,0 +1,20 @@
+{
+    "archives":[
+        {
+            "path":"C:\\Users\\skool\\Desktop\\testCatalogs\\amenadiel\\a1234",
+            "taggable":true,
+            "createAllImages":true
+        },
+        {
+            "path":"C:\\Users\\skool\\Desktop\\testCatalogs\\amenadiel\\a1337",
+            "taggable":true,
+            "createAllImages":true
+        },
+        {
+            "path":"C:\\Users\\skool\\Desktop\\testCatalogs\\bratva\\b111",
+            "taggable":true,
+            "createAllImages":false
+        }
+    ]
+
+}

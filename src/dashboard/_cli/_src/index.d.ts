@@ -31,7 +31,7 @@ declare namespace psiDashboard  {
     name : String,
     path : String,
     role: [Types.ObjectId],
-    storm:Types.ObjectId,
+    catalog:Types.ObjectId,
     taggable: Boolean,
     allImages?:any
   }

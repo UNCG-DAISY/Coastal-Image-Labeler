@@ -17,7 +17,7 @@
             "year":1337,
             "link":"www.google.com",
             "description":"🚨 WEEEEEE WOOOOO WEEEEEE WOOOOO 🚨",
-
+            "createAllArchives":true,
             "createAllImages":true
 
         },

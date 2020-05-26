@@ -11,6 +11,7 @@ import {CatalogModel} from '../models/Catalog'
 import {ArchiveModel} from '../models/Archive'
 import colorize from '../utils/colorize'
 import image from './image'
+import fs from 'fs'
 
 const archive = {
     async createArchives(options) {
@@ -57,112 +58,73 @@ const archive = {
             })
 
             if(allImages) {
-                colorize.log(`Make images for ${archiveEntry.name} archive`)
+                await image.addImages(archiveEntry._id)
             }
         }))
     },
 
-    async addArchives(path,catalogId,options) {
-        const dirs = getDirectories(path)
-        // console.log(path)
-        colorize.info(`Archives are ${dirs.toString()}`)
+    async createSpecificArchive(options) {
+        const {
+            path 
+        } = options
+        if(!path) {return {error:true,errorMessage:'no path passed'}}
 
-        //if no _id sent
-        if(!catalogId) {
-            return {
-                error:true,
-                message:'Please enter a valid catalog _id'
+        const file = JSON.parse(fs.readFileSync(path, 'utf8'));
+        
+        //connect to db
+        const uriManager = new UriManager();
+        const mongoConnection = new MongoConnection(uriManager.getKey())
+        await mongoConnection.connect()
+
+        const archives = file.archives
+        //console.log(archives)
+
+        await Promise.all(archives.map(async (archive,index)=>{
+
+            //get catalog and archive name
+            const pathArray = archive.path.split("\\")
+            const archiveName = pathArray[pathArray.length-1]
+            const catalogName = pathArray[pathArray.length-2]
+
+            //see if archive exists
+            const existingArchive = await ArchiveModel.find({ 
+                $or: [ 
+                    { path: `\\${archiveName}` },
+                    { name: archiveName }
+                ] 
+            })
+            if(existingArchive.length>0) {
+                return colorize.warning(`Archive ${archiveName} already exists`)
             }
-        }
 
-        //check catalogId to see if valid archive
-        const catalog = CatalogModel.findById(catalogId)
-        if(!catalog) {
-            return {
-                error:true,
-                message:`No catalog found with _id ${catalogId}`
-            } 
-        }
-
-        //find out which archives to add
-        const yesNoAns = [];
-        for(let i =0; i<dirs.length;i++)
-        {   
-            const element =dirs[i];
-            if(!options.all) {
-                const input = await inquirer.prompt([
-                    {
-                        type:'input',
-                        name:'shouldAdd',
-                        message: `Do you want to add archive ${element}? (y/n)`.green,
-                        validate: yesNoOnly
-                    }
-                ])
-                yesNoAns.push({
-                    archive:element,
-                    input:translateYesNoToBool(input.shouldAdd)
-                })
-            } else {
-                yesNoAns.push({
-                    archive:element,
-                    input:true
-                })
-            }        
-        }
-
-        let entries = []
-        //For each archive that the user said yes to,
-        //insert them into the database
-        await Promise.all(yesNoAns.map(async (element,index) =>{
-            const {archive,input} = element
-
-            // if(input === undefined) { return {error:true,message:'No input'}}
-
-            if(input) {
-                 //first check if this catalog exits
-                const archivePath=`\\${archive}`
-                const doesExistName = await ArchiveModel.find({name:archive})
-                const doesExistPath = await ArchiveModel.find({path:archivePath})
-
-                //Dont add if it exists
-                if(doesExistName[0] || doesExistPath[0]) {
-                    colorize.warning(`Archive ${archive} already exists`)
-                    return
-                }
-
-                //create archive model
-                const archiveEntry = await ArchiveModel.create({
-                    "dateAdded":Date.now(),
-                    "name" : archive,
-                    "path" : archivePath,
-                    "taggable": true,
-                    "catalog": catalogId,
-                })
-                //Say when all catalogs have been made
-                colorize.info(`Archive ${archive} made`)
-
-                //if we want to populate the images aswell
-                if(options.images) {
-                    //const imageFiles = getFiles(`${path}\\${archive}`)
-                    await image.addImages(`${path}\\${archive}`,archiveEntry._id)
-
-                }
-                
-                entries.push(archiveEntry)    
+            //see if catalog exists
+            const existingCatalog = await CatalogModel.find({ name:catalogName})
+            if(existingCatalog.length == 0) {
+                return colorize.warning(`Catalog for ${archiveName} does NOT exists`)
             }
-           
+
+            //enter into db
+            const archiveEntry = await ArchiveModel.create({
+                "dateAdded":Date.now(),
+                "name" : archiveName,
+                "path" : `\\${archiveName}`,
+                "taggable": archive.taggable,
+                "catalog": existingCatalog[0]._id,
+            })
+            colorize.log(`Archive ${archiveEntry.name} created`)
+            
+            //if create all images flag is given
+            if(archive.createAllImages) {
+                await image.addImages(archiveEntry._id)
+            }
+            
+
         }))
 
-        //return the entries
-        return {
-            error:false,
-            message:`${entries.length} archives made`,
-            data:entries
-        }
-
-         
+        //close connection to db
+        await mongoConnection.close()
     }
-    
+
 }
 
 export default archive;

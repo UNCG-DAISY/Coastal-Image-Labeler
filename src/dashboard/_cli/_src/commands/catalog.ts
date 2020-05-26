@@ -10,6 +10,7 @@ import archive from './archive';
 
 import {CatalogModel} from '../models/Catalog'
 import {ArchiveModel} from '../models/Archive'
+import {ImageModel} from '../models/Image'
 import colorize from '../utils/colorize'
 
 import {isRequired} from '../utils/validation'
@@ -51,6 +52,7 @@ const catalog = {
         //DEV
             await ArchiveModel.deleteMany({})
             await CatalogModel.deleteMany({})
+            await ImageModel.deleteMany({})
 
         await Promise.all(file.catalogs.map(async (catalogData,index)=> {
             const {
