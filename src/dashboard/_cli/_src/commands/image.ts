@@ -20,7 +20,8 @@ const image = {
         const catalogEntry = await CatalogModel.findById(archiveEntry.catalog)
         const path = `${catalogEntry.path}${archiveEntry.path}`
 
-        const imageFiles = getFiles(path)
+        const imageFiles = getFiles(path,'.jpg')
+        colorize.error(path)
 
         colorize.log(`Adding ${imageFiles.length} images for archive ${archiveEntry.name}`)
         await Promise.all(imageFiles.map(async (element,index) =>{
@@ -36,7 +37,7 @@ const image = {
             })
         }))
 
-        return 
+        //colorize.log(`Done adding ${imageFiles.length} images`) 
           
     }
 }
