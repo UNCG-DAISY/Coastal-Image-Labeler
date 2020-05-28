@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 //     maxWidth:'80%'
 //   },
   container:{
-      maxWidth:'50%'
+      //maxWidth:'70%'
   }
 });
 
