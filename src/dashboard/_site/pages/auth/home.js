@@ -38,6 +38,8 @@ function Home(props) {
       name:archive
     }
     
+    //because its buggy rn
+    return
 
     //get storm
     const res = await fetch(apiCall(endpoints.findArchive), { //`/api/v1/archives/FindArchive`
