@@ -33,7 +33,7 @@ const archive = {
         if(!catalog) {return {error:true,message:`No catalog found with _id ${catalogId}`}}
 
         await Promise.all(dirs.map(async(archiveName,index)=> {
-            const archivePath = `\\${archiveName}`
+            const archivePath = `/${archiveName}/jpgs`
 
             //check if archive exists
             const existingArchive = await ArchiveModel.find({ 
@@ -82,14 +82,14 @@ const archive = {
         await Promise.all(archives.map(async (archive,index)=>{
 
             //get catalog and archive name
-            const pathArray = archive.path.split("\\")
+            const pathArray = archive.path.split("/")
             const archiveName = pathArray[pathArray.length-1]
             const catalogName = pathArray[pathArray.length-2]
 
             //see if archive exists
             const existingArchive = await ArchiveModel.find({ 
                 $or: [ 
-                    { path: `\\${archiveName}` },
+                    { path: `/${archiveName}` },
                     { name: archiveName }
                 ] 
             })
@@ -107,7 +107,7 @@ const archive = {
             const archiveEntry = await ArchiveModel.create({
                 "dateAdded":Date.now(),
                 "name" : archiveName,
-                "path" : `\\${archiveName}`,
+                "path" : `/${archiveName}/jpgs`,
                 "taggable": archive.taggable,
                 "catalog": existingCatalog[0]._id,
             })

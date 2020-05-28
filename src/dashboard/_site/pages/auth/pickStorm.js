@@ -100,15 +100,16 @@ TagImage.getInitialProps = async ctx => {
       //`/api/v1/storms/user/${req.user.mongoUser._id}`
     )
   )).data
-
+  console.log(endpoints.getStormOfUser(req.user.mongoUser._id))
   let stormList = {}
- 
+  
+  console.log('----',getStorms.data)
   getStorms.data.forEach(storm => {
       
 
       stormList[storm.name] = {}
      
-      stormList[storm.name].info = storm.stormInfo
+      stormList[storm.name].info = storm.catalogInfo
       let archiveList = []
       storm.archives.forEach(archive => {
         stormList[storm.name].archives= {
@@ -118,6 +119,7 @@ TagImage.getInitialProps = async ctx => {
       });
   });
 
+  //console.log(stormList)
   return {
     allowedPages,
     stormList

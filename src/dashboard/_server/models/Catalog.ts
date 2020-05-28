@@ -58,7 +58,7 @@ const catalogScheme: Schema = new Schema({
 catalogScheme.virtual('archives', {
     ref: 'Archive',
     localField: '_id',
-    foreignField: 'catlog',
+    foreignField: 'catalog',
     justOne: false
 });
 

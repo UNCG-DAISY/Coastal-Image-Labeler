@@ -181,7 +181,7 @@ const showImage = asyncHandler(async (req: Request, res: Response, next: NextFun
         //return next()
     }
     
-    res.sendFile(`${catalogDoc.path}\\${archiveDoc.path}\\${req.params.id}`);
+    res.sendFile(`${catalogDoc.path}/${archiveDoc.path}/${req.params.id}`);
     // res.sendFile('C:\\Users\\skool\\Desktop\\testCatalogs\\amenadiel\\a420\\420_test.png');
 })
 
