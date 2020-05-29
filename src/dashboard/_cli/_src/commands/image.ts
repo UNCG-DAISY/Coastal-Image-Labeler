@@ -57,18 +57,19 @@ const image = {
                     "taggable":true,
                     "tillComplete":2
                 })
+
                 numImagesAdded ++;
                 switch (numImagesAdded) {
                     case Math.floor(0.25*totalImages):
-                        colorize.log(`Added 25% of ${totalImages} images for archive ${archiveEntry.name}`)
+                        colorize.info(`Added 25% of ${totalImages} images for archive ${archiveEntry.name}`)
                         break;
 
                     case Math.floor(0.5*totalImages):
-                        colorize.log(`Added 50% of ${totalImages} images for archive ${archiveEntry.name}`)
+                        colorize.info(`Added 50% of ${totalImages} images for archive ${archiveEntry.name}`)
                         break;
 
                     case Math.floor(0.75*totalImages):
-                        colorize.log(`Added 75% of ${totalImages} images for archive ${archiveEntry.name}`)
+                        colorize.info(`Added 75% of ${totalImages} images for archive ${archiveEntry.name}`)
                         break;
                    
                     default:
