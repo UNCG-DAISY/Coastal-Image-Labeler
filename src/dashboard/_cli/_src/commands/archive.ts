@@ -169,7 +169,7 @@ const archive = {
         }))
 
         await Promise.all(archivesMade.map(async(archiveEntry,index)=> {
-           image.addImages({
+           await image.addImages({
                archiveDoc:archiveEntry,
                fileExt:'.jpg'
             })
