@@ -6,9 +6,7 @@
             "taggable":true,
             "year":1066,
             "link":"www.google.com",
-            "description":"Hello world I am description!!!",
-            "createAllArchives":true,
-            "createAllImages":true
+            "description":"Hello world I am description!!!"
         },
         {
             "path":"C:\\Users\\skool\\Desktop\\testCatalogs\\bratva",
@@ -16,10 +14,7 @@
             "taggable":true,
             "year":1337,
             "link":"www.google.com",
-            "description":"🚨 WEEEEEE WOOOOO WEEEEEE WOOOOO 🚨",
-            "createAllArchives":true,
-            "createAllImages":true
-
+            "description":"🚨 WEEEEEE WOOOOO WEEEEEE WOOOOO 🚨"
         },
         {
             "path":"C:\\Users\\skool\\Desktop\\testCatalogs\\corono",
@@ -27,10 +22,7 @@
             "taggable":true,
             "year":420,
             "link":"www.google.com",
-            "description":"Beep Boop Bap!!!",
-            "createAllArchives":true,
-            "createAllImages":true
-
+            "description":"Beep Boop Bap!!!"
         }
     ]
 

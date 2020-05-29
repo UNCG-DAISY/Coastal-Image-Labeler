@@ -13,15 +13,22 @@ import {ImageModel} from '../models/Image'
 import colorize from '../utils/colorize'
 
 const image = {
-    async addImages(archiveId) {
+    async addImages(options) {
+
+        const {
+            archiveDoc,
+            fileExt
+        } = options
+
+        const archiveId = archiveDoc._id
 
         const archiveEntry = await ArchiveModel.findById(archiveId)
         if(!archiveEntry) {return colorize.warning(`No archive with id ${archiveId}`)}
         const catalogEntry = await CatalogModel.findById(archiveEntry.catalog)
         const path = `${catalogEntry.path}${archiveEntry.path}`
 
-        const imageFiles = getFiles(path,'.jpg')
-        colorize.error(path)
+        const imageFiles = getFiles(path,fileExt)
+        // colorize.error(path)
 
         colorize.log(`Adding ${imageFiles.length} images for archive ${archiveEntry.name}`)
         await Promise.all(imageFiles.map(async (element,index) =>{
