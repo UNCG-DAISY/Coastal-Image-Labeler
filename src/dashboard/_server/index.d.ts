@@ -30,7 +30,7 @@ declare namespace psiDashboard  {
           lowerLeft:[number],
           lowerRight:[number]
       },
-      id :string,
+      fileName :string,
       path : string,
       taggable:boolean,
       taggedTimes?:[Date],
