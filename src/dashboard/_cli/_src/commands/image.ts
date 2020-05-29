@@ -32,6 +32,7 @@ const image = {
         const totalImages = imageFiles.length
         colorize.log(`Adding ${totalImages} images for archive ${archiveEntry.name}`)
         let numImagesAdded = 0;
+        let dupCounter = 0;
         await Promise.all(imageFiles.map(async (element,index) =>{
 
             //first check if this image exists
@@ -44,7 +45,8 @@ const image = {
 
             //if exists
             if(existingImage.length>0) {
-                colorize.warning(`Image ${element} exists`)
+                //colorize.warning(`Image ${element} exists`)
+                dupCounter++;
             }
             else {
                 const imageEntry = await ImageModel.create({
@@ -78,6 +80,7 @@ const image = {
             
         }))
         colorize.success(`Done adding ${totalImages} images for archive ${archiveEntry.name}`)
+        colorize.warning(`Dups = ${dupCounter} vs Total = ${totalImages}`)
           
     }
 }
