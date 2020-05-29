@@ -40,7 +40,8 @@ const image = {
                 $or: [ 
                     { id: element }, 
                     { path: `/${element}` } 
-                ] 
+                ],
+                archive: archiveId
             })
 
             //if exists
