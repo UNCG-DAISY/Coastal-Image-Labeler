@@ -42,7 +42,7 @@ const ImageSchema: Schema  = new Schema(
         //         type:[Number]
         //     }
         // },
-        id : {
+        fileName : {
             type: String,
             required: [true,'Please add a name of image with its extension'],
             unique: false,
@@ -80,7 +80,7 @@ const ImageSchema: Schema  = new Schema(
 );
 
 
-ImageSchema.index({ id: 1, archive: 1}, { unique: true });
+ImageSchema.index({ fileName: 1, archive: 1}, { unique: true });
 
 // ImageSchema.post('save', function(doc) {
 //     console.log('%s has been saved', doc._id);

@@ -37,7 +37,7 @@ const image = {
 
             //first check if this image exists
             const existingImage = await ImageModel.find({ 
-                id: element,
+                fileName: element,
                 archive: archiveId
             })
 
@@ -52,24 +52,24 @@ const image = {
                     "compressed" : true,
                     "dateAdded" : Date.now(),
                     "finishedTagging": false,
-                    "id": element,
+                    "fileName": element,
                     "path":`/${element}`,
                     "taggable":true,
                     "tillComplete":2
                 })
-
+                
                 numImagesAdded ++;
                 switch (numImagesAdded) {
                     case Math.floor(0.25*totalImages):
-                        colorize.info(`Added 25% of ${totalImages} images for archive ${archiveEntry.name}`)
+                        colorize.log(`Added 25% of ${totalImages} images for archive ${archiveEntry.name}`)
                         break;
 
                     case Math.floor(0.5*totalImages):
-                        colorize.info(`Added 50% of ${totalImages} images for archive ${archiveEntry.name}`)
+                        colorize.log(`Added 50% of ${totalImages} images for archive ${archiveEntry.name}`)
                         break;
 
                     case Math.floor(0.75*totalImages):
-                        colorize.info(`Added 75% of ${totalImages} images for archive ${archiveEntry.name}`)
+                        colorize.log(`Added 75% of ${totalImages} images for archive ${archiveEntry.name}`)
                         break;
                    
                     default:
