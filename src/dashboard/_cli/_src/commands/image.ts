@@ -32,6 +32,20 @@ const image = {
 
         colorize.log(`Adding ${imageFiles.length} images for archive ${archiveEntry.name}`)
         await Promise.all(imageFiles.map(async (element,index) =>{
+
+            //first check if this image exists
+            const existingImage = await ArchiveModel.find({ 
+                $or: [ 
+                    { id: element }, 
+                    { path: `/${element}` } 
+                ] 
+            })
+
+            //if exists
+            if(existingImage.length>0) {
+                return colorize.warning(`Image ${element} exists`)
+            }
+
             const imageEntry = await ImageModel.create({
                 "archive":archiveId,
                 "compressed" : true,
