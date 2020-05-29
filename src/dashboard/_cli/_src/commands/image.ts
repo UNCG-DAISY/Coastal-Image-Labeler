@@ -43,20 +43,23 @@ const image = {
 
             //if exists
             if(existingImage.length>0) {
-                return colorize.warning(`Image ${element} exists`)
+                colorize.warning(`Image ${element} exists`)
             }
-
-            const imageEntry = await ImageModel.create({
-                "archive":archiveId,
-                "compressed" : true,
-                "dateAdded" : Date.now(),
-                "finishedTagging": false,
-                "id": element,
-                "path":`/${element}`,
-                "taggable":true,
-                "tillComplete":2
-            })
+            else {
+                const imageEntry = await ImageModel.create({
+                    "archive":archiveId,
+                    "compressed" : true,
+                    "dateAdded" : Date.now(),
+                    "finishedTagging": false,
+                    "id": element,
+                    "path":`/${element}`,
+                    "taggable":true,
+                    "tillComplete":2
+                })
+            }
+            
         }))
+        colorize.success(`Done adding ${imageFiles.length} images for archive ${archiveEntry.name}`)
 
         //colorize.log(`Done adding ${imageFiles.length} images`) 
           
