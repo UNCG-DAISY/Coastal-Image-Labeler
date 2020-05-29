@@ -79,6 +79,9 @@ const ImageSchema: Schema  = new Schema(
     }
 );
 
+
+ImageSchema.index({ id: 1, archive: 1}, { unique: true });
+
 // ImageSchema.post('save', function(doc) {
 //     console.log('%s has been saved', doc._id);
 //   });
