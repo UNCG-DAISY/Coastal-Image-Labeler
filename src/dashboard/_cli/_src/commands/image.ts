@@ -37,10 +37,7 @@ const image = {
 
             //first check if this image exists
             const existingImage = await ImageModel.find({ 
-                $or: [ 
-                    { id: element }, 
-                    { path: `/${element}` } 
-                ],
+                id: element,
                 archive: archiveId
             })
 
