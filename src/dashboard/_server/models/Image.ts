@@ -45,14 +45,14 @@ const ImageSchema: Schema  = new Schema(
         id : {
             type: String,
             required: [true,'Please add a name of image with its extension'],
-            //unique: true,
+            unique: false,
             trim:true,
             maxlength: [128,'Name can not be longer than 128 characters']
         },
         path : {
             type: String,
             required: [true,'Please provide image path'],
-            //unique: true,
+            unique: false,
             maxlength: [128,'Name can not be longer than 128 characters']
         },
         taggable:{
