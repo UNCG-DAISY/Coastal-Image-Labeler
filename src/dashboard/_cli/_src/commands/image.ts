@@ -29,12 +29,13 @@ const image = {
 
         const imageFiles = getFiles(path,fileExt)
         // colorize.error(path)
-
-        colorize.log(`Adding ${imageFiles.length} images for archive ${archiveEntry.name}`)
+        const totalImages = imageFiles.length
+        colorize.log(`Adding ${totalImages} images for archive ${archiveEntry.name}`)
+        let numImagesAdded = 0;
         await Promise.all(imageFiles.map(async (element,index) =>{
 
             //first check if this image exists
-            const existingImage = await ArchiveModel.find({ 
+            const existingImage = await ImageModel.find({ 
                 $or: [ 
                     { id: element }, 
                     { path: `/${element}` } 
@@ -56,12 +57,27 @@ const image = {
                     "taggable":true,
                     "tillComplete":2
                 })
+                numImagesAdded ++;
+                switch (numImagesAdded) {
+                    case Math.floor(0.25*totalImages):
+                        colorize.log(`Added 25% of ${totalImages} images for archive ${archiveEntry.name}`)
+                        break;
+
+                    case Math.floor(0.5*totalImages):
+                        colorize.log(`Added 50% of ${totalImages} images for archive ${archiveEntry.name}`)
+                        break;
+
+                    case Math.floor(0.75*totalImages):
+                        colorize.log(`Added 75% of ${totalImages} images for archive ${archiveEntry.name}`)
+                        break;
+                   
+                    default:
+                        break;
+                }
             }
             
         }))
-        colorize.success(`Done adding ${imageFiles.length} images for archive ${archiveEntry.name}`)
-
-        //colorize.log(`Done adding ${imageFiles.length} images`) 
+        colorize.success(`Done adding ${totalImages} images for archive ${archiveEntry.name}`)
           
     }
 }

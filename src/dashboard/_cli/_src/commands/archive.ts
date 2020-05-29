@@ -168,20 +168,20 @@ const archive = {
             colorize.success(`Archive ${archiveName} made`)
         }))
 
-        // await Promise.all(archivesMade.map(async(archiveEntry,index)=> {
-        //    await image.addImages({
-        //        archiveDoc:archiveEntry,
-        //        fileExt:'.jpg'
-        //     })
-        // }))
-
-        for(let i=0;i<archivesMade.length;i++) {
-            await image.addImages({
-                archiveDoc:archivesMade[i],
-                fileExt:'.jpg'
+        await Promise.all(archivesMade.map(async(archiveEntry,index)=> {
+           await image.addImages({
+               archiveDoc:archiveEntry,
+               fileExt:'.jpg'
             })
+        }))
+
+        // for(let i=0;i<archivesMade.length;i++) {
+        //     await image.addImages({
+        //         archiveDoc:archivesMade[i],
+        //         fileExt:'.jpg'
+        //     })
             
-        }
+        // }
     }
 
 }
