@@ -28,6 +28,7 @@ import {getAllowedPages} from '../../components/utils/getAllowedPages'
 import ResumeTaggingTable from '../../components/ResumeTaggingTable'
 
 import endpoints from '../../components/endpoints'
+import TestStormForm from '../../components/forms/testStormForm'
 import TestForm from '../../components/forms/testForm'
 
 // Home page after logging in
@@ -121,7 +122,7 @@ function Home(props) {
               
             <></>
           } */}
-          <TestForm/>
+          <TestStormForm/>
           
 {/* 
           <Button 
