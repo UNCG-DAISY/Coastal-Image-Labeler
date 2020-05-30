@@ -28,7 +28,7 @@ import {getAllowedPages} from '../../components/utils/getAllowedPages'
 import ResumeTaggingTable from '../../components/ResumeTaggingTable'
 
 import endpoints from '../../components/endpoints'
-
+import TestForm from '../../components/forms/testForm'
 
 // Home page after logging in
 function Home(props) {
@@ -95,7 +95,7 @@ function Home(props) {
     <Layout user={props.user} pageTitle="Home">
       <Container maxWidth="md">
         <Box my={4}>
-          <Typography variant="h4" component="h1" gutterBottom color="secondary">
+          {/* <Typography variant="h4" component="h1" gutterBottom color="secondary">
             Welcome!
           </Typography>
 
@@ -113,13 +113,6 @@ function Home(props) {
               <Typography variant="h6" component="h1" gutterBottom color="secondary" style={{paddingTop:20}}>
                 Continue tagging from collections below.
               </Typography>
-              {/* <Paper elevation={3} variant="outlined" style={{paddingBottom:10,paddingTop:10}}>
-                <Grid container className={classes.root} spacing={2}>
-                  <Grid item xs={12}>
-                  
-                  </Grid>
-                </Grid>
-              </Paper> */}
               <div className={classes.center}>
                 <ResumeTaggingTable archives={assignedImages} onClick={continueTagging}/>
               </div>
@@ -127,8 +120,8 @@ function Home(props) {
             </React.Fragment>:
               
             <></>
-          }
-
+          } */}
+          <TestForm/>
           
 {/* 
           <Button 
