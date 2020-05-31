@@ -12,83 +12,187 @@ import {
   FormControlLabel,
   Radio,
   makeStyles,
-  FormLabel 
+  FormLabel,
+  FormGroup,
+  Checkbox,
 } from "@material-ui/core";
 
-export default function TestForm() {
-    const { register, errors, handleSubmit, control, watch, getValues } = useForm(
-        {
-            mode: "onChange",
-            reValidateMode: "onChange",
+export default function TestStormForm() {
+    const { register, errors, handleSubmit, control, watch, getValues } = useForm({
+        mode: "onChange",
+        defaultValues:{
+            devType:"",
+            additionalComments:"",
+            washoverType:"",
+            dmgType:"",
+            ...impactTypesDefault
         }
-    );
-    
-    const classes = useStyles();
-
+    });
     const onSubmit = data => console.log(data);
 
-    //console.log(watch()); // watch input value by passing the name of it
-    //watch()
+    console.log()
     return (
         <React.Fragment>
-            <Container>
-                {/* <DevTool control={control} /> */}
-                <CssBaseline/>
-                <Typography variant="h4"> Title </Typography>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    {/* register your input into the hook by invoking the "register" function */}
-                    <input name="example" defaultValue="test" ref={register} />
-                    
-                    <TextField
-                        label="Your name"
-                        fullWidth
-                        variant="outlined"
-                        type="text"
-                        name="name" //default value key name
-                        className={classes.textField}
-                        error={!!errors.name}
-                        inputRef={register({ required: true })} //Need to get the actual ref of the input field
-                    />
-                    
-                    <input type="submit" />
-                </form>
-                {JSON.stringify(getValues())}
-            </Container>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                
+                {
+                    radioTypes.map((radioType,index) =>{
+                        return (
+                            <React.Fragment key={`${index}-${radioType.key}`}>
+                                <FormLabel component="legend">{radioType.label}</FormLabel>
+                                <Controller
+                                    as={
+                                        <RadioGroup aria-label="Pizza type" style={{display:'flex',flexDirection:'row'}}>
+                                            {radioType.value.map((type) => (
+                                                <FormControlLabel
+                                                    value={type.name}
+                                                    control={<Radio />}
+                                                    label={type.name}
+                                                    key={type.name}
+                                                />
+                                            ))}
+                                        </RadioGroup>
+                                    }
+                                    name={radioType.key}
+                                    control={control}
+                                />
+                            </React.Fragment>
+                        )
+                    })
+                }
 
-          
-        </React.Fragment>
+                {
+                    checkboxTypes.map((checkboxType,index) =>{
+                        return (
+                            <React.Fragment key={`${index}-${checkboxType.key}`}>
+                                <FormLabel component="legend">{checkboxType.label}</FormLabel>
+                                {checkboxType.value.map((type) => (
+                                    <React.Fragment key={type.name}>
+                                        <section >
+                                            <label>{type.name}</label>
+                                            <Controller
+                                            as={<Checkbox />}
+                                            name={type.name}
+                                            type="checkbox"
+                                            control={control}
+                                            />
+                                        </section>
+                                    </React.Fragment>
+                                ))}
+                            </React.Fragment>
+                        )
+                    })
+                }
+
+                {/* {
+                    impactTypes.map((type)=>{
+                        return (
+                            
+                        )
+                    })
+                } */}
+                {/* <section>
+                    <label>MUI Checkbox</label>
+                    <Controller
+                    as={<Checkbox />}
+                    name="Checkbox"
+                    type="checkbox"
+                    control={control}
+                    />
+                </section> */}
+                
+                <TextField
+                    label="Additional Comments"
+                    fullWidth
+                    variant="outlined"
+                    type="text"
+                    name="additionalComments"
+                    error={!!errors.additionalComments}
+                    inputRef={register({ required:true })}
+                />
+
+                <Button
+                    variant="contained"
+                    disabled={(!!errors.additionalComments || !getValues().additionalComments)}
+                >
+                    Submit
+                </Button>
+                <div>{JSON.stringify(watch())}</div>
+            </form>
+            
+        </React.Fragment>    
     );
 }
-
-const useStyles = makeStyles({
-    textField: {
-      marginTop: "1em",
-    },
-    pizzaImage: {
-      width: "100%",
-    },
-});
 
 const devTypes = [
     {
       name: "Undeveloped",
-      value: "0",
     },
     {
-        name: "Developed",
-        value: "1",
+      name: "Developed",
     }
 ];
 
-//  {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
-//  <form onSubmit={handleSubmit(onSubmit)}>
-//  {/* register your input into the hook by invoking the "register" function */}
-//  <input name="example" defaultValue="test" ref={register} />
- 
-//  {/* include validation with required or other standard HTML validation rules */}
-//  <input name="exampleRequired" ref={register({ required: true })} />
-//  {/* errors will return when field validation fails  */}
-//  {errors.exampleRequired && <span>This field is required</span>}
- 
-//  <input type="submit" />
-// </form>
+const washoverTypes = [
+    {
+        name:"No visible Washover"
+    },
+    {
+        name:"Visible Washover"
+    }
+]
+
+const dmgTypes = [
+    {
+        name:"No visible damage to infrastructure"
+    },
+    {
+        name:"Visible damage to infrastructure"
+    }
+]
+
+const radioTypes = [
+    {
+        key:'devType',
+        value:devTypes,
+        label:'Development Type'
+    },
+    {
+        key:'washoverType',
+        value:washoverTypes,
+        label:'Washover Type'
+    },
+    {
+        key:'dmgType',
+        value:dmgTypes,
+        label:'Damage Type'
+    }
+]
+
+const impactTypes = [
+    {
+        name:'Swash'
+    },
+    {
+        name:'Collision'
+    },
+    {
+        name:'Overwash'
+    },
+    {
+        name:'Inundation'
+    }
+]
+
+let impactTypesDefault = {}
+impactTypes.map((type)=>{
+    impactTypesDefault[type.name] = false
+})
+const checkboxTypes = [
+    {
+        key:'impactType',
+        value:impactTypes,
+        label:'Impact Types',
+        required:1
+    }
+]
