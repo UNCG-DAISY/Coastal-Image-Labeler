@@ -66,41 +66,31 @@ export default function TestStormForm() {
                         return (
                             <React.Fragment key={`${index}-${checkboxType.key}`}>
                                 <FormLabel component="legend">{checkboxType.label}</FormLabel>
-                                {checkboxType.value.map((type) => (
-                                    <React.Fragment key={type.name}>
-                                        <section >
-                                            <label>{type.name}</label>
-                                            <Controller
-                                            as={<Checkbox />}
-                                            name={type.name}
-                                            type="checkbox"
-                                            control={control}
+                                <FormGroup row>
+                                   
+                                    {checkboxType.value.map((type) => (
+                                        <React.Fragment key={type.name}>
+                                            <FormControlLabel
+                                                control={
+                                                    <Controller
+                                                        as={<Checkbox />}
+                                                        name={type.key}
+                                                        type="checkbox"
+                                                        control={control}
+                                                    />
+                                                }
+                                                label={type.name}
                                             />
-                                        </section>
-                                    </React.Fragment>
-                                ))}
+                                        </React.Fragment>
+                                    ))}
+                                </FormGroup>
+                                
+                                
                             </React.Fragment>
                         )
                     })
                 }
 
-                {/* {
-                    impactTypes.map((type)=>{
-                        return (
-                            
-                        )
-                    })
-                } */}
-                {/* <section>
-                    <label>MUI Checkbox</label>
-                    <Controller
-                    as={<Checkbox />}
-                    name="Checkbox"
-                    type="checkbox"
-                    control={control}
-                    />
-                </section> */}
-                
                 <TextField
                     label="Additional Comments"
                     fullWidth
@@ -171,22 +161,26 @@ const radioTypes = [
 
 const impactTypes = [
     {
-        name:'Swash'
+        name:'Swash',
+        key:'swash'
     },
     {
-        name:'Collision'
+        name:'Collision',
+        key:'collision'
     },
     {
-        name:'Overwash'
+        name:'Overwash',
+        key:'overwash'
     },
     {
-        name:'Inundation'
+        name:'Inundation',
+        key:'inundation'
     }
 ]
 
 let impactTypesDefault = {}
 impactTypes.map((type)=>{
-    impactTypesDefault[type.name] = false
+    impactTypesDefault[type.key] = false
 })
 const checkboxTypes = [
     {
