@@ -25,10 +25,10 @@ const router = express.Router();
 
 router
     .route('/tagImage')
-    .post(ensureAuthenticated,authorize('5e3e60207362e721e430ea6d'),tagImage,updatedTaggedImages)
+    .post(ensureAuthenticated,authorize('tagger'),tagImage,updatedTaggedImages)
 router
     .route('/skipImage/:archive')
-    .get(ensureAuthenticated,authorize('5e3e60207362e721e430ea6d'),updatedTaggedImages)
+    .get(ensureAuthenticated,authorize('tagger'),updatedTaggedImages)
 
 router
     .route('/show/:id')
