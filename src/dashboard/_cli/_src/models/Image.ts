@@ -42,17 +42,17 @@ const ImageSchema: Schema  = new Schema(
         //         type:[Number]
         //     }
         // },
-        id : {
+        fileName : {
             type: String,
             required: [true,'Please add a name of image with its extension'],
-            unique: true,
+            unique: false,
             trim:true,
             maxlength: [128,'Name can not be longer than 128 characters']
         },
         path : {
             type: String,
             required: [true,'Please provide image path'],
-            unique: true,
+            unique: false,
             maxlength: [128,'Name can not be longer than 128 characters']
         },
         taggable:{
@@ -78,6 +78,9 @@ const ImageSchema: Schema  = new Schema(
         toObject: { virtuals: true }
     }
 );
+
+
+ImageSchema.index({ fileName: 1, archive: 1}, { unique: true });
 
 // ImageSchema.post('save', function(doc) {
 //     console.log('%s has been saved', doc._id);

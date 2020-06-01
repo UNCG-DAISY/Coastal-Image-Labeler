@@ -65,11 +65,12 @@ nextApp.prepare()
     
     //Get the token from Auth0 and allow it to be globally used.
     //Note: im note sure if this is the best way.
-    global.MANGAGEMENT_TOKEN = await getManagementTokens()
-    if(global.MANGAGEMENT_TOKEN) {
-        //console.log("Management token recieved".magenta)
-        colorize.success("Management token recieved")
-    }
+    //https://manage.auth0.com/dashboard/us/XXX/apis/management/authorized-clients
+    // global.MANGAGEMENT_TOKEN = await getManagementTokens()
+    // if(global.MANGAGEMENT_TOKEN) {
+    //     //console.log("Management token recieved".magenta)
+    //     colorize.success("Management token recieved")
+    // }
 
     //Connect to DB via Mongoose
     connectDB()

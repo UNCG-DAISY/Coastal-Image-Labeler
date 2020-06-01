@@ -100,10 +100,10 @@ TagImage.getInitialProps = async ctx => {
       //`/api/v1/storms/user/${req.user.mongoUser._id}`
     )
   )).data
-  console.log(endpoints.getStormOfUser(req.user.mongoUser._id))
+ //console.log(endpoints.getStormOfUser(req.user.mongoUser._id))
   let stormList = {}
   
-  console.log('----',getStorms.data)
+  //console.log('----',getStorms.data)
   getStorms.data.forEach(storm => {
       
 

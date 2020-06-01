@@ -54,11 +54,12 @@ const catalog = {
             await CatalogModel.deleteMany({})
             await ImageModel.deleteMany({})
 
+        //create catalogs
+        let catalogsMade = []
         await Promise.all(file.catalogs.map(async (catalogData,index)=> {
-            const {
-                createAllArchives,
-                createAllImages
-            } = catalogData
+            // const {
+            
+            // } = catalogData
 
             //get existing catalog, if there is
             const existingCatalog = await CatalogModel.find({ 
@@ -85,20 +86,19 @@ const catalog = {
                     description:catalogData.description
                 }
             })
+
+            catalogsMade.push(catalogEntry)
             colorize.success(`Catalog ${catalogData.name} made`)
+ 
+        }))
 
-            //if asked to create all archives
-            if(createAllArchives) {
-                await archive.createArchives({
-                    path:catalogData.path,
-                    catalogId:catalogEntry._id,
-                    allImages:createAllImages ?? false
-                })        
-            }
-
-            console.log("")
-            
-
+        //create archives for each catalog
+        await Promise.all(catalogsMade.map(async (catalogEntry,index)=> {
+            await archive.createArchive({
+                catalogDoc:catalogEntry,
+                images:true,
+                appendPath:'/jpgs'
+            })
         }))
         await mongoConnection.close()
         

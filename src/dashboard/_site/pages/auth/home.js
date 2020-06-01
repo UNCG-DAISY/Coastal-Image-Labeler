@@ -2,73 +2,32 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Test from '../../components/utils/test'
 import {hasUser} from '../../components/utils/checkIfUser'
-import Drawer from '../../components/layouts/drawer'
-import MyAppBar from '../../components/layouts/appBar'
-import ShowLoggedInSideDrawer from '../../components/layouts/showLoggedInSideDrawer'
 import fetch from "isomorphic-fetch";
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-
 import Layout from '../../components/layouts/Layout'
 import { useRouter } from 'next/router'
-
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
-import axios from 'axios'
 import { 
   apiCall
 } from '../../components/constants'
-
-import {getAllowedPages} from '../../components/utils/getAllowedPages'
 import ResumeTaggingTable from '../../components/ResumeTaggingTable'
-
 import endpoints from '../../components/endpoints'
-
+import {getMongoDBUser} from '../../components/utils/getMongoUser'
+// import TestStormForm from '../../components/forms/testStormForm'
+// import TestForm from '../../components/forms/testForm'
 
 // Home page after logging in
 function Home(props) {
   const router = useRouter()
-  async function continueTagging(archive,imageId) {
-    const  reqBody ={
-      name:archive
-    }
-    
-
-    //get storm
-    const res = await fetch(apiCall(endpoints.findArchive), { //`/api/v1/archives/FindArchive`
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(reqBody)
-    });
-
-    
-    const dataArchive = ((await res.json()).data).archives[0]
-    const {storm} = dataArchive
-    
-    const resGetStorm = await fetch(endpoints.getStormById(storm), { //`/api/v1/storms?_id=${storm}`
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      //body: JSON.stringify(reqBody)
-    });
-    const dataGetStorm = ((await resGetStorm.json()).data)[0]
-    
-    location.href = `/auth/tagImage?storm=${dataGetStorm.name}&archive=${dataArchive.name}`
-  }
 
   const {
     userMessage,
-    assignedImages
+    assignedImages,
   } = props?.user?.mongoUser
-
+  const {
+    resumeURL
+  } = props
   const classes = useStyles();
 
   async function testcall() {
@@ -99,8 +58,8 @@ function Home(props) {
 
           <Typography variant="body1" component="h1" gutterBottom>
             <Paper elevation={3} variant="outlined" style={{padding:10}}>
-              Welcome {props.user.displayName}! You can start tagging by clicking on "Image Tag" on the left, or resume an archive you have
-              begun by pressing the buttons below
+              Welcome {props.user.displayName}! You can start tagging by clicking on <u><b>Image Tag</b></u> on the left, or resume an archive you have
+              begun by pressing the buttons/rows below
             </Paper>
           </Typography> 
 
@@ -111,22 +70,15 @@ function Home(props) {
               <Typography variant="h6" component="h1" gutterBottom color="secondary" style={{paddingTop:20}}>
                 Continue tagging from collections below.
               </Typography>
-              {/* <Paper elevation={3} variant="outlined" style={{paddingBottom:10,paddingTop:10}}>
-                <Grid container className={classes.root} spacing={2}>
-                  <Grid item xs={12}>
-                  
-                  </Grid>
-                </Grid>
-              </Paper> */}
               <div className={classes.center}>
-                <ResumeTaggingTable archives={assignedImages} onClick={continueTagging}/>
+                <ResumeTaggingTable resumeURL = {resumeURL}/>
               </div>
                
             </React.Fragment>:
               
             <></>
           }
-
+          {/* <TestStormForm/> */}
           
 {/* 
           <Button 
@@ -167,14 +119,68 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 Home.getInitialProps = async ctx => {
+
   const {req,res} = ctx
+  let resumeURL = {
+  }
 
   hasUser(req)
+
+
+  const mongoUser = await getMongoDBUser(req.user.id)
+
+  //if not mongoUser was found, error out
+  if(mongoUser.error) {
+    return {
+      cookie:ctx.req.headers.cookie,
+      resumeURL:resumeURL
+    }
+  }
+  const assignedImages = mongoUser.data.assignedImages
+  
+
+  if(assignedImages) {
+    await Promise.all(Object.keys(assignedImages).map(async (key) => {
+
+      const archiveName = key
+      const imageId = assignedImages[archiveName]
+
+      //get storm
+      const getArchive = await (await fetch(apiCall(endpoints.findArchive), { //`/api/v1/archives/FindArchive`
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name:archiveName
+        })
+      })).json()
+      const catalogId = getArchive?.data?.archives[0]?.catalog
+
+      const getStorm = await (await fetch(apiCall(endpoints.getStormById(catalogId)), { //`/api/v1/storms?_id=${storm}`
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        //body: JSON.stringify(reqBody)
+      })).json();
+      const catalogName = getStorm.data[0].name
+
+
+      const urlString = `/auth/tagImage?storm=${catalogName}&archive=${archiveName}`
+      
+      resumeURL[archiveName] = urlString
+      
+    }))
+  }
   
   //const allowedPages = {}//await getAllowedPages(req.user,ctx)
   
 
-  return {cookie:ctx.req.headers.cookie}
+  return {
+    cookie:ctx.req.headers.cookie,
+    resumeURL:resumeURL
+  }
 }
 
 export default Home

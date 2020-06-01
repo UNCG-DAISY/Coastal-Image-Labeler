@@ -17,7 +17,8 @@ import {
     ensureAuthenticated
 } from '../../middleware/v1/isAuthenticated'
 import {
-    authorize
+    authorize,
+    partOfCatalog
 } from '../../middleware/v1/auth'
 // "/api/v1/images/"
 const router = express.Router();
@@ -25,10 +26,10 @@ const router = express.Router();
 
 router
     .route('/tagImage')
-    .post(ensureAuthenticated,authorize('5e3e60207362e721e430ea6d'),tagImage,updatedTaggedImages)
+    .post(ensureAuthenticated,authorize('tagger'),partOfCatalog(),tagImage,updatedTaggedImages) //
 router
     .route('/skipImage/:archive')
-    .get(ensureAuthenticated,authorize('5e3e60207362e721e430ea6d'),updatedTaggedImages)
+    .get(ensureAuthenticated,authorize('tagger'),partOfCatalog(),updatedTaggedImages)
 
 router
     .route('/show/:id')
