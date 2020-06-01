@@ -72,8 +72,8 @@ function Home(props) {
 
           <Typography variant="body1" component="h1" gutterBottom>
             <Paper elevation={3} variant="outlined" style={{padding:10}}>
-              Welcome {props.user.displayName}! You can start tagging by clicking on "Image Tag" on the left, or resume an archive you have
-              begun by pressing the buttons below
+              Welcome {props.user.displayName}! You can start tagging by clicking on <u><b>Image Tag</b></u> on the left, or resume an archive you have
+              begun by pressing the buttons/rows below
             </Paper>
           </Typography> 
 
