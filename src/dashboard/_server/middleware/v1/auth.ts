@@ -9,19 +9,6 @@ import { Request,Response,NextFunction } from "express"
 import {rbacJson,UserDocument} from '../../index'
 import {UserModel} from '../../models/User'
 
-//protect routes
-
-// const protect = asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
-//     let token;
-    
-//     if(!req?.user) {
-//         //res.redirect('/');
-//         return next(new ErrorResponse('Not authorized to access this route',401))
-//     }
-    
-//     //User is good to access
-//     next()
-// })
 
 //Grant access to specific roles
 const authorize = (...roles:string[]) => {
@@ -41,10 +28,25 @@ const authorize = (...roles:string[]) => {
     }
 }
 
+const partOfCatalog = () => {
+    return async (req: Request, res: Response, next: NextFunction) => {
+
+        console.log(Object.keys(req.user))
+
+        //if no tag req meet
+        // if(!req?.user?.mongoUser?.role.includes( ...roles) ) {
+        //     return next(new ErrorResponse(`User/User role ${req?.user?.displayName} is not authorized to access this route`,403))
+        // }
+       
+        next()
+    }
+}
+
 
 
 export {
     //protect,
     authorize,
+    partOfCatalog
     //RBAC
 }
