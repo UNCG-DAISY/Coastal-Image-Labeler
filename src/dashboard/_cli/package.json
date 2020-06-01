@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "bin": "./_dist/bin/cil.js",
+  "bin": "./_dist/bin/cil-dashboard.js",
   "scripts": {
     "build": "tsc",
     "link": "rimraf _dist && tsc && npm link",

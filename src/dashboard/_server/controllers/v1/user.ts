@@ -27,7 +27,7 @@ const findUser = asyncHandler(async (req: Request, res: Response, next: NextFunc
     */
     if(req.body) {
         //get user
-        const user  = await UserModel.findOne(req.body).populate('roleData')
+        const user  = await UserModel.findOne(req.body)
         let message = 'User does not exist'
 
         //if user does exist
