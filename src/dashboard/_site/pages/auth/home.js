@@ -2,39 +2,25 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Test from '../../components/utils/test'
 import {hasUser} from '../../components/utils/checkIfUser'
-import Drawer from '../../components/layouts/drawer'
-import MyAppBar from '../../components/layouts/appBar'
-import ShowLoggedInSideDrawer from '../../components/layouts/showLoggedInSideDrawer'
 import fetch from "isomorphic-fetch";
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-
 import Layout from '../../components/layouts/Layout'
 import { useRouter } from 'next/router'
-
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
-import axios from 'axios'
 import { 
   apiCall
 } from '../../components/constants'
-
-import {getAllowedPages} from '../../components/utils/getAllowedPages'
 import ResumeTaggingTable from '../../components/ResumeTaggingTable'
-
 import endpoints from '../../components/endpoints'
-import TestStormForm from '../../components/forms/testStormForm'
-import TestForm from '../../components/forms/testForm'
+import {getMongoDBUser} from '../../components/utils/getMongoUser'
+// import TestStormForm from '../../components/forms/testStormForm'
+// import TestForm from '../../components/forms/testForm'
 
 // Home page after logging in
 function Home(props) {
   const router = useRouter()
-  
+  console.log('--------HOME',Object.keys(props))
   const {
     userMessage,
     assignedImages,
@@ -133,16 +119,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 Home.getInitialProps = async ctx => {
+  console.log('=== home get init')
   const {req,res} = ctx
+  let resumeURL = {
+  }
 
   hasUser(req)
+  console.log('=== got user')
+  console.log('=== ',Object.keys(req.user))
+  console.log(req.user.id,req.user.user_id)
 
+  const mongoUser = await getMongoDBUser(req.user.id)
+
+  //if not mongoUser was found, error out
+  if(mongoUser.error) {
+    return {
+      cookie:ctx.req.headers.cookie,
+      resumeURL:resumeURL
+    }
+  }
+  const assignedImages = mongoUser.data.assignedImages
   
 
-  const assignedImages = req?.user?.mongoUser?.assignedImages
-  let resumeURL = {
-
-  }
+  console.log('=== assigned images', assignedImages)
   if(assignedImages) {
     await Promise.all(Object.keys(assignedImages).map(async (key) => {
 
@@ -177,7 +176,7 @@ Home.getInitialProps = async ctx => {
       
     }))
   }
-  
+  console.log('=== resumeURL',resumeURL)
   //const allowedPages = {}//await getAllowedPages(req.user,ctx)
   
 

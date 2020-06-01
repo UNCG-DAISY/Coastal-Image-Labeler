@@ -20,6 +20,7 @@ const endpoints = {
     getImage(archive){
         return `/api/v1/users/getImage/${archive}`
     },
+    getUser: `/api/v1/users/findUser`,
     tagImage:`/api/v1/images/tagImage`,
     showImage(name){
         return `/api/v1/images/show/${name}`
