@@ -20,7 +20,7 @@ import {getMongoDBUser} from '../../components/utils/getMongoUser'
 // Home page after logging in
 function Home(props) {
   const router = useRouter()
-  console.log('--------HOME',Object.keys(props))
+
   const {
     userMessage,
     assignedImages,
@@ -119,15 +119,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 Home.getInitialProps = async ctx => {
-  console.log('=== home get init')
+
   const {req,res} = ctx
   let resumeURL = {
   }
 
   hasUser(req)
-  console.log('=== got user')
-  console.log('=== ',Object.keys(req.user))
-  console.log(req.user.id,req.user.user_id)
+
 
   const mongoUser = await getMongoDBUser(req.user.id)
 
@@ -141,7 +139,6 @@ Home.getInitialProps = async ctx => {
   const assignedImages = mongoUser.data.assignedImages
   
 
-  console.log('=== assigned images', assignedImages)
   if(assignedImages) {
     await Promise.all(Object.keys(assignedImages).map(async (key) => {
 
@@ -158,7 +155,7 @@ Home.getInitialProps = async ctx => {
           name:archiveName
         })
       })).json()
-      const catalogId = getArchive.data.archives[0].catalog
+      const catalogId = getArchive?.data?.archives[0]?.catalog
 
       const getStorm = await (await fetch(apiCall(endpoints.getStormById(catalogId)), { //`/api/v1/storms?_id=${storm}`
         method: "GET",
@@ -176,7 +173,7 @@ Home.getInitialProps = async ctx => {
       
     }))
   }
-  console.log('=== resumeURL',resumeURL)
+  
   //const allowedPages = {}//await getAllowedPages(req.user,ctx)
   
 

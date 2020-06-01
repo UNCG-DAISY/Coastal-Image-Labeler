@@ -29,12 +29,12 @@ export default class MyApp extends App {
     const { Component, ctx } =context
     let pageProps = {};
     
-    console.log('=== BEFORE')
+ 
     //get the pages props first
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
-    console.log('=== AFTER')
+
     
     //If there is a passport session
     //added ctx.req.session for server side rendering

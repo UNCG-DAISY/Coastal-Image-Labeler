@@ -30,7 +30,7 @@ function TagImage(props) {
   const classes = useStyles();
   //amenadiel/a420/420_test.png
 
-  console.log(imageDocument?.id)
+  // console.log(imageDocument?.id)
   const imgUrl = endpoints.showImage(imageDocument?.id)//`${queryParams?.storm}/${queryParams?.archive}/${imageDocument?.id}`
 
   async function skipImage() {
@@ -64,7 +64,6 @@ function TagImage(props) {
 
   async function submitTags(tags) {
     //alert(`You are about to tag to image ${imageDocument._id}`)
-
     const payload = {
       _id : imageDocument?._id,
       tags: tags,
