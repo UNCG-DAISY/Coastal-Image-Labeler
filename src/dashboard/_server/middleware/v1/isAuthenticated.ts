@@ -1,7 +1,7 @@
 import { Request,Response,NextFunction } from "express"
 
 function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
-    console.log('ENSURING AUTH')
+    //console.log('ENSURING AUTH')
 
     if (req.isAuthenticated()) return next();
 
