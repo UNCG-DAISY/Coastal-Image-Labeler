@@ -7,15 +7,13 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Container from '@material-ui/core/Container';
 
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
-//   table: {
-//     maxWidth:'80%'
-//   },
-  container:{
-      //maxWidth:'70%'
+  table: {
+    minWidth: 650
   }
 });
 
@@ -23,29 +21,42 @@ export default function ResumeTaggingTable(props) {
   const classes = useStyles();
 
   const {
-      archives,
-      onClick
+    resumeURL,
+      //onClick
   } = props
 
   return (
-    <TableContainer component={Paper} className={classes.container}>
+
+    <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <TableRow hover onClick={()=>alert('a')}> 
-            <TableCell>Archive</TableCell>
-            <TableCell align="left" size="small">Image Id</TableCell>
-            <TableCell align="left" size="small"></TableCell>
+          <TableRow>
+            <TableCell>Archive Name</TableCell>
+            <TableCell align="center" padding="default">
+              You tagged
+            </TableCell>
+            <TableCell align="center" padding="default">
+              Total tagged
+            </TableCell>
+            <TableCell align="center" padding="default">
+              Resume
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {Object.keys(archives).map((archive) => (
-            <TableRow key={archive} hover onClick ={()=>onClick(archive,archives[archive])}>
+          {Object.keys(resumeURL).map((archive) => (
+            <TableRow key={archive} hover onClick ={()=>location.href = resumeURL[archive]}>
               <TableCell component="th" scope="row">
                 {archive}
               </TableCell>
-              <TableCell align="justify" size="small">{archives[archive]}</TableCell>
-              <TableCell align="left" size="small">
-                <Button variant="contained" color="primary" onClick ={()=>onClick(archive,archives[archive])}>
+              <TableCell align="center" component="th" scope="row">
+                1/20
+              </TableCell>
+              <TableCell align="center" component="th" scope="row">
+                5/20
+              </TableCell>
+              <TableCell align="center" size="small">
+                <Button variant="contained" color="primary" onClick ={()=>location.href = resumeURL[archive]}>
                     Resume
                 </Button>
               </TableCell>

@@ -34,44 +34,14 @@ import TestForm from '../../components/forms/testForm'
 // Home page after logging in
 function Home(props) {
   const router = useRouter()
-  async function continueTagging(archive,imageId) {
-    const  reqBody ={
-      name:archive
-    }
-    
-    //because its buggy rn
-    return
-
-    //get storm
-    const res = await fetch(apiCall(endpoints.findArchive), { //`/api/v1/archives/FindArchive`
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(reqBody)
-    });
-
-    
-    const dataArchive = ((await res.json()).data).archives[0]
-    const {storm} = dataArchive
-    
-    const resGetStorm = await fetch(endpoints.getStormById(storm), { //`/api/v1/storms?_id=${storm}`
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      //body: JSON.stringify(reqBody)
-    });
-    const dataGetStorm = ((await resGetStorm.json()).data)[0]
-    
-    location.href = `/auth/tagImage?storm=${dataGetStorm.name}&archive=${dataArchive.name}`
-  }
-
+  
   const {
     userMessage,
-    assignedImages
+    assignedImages,
   } = props?.user?.mongoUser
-
+  const {
+    resumeURL
+  } = props
   const classes = useStyles();
 
   async function testcall() {
@@ -96,7 +66,7 @@ function Home(props) {
     <Layout user={props.user} pageTitle="Home">
       <Container maxWidth="md">
         <Box my={4}>
-          {/* <Typography variant="h4" component="h1" gutterBottom color="secondary">
+          <Typography variant="h4" component="h1" gutterBottom color="secondary">
             Welcome!
           </Typography>
 
@@ -115,14 +85,14 @@ function Home(props) {
                 Continue tagging from collections below.
               </Typography>
               <div className={classes.center}>
-                <ResumeTaggingTable archives={assignedImages} onClick={continueTagging}/>
+                <ResumeTaggingTable resumeURL = {resumeURL}/>
               </div>
                
             </React.Fragment>:
               
             <></>
-          } */}
-          <TestStormForm/>
+          }
+          {/* <TestStormForm/> */}
           
 {/* 
           <Button 
@@ -166,11 +136,55 @@ Home.getInitialProps = async ctx => {
   const {req,res} = ctx
 
   hasUser(req)
+
+  
+
+  const assignedImages = req?.user?.mongoUser?.assignedImages
+  let resumeURL = {
+
+  }
+  if(assignedImages) {
+    await Promise.all(Object.keys(assignedImages).map(async (key) => {
+
+      const archiveName = key
+      const imageId = assignedImages[archiveName]
+
+      //get storm
+      const getArchive = await (await fetch(apiCall(endpoints.findArchive), { //`/api/v1/archives/FindArchive`
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name:archiveName
+        })
+      })).json()
+      const catalogId = getArchive.data.archives[0].catalog
+
+      const getStorm = await (await fetch(apiCall(endpoints.getStormById(catalogId)), { //`/api/v1/storms?_id=${storm}`
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        //body: JSON.stringify(reqBody)
+      })).json();
+      const catalogName = getStorm.data[0].name
+
+
+      const urlString = `/auth/tagImage?storm=${catalogName}&archive=${archiveName}`
+      
+      resumeURL[archiveName] = urlString
+      
+    }))
+  }
   
   //const allowedPages = {}//await getAllowedPages(req.user,ctx)
   
 
-  return {cookie:ctx.req.headers.cookie}
+  return {
+    cookie:ctx.req.headers.cookie,
+    resumeURL:resumeURL
+  }
 }
 
 export default Home
