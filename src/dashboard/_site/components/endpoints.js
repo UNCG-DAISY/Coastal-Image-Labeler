@@ -24,7 +24,8 @@ const endpoints = {
     tagImage:`/api/v1/images/tagImage`,
     showImage(name){
         return `/api/v1/images/show/${name}`
-    }
+    },
+    getUserResumeInfo:`/api/v1/catalogs/getUserResumeInfo`
     
 }
 

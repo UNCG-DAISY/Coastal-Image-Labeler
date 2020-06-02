@@ -26,16 +26,14 @@ export default class MyApp extends App {
   
   static async getInitialProps(context) {
     
-    const { Component, ctx } =context
+    const { Component, ctx } = context
     let pageProps = {};
     
- 
-    //get the pages props first
+    //Run the pages getInitProps first
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    
     //If there is a passport session
     //added ctx.req.session for server side rendering
     if (ctx.req && ctx.req.session && ctx.req.session.passport) {
@@ -80,7 +78,7 @@ export default class MyApp extends App {
         }
 
         //Add this to the user prop so other may use.
-
+        //This is NOT accessable in getinitprops, only in the component
         pageProps.user.mongoUser = getMongoUserById.data.data.user
 
         //Add on the allowed pages for this user. 
