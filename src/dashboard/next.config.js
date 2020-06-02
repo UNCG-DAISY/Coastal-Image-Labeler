@@ -12,7 +12,7 @@ module.exports = {
     return {
       "/": { page: "/" },
       "/auth/home": { page: "/auth/home" },
-      "/auth/pickStorm": {page: "/auth/home"},
+      "/auth/pickCatalog": {page: "/auth/pickCatalog"},
       "/auth/tagImage": {page: "/auth/tagImage"},
     }
   },

@@ -19,7 +19,7 @@ import endpoints from '../../components/endpoints'
 // tag, what archive of that storm and then redirects to a page to show that
 // image
 
-function TagImage(props) {
+function PickCatalog(props) {
   const {stormList} = props
   const classes = useStyles();
 
@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme  => ({
   },
 }));
 
-TagImage.getInitialProps = async ctx => {
+PickCatalog.getInitialProps = async ctx => {
   const {req,res} = ctx
 
   //First make sure theres a user
@@ -93,7 +93,7 @@ TagImage.getInitialProps = async ctx => {
     })
   }
 
-  console.log('=======================================',endpoints.getStormOfUser(req.user.mongoUser._id))
+  
   const getStorms = (await axios.get(
     apiCall(
       endpoints.getStormOfUser(req.user.mongoUser._id)
@@ -126,4 +126,4 @@ TagImage.getInitialProps = async ctx => {
   }
 }
 
-export default TagImage
+export default PickCatalog
