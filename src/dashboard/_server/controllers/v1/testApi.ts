@@ -1,7 +1,7 @@
 import {asyncHandler} from '../../middleware/v1/async'
 import {ErrorResponse} from '../../utils/v1/errorResponse'
 import { Request,Response,NextFunction } from "express"
-
+import _ from 'lodash'
 let cards = [
     { _id: 123, message: "I love pepperoni pizza!", author: "unknown1" },
     { _id: 123, message: "I love pizza!", author: "unknown2" },
@@ -10,7 +10,7 @@ let cards = [
     { _id: 123, message: "I pepperoni pizza!", author: "unknown5" },
     { _id: 123, message: "I", author: "unknown6" },
     { _id: 456, message: "I'm watching Netflix.", author: "unknownX2" }
-  ];
+];
 
 /**
  * @desc        Gets all roles of a user
@@ -49,7 +49,81 @@ const testPost = asyncHandler(async (req: Request, res: Response, next: NextFunc
     })
 })
 
+const testLodash = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const simple1 = {
+        a:'1',
+        b:'2'
+    }
+    const simple2 = {
+        b:"2",
+        a:"1"
+    }
+    const simple3 = {
+        c:'1'
+    }
+    console.log('SIMPLE')
+    console.log('String compare',JSON.stringify(simple1) === JSON.stringify(simple2))
+    console.log('Lodash compare',_.isEqual(simple1,simple2))
+    console.log('Lodash compare',_.isEqual(simple1,simple3))
+    const tag1 = {
+        "tags": {
+            "devType": "1",
+            "washoverType": "1",
+            "damageType": "1",
+            "impactType": {
+                "swash": true,
+                "collision": false,
+                "overwash": false,
+                "inundation": false
+            },
+            "terrianType": {
+                "sandyCoastline": false,
+                "marsh": false,
+                "inland": false,
+                "river": true
+            },
+            "water": 0,
+            "comments": ""
+        },
+    }
+
+    const tag2 = {
+        "tags": {
+            "impactType": {
+                "overwash": false,
+                "inundation": false,
+                "swash": true,
+                "collision": false,
+               
+            },
+            "terrianType": {
+                "sandyCoastline": false,
+                "river": true,
+                "marsh": false,
+                "inland": false,
+            },
+            "water": 0,
+            "comments": "",
+            "devType": "1",
+            "washoverType": "1",
+            "damageType": "1"
+        },
+    }
+
+    delete tag1["tags"]["comments"]
+    delete tag2["tags"]["comments"]
+    console.log('COMPLEX')
+    console.log('String compare',JSON.stringify(tag1) === JSON.stringify(tag2))
+    console.log('Lodash compare',_.isEqual(tag1,tag2))
+    
+    res.status(200).json({
+        success:true,
+        //message: `Test POST, keys are ${keys} at time ${Date.now()}`
+    })
+})
+
 export {
     testGet,
-    testPost
+    testPost,
+    testLodash
 }
