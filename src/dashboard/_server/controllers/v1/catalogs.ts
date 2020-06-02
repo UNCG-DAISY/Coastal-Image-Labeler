@@ -146,8 +146,6 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
             catalogName: catalogName
         }
     }))
-    
-    console.log(taggedImagesCategorized)
 
     return res.status(200).json({
         success:true,
