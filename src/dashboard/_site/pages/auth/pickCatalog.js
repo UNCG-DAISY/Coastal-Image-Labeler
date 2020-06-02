@@ -93,33 +93,16 @@ PickCatalog.getInitialProps = async ctx => {
     })
   }
 
-  
-  const getStorms = (await axios.get(
-    apiCall(
-      endpoints.getStormOfUser(req.user.mongoUser._id)
-      //`/api/v1/storms/user/${req.user.mongoUser._id}`
-    )
-  )).data
- //console.log(endpoints.getStormOfUser(req.user.mongoUser._id))
-  let stormList = {}
-  
-  //console.log('----',getStorms.data)
-  getStorms.data.forEach(storm => {
-      
+  //get the dropdown information
+  const selectableCatalogInfo = await (await fetch(apiCall(endpoints.getPickCatalogInfo), { 
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "cookie": ctx.req ? ctx.req?.headers?.cookie ?? null : null
+      },
+  })).json()
+  const stormList = selectableCatalogInfo?.data?.dropdownInfo
 
-      stormList[storm.name] = {}
-     
-      stormList[storm.name].info = storm.catalogInfo
-      let archiveList = []
-      storm.archives.forEach(archive => {
-        stormList[storm.name].archives= {
-          ...stormList[storm.name].archives
-        }
-        stormList[storm.name].archives[archive.name] = {}
-      });
-  });
-
-  //console.log(stormList)
   return {
     allowedPages,
     stormList

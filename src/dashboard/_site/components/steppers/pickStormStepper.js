@@ -115,10 +115,10 @@ export default function PickStormStepper(props) {
 
   function shouldDisable() {
       if(activeStep == 0) {
-          return selectedStorm==-1
+          return selectedStorm ==-1
       }
       if(activeStep == 1) {
-        return selectedArchive==-1
+        return selectedArchive ==-1
     }
   }
 
@@ -157,9 +157,29 @@ export default function PickStormStepper(props) {
                           </div>
                           
                           <br/>
+                          <strong style={{color:theme.palette.secondary.main}}>
+                            Total Images of Catalog
+                          </strong>: {storms[selectedStorm]?.totalImages}
+
+                          {
+                            selectedArchive != -1?
+                            (
+                              <React.Fragment>
+                                <br/>
+                                <strong style={{color:theme.palette.secondary.main}}>
+                                  Total Images of Archive
+                                </strong>: {storms[selectedStorm].archives[selectedArchive]?.totalImages}
+                              </React.Fragment>
+                            )
+                            :
+                            (
+                              <div></div>
+                            )
+                          }
+                    
                           <div>
-                            <strong style={{color:theme.palette.secondary.main}}>Year</strong>: 
-                            {storms[selectedStorm]?.info?.year ?? 'N/A'}
+                            <strong style={{color:theme.palette.secondary.main}}>Year</strong> 
+                            : {storms[selectedStorm]?.info?.year ?? 'N/A'}
                           </div>                  
                       </React.Fragment>
                    

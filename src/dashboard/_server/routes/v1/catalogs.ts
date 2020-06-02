@@ -7,7 +7,8 @@ import express from 'express'
 import {
     getAllCatalogs,
     getCatalogsOfUser,
-    getUserResumeInfo
+    getUserResumeInfo,
+    pickCatalogInfo
 } from '../../controllers/v1/catalogs'
 
 //Perform advanced results which means filtering, pagination, and query parameters
@@ -38,5 +39,9 @@ router
 router
     .route('/getUserResumeInfo')
     .post(ensureAuthenticated,authorize('tagger'),addMongoUser(),getUserResumeInfo)
+
+router
+    .route('/pickCatalogInfo')
+    .post(ensureAuthenticated,authorize('tagger'),addMongoUser(),pickCatalogInfo)
 
 export default router;
