@@ -16,7 +16,7 @@ program
             path,
         } = cmd
 
-        archive.createSpecificArchive({path:path})
+        //archive.createSpecificArchive({path:path})
 
     })
 

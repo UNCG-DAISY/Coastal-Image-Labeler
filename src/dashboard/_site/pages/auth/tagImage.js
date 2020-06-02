@@ -13,14 +13,10 @@ import TaggingForm from '../../components/taggingForm/TaggingForm'
 import initalTagState from '../../components/taggingForm/initalTagState'
 import Layout from '../../components/layouts/Layout'
 import Paper from '@material-ui/core/Paper';
-
 import ErrorAlert from '../../components/ErrorAlert'
-
 import endpoints from '../../components/endpoints'
 
-
 // This page shows an image to tag
-
 function TagImage(props) {
   const {
     query:queryParams,
@@ -31,13 +27,11 @@ function TagImage(props) {
   //amenadiel/a420/420_test.png
 
   // console.log(imageDocument?.id)
-  const imgUrl = endpoints.showImage(imageDocument?.id)//`${queryParams?.storm}/${queryParams?.archive}/${imageDocument?.id}`
+  const imgUrl = endpoints.showImage(imageDocument?.id)
 
   async function skipImage() {
-    //alert('Skipping image')
     const responseData = await (await fetch(apiCall(
       endpoints.skipImage(queryParams?.archive)
-      //`/api/v1/images/skipImage/${queryParams?.archive}`
       ), {
       method: "GET",
     
@@ -50,20 +44,17 @@ function TagImage(props) {
   const taggingForm = (
     <React.Fragment>
       <TaggingForm
-        imageUrl = {`${apiCall(imgUrl)}`} //http://localhost:5000/${imgUrl}
+        imageUrl = {`${apiCall(imgUrl)}`}
         submitTags = {submitTags}
         tagAsWater = {tagAsWater}
         skipImage = {skipImage}
         imageDoc = {imageDocument}
         queryParams = {queryParams}
       />
-      
-      {/* <Button variant="contained" onClick={()=>submitTags(5)}>Default</Button> */}
     </React.Fragment>
   )
 
   async function submitTags(tags) {
-    //alert(`You are about to tag to image ${imageDocument._id}`)
     const payload = {
       _id : imageDocument?._id,
       tags: tags,
@@ -162,19 +153,18 @@ TagImage.getInitialProps = async ctx => {
     })
   }
 
-  //Is both query params sent
-  if(!query.archive || !query.storm) {
+  //Make sure both query params sent
+  if(!query.archive || !query.catalog) {
     return ({
       error:true,
       errorTitle:'Invalid query params',
-      errorMessage:`Please send a valid storm and archive in URL params.`
+      errorMessage:`Please send a valid catalog and archive in URL params.`
     })
   }
 
   //Is this user part of this archive
-  const getQueryStormName = await (await fetch(apiCall(
-    //`/api/v1/storms?name=${query.storm}`
-    endpoints.getStormByName(query.storm)
+  const getQueryCatalogName = await (await fetch(apiCall(
+    endpoints.getCatalogByName(query.catalog)
     ), {
     method: "GET",
     headers: {
@@ -184,25 +174,24 @@ TagImage.getInitialProps = async ctx => {
       "cookie": ctx?.req?.headers?.cookie ?? null 
     }
   })).json();
-  const stormID = getQueryStormName.data[0]?._id
+  const catalogId = getQueryCatalogName.data[0]?._id
 
-  //If the storm passed is invalid
-  if(!stormID) {
+  //If the Catalog passed is invalid
+  if(!catalogId) {
     return {
       error:true,
-      errorTitle:'Invalid Storm name',
-      errorMessage:`Storm name of ${query.storm} is an invalid storm name`
+      errorTitle:'Invalid Catalog name',
+      errorMessage:`Catalog name of ${query.catalog} is an invalid Catalog name`
     }
   }
 
-  //Compare the ID's of the storms a user is part of and the ID of this storm
-  const stormsOfUser = req?.user?.mongoUser?.catalogs ?? 
-  console.log(stormsOfUser,'----------------- ')
-  if(!(stormsOfUser.includes(stormID))) {
+  //Compare the ID's of the Catalogs a user is part of and the ID of this Catalogs
+  const catalogsOfUser = req?.user?.mongoUser?.catalogs ?? []
+  if(!(catalogsOfUser.includes(catalogId))) {
     return ({
       error:true,
       errorTitle:'Not allowed to tag',
-      errorMessage:`User is not allowed to tag storm ${query.storm}`
+      errorMessage:`User is not allowed to tag Catalog ${query.catalog}`
     })
   }
 

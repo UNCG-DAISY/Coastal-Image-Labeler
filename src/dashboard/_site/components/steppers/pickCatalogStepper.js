@@ -1,4 +1,4 @@
-// This is the stepper that asks the user what storm and archive they wanna tag
+// This is the stepper that asks the user what Catalog and archive they wanna tag
 
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,7 +13,7 @@ import Box from '@material-ui/core/Box';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
-import CreateStormPickerDropdown from './createPickStormDropdown'
+import CreateCatalogPickerDropdown from './createPickCatalogDropdown'
 import theme from '../theme'
 
 const useStyles = makeStyles(theme => ({
@@ -41,37 +41,26 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['Pick a Storm', 'Pick an archive from that strom'];
+  return ['Pick a Catalog', 'Pick an Archive from that Catalog'];
 }
 
-
-
-export default function PickStormStepper(props) {
+export default function PickCatalogStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
   const Router = useRouter()
 
-  const storms = props?.storms || {}
+  const catalogs = props?.catalogs || {}
 
-  const stormsKey = Object.keys(storms)
+  const catalogKeys = Object.keys(catalogs)
 
-  const [selectedStorm, setSelectedStorm] = React.useState(-1);
+  const [selectedCatalog, setSelectedCatalog] = React.useState(-1);
   const [selectedArchive, setselectedArchive] = React.useState(-1);
 
-
-
-
-  function getArchiveName(stormKey,archive) {
-      const storm = storms[stormKey]
-      const selectedStorm = Object.keys(storm)[storm]
-
-      return Object.keys(selectedStorm)[archive]
-  }
   const handleNext = () => {
       if(activeStep == steps.length-1) {  
-        //alert(`Getting image for storm ${selectedStorm} under archive ${selectedArchive}`) 
-        window.location.href=`/auth/tagImage?storm=${selectedStorm}&archive=${selectedArchive}`
+        //alert(`Getting image for Catalog ${selectedCatalog} under archive ${selectedArchive}`) 
+        window.location.href=`/auth/tagImage?catalog=${selectedCatalog}&archive=${selectedArchive}`
       }
       else {
         setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -90,21 +79,21 @@ export default function PickStormStepper(props) {
     switch (stepIndex) {
       case 0:
         return (
-            <CreateStormPickerDropdown 
-                data={storms} 
-                stateFunctions = {[selectedStorm, setSelectedStorm]} 
-                defaultValue="Please select an storm"
-                //label = 'Pick a storm'
+            <CreateCatalogPickerDropdown 
+                data={catalogs} 
+                stateFunctions = {[selectedCatalog, setSelectedCatalog]} 
+                defaultValue="Please select an Catalog"
+                //label = 'Pick a Catalog'
             />
         );
         
       case 1:
         return (
-            <CreateStormPickerDropdown 
-                data={storms[selectedStorm].archives} 
+            <CreateCatalogPickerDropdown 
+                data={catalogs[selectedCatalog].archives} 
                 stateFunctions = {[selectedArchive, setselectedArchive]}
-                defaultValue="Please select an archive"
-                //label = 'Pick a storm'
+                defaultValue="Please select an Archive"
+                //label = 'Pick a Catalog'
             />
         );
      
@@ -115,16 +104,16 @@ export default function PickStormStepper(props) {
 
   function shouldDisable() {
       if(activeStep == 0) {
-          return selectedStorm==-1
+          return selectedCatalog ==-1
       }
       if(activeStep == 1) {
-        return selectedArchive==-1
+        return selectedArchive ==-1
     }
   }
 
   return (
     <div className={classes.root}>
-      {/* {JSON.stringify(storms[selectedStorm])} */}
+      {/* {JSON.stringify(catalogs[selectedCatalog])} */}
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map(label => (
           <Step key={label}>
@@ -145,21 +134,41 @@ export default function PickStormStepper(props) {
                   {getStepContent(activeStep)}
                 </div>
                 {
-                  storms[selectedStorm]?
+                  catalogs[selectedCatalog]?
                   <Alert severity="info" color="info" variant="outlined" >
                     <AlertTitle>Info</AlertTitle>
                    
                       <React.Fragment>
                           <div>
                             <strong style={{color:theme.palette.secondary.main}}>Description</strong>: 
-                            {storms[selectedStorm]?.info?.description ?? 'N/A'}
-                            <Button variant="text" size="small" href={storms[selectedStorm]?.info?.link ?? ''} style={{textDecoration:'none'}} color="secondary">Link to Wikipedia</Button>
+                            {catalogs[selectedCatalog]?.info?.description ?? 'N/A'}
+                            <Button variant="text" size="small" href={catalogs[selectedCatalog]?.info?.link ?? ''} style={{textDecoration:'none'}} color="secondary">Link to Wikipedia</Button>
                           </div>
                           
                           <br/>
+                          <strong style={{color:theme.palette.secondary.main}}>
+                            Total Images of Catalog
+                          </strong>: {catalogs[selectedCatalog]?.totalImages}
+
+                          {
+                            selectedArchive != -1?
+                            (
+                              <React.Fragment>
+                                <br/>
+                                <strong style={{color:theme.palette.secondary.main}}>
+                                  Total Images of Archive
+                                </strong>: {catalogs[selectedCatalog].archives[selectedArchive]?.totalImages}
+                              </React.Fragment>
+                            )
+                            :
+                            (
+                              <div></div>
+                            )
+                          }
+                    
                           <div>
-                            <strong style={{color:theme.palette.secondary.main}}>Year</strong>: 
-                            {storms[selectedStorm]?.info?.year ?? 'N/A'}
+                            <strong style={{color:theme.palette.secondary.main}}>Year</strong> 
+                            : {catalogs[selectedCatalog]?.info?.year ?? 'N/A'}
                           </div>                  
                       </React.Fragment>
                    

@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container';
 import {hasUser} from '../../components/utils/checkIfUser'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import PickStormStepper from '../../components/steppers/pickStormStepper'
+import PickCatalogStepper from '../../components/steppers/pickCatalogStepper'
 import {getAllowedPages} from '../../components/utils/getAllowedPages'
 import { 
   apiCall
@@ -16,11 +16,11 @@ import ErrorAlert from '../../components/ErrorAlert'
 import endpoints from '../../components/endpoints'
 
 // This page shows a stepper that asks a series of questions on what strom to
-// tag, what archive of that storm and then redirects to a page to show that
+// tag, what archive of that catalog and then redirects to a page to show that
 // image
 
-function TagImage(props) {
-  const {stormList} = props
+function PickCatalog(props) {
+  const {catalogList} = props
   const classes = useStyles();
 
   function determineContent() {
@@ -28,7 +28,7 @@ function TagImage(props) {
       return <ErrorAlert errorTitle={props.errorTitle} errorMessage={props.errorMessage}/>
     }
   
-    if(Object.keys(stormList).length == 0) {
+    if(Object.keys(catalogList).length == 0) {
       return (
         <ErrorAlert 
           errorTitle={'No catalogs'} 
@@ -38,7 +38,7 @@ function TagImage(props) {
         />
       )
     }
-    return <PickStormStepper storms = {stormList}/>
+    return <PickCatalogStepper catalogs = {catalogList}/>
   }
 
   return (
@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme  => ({
   },
 }));
 
-TagImage.getInitialProps = async ctx => {
+PickCatalog.getInitialProps = async ctx => {
   const {req,res} = ctx
 
   //First make sure theres a user
@@ -93,37 +93,20 @@ TagImage.getInitialProps = async ctx => {
     })
   }
 
-  console.log('=======================================',endpoints.getStormOfUser(req.user.mongoUser._id))
-  const getStorms = (await axios.get(
-    apiCall(
-      endpoints.getStormOfUser(req.user.mongoUser._id)
-      //`/api/v1/storms/user/${req.user.mongoUser._id}`
-    )
-  )).data
- //console.log(endpoints.getStormOfUser(req.user.mongoUser._id))
-  let stormList = {}
-  
-  //console.log('----',getStorms.data)
-  getStorms.data.forEach(storm => {
-      
+  //get the dropdown information
+  const selectableCatalogInfo = await (await fetch(apiCall(endpoints.getPickCatalogInfo), { 
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "cookie": ctx.req ? ctx.req?.headers?.cookie ?? null : null
+      },
+  })).json()
+  const catalogList = selectableCatalogInfo?.data?.dropdownInfo
 
-      stormList[storm.name] = {}
-     
-      stormList[storm.name].info = storm.catalogInfo
-      let archiveList = []
-      storm.archives.forEach(archive => {
-        stormList[storm.name].archives= {
-          ...stormList[storm.name].archives
-        }
-        stormList[storm.name].archives[archive.name] = {}
-      });
-  });
-
-  //console.log(stormList)
   return {
     allowedPages,
-    stormList
+    catalogList
   }
 }
 
-export default TagImage
+export default PickCatalog

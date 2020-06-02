@@ -21,7 +21,7 @@ export default function ResumeTaggingTable(props) {
   const classes = useStyles();
 
   const {
-    resumeURL,
+    resumeObj,
       //onClick
   } = props
 
@@ -31,37 +31,45 @@ export default function ResumeTaggingTable(props) {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
+            <TableCell>Catalog Name</TableCell>
             <TableCell>Archive Name</TableCell>
-            <TableCell align="center" padding="default">
+            {/* <TableCell align="center" padding="default">
               You tagged
-            </TableCell>
+            </TableCell> */}
             <TableCell align="center" padding="default">
               Total tagged
             </TableCell>
             <TableCell align="center" padding="default">
-              Resume
+              
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {Object.keys(resumeURL).map((archive) => (
-            <TableRow key={archive} hover onClick ={()=>location.href = resumeURL[archive]}>
-              <TableCell component="th" scope="row">
-                {archive}
-              </TableCell>
-              <TableCell align="center" component="th" scope="row">
-                1/20
-              </TableCell>
-              <TableCell align="center" component="th" scope="row">
-                5/20
-              </TableCell>
-              <TableCell align="center" size="small">
-                <Button variant="contained" color="primary" onClick ={()=>location.href = resumeURL[archive]}>
-                    Resume
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
+          {Object.keys(resumeObj).map((archive) => {
+            
+            const archiveData = resumeObj[archive]
+            return (
+              <TableRow key={archiveData.URL} >
+                <TableCell component="th" scope="row">
+                  {archiveData.catalogName}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {archiveData.archiveName}
+                </TableCell>
+                <TableCell align="center" component="th" scope="row">
+                  {archiveData.taggedByUser}/{archiveData.totalForArchive}
+                </TableCell>
+                {/* <TableCell align="center" component="th" scope="row">
+                  {archiveData.totalTaggedForArchive}/{archiveData.totalForArchive}
+                </TableCell> */}
+                <TableCell align="center" size="small">
+                  <Button variant="contained" color="primary" onClick ={()=>location.href = archiveData.URL}>
+                      Resume
+                  </Button>
+                </TableCell>
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
     </TableContainer>
