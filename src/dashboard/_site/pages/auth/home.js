@@ -109,17 +109,16 @@ Home.getInitialProps = async ctx => {
 
   //Get resume table data
   if(assignedImages) {
-    const test = await (await fetch(apiCall(endpoints.getUserResumeInfo), { //`/api/v1/archives/FindArchive`
+    const getUserResumeInfo = await (await fetch(apiCall(endpoints.getUserResumeInfo), { //`/api/v1/archives/FindArchive`
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "cookie": ctx.req ? ctx.req.headers.cookie : null
       },
     })).json()
-    //console.log('TEST --- ',test.data)
-    resumeObj= test.data.resumeObj
+    //console.log('TEST --- ',getUserResumeInfo)
+    resumeObj= getUserResumeInfo?.data?.resumeObj
   }
-
   
   return {
     cookie:ctx.req.headers.cookie,
