@@ -33,9 +33,9 @@ export default function ResumeTaggingTable(props) {
           <TableRow>
             <TableCell>Catalog Name</TableCell>
             <TableCell>Archive Name</TableCell>
-            <TableCell align="center" padding="default">
+            {/* <TableCell align="center" padding="default">
               You tagged
-            </TableCell>
+            </TableCell> */}
             <TableCell align="center" padding="default">
               Total tagged
             </TableCell>
@@ -59,9 +59,9 @@ export default function ResumeTaggingTable(props) {
                 <TableCell align="center" component="th" scope="row">
                   {archiveData.taggedByUser}/{archiveData.totalForArchive}
                 </TableCell>
-                <TableCell align="center" component="th" scope="row">
+                {/* <TableCell align="center" component="th" scope="row">
                   {archiveData.totalTaggedForArchive}/{archiveData.totalForArchive}
-                </TableCell>
+                </TableCell> */}
                 <TableCell align="center" size="small">
                   <Button variant="contained" color="primary" onClick ={()=>location.href = archiveData.URL}>
                       Resume
