@@ -8,30 +8,7 @@ import {ImageModel} from '../../models/Image'
 import {ArchiveModel} from '../../models/Archive'
 import {CatalogModel} from '../../models/Catalog'
 import fs from 'fs'
-//import {RBAC} from '../../middleware/v1/auth'
-
-//import {TEST_assignNextImage} from './user'
-
-// async function test() {
-//     const allImages = await ImageModel.find();
-    
-//     //@ts-ignore
-//     allImages.forEach(async image => {
-//         //console.log('Updating',image.id,image.archive[0])
-        
-//         const x = await ImageModel.findByIdAndUpdate(
-//             image._id,
-//             {
-//                tillComplete:2
-//             },
-//             {
-//                 new:true
-//             }
-//         )
-//         //console.log(image.archive,x.archive)
-//     });
-// }
-// test()
+import _ from 'lodash'
 
 /**
  * @desc        Tags an image
@@ -72,20 +49,27 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
     //Get the current tagging state(should be true) for future use
     let stillTaggable = taggedImage.taggable
 
+    console.log(taggingPayload.tags.comments)
     /* Step 3 */
     //if this image has tags
     if(taggedImage.tags.length > 0) {
-        let stringifyedTaggingPayload = JSON.stringify(taggingPayload.tags)
-        let numMatched = 1 //image matches with self
+        //Do a deep copy so we can delete keys
+        let currentSubmittedTag =  _.cloneDeep(taggingPayload.tags)
+        //no need to compare the comments
+        delete currentSubmittedTag["comments"]
+
+        let numMatched = 1 //tag matches with self
 
         //Go through each currentee tag and compare
         for(let i = 0; i<taggedImage.tags.length;i++) {
             //Get the current tag and convert to a string
-            //@ts-ignore
-            const temp_tag = JSON.stringify(taggedImage.tags[i].tags)
+            //Do a deep copy so we can delete keys
+            const previouslySavedTag = _.cloneDeep((taggedImage.tags[i] as any).tags)
+            //no need to compare the comments, so make it undefined
+            delete previouslySavedTag["comments"]
 
             //Compare the new tag and the currently selected tag
-            if(temp_tag === stringifyedTaggingPayload) {
+            if(_.isEqual(currentSubmittedTag,previouslySavedTag)) {
                 numMatched++;
             }
         }
@@ -104,6 +88,7 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
 
     /* Step 4 */
     //Update
+    console.log(taggingPayload.tags.comments)
     let upadtedImage = await ImageModel.updateOne(
         {_id:_id},
         { $push: { tags: taggingPayload },taggable:stillTaggable },

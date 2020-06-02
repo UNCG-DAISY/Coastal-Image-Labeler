@@ -20,13 +20,16 @@ import {
     authorize,
     partOfCatalog
 } from '../../middleware/v1/auth'
+import {
+    dummyRes
+} from '../../controllers/v1/dummy'
 // "/api/v1/images/"
 const router = express.Router();
 
 
 router
     .route('/tagImage')
-    .post(ensureAuthenticated,authorize('tagger'),partOfCatalog(),tagImage,updatedTaggedImages) //
+    .post(ensureAuthenticated,authorize('tagger'),partOfCatalog(),tagImage,updatedTaggedImages)
 router
     .route('/skipImage/:archive')
     .get(ensureAuthenticated,authorize('tagger'),partOfCatalog(),updatedTaggedImages)

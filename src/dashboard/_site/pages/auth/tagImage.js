@@ -61,10 +61,10 @@ function TagImage(props) {
       timeEnd:Date.now(),
       timeStart: props.timeStart
     }
-
+    console.log(JSON.stringify(payload))
+    console.log(endpoints.tagImage)
     const responseData = await (await fetch(apiCall(
       endpoints.tagImage
-      //`/api/v1/images/tagImage`
       ), {
       method: "POST",
       headers: {
@@ -73,9 +73,10 @@ function TagImage(props) {
       body:JSON.stringify(payload)
     })).json();
 
+    //console.log(responseData.status)
     alert(responseData?.message ? responseData?.message : 'No message')
 
-    console.log(responseData)
+    // console.log(responseData)
     Router.reload()
     
   }
@@ -86,7 +87,6 @@ function TagImage(props) {
     submitTags(tag)
   }
   
-
   function determineContent() {
 
     if(props.error) {
@@ -102,8 +102,6 @@ function TagImage(props) {
 
     return taggingForm
   }
-
- 
 
   return (
     <Layout user={props.user} pageTitle={`Tagging Session: ${imageDocument?.id}`}>

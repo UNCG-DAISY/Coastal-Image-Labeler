@@ -2,7 +2,8 @@ import express from 'express'
 
 import {
     testGet,
-    testPost
+    testPost,
+    testLodash
 } from '../../controllers/v1/testApi'
 
 import {
@@ -17,15 +18,9 @@ const router = express.Router();
 
  
 router
-    .route('/ensureAuthenticated')
-    .get(ensureAuthenticated,testGet)
+    .route('/testLodash')
+    .get(testLodash)
 
-router
-    .route('/authorize')
-    .get(ensureAuthenticated,authorize('5e3e60207362e721e430ea6d'),testGet)
 
-router
-    .route('/authorize2')
-    .get(ensureAuthenticated,authorize('5e3e60207362e721e430ea6e'),testGet)
 
 export default router;

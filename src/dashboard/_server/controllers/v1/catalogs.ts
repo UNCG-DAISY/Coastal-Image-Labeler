@@ -136,12 +136,14 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
         const getTotalImagesArchive = await ImageModel.find({archive:getArchive._id})
         const totalTaggedOfArchive = await ImageModel.find({ tags: { $exists: true, $not: {$size: 0} } })
         
+        // console.log('taggedImagesCategorized',taggedImagesCategorized)
+        // console.log('catalogName',taggedImagesCategorized[catalogName]?.[archiveName])
         resumeObj[image] = {
-            taggedByUser: taggedImagesCategorized[catalogName][archiveName],
+            taggedByUser: taggedImagesCategorized?.[catalogName]?.[archiveName] ?? 0,
             totalForArchive:getTotalImagesArchive.length,
             totalTaggedForArchive:totalTaggedOfArchive.length,
 
-            URL:`/auth/tagImage?storm=${catalogName}&archive=${archiveName}`,
+            URL:`/auth/tagImage?catalog=${catalogName}&archive=${archiveName}`,
             archiveName: archiveName,
             catalogName: catalogName
         }
