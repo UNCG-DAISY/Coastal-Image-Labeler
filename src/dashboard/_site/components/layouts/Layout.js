@@ -15,7 +15,6 @@ class Layout extends React.Component{
                 <ResponsiveDrawer user={user} pageTitle={pageTitle}>
                     {children}
                 </ResponsiveDrawer>
-                
             </React.Fragment>
         )
     }
