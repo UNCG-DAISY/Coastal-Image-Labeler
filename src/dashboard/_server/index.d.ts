@@ -54,8 +54,8 @@ declare namespace psiDashboard  {
 
   export interface ArchiveDocument extends Document {
     dateAdded?:Date,
-    name : String,
-    path : String,
+    name : string,
+    path : string,
     role: [Types.ObjectId],
     catalog:Types.ObjectId,
     taggable: Boolean,
@@ -63,15 +63,16 @@ declare namespace psiDashboard  {
   }
 
   export interface RoleDocument extends Document {
-    name:String
+    name:string
   }
 
   export interface CatalogDocument extends Document {
     archives: any,
+    catalogInfo?:any,
     dateAdded?:Date,
-    name : String,
-    path : String,
-    taggable:Boolean
+    name : string,
+    path : string,
+    taggable:Boolean,
   }
 
   type allDocuments = 
