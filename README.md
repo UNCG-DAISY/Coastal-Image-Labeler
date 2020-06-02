@@ -5,7 +5,7 @@ https://psi-dashboard.readthedocs.io/en/latest/)
 [![Last Commit](https://img.shields.io/github/last-commit/UNCG-DAISY/Coastal-Image-Labeler)](
 https://github.com/UNCG-DAISY/Coastal-Image-Labeler/commits/master)
 
-Dashboard for tagging NOAA post-storm emergency response imagery.
+Dashboard for tagging Coastal Images — focused now on NOAA post-storm emergency response imagery.
 
 [![Documentation](https://img.shields.io/badge/Documentation-Click%20Me-brightgreen)](
 https://psi-dashboard.readthedocs.io/en/latest/)
