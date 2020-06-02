@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container';
 import {hasUser} from '../../components/utils/checkIfUser'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import PickStormStepper from '../../components/steppers/pickStormStepper'
+import PickCatalogStepper from '../../components/steppers/pickCatalogStepper'
 import {getAllowedPages} from '../../components/utils/getAllowedPages'
 import { 
   apiCall
@@ -16,11 +16,11 @@ import ErrorAlert from '../../components/ErrorAlert'
 import endpoints from '../../components/endpoints'
 
 // This page shows a stepper that asks a series of questions on what strom to
-// tag, what archive of that storm and then redirects to a page to show that
+// tag, what archive of that catalog and then redirects to a page to show that
 // image
 
 function PickCatalog(props) {
-  const {stormList} = props
+  const {catalogList} = props
   const classes = useStyles();
 
   function determineContent() {
@@ -28,7 +28,7 @@ function PickCatalog(props) {
       return <ErrorAlert errorTitle={props.errorTitle} errorMessage={props.errorMessage}/>
     }
   
-    if(Object.keys(stormList).length == 0) {
+    if(Object.keys(catalogList).length == 0) {
       return (
         <ErrorAlert 
           errorTitle={'No catalogs'} 
@@ -38,7 +38,7 @@ function PickCatalog(props) {
         />
       )
     }
-    return <PickStormStepper storms = {stormList}/>
+    return <PickCatalogStepper catalogs = {catalogList}/>
   }
 
   return (
@@ -101,11 +101,11 @@ PickCatalog.getInitialProps = async ctx => {
         "cookie": ctx.req ? ctx.req?.headers?.cookie ?? null : null
       },
   })).json()
-  const stormList = selectableCatalogInfo?.data?.dropdownInfo
+  const catalogList = selectableCatalogInfo?.data?.dropdownInfo
 
   return {
     allowedPages,
-    stormList
+    catalogList
   }
 }
 

@@ -2,13 +2,13 @@ const endpoints = {
     findUser:`/api/v1/users/findUser`,
     createUser:'/api/v1/users/createUser',
     findArchive:'/api/v1/archives/FindArchive',
-    getStormById(id) {
+    getCatalogById(id) {
         return `/api/v1/catalogs?_id=${id}`
     },
-    getStormByName(name) {
+    getCatalogByName(name) {
         return `/api/v1/catalogs?name=${name}`
     },
-    getStormOfUser(id){
+    getCatalogsOfUser(id){
         return `/api/v1/catalogs/user/${id}`
     },
     skipImage(archive){
