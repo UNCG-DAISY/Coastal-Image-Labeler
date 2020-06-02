@@ -75,7 +75,7 @@ const getCatalogsOfUser = asyncHandler(async (req: Request, res: Response, next:
 })
 
 /**
- * @desc        Gets all storms
+ * @desc        Gets the resume tagging information for a user
  * @route       POST /api/v1/catalogs/getUserResumeInfo
  * @access      Public
  * @returns     yes
@@ -157,9 +157,72 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
     })
 })
 
+/**
+ * @desc        Gets the dropdown info for picking a catalog/archive to tag
+ * @route       POST /api/v1/catalogs/pickCatalogInfo
+ * @access      Public
+ * @returns     yes
+ */
+const pickCatalogInfo = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const {
+       catalogs
+    } = res.mongoUser
+
+    let dropdownInfo = {}
+
+    //For each catalog the user is part of, create sub objects where the key is the archives name.
+    //then for each archive object keep track of how many images are part of that archive.
+    await Promise.all(await catalogs.map(async (catalogId,index)=>{
+        //Get fully populated Catalog
+        const populatedCatalog = await CatalogModel.findById(catalogId).populate('archives')
+        if(!populatedCatalog) {
+            return;
+        }
+        const catalogName = populatedCatalog.name
+        dropdownInfo[catalogName] = {}
+
+        //Get the catalog info(year,desc,link) and place them in
+        dropdownInfo[catalogName].info = populatedCatalog.catalogInfo
+
+        //Create empty objects where the keys are the names of the archives
+        dropdownInfo[catalogName].archives = {}
+        populatedCatalog.archives.forEach(element => {
+            dropdownInfo[catalogName].archives[element.name] = {}
+        });
+        
+        //How many images are part of this catalog
+        let totalImagesOfCatalog = 0
+
+        //For each archive of this catalog
+        await Promise.all(await populatedCatalog.archives.map(async (archiveDoc,index)=>{
+            
+            //Get how many images are part of this archive
+            const imagesOfArchive = await ImageModel.find({archive:archiveDoc._id})
+            const numImages = imagesOfArchive.length
+            const archiveName = archiveDoc.name
+
+            //Add to the archive object the number of images of that archive
+            dropdownInfo[catalogName].archives[archiveName].totalImages = numImages
+            //Add this same number to the total images of catalog
+            totalImagesOfCatalog += numImages
+        }))
+
+        dropdownInfo[catalogName].totalImages = totalImagesOfCatalog
+        
+    }))
+
+    return res.status(200).json({
+        success:true,
+        message:'Done',
+        data:{
+            dropdownInfo
+        }
+    })
+})
 
 export {
     getAllCatalogs,
     getCatalogsOfUser,
-    getUserResumeInfo
+    getUserResumeInfo,
+    pickCatalogInfo
 }
