@@ -40,7 +40,7 @@ export default function ResumeTaggingTable(props) {
               Total tagged
             </TableCell>
             <TableCell align="center" padding="default">
-              Resume
+              
             </TableCell>
           </TableRow>
         </TableHead>
@@ -49,7 +49,7 @@ export default function ResumeTaggingTable(props) {
             
             const archiveData = resumeObj[archive]
             return (
-              <TableRow key={archiveData.URL} hover onClick ={()=>location.href = archiveData.URL}>
+              <TableRow key={archiveData.URL} >
                 <TableCell component="th" scope="row">
                   {archiveData.catalogName}
                 </TableCell>
