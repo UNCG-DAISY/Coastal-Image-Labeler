@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CreateStormPickerDropdown(props) {
+export default function CreateCatalogPickerDropdown(props) {
     const classes = useStyles();
     const dataValues = Object.keys(props.data)
     
