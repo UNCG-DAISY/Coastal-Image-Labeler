@@ -18,7 +18,7 @@ const addMongoUser = () => {
         if(!mongoUser) {
             return next(new ErrorResponse(`User not found`,404))
         }
-        console.log('add mongo user')
+        //console.log('add mongo user')
         res.mongoUser = mongoUser
         next()
     }
