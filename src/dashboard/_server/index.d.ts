@@ -97,6 +97,9 @@ declare module 'express' {
   export interface Request {
       user?: any;
   }
+  export interface Response {
+    mongoUser?: any;
+  }
 }
 
 //Global variables

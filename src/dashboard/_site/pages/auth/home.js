@@ -19,35 +19,17 @@ import {getMongoDBUser} from '../../components/utils/getMongoUser'
 
 // Home page after logging in
 function Home(props) {
-  const router = useRouter()
 
   const {
-    userMessage,
     assignedImages,
   } = props?.user?.mongoUser
+
   const {
-    resumeURL
+    resumeObj
   } = props
+
   const classes = useStyles();
 
-  async function testcall() {
-    const res = await (await fetch(apiCall(
-        endpoints.allowedPages(props.user.id)
-        ), {
-        method: "GET",
-        "credentials": "include",
-        headers: {
-            "Content-Type": "application/json",
-            "credentials": "include",
-            
-            //"mycookie": props.cookie ,
-        }
-    })).json();
-
-    console.log(res)
-  }
-
-  //console.log(assignedImages)
   return (
     <Layout user={props.user} pageTitle="Home">
       <Container maxWidth="md">
@@ -71,28 +53,14 @@ function Home(props) {
                 Continue tagging from collections below.
               </Typography>
               <div className={classes.center}>
-                <ResumeTaggingTable resumeURL = {resumeURL}/>
+                <ResumeTaggingTable resumeObj = {resumeObj}/>
               </div>
                
             </React.Fragment>:
               
             <></>
           }
-          {/* <TestStormForm/> */}
-          
-{/* 
-          <Button 
-            variant="contained" 
-            onClick = {() => {   
-              testcall()     
-            }}
-          >
-            Test is tagger
-          </Button>
-           */}
-          
-    
-         
+          {/* <TestStormForm/> */}    
         </Box>
       </Container>
     </Layout>
@@ -121,12 +89,13 @@ const useStyles = makeStyles((theme) => ({
 Home.getInitialProps = async ctx => {
 
   const {req,res} = ctx
-  let resumeURL = {
-  }
+  //default value
+  let resumeObj = {}
 
+  //make sure there is a user
   hasUser(req)
 
-
+  //get MongoDB suer
   const mongoUser = await getMongoDBUser(req.user.id)
 
   //if not mongoUser was found, error out
@@ -137,49 +106,24 @@ Home.getInitialProps = async ctx => {
     }
   }
   const assignedImages = mongoUser.data.assignedImages
-  
 
+  //Get resume table data
   if(assignedImages) {
-    await Promise.all(Object.keys(assignedImages).map(async (key) => {
-
-      const archiveName = key
-      const imageId = assignedImages[archiveName]
-
-      //get storm
-      const getArchive = await (await fetch(apiCall(endpoints.findArchive), { //`/api/v1/archives/FindArchive`
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name:archiveName
-        })
-      })).json()
-      const catalogId = getArchive?.data?.archives[0]?.catalog
-
-      const getStorm = await (await fetch(apiCall(endpoints.getStormById(catalogId)), { //`/api/v1/storms?_id=${storm}`
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        //body: JSON.stringify(reqBody)
-      })).json();
-      const catalogName = getStorm.data[0].name
-
-
-      const urlString = `/auth/tagImage?storm=${catalogName}&archive=${archiveName}`
-      
-      resumeURL[archiveName] = urlString
-      
-    }))
+    const test = await (await fetch(apiCall(endpoints.getUserResumeInfo), { //`/api/v1/archives/FindArchive`
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "cookie": ctx.req ? ctx.req.headers.cookie : null
+      },
+    })).json()
+    //console.log('TEST --- ',test.data)
+    resumeObj= test.data.resumeObj
   }
-  
-  //const allowedPages = {}//await getAllowedPages(req.user,ctx)
-  
 
+  
   return {
     cookie:ctx.req.headers.cookie,
-    resumeURL:resumeURL
+    resumeObj:resumeObj
   }
 }
 
