@@ -19,16 +19,18 @@ import {
 import theme from '../theme';
 import CardContent from '@material-ui/core/CardContent';
 
-export default function MuiTestForm() {
-    
+export default function MuiTestForm(props) {
+
     const { register, handleSubmit, errors, watch, getValues, control, setValue  } = useForm({
         // defaultValues:{
         //     myRadios:""
         // }
     });
 
+    const { tagAsWater, skipImage, submitTags} = props
+
     const onSubmit = data => {
-        console.log('submit',data)
+        submitTags(data)
     };
 
     const errorText = (key) =>{
@@ -115,6 +117,22 @@ export default function MuiTestForm() {
         )
     }
 
+    function generateTextField(textFieldInfo) {
+        const {required,key} = textFieldInfo
+        return (
+            <TextField
+                fullWidth
+                type="text"
+                name={textFieldInfo.label}
+                id="filled-required"
+                label={textFieldInfo.label}
+                variant="filled"
+                inputRef={register({required:required})}
+                error={!!errors[key]}
+            />
+        )
+    }
+    
     function determineQuestionType(questionList) {
         return questionList.map((question)=>{
             switch (question.type) {
@@ -124,7 +142,10 @@ export default function MuiTestForm() {
                 case "checkboxGroup":
                     return generateCheckbox(question)
                     break;
-            
+                case "textField":
+                    return generateTextField(question)
+                    break;
+        
                 default:
                     break;
             }
@@ -134,75 +155,51 @@ export default function MuiTestForm() {
     return (
         <React.Fragment>
             <form onSubmit={handleSubmit(onSubmit)}>
-
                 <div>  
                     <React.Fragment>
-                        {/* <FormControl fullWidth component="fieldset" margin="normal">
-                            <FormLabel component="legend">BIG TEST</FormLabel>
-                            <Controller
-                                as={
-                                    <RadioGroup aria-label="Pizza type" row>
-                                        {["MuiR1","MuiR2","MuiR3"].map((pizza) => (
-                                            <FormControlLabel
-                                                value={pizza}
-                                                control={<Radio />}
-                                                label={pizza}
-                                                key={pizza}
-                                            />
-                                        ))}
-                                    </RadioGroup>
-                                }
-                                name="myRadios"
-                                control={control}
-                                rules={{ required: true }}
-                            />
-                        </FormControl> */}
                         {determineQuestionType(questions)}
                     </React.Fragment>
-                    <br/>
-                    {/* {errors.myRadios && "Error myRadios"} */}
-                </div>
-                <div>
-                    {/* {generateCheckbox(questions[3])} */}
-                    {/* <FormControl fullWidth component="fieldset" margin="normal">
-                        <FormLabel component="legend" focused={false}>
-                            Material UI Checkboxes
-                        </FormLabel>
+                    {/* <FormControl fullWidth component="fieldset" margin="normal" >
+                        
                         <FormGroup row>
-                        {
-                            ["MuiC1","MuiC2","MuiC3","MuiC4"].map((element)=>(
-                                <FormControlLabel
-                                    key={element}
-                                    control={
-                                        <Checkbox  
-                                            name="myCheckbox" 
-                                            value={element}
-                                            inputProps={{ 
-                                                ref:register({
-                                                    required: true,
-                                                    validate:value=>{
-                                                        //console.log( value,getValues().myCheckbox.length)
-                                                        const lengthVal = getValues().myCheckbox.length
-                                                        return (
-                                                            (lengthVal>=2 && lengthVal<=3) ? true:false
-                                                        )
-                                                    }
-                                                }) 
-
-                                            }}
-                                        />
-                                    }
-                                    label={element}
-                                /> 
-                            ))
-                        }
+                            <TextField
+                                fullWidth
+                                type="text"
+                                name="additionalComments"
+                                id="filled-required"
+                                label="Required"
+                                variant="filled"
+                                inputRef={register({required:true})}
+                                error={!!errors.additionalComments}
+                            />
                         </FormGroup>
-                    </FormControl>
-                    {errors.myCheckbox && "Error myCheckbox"} */}
+                    </FormControl> */}
                 </div>
+                <FormControl fullWidth component="fieldset" margin="normal">
+                    <div 
+                        style={{
+                            display: 'flex', justifyContent: 'space-between',flexDirection:'row',
+                            // marginLeft:theme.spacing(2),marginRight:theme.spacing(2),
+                            //marginBottom:theme.spacing(2)
+                        }} 
+                    >
+                        <div >
+                            <Button variant="outlined" onClick = {()=>skipImage()}>
+                                Skip
+                            </Button>
 
-                <br/>
-                <input type="submit" />
+                            <Button variant="outlined" onClick = {()=>tagAsWater()} style={{marginLeft:theme.spacing(2)}}>
+                            Tag as all water and skip to next image
+                            </Button>
+                        </div>
+                        <div >
+                            <Button type="submit" variant="outlined" color="default">
+                                Submit
+                            </Button>
+                        </div>
+                    </div> 
+                </FormControl>
+                
             </form>
             {JSON.stringify(watch())}
         </React.Fragment>
@@ -261,7 +258,7 @@ const questions = [
     {
         type:'checkboxGroup',
         required:true,
-        min:2,
+        min:1,
         label:"Impact Type(s)",
         key:"impactType",
         buttons:[
@@ -307,5 +304,11 @@ const questions = [
                 value: "river"
             }
         ]
+    },
+    {
+        type:'textField',
+        required:false,
+        label:"Additional Comments",
+        key:"additionalComments",
     }
 ]

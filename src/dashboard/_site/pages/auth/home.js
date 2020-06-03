@@ -62,7 +62,7 @@ function Home(props) {
             <></>
           }
           {/* <TestStormForm functions={{skipImage:()=>{},tagAsWater:()=>{},submitTags:()=>{}}}/>    */}
-          <MuiTestForm/>
+          <MuiTestForm functions={{skipImage:()=>{},tagAsWater:()=>{},submitTags:()=>{}}}/>
         </Box>
       </Container>
     </Layout>
