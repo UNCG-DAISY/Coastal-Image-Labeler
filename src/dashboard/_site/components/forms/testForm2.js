@@ -3,9 +3,15 @@ import { useForm, Controller } from "react-hook-form";
 
 export default function TestForm2() {
     const { register, handleSubmit, errors, watch, getValues, control  } = useForm({
-        
+        // defaultValues:{
+        //     x:{
+        //         myRadios:'r1'
+        //     }
+        // }
     });
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        console.log(data)
+    };
 
     
     return (
@@ -22,6 +28,7 @@ export default function TestForm2() {
                     <br/>
                     {errors.myRadios && "Error myRadios"}
                 </div>
+               
 
                 <div>
                     <input 
@@ -31,7 +38,7 @@ export default function TestForm2() {
                             register({
                                 required: true,
                                 validate:value=>{
-                                    console.log( getValues().myCheckbox.length)
+                                    //console.log( value,getValues().myCheckbox.length)
                                     const lengthVal = getValues().myCheckbox.length
                                     return (
                                        (lengthVal>=2 && lengthVal<=3) ? true:false
