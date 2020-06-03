@@ -7,7 +7,7 @@ import ImageContainer from './ImageContainer'
 import initalTagState from './initalTagState'
 import Header from './Header'
 import ClassificationQuestions from './ClassificationQuestions'
-import MuiTestForm from '../forms/muiTestForm'
+import MuiTGenericHookFormestForm from '../forms/genericHookForm'
 import CardContent from '@material-ui/core/CardContent';
 
 
@@ -56,7 +56,7 @@ class TaggingForm extends React.Component {
                            
                         />
                         <CardContent>
-                        <MuiTestForm functions={{
+                        <GenericHookForm functions={{
                             skipImage:skipImage,
                             tagAsWater:tagAsWater,
                             submitTags:submitTags

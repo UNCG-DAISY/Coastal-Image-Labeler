@@ -19,7 +19,7 @@ import {
 import theme from '../theme';
 import CardContent from '@material-ui/core/CardContent';
 
-export default function MuiTestForm(props) {
+export default function GenericHookForm(props) {
 
     const { register, handleSubmit, errors, watch, getValues, control, setValue  } = useForm({
         // defaultValues:{
