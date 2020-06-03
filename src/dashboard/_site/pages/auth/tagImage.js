@@ -43,31 +43,32 @@ function TagImage(props) {
   )
 
   async function submitTags(tags) {
-    // alert('Submit tags '+imageDocument?._id)
-    // console.log(tags)
-    // const payload = {
-    //   _id : imageDocument?._id,
-    //   tags: tags,
-    //   timeEnd:Date.now(),
-    //   timeStart: props.timeStart
-    // }
-    // console.log(JSON.stringify(payload))
-    // console.log(endpoints.tagImage)
-    // const responseData = await (await fetch(apiCall(
-    //   endpoints.tagImage
-    //   ), {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body:JSON.stringify(payload)
-    // })).json();
+    //alert('Submit tags '+imageDocument?._id)
+    //console.log(tags)
+    const payload = {
+      _id : imageDocument?._id,
+      tags: tags,
+      timeEnd:Date.now(),
+      timeStart: props.timeStart
+    }
+    console.log(payload)
+    console.log(JSON.stringify(payload))
+    console.log(endpoints.tagImage)
+    const responseData = await (await fetch(apiCall(
+      endpoints.tagImage
+      ), {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body:JSON.stringify(payload)
+    })).json();
 
-    // //console.log(responseData.status)
-    // alert(responseData?.message ? responseData?.message : 'No message')
+    //console.log(responseData.status)
+    alert(responseData?.message ? responseData?.message : 'No message')
 
-    // // console.log(responseData)
-    // Router.reload()
+    // console.log(responseData)
+    Router.reload()
     
   }
 
