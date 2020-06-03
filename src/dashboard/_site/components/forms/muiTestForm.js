@@ -20,14 +20,22 @@ import theme from '../theme';
 import CardContent from '@material-ui/core/CardContent';
 
 export default function MuiTestForm() {
+    
     const { register, handleSubmit, errors, watch, getValues, control, setValue  } = useForm({
         // defaultValues:{
         //     myRadios:""
         // }
     });
+
     const onSubmit = data => {
         console.log('submit',data)
     };
+
+    const errorText = (key) =>{
+        return (
+            errors[key] && <span style={{color:'red'}}>{errors[key] && `Error - ${key}`}</span>
+        )
+    }
 
     function generateRadio(radioQuestions) {
         const {
@@ -55,7 +63,7 @@ export default function MuiTestForm() {
                         rules={{ required: required }}
                     />
                 </FormControl>
-                {errors[key] && `Error - ${key}`}
+                {errorText(key)}
             </React.Fragment>
         )
     }
@@ -65,7 +73,7 @@ export default function MuiTestForm() {
             label,key,required,buttons,min,max
         } = checkboxQuestions
         return (
-            <FormControl fullWidth component="fieldset" margin="normal">
+            <FormControl fullWidth component="fieldset" margin="normal" key={key}>
                 <FormLabel component="legend" focused={false}>
                     {label}
                 </FormLabel>
@@ -82,11 +90,6 @@ export default function MuiTestForm() {
                                         ref:register({
                                             required: required,
                                             validate:value=>{
-                                                // //console.log( value,getValues().myCheckbox.length)
-                                                // const lengthVal = getValues().myCheckbox.length
-                                                // return (
-                                                //     (lengthVal>=2 && lengthVal<=3) ? true:false
-                                                // )
                                                 let valid = true;
                                                 if(min) {
                                                     valid = valid && getValues()[key].length >= min
@@ -107,7 +110,7 @@ export default function MuiTestForm() {
                 }
                 
                 </FormGroup>
-                {errors[key] && `Error - ${key}`}
+                {errorText(key)}
             </FormControl>
         )
     }
@@ -259,7 +262,6 @@ const questions = [
         type:'checkboxGroup',
         required:true,
         min:2,
-        max:3,
         label:"Impact Type(s)",
         key:"impactType",
         buttons:[
@@ -278,6 +280,31 @@ const questions = [
             {
                 name: "Inundation",
                 value: "inundation"
+            }
+        ]
+    },
+    {
+        type:'checkboxGroup',
+        required:true,
+        min:1,
+        label:"Terrian Type(s)",
+        key:"terrianType",
+        buttons:[
+            {
+                name: "Sandy Coastline",
+                value: "sandyCoastline" 
+            },
+            {
+                name: "Marsh",
+                value: "marsh"
+            },
+            {
+                name: "Inland",
+                value: "inland"
+            },
+            {
+                name: "River",
+                value: "river"
             }
         ]
     }
