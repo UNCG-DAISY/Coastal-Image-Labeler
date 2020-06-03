@@ -14,10 +14,10 @@ import {
 import ResumeTaggingTable from '../../components/ResumeTaggingTable'
 import endpoints from '../../components/endpoints'
 import {getMongoDBUser} from '../../components/utils/getMongoUser'
-import TestStormForm from '../../components/forms/testStormForm'
+// import TestStormForm from '../../components/forms/testStormForm'
 // import TestForm from '../../components/forms/testForm'
-import TestForm2 from '../../components/forms/testForm2'
-import MuiTestForm from '../../components/forms/muiTestForm'
+// import TestForm2 from '../../components/forms/testForm2'
+// import MuiTestForm from '../../components/forms/muiTestForm'
 // Home page after logging in
 function Home(props) {
 

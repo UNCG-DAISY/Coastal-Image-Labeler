@@ -7,7 +7,7 @@ import ImageContainer from './ImageContainer'
 import initalTagState from './initalTagState'
 import Header from './Header'
 import ClassificationQuestions from './ClassificationQuestions'
-import MuiTGenericHookFormestForm from '../forms/genericHookForm'
+import GenericHookForm from '../forms/genericHookForm'
 import CardContent from '@material-ui/core/CardContent';
 
 
@@ -65,24 +65,10 @@ class TaggingForm extends React.Component {
                     </Card>
                    
                 </div>
-                {/* <div style={{marginTop:10,display: 'flex', justifyContent: 'space-between'}} >
-                    <div style={{display: 'flex', justifyContent: 'space-between'}} >
-                        <SkipButton onClick={() => skipImage()} className = {classes.formControl}>
-                            Skip
-                        </SkipButton>
-                        <WaterButton onClick={() => tagAsWater()} className = {classes.formControl}>
-                            Tag as all water and skip to next image
-                        </WaterButton>
-                    </div>
-                   
-                   
-                </div> */}
             </React.Fragment>
         )
     }
 }
-
-
 
 const styles = theme => ({
     center:{
@@ -122,4 +108,5 @@ const styles = theme => ({
         marginRight: theme.spacing(3),
     },
 });
+
 export default withStyles(styles)(TaggingForm);
