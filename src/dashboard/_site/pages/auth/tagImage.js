@@ -29,18 +29,6 @@ function TagImage(props) {
   // console.log(imageDocument?.id)
   const imgUrl = endpoints.showImage(imageDocument?.id)
 
-  async function skipImage() {
-    const responseData = await (await fetch(apiCall(
-      endpoints.skipImage(queryParams?.archive)
-      ), {
-      method: "GET",
-    
-    })).json();
-    
-    alert(responseData?.message ? responseData?.message : 'No message')
-    Router.reload()
-  }
-
   const taggingForm = (
     <React.Fragment>
       <TaggingForm
@@ -55,36 +43,49 @@ function TagImage(props) {
   )
 
   async function submitTags(tags) {
-    const payload = {
-      _id : imageDocument?._id,
-      tags: tags,
-      timeEnd:Date.now(),
-      timeStart: props.timeStart
-    }
-    console.log(JSON.stringify(payload))
-    console.log(endpoints.tagImage)
-    const responseData = await (await fetch(apiCall(
-      endpoints.tagImage
-      ), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body:JSON.stringify(payload)
-    })).json();
+    // alert('Submit tags '+imageDocument?._id)
+    // console.log(tags)
+    // const payload = {
+    //   _id : imageDocument?._id,
+    //   tags: tags,
+    //   timeEnd:Date.now(),
+    //   timeStart: props.timeStart
+    // }
+    // console.log(JSON.stringify(payload))
+    // console.log(endpoints.tagImage)
+    // const responseData = await (await fetch(apiCall(
+    //   endpoints.tagImage
+    //   ), {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body:JSON.stringify(payload)
+    // })).json();
 
-    //console.log(responseData.status)
-    alert(responseData?.message ? responseData?.message : 'No message')
+    // //console.log(responseData.status)
+    // alert(responseData?.message ? responseData?.message : 'No message')
 
-    // console.log(responseData)
-    Router.reload()
+    // // console.log(responseData)
+    // Router.reload()
     
   }
 
   function tagAsWater() {
-    let tag = initalTagState
-    tag.water = 1
-    submitTags(tag)
+    submitTags({water:true})
+  }
+
+  async function skipImage() {
+    alert('Skip image')
+    const responseData = await (await fetch(apiCall(
+      endpoints.skipImage(queryParams?.archive)
+      ), {
+      method: "GET",
+    
+    })).json();
+    
+    alert(responseData?.message ? responseData?.message : 'No message')
+    Router.reload()
   }
   
   function determineContent() {
@@ -111,7 +112,6 @@ function TagImage(props) {
             determineContent()
           }
         </Box>
-        {/* {JSON.stringify(queryParams)} */}
       </Container>
     </Layout>
     

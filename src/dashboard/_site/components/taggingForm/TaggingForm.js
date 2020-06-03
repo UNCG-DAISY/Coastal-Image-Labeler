@@ -1,17 +1,15 @@
 import { makeStyles,withStyles  } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import Button from '@material-ui/core/Button';
-import * as colors from '@material-ui/core/colors/';
 
 import theme from '../theme';
 import ImageContainer from './ImageContainer'
 import initalTagState from './initalTagState'
 import Header from './Header'
 import ClassificationQuestions from './ClassificationQuestions'
+import TestStormForm from '../forms/testStormForm'
+
+
 class TaggingForm extends React.Component {
     state ={
         expanded:false,
@@ -26,62 +24,6 @@ class TaggingForm extends React.Component {
        this.setExpanded(!this.state.expanded)
     };
 
-    updateTagState = state => {
-        this.setState({tags:state})
-    }
-    
-    checkboxHasEnoughSelected(state,req) {
-        let numSelected = 0
-        Object.keys(state).forEach((value) => {
-            if(state[value] == 1) {
-                numSelected ++
-            }
-        })
-
-        return numSelected >= req
-    }
-
-    isSubmittable(state) {       
-        //radios   
-        if(state.tags.devType < 0) return true;
-        if(state.tags.washoverType < 0) return true;
-        if(state.tags.damageType < 0) return true; 
-
-        //checkboxes
-        if(!(this.checkboxHasEnoughSelected(state.tags.impactType,1))) return true;
-        if(!(this.checkboxHasEnoughSelected(state.tags.terrianType,1))) return true;
-        //if(state.tags.hasSand < 0) return true; 
-    
-        return false;
-    }
-
-    updateRadio = (params) => {
-        this.setState({tags:{
-            ...this.state.tags,
-            [params.key]:params.value
-        }})
-        
-    }
-
-    updateCheckbox = (params) => {
-        
-        this.setState({tags:{
-            ...this.state.tags,
-            [params.key]:{
-                ...this.state.tags[params.key],
-                ...params.value
-            }
-        }})
-    }
-    
-    updateComment = (value) => {
-        this.setState({
-            tags:{
-                ...this.state.tags,
-                comments:value
-            }
-        })
-    }
     render() {
         
         const { 
@@ -112,16 +54,16 @@ class TaggingForm extends React.Component {
                             handleExpandClick={this.handleExpandClick}
                            
                         />
-                        <ClassificationQuestions 
-                            tags={this.state.tags}
-                            updateRadio = {this.updateRadio}
-                            updateCheckbox = {this.updateCheckbox}
-                            updateComment = {this.updateComment}
-                        />
+
+                        <TestStormForm functions={{
+                            skipImage:skipImage,
+                            tagAsWater:tagAsWater,
+                            submitTags:submitTags
+                        }}/>
                     </Card>
                    
                 </div>
-                <div style={{marginTop:10,display: 'flex', justifyContent: 'space-between'}} >
+                {/* <div style={{marginTop:10,display: 'flex', justifyContent: 'space-between'}} >
                     <div style={{display: 'flex', justifyContent: 'space-between'}} >
                         <SkipButton onClick={() => skipImage()} className = {classes.formControl}>
                             Skip
@@ -130,61 +72,13 @@ class TaggingForm extends React.Component {
                             Tag as all water and skip to next image
                         </WaterButton>
                     </div>
-                    <div>   
-                        {
-                            this.isSubmittable(this.state)&&
-                            <Typography variant="caption" style={{paddingRight:5}}>
-                                Tag all categories to submit
-                            </Typography>
-                        }
-                       
-                        <SubmitButton onClick={() => submitTags(this.state.tags)} disabled={this.isSubmittable(this.state)}>
-                            Submit 
-                        </SubmitButton>
-                    </div>
                    
-                </div>
+                   
+                </div> */}
             </React.Fragment>
         )
     }
 }
-
-const ColorizeButton = (color,theme) => {
-    return {
-        root: {
-            color: theme.palette.getContrastText(color.color),
-            backgroundColor: color.background,
-            '&:hover': {
-                backgroundColor: color.hover,
-            },
-            '&:disabled': {
-                backgroundColor: 'grey',
-                color:'#000000'
-            },
-        },
-    }
-}
-
-const SkipButton = withStyles((theme) => (
-    // ColorizeButton({color:colors.red[400],background:colors.red[600],hover:colors.red[800]},theme)
-    ColorizeButton({color:theme.palette.customColors.red,background:theme.palette.customColors.red,hover:colors.red[800]},theme)
-))(Button);
-
-const WaterButton = withStyles((theme) => (
-    ColorizeButton({
-        color:theme.palette.customColors.cyan,
-        background:theme.palette.customColors.cyan,
-        hover:colors.cyan[800]
-    },theme)
-))(Button);
-
-const SubmitButton = withStyles((theme) => (
-    ColorizeButton({
-        color:'#ffffff',
-        background:theme.palette.primary.main,
-        hover:theme.palette.primary.light
-    },theme)
-))(Button);
 
 
 
