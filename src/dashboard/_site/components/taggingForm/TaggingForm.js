@@ -7,7 +7,8 @@ import ImageContainer from './ImageContainer'
 import initalTagState from './initalTagState'
 import Header from './Header'
 import ClassificationQuestions from './ClassificationQuestions'
-import TestStormForm from '../forms/testStormForm'
+import MuiTestForm from '../forms/muiTestForm'
+import CardContent from '@material-ui/core/CardContent';
 
 
 class TaggingForm extends React.Component {
@@ -54,12 +55,13 @@ class TaggingForm extends React.Component {
                             handleExpandClick={this.handleExpandClick}
                            
                         />
-
-                        <TestStormForm functions={{
+                        <CardContent>
+                        <MuiTestForm functions={{
                             skipImage:skipImage,
                             tagAsWater:tagAsWater,
                             submitTags:submitTags
                         }}/>
+                        </CardContent>
                     </Card>
                    
                 </div>

@@ -27,7 +27,7 @@ export default function MuiTestForm(props) {
         // }
     });
 
-    const { tagAsWater, skipImage, submitTags} = props
+    const { tagAsWater, skipImage, submitTags} = props.functions
 
     const onSubmit = data => {
         submitTags(data)
@@ -129,6 +129,7 @@ export default function MuiTestForm(props) {
                 variant="filled"
                 inputRef={register({required:required})}
                 error={!!errors[key]}
+                key={key}
             />
         )
     }
@@ -159,21 +160,6 @@ export default function MuiTestForm(props) {
                     <React.Fragment>
                         {determineQuestionType(questions)}
                     </React.Fragment>
-                    {/* <FormControl fullWidth component="fieldset" margin="normal" >
-                        
-                        <FormGroup row>
-                            <TextField
-                                fullWidth
-                                type="text"
-                                name="additionalComments"
-                                id="filled-required"
-                                label="Required"
-                                variant="filled"
-                                inputRef={register({required:true})}
-                                error={!!errors.additionalComments}
-                            />
-                        </FormGroup>
-                    </FormControl> */}
                 </div>
                 <FormControl fullWidth component="fieldset" margin="normal">
                     <div 
