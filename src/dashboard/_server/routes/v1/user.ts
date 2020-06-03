@@ -17,6 +17,11 @@ import {
     ensureAuthenticated
 } from '../../middleware/v1/isAuthenticated'
 
+import {
+    authorize,
+    userPartOfCatalog
+} from '../../middleware/v1/auth'
+
 // "/api/v1/users/"
 const router = express.Router();
 
@@ -25,17 +30,6 @@ router
     .route('/findUser')
     .post(findUser)
 
-//Gets all roles of a user
-// router
-//     .route('/getRoles')
-//     .post(getUserRoles)
-
-//Checks if a given user id is able to access certain features
-// router
-//     .route('/auth/:id')
-//     .post(checkUserRoles)
-
-//Creates a user with just id and displayName and creation date
 //This is at _app.js
 router
     .route('/createUser')
@@ -47,10 +41,9 @@ router
 
 router
     .route('/getImage/:archive')
-    .get(getAssignedImage)
+    .post(ensureAuthenticated,authorize('tagger'),userPartOfCatalog(),getAssignedImage)
 
 // router
-//     .route('/TEST_nextImage/:archive')
-//     .get(updatedTaggedImages)
-
+//     .route('/assignedImage')
+//     .get(getAssignedImage)
 export default router;
