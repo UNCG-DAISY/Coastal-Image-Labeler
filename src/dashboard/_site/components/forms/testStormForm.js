@@ -83,26 +83,48 @@ export default function TestStormForm(props) {
                     {
                         checkboxTypes.map((checkboxType,index) =>{
                             return (
+                                // <React.Fragment key={`${index}-${checkboxType.key}`}>
+                                //     <FormLabel component="legend">{checkboxType.label}</FormLabel>
+                                //     <Controller
+                                //         as={
+                                //             <FormGroup aria-label="RadioTypes" style={{display:'flex',flexDirection:'row'}}>
+                                //                 {checkboxType.value.map((type) => (
+                                //                     <FormControlLabel 
+                                //                         value={type.name}
+                                //                         key={type.name}
+                                //                         control={<Checkbox name={checkboxType.key} />} 
+                                //                         label={type.name}
+                                //                     />
+                                //                 ))}
+                                //             </FormGroup>
+                                //         }
+                                //         name={checkboxType.key}
+                                //         control={control}
+                                //         rules={{ required: checkboxType.required ?? false,min:2 }}
+                                //     />
+                                // </React.Fragment>
                                 <React.Fragment key={`${index}-${checkboxType.key}`}>
                                     <FormLabel component="legend">{checkboxType.label}</FormLabel>
-                                    <Controller
-                                        as={
-                                            <FormGroup aria-label="RadioTypes" style={{display:'flex',flexDirection:'row'}}>
-                                                {checkboxType.value.map((type) => (
-                                                    <FormControlLabel 
-                                                        value={type.name}
-                                                        key={type.name}
-                                                        control={<Checkbox name={checkboxType.key} />} 
-                                                        label={type.name}
-                                                    />
-                                                ))}
-                                            </FormGroup>
-                                        }
-                                        name={checkboxType.key}
-                                        control={control}
-                                        rules={{ required: checkboxType.required ?? false,min:2 }}
-                                    />
-                                </React.Fragment> 
+                                    <FormGroup row>
+                                        {checkboxType.value.map((type) => (
+                                            <React.Fragment key={type.name}>
+                                                <FormControlLabel
+                                                    control={
+                                                        <Controller
+                                                            as={<Checkbox />}
+                                                            name={type.key}
+                                                            type="checkbox"
+                                                            control={control}
+                                                        />
+                                                    }
+                                                    label={type.name}
+                                                />
+                                            </React.Fragment>
+                                        ))}
+                                    </FormGroup>
+                                    
+                                    
+                                </React.Fragment>
                             )
                         })
                     }
