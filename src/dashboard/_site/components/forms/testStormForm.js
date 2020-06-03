@@ -31,9 +31,10 @@ export default function TestStormForm(props) {
             dmgType:"",
             ...impactTypesDefault,
             ...terrianTypesDefault
-        }
+        },
+        //nested: true
     });
-    const onSubmit = data => {submitTags(data)};
+    const onSubmit = data => {alert('HI!')}; //submitTags(data)
 
     const {
         skipImage,
@@ -84,27 +85,24 @@ export default function TestStormForm(props) {
                             return (
                                 <React.Fragment key={`${index}-${checkboxType.key}`}>
                                     <FormLabel component="legend">{checkboxType.label}</FormLabel>
-                                    <FormGroup row>
-                                    
-                                        {checkboxType.value.map((type) => (
-                                            <React.Fragment key={type.name}>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Controller
-                                                            as={<Checkbox />}
-                                                            name={type.key}
-                                                            type="checkbox"
-                                                            control={control}
-                                                        />
-                                                    }
-                                                    label={type.name}
-                                                />
-                                            </React.Fragment>
-                                        ))}
-                                    </FormGroup>
-                                    
-                                    
-                                </React.Fragment>
+                                    <Controller
+                                        as={
+                                            <FormGroup aria-label="RadioTypes" style={{display:'flex',flexDirection:'row'}}>
+                                                {checkboxType.value.map((type) => (
+                                                    <FormControlLabel 
+                                                        value={type.name}
+                                                        key={type.name}
+                                                        control={<Checkbox name={checkboxType.key} />} 
+                                                        label={type.name}
+                                                    />
+                                                ))}
+                                            </FormGroup>
+                                        }
+                                        name={checkboxType.key}
+                                        control={control}
+                                        rules={{ required: checkboxType.required ?? false,min:2 }}
+                                    />
+                                </React.Fragment> 
                             )
                         })
                     }
@@ -120,6 +118,9 @@ export default function TestStormForm(props) {
                         })
                        
                     }
+
+
+
                     <TextField
                         label="Additional Comments"
                         fullWidth
@@ -195,19 +196,19 @@ const radioTypes = [
         key:'devType',
         value:devTypes,
         label:'Development Type',
-        required:true
+        //required:true
     },
     {
         key:'washoverType',
         value:washoverTypes,
         label:'Washover Type',
-        required:false
+        //required:false
     },
     {
         key:'dmgType',
         value:dmgTypes,
         label:'Damage Type',
-        required:true
+        //required:true
     }
 ]
 
@@ -264,12 +265,12 @@ const checkboxTypes = [
         key:'impactType',
         value:impactTypes,
         label:'Impact Types',
-        required:1
+        required:true
     },
     {
         key:'terrianType',
         value:terrianTypes,
         label:'Terrian Types',
-        required:1
+        required:true
     }
 ]
