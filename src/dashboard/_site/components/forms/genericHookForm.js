@@ -22,9 +22,9 @@ import CardContent from '@material-ui/core/CardContent';
 export default function GenericHookForm(props) {
 
     const { register, handleSubmit, errors, watch, getValues, control, setValue  } = useForm({
-        // defaultValues:{
-        //     myRadios:""
-        // }
+        defaultValues:{
+            ...generateRadioDefaults(questions)
+        }
     });
 
     const { tagAsWater, skipImage, submitTags} = props.functions
@@ -118,7 +118,7 @@ export default function GenericHookForm(props) {
     }
 
     function generateTextField(textFieldInfo) {
-        const {required,key} = textFieldInfo
+        const {required,key,multiline,rows} = textFieldInfo
         return (
             <TextField
                 fullWidth
@@ -130,6 +130,8 @@ export default function GenericHookForm(props) {
                 inputRef={register({required:required})}
                 error={!!errors[key]}
                 key={key}
+                multiline={multiline ?? false}
+                rows = {rows ?? 1}
             />
         )
     }
@@ -165,8 +167,6 @@ export default function GenericHookForm(props) {
                     <div 
                         style={{
                             display: 'flex', justifyContent: 'space-between',flexDirection:'row',
-                            // marginLeft:theme.spacing(2),marginRight:theme.spacing(2),
-                            //marginBottom:theme.spacing(2)
                         }} 
                     >
                         <div >
@@ -187,7 +187,7 @@ export default function GenericHookForm(props) {
                 </FormControl>
                 
             </form>
-            {JSON.stringify(watch())}
+            {/* {JSON.stringify(watch())} */}
         </React.Fragment>
     );
 }
@@ -296,5 +296,18 @@ const questions = [
         required:false,
         label:"Additional Comments",
         key:"additionalComments",
+        multiline:true,
+        rows: 5,
     }
 ]
+
+function generateRadioDefaults(input) {
+    let defaults = {}
+
+    input.map((question)=>{
+        if(question.type === "radioGroup"){
+            defaults[question.key] = ""
+        }
+    })
+    return defaults
+}
