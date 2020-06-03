@@ -107,7 +107,7 @@ Home.getInitialProps = async ctx => {
       resumeURL:resumeURL
     }
   }
-  const assignedImages = mongoUser.data.assignedImages
+  const assignedImages = mongoUser?.data?.assignedImages
 
   //Get resume table data
   if(assignedImages) {
