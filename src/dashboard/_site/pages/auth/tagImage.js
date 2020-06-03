@@ -135,12 +135,8 @@ const useStyles = makeStyles(theme  => ({
 }));
 
 TagImage.getInitialProps = async ctx => {
-
-  //things to check
-
   const {req,res} = ctx
   const {query} = req
-
   const allowedPages = await getAllowedPages(req.user,ctx)
   
   //Is this user a tagger?
@@ -161,44 +157,11 @@ TagImage.getInitialProps = async ctx => {
     })
   }
 
-  //Is this user part of this archive
-  const getQueryCatalogName = await (await fetch(apiCall(
-    endpoints.getCatalogByName(query.catalog)
-    ), {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      //These two are needed for server side calls
-      "credentials": "include",
-      "cookie": ctx?.req?.headers?.cookie ?? null 
-    }
-  })).json();
-  const catalogId = getQueryCatalogName.data[0]?._id
-
-  //If the Catalog passed is invalid
-  if(!catalogId) {
-    return {
-      error:true,
-      errorTitle:'Invalid Catalog name',
-      errorMessage:`Catalog name of ${query.catalog} is an invalid Catalog name`
-    }
-  }
-
-  //Compare the ID's of the Catalogs a user is part of and the ID of this Catalogs
-  const catalogsOfUser = req?.user?.mongoUser?.catalogs ?? []
-  if(!(catalogsOfUser.includes(catalogId))) {
-    return ({
-      error:true,
-      errorTitle:'Not allowed to tag',
-      errorMessage:`User is not allowed to tag Catalog ${query.catalog}`
-    })
-  }
-
   //Then get the image of the user
   const getImageOfArchive = await (await fetch(apiCall(
     endpoints.getImage(query.archive)
     ), {
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       //These two are needed for server side calls
@@ -209,19 +172,18 @@ TagImage.getInitialProps = async ctx => {
   if(!getImageOfArchive.success) {
     return ({
       error:true,
-      errorTitle:'Invalid Archive',
-      errorMessage:`Archive ${query.archive} is a invalid archive name`
+      errorTitle:'Error',
+      errorMessage:getImageOfArchive.message
     })
   }
-  // console.log('@@@@@@@@@@@@@@@',getImageOfArchive)
-  const imageDocument = getImageOfArchive?.data?.image
+
+  const imageDocument = getImageOfArchive?.data?.image ?? undefined
   
   return {
     error:false,
     query,
     allowedPages,
     imageDocument:imageDocument,
-    //cookie:ctx?.req?.headers?.cookie ?? null ,
     timeStart:Date.now()
   }
 }
