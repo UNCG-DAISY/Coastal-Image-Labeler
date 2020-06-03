@@ -16,7 +16,7 @@ import endpoints from '../../components/endpoints'
 import {getMongoDBUser} from '../../components/utils/getMongoUser'
 // import TestStormForm from '../../components/forms/testStormForm'
 // import TestForm from '../../components/forms/testForm'
-
+import TestForm2 from '../../components/forms/testForm2'
 // Home page after logging in
 function Home(props) {
 
@@ -60,7 +60,7 @@ function Home(props) {
               
             <></>
           }
-          {/* <TestStormForm/> */}    
+          <TestForm2/>   
         </Box>
       </Container>
     </Layout>
