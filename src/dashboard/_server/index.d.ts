@@ -66,6 +66,12 @@ declare namespace psiDashboard  {
     name:string
   }
 
+  export interface QuestionSetDocument extends Document {
+    name:string,
+    description:string,
+    questions:[any]
+  }
+
   export interface CatalogDocument extends Document {
     archives: any,
     catalogInfo?:any,
