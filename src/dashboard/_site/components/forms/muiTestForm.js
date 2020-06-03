@@ -21,9 +21,9 @@ import CardContent from '@material-ui/core/CardContent';
 
 export default function MuiTestForm() {
     const { register, handleSubmit, errors, watch, getValues, control, setValue  } = useForm({
-        // defaultValues:{
-        //     myRadios:""
-        // }
+        defaultValues:{
+            myRadios:""
+        }
     });
     const onSubmit = data => {
         console.log('submit',data)
@@ -33,7 +33,7 @@ export default function MuiTestForm() {
         <React.Fragment>
             <form onSubmit={handleSubmit(onSubmit)}>
 
-                {/* <div>  
+                <div>  
                     <React.Fragment>
                         <FormLabel component="legend">BIG TEST</FormLabel>
                         <Controller
@@ -56,62 +56,46 @@ export default function MuiTestForm() {
                     </React.Fragment>
                     <br/>
                     {errors.myRadios && "Error myRadios"}
-                </div> */}
+                </div>
                 <div>
                     <FormControl fullWidth component="fieldset" margin="normal">
                         <FormLabel component="legend" focused={false}>
                             Material UI Checkboxes
                         </FormLabel>
-
+                        <FormGroup row>
                         {
-                            ["MuiC1","MuiC2"].map((element)=>(
+                            ["MuiC1","MuiC2","MuiC3","MuiC4"].map((element)=>(
                                 <FormControlLabel
                                 key={element}
                                     control={
                                         <Checkbox  
                                             name="myCheckbox" 
                                             value={element}
-                                            inputProps={{ ref:register({required: true,min:2}) }}
+                                            inputProps={{ 
+                                                ref:register({
+                                                    required: true,
+                                                    validate:value=>{
+                                                        //console.log( value,getValues().myCheckbox.length)
+                                                        const lengthVal = getValues().myCheckbox.length
+                                                        return (
+                                                            (lengthVal>=2 && lengthVal<=3) ? true:false
+                                                        )
+                                                    }
+                                                }) 
+
+                                            }}
                                         />
                                     }
-                                    label="Secondary"
+                                    label={element}
                                 /> 
                             ))
                         }
-                        {/* <FormControlLabel
-                            // control={["Muic1","MuiC2","MuiC3","MuiC4"].map((element) => (
-                            //     <Checkbox 
-                            //         key={element}
-                            //         name="myCheckbox" 
-                            //         value={element}
-                            //         inputProps={{ ref:register({required: true,min:2}) }}
-                            //     />
-                            // ))}
-                            control={
-                                <div>
-                                    <Checkbox 
-                                    key={'element'}
-                                    name="myCheckbox" 
-                                    value={'element'}
-                                    inputProps={{ ref:register({required: true,min:2}) }}
-                                />
-                                <Checkbox 
-                                    key={'element2'}
-                                    name="myCheckbox" 
-                                    value={'element'}
-                                    inputProps={{ ref:register({required: true,min:2}) }}
-                                />
-                                </div>
-                            }
-                                
-                               
-                            
-                            label="Secondary"
-                        /> */}
+                        </FormGroup>
                     </FormControl>
+                    {errors.myCheckbox && "Error myCheckbox"}
                 </div>
 
-                <div>
+                {/* <div>
                     <input 
                         type="checkbox" placeholder="myCheckbox" 
                         name="myCheckbox" value="C1" 
@@ -137,7 +121,7 @@ export default function MuiTestForm() {
                     <label>C4</label>
                     <br/>
                     {errors.myCheckbox && "Error myCheckbox"}
-                </div>
+                </div> */}
 
                 <br/>
                 <input type="submit" />
