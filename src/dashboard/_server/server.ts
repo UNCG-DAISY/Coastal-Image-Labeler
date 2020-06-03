@@ -23,6 +23,7 @@ import catalogs from './routes/v1/catalogs'//Api calls for storms
 //import roles from './routes/v1/roles'//Api calls for roles
 import testApi from './routes/v1/testApi' 
 import image from './routes/v1/image' 
+import questionSet from './routes/v1/questionSet' 
 //Import the react/server shared constants
 
 //Packages for security
@@ -155,7 +156,7 @@ nextApp.prepare()
     //app.use('/api/v1/roles',roles)
     app.use('/api/v1/test',testApi)
     app.use('/api/v1/images',image)
-    
+    app.use('/api/v1/questionset',questionSet)
     
     // This handles errors that happen during API calls
     app.use(errorHandler)
