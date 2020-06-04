@@ -187,5 +187,5 @@ dist
 
 ### Project-specific rules
 config.env
-src/server/_dist
-src/cli/_dist
+src/dashboard/_dist
+src/dashboard/_cli/_dist
