@@ -49,7 +49,6 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
     //Get the current tagging state(should be true) for future use
     let stillTaggable = taggedImage.taggable
 
-    console.log(taggingPayload.tags.comments)
     /* Step 3 */
     //if this image has tags
     if(taggedImage.tags.length > 0) {
@@ -88,7 +87,6 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
 
     /* Step 4 */
     //Update
-    console.log(taggingPayload.tags.comments)
     let upadtedImage = await ImageModel.updateOne(
         {_id:_id},
         { $push: { tags: taggingPayload },taggable:stillTaggable },
