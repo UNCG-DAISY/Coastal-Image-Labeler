@@ -79,6 +79,7 @@ declare namespace psiDashboard  {
     name : string,
     path : string,
     taggable:Boolean,
+    questionSet:Types.ObjectId
   }
 
   type allDocuments = 

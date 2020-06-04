@@ -21,7 +21,8 @@ function TagImage(props) {
   const {
     query:queryParams,
     imageDocument,
-    allowedPages
+    allowedPages,
+    questionSetData
   } = props
   const classes = useStyles();
   //amenadiel/a420/420_test.png
@@ -38,6 +39,7 @@ function TagImage(props) {
         skipImage = {skipImage}
         imageDoc = {imageDocument}
         queryParams = {queryParams}
+        questionSetData = {questionSetData}
       />
     </React.Fragment>
   )
@@ -176,14 +178,40 @@ TagImage.getInitialProps = async ctx => {
       errorMessage:getImageOfArchive.message
     })
   }
-
   const imageDocument = getImageOfArchive?.data?.image ?? undefined
   
+  //get the catalog questions
+  
+  const getCatalogQuestion = await (await fetch(apiCall(
+    endpoints.getCatalogQuestionSet
+    ), {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      //These two are needed for server side calls
+      "credentials": "include",
+      "cookie": ctx?.req?.headers?.cookie ?? null ,
+      
+    },
+    body:JSON.stringify({
+      catalogName:query.catalog 
+    })
+  })).json();
+  if(!getCatalogQuestion.success) {
+    return ({
+      error:true,
+      errorTitle:'Error',
+      errorMessage:getCatalogQuestion.message
+    })
+  }
+  //console.log(getCatalogQuestion.data)
+
   return {
     error:false,
     query,
     allowedPages,
     imageDocument:imageDocument,
+    questionSetData:getCatalogQuestion?.data?.questionSets ?? {},
     timeStart:Date.now()
   }
 }

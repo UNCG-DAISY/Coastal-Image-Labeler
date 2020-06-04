@@ -4,7 +4,7 @@
 
 
 import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Types} from 'mongoose'
-import {StormDocument} from '../index'
+import {CatalogDocument} from '../index'
 
 const catalogScheme: Schema = new Schema({
     // creator: {
@@ -45,6 +45,10 @@ const catalogScheme: Schema = new Schema({
         type:Boolean,
         required: [true,'Please provide if storm is taggable or not.'],
     },
+    questionSet:{
+        type:Types.ObjectId,
+        required: [true,'Please provide ID of question set'],
+    }
 
     
 },{
@@ -58,9 +62,9 @@ const catalogScheme: Schema = new Schema({
 catalogScheme.virtual('archives', {
     ref: 'Archive',
     localField: '_id',
-    foreignField: 'catlog',
+    foreignField: 'catalog',
     justOne: false
 });
 
 
-export const CatalogModel: Model<StormDocument> =  model('Catalog', catalogScheme);
+export const CatalogModel: Model<CatalogDocument> =  model('Catalog', catalogScheme);

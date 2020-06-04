@@ -10,19 +10,31 @@ import {
     FormLabel,
     FormGroup,
     Checkbox,
+    Typography,
 } from "@material-ui/core";
 import theme from '../theme';
 
 
 export default function GenericHookForm(props) {
 
+    
+
+   
+    const {
+        questionSetData,
+        formFunctions
+    } = props
+
+    const { tagAsWater, skipImage, submitTags} = formFunctions
+    const {
+        questions 
+    } = questionSetData
+
     const { register, handleSubmit, errors, watch, getValues, control, setValue  } = useForm({
         defaultValues:{
             ...generateRadioDefaults(questions)
         }
     });
-
-    const { tagAsWater, skipImage, submitTags} = props.functions
 
     const onSubmit = data => {
         submitTags(data)
@@ -150,8 +162,15 @@ export default function GenericHookForm(props) {
         })
     }
 
+   
     return (
         <React.Fragment>
+            <Typography>
+                {questionSetData.name}
+            </Typography>
+            <Typography>
+                {questionSetData.description}
+            </Typography>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>  
                     <React.Fragment>
@@ -187,114 +206,114 @@ export default function GenericHookForm(props) {
     );
 }
 
-const questions = [
-    {
-        type:'radioGroup',
-        required:true,
-        label:"Development Type",
-        key:"devType",
-        buttons:[
-            {
-                name: "Undeveloped",
-                value: "undeveloped" 
-            },
-            {
-                name: "Developed",
-                value: "developed"
-            }
-        ]
-    },
-    {
-        type:'radioGroup',
-        required:true,
-        label:"Washover Type",
-        key:"washoverType",
-        buttons:[
-            {
-                name: "No visible washover",
-                value: "noWashover" 
-            },
-            {
-                name: "Visibile washover",
-                value: "washover"
-            }
-        ]
-    },
-    {
-        type:'radioGroup',
-        required:true,
-        label:"Damage Type",
-        key:"dmgType",
-        buttons:[
-            {
-                name: "No visible damage to infrastructure",
-                value: "noDamage" 
-            },
-            {
-                name: "Visible damage to infrastructure",
-                value: "damage"
-            }
-        ]
-    },
-    {
-        type:'checkboxGroup',
-        required:true,
-        min:1,
-        label:"Impact Type(s)",
-        key:"impactType",
-        buttons:[
-            {
-                name: "Swash",
-                value: "swash" 
-            },
-            {
-                name: "Collision",
-                value: "collision"
-            },
-            {
-                name: "Overwash",
-                value: "overwash"
-            },
-            {
-                name: "Inundation",
-                value: "inundation"
-            }
-        ]
-    },
-    {
-        type:'checkboxGroup',
-        required:true,
-        min:1,
-        label:"Terrian Type(s)",
-        key:"terrianType",
-        buttons:[
-            {
-                name: "Sandy Coastline",
-                value: "sandyCoastline" 
-            },
-            {
-                name: "Marsh",
-                value: "marsh"
-            },
-            {
-                name: "Inland",
-                value: "inland"
-            },
-            {
-                name: "River",
-                value: "river"
-            }
-        ]
-    },
-    {
-        type:'textField',
-        required:false,
-        label:"Additional Comments",
-        key:"additionalComments",
-        multiline:true,
-        rows: 5,
-    }
-]
+// const questions = [
+//     {
+//         type:'radioGroup',
+//         required:true,
+//         label:"Development Type",
+//         key:"devType",
+//         buttons:[
+//             {
+//                 name: "Undeveloped",
+//                 value: "undeveloped" 
+//             },
+//             {
+//                 name: "Developed",
+//                 value: "developed"
+//             }
+//         ]
+//     },
+//     {
+//         type:'radioGroup',
+//         required:true,
+//         label:"Washover Type",
+//         key:"washoverType",
+//         buttons:[
+//             {
+//                 name: "No visible washover",
+//                 value: "noWashover" 
+//             },
+//             {
+//                 name: "Visibile washover",
+//                 value: "washover"
+//             }
+//         ]
+//     },
+//     {
+//         type:'radioGroup',
+//         required:true,
+//         label:"Damage Type",
+//         key:"dmgType",
+//         buttons:[
+//             {
+//                 name: "No visible damage to infrastructure",
+//                 value: "noDamage" 
+//             },
+//             {
+//                 name: "Visible damage to infrastructure",
+//                 value: "damage"
+//             }
+//         ]
+//     },
+//     {
+//         type:'checkboxGroup',
+//         required:true,
+//         min:1,
+//         label:"Impact Type(s)",
+//         key:"impactType",
+//         buttons:[
+//             {
+//                 name: "Swash",
+//                 value: "swash" 
+//             },
+//             {
+//                 name: "Collision",
+//                 value: "collision"
+//             },
+//             {
+//                 name: "Overwash",
+//                 value: "overwash"
+//             },
+//             {
+//                 name: "Inundation",
+//                 value: "inundation"
+//             }
+//         ]
+//     },
+//     {
+//         type:'checkboxGroup',
+//         required:true,
+//         min:1,
+//         label:"Terrian Type(s)",
+//         key:"terrianType",
+//         buttons:[
+//             {
+//                 name: "Sandy Coastline",
+//                 value: "sandyCoastline" 
+//             },
+//             {
+//                 name: "Marsh",
+//                 value: "marsh"
+//             },
+//             {
+//                 name: "Inland",
+//                 value: "inland"
+//             },
+//             {
+//                 name: "River",
+//                 value: "river"
+//             }
+//         ]
+//     },
+//     {
+//         type:'textField',
+//         required:false,
+//         label:"Additional Comments",
+//         key:"additionalComments",
+//         multiline:true,
+//         rows: 5,
+//     }
+// ]
 
 function generateRadioDefaults(input) {
     let defaults = {}

@@ -45,6 +45,10 @@ const catalogScheme: Schema = new Schema({
         type:Boolean,
         required: [true,'Please provide if storm is taggable or not.'],
     },
+    questionSet:{
+        type:Types.ObjectId,
+        required: [true,'Please provide ID of question set'],
+    }
 
     
 },{
