@@ -1,16 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ensureAuthenticated = void 0;
 function ensureAuthenticated(req, res, next) {
-    // console.log('REQ OBJECT = ',Object.keys(req))
-    // console.log('IS AUTH? = ',req.isAuthenticated())
+    //console.log('ENSURING AUTH')
     if (req.isAuthenticated())
         return next();
     res.status(401).json({
         success: true,
-        data: {
-            message: `Not authenticated`,
-            cards: []
-        }
+        message: `Not authenticated`,
+        data: {}
     });
 }
 exports.ensureAuthenticated = ensureAuthenticated;

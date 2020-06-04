@@ -7,7 +7,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getManagementTokens = void 0;
 const axios_1 = __importDefault(require("axios"));
+const colorize_1 = __importDefault(require("./colorize"));
 const getManagementTokens = async () => {
     //Settings for api POST request
     const options = {
@@ -21,10 +23,17 @@ const getManagementTokens = async () => {
             audience: `https://${process.env.AUTH0_DOMAIN}/api/v2/`
         }
     };
-    console.log("Getting Auth0 management token".magenta);
+    colorize_1.default.log("Getting Auth0 management token");
     //Api call to get the token
-    const management_data = (await axios_1.default.post(options.url, options.form)).data;
-    console.log("Got Auth0 management token".bgMagenta);
-    return management_data.access_token;
+    try {
+        const management_data = (await axios_1.default.post(options.url, options.form)).data;
+        // console.log("Got Auth0 management token".bgMagenta)
+        colorize_1.default.success("Got Auth0 management token");
+        return management_data.access_token;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
 };
 exports.getManagementTokens = getManagementTokens;

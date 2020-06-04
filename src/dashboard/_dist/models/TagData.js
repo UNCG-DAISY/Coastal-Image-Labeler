@@ -3,6 +3,7 @@
     Model for tags. Contains a link to the user who created it and what image it is for.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TagDataModel = void 0;
 const mongoose_1 = require("mongoose");
 const tagDataSchema = new mongoose_1.Schema({
     imageId: {

@@ -134,9 +134,9 @@ const showImage = asyncHandler(async (req: Request, res: Response, next: NextFun
         })
     }
 
-    console.log('ID = ',req.params.id)
+    //console.log('ID = ',req.params.id)
     const imageDoc = await ImageModel.findById(req.params.id)
-    console.log('Doc = ',imageDoc)
+    //console.log('Doc = ',imageDoc)
     if(!imageDoc) {
         return res.status(404).json({
             success:false,

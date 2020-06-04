@@ -3,6 +3,7 @@
     All functions related to roles api calls
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getRoles = void 0;
 const async_1 = require("../../middleware/v1/async"); //to avoid putting try catch everywhere
 const Role_1 = require("../../models/Role");
 //import {ErrorResponse} from '../../utils/v1/errorResponse'
@@ -17,6 +18,7 @@ const getRoles = async_1.asyncHandler(async (req, res, next) => {
     const roles = await Role_1.RoleModel.find();
     res.status(200).json({
         success: true,
+        message: 'Got roles',
         data: {
             roles: roles
         }

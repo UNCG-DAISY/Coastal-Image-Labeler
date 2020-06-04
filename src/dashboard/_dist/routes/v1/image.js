@@ -15,8 +15,11 @@ const auth_1 = require("../../middleware/v1/auth");
 const router = express_1.default.Router();
 router
     .route('/tagImage')
-    .post(isAuthenticated_1.ensureAuthenticated, auth_1.authorize('5e3e60207362e721e430ea6d'), image_1.tagImage, user_1.updatedTaggedImages);
+    .post(isAuthenticated_1.ensureAuthenticated, auth_1.authorize('tagger'), image_1.tagImage, user_1.updatedTaggedImages);
 router
     .route('/skipImage/:archive')
-    .get(isAuthenticated_1.ensureAuthenticated, auth_1.authorize('5e3e60207362e721e430ea6d'), user_1.updatedTaggedImages);
+    .get(isAuthenticated_1.ensureAuthenticated, auth_1.authorize('tagger'), user_1.updatedTaggedImages);
+router
+    .route('/show/:id')
+    .get(image_1.showImage);
 exports.default = router;
