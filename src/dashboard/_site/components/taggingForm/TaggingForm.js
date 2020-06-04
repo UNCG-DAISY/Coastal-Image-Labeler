@@ -33,7 +33,8 @@ class TaggingForm extends React.Component {
             queryParams,
             submitTags,
             tagAsWater,
-            skipImage
+            skipImage,
+            questionSetData
          } = this.props;
 
         return (
@@ -43,7 +44,7 @@ class TaggingForm extends React.Component {
                     
                     <Card className={classes.root}>
                         <Header 
-                            title={`Storm ${queryParams.storm}`} 
+                            title={`Catalog ${queryParams.catalog}`} 
                             subheader={`Archive ${queryParams.archive} - ${imageDoc?.id}`}
                             style={{color:theme.palette.primary.light}}
                             styleSubheader = {{color:theme.palette.secondary.main}} 
@@ -56,11 +57,14 @@ class TaggingForm extends React.Component {
                            
                         />
                         <CardContent>
-                        <GenericHookForm functions={{
-                            skipImage:skipImage,
-                            tagAsWater:tagAsWater,
-                            submitTags:submitTags
-                        }}/>
+                        <GenericHookForm 
+                            formFunctions={{
+                                skipImage:skipImage,
+                                tagAsWater:tagAsWater,
+                                submitTags:submitTags
+                            }}
+                            questionSetData = {questionSetData}
+                        />
                         </CardContent>
                     </Card>
                    

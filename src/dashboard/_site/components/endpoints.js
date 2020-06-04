@@ -26,7 +26,8 @@ const endpoints = {
         return `/api/v1/images/show/${name}`
     },
     getUserResumeInfo:`/api/v1/catalogs/getUserResumeInfo`,
-    getPickCatalogInfo:'/api/v1/catalogs/pickCatalogInfo'
+    getPickCatalogInfo:'/api/v1/catalogs/pickCatalogInfo',
+    getCatalogQuestionSet:'/api/v1/questionset/getCatalogQuestionSet'
     
 }
 
