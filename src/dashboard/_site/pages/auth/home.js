@@ -16,7 +16,8 @@ import endpoints from '../../components/endpoints'
 import {getMongoDBUser} from '../../components/utils/getMongoUser'
 // import TestStormForm from '../../components/forms/testStormForm'
 // import TestForm from '../../components/forms/testForm'
-
+// import TestForm2 from '../../components/forms/testForm2'
+// import MuiTestForm from '../../components/forms/muiTestForm'
 // Home page after logging in
 function Home(props) {
 
@@ -60,7 +61,8 @@ function Home(props) {
               
             <></>
           }
-          {/* <TestStormForm/> */}    
+          {/* <TestStormForm functions={{skipImage:()=>{},tagAsWater:()=>{},submitTags:()=>{}}}/>    */}
+          {/* <MuiTestForm functions={{skipImage:()=>{},tagAsWater:()=>{},submitTags:()=>{}}}/> */}
         </Box>
       </Container>
     </Layout>
@@ -105,7 +107,7 @@ Home.getInitialProps = async ctx => {
       resumeURL:resumeURL
     }
   }
-  const assignedImages = mongoUser.data.assignedImages
+  const assignedImages = mongoUser?.data?.assignedImages
 
   //Get resume table data
   if(assignedImages) {
@@ -119,7 +121,15 @@ Home.getInitialProps = async ctx => {
     //console.log('TEST --- ',getUserResumeInfo)
     resumeObj= getUserResumeInfo?.data?.resumeObj
   }
-  
+
+  // const test = await (await fetch(apiCall('/api/v1/questionset'), { //`/api/v1/archives/FindArchive`
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "cookie": ctx.req ? ctx.req.headers.cookie : null
+  //     },
+  //   })).json()
+  // console.log(test.data)
   return {
     cookie:ctx.req.headers.cookie,
     resumeObj:resumeObj

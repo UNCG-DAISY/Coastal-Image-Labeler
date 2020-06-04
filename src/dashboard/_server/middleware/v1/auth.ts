@@ -39,7 +39,8 @@ const authorize = (roles:string) => {
     }
 }
 
-const partOfCatalog = () => {
+//makes sure a given image is part of a catalog that a user can tag
+const imagePartOfCatalog = () => {
     return async (req: Request, res: Response, next: NextFunction) => {
 
          //if no body
@@ -85,12 +86,44 @@ const partOfCatalog = () => {
     }
 }
 
+//makes sure a given user is part of a catalog
+const userPartOfCatalog = () => {
+    return async (req: Request, res: Response, next: NextFunction) => {
+
+         //if no query param
+        if(!req.params) {
+            return next(new ErrorResponse(`No query param sent`,400))
+        }
+
+        //Get the mongoDB information on the user
+        const mongoUser = await UserModel.findOne({userId:req.user.id})
+        const {catalogs} = mongoUser
+
+        const archive:string = (req.params.archive as string)
+        const archiveDoc = await ArchiveModel.findOne({name:archive})
+        const catalogDoc = await CatalogModel.findById(archiveDoc.catalog)
+
+        //check
+       if(!catalogs.includes(catalogDoc._id))  {
+            return res.status(400).json({
+                success:false,
+                message:`User ${req.user.displayName} not allowed to tag Catalog ${catalogDoc.name}`,
+            })
+            //return next(new ErrorResponse(`User ${req.user.id} not allowed to tag Catalog ${catalogDoc._id}`,400))
+       }
+       
+        next()
+       
+    }
+}
+
 
 
 
 export {
     //protect,
     authorize,
-    partOfCatalog
+    imagePartOfCatalog,
+    userPartOfCatalog
     //RBAC
 }
