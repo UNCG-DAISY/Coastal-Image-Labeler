@@ -8,7 +8,9 @@
     "buildTSC": "tsc -p ./_server",
     "build":"npm run buildSite && npm run buildTSC",
     "start": "NODE_ENV=production node ./_dist/server.js",
+    "startW": "SET NODE_ENV=production&& node ./_dist/server.js",
     "bas": "npm run build && npm run start",
+    "basW": "npm run build && npm run startW",
     "nodemonTSC": "nodemon --exec ts-node ./_server/server.ts",
     "dev": "npm run nodemonTSC"
   },
