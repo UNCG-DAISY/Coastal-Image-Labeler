@@ -3,6 +3,7 @@
     This file handles errors during API calls
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.errorHandler = void 0;
 const errorResponse_1 = require("../../utils/v1/errorResponse");
 exports.errorHandler = (err, req, res, next) => {
     var _a, _b, _c, _d;

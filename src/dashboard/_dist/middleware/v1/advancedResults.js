@@ -6,6 +6,7 @@
     15, or by some value passed in the api url or if reverse ordering is needed.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.advancedResults = void 0;
 const advancedResults = (model, populate) => async (req, res, next) => {
     var _a, _b, _c, _d;
     let query;

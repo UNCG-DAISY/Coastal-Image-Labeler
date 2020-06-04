@@ -1,22 +1,22 @@
 "use strict";
 /*
-    Archive related Api calls
+    QuestionSet related Api calls
 */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const archives_1 = require("../../controllers/v1/archives");
+const questionSet_1 = require("../../controllers/v1/questionSet");
 const advancedResults_1 = require("../../middleware/v1/advancedResults");
-const Archive_1 = require("../../models/Archive");
-// "/api/v1/archives/"
+const QuestionSet_1 = require("../../models/QuestionSet");
+// "/api/v1/questionset/"
 const router = express_1.default.Router();
 //Get all existing archives
 router
     .route('/')
-    .get(advancedResults_1.advancedResults(Archive_1.ArchiveModel, ''), archives_1.getAllArchives);
+    .get(advancedResults_1.advancedResults(QuestionSet_1.QuestionSetModel, ''), questionSet_1.getAllQuestionSets);
 router
-    .route('/FindArchive')
-    .post(advancedResults_1.advancedResults(Archive_1.ArchiveModel, ''), archives_1.findArchive);
+    .route('/getCatalogQuestionSet')
+    .post(questionSet_1.getCatalogQuestionSet);
 exports.default = router;

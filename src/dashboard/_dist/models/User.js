@@ -3,6 +3,7 @@
     Model for users. Contains a link to each role the user has and what storms they can tag
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserModel = void 0;
 const mongoose_1 = require("mongoose");
 // import slugify from 'slugify'
 // import {geocoder} from '../utils/v1/geocoder'
@@ -13,7 +14,7 @@ const userSchema = new mongoose_1.Schema({
     assignedImages: {
         type: Object
     },
-    storms: {
+    catalogs: {
         type: [mongoose_1.Types.ObjectId]
     },
     dateAdded: {
@@ -37,8 +38,8 @@ const userSchema = new mongoose_1.Schema({
         type: [String],
         default: []
     },
-    role: {
-        type: [mongoose_1.Types.ObjectId],
+    roles: {
+        type: [String],
         default: []
     }
 }, {
@@ -55,23 +56,23 @@ userSchema.pre('save', async function (next) {
     next();
 });
 // Reverse populate with virtuals
-userSchema.virtual('roleData', {
-    ref: 'Role',
-    localField: 'role',
-    foreignField: '_id',
-    justOne: false
-});
-//This runs everytime
-userSchema
-    .virtual('roleNames')
-    .get(function () {
-    let roleNames = [];
-    if (this.roleData) {
-        for (let i = 0; i < this.roleData.length; i++) {
-            let role = this.roleData[i];
-            roleNames.push(role.name);
-        }
-    }
-    return roleNames;
-});
+// userSchema.virtual('roleData', {
+//     ref: 'Role',
+//     localField: 'roles',
+//     foreignField: '_id',
+//     justOne: false
+// })
+// //This runs everytime
+// userSchema
+// .virtual('roleNames')
+// .get(function () {
+//     let roleNames:string[] = []
+//     if(this.roleData) {
+//         for(let i =0;i<this.roleData.length;i++) {
+//             let role = this.roleData[i]
+//             roleNames.push(role.name)
+//         }
+//     }
+//     return roleNames
+// });
 exports.UserModel = mongoose_1.model('User', userSchema);

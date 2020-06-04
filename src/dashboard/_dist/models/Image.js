@@ -3,6 +3,7 @@
     Model for images. Contains a link to the archive it falls under
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ImageModel = void 0;
 const mongoose_1 = require("mongoose");
 const ImageSchema = new mongoose_1.Schema({
     archive: {
@@ -23,31 +24,31 @@ const ImageSchema = new mongoose_1.Schema({
         type: Boolean,
         required: [true, 'Please tell if compressed or not'],
     },
-    location: {
-        upperLeft: {
-            type: [Number]
-        },
-        upperRight: {
-            type: [Number]
-        },
-        lowerLeft: {
-            type: [Number]
-        },
-        lowerRight: {
-            type: [Number]
-        }
-    },
-    id: {
+    // location:{
+    //     upperLeft:{
+    //         type:[Number]
+    //     },
+    //     upperRight:{
+    //         type:[Number]
+    //     },
+    //     lowerLeft:{
+    //         type:[Number]
+    //     },
+    //     lowerRight:{
+    //         type:[Number]
+    //     }
+    // },
+    fileName: {
         type: String,
         required: [true, 'Please add a name of image with its extension'],
-        unique: true,
+        unique: false,
         trim: true,
         maxlength: [128, 'Name can not be longer than 128 characters']
     },
     path: {
         type: String,
         required: [true, 'Please provide image path'],
-        unique: true,
+        unique: false,
         maxlength: [128, 'Name can not be longer than 128 characters']
     },
     taggable: {
@@ -68,6 +69,7 @@ const ImageSchema = new mongoose_1.Schema({
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
 });
+ImageSchema.index({ fileName: 1, archive: 1 }, { unique: true });
 // ImageSchema.post('save', function(doc) {
 //     console.log('%s has been saved', doc._id);
 //   });

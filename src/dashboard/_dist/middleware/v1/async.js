@@ -6,4 +6,5 @@
   the function `fn` in a promise and does catch inside it.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.asyncHandler = void 0;
 exports.asyncHandler = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);

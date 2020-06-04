@@ -3,6 +3,7 @@
     Model for archives. Contains a link to the storm it falls under
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ArchiveModel = void 0;
 const mongoose_1 = require("mongoose");
 const archiveScehma = new mongoose_1.Schema({
     dateAdded: {
@@ -27,10 +28,10 @@ const archiveScehma = new mongoose_1.Schema({
         type: [mongoose_1.Types.ObjectId],
         default: []
     },
-    storm: {
+    catalog: {
         type: mongoose_1.Types.ObjectId,
         required: true,
-        ref: 'Storm'
+        ref: 'Catalog'
     },
     taggable: {
         type: Boolean,
@@ -40,15 +41,15 @@ const archiveScehma = new mongoose_1.Schema({
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
 });
-archiveScehma.virtual('allImages', {
-    ref: 'Image',
-    localField: '_id',
-    foreignField: 'archive',
-    justOne: false
-});
-archiveScehma.virtual('Stormie', {
-    ref: 'Storm',
-    localField: 'storm',
+// archiveScehma.virtual('allImages', {
+//     ref: 'Image',
+//     localField: '_id',
+//     foreignField: 'archive',
+//     justOne: false
+// })
+archiveScehma.virtual('getCatalog', {
+    ref: 'Catalog',
+    localField: 'catalog',
     foreignField: '_id',
     justOne: false
 });

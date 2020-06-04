@@ -4,17 +4,13 @@
   "description": "PSIC Node server",
   "main": "server.js",
   "scripts": {
-    "build": "next build ./_site && tsc",
+    "buildSite": "next build ./_site",
+    "buildTSC": "tsc -p ./_server",
+    "build":"npm run buildSite && npm run buildTSC",
+    "start": "NODE_ENV=production node ./_dist/server.js",
     "bas": "npm run build && npm run start",
     "nodemonTSC": "nodemon --exec ts-node ./_server/server.ts",
-    "dev": "npm run nodemonTSC",
-    "dev2": "npm run nodemonTSC | pino-pretty | pino-tee warn ./logs/warn-logs > ./logs/all-logs",
-    "start": "tsc && SET NODE_ENV=production&& node ./_dist/server.js",
-    "seederCreate": "ts-node ./_server/jsonSeeder.ts -i",
-    "seederDel": "ts-node ./_server/jsonSeeder.ts -d",
-    "seederRole": "ts-node ./_server/jsonSeeder.ts -r",
-    "stormSeeder": "ts-node ./_server/stormSeeder.ts",
-    "seeder": "npm run seederDel && npm run seederCreate"
+    "dev": "npm run nodemonTSC"
   },
   "author": "Shah Nafis Rafique",
   "license": "MIT",
