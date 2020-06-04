@@ -3,8 +3,6 @@
 */
 
 import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Types} from 'mongoose'
-import slugify from 'slugify'
-import { Entry } from 'node-geocoder'
 import {ArchiveDocument} from '../index'
 
 const archiveScehma: Schema = new Schema({

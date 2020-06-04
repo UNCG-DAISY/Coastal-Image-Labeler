@@ -1,3 +1,4 @@
+#!/usr/bin/env ts-node-script
 /*
     This is the main server file.
 */
