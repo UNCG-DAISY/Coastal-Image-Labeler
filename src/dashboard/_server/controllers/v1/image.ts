@@ -134,15 +134,16 @@ const showImage = asyncHandler(async (req: Request, res: Response, next: NextFun
         })
     }
 
-    const imageDoc = await ImageModel.findOne({id:req.params.id})
+    console.log('ID = ',req.params.id)
+    const imageDoc = await ImageModel.findById(req.params.id)
+    console.log('Doc = ',imageDoc)
     if(!imageDoc) {
         return res.status(404).json({
             success:false,
             message:'No image found',
         })
-        //return next()
+
     }
-    //console.log('img',imageDoc)
 
     const archiveDoc = await ArchiveModel.findById(imageDoc.archive)
     if(!archiveDoc) {
@@ -150,10 +151,9 @@ const showImage = asyncHandler(async (req: Request, res: Response, next: NextFun
             success:false,
             message:'No archive found',
         })
-        //return next()
+
     }
-    //console.log('archive',archiveDoc)
-    //console.log('---------',archiveDoc.catalog,'=========')
+
     const catalogDoc = await CatalogModel.findById(archiveDoc.catalog)
     //console.log('catalog',catalogDoc)
     if(!catalogDoc) {
@@ -161,11 +161,10 @@ const showImage = asyncHandler(async (req: Request, res: Response, next: NextFun
             success:false,
             message:'No catalog found',
         })
-        //return next()
+
     }
     
-    res.sendFile(`${catalogDoc.path}/${archiveDoc.path}/${req.params.id}`);
-    // res.sendFile('C:\\Users\\skool\\Desktop\\testCatalogs\\amenadiel\\a420\\420_test.png');
+    res.sendFile(`${catalogDoc.path}/${archiveDoc.path}/${imageDoc.fileName}`);
 })
 
 export {
