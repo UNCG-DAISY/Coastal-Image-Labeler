@@ -29,6 +29,7 @@ import questionSet from './routes/v1/questionSet'
 //Packages for security
 // 1 - importing dependencies
 import session from "express-session";
+let MemoryStore = require('memorystore')(session)
 import passport from "passport";
 import Auth0Strategy from "passport-auth0";
 import uid from 'uid-safe';
@@ -87,7 +88,10 @@ nextApp.prepare()
         maxAge: 86400 * 1000 // 24 hours in milliseconds
         },
         resave: false,
-        saveUninitialized: true
+        saveUninitialized: true,
+        store: new MemoryStore({
+            checkPeriod: 86400000 // prune expired entries every 24h
+        }),
     };
     app.use(session(sessionConfig));
 
