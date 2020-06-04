@@ -59,7 +59,13 @@ function Home(props) {
                
             </React.Fragment>:
               
-            <></>
+            <React.Fragment>
+              <Typography variant="body1" component="h1" gutterBottom>
+                <Paper elevation={3} variant="outlined" style={{padding:10}}>
+                  No archives to resume tagging from.
+                </Paper>
+              </Typography>
+            </React.Fragment>
           }
           {/* <TestStormForm functions={{skipImage:()=>{},tagAsWater:()=>{},submitTags:()=>{}}}/>    */}
           {/* <MuiTestForm functions={{skipImage:()=>{},tagAsWater:()=>{},submitTags:()=>{}}}/> */}
