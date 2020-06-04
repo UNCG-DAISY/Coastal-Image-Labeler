@@ -79,7 +79,7 @@ function TagImage(props) {
   }
 
   async function skipImage() {
-    alert('Skip image')
+    //alert('Skip image')
     const responseData = await (await fetch(apiCall(
       endpoints.skipImage(queryParams?.archive)
       ), {
