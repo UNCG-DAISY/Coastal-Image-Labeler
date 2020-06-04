@@ -74,7 +74,7 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
         }
         
         //if enough match,then we can mark the image as complete
-        if(numMatched == taggedImage.tillComplete) {
+        if(numMatched >= taggedImage.tillComplete) {
             console.log(`image ${_id} NOT LONGER taggable`)
             stillTaggable = false     
         } else {
@@ -100,7 +100,11 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
     if(stillTaggable == false) {
         upadtedImage = await ImageModel.updateOne(
             {_id:_id},
-            { finalTag:taggingPayload },
+            { 
+                finalTag:taggingPayload,
+                taggable:false,
+                finishedTagging:true 
+            },
             {
                 runValidators:true,
                 new:true

@@ -276,6 +276,7 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
     const listOfPossibleTaggableImages = (await ImageModel.find({
         archive:archiveDocument._id,
         taggable:true,
+        finishedTagging:false,
         tillComplete: { $gt: 0 }
     }))
 

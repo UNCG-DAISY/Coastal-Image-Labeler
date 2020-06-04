@@ -1,0 +1,96 @@
+
+> psic_node_server@1.0.0 start /home/shahnafis/GitHub/Coastal-Image-Labeler/src/dashboard
+> NODE_ENV=production node ./_dist/server.js
+
+
+> psic_node_server@1.0.0 start /home/shahnafis/GitHub/Coastal-Image-Labeler/src/dashboard
+> NODE_ENV=production node ./_dist/server.js
+
+Warning: Detected next.config.js, no exported configuration found. https://err.sh/vercel/next.js/empty-configuration
+[36mUsing production database[39m
+[36mServer running in production mode on port 5000[39m
+Warning: Detected next.config.js, no exported configuration found. https://err.sh/vercel/next.js/empty-configuration
+[36mUsing production database[39m
+events.js:292
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (net.js:1313:16)
+    at listenInCluster (net.js:1361:12)
+    at Server.listen (net.js:1447:7)
+    at Function.listen (/home/shahnafis/GitHub/Coastal-Image-Labeler/src/dashboard/node_modules/express/lib/application.js:618:24)
+    at /home/shahnafis/GitHub/Coastal-Image-Labeler/src/dashboard/_dist/server.js:147:24
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (net.js:1340:8)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! psic_node_server@1.0.0 start: `NODE_ENV=production node ./_dist/server.js`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the psic_node_server@1.0.0 start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/shahnafis/.npm/_logs/2020-06-04T18_02_08_276Z-debug.log
+[32mMongoDB connected: [4mcoastal-shard-00-00-u1gox.azure.mongodb.net[24m[39m
+
+> psic_node_server@1.0.0 start /home/shahnafis/GitHub/Coastal-Image-Labeler/src/dashboard
+> NODE_ENV=production node ./_dist/server.js
+
+Warning: Detected next.config.js, no exported configuration found. https://err.sh/vercel/next.js/empty-configuration
+[36mUsing production database[39m
+[36mServer running in production mode on port 5000[39m
+[32mMongoDB connected: [4mcoastal-shard-00-00-u1gox.azure.mongodb.net[24m[39m
+
+> psic_node_server@1.0.0 start /home/shahnafis/GitHub/Coastal-Image-Labeler/src/dashboard
+> NODE_ENV=production node ./_dist/server.js
+
+Warning: Detected next.config.js, no exported configuration found. https://err.sh/vercel/next.js/empty-configuration
+[36mUsing production database[39m
+[36mServer running in production mode on port 5000[39m
+[32mMongoDB connected: [4mcoastal-shard-00-02-u1gox.azure.mongodb.net[24m[39m
+
+> psic_node_server@1.0.0 start /home/shahnafis/GitHub/Coastal-Image-Labeler/src/dashboard
+> NODE_ENV=production node ./_dist/server.js
+
+Warning: Detected next.config.js, no exported configuration found. https://err.sh/vercel/next.js/empty-configuration
+[36mUsing production database[39m
+events.js:292
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (net.js:1313:16)
+    at listenInCluster (net.js:1361:12)
+    at Server.listen (net.js:1447:7)
+    at Function.listen (/home/shahnafis/GitHub/Coastal-Image-Labeler/src/dashboard/node_modules/express/lib/application.js:618:24)
+    at /home/shahnafis/GitHub/Coastal-Image-Labeler/src/dashboard/_dist/server.js:147:24
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (net.js:1340:8)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! psic_node_server@1.0.0 start: `NODE_ENV=production node ./_dist/server.js`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the psic_node_server@1.0.0 start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/shahnafis/.npm/_logs/2020-06-04T18_05_53_229Z-debug.log
