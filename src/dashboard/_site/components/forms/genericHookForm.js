@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
     Button,
@@ -19,7 +19,7 @@ export default function GenericHookForm(props) {
 
     
 
-   
+    const [globalDisable, setGlobalDisable] = useState(false);
     const {
         questionSetData,
         formFunctions
@@ -37,6 +37,7 @@ export default function GenericHookForm(props) {
     });
 
     const onSubmit = data => {
+        setGlobalDisable(true)
         submitTags(data)
     };
 
@@ -63,6 +64,7 @@ export default function GenericHookForm(props) {
                                         control={<Radio />}
                                         label={radioButton.name}
                                         key={radioButton.value}
+                                        disabled={globalDisable}
                                     />
                                 ))}
                             </RadioGroup>
@@ -93,6 +95,7 @@ export default function GenericHookForm(props) {
                             key={checkboxButton.value}
                             control={
                                 <Checkbox  
+                                    disabled={globalDisable}
                                     name={key} 
                                     value={checkboxButton.value}
                                     inputProps={{ 
@@ -139,6 +142,7 @@ export default function GenericHookForm(props) {
                 key={key}
                 multiline={multiline ?? false}
                 rows = {rows ?? 1}
+                disabled={globalDisable}
             />
         )
     }
@@ -184,16 +188,16 @@ export default function GenericHookForm(props) {
                         }} 
                     >
                         <div >
-                            <Button variant="outlined" onClick = {()=>skipImage()}>
+                            <Button variant="outlined" onClick = {()=>{setGlobalDisable(true);skipImage()}} disabled={globalDisable}>
                                 Skip
                             </Button>
 
-                            <Button variant="outlined" onClick = {()=>tagAsWater()} style={{marginLeft:theme.spacing(2)}}>
+                            <Button variant="outlined" onClick = {()=>{setGlobalDisable(true);tagAsWater()}} style={{marginLeft:theme.spacing(2)}} disabled={globalDisable}>
                             Tag as all water and skip to next image
                             </Button>
                         </div>
                         <div >
-                            <Button type="submit" variant="outlined" color="default">
+                            <Button type="submit" variant="outlined" color="default" disabled={globalDisable}>
                                 Submit
                             </Button>
                         </div>
