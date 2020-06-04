@@ -18,7 +18,7 @@ import {
 } from '../../middleware/v1/isAuthenticated'
 import {
     authorize,
-    partOfCatalog
+    imagePartOfCatalog
 } from '../../middleware/v1/auth'
 import {
     dummyRes
@@ -29,10 +29,10 @@ const router = express.Router();
 
 router
     .route('/tagImage')
-    .post(ensureAuthenticated,authorize('tagger'),partOfCatalog(),tagImage,updatedTaggedImages)
+    .post(ensureAuthenticated,authorize('tagger'),tagImage,updatedTaggedImages)
 router
     .route('/skipImage/:archive')
-    .get(ensureAuthenticated,authorize('tagger'),partOfCatalog(),updatedTaggedImages)
+    .get(ensureAuthenticated,authorize('tagger'),updatedTaggedImages)
 
 router
     .route('/show/:id')
