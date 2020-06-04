@@ -1,0 +1,26 @@
+{
+  "name": "cil-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": "./_dist/bin/cil-dashboard.js",
+  "scripts": {
+    "build": "tsc",
+    "link": "rimraf _dist && tsc && npm link"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^14.0.1",
+    "colors": "^1.4.0",
+    "commander": "^5.1.0",
+    "configstore": "^5.0.1",
+    "inquirer": "^7.1.0",
+    "moment": "^2.26.0",
+    "mongoose": "^5.9.14",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.2"
+  }
+}
