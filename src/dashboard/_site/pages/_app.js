@@ -10,17 +10,12 @@ import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../components/theme';
-import { throws } from 'assert';
 import axios from 'axios'
 import { 
-  myIp,
-  port,
-  protocal,
   apiCall
 } from '../components/constants'
 import {getAllowedPages} from '../components/utils/getAllowedPages'
 import endpoints from '../components/endpoints'
-
 
 export default class MyApp extends App {
   
@@ -29,7 +24,7 @@ export default class MyApp extends App {
     const { Component, ctx } = context
     let pageProps = {};
     
-    //Run the pages getInitProps first
+    //Run the pages getInitProps first before _app.js
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
@@ -39,58 +34,63 @@ export default class MyApp extends App {
     if (ctx.req && ctx.req.session && ctx.req.session.passport) {
 
       //Then get the passport user
-      pageProps.user = ctx.req.session.passport.user
+      pageProps.user = ctx?.req?.session?.passport?.user ?? {}
       
-      //If there is indeed a user,get role and check if in mongo
+      //If there is a user,get role and check if in mongo
       if(pageProps?.user?.id) {   
        
         //First using the passportId, see if this passport user is in mongoDb already
         let getMongoUserById = {};
         try {
-          getMongoUserById = await axios.post(
-            apiCall(
-              endpoints.findUser//`/api/v1/users/findUser`
-            ),
-            {
+          getMongoUserById = await (await fetch(apiCall(endpoints.findUser), { 
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "cookie": ctx.req ? ctx.req.headers.cookie : null
+            },
+            body:JSON.stringify({
               userId: ctx?.req?.session?.passport?.user?.id
-            }
-          )
+            })
+          })).json()
+          
         } catch(error) {
           console.log(error)
         }
 
         //If the returned user is undefined, that means this is a user who has
-        //recently register and not been entered into the db So enter them into
+        //recently register to auth0 and not been entered into the db,so enter them into
         //the DB
-        if(!getMongoUserById?.data?.data?.user) {
+        if(!getMongoUserById?.data?.user) {
           console.log('New registered user not in mongoDB, adding now...'.bgRed)
 
           //Get the newly created user
           try{
-            getMongoUserById = await axios.post(apiCall(endpoints.createUser),{ //'/api/v1/users/createUser'
-              passportUser:pageProps?.user
-            })
+            getMongoUserById = await (await fetch(apiCall(endpoints.createUser), { 
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "cookie": ctx.req ? ctx.req.headers.cookie : null
+              },
+              body:JSON.stringify({
+                passportUser:pageProps?.user
+              })
+            })).json()
           } catch(error) {
             console.log(error)
           }
-        
-  
         }
 
         //Add this to the user prop so other may use.
         //This is NOT accessable in getinitprops, only in the component
-        pageProps.user.mongoUser = getMongoUserById.data.data.user
+        pageProps.user.mongoUser = getMongoUserById?.data?.user
 
         //Add on the allowed pages for this user. 
         pageProps.user.allowedPages = await getAllowedPages(pageProps.user,ctx)
-        //Show a message
-        //console.log(getMongoUserById.data.data.message.green,'--------')
       }
      
     }
 
     return { pageProps };
-
   }
 
   constructor(props) {
@@ -98,7 +98,7 @@ export default class MyApp extends App {
     
     //Add user to state
     this.state = {
-      user: props.pageProps.user
+      user: props?.pageProps?.user ?? {}
     };
   }
 
@@ -112,11 +112,6 @@ export default class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props;
-
-    const props = {
-      ...pageProps,
-      user: this.state.user,
-    };
 
     return (
       <React.Fragment>

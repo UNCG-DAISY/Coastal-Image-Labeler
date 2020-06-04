@@ -3,7 +3,6 @@
 */
 
 import { Document,Types} from 'mongoose'
-import express from 'express';
 
 declare namespace psiDashboard  {
   export interface ImageDocument extends Document {
@@ -37,7 +36,7 @@ declare namespace psiDashboard  {
   }
 
 
-  export interface StormDocument extends Document {
+  export interface CatalogDocument extends Document {
     archives: any,
     dateAdded?:Date,
     name : String,
