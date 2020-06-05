@@ -54,6 +54,7 @@ const catalog = {
             await CatalogModel.deleteMany({})
             await ImageModel.deleteMany({})
 
+        const startTime = Date.now()
         //create catalogs
         let catalogsMade = []
         await Promise.all(file.catalogs.map(async (catalogData,index)=> {
@@ -102,6 +103,11 @@ const catalog = {
                 file:file
             })
         }))
+
+        const endTime = Date.now()
+        const elapsed = endTime-startTime
+        console.log(startTime,endTime,elapsed)
+        console.log(`seconds elapsed = ${Math.floor(elapsed / 1000)}`);
         await mongoConnection.close()
         
     }
