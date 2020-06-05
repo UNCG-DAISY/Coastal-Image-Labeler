@@ -27,16 +27,16 @@ export default class ImageContainer extends React.Component{
                         variant="outlined" 
                         style={{marginRight:10}}
                         onClick = {()=>{
-                            window.open(  imageUrl, 'Full Image')
+                            window.open(  imageUrl.compressed, 'Compressed Image')
                         }}
                     >
-                        View compressed image
+                        View compressed image X
                     </ViewFullImage>
                     <ViewCompressedImage 
                         color="secondary" 
                         variant="outlined"
                         onClick = {()=>{
-                            window.open( imageUrl, 'Compressed Image')
+                            window.open( imageUrl.full, 'Full Image')
                         }}
                     >
                         View full image
