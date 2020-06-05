@@ -25,6 +25,9 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
         4. Update
         5. See if can finalize tags
         6. Update res object
+            For this I add archive of the image as a param,and the newly updated image
+            for the next callback function, updatedTaggedImages, which cycles the image
+            off from being assigned to tagged and assigns a new image.
     */
 
     /* Step 1 */
@@ -112,8 +115,8 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
         )
     }
     
-    //Not sure if I need this, just getting the latest image
-    upadtedImage = await ImageModel.findById(_id) 
+    //Make sure to get the latest image
+    //upadtedImage = await ImageModel.findById(_id) 
 
     /* Step 6 */
     //@ts-ignore
