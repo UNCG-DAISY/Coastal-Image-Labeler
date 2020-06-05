@@ -53,6 +53,7 @@ program
                         //console.log(image)
                         await compressImage({
                             inputPath:`${archivePath}${image.path}`,
+                            //needs that /
                             outputPath:`${out}${catalog.name}${archive.path}/`,
                             imageName:image.fileName
                         })
