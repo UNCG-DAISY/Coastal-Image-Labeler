@@ -19,7 +19,7 @@ async function compressImage(options) {
     } catch(error) {
         colorize.log(error)
     }
-    colorize.log(`Compressing image ${imageName}`)
+    //colorize.log(`Compressing image ${imageName}`)
     compress_images(
         inputPath, 
         outputPath, 
@@ -33,14 +33,7 @@ async function compressImage(options) {
         {png: {engine: 'webp', command: ['-q', '60']}},
         {svg: {engine: 'svgo', command: '--multipass'}},
         {gif: {engine: 'gifsicle', command: ['--colors', '64', '--use-col=web']}}, 
-        function(error, completed, statistic){
-            // console.log('-------------');
-            // console.log(error);
-            //console.log(``);
-            // console.log(statistic);
-
-            // console.log('-------------');       
-                                
+        function(error, completed, statistic){                            
         }
     );
 
