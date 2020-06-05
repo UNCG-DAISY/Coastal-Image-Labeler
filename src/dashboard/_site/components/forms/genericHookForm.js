@@ -11,13 +11,18 @@ import {
     FormGroup,
     Checkbox,
     Typography,
+    makeStyles,
+    createStyles,
+    IconButton,
+    Divider 
 } from "@material-ui/core";
+import HelpTwoToneIcon from '@material-ui/icons/HelpTwoTone';
 import theme from '../theme';
 
 
 export default function GenericHookForm(props) {
 
-    
+    const classes = useStyles();
 
     const [globalDisable, setGlobalDisable] = useState(false);
     const {
@@ -41,20 +46,86 @@ export default function GenericHookForm(props) {
         submitTags(data)
     };
 
-    const errorText = (key) =>{
+    function generateMinMaxText(min,max) {
+        let minText = ""
+        let maxText = ""
+        let seperator = ""
+        if(min) {
+            seperator = " - "
+            minText = `Atleast ${min} `
+        }
+        if(max) {
+            seperator = " - "
+            maxText = `Atmost ${max}`
+        }
+        return `${seperator}${minText}${maxText}`
+    }
+
+    function generateTextField(textFieldInfo) {
+        const {required,key,multiline,rows} = textFieldInfo
         return (
-            errors[key] && <span style={{color:'red'}}>{errors[key] && `Error - ${key}`}</span>
+            <TextField
+                fullWidth
+                type="text"
+                name={textFieldInfo.label}
+                id="filled-required"
+                label={textFieldInfo.label}
+                variant="filled"
+                inputRef={register({required:required})}
+                error={!!errors[key]}
+                key={key}
+                multiline={multiline ?? false}
+                rows = {rows ?? 1}
+                disabled={globalDisable}
+            />
+        )
+    }
+
+    function generateLabel(label,link) {
+        return (
+            <React.Fragment>
+                <Typography color="secondary">
+                    {label}
+                    <a className={classes.link} href={link}>
+                        <IconButton size="small">
+                            <HelpTwoToneIcon />
+                        </IconButton>
+                    </a>
+                </Typography>
+                
+            </React.Fragment>
+        )
+    }
+
+    const errorText = (key,errorMessage,label,min,max) =>{
+        const text = ( 
+            <span style={{color:'red'}}>
+                {
+                    errorMessage?
+                    errorMessage
+                    :
+                    <React.Fragment>
+                        {errors[key] && `Error - ${label} requires`}
+                        {` atleast ${min?min:0}`}
+                        {max&&min?' and':""}
+                        {` ${max?` at most ${max}`:""}`}
+                    </React.Fragment>  
+                }   
+            </span>
+        )
+        return (
+            errors[key] && text
         )
     }
 
     function generateRadio(radioQuestions) {
         const {
-            label,key,required,buttons
+            label,key,required,buttons,errorMessage,link
         } = radioQuestions
         return (
             <React.Fragment key={key}>
                 <FormControl fullWidth component="fieldset" margin="normal">
-                    <FormLabel component="legend">{label}</FormLabel>
+                    <FormLabel component="legend">{generateLabel(label,link)}</FormLabel>
                     <Controller
                         as={
                             <RadioGroup aria-label={key} row>
@@ -73,26 +144,28 @@ export default function GenericHookForm(props) {
                         control={control}
                         rules={{ required: required }}
                     />
+                    {errorText(key,errorMessage,label,1)}
                 </FormControl>
-                {errorText(key)}
+                
             </React.Fragment>
         )
     }
 
     function generateCheckbox(checkboxQuestions) {
         const {
-            label,key,required,buttons,min,max
+            label,key,required,buttons,min,max,errorMessage,link
         } = checkboxQuestions
         return (
             <FormControl fullWidth component="fieldset" margin="normal" key={key}>
                 <FormLabel component="legend" focused={false}>
-                    {label}
+                {generateLabel(label,link)} {generateMinMaxText(min,max)}
                 </FormLabel>
                 <FormGroup row>
                 {
                     buttons.map((checkboxButton)=>(
                         <FormControlLabel
                             key={checkboxButton.value}
+                            label={`${checkboxButton.name}`}
                             control={
                                 <Checkbox  
                                     disabled={globalDisable}
@@ -116,37 +189,17 @@ export default function GenericHookForm(props) {
                                     }}
                                 />
                             }
-                            label={checkboxButton.name}
+                            
                         /> 
                     ))
                 }
                 
                 </FormGroup>
-                {errorText(key)}
+                {errorText(key,errorMessage,label,min,max)}
             </FormControl>
         )
     }
 
-    function generateTextField(textFieldInfo) {
-        const {required,key,multiline,rows} = textFieldInfo
-        return (
-            <TextField
-                fullWidth
-                type="text"
-                name={textFieldInfo.label}
-                id="filled-required"
-                label={textFieldInfo.label}
-                variant="filled"
-                inputRef={register({required:required})}
-                error={!!errors[key]}
-                key={key}
-                multiline={multiline ?? false}
-                rows = {rows ?? 1}
-                disabled={globalDisable}
-            />
-        )
-    }
-    
     function determineQuestionType(questionList) {
         return questionList.map((question)=>{
             switch (question.type) {
@@ -166,15 +219,15 @@ export default function GenericHookForm(props) {
         })
     }
 
-   
     return (
         <React.Fragment>
-            <Typography>
+            <Typography color="secondary">
                 {questionSetData.name}
             </Typography>
             <Typography>
                 {questionSetData.description}
             </Typography>
+            <Divider/>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>  
                     <React.Fragment>
@@ -318,6 +371,14 @@ export default function GenericHookForm(props) {
 //         rows: 5,
 //     }
 // ]
+
+const useStyles = makeStyles((theme) => createStyles({
+    link: {
+        textDecoration:'none',
+        color:theme.palette.primary.main
+    },
+}));
+  
 
 function generateRadioDefaults(input) {
     let defaults = {}
