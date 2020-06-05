@@ -22,8 +22,8 @@ const endpoints = {
     },
     getUser: `/api/v1/users/findUser`,
     tagImage:`/api/v1/images/tagImage`,
-    showImage(name){
-        return `/api/v1/images/show/${name}`
+    showImage(name,compress){
+        return compress?`/api/v1/images/showCompressed/${name}`: `/api/v1/images/show/${name}`
     },
     getUserResumeInfo:`/api/v1/catalogs/getUserResumeInfo`,
     getPickCatalogInfo:'/api/v1/catalogs/pickCatalogInfo',

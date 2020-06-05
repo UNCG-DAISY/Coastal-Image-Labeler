@@ -132,7 +132,7 @@ export default function GenericHookForm(props) {
                                 {buttons.map((radioButton) => (
                                     <FormControlLabel
                                         value={radioButton.value}
-                                        control={<Radio />}
+                                        control={<Radio color="primary"/>}
                                         label={radioButton.name}
                                         key={radioButton.value}
                                         disabled={globalDisable}
@@ -169,6 +169,7 @@ export default function GenericHookForm(props) {
                             control={
                                 <Checkbox  
                                     disabled={globalDisable}
+                                    color="primary"
                                     name={key} 
                                     value={checkboxButton.value}
                                     inputProps={{ 
