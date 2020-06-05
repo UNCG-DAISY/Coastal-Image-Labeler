@@ -30,7 +30,7 @@ export default class ImageContainer extends React.Component{
                             window.open(  imageUrl.compressed, 'Compressed Image')
                         }}
                     >
-                        View compressed image X
+                        View compressed image
                     </ViewFullImage>
                     <ViewCompressedImage 
                         color="secondary" 
@@ -58,8 +58,9 @@ export default class ImageContainer extends React.Component{
                     </CardContent> */}
                     <CardMedia
                         className={classes.media}
-                        image={imageUrl}
-                        title={`Image ${imageUrl}`}
+                        image={imageUrl.compressed}
+                        title={`Image ${imageUrl.compressed}`}
+                        src="Loading"
                     />
                 </Collapse>
             </React.Fragment>

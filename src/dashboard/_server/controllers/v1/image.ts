@@ -9,6 +9,7 @@ import {ArchiveModel} from '../../models/Archive'
 import {CatalogModel} from '../../models/Catalog'
 import fs from 'fs'
 import _ from 'lodash'
+import compress_images from 'compress-images'
 
 /**
  * @desc        Tags an image
@@ -133,46 +134,89 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
  * @access      Public
  * @returns     no
  */
-const showImage = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    if(req.params.id === undefined) {
-        res.status(404).json({
-            success:false,
-            message:'No Id sent',
-        })
-    }
+// const showImage = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+//     if(req.params.id === undefined) {
+//         res.status(404).json({
+//             success:false,
+//             message:'No Id sent',
+//         })
+//     }
 
-    //console.log('ID = ',req.params.id)
-    const imageDoc = await ImageModel.findById(req.params.id)
-    //console.log('Doc = ',imageDoc)
-    if(!imageDoc) {
-        return res.status(404).json({
-            success:false,
-            message:'No image found',
-        })
+//     //console.log('ID = ',req.params.id)
+//     const imageDoc = await ImageModel.findById(req.params.id)
+//     //console.log('Doc = ',imageDoc)
+//     if(!imageDoc) {
+//         return res.status(404).json({
+//             success:false,
+//             message:'No image found',
+//         })
 
-    }
+//     }
 
-    const archiveDoc = await ArchiveModel.findById(imageDoc.archive)
-    if(!archiveDoc) {
-        return res.status(404).json({
-            success:false,
-            message:'No archive found',
-        })
+//     const archiveDoc = await ArchiveModel.findById(imageDoc.archive)
+//     if(!archiveDoc) {
+//         return res.status(404).json({
+//             success:false,
+//             message:'No archive found',
+//         })
 
-    }
+//     }
 
-    const catalogDoc = await CatalogModel.findById(archiveDoc.catalog)
-    //console.log('catalog',catalogDoc)
-    if(!catalogDoc) {
-        return res.status(404).json({
-            success:false,
-            message:'No catalog found',
-        })
+//     const catalogDoc = await CatalogModel.findById(archiveDoc.catalog)
+//     //console.log('catalog',catalogDoc)
+//     if(!catalogDoc) {
+//         return res.status(404).json({
+//             success:false,
+//             message:'No catalog found',
+//         })
 
-    }
+//     }
+//     res.sendFile('C:/Users/Skool/Desktop/japan.PNG')
+//     //res.sendFile(`${catalogDoc.path}/${archiveDoc.path}/${imageDoc.fileName}`);
+// })
+
+const showImage = (options:any) => {
+    return asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+        if(req.params.id === undefined) {
+            res.status(404).json({
+                success:false,
+                message:'No Id sent',
+            })
+        }
     
-    res.sendFile(`${catalogDoc.path}/${archiveDoc.path}/${imageDoc.fileName}`);
-})
+        //console.log('ID = ',req.params.id)
+        const imageDoc = await ImageModel.findById(req.params.id)
+        //console.log('Doc = ',imageDoc)
+        if(!imageDoc) {
+            return res.status(404).json({
+                success:false,
+                message:'No image found',
+            })
+    
+        }
+    
+        const archiveDoc = await ArchiveModel.findById(imageDoc.archive)
+        if(!archiveDoc) {
+            return res.status(404).json({
+                success:false,
+                message:'No archive found',
+            })
+    
+        }
+    
+        const catalogDoc = await CatalogModel.findById(archiveDoc.catalog)
+        //console.log('catalog',catalogDoc)
+        if(!catalogDoc) {
+            return res.status(404).json({
+                success:false,
+                message:'No catalog found',
+            })
+    
+        }
+
+        res.sendFile(`${catalogDoc.path}/${archiveDoc.path}/${imageDoc.fileName}`);
+    })
+}
 
 export {
     tagImage,

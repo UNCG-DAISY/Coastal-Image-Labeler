@@ -38,8 +38,9 @@ router
 
 router
     .route('/show/:id')
-    .get(showImage)
+    .get(showImage({}))
 router
     .route('/showCompressed/:id')
-    .get(compression(),showImage)
+    .get(showImage({compress:true}))
+
 export default router;
