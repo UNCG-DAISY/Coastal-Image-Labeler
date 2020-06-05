@@ -53,7 +53,7 @@ program
                         //console.log(image)
                         await compressImage({
                             inputPath:`${archivePath}${image.path}`,
-                            outputPath:out,
+                            outputPath:`${out}${catalog.name}${archive.path}`,
                             imageName:image.fileName
                         })
                         counter++
