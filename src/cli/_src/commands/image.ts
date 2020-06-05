@@ -63,7 +63,7 @@ const image = {
                 compressImage({
                     inputPath:`${catalogDoc.path}/${archiveDoc.path}/${imageEntry.path}`,
                     imageName:`${imageName}`,
-                    outputPath:`${file.compressedFolder}/${catalogDoc.name}/${archiveDoc.name}`
+                    outputPath:`${file.compressedFolder}/${catalogDoc.name}/${archiveDoc.name}/`
                 })
                 numImagesAdded ++;
                 switch (numImagesAdded) {
