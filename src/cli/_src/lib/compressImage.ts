@@ -36,7 +36,7 @@ async function compressImage(options) {
         function(error, completed, statistic){
             // console.log('-------------');
             // console.log(error);
-            console.log(completed);
+            //console.log(``);
             // console.log(statistic);
 
             // console.log('-------------');       
