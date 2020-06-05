@@ -1,12 +1,13 @@
 {
   "name": "cil-dashboard",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "",
   "main": "index.js",
   "bin": "./_dist/bin/cil-dashboard.js",
   "scripts": {
     "build": "tsc",
-    "link": "rimraf _dist && tsc && npm link"
+    "link": "rimraf _dist && tsc && npm link",
+    "start": "node ./_dist/bin/cil-dashboard.js mongoURI show"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "commander": "^5.1.0",
     "compress-images": "^1.7.8",
     "configstore": "^5.0.1",
+    "decompress": "^4.2.1",
     "gifsicle": "^5.1.0",
     "inquirer": "^7.1.0",
     "moment": "^2.26.0",
