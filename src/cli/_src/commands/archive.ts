@@ -18,7 +18,8 @@ const archive = {
         const {
             catalogDoc,
             images,
-            appendPath
+            appendPath,
+            file
         } = options
 
         //Check params
@@ -67,7 +68,9 @@ const archive = {
         for(let i=0;i<archivesMade.length;i++) {
             await image.addImages({
                 archiveDoc:archivesMade[i],
-                fileExt:'.jpg'
+                catalogDoc:catalogDoc,
+                fileExt:'.jpg',
+                file:file
             })
             
         }

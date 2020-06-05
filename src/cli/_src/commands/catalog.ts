@@ -84,7 +84,8 @@ const catalog = {
                     year:catalogData.year,
                     link:catalogData.link,
                     description:catalogData.description
-                }
+                },
+                "questionSet":catalogData.questionSet
             })
 
             catalogsMade.push(catalogEntry)
@@ -97,7 +98,8 @@ const catalog = {
             await archive.createArchive({
                 catalogDoc:catalogEntry,
                 images:true,
-                appendPath:'/jpgs'
+                appendPath:'/jpgs',
+                file:file
             })
         }))
         await mongoConnection.close()

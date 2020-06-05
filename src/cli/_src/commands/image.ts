@@ -11,13 +11,15 @@ import {CatalogModel} from '../models/Catalog'
 import {ArchiveModel} from '../models/Archive'
 import {ImageModel} from '../models/Image'
 import colorize from '../utils/colorize'
-
+import {compressImage} from '../lib/compressImage'
 const image = {
     async addImages(options) {
 
         const {
             archiveDoc,
-            fileExt
+            catalogDoc,
+            fileExt,
+            file
         } = options
 
         const archiveId = archiveDoc._id
@@ -33,11 +35,11 @@ const image = {
         colorize.log(`Adding ${totalImages} images for archive ${archiveEntry.name}`)
         let numImagesAdded = 0;
         let dupCounter = 0;
-        await Promise.all(imageFiles.map(async (element,index) =>{
+        await Promise.all(imageFiles.map(async (imageName,index) =>{
 
             //first check if this image exists
             const existingImage = await ImageModel.find({ 
-                fileName: element,
+                fileName: imageName,
                 archive: archiveId
             })
 
@@ -52,12 +54,17 @@ const image = {
                     "compressed" : true,
                     "dateAdded" : Date.now(),
                     "finishedTagging": false,
-                    "fileName": element,
-                    "path":`/${element}`,
+                    "fileName": imageName,
+                    "path":`/${imageName}`,
                     "taggable":true,
                     "tillComplete":2
                 })
-                
+
+                compressImage({
+                    inputPath:`${catalogDoc.path}/${archiveDoc.path}/${imageEntry.path}`,
+                    imageName:`${imageName}`,
+                    outputPath:`${file.compressedFolder}/${catalogDoc.name}/${archiveDoc.name}`
+                })
                 numImagesAdded ++;
                 switch (numImagesAdded) {
                     case Math.floor(0.25*totalImages):
