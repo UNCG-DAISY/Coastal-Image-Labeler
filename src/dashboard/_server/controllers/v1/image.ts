@@ -214,20 +214,44 @@ const showImage = (options:any) => {
     
         }
 
+        const uncompressedImagePath = `${catalogDoc.path}/${archiveDoc.path}/${imageDoc.fileName}`
+        const compressedPath = `${process.env.COMPRESS_FOLDER}/${catalogDoc.name}${archiveDoc.path}/`
+        const compressedImagePath = `${compressedPath}${imageDoc.fileName}`
         if(options.compress) {
-            //First check to see if the image as already been compressed
-            const compressedPath = `${process.env.COMPRESS_FOLDER}${catalogDoc.name}${archiveDoc.path}${imageDoc.path}`
-            const uncompressedPath = `${catalogDoc.path}/${archiveDoc.path}/${imageDoc.fileName}`
-            console.log(compressedPath)
-            if(fs.existsSync(compressedPath)) {
-                res.sendFile(compressedPath)
-                return next()
-            }
 
-            //if not compressed
+            //compress
+            await new Promise(resolve =>{
+                console.log(`Compressing image ${imageDoc.fileName}`)
+                //console.log(inputPath,outputPath,imageName)
+                compress_images(
+                    uncompressedImagePath,
+                    compressedPath,
+                    {
+                        compress_force: false, 
+                        statistic: true, 
+                        autoupdate: true
+                    }, 
+                    false,
+                    {jpg: {engine: 'mozjpeg', command: ['-quality', '60']}},
+                    {png: {engine: 'webp', command: ['-q', '60']}},
+                    {svg: {engine: 'svgo', command: '--multipass'}},
+                    {gif: {engine: 'gifsicle', command: ['--colors', '64', '--use-col=web']}}, 
+                    function(error, completed, statistic){   
+                        console.log(`Completed compression of ${imageDoc.fileName} - ${completed}`)
+                        resolve(imageDoc.fileName)                   
+                    }
+                );
+                // console.log('B')
+            })
+            
+            //console.log(compressedImagePath)
+            res.sendFile(compressedImagePath)
         }
-
-        res.sendFile(`${catalogDoc.path}/${archiveDoc.path}/${imageDoc.fileName}`);
+        else {
+            console.log('Sending uncompressed')
+            res.sendFile(uncompressedImagePath);
+        }
+        
     })
 }
 
