@@ -29,11 +29,12 @@ function TagImage(props) {
 
   // console.log(imageDocument?.id)
   const imgUrl = endpoints.showImage(imageDocument?.id)
+  const imgUrlCompressed = endpoints.showImage(imageDocument?.id,true)
 
   const taggingForm = (
     <React.Fragment>
       <TaggingForm
-        imageUrl = {`${apiCall(imgUrl)}`}
+        imageUrl = {{full:`${apiCall(imgUrl)}`,compressed:`${apiCall(imgUrlCompressed)}`}}
         submitTags = {submitTags}
         tagAsWater = {tagAsWater}
         skipImage = {skipImage}

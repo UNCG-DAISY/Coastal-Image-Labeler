@@ -9,7 +9,38 @@ import * as colors from '@material-ui/core/colors/';
 import { makeStyles,withStyles  } from '@material-ui/core/styles';
 import theme from '../theme';
 
+
+// async function test(url) {
+//     return  (fetch( url, { 
+//         method: "GET",
+//         headers: {
+//         "Content-Type": "application/json",
+//         },
+//     })
+
+// }
+
+let imageObj;
 export default class ImageContainer extends React.Component{
+
+    state = {
+        imageLoading:true
+    }
+    
+    componentDidMount() {
+        //imageObj = test(this.props.imageUrl.full)
+
+        fetch( this.props.imageUrl.compressed, { 
+            method: "GET",
+            headers: {
+            "Content-Type": "application/json",
+            },
+        })
+        .then(response => {
+            console.log(response)
+            this.state.imageLoading == false
+        })
+    }
 
     render() {
 
@@ -19,6 +50,10 @@ export default class ImageContainer extends React.Component{
             imageUrl,
             handleExpandClick
         } = this.props
+
+        
+        
+       
         return (
             <React.Fragment>
                 <CardActions disableSpacing className={classes.dropdownStyles}>
@@ -27,7 +62,7 @@ export default class ImageContainer extends React.Component{
                         variant="outlined" 
                         style={{marginRight:10}}
                         onClick = {()=>{
-                            window.open(  imageUrl, 'Full Image')
+                            window.open(  imageUrl.compressed, 'Compressed Image')
                         }}
                     >
                         View compressed image
@@ -36,7 +71,7 @@ export default class ImageContainer extends React.Component{
                         color="secondary" 
                         variant="outlined"
                         onClick = {()=>{
-                            window.open( imageUrl, 'Compressed Image')
+                            window.open( imageUrl.full, 'Full Image')
                         }}
                     >
                         View full image
@@ -52,14 +87,21 @@ export default class ImageContainer extends React.Component{
                         <ExpandMoreIcon />
                     </IconButton>
                 </CardActions>
-
+{/*                 
+                {
+                    this.state.imageLoading && "LOADING"
+                }
+                {
+                    JSON.stringify(this.state)
+                } */}
                 <Collapse in={state.expanded} timeout="auto" unmountOnExit>
                     {/* <CardContent>  
                     </CardContent> */}
                     <CardMedia
                         className={classes.media}
-                        image={imageUrl}
-                        title={`Image ${imageUrl}`}
+                        image={imageUrl.compressed}
+                        title={`Image ${imageUrl.compressed}`}
+                        src="Loading"
                     />
                 </Collapse>
             </React.Fragment>

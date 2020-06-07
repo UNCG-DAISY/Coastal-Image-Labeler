@@ -26,7 +26,8 @@ function Home(props) {
   } = props?.user?.mongoUser
 
   const {
-    resumeObj
+    resumeObj,
+    allImagesTagged
   } = props
 
   const classes = useStyles();
@@ -54,7 +55,7 @@ function Home(props) {
                 Continue tagging from collections below.
               </Typography>
               <div className={classes.center}>
-                <ResumeTaggingTable resumeObj = {resumeObj}/>
+                <ResumeTaggingTable resumeObj = {resumeObj} allImages = {allImagesTagged}/>
               </div>
                
             </React.Fragment>:
@@ -99,7 +100,7 @@ Home.getInitialProps = async ctx => {
   const {req,res} = ctx
   //default value
   let resumeObj = {}
-
+  let allImagesTagged = {}
   //make sure there is a user
   hasUser(req)
 
@@ -125,20 +126,17 @@ Home.getInitialProps = async ctx => {
       },
     })).json()
     //console.log('TEST --- ',getUserResumeInfo)
-    resumeObj= getUserResumeInfo?.data?.resumeObj
+    resumeObj = getUserResumeInfo?.data?.resumeObj
+    allImagesTagged = getUserResumeInfo?.data?.allImagesTagged
+    // console.log(allImagesTagged)
+    // console.log(resumeObj)
   }
 
-  // const test = await (await fetch(apiCall('/api/v1/questionset'), { //`/api/v1/archives/FindArchive`
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "cookie": ctx.req ? ctx.req.headers.cookie : null
-  //     },
-  //   })).json()
-  // console.log(test.data)
+  
   return {
     cookie:ctx.req.headers.cookie,
-    resumeObj:resumeObj
+    resumeObj:resumeObj,
+    allImagesTagged:allImagesTagged
   }
 }
 
