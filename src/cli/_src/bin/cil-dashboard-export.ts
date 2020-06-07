@@ -17,34 +17,19 @@ import exportCommands from '../commands/export'
 //     })
 
 program
-    .command('json', {isDefault: true})
-    .description('Export all collections for ML use to a folder')
+    .command('tags')
+    .description('Export tags to a folder')
     .option('-p, --path <type>','Give path to directory to place collections',undefined)
     .action(async (cmd) => {
         const {
-            path,
-            csv
+            path
         } = cmd
 
         //make sure a path is given
         if(!path) return colorize.warning('Please provide a path')
-    
-        //connect to db
-        const uriManager = new UriManager();
-        const mongoConnection = new MongoConnection(uriManager.getKey())
-        await mongoConnection.connect()
-
-        //Export
-        const exportResult = await exportCommands.exportJSON(path)//{error:undefined,message:'1'};
-
-        //if an error, report it.
-        if(exportResult.error) {
-            colorize.error(exportResult.message)
-        } else {
-            colorize.info(exportResult.message)
-        }
-        await mongoConnection.close()
+        await exportCommands.exportImageTags(path)
+        
     })
 
-
+    
 program.parse(process.argv)
