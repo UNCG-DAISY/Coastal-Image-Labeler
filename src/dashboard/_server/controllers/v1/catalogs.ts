@@ -118,6 +118,7 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
         taggedImagesCategorized[catalogName][archiveName] = taggedImagesCategorized[catalogName][archiveName] + 1
     }))
 
+    console.log('taggedImagesCategorized',taggedImagesCategorized)
     //for each assigned image, pull how many you have tagged from that images archive
     //and how many are in that archive
     await Promise.all(Object.keys(assignedImages).map(async (image,index) =>{
@@ -154,6 +155,7 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
         message:'Done',
         data:{
             resumeObj,
+            allImagesTagged:taggedImagesCategorized
             //taggedImagesCategorized
         }
     })
