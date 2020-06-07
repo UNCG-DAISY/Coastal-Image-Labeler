@@ -9,6 +9,8 @@ import {ArchiveModel} from '../../models/Archive'
 import {CatalogModel} from '../../models/Catalog'
 import fs from 'fs'
 import _ from 'lodash'
+import compress_images from 'compress-images'
+import { UserModel } from "../../models/User"
 
 /**
  * @desc        Tags an image
@@ -25,6 +27,9 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
         4. Update
         5. See if can finalize tags
         6. Update res object
+            For this I add archive of the image as a param,and the newly updated image
+            for the next callback function, updatedTaggedImages, which cycles the image
+            off from being assigned to tagged and assigns a new image.
     */
 
     /* Step 1 */
@@ -35,7 +40,9 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
         timeStart
     } = req.body
     
-
+    //first get user
+    const mongoUser = await UserModel.findOne({userId:req.user.id})
+    tags.userId = mongoUser._id
     //just take the stuff we need
     let taggingPayload = {
         _id,
@@ -74,7 +81,7 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
         }
         
         //if enough match,then we can mark the image as complete
-        if(numMatched == taggedImage.tillComplete) {
+        if(numMatched >= taggedImage.tillComplete) {
             console.log(`image ${_id} NOT LONGER taggable`)
             stillTaggable = false     
         } else {
@@ -87,20 +94,24 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
 
     /* Step 4 */
     //Update
-    let upadtedImage = await ImageModel.updateOne(
+    let upadtedImage = await ImageModel.findOneAndUpdate(
         {_id:_id},
         { $push: { tags: taggingPayload },taggable:stillTaggable },
         {
             runValidators:true,
             new:true
         }
-    )
-
+    )   
+    
     /* Step 5*/
     if(stillTaggable == false) {
-        upadtedImage = await ImageModel.updateOne(
+        upadtedImage = await ImageModel.findOneAndUpdate(
             {_id:_id},
-            { finalTag:taggingPayload },
+            { 
+                finalTag:taggingPayload,
+                taggable:false,
+                finishedTagging:true 
+            },
             {
                 runValidators:true,
                 new:true
@@ -108,14 +119,15 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
         )
     }
     
-    //Not sure if I need this, just getting the latest image
-    upadtedImage = await ImageModel.findById(_id) 
+    //Make sure to get the latest image
+    //upadtedImage = await ImageModel.findById(_id) 
 
     /* Step 6 */
     //@ts-ignore
     res.updatedImage = upadtedImage
     //@ts-ignore
-    req.params.archive = (await ArchiveModel.findOne({_id:upadtedImage.archive})).name
+    const imageArchive = await ArchiveModel.findOne({_id:upadtedImage.archive})
+    req.params.archive = (imageArchive).name
     //Attach the newly tagged image to the res object
     next()
 })
@@ -126,46 +138,126 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
  * @access      Public
  * @returns     no
  */
-const showImage = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    if(req.params.id === undefined) {
-        res.status(404).json({
-            success:false,
-            message:'No Id sent',
-        })
-    }
+// const showImage = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+//     if(req.params.id === undefined) {
+//         res.status(404).json({
+//             success:false,
+//             message:'No Id sent',
+//         })
+//     }
 
-    //console.log('ID = ',req.params.id)
-    const imageDoc = await ImageModel.findById(req.params.id)
-    //console.log('Doc = ',imageDoc)
-    if(!imageDoc) {
-        return res.status(404).json({
-            success:false,
-            message:'No image found',
-        })
+//     //console.log('ID = ',req.params.id)
+//     const imageDoc = await ImageModel.findById(req.params.id)
+//     //console.log('Doc = ',imageDoc)
+//     if(!imageDoc) {
+//         return res.status(404).json({
+//             success:false,
+//             message:'No image found',
+//         })
 
-    }
+//     }
 
-    const archiveDoc = await ArchiveModel.findById(imageDoc.archive)
-    if(!archiveDoc) {
-        return res.status(404).json({
-            success:false,
-            message:'No archive found',
-        })
+//     const archiveDoc = await ArchiveModel.findById(imageDoc.archive)
+//     if(!archiveDoc) {
+//         return res.status(404).json({
+//             success:false,
+//             message:'No archive found',
+//         })
 
-    }
+//     }
 
-    const catalogDoc = await CatalogModel.findById(archiveDoc.catalog)
-    //console.log('catalog',catalogDoc)
-    if(!catalogDoc) {
-        return res.status(404).json({
-            success:false,
-            message:'No catalog found',
-        })
+//     const catalogDoc = await CatalogModel.findById(archiveDoc.catalog)
+//     //console.log('catalog',catalogDoc)
+//     if(!catalogDoc) {
+//         return res.status(404).json({
+//             success:false,
+//             message:'No catalog found',
+//         })
 
-    }
+//     }
+//     res.sendFile('C:/Users/Skool/Desktop/japan.PNG')
+//     //res.sendFile(`${catalogDoc.path}/${archiveDoc.path}/${imageDoc.fileName}`);
+// })
+
+const showImage = (options:any) => {
+    return asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+        if(req.params.id === undefined) {
+            res.status(404).json({
+                success:false,
+                message:'No Id sent',
+            })
+        }
     
-    res.sendFile(`${catalogDoc.path}/${archiveDoc.path}/${imageDoc.fileName}`);
-})
+        //console.log('ID = ',req.params.id)
+        const imageDoc = await ImageModel.findById(req.params.id)
+        //console.log('Doc = ',imageDoc)
+        if(!imageDoc) {
+            return res.status(404).json({
+                success:false,
+                message:'No image found',
+            })
+    
+        }
+    
+        const archiveDoc = await ArchiveModel.findById(imageDoc.archive)
+        if(!archiveDoc) {
+            return res.status(404).json({
+                success:false,
+                message:'No archive found',
+            })
+    
+        }
+    
+        const catalogDoc = await CatalogModel.findById(archiveDoc.catalog)
+        //console.log('catalog',catalogDoc)
+        if(!catalogDoc) {
+            return res.status(404).json({
+                success:false,
+                message:'No catalog found',
+            })
+    
+        }
+
+        const uncompressedImagePath = `${catalogDoc.path}/${archiveDoc.path}/${imageDoc.fileName}`
+        const compressedPath = `${process.env.COMPRESS_FOLDER}/${catalogDoc.name}${archiveDoc.path}/`
+        const compressedImagePath = `${compressedPath}${imageDoc.fileName}`
+        if(options.compress) {
+
+            //compress
+            await new Promise(resolve =>{
+                console.log(`Compressing image ${imageDoc.fileName}`)
+                //console.log(inputPath,outputPath,imageName)
+                compress_images(
+                    uncompressedImagePath,
+                    compressedPath,
+                    {
+                        compress_force: false, 
+                        statistic: true, 
+                        autoupdate: true
+                    }, 
+                    false,
+                    {jpg: {engine: 'mozjpeg', command: ['-quality', '60']}},
+                    {png: {engine: 'webp', command: ['-q', '60']}},
+                    {svg: {engine: 'svgo', command: '--multipass'}},
+                    {gif: {engine: 'gifsicle', command: ['--colors', '64', '--use-col=web']}}, 
+                    function(error, completed, statistic){   
+                        console.log(`Completed compression of ${imageDoc.fileName} - ${completed}`)
+                        resolve(imageDoc.fileName)                   
+                    }
+                );
+                // console.log('B')
+            })
+            
+            //console.log(compressedImagePath)
+            res.sendFile(compressedImagePath)
+        }
+        else {
+            console.log('Sending uncompressed')
+            res.sendFile(uncompressedImagePath);
+        }
+        
+    })
+}
 
 export {
     tagImage,

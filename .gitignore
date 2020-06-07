@@ -189,3 +189,4 @@ dist
 config.env
 src/dashboard/_dist
 src/dashboard/_cli/_dist
+src/dashboard/log/compress-images

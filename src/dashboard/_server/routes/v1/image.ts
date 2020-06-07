@@ -23,6 +23,8 @@ import {
 import {
     dummyRes
 } from '../../controllers/v1/dummy'
+
+import compression from 'compression'
 // "/api/v1/images/"
 const router = express.Router();
 
@@ -36,5 +38,9 @@ router
 
 router
     .route('/show/:id')
-    .get(showImage)
+    .get(showImage({}))
+router
+    .route('/showCompressed/:id')
+    .get(showImage({compress:true}))
+
 export default router;
