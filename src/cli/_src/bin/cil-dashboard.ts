@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import program from 'commander'
-
+import colorize from '../utils/colorize'
 //Cant use import because of TS
 //https://stackoverflow.com/a/53836076
 const pkg = require('../../package.json')
