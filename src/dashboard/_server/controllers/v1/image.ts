@@ -10,6 +10,7 @@ import {CatalogModel} from '../../models/Catalog'
 import fs from 'fs'
 import _ from 'lodash'
 import compress_images from 'compress-images'
+import { UserModel } from "../../models/User"
 
 /**
  * @desc        Tags an image
@@ -39,7 +40,9 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
         timeStart
     } = req.body
     
-
+    //first get user
+    const mongoUser = await UserModel.findOne({userId:req.user.id})
+    tags.userId = mongoUser._id
     //just take the stuff we need
     let taggingPayload = {
         _id,
@@ -91,18 +94,18 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
 
     /* Step 4 */
     //Update
-    let upadtedImage = await ImageModel.updateOne(
+    let upadtedImage = await ImageModel.findOneAndUpdate(
         {_id:_id},
         { $push: { tags: taggingPayload },taggable:stillTaggable },
         {
             runValidators:true,
             new:true
         }
-    )
-
+    )   
+    
     /* Step 5*/
     if(stillTaggable == false) {
-        upadtedImage = await ImageModel.updateOne(
+        upadtedImage = await ImageModel.findOneAndUpdate(
             {_id:_id},
             { 
                 finalTag:taggingPayload,
@@ -123,7 +126,8 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
     //@ts-ignore
     res.updatedImage = upadtedImage
     //@ts-ignore
-    req.params.archive = (await ArchiveModel.findOne({_id:upadtedImage.archive})).name
+    const imageArchive = await ArchiveModel.findOne({_id:upadtedImage.archive})
+    req.params.archive = (imageArchive).name
     //Attach the newly tagged image to the res object
     next()
 })
