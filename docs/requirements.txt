@@ -1,7 +1,0 @@
-markdown==3.1.1
-mkdocs==1.0.4
-mkdocs-git-revision-date-plugin==0.2
-mkdocs-macros-plugin==0.2.4
-mkdocs-material==4.5.1
-mkdocs-minify-plugin==0.2.1
-pymdown-extensions==6.2
