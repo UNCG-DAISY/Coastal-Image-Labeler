@@ -16,6 +16,9 @@ nav:
         - Add Checkbox Buttons: code_documentation/extensions/form/checkboxButton.md
     - User Documentation: 
       - Overview: user_documentation/overview.md
+      - Image Tagging Process: user_documentation/tagging_process.md
+      - Examples:
+        - Storm Impact: user_documentation/examples/storm_impact.md
       # - Image: models/image.md
       # - TagData: models/tagData.md
       # - User: models/user.md
