@@ -1,5 +1,5 @@
-site_name: PSI Dashboard
-repo_url: https://github.com/UNCG-DAISY/psi-dashboard
+site_name: CIL Dashboard
+repo_url: https://github.com/UNCG-DAISY/Coastal-Image-Labeler
 
 nav:
     - Home: index.md
@@ -30,18 +30,6 @@ theme:
   font:
     text: 'Ubuntu'
     code: 'Ubuntu Mono'
-  # palette:
-  #   primary: 'light green'
-  #   accent: 'orange'
-
-# extra:
-#   social:
-#     - type: 'github'
-#       link: ''    
-  
-# plugins:
-#     - search
-#     - git-revision-date
 
 markdown_extensions:
   - codehilite:
