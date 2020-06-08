@@ -56,3 +56,8 @@ markdown_extensions:
       use_pygments: True
       #noclasses: True
       pygments_style: monokai
+
+extra_css:
+  - stylesheets/custom.css
+#   - stylesheets/dark_theme.css
+#   - stylesheets/codehilite.css
