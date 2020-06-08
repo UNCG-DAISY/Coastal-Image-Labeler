@@ -39,7 +39,16 @@ BASE_URL= "http://localhost:5000"
 
 After logging into auth0, you can find the values like so
 
+Go to my `Applications` and select the correct one.
+![app6](../img/my_applications.png "Applications6")
+
+The secrect values can be found here.
+![app5](../img/secret_values.png "Applications5")
 
 ![app4](../img/logo2.png "Applications4")
+
+And then set the callback URLS. Here they are localhost because of testing but for production they would be the machines IP.
+![app7](../img/callback_urls.png "Applications7")
+
 <!-- ![secrets](../../images/secrets.png "Secerets")
 ![callbacks](../../images/callbacks.png "Callbacks") -->
