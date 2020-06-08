@@ -39,9 +39,7 @@ BASE_URL= "http://localhost:5000"
 
 After logging into auth0, you can find the values like so
 
-![app](/docs/images/logo.png "Applications")
-![app2](/images/logo.png "Applications2")
-![app3](images/logo.png "Applications3")
-![app4](../images/logo.png "Applications4")
+
+![app4](../img/logo2.png "Applications4")
 <!-- ![secrets](../../images/secrets.png "Secerets")
 ![callbacks](../../images/callbacks.png "Callbacks") -->

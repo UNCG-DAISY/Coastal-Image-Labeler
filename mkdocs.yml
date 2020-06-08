@@ -22,7 +22,6 @@ nav:
 
 theme:
   name: 'material'
-  logo: images/logo.png
   palette:
     scheme: slate
     primary: 'light green'
