@@ -19,19 +19,20 @@ nav:
       - Image Tagging Process: user_documentation/tagging_process.md
       - Examples:
         - Storm Impact: user_documentation/examples/storm_impact.md
-      # - Image: models/image.md
-      # - TagData: models/tagData.md
-      # - User: models/user.md
 
 theme:
   name: 'material'
-  custom_dir: 'theme'
+  logo: images/logo.png
+  palette:
+    scheme: slate
+    primary: 'light green'
+    accent: 'light green'
   font:
     text: 'Ubuntu'
     code: 'Ubuntu Mono'
-  palette:
-    primary: 'light green'
-    accent: 'orange'
+  # palette:
+  #   primary: 'light green'
+  #   accent: 'orange'
 
 # extra:
 #   social:
@@ -55,9 +56,3 @@ markdown_extensions:
       use_pygments: True
       #noclasses: True
       pygments_style: monokai
-      
-
-extra_css:
-  - stylesheets/dark_theme.css
-  - stylesheets/codehilite.css
-  - stylesheets/custom.css
