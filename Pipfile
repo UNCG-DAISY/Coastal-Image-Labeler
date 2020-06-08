@@ -11,3 +11,4 @@ python_version = "3.8"
 [packages]
 mkdocs = "*"
 mkdocs-material = "*"
+pygments = "*"
