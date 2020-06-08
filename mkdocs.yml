@@ -21,6 +21,7 @@ nav:
         - Storm Impact: user_documentation/examples/storm_impact.md
 
 theme:
+  logo: images/logo.svg
   name: 'material'
   palette:
     scheme: slate
@@ -43,20 +44,19 @@ theme:
 #     - git-revision-date
 
 markdown_extensions:
+  - codehilite:
+      linenums: true
+      guess_lang: False
+      use_pygments: True
+      pygments_style: fruity
   - pymdownx.superfences
   - admonition
   - pymdownx.details
   - pymdownx.mark
   - pymdownx.critic
   - pymdownx.tilde
-  - codehilite:
-      linenums: true
-      guess_lang: False
-      use_pygments: True
-      #noclasses: True
-      pygments_style: monokai
+
 
 extra_css:
   - stylesheets/custom.css
-#   - stylesheets/dark_theme.css
-#   - stylesheets/codehilite.css
+
