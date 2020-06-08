@@ -1,0 +1,24 @@
+.md-typeset h2 {
+    color:#8BC34B;
+    /* font-weight:bold; */
+    text-decoration: underline;
+}
+
+h3 {
+    /* color:#5b941f; */
+    text-decoration: underline;
+}
+
+.md-nav--secondary {
+    border-left: 0.4rem solid #7ee90c;
+}
+
+
+.md-typeset code, .md-typeset pre {
+    /* background-color: rgba(143, 143, 143, 0.5); */
+    /* margin: 0 .29412em; */
+    padding: 0.1em 0.4em 0.1em 0.4em;
+    /* color: #37474f;
+    font-size: 85%;
+    direction: ltr; */
+}
