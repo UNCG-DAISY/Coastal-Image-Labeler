@@ -1,3 +1,5 @@
+[import_settings]: /images/applications.png "Import settings"
+
 # Auth0
 
 Auth0, found [here](https://auth0.com/), is the provider I am using for session
@@ -39,6 +41,7 @@ BASE_URL= "http://localhost:5000"
 
 After logging into auth0, you can find the values like so
 
+![Import Settings][import_settings]
 ![app](/images/applications.png "Applications")
-![secrets](/images/secrets.png "Secerets")
-![callbacks](/images/callbacks.png "Callbacks")
+![secrets](./images/secrets.png "Secerets")
+![callbacks](./images/callbacks.png "Callbacks")
