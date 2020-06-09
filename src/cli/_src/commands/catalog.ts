@@ -50,9 +50,12 @@ const catalog = {
         await mongoConnection.connect()
 
         //DEV
+        if(options.dev) {
             await ArchiveModel.deleteMany({})
             await CatalogModel.deleteMany({})
             await ImageModel.deleteMany({})
+        }
+            
 
         const startTime = Date.now()
         //create catalogs
@@ -95,14 +98,25 @@ const catalog = {
         }))
 
         //create archives for each catalog
-        await Promise.all(catalogsMade.map(async (catalogEntry,index)=> {
+        //converted to a for loop so it does each archive one by one
+        for(let i=0;i<catalogsMade.length;i++) {
+            const catalogEntry = catalogsMade[i];
             await archive.createArchive({
                 catalogDoc:catalogEntry,
                 images:true,
                 appendPath:'/jpgs',
                 file:file
             })
-        }))
+            
+        }
+        // await Promise.all(catalogsMade.map(async (catalogEntry,index)=> {
+        //     await archive.createArchive({
+        //         catalogDoc:catalogEntry,
+        //         images:true,
+        //         appendPath:'/jpgs',
+        //         file:file
+        //     })
+        // }))
 
         const endTime = Date.now()
         const elapsed = endTime-startTime
