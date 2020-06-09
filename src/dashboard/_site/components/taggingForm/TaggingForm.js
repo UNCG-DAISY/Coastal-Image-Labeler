@@ -13,7 +13,7 @@ import CardContent from '@material-ui/core/CardContent';
 
 class TaggingForm extends React.Component {
     state ={
-        expanded:false,
+        expanded:true,
         tags:initalTagState
     }
 
