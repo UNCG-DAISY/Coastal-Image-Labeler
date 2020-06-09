@@ -1,14 +1,31 @@
 # Project Structure
 
-The project is broken into 2 parts. Under `src/server/_site` is the "frontend" website. I put "frontend" in quotes as some parts of the code is executed on the server as it is server side rendered. Regardless all of it is geared to the functionality of the webpage. The second part is `src/server/_server` which is all code for the backend such as API calls, database connection, model creation, route handling and many more. Besides these two there is the folder `src/server/_config` which holds the `.env` file for enviroment variables. This file is ignored on github as it contains secrect values, there is a template file called `config.template.env` to show what the expected values are.
+The project is broken into 2 main parts.
+-First is the "frontend" website, under `src/server/_site`. I put "frontend"
+in quotes as some parts of the code are executed on the server
+(as it is server side rendered). Regardless all of it is geared to the
+functionality of the webpage.
+
+-Second, is the backend, under `src/server/_server`. This is for API calls,
+database connection, model creation, route handling, etc..
+
+In addition to these two parts, there is`src/server/_config` which holds the
+`.env` file for environment variables. This is ignored on github as it contains
+secret values — however there is a template file called `config.template.env`
+to illustrate what the expected values woudl look like.
 
 ## Site
 
-Inside the `src/server/_site` folder there are only two noteworthy folders to look at. They are `src/server/_site/components` and `src/server/_site/pages`. 
+Inside the `src/server/_site` folder there are two key folders:
+ `src/server/_site/components` and `src/server/_site/pages`.
 
 ### Pages
 
-`src/server/_site/pages` is as it sounds, it is the pages. For example we have the page `src/server/_site/pages/auth/home` which translates to `http://localhost:5000//auth/home` in the URL. One special case is `src/server/_site/pages/index` which is the home page and is just `http://localhost:5000/` or `http://localhost:5000//index`.
+`src/server/_site/pages` is as it sounds, it is the site pages. For example we
+have the page `src/server/_site/pages/auth/home` which translates to
+`http://localhost:5000//auth/home` in the URL. One special case is
+`src/server/_site/pages/index` which is the home page and is just
+`http://localhost:5000/` or `http://localhost:5000//index`.
 
 !!! note "about `/auth` pages"
     any page inside the folder `src/server/_site/pages/auth` requires the user
