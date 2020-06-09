@@ -1,10 +1,10 @@
-site_name: CIL Dashboard
+site_name: Coastal Image Labeler
 repo_url: https://github.com/UNCG-DAISY/Coastal-Image-Labeler
 
 nav:
     - Home: index.md
     - Code of Conduct: code_of_conduct.md
-    - Code Documentation: 
+    - Code Documentation:
       - Overview: code_documentation/overview.md
       - 1 - Packages: code_documentation/packages.md
       - 2 - Project Structure: code_documentation/project_structure.md
@@ -14,7 +14,7 @@ nav:
       - 6 - Extending:
         - Add Radio Buttons: code_documentation/extensions/form/radiobutton.md
         - Add Checkbox Buttons: code_documentation/extensions/form/checkboxButton.md
-    - User Documentation: 
+    - User Documentation:
       - Overview: user_documentation/overview.md
       - Image Tagging Process: user_documentation/tagging_process.md
       - Examples:
@@ -47,4 +47,3 @@ markdown_extensions:
 
 extra_css:
   - stylesheets/custom.css
-

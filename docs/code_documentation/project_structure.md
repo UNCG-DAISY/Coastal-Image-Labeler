@@ -38,7 +38,7 @@ have the page `src/server/_site/pages/auth/home` which translates to
 
 ## Server
 
-The structure of the server code is a litte bit more complicated then the frontend.
+The structure of the server code is a little bit more complicated then the frontend.
 
 Starting in the root directory, `src/server/_server`, we have the most important file `src/server/_server/server.ts` which is the main server file that runs everything else. It handles the requests from the client for pages, api calls, registers the models, handles database entries and authentication.
 
