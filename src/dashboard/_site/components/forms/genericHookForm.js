@@ -47,18 +47,16 @@ export default function GenericHookForm(props) {
     };
 
     function generateMinMaxText(min,max) {
-        let minText = ""
-        let maxText = ""
-        let seperator = ""
-        if(min) {
-            seperator = " - "
-            minText = `Atleast ${min} `
-        }
-        if(max) {
-            seperator = " - "
-            maxText = `Atmost ${max}`
-        }
-        return `${seperator}${minText}${maxText}`
+        // let minText = ""
+        // let maxText = ""
+        // let seperator = ""
+        // seperator = " - "
+        // minText = `Atleast ${min} `
+        // if(max) {
+        //     seperator = " - "
+        //     maxText = `Atmost ${max}`
+        // }
+        // return `${seperator}${minText}${maxText}`
     }
 
     function generateTextField(textFieldInfo) {
@@ -158,7 +156,7 @@ export default function GenericHookForm(props) {
         return (
             <FormControl fullWidth component="fieldset" margin="normal" key={key}>
                 <FormLabel component="legend" focused={false}>
-                {generateLabel(label,link)} {generateMinMaxText(min,max)}
+                {generateLabel(label,link)} {errorMessage}
                 </FormLabel>
                 <FormGroup row>
                 {
