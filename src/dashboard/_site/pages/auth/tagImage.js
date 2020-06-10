@@ -68,7 +68,10 @@ function TagImage(props) {
     })).json();
 
     //console.log(responseData.status)
-    //alert(responseData?.message ? responseData?.message : 'No message')
+    if(responseData.success == false) {
+      alert(responseData?.message )
+    }
+    
 
     // console.log(responseData)
     Router.reload()
