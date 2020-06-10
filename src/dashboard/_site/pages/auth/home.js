@@ -14,6 +14,7 @@ import {
 import ResumeTaggingTable from '../../components/ResumeTaggingTable'
 import endpoints from '../../components/endpoints'
 import {getMongoDBUser} from '../../components/utils/getMongoUser'
+import theme from '../../components/theme'
 // import TestStormForm from '../../components/forms/testStormForm'
 // import TestForm from '../../components/forms/testForm'
 // import TestForm2 from '../../components/forms/testForm2'
@@ -37,13 +38,23 @@ function Home(props) {
       <Container maxWidth="md">
         <Box my={4}>
           <Typography variant="h4" component="h1" gutterBottom color="secondary">
-            Welcome!
+            Hello There!
           </Typography>
 
           <Typography variant="body1" component="h1" gutterBottom>
             <Paper elevation={3} variant="outlined" style={{padding:10}}>
-              Welcome {props.user.displayName}! You can start tagging by clicking on <u><b>Image Tag</b></u> on the left, or resume an archive you have
-              begun by pressing the buttons/rows below
+              {/* Welcome {props.user.displayName}! You can start tagging by clicking on <u><b>Image Tag</b></u> on the left, or resume an archive you have
+              begun by pressing the buttons/rows below */}
+
+              Welcome {props.user.displayName}! If you have permission to tag images, 
+              you can start tagging by clicking on <Linky href="/auth/pickCatalog" color={theme.palette.secondary.main}>Image Tag</Linky> on the left, or resume an 
+              archive you have begun by pressing the buttons below.
+              To request permission to tag images, 
+              please contact 
+              Evan Goldstein at <Linky color={theme.palette.secondary.main} href="mailto:ebgoldst@uncg.edu">
+                ebgoldst@uncg.edu
+              </Linky> You can read about 
+              the project <Linky color={theme.palette.secondary.main} href="https://github.com/UNCG-DAISY/Coastal-Image-Labeler">here</Linky>.
             </Paper>
           </Typography> 
 
@@ -75,6 +86,14 @@ function Home(props) {
     </Layout>
     
   );
+}
+
+function Linky(props) {
+  return (
+    <a style={{color:props.color}} href={props.href}>
+      {props.children}
+    </a>
+  )
 }
 
 const useStyles = makeStyles((theme) => ({
