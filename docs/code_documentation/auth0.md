@@ -44,11 +44,11 @@ After logging into Auth0, you can find values:
 Go to my `Applications` and select the correct one.
 ![app6](../img/my_applications.png "Applications6")
 
-The secrect values can be found here.
+The secret values can be found here.
 ![app5](../img/secret_values.png "Applications5")
 
 And then set the callback URLS. Here they are localhost because of testing but for production they would be the machines IP.
 ![app7](../img/callback_urls.png "Applications7")
 
-<!-- ![secrets](../../images/secrets.png "Secerets")
+<!-- ![secrets](../../images/secrets.png "Secrets")
 ![callbacks](../../images/callbacks.png "Callbacks") -->

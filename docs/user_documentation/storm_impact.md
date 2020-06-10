@@ -1,6 +1,9 @@
-# Storm Imapct Question Set
+# Storm Impact Question Set
 
-The Storm Impact question set contains 6 questions, 3 radio questions, 2 checkbox questions and a textbox for additional comments.
+The Storm Impact question set contains 6 questions in total:
++ 3 radio questions
++ 2 check box questions
++ 1 text box for additional comments.
 
 ## Radio groups
 
@@ -28,7 +31,7 @@ The Storm Impact question set contains 6 questions, 3 radio questions, 2 checkbo
     - Overwash - Explain here  
     - Inundation - Explain here
 
-???+ Success "Terrian Type(s) - ==Select 1 or more=="
+???+ Success "Terrain Type(s) - ==Select 1 or more=="
     **Options**  
     - Sandy Coastline - Explain here  
     - Marsh - Explain here
@@ -38,4 +41,4 @@ The Storm Impact question set contains 6 questions, 3 radio questions, 2 checkbo
 ## Textbox
 
 ???+ Warning "Additional Comments - **==NOT==** required"
-    Textbox to explain anything else about the image.
+    A Textbox to explain anything of note in the image.

@@ -9,10 +9,10 @@ functionality of the webpage.
 -Second, is the backend, under `src/server/_server`. This is for API calls,
 database connection, model creation, route handling, etc..
 
-In addition to these two parts, there is`src/server/_config` which holds the
+In addition to these two parts, there is `src/server/_config` which holds the
 `.env` file for environment variables. This is ignored on github as it contains
 secret values — however there is a template file called `config.template.env`
-to illustrate what the expected values woudl look like.
+to illustrate what the expected values would look like.
 
 ## Site
 
@@ -68,7 +68,7 @@ General purpose helper functions
 
 ### controllers
 
-Functions that perform certains tasks such as finding a user, or entering into a database.
+Functions that perform certain tasks such as finding a user, or entering into a database.
 
 ### routes
 
