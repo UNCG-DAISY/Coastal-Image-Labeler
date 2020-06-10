@@ -46,7 +46,7 @@ function MyAppBar(props) {
                 <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-                {props?.pageTitle || 'CIL Dashboard'}
+                {props?.pageTitle || 'Coastal Image Labeler Dashboard'}
             </Typography>
             </Toolbar>
         </AppBar>
