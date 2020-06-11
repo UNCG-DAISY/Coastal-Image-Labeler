@@ -11,6 +11,7 @@
     "startW": "SET NODE_ENV=production&& node ./_dist/server.js",
     "bas": "npm run build && npm run start",
     "basW": "npm run build && npm run startW",
+    "baf":"npm run build && NODE_ENV=production forever start ./_dist/server.js",
     "nodemonTSC": "nodemon --exec ts-node-script ./_server/server.ts",
     "dev": "npm run nodemonTSC",
     "test": "tsc --help"
