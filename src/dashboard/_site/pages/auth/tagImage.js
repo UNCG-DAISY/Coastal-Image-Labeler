@@ -34,7 +34,7 @@ function TagImage(props) {
   const taggingForm = (
     <React.Fragment>
       <TaggingForm
-        imageUrl = {{full:`${apiCall(imgUrl)}`,compressed:`${apiCall(imgUrlCompressed)}`}}
+        imageUrl = {{full:`${imgUrl}`,compressed:`${imgUrlCompressed}`}}
         submitTags = {submitTags}
         tagAsWater = {tagAsWater}
         skipImage = {skipImage}

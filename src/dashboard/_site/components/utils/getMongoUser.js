@@ -4,12 +4,14 @@ import {
     apiCall
 } from '../constants'
 
-const getMongoDBUser = async (id) => {
+const getMongoDBUser = async (id,ctx) => {
     //console.log('--------HOME',req?.user)
+    //console.log(apiCall(endpoints.getUser))
     const getUser = await (await fetch(apiCall(endpoints.getUser), { //`/api/v1/archives/FindArchive`
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "cookie": ctx?.req ? ctx.req.headers.cookie : null
         },
         body: JSON.stringify({
           userId:id

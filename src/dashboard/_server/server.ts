@@ -64,6 +64,9 @@ const nextApp = next({
 })//relative to package.json
 const handle = nextApp.getRequestHandler()
 
+// https://github.com/node-fetch/node-fetch/issues/19#issuecomment-369653134
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 const https_options = {
     key: fs.readFileSync('./_config/key.pem'),
     cert: fs.readFileSync('./_config/cert.pem')
@@ -172,6 +175,8 @@ nextApp.prepare()
         .listen(PORT, function () {
         console.log(`Example app listening on port ${PORT}!`)
     })
+
+    //app.listen(PORT, () => console.log(`Example app listening at http://localhost:${PORT}`))
 
     // const server = app.listen(PORT,() => {
         

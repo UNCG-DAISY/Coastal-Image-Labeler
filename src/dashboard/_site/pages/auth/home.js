@@ -15,6 +15,7 @@ import ResumeTaggingTable from '../../components/ResumeTaggingTable'
 import endpoints from '../../components/endpoints'
 import {getMongoDBUser} from '../../components/utils/getMongoUser'
 import theme from '../../components/theme'
+import Button from '@material-ui/core/Button';
 // import TestStormForm from '../../components/forms/testStormForm'
 // import TestForm from '../../components/forms/testForm'
 // import TestForm2 from '../../components/forms/testForm2'
@@ -79,6 +80,11 @@ function Home(props) {
               </Typography>
             </React.Fragment>
           }
+
+          {/* <Button onClick={async ()=>{
+            const x = await getMongoDBUser('google-oauth2|100613204270669384478')
+            console.log(x)
+          }}>aaa</Button> */}
           {/* <TestStormForm functions={{skipImage:()=>{},tagAsWater:()=>{},submitTags:()=>{}}}/>    */}
           {/* <MuiTestForm functions={{skipImage:()=>{},tagAsWater:()=>{},submitTags:()=>{}}}/> */}
         </Box>
@@ -124,8 +130,8 @@ Home.getInitialProps = async ctx => {
   hasUser(req)
 
   //get MongoDB suer
-  const mongoUser = await getMongoDBUser(req.user.id)
-
+  const mongoUser = await getMongoDBUser(req.user.id,ctx)
+  //console.log('mongoUser',mongoUser,req.user.id)
   //if not mongoUser was found, error out
   if(mongoUser.error) {
     return {
@@ -134,7 +140,7 @@ Home.getInitialProps = async ctx => {
     }
   }
   const assignedImages = mongoUser?.data?.assignedImages
-
+  //console.log(assignedImages)
   //Get resume table data
   if(assignedImages) {
     const getUserResumeInfo = await (await fetch(apiCall(endpoints.getUserResumeInfo), { //`/api/v1/archives/FindArchive`
@@ -151,7 +157,7 @@ Home.getInitialProps = async ctx => {
     // console.log(resumeObj)
   }
 
-  
+  //console.log(resumeObj)
   return {
     cookie:ctx.req.headers.cookie,
     resumeObj:resumeObj,
