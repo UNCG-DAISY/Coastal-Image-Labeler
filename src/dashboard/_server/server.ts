@@ -169,8 +169,8 @@ nextApp.prepare()
     const PORT = (process.env.PORT as unknown as number) ?? 5000;
 
     https.createServer(https_options, app)
-    .listen(5000, function () {
-    console.log('Example app listening on port 3000! Go to https://localhost:5000/')
+        .listen(PORT, function () {
+        console.log(`Example app listening on port ${PORT}!`)
     })
 
     // const server = app.listen(PORT,() => {
