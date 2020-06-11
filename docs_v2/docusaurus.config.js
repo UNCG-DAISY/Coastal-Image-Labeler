@@ -56,12 +56,8 @@ module.exports = {
               href: 'docs/contactUsDoc',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
               label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              href: 'https://twitter.com/ebgoldstein',
             },
           ],
         },
