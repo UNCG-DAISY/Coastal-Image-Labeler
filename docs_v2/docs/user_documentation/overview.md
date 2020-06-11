@@ -1,4 +1,8 @@
-# User Documentation
+---
+id: userDocOverview
+title: Overview
+sidebar_label: Overview
+---
 
 This section is the documentation for a user interested in labeling.
 

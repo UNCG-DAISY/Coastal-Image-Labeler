@@ -1,4 +1,8 @@
-# Packages
+---
+id: packages
+title: Packages
+sidebar_label: Packages
+---
 
 This is an explanation for each package used and `npm` scripts that are in `package.json`.
 
