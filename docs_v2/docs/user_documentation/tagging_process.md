@@ -1,4 +1,9 @@
-# Image Tagging Process
+---
+id: imageTaggingProcess
+title: Image Tagging Process
+sidebar_label: Image Tagging Process
+---
+
 
 ## The site
 ## Sign in with Auth0

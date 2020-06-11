@@ -1,4 +1,8 @@
-# Auth0
+---
+id: auth0
+title: Auth0
+sidebar_label: Auth0
+---
 
 Auth0, found [here](https://auth0.com/), is the provider for session
 management. Auth0 permits users to signin using Gmail, GitHub,
