@@ -1,5 +1,8 @@
-# Coastal Image Labeler
-
+---
+id: indexDoc
+title: Coastal Image Labeler
+sidebar_label: Introduction
+---
 ## Goals
 
   + The Coastal Image Labeler (CILabel) is designed to collaboratively label
