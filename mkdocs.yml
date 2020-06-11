@@ -33,11 +33,10 @@ theme:
 
 markdown_extensions:
   - codehilite:
-      linenums: true
-      guess_lang: False
-      use_pygments: True
-      pygments_style: fruity
-  - pymdownx.superfences
+      linenums: false
+      use_pygments: true
+      noclasses: true
+      pygments_style: monokai
   - admonition
   - pymdownx.details
   - pymdownx.mark
@@ -45,5 +44,5 @@ markdown_extensions:
   - pymdownx.tilde
 
 
-extra_css:
-  - stylesheets/custom.css
+# extra_css:
+#   - stylesheets/custom.css
