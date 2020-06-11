@@ -6,6 +6,7 @@ module.exports = {
       items: [
         'indexDoc',
         'code_of_conduct',
+        'contactUsDoc',
         // 'code_documentation/codeDocOverview',
         // 'user_documentation/userDocOverview'
       ],

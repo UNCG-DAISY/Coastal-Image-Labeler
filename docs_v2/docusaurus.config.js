@@ -53,7 +53,7 @@ module.exports = {
           items: [
             {
               label: 'Contact Us',
-              href: 'docs/contactUsDoc',
+              href: '/contactUsDoc',
             },
             {
               label: 'Discord',
