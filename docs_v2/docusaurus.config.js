@@ -52,8 +52,8 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'Contact Us',
+              href: 'docs/contactUsDoc',
             },
             {
               label: 'Discord',
@@ -74,12 +74,12 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/UNCG-DAISY/Coastal-Image-Labeler',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Coastal-Image-Labeler, Inc. Built with Docusaurus.`,
     },
   },
   presets: [

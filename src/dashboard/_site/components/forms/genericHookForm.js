@@ -231,11 +231,11 @@ export default function GenericHookForm(props) {
     return (
         <React.Fragment>
             <Typography color="secondary">
-                {questionSetData.name}
+                {questionSetData.name}:{questionSetData.description}
             </Typography>
-            <Typography>
+            {/* <Typography>
                 {questionSetData.description}
-            </Typography>
+            </Typography> */}
             <Divider/>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>  
