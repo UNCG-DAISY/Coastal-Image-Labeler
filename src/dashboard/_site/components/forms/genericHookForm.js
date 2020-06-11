@@ -18,7 +18,17 @@ import {
 } from "@material-ui/core";
 import HelpTwoToneIcon from '@material-ui/icons/HelpTwoTone';
 import theme from '../theme';
-
+import {
+    WaterButton,
+    SkipButton,
+    SubmitButton
+} from '../buttons/colorizedButtons'
+import {
+    YesNoRadio
+} from '../buttons/radioButtons/radioButtons'
+import {
+    YesNoCheckbox
+}  from '../buttons/checkboxButtons/checkboxButtons'
 
 export default function GenericHookForm(props) {
 
@@ -130,7 +140,7 @@ export default function GenericHookForm(props) {
                                 {buttons.map((radioButton) => (
                                     <FormControlLabel
                                         value={radioButton.value}
-                                        control={<Radio color="primary"/>}
+                                        control={<YesNoRadio color="primary"/>}
                                         label={radioButton.name}
                                         key={radioButton.value}
                                         disabled={globalDisable}
@@ -165,7 +175,7 @@ export default function GenericHookForm(props) {
                             key={checkboxButton.value}
                             label={`${checkboxButton.name}`}
                             control={
-                                <Checkbox  
+                                <YesNoCheckbox  
                                     disabled={globalDisable}
                                     color="primary"
                                     name={key} 
@@ -240,18 +250,18 @@ export default function GenericHookForm(props) {
                         }} 
                     >
                         <div >
-                            <Button variant="outlined" onClick = {()=>{setGlobalDisable(true);skipImage()}} disabled={globalDisable}>
+                            <SkipButton variant="outlined" onClick = {()=>{setGlobalDisable(true);skipImage()}} disabled={globalDisable}>
                                 Skip
-                            </Button>
+                            </SkipButton>
 
-                            <Button variant="outlined" onClick = {()=>{setGlobalDisable(true);tagAsWater()}} style={{marginLeft:theme.spacing(2)}} disabled={globalDisable}>
+                            <WaterButton variant="outlined" onClick = {()=>{setGlobalDisable(true);tagAsWater()}} style={{marginLeft:theme.spacing(2)}} disabled={globalDisable}>
                             Tag as all water and skip to next image
-                            </Button>
+                            </WaterButton>
                         </div>
                         <div >
-                            <Button type="submit" variant="outlined" color="default" disabled={globalDisable}>
+                            <SubmitButton type="submit" variant="outlined" color="default" disabled={globalDisable}>
                                 Submit
-                            </Button>
+                            </SubmitButton>
                         </div>
                     </div> 
                 </FormControl>

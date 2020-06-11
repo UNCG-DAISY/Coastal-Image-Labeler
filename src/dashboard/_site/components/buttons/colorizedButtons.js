@@ -8,8 +8,10 @@ const ColorizeButton = (color,theme) => {
         root: {
             color: color.text ?? theme.palette.getContrastText(color.color),
             backgroundColor: color.background,
+            borderColor:color.borderColor,
             '&:hover': {
                 backgroundColor: color.hover,
+                color: color.hoverText
             },
             '&:disabled': {
                 backgroundColor: 'grey',
@@ -22,6 +24,7 @@ const ColorizeButton = (color,theme) => {
 const SkipButton = withStyles((theme) => (
     ColorizeButton({
         text:theme.palette.customColors.red,
+        borderColor:theme.palette.customColors.red
         //background:theme.palette.customColors.red,
         //hover:colors.red[800]
     },theme)
@@ -30,6 +33,7 @@ const SkipButton = withStyles((theme) => (
 const WaterButton = withStyles((theme) => (
     ColorizeButton({
         text:theme.palette.customColors.cyan,
+        borderColor:theme.palette.customColors.cyan
         //background:theme.palette.customColors.cyan,
         //hover:colors.cyan[800]
     },theme)
@@ -37,12 +41,16 @@ const WaterButton = withStyles((theme) => (
 
 const SubmitButton = withStyles((theme) => (
     ColorizeButton({
-        color:'#ffffff',
-        background:theme.palette.primary.main,
-        hover:theme.palette.primary.light
+        text:theme.palette.customColors.green,
+        borderColor:theme.palette.customColors.green,
+        //background:theme.palette.primary.main,
+        hover:theme.palette.customColors.green,
+        hoverText:'#000000'
     },theme)
 ))(Button);
 
 export {
-   
+    SkipButton,
+    WaterButton,
+    SubmitButton
 }
