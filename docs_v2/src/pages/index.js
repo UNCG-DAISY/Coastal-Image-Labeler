@@ -22,7 +22,7 @@ const features = [
   },
   {
     title: <>Tag Collaboratively </>,
-    imageUrl: 'img/undraw_collaborators_prrw.svg',
+    imageUrl: 'img/undraw_files1_9ool.svg',
     description: (
       <>
         We wanted a tool to easily accommodate multiple users labeling a 
@@ -32,7 +32,7 @@ const features = [
   },
   {
     title: <>I am not sure what to put here?</>,
-    imageUrl: 'img/undraw_questions_75e0.svg',
+    //imageUrl: 'img/undraw_questions_75e0.svg',
     description: (
       <>
         ?????
