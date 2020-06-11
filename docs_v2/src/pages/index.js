@@ -9,31 +9,33 @@ import styles from './styles.module.css';
 const features = [
   {
     title: <>Easy to Use</>,
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    imageUrl: 'img/undraw_Artificial_intelligence_oyxx.svg',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Labeled images are important for supervised machine learning research. 
+        There are many well known labeled image databases, 
+        but these existing databases tend to focus on general features . 
+        Our goal with this project is to develop a discipline-specific 
+        database of labeled images that is relevant for coastal scientists.
       </>
     ),
   },
   {
-    title: <>Focus on What Matters</>,
-    imageUrl: 'img/undraw_docusaurus_tree.svg',
+    title: <>Tag Collaboratively </>,
+    imageUrl: 'img/undraw_collaborators_prrw.svg',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        We wanted a tool to easily accommodate multiple users labeling a 
+        single images to ensure correct labeling via consensus.
       </>
     ),
   },
   {
-    title: <>Powered by React</>,
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    title: <>I am not sure what to put here?</>,
+    imageUrl: 'img/undraw_questions_75e0.svg',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        ?????
       </>
     ),
   },
@@ -72,7 +74,7 @@ function Home() {
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/')}>
-              Get Started
+              The Docs
             </Link>
           </div>
         </div>
