@@ -35,8 +35,9 @@ import passport from "passport";
 import Auth0Strategy from "passport-auth0";
 import uid from 'uid-safe';
 import {authRoutes} from "./utils/v1/auth-routes"//Handles login and logout
-import {getManagementTokens} from './utils/v1/auth0_tokens'//Gets the mangagement token form Auth0 so we can access information
-// import * as types from './index'
+
+import fs from 'fs';
+import https from 'https'
 
 import bodyParser from 'body-parser'
 import cors from 'cors'
@@ -63,17 +64,14 @@ const nextApp = next({
 })//relative to package.json
 const handle = nextApp.getRequestHandler()
 
+const https_options = {
+    key: fs.readFileSync('./_config/key.pem'),
+    cert: fs.readFileSync('./_config/cert.pem')
+}
+
 nextApp.prepare()
 .then(async () => {
-    
-    //Get the token from Auth0 and allow it to be globally used.
-    //Note: im note sure if this is the best way.
-    //https://manage.auth0.com/dashboard/us/XXX/apis/management/authorized-clients
-    // global.MANGAGEMENT_TOKEN = await getManagementTokens()
-    // if(global.MANGAGEMENT_TOKEN) {
-    //     //console.log("Management token recieved".magenta)
-    //     colorize.success("Management token recieved")
-    // }
+
 
     //Connect to DB via Mongoose
     connectDB()
@@ -124,15 +122,6 @@ nextApp.prepare()
         if (!req.isAuthenticated()) return res.redirect("/login");
         next();
     };
-
-    // app.use(function(req, res, next) {
-    //     res.header("Access-Control-Allow-Origin", "*");
-    //     res.header("Access-Control-Allow-Credentials","true")
-    //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    //     //res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    //     //res.header("Access-Control-Allow-Headers", "*");
-    //     next();
-    // });
  
     // Body parser so that json can be recieved on Api calls
     app.use(express.json())
@@ -178,13 +167,18 @@ nextApp.prepare()
 
     //Get the port and have the site on that port
     const PORT = (process.env.PORT as unknown as number) ?? 5000;
-    const server = app.listen(PORT,() => {
-        //log.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
-        //log.error('TEST')
-        //@ts-ignore
-        colorize.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
-        //console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.green.bold.underline)
+
+    https.createServer(https_options, app)
+    .listen(5000, function () {
+    console.log('Example app listening on port 3000! Go to https://localhost:5000/')
     })
+
+    // const server = app.listen(PORT,() => {
+        
+    //     //@ts-ignore
+    //     colorize.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+    //     //console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.green.bold.underline)
+    // })
 
     //Handle unhandled promise rejections
     process.on('unhandledRejection', (err:any,promise: Promise<any>) => {
@@ -193,9 +187,9 @@ nextApp.prepare()
         colorize.error(`Error: ${err?.message ?? 'undefined error'}`)
         
         //Exit server on fail
-        server.close(() => {
-            process.exit(1)
-        })
+        // server.close(() => {
+        //     process.exit(1)
+        // })
     })
   
 })
