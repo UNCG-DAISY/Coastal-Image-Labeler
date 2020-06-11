@@ -1,9 +1,9 @@
 module.exports = {
-  title: 'My Site',
-  tagline: 'The tagline of my site',
+  title: 'Coastal-Image-Labeler Dashboard',
+  tagline: 'A labeling tool for Coastal Images',
 
   url: 'https://uncg-daisy.github.io/Coastal-Image-Labeler/',
-  baseUrl: '/',
+  baseUrl: '/Coastal-Image-Labeler/',
   projectName: 'Coastal-Image-Labeler', // Usually your repo name.
   organizationName: 'UNCG-DAISY', // Usually your GitHub org/user name.
   
@@ -12,7 +12,7 @@ module.exports = {
  
   themeConfig: {
     navbar: {
-      title: 'My Site',
+      title: 'Coastal-Image-Labeler Dashboard',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
@@ -26,7 +26,7 @@ module.exports = {
         },
         {to: 'blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/UNCG-DAISY/Coastal-Image-Labeler',
           label: 'GitHub',
           position: 'right',
         },
@@ -39,12 +39,12 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Style Guide',
+              label: 'Documentation',
               to: 'docs/',
             },
             {
-              label: 'Second Doc',
-              to: 'docs/doc2/',
+              label: 'Code of Conduct',
+              to: 'docs/code_of_conduct',
             },
           ],
         },
@@ -88,7 +88,7 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: 'doc1',
+          homePageId: 'indexDoc',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
