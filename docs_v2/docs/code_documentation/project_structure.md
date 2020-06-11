@@ -1,4 +1,8 @@
-# Project Structure
+---
+id: project_structure
+title: Project Structure
+sidebar_label: Project Structure
+---
 
 The project is broken into 2 main parts.
 -First is the "frontend" website, under `src/server/_site`. I put "frontend"

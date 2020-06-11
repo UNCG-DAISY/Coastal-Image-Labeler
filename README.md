@@ -1,18 +1,16 @@
-# Post-Storm Imagery Tagging Dashboard
+# Coastal Image Labeler
 
-[![ReadTheDocs](https://readthedocs.org/projects/psi-dashboard/badge/?version=latest)](
-https://psi-dashboard.readthedocs.io/en/latest/)
-[![Last Commit](https://img.shields.io/github/last-commit/UNCG-DAISY/psi-dashboard)](
-https://github.com/UNCG-DAISY/psi-dashboard/commits/master)
+[![ReadTheDocs](https://readthedocs.org/projects/coastal-image-labeler/badge/?version=latest)](
+https://coastal-image-labeler.readthedocs.io/en/latest/)
+[![Last Commit](https://img.shields.io/github/last-commit/UNCG-DAISY/Coastal-Image-Labeler)](
+https://github.com/UNCG-DAISY/Coastal-Image-Labeler/commits/master)
 
-Dashboard for tagging NOAA post-storm emergency response imagery.
+A labeling tool for Coastal Images.
 
 [![Documentation](https://img.shields.io/badge/Documentation-Click%20Me-brightgreen)](
-https://psi-dashboard.readthedocs.io/en/latest/)
-
-## Contributing / Developing
+https://coastal-image-labeler.readthedocs.io/en/latest/)
 
 ### Code of Conduct
 
 We hope to foster an inclusive and respectful environment surrounding the contribution and discussion of our project.
-Make sure you understand our [**Code of Conduct**](https://psi-dashboard.readthedocs.io/en/latest/code_of_conduct/).
+Make sure you understand our [**Code of Conduct**](https://Coastal-Image-Labeler.readthedocs.io/en/latest/code_of_conduct/).
