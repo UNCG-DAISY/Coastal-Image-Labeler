@@ -94,3 +94,11 @@ npm ERR! This is probably not a problem with npm. There is likely additional log
 
 npm ERR! A complete log of this run can be found in:
 npm ERR!     /home/shahnafis/.npm/_logs/2020-06-04T18_05_53_229Z-debug.log
+
+> psic_node_server@1.0.0 start /home/shahnafis/GitHub/Coastal-Image-Labeler/src/dashboard
+> NODE_ENV=production node ./_dist/server.js
+
+Warning: Detected next.config.js, no exported configuration found. https://err.sh/vercel/next.js/empty-configuration
+[36mUsing production database[39m
+[36mServer running in production mode on port 5000[39m
+[32mMongoDB connected: [4mcoastal-shard-00-00-u1gox.azure.mongodb.net[24m[39m
