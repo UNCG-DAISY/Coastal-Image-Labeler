@@ -38,9 +38,9 @@ router
 
 router
     .route('/show/:id')
-    .get(showImage({}))
+    .get(ensureAuthenticated,showImage({}))
 router
     .route('/showCompressed/:id')
-    .get(showImage({compress:true}))
+    .get(ensureAuthenticated,showImage({compress:true}))
 
 export default router;

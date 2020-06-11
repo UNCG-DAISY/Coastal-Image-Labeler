@@ -28,12 +28,12 @@ const router = express.Router();
 //Get a user by post data sent
 router
     .route('/findUser')
-    .post(findUser)
+    .post(ensureAuthenticated,findUser)
 
 //This is at _app.js
 router
     .route('/createUser')
-    .post(createNewUser)
+    .post(ensureAuthenticated,createNewUser)
 
 router
     .route('/allowedPages/:id')

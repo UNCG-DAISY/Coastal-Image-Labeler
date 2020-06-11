@@ -29,12 +29,12 @@ const router = express.Router();
 //Get all catalogs
 router
     .route('/')
-    .get(advancedResults(CatalogModel,'archives'),getAllCatalogs)
+    .get(ensureAuthenticated,advancedResults(CatalogModel,'archives'),getAllCatalogs)
 
 //Get all catalogs that a user can tag
 router
     .route('/user/:userId')
-    .get(advancedResults(CatalogModel,'archives'),getCatalogsOfUser)
+    .get(ensureAuthenticated,advancedResults(CatalogModel,'archives'),getCatalogsOfUser)
 
 router
     .route('/getUserResumeInfo')
