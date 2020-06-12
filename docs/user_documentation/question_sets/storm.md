@@ -9,36 +9,36 @@ The Storm Impact question set contains 6 questions in total:
 
 ???+ Success "Development Type - ==Required=="
     **Options**  
-    - Developed - Explain here  
-    - Undeveloped - Explain here
+    - Developed - I see human development in the image? (roads, houses, buildings, etc.)  
+    - Undeveloped - No development is in the image
 
 ???+ Success "Washover Type - ==Required=="
     **Options**  
-    - Visible washover - Explain here  
-    - No visible washover - Explain here
+    - Visible washover - I see a washover deposit in the image
+    - No visible washover - No washover deposit is visible in the image
 
 ???+ Success "Damage Type - ==Required=="
     **Options**  
-    - Visible damage to infrastructure - Explain here  
-    - No visible damage to infrastructure - Explain here
+    - Visible damage to infrastructure - There is damage to infrastructure (roads, houses, buildings, etc.) in the image.
+    - No visible damage to infrastructure - No damage can be identified
 
 ## Checkbox groups
 
 ???+ Success "Impact Type(s) - ==Select 0 or more=="
     **Options**  
-    - Swash - Explain here  
-    - Collision - Explain here
-    - Overwash - Explain here  
-    - Inundation - Explain here
+    - Swash - It looks as though waves stayed below the dune toe.
+    - Collision - It looks as though waves impact the dunes.
+    - Overwash - There are breaches and washover deposits.   
+    - Inundation - It looks as thought there was significant water flowing over the entire area.
 
 ???+ Success "Terrain Type(s) - ==Select 1 or more=="
     **Options**  
-    - Sandy Coastline - Explain here  
-    - Marsh - Explain here
-    - Inland - Explain here  
-    - River - Explain here
+    - Sandy Coastline - I see sandy beaches
+    - Marsh - I see marsh
+    - Inland - This is inland, not an island or coastline or marsh
+    - River - I see a river
 
 ## Textbox
 
 ???+ Warning "Additional Comments - **==NOT==** required"
-    A Textbox to explain anything of note in the image.
+    If you want to add a note, or point out something interesting, type it here.  

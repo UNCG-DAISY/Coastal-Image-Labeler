@@ -8,11 +8,12 @@ The Dune Collision  question set contains 2 questions in total:
 
 ???+ Success "Collision - ==Required=="
     **Options**  
-    - No Collision - Explain here  
-    - Close to Collision - Explain here  
-    - Collision - Explain here
+    - No Collision - Waves are not near the dune toe
+    - Close to Collision - Collision seems likely to occur: e.g.,  water is near
+    the dune toe, it looks as though there was collision in a previous frame
+    - Collision - waves are hitting the dune in the frame
 
 ## Textbox
 
 ???+ Warning "Additional Comments - **==NOT==** required"
-    A Text box to explain anything of note.
+    If you want to add a note, or point out something interesting, type it here.
