@@ -17,11 +17,12 @@ nav:
     - User Documentation:
       - Overview: user_documentation/overview.md
       - Image Tagging Process: user_documentation/tagging_process.md
-      - Examples:
-        - Storm Impact: user_documentation/examples/storm_impact.md
+      - Question Sets:
+        - Storm: user_documentation/question_sets/storm.md
+        - Dune Collision: user_documentation/question_sets/collision.md
 
 theme:
-  logo: images/logo.svg
+  logo: img/logo.svg
   name: 'material'
   palette:
     scheme: slate
