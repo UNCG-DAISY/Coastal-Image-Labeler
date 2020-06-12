@@ -1,75 +1,55 @@
 # Project Structure
 
-The project is broken into 2 main parts.
--First is the "frontend" website, under `src/server/_site`. I put "frontend"
-in quotes as some parts of the code are executed on the server
-(as it is server side rendered). Regardless all of it is geared to the
-functionality of the webpage.
+There are 2 major groups of the project.  
 
--Second, is the backend, under `src/server/_server`. This is for API calls,
-database connection, model creation, route handling, etc..
 
-In addition to these two parts, there is `src/server/_config` which holds the
-`.env` file for environment variables. This is ignored on github as it contains
-secret values — however there is a template file called `config.template.env`
-to illustrate what the expected values would look like.
+- The Dashboard, under `src/dashboard/`, which is the front and backend for the Dashboard site. 
 
-## Site
 
-Inside the `src/server/_site` folder there are two key folders:
- `src/server/_site/components` and `src/server/_site/pages`.
+- The Command Line Interface, under `src/cli/`, which is used to insert the
+  initial data into the database.
 
-### Pages
+## Dashboard
 
-`src/server/_site/pages` is as it sounds, it is the site pages. For example we
-have the page `src/server/_site/pages/auth/home` which translates to
-`http://localhost:5000//auth/home` in the URL. One special case is
-`src/server/_site/pages/index` which is the home page and is just
-`http://localhost:5000/` or `http://localhost:5000//index`.
+The Dashboard has 4 important folders.  
 
-!!! note "about `/auth` pages"
-    any page inside the folder `src/server/_site/pages/auth` requires the user
-    to be logged in, this is ensured by the server code under
-    `src/server/_server` and will redirect them to the home page if they are not.
+??? Success "_server"
+    - Which is the code for the node.js server.
+    - Inside the server folder are the following.
+        - `controllers` - Which are the actualy logic for an API endpoint
+        - `middleware` - General purpose functions that are ran when a API endpoint
+        is hit, for example making sure that a user is logged in, or making sure a user is a tagger.
+        - `models` - Which are the Objects to set up some structure in the Database and make sure entries have some uniformity. ==Note:== These files have to be the same as the ones in `src/cli/_src/models` due the project structure not accounting for a cli when it was originally made.
+        - `routes` - Assign endpoints to a `controller` function. For example `api/v1/test` would be mapped to the `test` function in the `controllers` folder.
+        - `utils` - Utility functions.
 
-### Components
+??? Success "_site"
+    - Which is the code for the frontend site.
+    - Inside the site folder are the following.
+        - `pages` - Which are the pages of the website. ==Note:== Any page inside `pages/auth/` will require the user to be logged in, this is ensured by the server.
+        - `components`  - Reuseable components for the website such as the tagging form, or various buttons.
 
-`src/server/_site/components` is components for the pages or any utility functions. They are made in attempt to make the code more cleaner.
+??? Success "_dist"
+    - Which contains the compiled code of `_server` since its written in TypeScript. 
+    - Maintains the exact same structure as `src/dashboard/_server` but with all files as `.js` instead of `.ts`.
 
-## Server
+??? Success "_config"
+    - Which contains the enviroment variables. ==Note:== The contents of
+    this folder are added to the `.gitignore` since they contain secret information.
+    There are however `.template` files to explain what variables need to be
+    defined.
 
-The structure of the server code is a little bit more complicated then the frontend.
+## CLI
 
-Starting in the root directory, `src/server/_server`, we have the most important file `src/server/_server/server.ts` which is the main server file that runs everything else. It handles the requests from the client for pages, api calls, registers the models, handles database entries and authentication.
+The CLI has 2 folders.
 
-Next we have `src/server/_server/db.ts` which handles connecting to the database. You dont need to edit this file directly if you want to change which database to connect to as you can edit the `.env` file in `src/server/_config/config.env`.
+- `_src` - Which is the TypeScript files.
+- `_dist` - Which is the compiled files.
 
-The files `src/server/_server/jsonSeeder.ts` and `src/server/_server/stormSeeder.ts` are used to populate the database. They shouldnt be used more then once or if theres a new storm/archive to add.
-
-`src/server/_server/index.d.ts` can be ignored as its just the type definitions for typescript.
-
-Now I will explain each folder in `src/server/_server`.
-
-### _data
-
-This folder contains test data to insert into the database and test images to show to the user.
-
-### models
-
-These are the models created by the `mongoose` package that help add some structure to the noSql database.
-
-### middleware
-
-These are helper functions that run whenever a certain API endpoint is hit. For example `src/server/_server/middleware/v1/authentucated.ts` makes sure a user is logged in when accessing an API or `src/server/_server/middleware/v1/error.ts` handles errors.
-
-### utils
-
-General purpose helper functions
-
-### controllers
-
-Functions that perform certain tasks such as finding a user, or entering into a database.
-
-### routes
-
-These assign an API endpoint with a controller function mentioned above. For example the endpoint `user/v1/getUser` will be assigned to the `getUser` function and returns data on a specific user.
+??? Success "_src"
+    - There are a few folders in here.
+        - `bin` - Sets up the command and subcomman hierarchy.
+        - `commands` - The command functions that are mapped in `bin`.
+        - `lib` - Library functions/classes called by `commands`
+        - `model` - Same as `src/dashboard/_server/models`. ==Note:== Remember to have both here and `src/dashboard/_server/models` be the exact same.
+        - `utils` - Utility functions.

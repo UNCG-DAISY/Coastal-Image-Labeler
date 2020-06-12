@@ -1,7 +1,7 @@
 # Overview
 
 This section of the documentation is focused on describing the code: explaining the
-parts of the entire system, example calls, example outputs, and expected results.
+parts of the system, examples, how to maintain and extend.
 
 + Topics:
     - [Project Structure](project_structure.md)

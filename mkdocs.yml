@@ -45,5 +45,5 @@ markdown_extensions:
   - pymdownx.tilde
 
 
-# extra_css:
-#   - stylesheets/custom.css
+extra_css:
+  - stylesheets/custom.css
