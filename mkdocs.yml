@@ -12,8 +12,7 @@ nav:
       - 4 - Data export: code_documentation/data_export.md
       - 5 - Maintenance: code_documentation/maintenance.md
       - 6 - Extending:
-        - Add Radio Buttons: code_documentation/extensions/form/radiobutton.md
-        - Add Checkbox Buttons: code_documentation/extensions/form/checkboxButton.md
+        - Add New Question Set: code_documentation/extensions/form/question_set.md
     - User Documentation:
       - Overview: user_documentation/overview.md
       - Image Tagging Process: user_documentation/tagging_process.md
@@ -34,8 +33,8 @@ theme:
 
 markdown_extensions:
   - codehilite:
-      linenums: false
-      use_pygments: true
+      # linenums: false
+      # use_pygments: true
       noclasses: true
       pygments_style: monokai
   - admonition
