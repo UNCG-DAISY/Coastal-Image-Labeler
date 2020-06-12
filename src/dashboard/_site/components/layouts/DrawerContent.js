@@ -53,14 +53,14 @@ class DrawerContent extends React.Component{
                         </List>     
                         <Divider />
                                 
-                        <ListItem>
+                        {/* <ListItem>
                             <ListItemText primary={'External Links'} />
-                        </ListItem>
+                        </ListItem> */}
                         
                         {/* Links to other sites */}
-                        <List>
+                        {/* <List>
                             {generateSideContent(extraContentePages,classes)}
-                        </List>
+                        </List> */}
 
                         {/* Logout button         */}
                         <Divider />
@@ -141,11 +141,11 @@ const notLoggedInLinks = [
 ]
 
 const extraContentePages = [
-    {
-        title:'Date Source - NOAA',
-        icon: <LinkIcon/>,
-        href:'https://storms.ngs.noaa.gov/'
-    },
+    // {
+    //     title:'Date Source - NOAA',
+    //     icon: <LinkIcon/>,
+    //     href:'https://storms.ngs.noaa.gov/'
+    // },
     // {
     //     title:'Date Source - USGS',
     //     icon: <LinkIcon/>,
