@@ -67,9 +67,18 @@ const handle = nextApp.getRequestHandler()
 // https://github.com/node-fetch/node-fetch/issues/19#issuecomment-369653134
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
+//https keys
+const cert = fs.readFileSync('/home/shahnafis/ssl/coastalimagelabeler_science.crt');
+const ca = fs.readFileSync('/home/shahnafis/ssl/coastalimagelabeler_science.ca-bundle');
+const key = fs.readFileSync('/home/shahnafis/ssl/private.key');
+//console.log(cert,ca)
+
 const https_options = {
-    key: fs.readFileSync('./_config/key.pem'),
-    cert: fs.readFileSync('./_config/cert.pem')
+    //key: fs.readFileSync('./_config/key.pem'),
+    //cert:fs.readFileSync('./_config/cert.pem')
+    cert:cert, 
+    ca:ca,
+    key:key
 }
 
 nextApp.prepare()
