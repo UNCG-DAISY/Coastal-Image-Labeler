@@ -4,6 +4,9 @@
 https://coastal-image-labeler.readthedocs.io/en/latest/)
 [![Last Commit](https://img.shields.io/github/last-commit/UNCG-DAISY/Coastal-Image-Labeler)](
 https://github.com/UNCG-DAISY/Coastal-Image-Labeler/commits/master)
+[![DOI](https://zenodo.org/badge/226252747.svg)](https://zenodo.org/badge/latestdoi/226252747)
+
+
 
 A labeling tool for Coastal Images.
 
