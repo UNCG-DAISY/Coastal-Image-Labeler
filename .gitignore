@@ -192,3 +192,5 @@ src/dashboard/_cli/_dist
 src/dashboard/log/compress-images
 
 *.pem
+*.crt
+*.key
