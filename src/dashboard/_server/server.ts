@@ -91,6 +91,11 @@ nextApp.prepare()
     //Create our application
     const app: Application = express();
 
+    // Enable reverse proxy support in Express. This causes the
+    // the "X-Forwarded-Proto" header field to be trusted so its
+    // value can be used to determine the protocol. See 
+    // http://expressjs.com/api#app-settings for more details.
+    app.enable('trust proxy');
     //Security
     // 2 - add session management to Express
     const sessionConfig = {
@@ -150,6 +155,19 @@ nextApp.prepare()
 
     //logging
     app.use(expressLogger)
+
+    //http to https redirect?
+    app.use (function (req, res, next) {
+        if (req.secure) {
+            //console.log("Connection is secure")
+            // request was via https, so do no special handling
+            next();
+        } else {
+            console.log("Redirecting http to https");
+            // request was via http, so redirect to https
+            res.redirect('https://' + req.headers.host + req.url);
+        }
+    });
    
 
     //Mount routers, appi calls
@@ -182,10 +200,10 @@ nextApp.prepare()
 
     https.createServer(https_options, app)
         .listen(PORT, function () {
-        console.log(`Example app listening on port ${PORT}!`)
+        console.log(`Server running on HTTPS ${PORT}!`)
     })
 
-    //app.listen(PORT, () => console.log(`Example app listening at http://localhost:${PORT}`))
+    app.listen(80, () => console.log(`Listening to port 80 for HTTP redirect`))
 
     // const server = app.listen(PORT,() => {
         

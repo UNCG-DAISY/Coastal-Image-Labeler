@@ -138,46 +138,6 @@ const tagImage = asyncHandler(async (req: Request, res: Response, next: NextFunc
  * @access      Public
  * @returns     no
  */
-// const showImage = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-//     if(req.params.id === undefined) {
-//         res.status(404).json({
-//             success:false,
-//             message:'No Id sent',
-//         })
-//     }
-
-//     //console.log('ID = ',req.params.id)
-//     const imageDoc = await ImageModel.findById(req.params.id)
-//     //console.log('Doc = ',imageDoc)
-//     if(!imageDoc) {
-//         return res.status(404).json({
-//             success:false,
-//             message:'No image found',
-//         })
-
-//     }
-
-//     const archiveDoc = await ArchiveModel.findById(imageDoc.archive)
-//     if(!archiveDoc) {
-//         return res.status(404).json({
-//             success:false,
-//             message:'No archive found',
-//         })
-
-//     }
-
-//     const catalogDoc = await CatalogModel.findById(archiveDoc.catalog)
-//     //console.log('catalog',catalogDoc)
-//     if(!catalogDoc) {
-//         return res.status(404).json({
-//             success:false,
-//             message:'No catalog found',
-//         })
-
-//     }
-//     res.sendFile('C:/Users/Skool/Desktop/japan.PNG')
-//     //res.sendFile(`${catalogDoc.path}/${archiveDoc.path}/${imageDoc.fileName}`);
-// })
 
 const showImage = (options:any) => {
     return asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
@@ -187,10 +147,9 @@ const showImage = (options:any) => {
                 message:'No Id sent',
             })
         }
-    
-        //console.log('ID = ',req.params.id)
+        
+        //First we need to get the images path, from archive and catalog
         const imageDoc = await ImageModel.findById(req.params.id)
-        //console.log('Doc = ',imageDoc)
         if(!imageDoc) {
             return res.status(404).json({
                 success:false,
@@ -209,7 +168,6 @@ const showImage = (options:any) => {
         }
     
         const catalogDoc = await CatalogModel.findById(archiveDoc.catalog)
-        //console.log('catalog',catalogDoc)
         if(!catalogDoc) {
             return res.status(404).json({
                 success:false,
@@ -222,37 +180,12 @@ const showImage = (options:any) => {
         const compressedPath = `${process.env.COMPRESS_FOLDER}/${catalogDoc.name}${archiveDoc.path}/`
         const compressedImagePath = `${compressedPath}${imageDoc.fileName}`
         if(options.compress) {
-
-            //compress
-            await new Promise(resolve =>{
-                console.log(`Compressing image ${imageDoc.fileName}`)
-                //console.log(inputPath,outputPath,imageName)
-                compress_images(
-                    uncompressedImagePath,
-                    compressedPath,
-                    {
-                        compress_force: false, 
-                        statistic: true, 
-                        autoupdate: true
-                    }, 
-                    false,
-                    {jpg: {engine: 'mozjpeg', command: ['-quality', '60']}},
-                    {png: {engine: 'webp', command: ['-q', '60']}},
-                    {svg: {engine: 'svgo', command: '--multipass'}},
-                    {gif: {engine: 'gifsicle', command: ['--colors', '64', '--use-col=web']}}, 
-                    function(error, completed, statistic){   
-                        console.log(`Completed compression of ${imageDoc.fileName} - ${completed}`)
-                        resolve(imageDoc.fileName)                   
-                    }
-                );
-                // console.log('B')
-            })
             
-            //console.log(compressedImagePath)
+            console.log(`Sending compressed image ${imageDoc.fileName} at path ${compressedImagePath}`)
             res.sendFile(compressedImagePath)
         }
         else {
-            console.log('Sending uncompressed')
+            console.log(`Sending uncompressed image ${imageDoc.fileName} at path ${uncompressedImagePath}`)
             res.sendFile(uncompressedImagePath);
         }
         
