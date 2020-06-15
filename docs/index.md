@@ -1,8 +1,5 @@
 # Coastal Image Labeler
 
-<<<<<<< Updated upstream
-## Goals
-=======
 ## Project Overview
 
 Generally, the the Coastal Image Labeler is server that provides users with
@@ -22,7 +19,6 @@ the database. Second, a labeler — who logs onto the server and labels images.
       - Documenting how to interact with the labeling tool as a User — see the [User Documentation](user_documentation/overview.md) section.
 
 ## Project Goals
->>>>>>> Stashed changes
 
   + The Coastal Image Labeler (CILabel) is designed to collaboratively label
   coastal images and then provide these labeled images as open data (FAIR) for
