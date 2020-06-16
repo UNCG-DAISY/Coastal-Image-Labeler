@@ -1,58 +1,45 @@
 #!/bin/bash
 #mesaure time
 start=`date +%s`
+catalog_to_compress=Michael
 
-# root_folder=/datadrive/archives;
-# compressed_folder=/datadrive/compressed/archives;
+root_folder=/datadrive/archives/$catalog_to_compress;
+compressed_folder=/datadrive2/compressed/archives/$catalog_to_compress;
 
-# # Make the path
-# [ ! -d $compressed_folder ] && mkdir $compressed_folder
+# Make the path
+[ ! -d $compressed_folder ] && mkdir $compressed_folder
 
+for archive in $root_folder/*; do 
+    
+    if [ -d "$archive" ]; then
+        echo $archive
+        archiveName=$(basename "$archive") 
+        archivePath=$archive/jpgs/*.jpg
+        archivePathCompressed=$compressed_folder/$archiveName/jpgs
 
-# for dir in $root_folder/*; do
-#     # Will not run if no directories are available 
-#     if [ -d "$dir" ]; then
-        
-#         catalogName=$(basename "$dir")
-#         catalogCompressedPath=$compressed_folder/$catalogName;
-#         catalogOriginalPath=$root_folder/$catalogName;
+        for image in $archivePath; do
+            imageName=$(basename "$image") 
+            echo $image
+            echo $archivePathCompressed/$imageName
 
-#         # Make the path for compressed
-#         [ ! -d $catalogCompressedPath ] && mkdir $catalogCompressedPath
+            #jpegoptim -m40 -d $archivePathCompressed/$imageName -p $image
+        done
+    fi
 
-#         # For each archive in the catalogs original path
-#         for archive in $catalogOriginalPath/*; do
+    
+   #[ ! -d $compressed_folder/$archivePath ] && mkdir $compressed_folder/$archivePath
+    
+    # for imagePath in $root_folder/$archivePath/jpgs/*.jpg; do 
+    #     imageName=$(basename "$imagePath") 
+    #     # echo $imagePath
+    #     # echo $compressed_folder/$archivePath/jpgs/$imageName
+    #     # echo
+    #     echo $root_folder/$archivePath/jpgs/*.jpg
+    #     ##[ ! -d $compressed_folder/$archivePath/jpgs ] && mkdir $compressed_folder/$archivePath/jpgs
+    #     #jpegoptim -m40 -d $compressed_folder/$archivePath/jpgs/$imageName -p $imagePath
+    # done
+done
 
-#             # Will not run if no directories are available 
-#             if [ -d "$archive" ]; then
-                
-                
-#                 archiveName=$(basename "$archive")
-#                 archiveCompressedPath=$catalogCompressedPath/$archiveName
-#                 archiveOriginalPath=$catalogOriginalPath/$archiveName/jpgs
-
-#                 #echo $archiveName
-
-#                 #Make the paths for compressed archives
-#                 [ ! -d $archiveCompressedPath ] && mkdir $archiveCompressedPath
-
-#                 #add /jpg
-#                 archiveCompressedPath=$archiveCompressedPath/jpgs;
-#                 [ ! -d $archiveCompressedPath ] && mkdir $archiveCompressedPath
-                
-
-#                 for image in $archiveOriginalPath/*.jpg; do
-
-#                     imageName=$(basename "$image") 
-#                     # echo $archiveOriginalPath/$imageName
-#                     # echo $archiveCompressedPath/$imageName
-#                     jpegoptim -m40 -d $archiveCompressedPath -p $archiveOriginalPath/$imageName
-#                 done
-
-#             fi
-#         done
-#     fi
-# done
 
 end=`date +%s`
 runtime=$((end-start))

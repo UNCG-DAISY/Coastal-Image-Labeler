@@ -3,7 +3,7 @@
 start=`date +%s`
 
 root_folder=/datadrive/archives;
-compressed_folder=/datadrive/compressed/archives;
+compressed_folder=/datadrive2/compressed/archives;
 
 # Make the path
 [ ! -d $compressed_folder ] && mkdir $compressed_folder
