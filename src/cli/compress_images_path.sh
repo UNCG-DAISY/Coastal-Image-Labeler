@@ -19,25 +19,20 @@ for archive in $root_folder/*; do
 
         for image in $archivePath; do
             imageName=$(basename "$image") 
-            echo $image
-            echo $archivePathCompressed/$imageName
+            # echo $image
+            # echo $archivePathCompressed/$imageName
 
-            #jpegoptim -m40 -d $archivePathCompressed/$imageName -p $image
+            source_path=$image;
+            dest_path=$archivePathCompressed;
+
+            echo $source_path
+            echo $dest_path
+
+
+            jpegoptim -m40 -d $dest_path -p $source_path
         done
     fi
 
-    
-   #[ ! -d $compressed_folder/$archivePath ] && mkdir $compressed_folder/$archivePath
-    
-    # for imagePath in $root_folder/$archivePath/jpgs/*.jpg; do 
-    #     imageName=$(basename "$imagePath") 
-    #     # echo $imagePath
-    #     # echo $compressed_folder/$archivePath/jpgs/$imageName
-    #     # echo
-    #     echo $root_folder/$archivePath/jpgs/*.jpg
-    #     ##[ ! -d $compressed_folder/$archivePath/jpgs ] && mkdir $compressed_folder/$archivePath/jpgs
-    #     #jpegoptim -m40 -d $compressed_folder/$archivePath/jpgs/$imageName -p $imagePath
-    # done
 done
 
 
