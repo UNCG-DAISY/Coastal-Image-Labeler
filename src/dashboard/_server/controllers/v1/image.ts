@@ -180,9 +180,17 @@ const showImage = (options:any) => {
         const compressedPath = `${process.env.COMPRESS_FOLDER}/${catalogDoc.name}${archiveDoc.path}/`
         const compressedImagePath = `${compressedPath}${imageDoc.fileName}`
         if(options.compress) {
+
+            //if the compressed file exists
+            if (fs.existsSync(compressedImagePath)) {
+                console.log(`Sending compressed image ${imageDoc.fileName} at path ${compressedImagePath}`)
+                res.sendFile(compressedImagePath)
+            } else {
+                //if not, send uncompressed
+                console.log(`No compressed found. Sending uncompressed image ${imageDoc.fileName} at path ${uncompressedImagePath}`)
+                res.sendFile(uncompressedImagePath);
+            }
             
-            console.log(`Sending compressed image ${imageDoc.fileName} at path ${compressedImagePath}`)
-            res.sendFile(compressedImagePath)
         }
         else {
             console.log(`Sending uncompressed image ${imageDoc.fileName} at path ${uncompressedImagePath}`)
