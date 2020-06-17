@@ -6,7 +6,6 @@ import theme from '../theme';
 import ImageContainer from './ImageContainer'
 import initalTagState from './initalTagState'
 import Header from './Header'
-import ClassificationQuestions from './ClassificationQuestions'
 import GenericHookForm from '../forms/genericHookForm'
 import CardContent from '@material-ui/core/CardContent';
 

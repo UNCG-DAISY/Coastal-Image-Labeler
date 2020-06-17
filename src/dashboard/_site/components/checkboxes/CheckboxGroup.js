@@ -1,12 +1,12 @@
-import CheckboxButton from './CheckboxButton'
+// import CheckboxButton from './CheckboxButton'
 
-export default function ImpactCheckbox(props) {
+// export default function ImpactCheckbox(props) {
 
-    const {states,howManyReq,handleChange} = props
+//     const {states,howManyReq,handleChange} = props
 
    
 
-    return (
+//     return (
         
-    )
-}
+//     )
+// }

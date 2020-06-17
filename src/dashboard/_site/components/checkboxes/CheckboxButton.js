@@ -1,58 +1,58 @@
-//Custom checkbox button
+// //Custom checkbox button
 
-import React from 'react';
+// import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Checkbox from '@material-ui/core/Checkbox'
-import Typography from '@material-ui/core/Typography';
-import * as colors from '@material-ui/core/colors/';
+// import { makeStyles } from '@material-ui/core/styles';
+// import FormLabel from '@material-ui/core/FormLabel';
+// import FormControl from '@material-ui/core/FormControl';
+// import FormGroup from '@material-ui/core/FormGroup';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import FormHelperText from '@material-ui/core/FormHelperText';
+// import Checkbox from '@material-ui/core/Checkbox'
+// import Typography from '@material-ui/core/Typography';
+// import * as colors from '@material-ui/core/colors/';
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      //display: 'flex',
-      //color:'red'
-    },
-    formControl: {
-      //display: 'flex',
-      //margin: theme.spacing(3),
-    },
-}));
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//       //display: 'flex',
+//       //color:'red'
+//     },
+//     formControl: {
+//       //display: 'flex',
+//       //margin: theme.spacing(3),
+//     },
+// }));
 
-export default function CheckboxButton(props) {
-    const classes = useStyles();
-    // const error = Object.keys(props.states).filter((element) => props.states[element]).length < props.howManyReq;
-    const {
-      label,
-      buttons,
-      labelColor 
-    } = props
-    return (
-      <div className={classes.root}>
-        <FormControl required  component="fieldset" className={classes.formControl}>
-          <Typography variant="h6" style={{color:labelColor}}>{label}</Typography>
-          <FormGroup>
+// export default function CheckboxButton(props) {
+//     const classes = useStyles();
+//     // const error = Object.keys(props.states).filter((element) => props.states[element]).length < props.howManyReq;
+//     const {
+//       label,
+//       buttons,
+//       labelColor 
+//     } = props
+//     return (
+//       <div className={classes.root}>
+//         <FormControl required  component="fieldset" className={classes.formControl}>
+//           <Typography variant="h6" style={{color:labelColor}}>{label}</Typography>
+//           <FormGroup>
 
-            <div >
-              {buttons.map(button => (
-                  <FormControlLabel
-                    key = {button.label}
+//             <div >
+//               {buttons.map(button => (
+//                   <FormControlLabel
+//                     key = {button.label}
                     
-                    {...button}
-                  />  
+//                     {...button}
+//                   />  
 
-              ))}
-            </div>
+//               ))}
+//             </div>
            
-          </FormGroup>
-            {/* {error && <FormHelperText>Please select atleast {props.howManyReq} options</FormHelperText>} */}
-        </FormControl>
-      </div>
-    );
-}
+//           </FormGroup>
+//             {/* {error && <FormHelperText>Please select atleast {props.howManyReq} options</FormHelperText>} */}
+//         </FormControl>
+//       </div>
+//     );
+// }
 
