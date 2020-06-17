@@ -10,6 +10,24 @@ import {ArchiveModel} from '../../models/Archive'
 import {CatalogModel} from '../../models/Catalog'
 import {UserDocument,CatalogDocument,ArchiveDocument} from '../../index'
 
+// async function test() {
+//     const catalogs = await CatalogModel.find();
+
+//     for(let c = 0; c<catalogs.length;c++) {
+        
+//         const archives = await ArchiveModel.find({catalog:catalogs[c]._id})
+//         let archiveCount = archives.length;
+//         let imageCount = 0;
+//         for(let a = 0 ;a<archives.length;a++) {
+//             const images =  await ImageModel.find({archive:archives[a]._id})
+//             imageCount += images.length
+//         }
+
+//         console.log(`Catalog ${catalogs[c].name} has ${archiveCount} archives and ${imageCount} images`)
+//     }
+// }
+// test()
+
 /**
  * @desc        Gets all storms
  * @route       GET /api/v1/catalogs/
