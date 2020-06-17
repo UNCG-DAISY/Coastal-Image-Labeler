@@ -128,12 +128,12 @@ export default function GenericHookForm(props) {
 
     function generateRadio(radioQuestions) {
         const {
-            label,key,required,buttons,errorMessage,link
+            label,key,required,buttons,errorMessage,docLink
         } = radioQuestions
         return (
             <React.Fragment key={key}>
                 <FormControl fullWidth component="fieldset" margin="normal">
-                    <FormLabel component="legend">{generateLabel(label,link)}</FormLabel>
+                    <FormLabel component="legend">{generateLabel(label,docLink)}</FormLabel>
                     <Controller
                         as={
                             <RadioGroup aria-label={key} row>
@@ -161,12 +161,12 @@ export default function GenericHookForm(props) {
 
     function generateCheckbox(checkboxQuestions) {
         const {
-            label,key,required,buttons,min,max,errorMessage,link
+            label,key,required,buttons,min,max,errorMessage,docLink
         } = checkboxQuestions
         return (
             <FormControl fullWidth component="fieldset" margin="normal" key={key}>
                 <FormLabel component="legend" focused={false}>
-                {generateLabel(label,link)} {errorMessage}
+                {generateLabel(label,docLink)} {errorMessage}
                 </FormLabel>
                 <FormGroup row>
                 {
