@@ -54,8 +54,8 @@ function Home(props) {
               please contact 
               Evan Goldstein at <Linky color={theme.palette.secondary.main} href="mailto:ebgoldst@uncg.edu">
                 ebgoldst@uncg.edu
-              </Linky> You can read about 
-              the project <Linky color={theme.palette.secondary.main} href="https://github.com/UNCG-DAISY/Coastal-Image-Labeler">here</Linky>.
+              </Linky> You can see the project repo <Linky color={theme.palette.secondary.main} href="https://github.com/UNCG-DAISY/Coastal-Image-Labeler" target="_blank">here</Linky> or
+              the project documentation <Linky color={theme.palette.secondary.main} href="https://uncg-daisy.github.io/Coastal-Image-Labeler/" target="_blank">here</Linky>.
             </Paper>
           </Typography> 
 
@@ -96,7 +96,7 @@ function Home(props) {
 
 function Linky(props) {
   return (
-    <a style={{color:props.color}} href={props.href}>
+    <a style={{color:props.color}} {...props}>
       {props.children}
     </a>
   )
