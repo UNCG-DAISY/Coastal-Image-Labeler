@@ -21,6 +21,7 @@ import {UserDocument,CatalogDocument,ArchiveDocument} from '../../index'
 //         for(let a = 0 ;a<archives.length;a++) {
 //             const images =  await ImageModel.find({archive:archives[a]._id})
 //             imageCount += images.length
+//             console.log(`${archives[a].name} has ${images.length} images`)
 //         }
 
 //         console.log(`Catalog ${catalogs[c].name} has ${archiveCount} archives and ${imageCount} images`)
