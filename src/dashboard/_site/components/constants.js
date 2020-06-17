@@ -4,7 +4,7 @@ import ip from 'ip';
 
 const myIp = ip.address()
 const port = 5000
-const protocal = 'https'
+const protocal = 'http'
 const apiCall = (route) => {
     if(myIp === '127.0.0.1') {
         //return `${protocal}://${myIp}:${port}${route}`
