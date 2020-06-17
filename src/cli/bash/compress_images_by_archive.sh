@@ -7,14 +7,15 @@ compressed_folder=/datadrive2/compressed
 catalog=/archives/Michael
 
 archive_array=()
-archive_array[0]=/20181011a_jpgs
-archive_array[1]=/20181012a_jpgs
+archive_array[0]=/20181014a_jpgs
+#archive_array[1]=/20181012a_jpgs
 
 for archive_path in "${archive_array[@]}"
 do  
-    if [ -d "$archive_path" ]; then
-        uncomp_archive_path=$uncompressed_folder$catalog$archive_path/jpgs
-        comp_archive_path=$compressed_folder$catalog$archive_path
+    uncomp_archive_path=$uncompressed_folder$catalog$archive_path/jpgs
+    comp_archive_path=$compressed_folder$catalog$archive_path
+    if [ -d "$uncomp_archive_path" ]; then
+        
 
         #make dir
         #[ ! -d $comp_archive_path ] && mkdir $comp_archive_path
@@ -31,11 +32,11 @@ do
             imageName=$(basename "$image") 
             
             source_path=$uncomp_archive_path/$imageName
-            dest_path=$comp_archive_path/$imageName
+            dest_path=$comp_archive_path
 
-            echo $source_path
-            echo $dest_path
-            #jpegoptim -m40 -d $dest_path -p $source_path
+            # echo $source_path
+            #echo $dest_path
+            jpegoptim -m40 -d $dest_path -p $source_path
         done
     fi
     
