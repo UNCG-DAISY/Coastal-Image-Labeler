@@ -90,7 +90,7 @@ export default function GenericHookForm(props) {
     }
 
     function generateLabel(label,link) {
-        console.log("link = ",link)
+        //console.log("link = ",link)
         return (
             <React.Fragment>
                 <Typography color="secondary">
@@ -131,7 +131,7 @@ export default function GenericHookForm(props) {
         const {
             label,key,required,buttons,errorMessage,docLink
         } = radioQuestions
-        console.log(radioQuestions)
+        //console.log(radioQuestions)
         return (
             <React.Fragment key={key}>
                 <FormControl fullWidth component="fieldset" margin="normal">

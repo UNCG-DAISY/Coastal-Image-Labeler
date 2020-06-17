@@ -187,7 +187,7 @@ const showImage = (options:any) => {
                 res.sendFile(compressedImagePath)
             } else {
                 //if not, send uncompressed
-                console.log(`No compressed found. Sending uncompressed image ${imageDoc.fileName} at path ${uncompressedImagePath}`)
+                console.log(`No compressed found for ${compressedImagePath}. Sending uncompressed image ${imageDoc.fileName} at path ${uncompressedImagePath}`)
                 res.sendFile(uncompressedImagePath);
             }
             

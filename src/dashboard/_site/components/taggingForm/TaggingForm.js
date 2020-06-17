@@ -4,7 +4,6 @@ import { red } from '@material-ui/core/colors';
 
 import theme from '../theme';
 import ImageContainer from './ImageContainer'
-import initalTagState from './initalTagState'
 import Header from './Header'
 import GenericHookForm from '../forms/genericHookForm'
 import CardContent from '@material-ui/core/CardContent';
@@ -13,7 +12,6 @@ import CardContent from '@material-ui/core/CardContent';
 class TaggingForm extends React.Component {
     state ={
         expanded:true,
-        tags:initalTagState
     }
 
     setExpanded(value) {

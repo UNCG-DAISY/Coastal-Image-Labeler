@@ -10,7 +10,6 @@ import fetch from "isomorphic-fetch";
 import Router from "next/router";
 
 import TaggingForm from '../../components/taggingForm/TaggingForm'
-import initalTagState from '../../components/taggingForm/initalTagState'
 import Layout from '../../components/layouts/Layout'
 import Paper from '@material-ui/core/Paper';
 import ErrorAlert from '../../components/ErrorAlert'
