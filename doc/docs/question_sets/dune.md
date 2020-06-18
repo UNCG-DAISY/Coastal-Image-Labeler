@@ -23,5 +23,4 @@ The Dune Collision  question set contains 2 questions in total:
 :::note Additional Comments - `Required`
 A Text box to explain anything of note.
 :::
-???+ Warning "Additional Comments - **==NOT==** required"
-    
+
