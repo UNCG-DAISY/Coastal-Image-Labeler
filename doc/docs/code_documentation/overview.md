@@ -11,8 +11,9 @@ parts of the system, examples, how to maintain and extend.
 + [Project Structure](project_structure.md)
 + [Needed Packages](packages.md)
 + [Auth0](auth0.md)
-+ MongoDB
-+ Production version (i.e., on a VM)
++ [MongoDB Structure](database)
++ [Adding images](adding_images.md)
++ [Production version](deployment.md) (i.e., on a VM)
 + [Data export](data_export.md)
 + [Maintenance](maintenance.md)
 + Extensions:

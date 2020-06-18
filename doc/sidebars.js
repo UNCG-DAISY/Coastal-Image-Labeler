@@ -18,6 +18,7 @@ module.exports = {
         "code_documentation/project_structure",
         "code_documentation/auth0",
         "code_documentation/database",
+        "code_documentation/adding_images",
         "code_documentation/deployment",
         "code_documentation/data_exporting",
         "code_documentation/maintenance",
@@ -38,6 +39,7 @@ module.exports = {
       items: [
         "user_documentation/userDocOverview",
         "user_documentation/imageTaggingProcess",
+        "user_documentation/data_sources"
       ],
     },
     {

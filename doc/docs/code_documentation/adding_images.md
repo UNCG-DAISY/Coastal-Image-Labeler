@@ -1,5 +1,5 @@
 ---
-id: database
+id: adding_images
 title: Add Images to Database
 sidebar_label: Add Images to Database
 ---
