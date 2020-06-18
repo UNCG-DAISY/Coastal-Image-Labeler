@@ -18,7 +18,7 @@ cd <location of the code>/GitHub/Coastal-Image-Labeler/src/dashboard
 
 And then run.  
 ```js
-NODE_ENV=production forever start ./_dist/server.js
+sudo NODE_ENV=production forever start ./_dist/server.js
 ```
 
 
@@ -29,11 +29,11 @@ We are using a npm packaged called `forever`, found
 backgroud. So we need to tell it to stop running the server by finding the PID.
 
 ``` js
-forever list
+sudo forever list
 ```
 
 Get the PID of the server and then
 
 ``` js
-forever stop <PID>
+sudo forever stop <PID>
 ```
