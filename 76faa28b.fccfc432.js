@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[22],{123:function(a){a.exports=JSON.parse('{"allTagsPath":"/Coastal-Image-Labeler/blog/tags","slug":"docusaurus","name":"docusaurus","count":3,"permalink":"/Coastal-Image-Labeler/blog/tags/docusaurus"}')}}]);
