@@ -1,17 +1,17 @@
 {
     "compressedFolder":"/home/shahnafis/compressed",
     "catalogs":[
-        // {
-        //     "path":"/datadrive/archives/Florence",
-        //     "name":"Florence",
-        //     "taggable":true,
-        //     "year":2018,
-        //     "link":"https://en.wikipedia.org/wiki/Hurricane_Florence",
-        //     "description":"Hurricane Florence was a powerful and long-lived Cape Verde hurricane that caused catastrophic damage in the Carolinas in September 2018, primarily as a result of freshwater flooding due to torrential rain. The sixth named storm, third hurricane, and the first major hurricane of the 2018 Atlantic hurricane season, Florence originated from a strong tropical wave that emerged off the west coast of Africa on August 30, 2018.",
-        //     "createAllArchives":true,
-        //     "createAllImages":true,
-        //     "questionSet":"5ed82a588896022158fa0852"
-        // },   
+        {
+            "path":"/datadrive/archives/Florence",
+            "name":"Florence",
+            "taggable":true,
+            "year":2018,
+            "link":"https://en.wikipedia.org/wiki/Hurricane_Florence",
+            "description":"Hurricane Florence was a powerful and long-lived Cape Verde hurricane that caused catastrophic damage in the Carolinas in September 2018, primarily as a result of freshwater flooding due to torrential rain. The sixth named storm, third hurricane, and the first major hurricane of the 2018 Atlantic hurricane season, Florence originated from a strong tropical wave that emerged off the west coast of Africa on August 30, 2018.",
+            "createAllArchives":true,
+            "createAllImages":true,
+            "questionSet":"5ed82a588896022158fa0852"
+        },
         {
             "path":"/datadrive/archives/Dorian",
             "name":"Dorian",
@@ -33,6 +33,17 @@
             "createAllArchives":true,
             "createAllImages":true,
             "questionSet":"5ed82a588896022158fa0852"
-        }      
+        },
+        {
+            "path":"/datadrive/archives/buxtoncoastalcam",
+            "name":"Buxton Coastal Camera",
+            "taggable":true,
+            "year":2019,
+            "link":"https://en.wikipedia.org/wiki/Buxton,_North_Carolina",
+            "description":"These are images from a NOAA NOS and SECOORA WebCAT coastal camera in Buxton, NC",
+            "createAllArchives":true,
+            "createAllImages":true,
+            "questionSet":"5ee3a8d801091b0dd1d62d3a"
+        }           
     ]
 }

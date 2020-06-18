@@ -51,9 +51,9 @@ const catalog = {
 
         //DEV
         if(options.dev) {
-            await ArchiveModel.deleteMany({})
-            await CatalogModel.deleteMany({})
-            await ImageModel.deleteMany({})
+            // await ArchiveModel.deleteMany({})
+            // await CatalogModel.deleteMany({})
+            // await ImageModel.deleteMany({})
         }
             
 

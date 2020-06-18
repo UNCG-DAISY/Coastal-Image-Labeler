@@ -142,7 +142,15 @@ export default function PickCatalogStepper(props) {
                           <div>
                             <strong style={{color:theme.palette.secondary.main}}>Description</strong>: 
                             {catalogs[selectedCatalog]?.info?.description ?? 'N/A'}
-                            <Button variant="text" size="small" href={catalogs[selectedCatalog]?.info?.link ?? ''} style={{textDecoration:'none'}} color="secondary">Link to Wikipedia</Button>
+                            <Button 
+                              variant="text" 
+                              size="small"
+                              href={catalogs[selectedCatalog]?.info?.link ?? ''} 
+                              style={{textDecoration:'none'}} 
+                              color="secondary"
+                            >
+                              Link for more info
+                            </Button>
                           </div>
                           
                           <br/>
