@@ -157,17 +157,17 @@ nextApp.prepare()
     app.use(expressLogger)
 
     //http to https redirect?
-    app.use (function (req, res, next) {
-        if (req.secure) {
-            //console.log("Connection is secure")
-            // request was via https, so do no special handling
-            next();
-        } else {
-            console.log("Redirecting http to https");
-            // request was via http, so redirect to https
-            res.redirect('https://' + req.headers.host + req.url);
-        }
-    });
+    // app.use (function (req, res, next) {
+    //     if (req.secure) {
+    //         //console.log("Connection is secure")
+    //         // request was via https, so do no special handling
+    //         next();
+    //     } else {
+    //         console.log("Redirecting http to https");
+    //         // request was via http, so redirect to https
+    //         res.redirect('https://' + req.headers.host + req.url);
+    //     }
+    // });
    
 
     //Mount routers, appi calls
@@ -198,19 +198,19 @@ nextApp.prepare()
     //Get the port and have the site on that port
     const PORT = (process.env.PORT as unknown as number) ?? 5000;
 
-    https.createServer(https_options, app)
-        .listen(PORT, function () {
-        console.log(`Server running on HTTPS ${PORT}!`)
-    })
-
-    app.listen(80, () => console.log(`Listening to port 80 for HTTP redirect`))
-
-    // const server = app.listen(PORT,() => {
-        
-    //     //@ts-ignore
-    //     colorize.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
-    //     //console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.green.bold.underline)
+    // https.createServer(https_options, app)
+    //     .listen(PORT, function () {
+    //     console.log(`Server running on HTTPS ${PORT}!`)
     // })
+
+    //app.listen(80, () => console.log(`Listening to port 80 for HTTP redirect`))
+
+    const server = app.listen(PORT,() => {
+        
+        //@ts-ignore
+        colorize.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+        //console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.green.bold.underline)
+    })
 
     //Handle unhandled promise rejections
     process.on('unhandledRejection', (err:any,promise: Promise<any>) => {
