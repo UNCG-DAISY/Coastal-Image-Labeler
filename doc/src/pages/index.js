@@ -32,7 +32,8 @@ const features = [
   },
   {
     title: <>Easy to use</>,
-    imageUrl: 'img/data_center.svg',
+    imageUrl: 'img/undraw_server_q2pb.svg',
+    stylesClass:'featureImage2',
     description: (
       <>
         A server that provides users with images to be labeled using a given 
@@ -44,13 +45,13 @@ const features = [
   },
 ];
 
-function Feature({imageUrl, title, description}) {
+function Feature({imageUrl, title, description,stylesClass}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
     <div className={classnames('col col--4', styles.feature)}>
       {imgUrl && (
         <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
+          <img className={styles[stylesClass] || styles.featureImage} src={imgUrl} alt={title} />
         </div>
       )}
       <h3>{title}</h3>
