@@ -23,3 +23,5 @@ helped me with this project.
 - [TypeScript](https://www.typescriptlang.org/) - For allowing me to use new JavaScript features before they come out, adding static typing  and helping me catch a few errors before hand.
 - [unDraw](https://undraw.co/illustrations) - For cool art (used on docs site).
 - [manypixels](https://www.manypixels.co/gallery/) - For cool art (used on docs site).
+
+There are ofcourse **way** more packages I used, which you can find in the various `package.json` files through out the project, just these are the key ones.
