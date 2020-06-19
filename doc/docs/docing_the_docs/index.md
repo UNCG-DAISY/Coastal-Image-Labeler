@@ -100,4 +100,14 @@ module.exports = {
 
 You can vist the page [here](../my_catagory/fileId).
 
+
+5. Deploying. So to deploy run 
+```bash title="bash"
+npm run deployE
+```
+`deployE` = `Deploy as Evan`  
+`deployS` = `Deploy as Shah`
+
+Which deploys the site by commiting to the `gh-page` branch as `ebgoldstein`. It will ask you to log in as that user. The reason it asks is because usualy this stuff is done by a bot.
+
 This should cover the basic use of Docusaurus to edit and test docs. I didnt cover the stuff liek blogs as that we can do later.
