@@ -58,15 +58,33 @@ module.exports = {
         "other/styleGuide",
         "other/mdx"
       ],
-    }
-  ],
-  "3rdLabel": [
+    },
     {
       type: 'category',
-      label: 'Test',
+      label: 'Docing the Docs',
       items: [
-        'announcements/index',
+        "docing_the_docs/indexId",
       ],
-    }, 
+    }
   ],
+  docs2:[
+    {
+      type: 'category',
+      label: 'My Catagory',
+      items: [
+        //Path to the file relative from Coastal-Image-Labeler/doc/docs/ 
+        //With the filename being replace with the ID 
+        "my_catagory/fileId",
+      ],
+    }
+  ]
+  // "3rdLabel": [
+  //   {
+  //     type: 'category',
+  //     label: 'Test',
+  //     items: [
+  //       'announcements/index',
+  //     ],
+  //   }, 
+  // ],
 };

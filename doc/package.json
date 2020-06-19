@@ -6,7 +6,8 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "SET GIT_USER=ShahNafisRafique&&docusaurus deploy"
+    "deployS": "SET GIT_USER=ShahNafisRafique&&docusaurus deploy",
+    "deployE": "SET GIT_USER=ebgoldstein&&docusaurus deploy"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.56",
