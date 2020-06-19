@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[39],{138:function(a){a.exports=JSON.parse('{"allTagsPath":"/Coastal-Image-Labeler/blog/tags","slug":"resource","name":"resource","count":1,"permalink":"/Coastal-Image-Labeler/blog/tags/resource"}')}}]);
