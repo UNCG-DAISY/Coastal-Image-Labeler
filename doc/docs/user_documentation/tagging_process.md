@@ -4,7 +4,7 @@ title: Image Tagging Process
 sidebar_label: Image Tagging Process
 ---
 
-## The site
+## The Site
 
 The first step is to navigate to the site: [https://coastalimagelabeler.science](https://coastalimagelabeler.science)
 
@@ -16,14 +16,14 @@ You might ask why we are asking users to log in to the service. There are xx rea
  - We want to know that users are trained coastal experts.
  - We want to make sure at least two different people come to a consensus on an image label,  so labels can reflect multiple expert opinions.
 
-## Get permission to label specific catalogs of images
+## Get Permission to Label Specific Catalogs of Images
 
 Once the login is complete, users will need to request permission to be a labeler.
 Instructions on how to do this are available after login. Permission to tag images is given for
 specific catalogs of images — each catalog of image is separate. This was done to help users deal
 with the huge number of options and images that we have uploaded.
 
-## Navigating the site — Select catalog and archive
+## Navigating the Site — Select Catalog and Archive
 
 Once you have permission to label images, you can click on the 'Label image' link on the left of screen to be shown a wizard — which steps a user through the decision of which images to tag. For Hurricane imagery, each storm is its own catalog, and each archive is a set of images taken on a specific day, or on a specific NOAA flight.
 

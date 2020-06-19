@@ -55,6 +55,19 @@ Hello There 👋.
 
 the ID is important as this is how we will refer to it.
 
+:::note
+The stuff between 
+```
+---
+//stuff
+id: fileId
+title: Title of My Page
+sidebar_label: Side Title
+---
+```
+Is called [frontmatter](https://jekyllrb.com/docs/front-matter/), its like a few things describing the `.md` file like and ID, the name to show as the title (Basicaly what is the top level `#` as there can only be one according to markdown convention) or what the sidebar title is.
+:::
+
 3. Inorder to have it show up in the sidebar go to
    `Coastal-Image-Labeler/doc/sidebars.js` and you will see a rather long array
    of JSON objects that describe the current catagories. You can just add this.
