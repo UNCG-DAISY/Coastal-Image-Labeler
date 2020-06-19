@@ -30,7 +30,7 @@ module.exports = {
             "code_documentation/extensions/form/adding_new_question_set",
           ],
         },
-        
+        "code_documentation/tools",
       ],
     },
     {
