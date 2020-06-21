@@ -1,7 +1,7 @@
 ---
 id: cli
-title: CLI
-sidebar_label: CLI
+title: Setting up CLI
+sidebar_label: Setting up CLI
 ---
 
 The CLI is used to enter the data about the catalogs and their archives and
@@ -26,12 +26,16 @@ Running the command below will show all the commands. There are also various sub
 
 ![commands](../../img/code_documentation/commands.png)
 
-:::info
+:::caution
 Almost all commands will require the mongoURI to be set. So make sure you run
 
 ```bash
 cil-dashboard mongoURI set
 ```
 and follow the prompt to set the URI
+
+![commands](../../img/code_documentation/set.png)
+
+![commands](../../img/code_documentation/show.png)
 :::
 
