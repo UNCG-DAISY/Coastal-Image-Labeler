@@ -29,7 +29,7 @@ const exportCommands = {
         let output = []
 
         const catalogs = await CatalogModel.find()
-        let test = 0;
+        //let test = 0;
         for(let i =0;i<catalogs.length;i++) {
             const catalog = catalogs[i];
             const archives = await ArchiveModel.find({
@@ -45,10 +45,10 @@ const exportCommands = {
                 for(let k=0;k<images.length;k++) {
                     let image = images[k];
 
-                    if(test ==0) {
-                        console.log(image)
-                    }
-                    test++;
+                    // if(test ==0) {
+                    //     console.log(image)
+                    // }
+                    // test++;
                     output.push({
                         image,
                         archiveName:archive.name,
