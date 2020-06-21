@@ -1,6 +1,6 @@
-import inquirer from 'inquirer'
-import {isRequired,yesNoOnly,translateYesNoToBool} from '../utils/validation'
-import {getDirectories,getFiles} from '../utils/file'
+// import inquirer from 'inquirer'
+// import {isRequired,yesNoOnly,translateYesNoToBool} from '../utils/validation'
+// import {getDirectories,getFiles} from '../utils/file'
 import MongoConnection from '../lib/MongoConnection'
 import UriManager from '../lib/UriManager'
 
@@ -11,13 +11,13 @@ import colorize from '../utils/colorize'
 import fs from 'fs'
 
 import moment from 'moment';
-import { ImageDocument } from '..'
 
 import unhandledRejection from '../utils/unhandledRejection'
+import image from './image'
 unhandledRejection
 
 const exportCommands = {
-    async exportImageTags(path:string) {
+    async exportImageCollection(path:string) {
         //connect to db
         const uriManager = new UriManager();
         const mongoConnection = new MongoConnection(uriManager.getKey())
@@ -26,23 +26,39 @@ const exportCommands = {
         //Export
         const fileName = moment().format('MM-DD-YYYY-T-hh-mm-ss').toString()
         const outputPath = `${path}/${fileName}_tags_export.json`
-        // const allCatalogs = await CatalogModel.find().populate('archives')
-        // const allArchives = await ArchiveModel.find()
-        //get all images with tags
-        const allImages= await ImageModel.find( {tags : {$exists:true}} )
-        
-        const taggedImages = []
+        let output = []
 
-        allImages.map((image:ImageDocument,imageIndex:number)=>{
-            if(image.tags.length > 0) {
-                console.log(image.tags.length)
-                image.tags.map((tag,tagIndex:number)=>{
-                    taggedImages.push(tag)
+        const catalogs = await CatalogModel.find()
+        let test = 0;
+        for(let i =0;i<catalogs.length;i++) {
+            const catalog = catalogs[i];
+            const archives = await ArchiveModel.find({
+                catalog:catalog._id
+            })
+
+            for(let j=0;j<archives.length;j++) {
+                const archive = archives[j];
+                const images = await ImageModel.find({
+                    archive:archive._id
                 })
+
+                for(let k=0;k<images.length;k++) {
+                    let image = images[k];
+
+                    if(test ==0) {
+                        console.log(image)
+                    }
+                    test++;
+                    output.push({
+                        image,
+                        archiveName:archive.name,
+                        catalogName:catalog.name
+                    })
+                }
             }
-            
-        })
-        fs.writeFileSync(outputPath, JSON.stringify(taggedImages));
+        }
+
+        fs.writeFileSync(outputPath, JSON.stringify(output));
 
         await mongoConnection.close()
         

@@ -17,9 +17,9 @@ import exportCommands from '../commands/export'
 //     })
 
 program
-    .command('tags')
-    .description('Export tags to a folder')
-    .option('-p, --path <type>','Give path to directory to place collections',undefined)
+    .command('image')
+    .description('Export all images to a folder')
+    .option('-p, --path <type>','Give path to directory to place JSON file',undefined)
     .action(async (cmd) => {
         const {
             path
@@ -27,7 +27,7 @@ program
 
         //make sure a path is given
         if(!path) return colorize.warning('Please provide a path')
-        await exportCommands.exportImageTags(path)
+        await exportCommands.exportImageCollection(path)
         
     })
 
