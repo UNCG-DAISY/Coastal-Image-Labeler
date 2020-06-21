@@ -26,12 +26,13 @@ const exportCommands = {
         //Export
         const fileName = moment().format('MM-DD-YYYY-T-hh-mm-ss').toString()
         const outputPath = `${path}/${fileName}_tags_export.json`
-        let output = []
+        let outputData = []
 
         const catalogs = await CatalogModel.find()
         //let test = 0;
+        let imgCount=0;
         for(let i =0;i<catalogs.length;i++) {
-            
+            imgCount=0;
             const catalog = catalogs[i];
             console.log(`Catalog ${catalog.name}`);
             const archives = await ArchiveModel.find({
@@ -51,16 +52,19 @@ const exportCommands = {
                     //     console.log(image)
                     // }
                     // test++;
-                    output.push({
+                    imgCount++;
+                    outputData.push({
                         image,
                         archiveName:archive.name,
                         catalogName:catalog.name
                     })
                 }
             }
+
+            console.log(`${imgCount} Images, for total of ${outputData.length}`)
         }
 
-        fs.writeFileSync(outputPath, JSON.stringify(output));
+        fs.writeFileSync(outputPath, JSON.stringify(outputData));
         console.log(`File written to ${outputPath}`);
         await mongoConnection.close()
         
