@@ -31,7 +31,9 @@ const exportCommands = {
         const catalogs = await CatalogModel.find()
         //let test = 0;
         for(let i =0;i<catalogs.length;i++) {
+            
             const catalog = catalogs[i];
+            console.log(`Catalog ${catalog.name}`);
             const archives = await ArchiveModel.find({
                 catalog:catalog._id
             })
@@ -59,7 +61,7 @@ const exportCommands = {
         }
 
         fs.writeFileSync(outputPath, JSON.stringify(output));
-
+        console.log(`File written to ${outputPath}`);
         await mongoConnection.close()
         
         return {
