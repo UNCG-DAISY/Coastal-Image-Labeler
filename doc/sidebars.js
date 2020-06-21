@@ -18,6 +18,7 @@ module.exports = {
         "code_documentation/project_structure",
         "code_documentation/auth0",
         "code_documentation/database",
+        "code_documentation/cli",
         "code_documentation/adding_images",
         "code_documentation/deployment",
         "code_documentation/data_exporting",

@@ -4,7 +4,7 @@ title: Add Images to Database
 sidebar_label: Add Images to Database
 ---
 
-The overall process to add catalogs, archives and images to the database is as follows.
+The overall process to add catalogs, archives and images to the database is as follows. Please make sure you read about how to use the CLI [here](cli).
 
 1. Use the `cil-dashboard` CLI to the catalogs, archives and images to database.
 
