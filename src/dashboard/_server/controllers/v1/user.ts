@@ -291,9 +291,14 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
     //that is determined by the image selection order of catalog
     let selectionType = catalogDocument?.imageServeOrder?.type ?? 'sequential'
     let indexToSelect = 0;
+
     if(selectionType === 'random') {
         indexToSelect = Math.floor(Math.random()*newImagesForUser.length)
     }
+    if(selectionType === 'sequential') {
+        indexToSelect = 0;
+    }
+    
     console.log(`Image serve index = ${indexToSelect}`)
     const firstPossibleTaggableImage = newImagesForUser[indexToSelect];
     

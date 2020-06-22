@@ -89,7 +89,10 @@ const catalog = {
                     link:catalogData.link,
                     description:catalogData.description
                 },
-                "questionSet":catalogData.questionSet
+                "questionSet":catalogData.questionSet,
+                "imageServeOrder":{
+                    type:catalogData.imageServeOrder ?? 'sequential'
+                }
             })
 
             catalogsMade.push(catalogEntry)
