@@ -198,21 +198,31 @@ export default function GenericHookForm(props) {
         )
     }
 
-    function generateQuickSubmitButton(buttonQuestion) {
+    function generateQuickSubmitButton(buttonQuestions) {
         const {
-            label,key,docLink,tag
-        } = checkboxQuestions
-        console.log("BUTTONS",buttonQuestion)
+            label,key,docLink,buttons
+        } = buttonQuestions
+        // console.log("BUTTONS",buttonQuestions)
 
         return (
             <FormControl fullWidth component="fieldset" margin="normal" key={key}>
                 <FormLabel component="legend" focused={false}>
-                {generateLabel(label,docLink)} {errorMessage}
+                {generateLabel(label,docLink)}
                 </FormLabel>
                 <FormGroup row>
-                    <WaterButton variant="outlined" onClick = {()=>{setGlobalDisable(true);submitTags(tag)}} style={{marginLeft:theme.spacing(2)}} disabled={globalDisable}>
-                    {label}
-                    </WaterButton>
+                    {
+                        buttons.map((buttonData,index)=>{
+                            const {
+                                label:buttonLabel,tag,key:buttonKey
+                            } = buttonData
+                            return (
+                                <WaterButton key={buttonKey} variant="outlined" onClick = {()=>{setGlobalDisable(true);submitTags(tag)}} disabled={globalDisable} style={{marginRight:theme.spacing(2)}}>
+                                    {buttonLabel}
+                                </WaterButton>
+                            )
+                        })
+                    }
+                    
                 </FormGroup>
                
             </FormControl>
@@ -256,6 +266,7 @@ export default function GenericHookForm(props) {
                         {determineQuestionType(questions)}
                     </React.Fragment>
                 </div>
+                <Divider/>
                 <FormControl fullWidth component="fieldset" margin="normal">
                     <div 
                         style={{
@@ -280,6 +291,7 @@ export default function GenericHookForm(props) {
                 </FormControl>
                 
             </form>
+            
             {/* {JSON.stringify(watch())} */}
         </React.Fragment>
     );

@@ -37,7 +37,7 @@ export default class ImageContainer extends React.Component{
             },
         })
         .then(response => {
-            console.log(response)
+            //console.log(response)
             this.state.imageLoading == false
         })
     }

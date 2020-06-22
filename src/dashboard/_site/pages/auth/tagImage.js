@@ -45,8 +45,7 @@ function TagImage(props) {
   )
 
   async function submitTags(tags) {
-    //alert('Submit tags '+imageDocument?._id)
-    //console.log(tags)
+   
     const payload = {
       _id : imageDocument?._id,
       tags: tags,
@@ -54,8 +53,7 @@ function TagImage(props) {
       timeStart: props.timeStart
     }
     console.log(payload)
-    console.log(JSON.stringify(payload))
-    console.log(endpoints.tagImage)
+  
     const responseData = await (await fetch(apiCall(
       endpoints.tagImage
       ), {
@@ -71,8 +69,6 @@ function TagImage(props) {
       alert(responseData?.message )
     }
     
-
-    // console.log(responseData)
     Router.reload()
     
   }

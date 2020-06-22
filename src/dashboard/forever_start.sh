@@ -12,7 +12,7 @@ path_out=$log_folder/$log_out$now
 
 #sudo forever list
 
-sudo NODE_ENV=production forever start -e $path_error -l $path_log -o $path_out ./_dist/server.js 
+NODE_ENV=production forever start -e $path_error -l $path_log -o $path_out ./_dist/server.js 
 
 # cd /home/shahnafis/GitHub/Coastal-Image-Labeler/src/dashboard
 # NODE_ENV=production  pm2 start ./_dist/server.js
