@@ -56,19 +56,6 @@ export default function GenericHookForm(props) {
         submitTags(data)
     };
 
-    function generateMinMaxText(min,max) {
-        // let minText = ""
-        // let maxText = ""
-        // let seperator = ""
-        // seperator = " - "
-        // minText = `Atleast ${min} `
-        // if(max) {
-        //     seperator = " - "
-        //     maxText = `Atmost ${max}`
-        // }
-        // return `${seperator}${minText}${maxText}`
-    }
-
     function generateTextField(textFieldInfo) {
         const {required,key,multiline,rows} = textFieldInfo
         return (
@@ -211,6 +198,27 @@ export default function GenericHookForm(props) {
         )
     }
 
+    function generateQuickSubmitButton(buttonQuestion) {
+        const {
+            label,key,docLink,tag
+        } = checkboxQuestions
+        console.log("BUTTONS",buttonQuestion)
+
+        return (
+            <FormControl fullWidth component="fieldset" margin="normal" key={key}>
+                <FormLabel component="legend" focused={false}>
+                {generateLabel(label,docLink)} {errorMessage}
+                </FormLabel>
+                <FormGroup row>
+                    <WaterButton variant="outlined" onClick = {()=>{setGlobalDisable(true);submitTags(tag)}} style={{marginLeft:theme.spacing(2)}} disabled={globalDisable}>
+                    {label}
+                    </WaterButton>
+                </FormGroup>
+               
+            </FormControl>
+        )
+    }
+
     function determineQuestionType(questionList) {
         return questionList.map((question)=>{
             switch (question.type) {
@@ -222,6 +230,9 @@ export default function GenericHookForm(props) {
                     break;
                 case "textField":
                     return generateTextField(question)
+                    break;
+                case "buttonSubmit":
+                    return generateQuickSubmitButton(question)
                     break;
         
                 default:
@@ -256,9 +267,9 @@ export default function GenericHookForm(props) {
                                 Skip
                             </SkipButton>
 
-                            <WaterButton variant="outlined" onClick = {()=>{setGlobalDisable(true);tagAsWater()}} style={{marginLeft:theme.spacing(2)}} disabled={globalDisable}>
+                            {/* <WaterButton variant="outlined" onClick = {()=>{setGlobalDisable(true);tagAsWater()}} style={{marginLeft:theme.spacing(2)}} disabled={globalDisable}>
                             Tag as all water and skip to next image
-                            </WaterButton>
+                            </WaterButton> */}
                         </div>
                         <div >
                             <SubmitButton type="submit" variant="outlined" color="default" disabled={globalDisable}>
