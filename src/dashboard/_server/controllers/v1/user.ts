@@ -295,7 +295,7 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
         indexToSelect = Math.floor(Math.random()*newImagesForUser.length)
     }
     console.log(`Image serve index = ${indexToSelect}`)
-    const firstPossibleTaggableImage = newImagesForUser[0];
+    const firstPossibleTaggableImage = newImagesForUser[indexToSelect];
     
     //If there is a image that can be tagged, give it back, else tell them 
     //theres no more images to tag.
