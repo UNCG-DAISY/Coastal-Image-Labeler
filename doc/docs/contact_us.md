@@ -4,6 +4,17 @@ title: Contact Us
 sidebar_label: Contact Us
 ---
 
+## Shah Nafis Rafique - Developer
+
+![alt](https://media-exp1.licdn.com/dms/image/C4D03AQF4hLLcnpa1Vw/profile-displayphoto-shrink_200_200/0?e=1597276800&v=beta&t=AaTNzI1aFDJMsqEFdrS_fT9cTuBlTdqRxLfIQ7Fo2FM)  
+
+###  B.S. Computer Science '20
+Contact:
+sarafiqu@uncg.edu   
+[Personal Website](http://shahnafisrafique.com/)    
+[Linkedin](https://www.linkedin.com/in/shahnafis/)
+
+
 ## Dr. Evan Goldstein - Project Lead
 ![alt](https://ges.uncg.edu/wp-content/uploads/2019/08/goldstein-237x300.jpg)
 
@@ -29,13 +40,3 @@ ebgoldst@uncg.edu
 [Website](https://ebgoldstein.wordpress.com/)   
 [Twitter](https://twitter.com/ebgoldstein)   
 <!-- [UNCG Page](https://ges.uncg.edu/person/dr-evan-goldstein/) -->
-
-## Shah Nafis Rafique - Developer
-
-![alt](https://media-exp1.licdn.com/dms/image/C4D03AQF4hLLcnpa1Vw/profile-displayphoto-shrink_200_200/0?e=1597276800&v=beta&t=AaTNzI1aFDJMsqEFdrS_fT9cTuBlTdqRxLfIQ7Fo2FM)  
-
-###  B.S. Computer Science '20
-Contact:
-sarafiqu@uncg.edu   
-[Personal Website](http://shahnafisrafique.com/)    
-[Linkedin](https://www.linkedin.com/in/shahnafis/)
