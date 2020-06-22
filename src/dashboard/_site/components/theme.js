@@ -23,8 +23,20 @@ const theme = createMuiTheme({
       // '"Apple Color Emoji"',
       // '"Segoe UI Emoji"',
       // '"Segoe UI Symbol"',
-      //'Roboto Mono'
-      //'monospace'
+      // 'Roboto Mono'
+      // 'monospace'
+
+      // '-apple-system',
+      // 'BlinkMacSystemFont',
+      // '"Segoe UI"',
+      // 'Roboto',
+      // '"Helvetica Neue"',
+      // 'Arial',
+      // 'sans-serif',
+      // '"Apple Color Emoji"',
+      // '"Segoe UI Emoji"',
+      // '"Segoe UI Symbol"',
+      
       'Roboto Mono'
       //'Roboto'
     ].join(','),
