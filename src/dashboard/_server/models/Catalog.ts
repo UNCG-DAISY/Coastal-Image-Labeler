@@ -48,6 +48,10 @@ const catalogScheme: Schema = new Schema({
         questionSet:{
             type:Types.ObjectId,
             required: [true,'Please provide ID of question set'],
+        },
+        imageServeOrder:{
+            type:Object,
+            required:false
         }
 
         

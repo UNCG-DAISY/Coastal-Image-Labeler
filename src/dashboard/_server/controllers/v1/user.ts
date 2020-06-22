@@ -10,6 +10,7 @@ import {ErrorResponse} from '../../utils/v1/errorResponse'
 import axios from 'axios'
 import {ArchiveModel} from '../../models/Archive'
 import {ImageModel} from '../../models/Image'
+import { CatalogModel } from "../../models/Catalog"
 
 /**
  * @desc        Gets a user by id
@@ -268,6 +269,7 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
 
     //First find the archive with this name
     const archiveDocument = (await ArchiveModel.find({name:archive}))[0]
+    const catalogDocument = await CatalogModel.findById(archiveDocument.catalog);
 
     //Get the list of images already tagged by this user
     const listOfTaggedImagesOfUser = userDocument.imagesTagged
@@ -280,12 +282,19 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
         tillComplete: { $gt: 0 }
     }))
 
-    //Filter out the images that have been tagged
+    //Filter out the images that have been tagged by this user.
     let newImagesForUser = listOfPossibleTaggableImages.filter(function (image) {
         return !listOfTaggedImagesOfUser.includes(image._id)
     });
 
-    //of the images that can be tagged, get the first one
+    //of the images that can be tagged, get the 
+    //that is determined by the image selection order of catalog
+    let selectionType = catalogDocument?.imageServeOrder?.type ?? 'sequential'
+    let indexToSelect = 0;
+    if(selectionType === 'random') {
+        indexToSelect = Math.floor(Math.random()*newImagesForUser.length)
+    }
+    console.log(`Image serve index = ${indexToSelect}`)
     const firstPossibleTaggableImage = newImagesForUser[0];
     
     //If there is a image that can be tagged, give it back, else tell them 

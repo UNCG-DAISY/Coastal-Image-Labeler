@@ -79,7 +79,8 @@ declare namespace psiDashboard  {
     name : string,
     path : string,
     taggable:Boolean,
-    questionSet:Types.ObjectId
+    questionSet:Types.ObjectId,
+    imageServeOrder?:any
   }
 
   type allDocuments = 
