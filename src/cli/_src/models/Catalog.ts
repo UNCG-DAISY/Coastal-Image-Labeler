@@ -7,54 +7,58 @@ import { Schema, model, Model, Document, HookNextFunction, SchemaDefinition, Typ
 import {CatalogDocument} from '../index'
 
 const catalogScheme: Schema = new Schema({
-    // creator: {
-    //     type: Types.ObjectId,
-    //     required: [true,'Please provide the creator id'],
-    // },
-    dateAdded:{
-        type:Date
-    },
-    name : {
-        type: String,
-        required: [true,'Please provide storm name'],
-        unique: true,
-        maxlength: [128,'Name can not be longer than 128 characters']
-    },
-    path : {
-        type: String,
-        required: [true,'Please provide storm path'],
-        unique: true,
-        maxlength: [128,'Name can not be longer than 128 characters']
-    },
-    catalogInfo:{
-        year:{
-            type:Number,
-            required:false
+        // creator: {
+        //     type: Types.ObjectId,
+        //     required: [true,'Please provide the creator id'],
+        // },
+        dateAdded:{
+            type:Date
         },
-        link:{
-            type:String,
-            required:false,
+        name : {
+            type: String,
+            required: [true,'Please provide storm name'],
+            unique: true,
+            maxlength: [128,'Name can not be longer than 128 characters']
         },
-        description:{
-            type:String,
-            required:false
+        path : {
+            type: String,
+            required: [true,'Please provide storm path'],
+            unique: true,
+            maxlength: [128,'Name can not be longer than 128 characters']
         },
+        catalogInfo:{
+            year:{
+                type:Number,
+                required:false
+            },
+            link:{
+                type:String,
+                required:false,
+            },
+            description:{
+                type:String,
+                required:false
+            },
 
-    },
-    taggable: {
-        type:Boolean,
-        required: [true,'Please provide if storm is taggable or not.'],
-    },
-    questionSet:{
-        type:Types.ObjectId,
-        required: [true,'Please provide ID of question set'],
+        },
+        taggable: {
+            type:Boolean,
+            required: [true,'Please provide if storm is taggable or not.'],
+        },
+        questionSet:{
+            type:Types.ObjectId,
+            required: [true,'Please provide ID of question set'],
+        },
+        imageServeOrder:{
+            type:Object,
+            required:false
+        }
+
+        
+    },{
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
     }
-
-    
-},{
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true }
-}
 
 )
 
