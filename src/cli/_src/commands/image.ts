@@ -11,7 +11,7 @@ import {CatalogModel} from '../models/Catalog'
 import {ArchiveModel} from '../models/Archive'
 import {ImageModel} from '../models/Image'
 import colorize from '../utils/colorize'
-import {compressImage} from '../lib/compressImage'
+
 const image = {
     async addImages(options) {
 
