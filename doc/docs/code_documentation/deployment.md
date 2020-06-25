@@ -20,6 +20,13 @@ server {
 	listen 80;
 	listen [::]:80;
 
+	//error page
+	error_page 502 /custom_502.html;
+	location = /custom_502.html {
+			root /usr/share/nginx/html;
+			internal;
+	}
+
 	server_name _;
 	return 301 https://$host$request_uri;
 }
@@ -30,6 +37,13 @@ server {
 	ssl_certificate /home/shahnafis/ssl/coastalimagelabeler_science.crt;
 	ssl_certificate_key /home/shahnafis/ssl/private.key;
 	server_name _;
+
+	//error page
+	error_page 502 /custom_502.html;
+	location = /custom_502.html {
+			root /usr/share/nginx/html;
+			internal;
+	}
 
 	location / {
 		# First attempt to serve request as file, then

@@ -39,6 +39,13 @@ module.exports = {
           ],
         },
         "code_documentation/tools",
+        {
+          type: 'category',
+          label: 'Full VM Deployment',
+          items: [
+            "code_documentation/full_deployment/overview",
+          ],
+        },
       ],
     },
     {

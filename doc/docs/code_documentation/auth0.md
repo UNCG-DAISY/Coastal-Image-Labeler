@@ -24,7 +24,7 @@ This is the contents of the `config.env` file
 
 ```js
 NODE_ENV="development"
-PORT=5000
+PORT=6969
 
 //Both below can be found from MongoDb.
 MONGO_URI_DEV = "The information for development database. "
@@ -37,13 +37,13 @@ AUTH0_CLIENT_ID= "String, found on Auth0, very important that this is kept secre
 AUTH0_CLIENT_SECRET= "String, found on Auth0, very important that this is kept secret"
 
 //make sure the port above and below are same
-AUTH0_CALLBACK_URL= "http://localhost:5000/callback"
-BASE_URL= "http://localhost:5000"
+AUTH0_CALLBACK_URL= "https://coastalimagelabeler.science/callback"
+BASE_URL= "https://coastalimagelabeler.science"
 
 //Where compressed images are saved
 //Inside the file structure is the same as
 //where the image is saved.
-COMPRESS_FOLDER = "/datadrive/compressed/archives"
+COMPRESS_FOLDER = "/datadrive2/compressed/archives"
 ```
 
 ## Finding values on Auth0

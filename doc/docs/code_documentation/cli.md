@@ -18,7 +18,12 @@ compile the CLI due to it still being under development.
 ```bash
 cil-dashboard -V
 ```
-The current verision as of now is `1.0.6`
+The current verision as of now is `1.0.9`
+
+
+:::caution
+**I reccomend building the CLI everytime you use it, just incase some update happened**
+:::
 
 ## Running Commands
 
