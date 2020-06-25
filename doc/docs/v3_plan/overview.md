@@ -112,6 +112,16 @@ bit of a weird one since Mongoose handles error checking
 DB interface (**optional**)
 :::
 
+
+### Continuous Integration/Unit Testing
+
+Simply put these are two things that help make sure the code is deployed on time
+and works. Plus helps set up a work flow.
+
+:::note
+Add CI/CD and Unit testing
+:::
+
 ### Other
 
 This one is a little bit odd, but planing out the features and setting them in
@@ -120,6 +130,8 @@ stone will allow for better planning and organization of code
 :::note
 Plan all features and stick to them
 :::
+
+
 
 ## Summary
 
@@ -134,5 +146,6 @@ A Summary of all the major changes.
 6. Use more Mongoose features (Having archives keep track of image numbers) (**optional**)
 7. See if Auth0 has someway to enter user info into DB on signup
 8. DB interface (**optional**)
-9. Plan all features and stick to them
+9. Add CI/CD and Unit testing
+10. Plan all features and stick to them
 :::
