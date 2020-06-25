@@ -75,14 +75,17 @@ module.exports = {
       ],
     }
   ],
-  docs2:[
+  v3Plan:[
     {
       type: 'category',
-      label: 'My Catagory',
+      label: 'V3 Plan',
       items: [
         //Path to the file relative from Coastal-Image-Labeler/doc/docs/ 
         //With the filename being replace with the ID 
-        "my_catagory/fileId",
+        "v3_plan/overview",
+        "v3_plan/TypeScript",
+        "v3_plan/Frontend",
+        
       ],
     }
   ]
