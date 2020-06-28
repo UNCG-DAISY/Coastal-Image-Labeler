@@ -91,18 +91,10 @@ module.exports = {
         //With the filename being replace with the ID 
         "v3_plan/overview",
         "v3_plan/TypeScript",
-        "v3_plan/Frontend",
-        
+        "v3_plan/nextjsreactjs",
+        "v3_plan/nodejs",
+        "v3_plan/featurelist"
       ],
     }
   ]
-  // "3rdLabel": [
-  //   {
-  //     type: 'category',
-  //     label: 'Test',
-  //     items: [
-  //       'announcements/index',
-  //     ],
-  //   }, 
-  // ],
 };

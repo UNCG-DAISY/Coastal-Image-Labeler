@@ -1,5 +1,5 @@
 ---
-id: Frontend 
+id: nextjsreactjs 
 title: Next.js/React.js 
 sidebar_label: Next.js/React.js
 ---
@@ -7,17 +7,17 @@ sidebar_label: Next.js/React.js
 For now the best way to plan for reuseability is to simply list out the pages
 with their features and components.
 
-```
-\_app
+```js
+"\_app":
     - getInitProps
         - Check for user
-\index
+"\index":
     - layout component
         - appbar component
         - drawer component
     - text container component to show message
-\auth
-    \auth\index
+"\auth":
+    "\auth\index":
         - layout component
             - appbar component
             - drawer component
@@ -27,7 +27,7 @@ with their features and components.
         - getInitProps
             - Check user
             - Information for resume tagging
-    \auth\start_tagging
+    "\auth\start_tagging":
         - A wizard/large form for selecting catalog and archive
             - A wizard is probably best
         - getInitProps
@@ -35,7 +35,7 @@ with their features and components.
             - Check tagger
             - Check any catalogs
             - Get catalogs that can be tagged
-    \auth\tag_image?catalog=X&archive=X
+    "\auth\tag_image?catalog=X&archive=X":
         - React-Hook-Form
             - Get questions based off catalog
             - Generic button component
@@ -46,7 +46,7 @@ with their features and components.
             - Check tagger
             - Check catalog    
             - Get image document
-    \auth\profile
+    "\auth\profile":
         - Section to show tagged images
             - Listed with a sortable table
             - Shows the data as a modal

@@ -63,7 +63,7 @@ Layout all possible endpoints beforehand
 That way proper planning can be done. Another key change would be to
 
 :::note
-Create atmoic middlewares that perform basic tasks
+Create atomic middlewares that perform basic tasks
 :::
 
 For example having a middleware that checks to see if a body was sent in a POST
@@ -94,6 +94,38 @@ the static methods, however the use as it is now is currently fine.
 Use more Mongoose features (Having archives keep track of image numbers) (**optional**)
 :::
 
+#### Background Process
+
+Currently the project uses [`forever`](https://www.npmjs.com/package/forever) to
+have the server run as a background process. Its simple but there is some
+downsides with it. As such instead of forever the v3 should use [`pm2`](https://pm2.keymetrics.io/)
+which a more popular and offers more features like cpu/memory history
+
+:::note
+Use PM2, [guide](https://www.youtube.com/watch?v=oykl1Ih9pMg)
+:::
+
+#### SSL
+
+There was nothing fundamentally wrong with the way the current SSL certs where
+generate, it just was a pain. [`Lets Encrypt`](https://letsencrypt.org/) is much
+easier to use.
+
+:::note
+Use Lets Encrypt, [guide](https://www.youtube.com/watch?v=oykl1Ih9pMg)
+:::
+
+
+#### Logging
+
+Logging currently as it is only helps in a few cases, and usualy is buggy due to
+having colors in the console. V3 should have a better logging system with colors
+for dev mode and no colors for production along with a centeralized location for logging
+
+:::note
+Better logging
+:::
+
 ### Auth0 and MongoDB
 
 The current way to detect a new user is a bit hacky. Every page essentially
@@ -102,7 +134,7 @@ new user. Auth0 might potentially have a solution to this where on signup it
 creates the user.
 
 :::note 
-See if Auth0 has someway to enter user info into DB on signup
+See if Auth0 has someway to enter user info into DB on signup. [Possible soultion](https://auth0.com/blog/get-realtime-auth-events-with-auth0-and-pusher/)
 :::
 
 One other change would be to have a interface for MongoDB, but this is a little
@@ -142,10 +174,13 @@ A Summary of all the major changes.
 2. Structure code for better reuseability for the frontend
 3. Create more atomic components
 4. Layout all possible endpoints beforehand
-5. Create atmoic middlewares that perform basic tasks
+5. Create atomic middlewares that perform basic tasks
 6. Use more Mongoose features (Having archives keep track of image numbers) (**optional**)
-7. See if Auth0 has someway to enter user info into DB on signup
-8. DB interface (**optional**)
-9. Add CI/CD and Unit testing
-10. Plan all features and stick to them
+7. Use PM2, [guide](https://www.youtube.com/watch?v=oykl1Ih9pMg)
+8. Use Lets Encrypt, [guide](https://www.youtube.com/watch?v=oykl1Ih9pMg)
+9. Better logging
+10. See if Auth0 has someway to enter user info into DB on signup. [Possible soultion](https://auth0.com/blog/get-realtime-auth-events-with-auth0-and-pusher/)
+11. DB interface (**optional**)
+12. Add CI/CD and Unit testing
+13. Plan all features and stick to them
 :::
