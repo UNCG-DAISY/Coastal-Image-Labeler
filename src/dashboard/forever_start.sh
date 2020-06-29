@@ -6,6 +6,9 @@ log_out=forever_out
 var=$(date +"%FORMAT_STRING")
 now=_$(date +"%m_%d_%Y-%H.%M.%S")
 
+log_folder=$log_folder/$now
+[ ! -d $log_folder ] && mkdir $log_folder
+
 path_log=$log_folder/$log_name$now 
 path_error=$log_folder/$log_error$now 
 path_out=$log_folder/$log_out$now 
