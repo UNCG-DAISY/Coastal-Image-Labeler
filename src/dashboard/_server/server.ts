@@ -36,18 +36,17 @@ import Auth0Strategy from "passport-auth0";
 import uid from 'uid-safe';
 import {authRoutes} from "./utils/v1/auth-routes"//Handles login and logout
 
-import fs from 'fs';
-import https from 'https'
-
-import bodyParser from 'body-parser'
 import cors from 'cors'
-
+import schedule  from 'node-schedule';
 import colorize from './utils/v1/colorize'
+import moment from 'moment';
 
 import {
     logger,
     expressLogger
 } from './utils/v1/logger'
+
+import {startCronJob} from './utils/v1/exportDbData'
 
 // Load env vars
 dotenv.config({  
@@ -69,10 +68,13 @@ const handle = nextApp.getRequestHandler()
 
 nextApp.prepare()
 .then(async () => {
-
+    
 
     //Connect to DB via Mongoose
     connectDB()
+
+    startCronJob('00 12 * * *');
+    
 
     //Create our application
     const app: Application = express();
