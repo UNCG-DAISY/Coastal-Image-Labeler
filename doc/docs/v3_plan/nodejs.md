@@ -8,10 +8,14 @@ sidebar_label: Node.js
 
 The endpoints would still be structured the same way where they are grouped by
 what Mongoose model they interact with. In truth it probably would be best to
-build the frontend first then figure out the endpoints
+build the frontend first as a skeleton then figure out the endpoints
 
 :::note
 Generally wont use GET requests due to no body being passed and possible caching issues.
+:::
+
+:::caution
+Still being worked on
 :::
 
 ### User

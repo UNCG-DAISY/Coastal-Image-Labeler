@@ -49,7 +49,7 @@ with their features and components.
     "\auth\profile":
         - Section to show tagged images
             - Listed with a sortable table
-            - Shows the data as a modal
+            - Shows the tag data as a modal
                 - Modal component
         - Section to show catalog and archives
             - Can request perms to tag archive

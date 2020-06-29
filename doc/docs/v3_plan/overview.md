@@ -170,17 +170,17 @@ Plan all features and stick to them
 A Summary of all the major changes.
 
 :::info Major Changes for V3
-1. Use TypeScript across all sections of the project
-2. Structure code for better reuseability for the frontend
-3. Create more atomic components
-4. Layout all possible endpoints beforehand
-5. Create atomic middlewares that perform basic tasks
-6. Use more Mongoose features (Having archives keep track of image numbers) (**optional**)
-7. Use PM2, [guide](https://www.youtube.com/watch?v=oykl1Ih9pMg)
-8. Use Lets Encrypt, [guide](https://www.youtube.com/watch?v=oykl1Ih9pMg)
-9. Better logging
-10. See if Auth0 has someway to enter user info into DB on signup. [Possible soultion](https://auth0.com/blog/get-realtime-auth-events-with-auth0-and-pusher/)
-11. DB interface (**optional**)
-12. Add CI/CD and Unit testing
-13. Plan all features and stick to them
+1. Use TypeScript across all sections of the project (Static type checking)
+2. Structure code for better reuseability for the frontend (Modular code)
+3. Create more atomic components (Modular code)
+4. Layout all possible endpoints beforehand (Organization)
+5. Create atomic middlewares that perform basic tasks (Modular code)
+6. Use more Mongoose features (Having archives keep track of image numbers) (Automatic stats)
+7. Use PM2, [guide](https://www.youtube.com/watch?v=oykl1Ih9pMg) (Logging,management)
+8. Use Lets Encrypt, [guide](https://www.youtube.com/watch?v=oykl1Ih9pMg) (Ease of life)
+9. Better logging (Logging)
+10. See if Auth0 has someway to enter user info into DB on signup. [Possible soultion](https://auth0.com/blog/get-realtime-auth-events-with-auth0-and-pusher/) (Automatic code)
+11. DB interface (**optional**) (Input checking)
+12. Add CI/CD and Unit testing (Work Flow)
+13. Plan all features and stick to them (Organization)
 :::
