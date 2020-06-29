@@ -65,21 +65,7 @@ const nextApp = next({
 const handle = nextApp.getRequestHandler()
 
 // https://github.com/node-fetch/node-fetch/issues/19#issuecomment-369653134
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-
-//https keys
-const cert = fs.readFileSync('/home/shahnafis/ssl/coastalimagelabeler_science.crt');
-const ca = fs.readFileSync('/home/shahnafis/ssl/coastalimagelabeler_science.ca-bundle');
-const key = fs.readFileSync('/home/shahnafis/ssl/private.key');
-//console.log(cert,ca)
-
-const https_options = {
-    //key: fs.readFileSync('./_config/key.pem'),
-    //cert:fs.readFileSync('./_config/cert.pem')
-    cert:cert, 
-    ca:ca,
-    key:key
-}
+//process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 nextApp.prepare()
 .then(async () => {
@@ -95,7 +81,7 @@ nextApp.prepare()
     // the "X-Forwarded-Proto" header field to be trusted so its
     // value can be used to determine the protocol. See 
     // http://expressjs.com/api#app-settings for more details.
-    app.enable('trust proxy');
+    //app.enable('trust proxy');
     //Security
     // 2 - add session management to Express
     const sessionConfig = {
@@ -156,20 +142,6 @@ nextApp.prepare()
     //logging
     app.use(expressLogger)
 
-    //http to https redirect?
-    // app.use (function (req, res, next) {
-    //     if (req.secure) {
-    //         //console.log("Connection is secure")
-    //         // request was via https, so do no special handling
-    //         next();
-    //     } else {
-    //         console.log("Redirecting http to https");
-    //         // request was via http, so redirect to https
-    //         res.redirect('https://' + req.headers.host + req.url);
-    //     }
-    // });
-   
-
     //Mount routers, appi calls
     //The first parameter is the name of the path and the 2nd is the file to use if an Api call with that path is received
     //For example
@@ -193,35 +165,20 @@ nextApp.prepare()
         return handle(req, res)
     })
 
-    
-
     //Get the port and have the site on that port
     const PORT = (process.env.PORT as unknown as number) ?? 5000;
-
-    // https.createServer(https_options, app)
-    //     .listen(PORT, function () {
-    //     console.log(`Server running on HTTPS ${PORT}!`)
-    // })
-
-    //app.listen(80, () => console.log(`Listening to port 80 for HTTP redirect`))
-
-    const server = app.listen(PORT,() => {
-        
-        //@ts-ignore
+    const server = app.listen(PORT,() => {  
         colorize.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
-        //console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.green.bold.underline)
     })
 
     //Handle unhandled promise rejections
     process.on('unhandledRejection', (err:any,promise: Promise<any>) => {
-
-        // console.log(`Error: ${err?.message ?? 'undefined error'}`.red)
         colorize.error(`Error: ${err?.message ?? 'undefined error'}`)
         
         //Exit server on fail
-        // server.close(() => {
-        //     process.exit(1)
-        // })
+        server.close(() => {
+            process.exit(1)
+        })
     })
   
 })
