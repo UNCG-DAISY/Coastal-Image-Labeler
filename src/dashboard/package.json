@@ -13,7 +13,8 @@
     "basW": "npm run build && npm run startW",
     "nodemonTSC": "nodemon --exec ts-node-script ./_server/server.ts",
     "dev": "npm run nodemonTSC",
-    "test": "tsc --help"
+    "test": "tsc --help",
+    "baf":"sudo npm run build && bash forever_start.sh"
   },
   "author": "Shah Nafis Rafique",
   "license": "MIT",
