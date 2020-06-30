@@ -40,6 +40,11 @@ import cors from 'cors'
 import schedule  from 'node-schedule';
 import colorize from './utils/v1/colorize'
 import moment from 'moment';
+import fs from 'fs';
+import https from 'https';
+import rootCas from 'ssl-root-cas/latest';
+let sslRootCas = rootCas.create()
+require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
 
 import {
     logger,
@@ -64,7 +69,18 @@ const nextApp = next({
 const handle = nextApp.getRequestHandler()
 
 // https://github.com/node-fetch/node-fetch/issues/19#issuecomment-369653134
+//This fixes the issue "unable to verify the first certificate" which I have not been able to fix.....
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
+const cert = fs.readFileSync(`${process.env.CERT_FOLDER}/cert.pem`, 'ascii');
+const ca = fs.readFileSync(`${process.env.CERT_FOLDER}/fullchain.pem`, 'ascii');
+const fullchain = fs.readFileSync(`${process.env.CERT_FOLDER}/fullchain.pem`, 'ascii');
+const key = fs.readFileSync(`${process.env.CERT_FOLDER}/privkey.pem`, 'ascii');
+
+const https_options = {
+    cert:fullchain, 
+    key:key
+}
 
 nextApp.prepare()
 .then(async () => {
@@ -73,8 +89,8 @@ nextApp.prepare()
     //Connect to DB via Mongoose
     connectDB()
 
+    //cron job for mongo backup
     startCronJob('00 12 * * *');
-    
 
     //Create our application
     const app: Application = express();
@@ -83,7 +99,8 @@ nextApp.prepare()
     // the "X-Forwarded-Proto" header field to be trusted so its
     // value can be used to determine the protocol. See 
     // http://expressjs.com/api#app-settings for more details.
-    //app.enable('trust proxy');
+    app.enable('trust proxy');
+
     //Security
     // 2 - add session management to Express
     const sessionConfig = {
@@ -169,6 +186,7 @@ nextApp.prepare()
 
     //Get the port and have the site on that port
     const PORT = (process.env.PORT as unknown as number) ?? 5000;
+    
     const server = app.listen(PORT,() => {  
         colorize.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
     })

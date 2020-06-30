@@ -11,7 +11,7 @@ const apiCall = (route) => {
         return `${route}`
     }
     else {
-        return `${protocal}://${myIp}${route}`
+        return `${protocal}://coastalimagelabeler.science${route}`
     }
 
     //return `${route}`
