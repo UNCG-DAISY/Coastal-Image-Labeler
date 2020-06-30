@@ -10,6 +10,8 @@ https://github.com/UNCG-DAISY/Coastal-Image-Labeler/commits/master)
 
 ### It's a labeling tool for Coastal Images!
 
+![Labeler](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/blob/master/doc/static/img/labeler.gif)
+
 The labeler is deployed here: www.coastalimagelabeler.science
 
 Check out the docs for more info. [![Documentation](https://img.shields.io/badge/Documentation-Click%20Me-brightgreen)](
