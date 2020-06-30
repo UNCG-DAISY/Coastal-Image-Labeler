@@ -77,7 +77,7 @@ const ca = fs.readFileSync(`${process.env.CERT_FOLDER}/fullchain.pem`, 'ascii');
 const fullchain = fs.readFileSync(`${process.env.CERT_FOLDER}/fullchain.pem`, 'ascii');
 const key = fs.readFileSync(`${process.env.CERT_FOLDER}/privkey.pem`, 'ascii');
 
-const https_options = {
+const credentials = {
     cert:fullchain, 
     key:key
 }
@@ -90,7 +90,7 @@ nextApp.prepare()
     connectDB()
 
     //cron job for mongo backup
-    startCronJob('00 12 * * *');
+    startCronJob('00 14 * * *');
 
     //Create our application
     const app: Application = express();
@@ -187,6 +187,7 @@ nextApp.prepare()
     //Get the port and have the site on that port
     const PORT = (process.env.PORT as unknown as number) ?? 5000;
     
+    //const server = https.createServer(credentials, app).listen(PORT);
     const server = app.listen(PORT,() => {  
         colorize.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
     })
