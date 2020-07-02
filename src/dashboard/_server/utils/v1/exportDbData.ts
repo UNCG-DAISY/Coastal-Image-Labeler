@@ -8,7 +8,10 @@ import {ArchiveModel} from '../../models/Archive'
 import {CatalogModel} from '../../models/Catalog'
 import {QuestionSetModel} from '../../models/QuestionSet'
 
+import parser from 'cron-parser';
+
 function startCronJob(time) {
+
     let dailyExportJob = schedule.scheduleJob(time, async function(){
         
         const exportTimeName = moment().format('MM-DD-YYYY-T-hh-mm-ss').toString();
@@ -59,7 +62,8 @@ function startCronJob(time) {
         
 
     });
-    console.log(`CRON job for daily export set at ${time}`)
+    let interval = parser.parseExpression(time);
+    console.log(`CRON job for daily export set at = ${interval.next().toString()}`)
 }
 
 export {

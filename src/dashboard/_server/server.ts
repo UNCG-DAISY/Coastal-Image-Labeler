@@ -46,6 +46,8 @@ import rootCas from 'ssl-root-cas/latest';
 let sslRootCas = rootCas.create()
 require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
 
+
+
 import {
     logger,
     expressLogger
@@ -81,6 +83,7 @@ const credentials = {
     cert:fullchain, 
     key:key
 }
+
 
 nextApp.prepare()
 .then(async () => {

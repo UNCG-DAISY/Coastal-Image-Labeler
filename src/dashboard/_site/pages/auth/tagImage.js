@@ -105,9 +105,10 @@ function TagImage(props) {
 
     return taggingForm
   }
-
+  
   return (
-    <Layout user={props.user} pageTitle={`Tagging Session: ${imageDocument?.id}`}>
+    <Layout user={props.user} pageTitle="You're Tagging Now! 👍">
+      {/* `Tagging Session: ${imageDocument?.id}` */}
       <Container maxWidth="md">
         <Box my={0}>  
           {       
