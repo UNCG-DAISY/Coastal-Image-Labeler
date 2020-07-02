@@ -22,6 +22,11 @@ server {
 	listen 80;
 	listen [::]:80;
 	
+	error_page 502 /custom_502.html;
+	location = /custom_502.html {
+			root /usr/share/nginx/html;
+			internal;
+	}
 
 	server_name _;
 	return 301 https://$host$request_uri;
@@ -30,8 +35,8 @@ server {
 server {
 	
 	listen 443 ssl;
-	ssl_certificate /home/shahnafis/ssl/coastalimagelabeler_science.crt;
-	ssl_certificate_key /home/shahnafis/ssl/private.key;
+    ssl_certificate /etc/letsencrypt/live/coastalimagelabeler.science/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/coastalimagelabeler.science/privkey.pem; # managed by Certbot
 	
 	# SSL configuration
 	#
@@ -54,14 +59,30 @@ server {
 	# Add index.php to the list if you are using PHP
 	
 
-	server_name _;
+	# server_name _;
+	server_name coastalimagelabeler.science www.coastalimagelabeler.science;
+
+	error_page 502 /custom_502.html;
+	location = /custom_502.html {
+			root /usr/share/nginx/html;
+			internal;
+	}
 
 	location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
-		proxy_set_header   X-Forwarded-For $remote_addr;
-		proxy_set_header   Host $http_host;
-		proxy_pass "http://127.0.0.1:6969";
+
+		# proxy_set_header   X-Forwarded-For $remote_addr;
+		# proxy_set_header   Host $http_host;
+		# proxy_pass "http://127.0.0.1:6969";
+
+		proxy_pass http://localhost:6969; #whatever port your app runs on
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+
 	}
 
 	# pass PHP scripts to FastCGI server
@@ -81,6 +102,8 @@ server {
 	#location ~ /\.ht {
 	#	deny all;
 	#}
+
+
 }
 
 

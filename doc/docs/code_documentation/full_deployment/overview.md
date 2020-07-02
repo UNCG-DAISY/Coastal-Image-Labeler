@@ -100,6 +100,8 @@ and then run this to reload.
 sudo systemctl reload nginx
 ```
 
+**Make sure to create the SSL certs with LetsEncrypt.**
+
 ### Images
 
 Make sure to compress the images, and set up the path in the config.env. Else
