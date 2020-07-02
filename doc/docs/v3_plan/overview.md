@@ -94,6 +94,12 @@ the static methods, however the use as it is now is currently fine.
 Use more Mongoose features (Having archives keep track of image numbers) (**optional**)
 :::
 
+Also have increased error checking for tags by having a tag model that ensures ID's are present
+
+:::note
+Create a tag model that ensure error checking
+:::
+
 #### Background Process
 
 Currently the project uses [`forever`](https://www.npmjs.com/package/forever) to
@@ -176,11 +182,12 @@ A Summary of all the major changes.
 4. Layout all possible endpoints beforehand (Organization)
 5. Create atomic middlewares that perform basic tasks (Modular code)
 6. Use more Mongoose features (Having archives keep track of image numbers) (Automatic stats)
-7. Use PM2, [guide](https://www.youtube.com/watch?v=oykl1Ih9pMg) (Logging,management)
-8. Use Lets Encrypt, [guide](https://www.youtube.com/watch?v=oykl1Ih9pMg) (Ease of life)
-9. Better logging (Logging)
-10. See if Auth0 has someway to enter user info into DB on signup. [Possible soultion](https://auth0.com/blog/get-realtime-auth-events-with-auth0-and-pusher/) (Automatic code)
-11. DB interface (**optional**) (Input checking)
-12. Add CI/CD and Unit testing (Work Flow)
-13. Plan all features and stick to them (Organization)
+7. Create a tag model that ensure error checking
+8. Use PM2, [guide](https://www.youtube.com/watch?v=oykl1Ih9pMg) (Logging,management)
+9. Use Lets Encrypt, [guide](https://www.youtube.com/watch?v=oykl1Ih9pMg) (Ease of life)
+10. Better logging (Logging)
+11. See if Auth0 has someway to enter user info into DB on signup. [Possible soultion](https://auth0.com/blog/get-realtime-auth-events-with-auth0-and-pusher/) (Automatic code)
+12. DB interface (**optional**) (Input checking)
+13. Add CI/CD and Unit testing (Work Flow)
+14. Plan all features and stick to them (Organization)
 :::
