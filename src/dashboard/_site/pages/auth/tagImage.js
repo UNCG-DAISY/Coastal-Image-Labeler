@@ -24,9 +24,8 @@ function TagImage(props) {
     questionSetData
   } = props
   const classes = useStyles();
-  //amenadiel/a420/420_test.png
 
-  // console.log(imageDocument?.id)
+
   const imgUrl = endpoints.showImage(imageDocument?.id)
   const imgUrlCompressed = endpoints.showImage(imageDocument?.id,true)
 
@@ -204,7 +203,17 @@ TagImage.getInitialProps = async ctx => {
       errorMessage:getCatalogQuestion.message
     })
   }
-  //console.log(getCatalogQuestion.data)
+  
+  console.log(`Image document is`)
+  console.log(imageDocument)
+
+  if(imageDocument == undefined || imageDocument.id === undefied) {
+    return ({
+      error:true,
+      errorTitle:'No more images to tag',
+      errorMessage:`There are no more images for you to tag in archive ${query.archive}. Please select a different archive or catalog.`
+    })
+  }
 
   return {
     error:false,
