@@ -207,7 +207,7 @@ TagImage.getInitialProps = async ctx => {
   console.log(`Image document is`)
   console.log(imageDocument)
 
-  if(imageDocument == undefined || imageDocument.id === undefied) {
+  if(imageDocument == undefined || imageDocument.id === undefined) {
     return ({
       error:true,
       errorTitle:'No more images to tag',
