@@ -3,7 +3,17 @@ id: indexDoc
 title: Coastal Image Labeler
 sidebar_label: Introduction
 ---
+
+
 ## Project Overview
+
+[![Documentation](https://img.shields.io/badge/Documentation-Click%20Me-brightgreen)](
+https://uncg-daisy.github.io/Coastal-Image-Labeler/)
+[![Last Commit](https://img.shields.io/github/last-commit/UNCG-DAISY/Coastal-Image-Labeler)](
+https://github.com/UNCG-DAISY/Coastal-Image-Labeler/commits/master)
+[![DOI](https://zenodo.org/badge/226252747.svg)](https://zenodo.org/badge/latestdoi/226252747)
+[![BUILD](https://travis-ci.com/UNCG-DAISY/Coastal-Image-Labeler.svg?branch=master)](https://travis-ci.com/UNCG-DAISY/Coastal-Image-Labeler.svg?branch=master)
+
 
 Generally, the the Coastal Image Labeler is server that provides users with
 images to be labeled using a given set of questions. We designed the labeler to

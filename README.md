@@ -5,7 +5,7 @@ https://uncg-daisy.github.io/Coastal-Image-Labeler/)
 [![Last Commit](https://img.shields.io/github/last-commit/UNCG-DAISY/Coastal-Image-Labeler)](
 https://github.com/UNCG-DAISY/Coastal-Image-Labeler/commits/master)
 [![DOI](https://zenodo.org/badge/226252747.svg)](https://zenodo.org/badge/latestdoi/226252747)
-<!--[![BUILD](https://travis-ci.com/ShahNafis/ci-cd-test.svg?branch=master)](https://travis-ci.com/ShahNafis/ci-cd-test.svg?branch=master)-->
+[![BUILD](https://travis-ci.com/UNCG-DAISY/Coastal-Image-Labeler.svg?branch=master)](https://travis-ci.com/UNCG-DAISY/Coastal-Image-Labeler.svg?branch=master)
 
 
 ### It's a labeling tool for Coastal Images!
