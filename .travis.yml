@@ -14,20 +14,20 @@ cache:
 #     - cd ./doc && npm install && GIT_USER="${GH_NAME}" docusaurus deploy
 
 # Overall builds only on branches not master
-if: branch != master
-script:
-    - git config --global user.name "${GH_NAME}"
-    - git config --global user.email "${GH_EMAIL}"
-    - echo "machine github.com login ${GH_NAME} password ${GH_TOKEN}" > ~/.netrc
-    - cd ./docs && npm install && GIT_USER="${GH_NAME}" docusaurus deploy
-
-# Overall builds only on master and PR into master
-# if: branch = master
+# if: branch != master
 # script:
 #     - git config --global user.name "${GH_NAME}"
 #     - git config --global user.email "${GH_EMAIL}"
 #     - echo "machine github.com login ${GH_NAME} password ${GH_TOKEN}" > ~/.netrc
 #     - cd ./docs && npm install && GIT_USER="${GH_NAME}" docusaurus deploy
+
+# Overall builds only on master and PR into master
+if: branch = master
+script:
+    - git config --global user.name "${GH_NAME}"
+    - git config --global user.email "${GH_EMAIL}"
+    - echo "machine github.com login ${GH_NAME} password ${GH_TOKEN}" > ~/.netrc
+    - cd ./docs && npm install && GIT_USER="${GH_NAME}" docusaurus deploy
 
 # Job is built only if master
 # jobs:
