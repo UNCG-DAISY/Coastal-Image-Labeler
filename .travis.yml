@@ -1,7 +1,10 @@
 language: node_js
 node_js:
   - "stable"
-
+# No emails plz
+notifications:
+  email:
+    on_failure: always
 # Build Doc site
 cache:
   yarn: true
