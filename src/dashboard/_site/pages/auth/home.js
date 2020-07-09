@@ -48,15 +48,8 @@ function Home(props) {
         },
       })).json()
       
-      console.log('Got data')
-      console.log(getUserResumeInfo?.data?.resumeObj)
       setResumeObj(getUserResumeInfo?.data?.resumeObj)
       setImagesTagged(getUserResumeInfo?.data?.allImagesTagged)
-
-      // return {
-      //   resumeObj:getUserResumeInfo?.data?.resumeObj,
-      //   allImagesTagged:getUserResumeInfo?.data?.allImagesTagged
-      // }
     } 
     else {
       setResumeObj(undefined)
@@ -74,13 +67,6 @@ function Home(props) {
   
   const classes = useStyles();
 
-  // const {
-  //   resumeObj,
-  //   allImagesTagged
-  // } = getResumeObject()
-
-
-
   return (
     <Layout user={props.user} pageTitle="Home">
       <Container maxWidth="md">
@@ -88,13 +74,17 @@ function Home(props) {
           <Typography variant="h4" component="h1" gutterBottom color="secondary">
             Hello There!
           </Typography>
-          {resumeObj? Object.keys(resumeObj): "-"}
           <Typography variant="body1" component="h1" gutterBottom>
             <Paper elevation={3} variant="outlined" style={{padding:10}}>
-              {/* Welcome {props.user.displayName}! You can start tagging by clicking on <u><b>Image Tag</b></u> on the left, or resume an archive you have
-              begun by pressing the buttons/rows below */}
+              Welcome {props.user.displayName}! If you have permission to label images, you can start  by clicking "Pick Catalog to Label" on the left, 
+              or resume labeling a catalog you have started using the table below. 
+              To request permission to label images, please contact 
+              Evan Goldstein at <Linky color={theme.palette.secondary.main} href="mailto:ebgoldst@uncg.edu"> ebgoldst@uncg.edu</Linky>. 
+              Also, please check out 
+              the project <Linky color={theme.palette.secondary.main} href="https://github.com/UNCG-DAISY/Coastal-Image-Labeler" target="_blank">repository</Linky> and 
+              the project  <Linky color={theme.palette.secondary.main} href="https://uncg-daisy.github.io/Coastal-Image-Labeler/" target="_blank">documentation</Linky>.
 
-              Welcome {props.user.displayName}! If you have permission to tag images, 
+              {/* Welcome {props.user.displayName}! If you have permission to tag images, 
               you can start tagging by clicking on <Linky href="/auth/pickCatalog" color={theme.palette.secondary.main}>Image Tag</Linky> on the left, or resume an 
               archive you have begun by pressing the buttons below.
               To request permission to tag images, 
@@ -102,7 +92,7 @@ function Home(props) {
               Evan Goldstein at <Linky color={theme.palette.secondary.main} href="mailto:ebgoldst@uncg.edu">
                 ebgoldst@uncg.edu
               </Linky> You can see the project repo <Linky color={theme.palette.secondary.main} href="https://github.com/UNCG-DAISY/Coastal-Image-Labeler" target="_blank">here</Linky> or
-              the project documentation <Linky color={theme.palette.secondary.main} href="https://uncg-daisy.github.io/Coastal-Image-Labeler/" target="_blank">here</Linky>.
+              the project documentation <Linky color={theme.palette.secondary.main} href="https://uncg-daisy.github.io/Coastal-Image-Labeler/" target="_blank">here</Linky>. */}
             </Paper>
           </Typography> 
 

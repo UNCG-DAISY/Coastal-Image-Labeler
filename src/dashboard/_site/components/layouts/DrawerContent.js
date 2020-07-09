@@ -101,11 +101,11 @@ function LoggedInLinks(props) {
                  <a href={'/auth/pickCatalog'} className= {classes.link} key={'PickStorm'}>
                     <ListItem button style={{color:colorOfLinks}}>
                         <ListItemIcon style={{color:'inherit'}}><LabelIcon/></ListItemIcon>
-                        <ListItemText primary={'Image Tag'} />
+                        <ListItemText primary={'Pick Catalog to Label'} />
                     </ListItem>
                 </a>
             }
-            {
+            {/* {
                 allowedPages?.admin &&
                  <a href={'/auth/pickStorm'} className= {classes.link} key={'AdminPage'}>
                     <ListItem button style={{color:colorOfLinks}}>
@@ -113,7 +113,7 @@ function LoggedInLinks(props) {
                         <ListItemText primary={'Admin'} />
                     </ListItem>
                 </a>
-            }
+            } */}
         </React.Fragment>
     )
 }
