@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState,useEffect  } from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -16,6 +16,8 @@ import endpoints from '../../components/endpoints'
 import {getMongoDBUser} from '../../components/utils/getMongoUser'
 import theme from '../../components/theme'
 import Button from '@material-ui/core/Button';
+import Skeleton from '@material-ui/lab/Skeleton';
+
 // import TestStormForm from '../../components/forms/testStormForm'
 // import TestForm from '../../components/forms/testForm'
 // import TestForm2 from '../../components/forms/testForm2'
@@ -28,11 +30,56 @@ function Home(props) {
   } = props?.user?.mongoUser
 
   const {
-    resumeObj,
-    allImagesTagged
+    //resumeObj,
+    //allImagesTagged
   } = props
+  const [resumeObj, setResumeObj] = useState(null);
+  const [allImagesTagged, setImagesTagged] = useState(null);
 
+  async function getResumeObject() {
+ 
+    //Get resume table data
+    if(assignedImages) {
+      const getUserResumeInfo = await (await fetch(apiCall(endpoints.getUserResumeInfo), { //`/api/v1/archives/FindArchive`
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          //"cookie": ctx.req ? ctx.req.headers.cookie : null
+        },
+      })).json()
+      
+      console.log('Got data')
+      console.log(getUserResumeInfo?.data?.resumeObj)
+      setResumeObj(getUserResumeInfo?.data?.resumeObj)
+      setImagesTagged(getUserResumeInfo?.data?.allImagesTagged)
+
+      // return {
+      //   resumeObj:getUserResumeInfo?.data?.resumeObj,
+      //   allImagesTagged:getUserResumeInfo?.data?.allImagesTagged
+      // }
+    } 
+    else {
+      setResumeObj(undefined)
+      setImagesTagged(undefined)
+    }
+   
+   
+  }
+
+  useEffect(() => {
+    if(resumeObj===null) {
+      getResumeObject();
+    }
+  });
+  
   const classes = useStyles();
+
+  // const {
+  //   resumeObj,
+  //   allImagesTagged
+  // } = getResumeObject()
+
+
 
   return (
     <Layout user={props.user} pageTitle="Home">
@@ -41,7 +88,7 @@ function Home(props) {
           <Typography variant="h4" component="h1" gutterBottom color="secondary">
             Hello There!
           </Typography>
-
+          {resumeObj? Object.keys(resumeObj): "-"}
           <Typography variant="body1" component="h1" gutterBottom>
             <Paper elevation={3} variant="outlined" style={{padding:10}}>
               {/* Welcome {props.user.displayName}! You can start tagging by clicking on <u><b>Image Tag</b></u> on the left, or resume an archive you have
@@ -141,26 +188,27 @@ Home.getInitialProps = async ctx => {
   }
   const assignedImages = mongoUser?.data?.assignedImages
   //console.log(assignedImages)
-  //Get resume table data
-  if(assignedImages) {
-    const getUserResumeInfo = await (await fetch(apiCall(endpoints.getUserResumeInfo), { //`/api/v1/archives/FindArchive`
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "cookie": ctx.req ? ctx.req.headers.cookie : null
-      },
-    })).json()
-    //console.log('TEST --- ',getUserResumeInfo)
-    resumeObj = getUserResumeInfo?.data?.resumeObj
-    allImagesTagged = getUserResumeInfo?.data?.allImagesTagged
-    // console.log(allImagesTagged)
-    // console.log(resumeObj)
-  }
+
+  // //Get resume table data
+  // if(assignedImages) {
+  //   const getUserResumeInfo = await (await fetch(apiCall(endpoints.getUserResumeInfo), { //`/api/v1/archives/FindArchive`
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "cookie": ctx.req ? ctx.req.headers.cookie : null
+  //     },
+  //   })).json()
+  //   //console.log('TEST --- ',getUserResumeInfo)
+  //   resumeObj = getUserResumeInfo?.data?.resumeObj
+  //   allImagesTagged = getUserResumeInfo?.data?.allImagesTagged
+  //   // console.log(allImagesTagged)
+  //   // console.log(resumeObj)
+  // }
 
   //console.log(resumeObj)
   return {
     cookie:ctx.req.headers.cookie,
-    resumeObj:resumeObj,
+    //resumeObj:resumeObj,
     allImagesTagged:allImagesTagged
   }
 }
