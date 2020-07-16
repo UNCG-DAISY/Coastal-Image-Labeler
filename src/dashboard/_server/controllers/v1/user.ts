@@ -282,6 +282,8 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
             })
         })
     });
+    console.log('&&&&& COMPARISION LIST &&&&')
+    console.log(listOfTaggedImages)
 
     //Get the list of all images that can be tagged
     const listOfPossibleTaggableImages = (await ImageModel.find({
