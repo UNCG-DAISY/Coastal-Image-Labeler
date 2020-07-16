@@ -110,6 +110,7 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
     let resumeObj = {}
     let taggedImagesCategorized = {}
 
+    const t0 = performance.now();
     //Go through the tagged images and group them by catalogs, then by archive
     await Promise.all(imagesTagged.map(async (imageId,index) =>{
         const getImage = await ImageModel.findById(imageId)
@@ -136,6 +137,8 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
 
         taggedImagesCategorized[catalogName][archiveName] = taggedImagesCategorized[catalogName][archiveName] + 1
     }))
+    const t1 = performance.now();
+    console.log(`Time to group = ${t1-t0} ms`)
 
     console.log('taggedImagesCategorized',taggedImagesCategorized)
     //for each assigned image, pull how many you have tagged from that images archive
@@ -168,6 +171,9 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
             catalogName: catalogName
         }
     }))
+
+    const t2 = performance.now();
+    console.log(`Time to get tagged image/total image = ${t2-t1} ms`)
 
     return res.status(200).json({
         success:true,
