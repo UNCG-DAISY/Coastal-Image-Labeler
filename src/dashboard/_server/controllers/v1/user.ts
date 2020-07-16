@@ -278,15 +278,15 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
     Object.keys(taggedImagesOfUserObject).forEach(catalog => {
         Object.keys(taggedImagesOfUserObject[catalog]).forEach(archive => {
             taggedImagesOfUserObject[catalog][archive].forEach(image=>{
-                console.log('@@@ PUSHING @@@')
-                console.log(image)
+                // console.log('@@@ PUSHING @@@')
+                // console.log(image)
                 listOfTaggedImages.push(image)
             })
         })
     });
 
-    console.log('&&&&& COMPARISION LIST &&&&')
-    console.log(listOfTaggedImages)
+
+    //console.log(listOfTaggedImages)
     
     //Get the list of all images that can be tagged
     const listOfPossibleTaggableImages = (await ImageModel.find({
@@ -296,11 +296,16 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
         tillComplete: { $gt: 0 }
     }))
 
+    console.log('Removing already tagged images')
+   // console.log(`TEST ${listOfTaggedImages.includes('5eebab4994c06929998f5805')}`)
     //Filter out the images that have been tagged by this user.
     let newImagesForUser = listOfPossibleTaggableImages.filter(function (image) {
         //!!! For refactor optimization. use listOfTaggedImages instead when refactoring
-        return !listOfTaggedImages.includes(image._id) //!taggedImagesOfUserObject.includes(image._id)
+        //console.log(`Looking for ${image._id}`)
+        return !listOfTaggedImages.includes(`${image._id}`) //!taggedImagesOfUserObject.includes(image._id)
     });
+    console.log('Done filtering')
+    console.log(newImagesForUser.length,' vs ',listOfPossibleTaggableImages.length)
 
     //of the images that can be tagged, get the 
     //that is determined by the image selection order of catalog
