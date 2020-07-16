@@ -278,6 +278,8 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
     Object.keys(taggedImagesOfUserObject).forEach(catalog => {
         Object.keys(taggedImagesOfUserObject[catalog]).forEach(archive => {
             taggedImagesOfUserObject[catalog][archive].forEach(image=>{
+                console.log('@@@ PUSHING @@@')
+                console.log(image)
                 listOfTaggedImages.push(image)
             })
         })
@@ -404,6 +406,18 @@ const updatedTaggedImages = asyncHandler(async (req: Request, res: Response, nex
     //!!! For refactor optimization
     const archiveDoc = await ArchiveModel.findOne({name:archive})
     const catalogDoc = await CatalogModel.findById(archiveDoc.catalog)
+    console.log('!!! ---- PUSHING ---- !!!')
+    console.log(userDocument.assignedImages[archive])
+
+    //Make sure this property exists
+    if(!newListOfTaggedImages[catalogDoc.name]) {
+        newListOfTaggedImages[catalogDoc.name] = {}
+    }
+
+    if(!newListOfTaggedImages[catalogDoc.name][archiveDoc.name]) {
+        newListOfTaggedImages[catalogDoc.name][archiveDoc.name] = []
+    }
+
     newListOfTaggedImages[catalogDoc.name][archiveDoc.name].push(userDocument.assignedImages[archive])
 
     //newListOfTaggedImages.push(userDocument.assignedImages[archive]);
