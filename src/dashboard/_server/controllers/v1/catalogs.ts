@@ -14,24 +14,6 @@ import {
     performance
 } from 'perf_hooks';
 
-// async function test() {
-//     const catalogs = await CatalogModel.find();
-
-//     for(let c = 0; c<catalogs.length;c++) {
-        
-//         const archives = await ArchiveModel.find({catalog:catalogs[c]._id})
-//         let archiveCount = archives.length;
-//         let imageCount = 0;
-//         for(let a = 0 ;a<archives.length;a++) {
-//             const images =  await ImageModel.find({archive:archives[a]._id})
-//             imageCount += images.length
-//             console.log(`${archives[a].name} has ${images.length} images`)
-//         }
-
-//         console.log(`Catalog ${catalogs[c].name} has ${archiveCount} archives and ${imageCount} images`)
-//     }
-// }
-// test()
 
 /**
  * @desc        Gets all storms
@@ -114,36 +96,7 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
     let resumeObj = {}
     let taggedImagesCategorized = {}
 
-    const t0 = performance.now();
-    //Go through the tagged images and group them by catalogs, then by archive
-    // await Promise.all(imagesTagged.map(async (imageId,index) =>{
-    //     const getImage = await ImageModel.findById(imageId)
-    //     if(!getImage) {return;}
-
-    //     const getArchive = await ArchiveModel.findById(getImage.archive)
-    //     if(!getArchive) {return;}
-
-    //     const getCatalog = await CatalogModel.findById(getArchive.catalog)
-    //     if(!getCatalog) {return;}
-
-    //     const catalogName:any = getCatalog.name
-    //     const archiveName:any = getArchive.name
-
-    //     //if no entry for this catalog has been made
-    //     if(!taggedImagesCategorized[catalogName]) {
-    //         taggedImagesCategorized[catalogName] = {}
-    //     }
-
-    //     //if no entry for this archive has been made
-    //     if(!taggedImagesCategorized[catalogName][archiveName]) {
-    //         taggedImagesCategorized[catalogName][archiveName] = 0
-    //     }
-
-    //     taggedImagesCategorized[catalogName][archiveName] = taggedImagesCategorized[catalogName][archiveName] + 1
-    // }))
-
     const t1 = performance.now();
-    console.log(`Time to group = ${t1-t0} ms`)
 
     //console.log('taggedImagesCategorized',taggedImagesCategorized)
     //for each assigned image, pull how many you have tagged from that images archive
@@ -164,10 +117,15 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
         const getTotalImagesArchive = await ImageModel.find({archive:getArchive._id})
         const totalTaggedOfArchive = await ImageModel.find({ tags: { $exists: true, $not: {$size: 0} } })
         
-        // console.log('taggedImagesCategorized',taggedImagesCategorized)
-        // console.log('catalogName',taggedImagesCategorized[catalogName]?.[archiveName])
+        
+        // if(!imagesTagged?.[catalogName]?.[archiveName]) {
+
+        //     console.log(typeof imagesTagged?.[catalogName]?.[archiveName])
+        //     console.log(imagesTagged?.[catalogName]?.[archiveName],catalogName,archiveName)
+        //     console.log('------')
+        // }
         resumeObj[image] = {
-            taggedByUser: imagesTagged?.[catalogName]?.[archiveName].length ?? 0, //taggedImagesCategorized?.[catalogName]?.[archiveName] ?? 0,
+            taggedByUser: imagesTagged?.[catalogName]?.[archiveName] ? imagesTagged?.[catalogName]?.[archiveName].length : 0, //taggedImagesCategorized?.[catalogName]?.[archiveName] ?? 0,
             totalForArchive:getTotalImagesArchive.length,
             totalTaggedForArchive:totalTaggedOfArchive.length,
 
