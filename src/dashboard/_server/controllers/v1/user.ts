@@ -273,6 +273,15 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
 
     //Get the list of images already tagged by this user
     const listOfTaggedImagesOfUser = userDocument.imagesTagged
+    let listOfTaggedImages = []
+    //convert to a list !!! For refactor optimization
+    // Object.keys(listOfTaggedImagesOfUser).forEach(catalog => {
+    //     Object.keys(listOfTaggedImagesOfUser[catalog]).forEach(archive => {
+    //         listOfTaggedImagesOfUser[catalog][archive].forEach(image=>{
+    //             listOfTaggedImages.push(image)
+    //         })
+    //     })
+    // });
 
     //Get the list of all images that can be tagged
     const listOfPossibleTaggableImages = (await ImageModel.find({
@@ -284,6 +293,7 @@ const getAssignedImage = asyncHandler(async (req: Request, res: Response, next: 
 
     //Filter out the images that have been tagged by this user.
     let newImagesForUser = listOfPossibleTaggableImages.filter(function (image) {
+        //!!! For refactor optimization. use listOfTaggedImages instead when refactoring
         return !listOfTaggedImagesOfUser.includes(image._id)
     });
 
@@ -390,6 +400,12 @@ const updatedTaggedImages = asyncHandler(async (req: Request, res: Response, nex
     //get the current list of tagged images
     let newListOfTaggedImages = userDocument.imagesTagged
     //add the currently assigned image for the archive to the tagged list
+
+    //!!! For refactor optimization
+    // const archiveDoc = await ArchiveModel.findOne({name:archive})
+    // const catalogDoc = await CatalogModel.findById(archiveDoc.catalog)
+    // newListOfTaggedImages[catalogDoc.name][archiveDoc.name].push(userDocument.assignedImages[archive])
+
     newListOfTaggedImages.push(userDocument.assignedImages[archive]);
 
     //remove that archive, which means no image is assigned from that archive
