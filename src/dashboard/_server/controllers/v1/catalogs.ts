@@ -167,7 +167,7 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
         // console.log('taggedImagesCategorized',taggedImagesCategorized)
         // console.log('catalogName',taggedImagesCategorized[catalogName]?.[archiveName])
         resumeObj[image] = {
-            taggedByUser: imagesTagged?.[catalogName]?.[archiveName] ?? 0, //taggedImagesCategorized?.[catalogName]?.[archiveName] ?? 0,
+            taggedByUser: imagesTagged?.[catalogName]?.[archiveName].length ?? 0, //taggedImagesCategorized?.[catalogName]?.[archiveName] ?? 0,
             totalForArchive:getTotalImagesArchive.length,
             totalTaggedForArchive:totalTaggedOfArchive.length,
 
