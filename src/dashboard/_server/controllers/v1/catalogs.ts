@@ -144,7 +144,7 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
     const t1 = performance.now();
     console.log(`Time to group = ${t1-t0} ms`)
 
-    console.log('taggedImagesCategorized',taggedImagesCategorized)
+    //console.log('taggedImagesCategorized',taggedImagesCategorized)
     //for each assigned image, pull how many you have tagged from that images archive
     //and how many are in that archive
     await Promise.all(Object.keys(assignedImages).map(async (image,index) =>{
