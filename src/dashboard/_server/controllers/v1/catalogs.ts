@@ -116,31 +116,32 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
 
     const t0 = performance.now();
     //Go through the tagged images and group them by catalogs, then by archive
-    await Promise.all(imagesTagged.map(async (imageId,index) =>{
-        const getImage = await ImageModel.findById(imageId)
-        if(!getImage) {return;}
+    // await Promise.all(imagesTagged.map(async (imageId,index) =>{
+    //     const getImage = await ImageModel.findById(imageId)
+    //     if(!getImage) {return;}
 
-        const getArchive = await ArchiveModel.findById(getImage.archive)
-        if(!getArchive) {return;}
+    //     const getArchive = await ArchiveModel.findById(getImage.archive)
+    //     if(!getArchive) {return;}
 
-        const getCatalog = await CatalogModel.findById(getArchive.catalog)
-        if(!getCatalog) {return;}
+    //     const getCatalog = await CatalogModel.findById(getArchive.catalog)
+    //     if(!getCatalog) {return;}
 
-        const catalogName:any = getCatalog.name
-        const archiveName:any = getArchive.name
+    //     const catalogName:any = getCatalog.name
+    //     const archiveName:any = getArchive.name
 
-        //if no entry for this catalog has been made
-        if(!taggedImagesCategorized[catalogName]) {
-            taggedImagesCategorized[catalogName] = {}
-        }
+    //     //if no entry for this catalog has been made
+    //     if(!taggedImagesCategorized[catalogName]) {
+    //         taggedImagesCategorized[catalogName] = {}
+    //     }
 
-        //if no entry for this archive has been made
-        if(!taggedImagesCategorized[catalogName][archiveName]) {
-            taggedImagesCategorized[catalogName][archiveName] = 0
-        }
+    //     //if no entry for this archive has been made
+    //     if(!taggedImagesCategorized[catalogName][archiveName]) {
+    //         taggedImagesCategorized[catalogName][archiveName] = 0
+    //     }
 
-        taggedImagesCategorized[catalogName][archiveName] = taggedImagesCategorized[catalogName][archiveName] + 1
-    }))
+    //     taggedImagesCategorized[catalogName][archiveName] = taggedImagesCategorized[catalogName][archiveName] + 1
+    // }))
+
     const t1 = performance.now();
     console.log(`Time to group = ${t1-t0} ms`)
 
@@ -166,7 +167,7 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
         // console.log('taggedImagesCategorized',taggedImagesCategorized)
         // console.log('catalogName',taggedImagesCategorized[catalogName]?.[archiveName])
         resumeObj[image] = {
-            taggedByUser: taggedImagesCategorized?.[catalogName]?.[archiveName] ?? 0,
+            taggedByUser: imagesTagged?.[catalogName]?.[archiveName] ?? 0, //taggedImagesCategorized?.[catalogName]?.[archiveName] ?? 0,
             totalForArchive:getTotalImagesArchive.length,
             totalTaggedForArchive:totalTaggedOfArchive.length,
 

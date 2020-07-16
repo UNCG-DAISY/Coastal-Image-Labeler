@@ -14,7 +14,7 @@
     "nodemonTSC": "nodemon --exec ts-node-script ./_server/server.ts",
     "dev2": "ts-node-script ./_server/server.ts",
     "dev": "npm run nodemonTSC",
-    "test": "tsc --help",
+    "test": "nodemon --exec ts-node-script ./_server/test_server.ts",
     "baf": "sudo npm run build && forever stopall && bash forever_start.sh"
   },
   "author": "Shah Nafis Rafique",

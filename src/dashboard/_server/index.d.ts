@@ -43,7 +43,7 @@ declare namespace psiDashboard  {
     dateAdded: number;
     userId:string,
     userName: string,
-    imagesTagged?: [string]
+    imagesTagged?: Object
     //numberOfImagesTagged?: number
     roles:[string]
     //roleData?:[any]

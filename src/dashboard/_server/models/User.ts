@@ -37,7 +37,7 @@ const userSchema: Schema = new Schema({
         type:String
     },
     imagesTagged: {
-        type: [String],
+        type: Object,
         default: []
     },
     roles:{
