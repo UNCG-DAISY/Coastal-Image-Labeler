@@ -26,24 +26,30 @@ This is the contents of the `config.env` file
 NODE_ENV="development"
 PORT=6969
 
-//Both below can be found from MongoDb.
+# Both below can be found from MongoDb.
 MONGO_URI_DEV = "The information for development database. "
 MONGO_URI_PRODUCTION = "The information for production database."
 
-//Auth0 related
+# Auth0 related
 AUTH0_DOMAIN= "String, found on Auth0"
-AUTH0_TOKEN_URL = "AUTH0_DOMAIN/oauth/token" // Replace AUTH0_DOMAIN with the value above
+AUTH0_TOKEN_URL = "AUTH0_DOMAIN/oauth/token" # Replace AUTH0_DOMAIN with the value above
 AUTH0_CLIENT_ID= "String, found on Auth0, very important that this is kept secret"
 AUTH0_CLIENT_SECRET= "String, found on Auth0, very important that this is kept secret"
 
-//make sure the port above and below are same
+# Make sure the port above and below are same
 AUTH0_CALLBACK_URL= "https://coastalimagelabeler.science/callback"
 BASE_URL= "https://coastalimagelabeler.science"
 
-//Where compressed images are saved
-//Inside the file structure is the same as
-//where the image is saved.
+# Where compressed images are saved
+# Inside the file structure is the same as
+# where the image is saved.
 COMPRESS_FOLDER = "/datadrive2/compressed/archives"
+
+# Where to put backup of database
+DAILY_BACKUP_FOLDER = "/home/shahnafis/mongo_backup"
+
+# Where certs are
+CERT_FOLDER = "/home/shahnafis/ssl/letsEncrypt/coastalimagelabeler.science"
 ```
 
 ## Finding values on Auth0
