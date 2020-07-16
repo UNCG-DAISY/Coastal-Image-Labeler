@@ -139,7 +139,7 @@ const getUserResumeInfo = asyncHandler(async (req: Request, res: Response, next:
             taggedImagesCategorized[catalogName][archiveName] = 0
         }
 
-        taggedImagesCategorized[catalogName][archiveName] = 1.1//taggedImagesCategorized[catalogName][archiveName] + 1
+        taggedImagesCategorized[catalogName][archiveName] = taggedImagesCategorized[catalogName][archiveName] + 1
     }))
     const t1 = performance.now();
     console.log(`Time to group = ${t1-t0} ms`)
