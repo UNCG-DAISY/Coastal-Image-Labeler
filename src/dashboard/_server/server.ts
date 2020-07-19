@@ -74,14 +74,15 @@ const handle = nextApp.getRequestHandler()
 //This fixes the issue "unable to verify the first certificate" which I have not been able to fix.....
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-const cert = fs.readFileSync(`${process.env.CERT_FOLDER}/cert.pem`, 'ascii');
-const ca = fs.readFileSync(`${process.env.CERT_FOLDER}/fullchain.pem`, 'ascii');
-const fullchain = fs.readFileSync(`${process.env.CERT_FOLDER}/fullchain.pem`, 'ascii');
-const key = fs.readFileSync(`${process.env.CERT_FOLDER}/privkey.pem`, 'ascii');
-const credentials = {
-    cert:fullchain, 
-    key:key
-}
+// const cert = fs.readFileSync(`${process.env.CERT_FOLDER}/cert.pem`, 'ascii');
+// const ca = fs.readFileSync(`${process.env.CERT_FOLDER}/fullchain.pem`, 'ascii');
+// const fullchain = fs.readFileSync(`${process.env.CERT_FOLDER}/fullchain.pem`, 'ascii');
+// const key = fs.readFileSync(`${process.env.CERT_FOLDER}/privkey.pem`, 'ascii');
+
+// const credentials = {
+//     cert:fullchain, 
+//     key:key
+// }
 
 
 nextApp.prepare()
