@@ -78,7 +78,6 @@ const cert = fs.readFileSync(`${process.env.CERT_FOLDER}/cert.pem`, 'ascii');
 const ca = fs.readFileSync(`${process.env.CERT_FOLDER}/fullchain.pem`, 'ascii');
 const fullchain = fs.readFileSync(`${process.env.CERT_FOLDER}/fullchain.pem`, 'ascii');
 const key = fs.readFileSync(`${process.env.CERT_FOLDER}/privkey.pem`, 'ascii');
-
 const credentials = {
     cert:fullchain, 
     key:key
