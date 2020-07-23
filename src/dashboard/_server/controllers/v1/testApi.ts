@@ -118,7 +118,22 @@ const testLodash = asyncHandler(async (req: Request, res: Response, next: NextFu
     
     res.status(200).json({
         success:true,
-        //message: `Test POST, keys are ${keys} at time ${Date.now()}`
+        data:{
+            stringify:{
+                comp1:JSON.stringify(simple1) === JSON.stringify(simple2),
+                comp2:JSON.stringify(tag1) === JSON.stringify(tag2)
+            },
+            loadash:{
+                comp1:_.isEqual(simple1,simple2),
+                comp2:_.isEqual(tag1,tag2),
+                comp3:_.isEqual(simple1,simple3)
+            },
+            true:{
+                comp1:true,
+                comp2:true,
+                comp3:false
+            }
+        }
     })
 })
 
