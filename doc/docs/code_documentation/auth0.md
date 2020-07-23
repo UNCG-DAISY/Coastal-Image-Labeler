@@ -24,7 +24,7 @@ This is the contents of the `config.env` file
 
 ```js
 NODE_ENV="development"
-PORT=6969
+PORT=4200
 
 # Both below can be found from MongoDb.
 MONGO_URI_DEV = "The information for development database. "
