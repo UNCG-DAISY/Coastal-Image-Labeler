@@ -194,3 +194,4 @@ src/dashboard/log/compress-images
 *.pem
 *.crt
 *.key
+src/dashboard/_site/.env.local

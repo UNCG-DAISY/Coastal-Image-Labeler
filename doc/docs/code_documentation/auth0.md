@@ -20,9 +20,10 @@ information to interact with Auth0.
 
 ## config.env
 
-This is the contents of the `config.env` file
+### Server
+This is the contents of the `config.env` file that is used on the server. It goes to `/src/dashboard/_config/`
 
-```js
+```js title="config.env"
 NODE_ENV="development"
 PORT=4200
 
@@ -51,6 +52,19 @@ DAILY_BACKUP_FOLDER = "/home/shahnafis/mongo_backup"
 # Where certs are
 CERT_FOLDER = "/home/shahnafis/ssl/letsEncrypt/coastalimagelabeler.science"
 ```
+
+### Site
+There is another 2 files that are also important. They are in `/src/dashboard/_site`
+
+- The file called `.env` is the default enviroment values. They are set to use https and the domain name.
+- The other file called `.env.local` is added to the gitignore. It is there to override any values of `.env` should the need arise. For example let say you would like to run a localhost of the site the contents of `.env.local` would look like this:
+
+```js title=".env.local"
+NEXT_PUBLIC_API_URL = 'localhost:5000'
+NEXT_PUBLIC_PROTOCOL = 'http'
+```
+
+Then the site would use `http://localhost:5000/` for any api calls. Without this the site would have all API calls use the domainname route thus defeating the purpose of a local host.
 
 ## Finding values on Auth0
 
