@@ -6,7 +6,8 @@ import express from 'express'
 
 import {
     tagImage,
-    showImage
+    showImage,
+    exportAsCSV
 } from '../../controllers/v1/image'
 
 import {
@@ -42,5 +43,9 @@ router
 router
     .route('/showCompressed/:id')
     .get(ensureAuthenticated,showImage({compress:true}))
+
+router  
+    .route("/export")
+    .get(exportAsCSV)
 
 export default router;

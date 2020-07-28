@@ -200,7 +200,28 @@ const showImage = (options:any) => {
     })
 }
 
+/**
+ * @desc        Exports all tags of all images as CSV
+ * @route       GET /api/v1/images/export
+ * @access      Public
+ * @returns     yes
+ */
+const exportAsCSV = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    //Logic for converting to csv
+    //read json from db
+    //do stuff with json
+    //parse json to csv
+    //write to the vm
+    const file = fs.readFileSync('path to newly made csv')
+
+    // res.header('Content-Type', 'text/csv');
+    // res.attachment('test.csv');
+    return res.send(file);
+    
+})
+
 export {
     tagImage,
-    showImage
+    showImage,
+    exportAsCSV
 }
