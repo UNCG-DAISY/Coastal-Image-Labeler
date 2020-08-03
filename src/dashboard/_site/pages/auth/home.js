@@ -25,9 +25,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 // Home page after logging in
 function Home(props) {
 
-  const {
-    assignedImages,
-  } = props?.user?.mongoUser
+  const assignedImages = props?.user?.mongoUser?.assignedImages ?? {}
 
   const {
     //resumeObj,
