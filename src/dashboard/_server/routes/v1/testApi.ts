@@ -3,7 +3,9 @@ import express from 'express'
 import {
     testGet,
     testPost,
-    testLodash
+    testLodash,
+    testQuery,
+    testCreate
 } from '../../controllers/v1/testApi'
 
 import {
@@ -20,6 +22,14 @@ const router = express.Router();
 router
     .route('/testLodash')
     .get(testLodash)
+
+router
+    .route('/testQuery')
+    .get(testQuery)
+
+router
+    .route('/testCreate')
+    .get(testCreate)
 
 
 

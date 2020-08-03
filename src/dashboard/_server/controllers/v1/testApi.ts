@@ -1,6 +1,7 @@
 import {asyncHandler} from '../../middleware/v1/async'
 import {ErrorResponse} from '../../utils/v1/errorResponse'
 import { Request,Response,NextFunction } from "express"
+import {UserModel} from '../../models/User'
 import _ from 'lodash'
 let cards = [
     { _id: 123, message: "I love pepperoni pizza!", author: "unknown1" },
@@ -137,8 +138,36 @@ const testLodash = asyncHandler(async (req: Request, res: Response, next: NextFu
     })
 })
 
+const testQuery = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const user = await UserModel.find({})
+    res.status(200).json({
+        success:true,
+        message: `Done`,
+        data:{
+            user
+        }
+    })
+})
+
+const testCreate = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const user = {}
+    // await UserModel.create({
+    //     userId:Date.now(),
+    //     userName:Date.now()
+    // })
+
+    res.status(200).json({
+        success:true,
+        message: `Done`,
+        data:{
+            user
+        }
+    })
+})
 export {
     testGet,
     testPost,
-    testLodash
+    testLodash,
+    testQuery,
+    testCreate
 }
