@@ -193,4 +193,4 @@ src/dashboard/log/compress-images
 *.pem
 *.crt
 *.key
-src/dashboard/_site/.env.local
+src/cli_test_data/testCatalogs
