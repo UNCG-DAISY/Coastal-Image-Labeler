@@ -1,0 +1,18 @@
+{
+    "catalogs":[
+        {
+            "path":"C:/Users/Namenai/Documents/GitHub/v3_dashboard/src/cli_test_data/testCatalogs/tanks",
+            "compressedPath":"C:/Users/Namenai/Documents/GitHub/v3_dashboard/src/cli_test_data/testCatalogs/tanks",
+            "name":"Tanks",
+            "taggable":true,
+            "catalogInfo":{
+                "year": 1916,
+                "link":"https://en.wikipedia.org/wiki/Tank",
+                "description":"Tanks are tracked fighting vehicles with armor and large caliber guns."
+            }, 
+            "imageFormat":[".jpg",".jpeg"],
+            "questionSet":"5ee3a8d801091b0dd1d62d3a",
+            "imageServeOrder": "5f3197417264d3213420c20e"
+        }      
+    ]
+}
