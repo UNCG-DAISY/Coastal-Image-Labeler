@@ -14,9 +14,12 @@
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js ",
     "lint:fix": "eslint . --ext ts --ext tsx --ext js --fix",
-    "test": "jest",
+    "seeder": "cross-env NODE_ENV=test ts-node --project tsconfig.server.json server/seeder.ts",
+    "jest": "jest",
+    "test": "npm run seeder && npm run jest",
     "test-all": "npm run lint && npm run type-check && npm run test",
-    "testFile": "ts-node --project tsconfig.server.json tests/index.ts"
+    "testFile": "ts-node --project tsconfig.server.json tests/index.ts",
+    "pm2": "npm run build && pm2 start ecosystem.config.js"
   },
   "husky": {
     "hooks": {

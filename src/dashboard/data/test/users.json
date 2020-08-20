@@ -1,0 +1,31 @@
+[{
+  "_id":  "5f2f65cd363ae5001670164b",
+  
+  "catalogs": [
+    "5f336c1de9aea42d24bf0f21"
+  ],
+  "dateAdded": "2020-08-09T02:56:13.591Z",
+
+  "roles": [
+    "tagger",
+    "admin"
+  ],
+  "userId": "google-oauth2|116302372331153157667",
+  "userName": "Nafis Shah",
+  "__v": 0
+},{
+  "_id": "5f39cf33e0ceea4f6c11c046",
+
+  "catalogs": [
+    "5f336c1de9aea42d24bf0f21"
+  ],
+  "dateAdded": "2020-08-09T02:56:13.591Z",
+
+  "roles": [
+    "tagger",
+    "admin"
+  ],
+  "userId": "fakeUserId",
+  "userName": "Test User 2",
+  "__v": 0
+}]

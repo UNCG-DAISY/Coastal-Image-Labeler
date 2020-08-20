@@ -4,13 +4,13 @@ import { CatalogInfo } from './index'
 
 export interface UserDocument extends Document {
   username: string
-  assignedImages: Record<string, any>
+  //assignedImages: Record<string, any>
   catalogs: [ObjectID]
   dateAdded: Date
-  imagesTagged: Record<string, any>
+  //imagesTagged: Record<string, any>
   roles: string[]
   userId: string
-  _id: string
+  // _id: string
 }
 
 export interface CatalogDocument extends Document {
@@ -105,7 +105,7 @@ export interface TagDocument extends Document {
 }
 
 export interface ImageServeOrderDocument extends Document {
-  type: 'random'
+  type: 'random' | string
 }
 
 export interface QuestionSetDocument extends Document {

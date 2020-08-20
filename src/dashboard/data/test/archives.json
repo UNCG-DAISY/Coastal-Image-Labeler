@@ -1,0 +1,49 @@
+[{
+  "_id": "5f336c1ee9aea42d24bf0f31",
+  "totalImages": 7,
+  "catalog": "5f336c1de9aea42d24bf0f21",
+  "name": "german",
+  "path": {
+    "original": "/german",
+    "compressed": "/german"
+  },
+  "taggable": true,
+  "dateAdded": "2020-08-12T04:12:14.543Z",
+  "__v": 0
+},{
+  "_id": "5f336c1ee9aea42d24bf0f2a",
+  "totalImages": 6,
+  "catalog": "5f336c1de9aea42d24bf0f21",
+  "name": "british",
+  "path": {
+    "original": "/british",
+    "compressed": "/british"
+  },
+  "taggable": true,
+  "dateAdded": "2020-08-12T04:12:14.042Z",
+  "__v": 0
+},{
+  "_id": "5f336c1de9aea42d24bf0f22",
+  "totalImages": 7,
+  "catalog": "5f336c1de9aea42d24bf0f21",
+  "name": "american",
+  "path": {
+    "original": "/american",
+    "compressed": "/american"
+  },
+  "taggable": true,
+  "dateAdded": "2020-08-12T04:12:13.336Z",
+  "__v": 0
+},{
+  "_id": "5f336c1fe9aea42d24bf0f39",
+  "totalImages": 7,
+  "catalog": "5f336c1de9aea42d24bf0f21",
+  "name": "russian",
+  "path": {
+    "original": "/russian",
+    "compressed": "/russian"
+  },
+  "taggable": true,
+  "dateAdded": "2020-08-12T04:12:15.070Z",
+  "__v": 0
+}]

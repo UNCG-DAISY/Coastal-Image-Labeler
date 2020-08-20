@@ -5,11 +5,14 @@ import Hidden from '@material-ui/core/Hidden'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { uiConstants } from '../../Constants'
+import { theme } from '../../theme'
+import { Divider } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
   drawerPaper: {
     width: uiConstants.drawerWidth,
   },
+  toolbar: theme.mixins.toolbar,
 }))
 
 function MobileDrawer(props) {
@@ -33,6 +36,8 @@ function MobileDrawer(props) {
           keepMounted: true, // Better open performance on mobile.
         }}
       >
+        <div className={classes.toolbar} />
+        <Divider />
         {props.children}
       </SwipeableDrawer>
     </Hidden>

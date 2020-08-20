@@ -25,7 +25,6 @@ export async function apiRequest(params: Params) {
 
   try {
     const responseData: ResponseType = await response.json()
-
     return responseData
   } catch (error) {
     console.error(error)

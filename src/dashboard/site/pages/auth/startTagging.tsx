@@ -31,7 +31,8 @@ const StartTagging = (props: Props): JSX.Element => {
 
       <Layout
         user={props.user}
-        navItems={determineNavItems(user)}
+        navItems={{ center: [], right: [] }}
+        drawer={{ list: determineNavItems(user) }}
         title={`Welcome ${user.displayName}`}
       >
         {!success ? (

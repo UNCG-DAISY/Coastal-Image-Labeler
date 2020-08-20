@@ -19,7 +19,9 @@ async function getUserDB({ cookie, res }: Params) {
   if (data.success) {
     return data.data.user
   }
+
   //For whatever reasons, if fail redirect to landing page
+  console.log(data.message)
   res.redirect('/')
   return undefined
 }

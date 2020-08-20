@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container'
 import Appbar from './Appbar'
 import MobileDrawer from './Drawer/mobile'
 import DesktopDrawer from './Drawer/desktop'
+import { DrawerItemList } from './Drawer/drawerItemList'
 import { uiConstants, navigationItems } from '../Constants'
 
 const drawerWidth = uiConstants.drawerWidth
@@ -15,6 +16,7 @@ interface Props {
   user?: object
   drawer?: {
     content?: any
+    list?: any
   }
   children: ReactNode
   navItems?: any
@@ -34,6 +36,12 @@ function Layout(props: Props) {
   const { title, drawer, navItems } = props
 
   const classes = genUseStyle({ showDrawer: !!drawer })()
+
+  const drawerContent = drawer
+    ? drawer?.list
+      ? DrawerItemList(drawer?.list)
+      : drawer?.content
+    : undefined
 
   return (
     <div className={classes.root}>
@@ -56,10 +64,12 @@ function Layout(props: Props) {
             <MobileDrawer
               handleDrawerToggle={handleDrawerToggle}
               mobileOpen={mobileOpen}
-            ></MobileDrawer>
+            >
+              {drawerContent}
+            </MobileDrawer>
 
             {/* Desktop mode */}
-            <DesktopDrawer></DesktopDrawer>
+            <DesktopDrawer>{drawerContent}</DesktopDrawer>
           </React.Fragment>
         )}
       </nav>
