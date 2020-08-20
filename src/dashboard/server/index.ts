@@ -76,7 +76,7 @@ const port = ((process.env.NEXT_PUBLIC_PORT as unknown) as number) ?? 3000
       log({
         message: `> Ready on ${process.env.NEXT_PUBLIC_PROTOCOL}://${
           process.env.NEXT_PUBLIC_DOMAIN_NAME
-        } - env: ${process.env.NODE_ENV ?? 'dev'} mode
+        }  at port = ${port} - env: ${process.env.NODE_ENV ?? 'dev'} mode
         `,
         type: 'info',
       })
