@@ -33,7 +33,7 @@ function Layout(props: Props) {
 
   const { title, drawer, navItems, navbar } = props
 
-  const classes = genUseStyle({ showDrawer: !!drawer })()
+  const classes = genUseStyle({ showDrawer: drawer })()
 
   const drawerContent = drawer ? DrawerItemContent(navItems) : undefined
 
@@ -43,7 +43,7 @@ function Layout(props: Props) {
       <Appbar
         title={title}
         drawer={{
-          showDrawer: !!drawer,
+          showDrawer: drawer,
           handleDrawerToggle: handleDrawerToggle,
           handleMenuToggle: handleMenuToggle,
         }}
@@ -51,7 +51,7 @@ function Layout(props: Props) {
       />
 
       <nav className={classes.drawer} aria-label="mailbox folders">
-        {!!drawer && (
+        {drawer && (
           <React.Fragment>
             {/* Phone mode */}
             <MobileDrawer
