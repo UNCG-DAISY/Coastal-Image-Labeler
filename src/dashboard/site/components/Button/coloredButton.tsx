@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 
 interface Props {
-  textColor?: string
+  color?: string
   backgroundColor?: string
   borderColor?: string
 
@@ -19,12 +19,15 @@ interface Props {
   children?: React.ReactNode
 
   style: Record<string, any>
+  className?: any
+  variant?: 'text' | 'contained' | 'outlined'
+  href?: any
   //otherProps: any
 }
 
 export default function ColoredButton(props: Props) {
   const {
-    textColor,
+    color,
     backgroundColor,
     borderColor,
 
@@ -44,7 +47,7 @@ export default function ColoredButton(props: Props) {
 
   const StyledButton = withStyles(() => ({
     root: {
-      color: textColor,
+      color: color,
       backgroundColor: backgroundColor,
       borderColor: borderColor,
       '&:hover': {

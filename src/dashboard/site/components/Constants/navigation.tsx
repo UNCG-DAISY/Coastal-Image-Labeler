@@ -1,67 +1,57 @@
-// import { Logout, Login } from '../Button/premadeButtons'
-import Button from '@material-ui/core/Button'
+import LockOpenIcon from '@material-ui/icons/LockOpen'
+import HomeIcon from '@material-ui/icons/Home'
+import LabelIcon from '@material-ui/icons/Label'
+import SecurityIcon from '@material-ui/icons/Security'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
-interface NavigationItemType {
-  name: string
-  route: string
-  icon?: string
-  element?: JSX.Element
-}
+import * as Colors from '@material-ui/core/colors'
 
-interface NavigationItemsType {
-  default: {
-    center?: NavigationItemType[]
-    right?: NavigationItemType[]
-  }
-  basic: {
-    center: NavigationItemType[]
-    right: NavigationItemType[]
-  }
-  admin: {
-    center: NavigationItemType[]
-    right: NavigationItemType[]
-  }
-}
+import { NavItem } from '../../../interfaces'
 
-export const login = {
+export const login: NavItem = {
   name: 'Login',
   route: '/login',
-  element: <Button href="/login">Login</Button>,
-}
-export const logout = {
-  name: 'Logout',
-  route: '/logout',
-  element: <Button href="/logout">Logout</Button>,
-}
-export const home = {
-  name: 'Home',
-  icon: '',
-  route: '/auth/home',
-}
-export const startTagging = {
-  name: 'Start Tagging',
-  icon: '',
-  route: '/auth/startTagging',
-}
-export const admin = {
-  name: 'Admin',
-  icon: '',
-  route: '/auth/admin',
+  icon: (props) => <LockOpenIcon {...props} />,
 }
 
-const navigationItems: NavigationItemsType = {
-  default: {
+export const logout: NavItem = {
+  name: 'Logout',
+  route: '/logout',
+  icon: (props) => <ExitToAppIcon {...props} />,
+  style: {
+    color: Colors.red[700],
+    borderColor: Colors.red[700],
+
+    hoverTextColor: 'white',
+    hoverBackgroundColor: Colors.red[700],
+  },
+}
+
+export const home: NavItem = {
+  name: 'Home',
+  route: '/auth/home',
+  icon: (props) => <HomeIcon {...props} />,
+}
+export const startTagging: NavItem = {
+  name: 'Label New Archive',
+  route: '/auth/startTagging',
+  icon: (props) => <LabelIcon {...props} />,
+}
+export const admin: NavItem = {
+  name: 'Admin',
+  route: '/auth/admin',
+  icon: (props) => <SecurityIcon {...props} />,
+}
+
+const defaultNavItems = {
+  center: [],
+  right: [],
+}
+
+export const navigationItems = {
+  defaultNavItems: defaultNavItems,
+  landingPage: {
     center: [],
     right: [login],
   },
-  basic: {
-    center: [home, startTagging],
-    right: [logout],
-  },
-  admin: {
-    center: [home, startTagging, admin],
-    right: [logout],
-  },
 }
-
-export { navigationItems }

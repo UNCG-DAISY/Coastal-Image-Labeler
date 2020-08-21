@@ -1,17 +1,16 @@
-const fs = require('fs'); 
-const path = require('path');
+const fs = require('fs')
+const path = require('path')
 
 const date = new Date()
 const timestamp = `${date.getMonth()}-${date.getDate()}-${date.getFullYear()}_${date.getHours()}.${date.getMinutes()}.${date.getSeconds()}`
 const root = `../../../../pm2Logs/${timestamp}/`
 
-fs.mkdir(path.join(__dirname, 'test'), (err) => { 
-  if (err) { 
-      return console.error(err); 
-  } 
-  console.log('Directory created successfully!'); 
-}); 
-
+fs.mkdir(path.join(__dirname, 'test'), (err) => {
+  if (err) {
+    return console.error(err)
+  }
+  console.log('Directory created successfully!')
+})
 
 module.exports = {
   apps: [

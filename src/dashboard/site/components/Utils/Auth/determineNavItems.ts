@@ -15,6 +15,7 @@ function determineNavItems(user: UserProp) {
     res.center.push(admin)
   }
 
+  console.log(res)
   return res
 }
 

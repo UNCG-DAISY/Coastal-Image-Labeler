@@ -113,6 +113,13 @@ declare namespace cilDashboard {
     archives?: AssignedImageTagAggregateArchive[]
     tagged?: any[]
   }
+
+  export interface NavItem {
+    route: string
+    name: string
+    icon?: any
+    style?: any
+  }
 }
 
 declare global {
