@@ -14,6 +14,7 @@ interface Param {
   }
 }
 
+//✔️ Tested by archiveExists controller
 export async function isValidArchive(query: Param) {
   log({
     message: `Checking if valid archive: ${JSON.stringify(query)}`,
