@@ -122,6 +122,8 @@ declare namespace cilDashboard {
     icon?: any
     style?: any
   }
+
+  export type ImagePathTypes = 'Compressed' | 'Original'
 }
 
 declare global {

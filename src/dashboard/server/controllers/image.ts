@@ -1,6 +1,6 @@
 import { asyncHandler } from '../middlewares/async'
 import { Request, NextFunction } from 'express'
-import { ExtenedResponse } from '../../interfaces'
+import { ExtenedResponse, ImagePathTypes } from '../../interfaces'
 import { ImageModel } from '../models/Image'
 import { log } from '../utils/logger'
 import { ArchiveModel } from '../models/Archive'
@@ -8,7 +8,7 @@ import { CatalogModel } from '../models/Catalog'
 import fs from 'fs'
 
 interface Params {
-  imagePath: 'Compressed' | 'Original'
+  imagePath: ImagePathTypes
 }
 
 function getImagePath({ imagePath }: Params) {
@@ -20,55 +20,63 @@ function getImagePath({ imagePath }: Params) {
         type: 'info',
       })
 
-      const image = await ImageModel.findById(imageId)
-      if (!image) {
-        log({
-          message: `Image not found`,
-          type: 'error',
-        })
-        return res.sendFile(process.env.NEXT_PUBLIC_Error_Image)
-      }
+      try {
+        const image = await ImageModel.findById(imageId)
+        if (!image) {
+          log({
+            message: `Image not found`,
+            type: 'error',
+          })
+          throw `Image id ${imageId} does not exist`
+        }
 
-      const archive = await ArchiveModel.findById(image.archive)
-      if (!archive) {
+        const archive = await ArchiveModel.findById(image.archive)
+        if (!archive) {
+          log({
+            message: `Archive ${image.archive} not found`,
+            type: 'error',
+          })
+          throw `Archive id ${image.archive} does not exist`
+        }
+
+        const catalog = await CatalogModel.findById(archive.catalog)
+        if (!catalog) {
+          log({
+            message: `Catalog ${archive.catalog} not found`,
+            type: 'error',
+          })
+          throw `Catalog id ${archive.catalog} does not exist`
+        }
+
+        switch (imagePath) {
+          case 'Compressed':
+            res.imagePath = `${catalog.path.compressed}${archive.path.compressed}${image.path.compressed}`
+            break
+
+          case 'Original':
+            res.imagePath = `${catalog.path.original}${archive.path.original}${image.path.original}`
+            break
+
+          default:
+            return res.sendFile(process.env.NEXT_PUBLIC_Error_Image)
+        }
+
+        if (!fs.existsSync(res.imagePath)) {
+          log({
+            message: `Image at ${res.imagePath} does not exist`,
+            type: 'error',
+          })
+
+          throw `Image at ${res.imagePath} does not exist`
+        }
+        next()
+      } catch (error) {
         log({
-          message: `Archive ${image.archive} not found`,
+          message: error.message,
           type: 'error',
         })
         res.sendFile(process.env.NEXT_PUBLIC_Error_Image)
       }
-
-      const catalog = await CatalogModel.findById(archive.catalog)
-      if (!catalog) {
-        log({
-          message: `Catalog ${archive.catalog} not found`,
-          type: 'error',
-        })
-        res.sendFile(process.env.NEXT_PUBLIC_Error_Image)
-      }
-
-      switch (imagePath) {
-        case 'Compressed':
-          res.imagePath = `${catalog.path.compressed}${archive.path.compressed}${image.path.compressed}`
-          break
-
-        case 'Original':
-          res.imagePath = `${catalog.path.original}${archive.path.original}${image.path.original}`
-          break
-
-        default:
-          return res.sendFile(process.env.NEXT_PUBLIC_Error_Image)
-      }
-
-      if (!fs.existsSync(res.imagePath)) {
-        log({
-          message: `Image at ${res.imagePath} does not exist`,
-          type: 'error',
-        })
-
-        return res.sendFile(process.env.NEXT_PUBLIC_Error_Image)
-      }
-      next()
     }
   )
 }

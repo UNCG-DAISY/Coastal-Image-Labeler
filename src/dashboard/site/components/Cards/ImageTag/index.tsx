@@ -22,6 +22,8 @@ import Router from 'next/router'
 import { SuccessErrorBar } from '../../Snackbar'
 import { submitImageTags } from '../../API/post/submitTags'
 
+import { routes } from '../../Constants'
+
 interface Props {
   user: UserProp
   imageDocument: ImageDocument
@@ -44,14 +46,6 @@ export function ImageTag(props: Props) {
   const handleClick = () => {
     setSnackbar(true)
   }
-
-  // const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-  //   if (reason === 'clickaway') {
-  //     return;
-  //   }
-
-  //   setSnackbar(false);
-  // };
 
   async function submitTags(tags) {
     const submitData = {
@@ -78,11 +72,6 @@ export function ImageTag(props: Props) {
   }
 
   function skipImage() {
-    //blah blah
-    // const submitData = {
-    //   userId: user.data._id,
-    //   imageId: imageDocument._id
-    // }
     Router.reload()
   }
 
@@ -95,8 +84,11 @@ export function ImageTag(props: Props) {
         subheaderStyle={{ color: theme.palette.secondary.main }}
       />
       <ImageContainer
-        compressedLink={imageDocument?.path?.compressed}
-        originalLink={imageDocument?.path?.original}
+        compressedLink={routes.getReq.showImage(
+          'Compressed',
+          imageDocument._id
+        )}
+        originalLink={routes.getReq.showImage('Original', imageDocument._id)}
       />
       <CardContent>
         <GenericHookForm
