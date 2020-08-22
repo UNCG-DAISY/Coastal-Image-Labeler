@@ -58,7 +58,7 @@ export interface ArchiveModelType extends Model<ArchiveDocument> {
 export interface ImageDocument extends Document {
   archive: ObjectID
   dateAdded?: Date
-  finalTag?: ObjectID
+  //finalTag?: ObjectID
   name: string
   path: {
     original: string
@@ -67,7 +67,7 @@ export interface ImageDocument extends Document {
   taggable: boolean
   // tags?: [Record<string, any>]
   //numberOfTags?: number
-  numberOfMatches: number
+  //numberOfMatches: number
   compareTags(
     tags: any,
     ignoreFields: string[]

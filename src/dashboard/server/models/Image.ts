@@ -5,8 +5,8 @@
 import { Schema, model, Model, Types } from 'mongoose'
 import { ImageDocument } from '../../interfaces/models'
 import { ArchiveModel } from './Archive'
-import { TagModel } from './Tag'
-import { compareTags } from '../utils/compareTags'
+// import { TagModel } from './Tag'
+// import { compareTags } from '../utils/compareTags'
 //import { CatalogModel } from './Catalog'
 
 const ImageSchema: Schema = new Schema(
@@ -18,9 +18,9 @@ const ImageSchema: Schema = new Schema(
     dateAdded: {
       type: Date,
     },
-    finalTag: {
-      type: Types.ObjectId,
-    },
+    // finalTag: {
+    //   type: Types.ObjectId,
+    // },
     name: {
       type: String,
       required: [true, 'Please add a name of image with its extension'],
@@ -51,13 +51,13 @@ const ImageSchema: Schema = new Schema(
     // numberOfTags: {
     //   type: Number,
     // },
-    numberOfMatches: {
-      type: Number,
-      required: [
-        true,
-        'Please tell how many times two or more taggers must agree till complete',
-      ],
-    },
+    // numberOfMatches: {
+    //   type: Number,
+    //   required: [
+    //     true,
+    //     'Please tell how many times two or more taggers must agree till complete',
+    //   ],
+    // },
   },
   {
     toJSON: { virtuals: true },
@@ -66,23 +66,23 @@ const ImageSchema: Schema = new Schema(
 )
 
 //instance method, on document
-ImageSchema.methods.compareTags = async function (tag: any, ignoreFields: any) {
-  let numMatch = 1
-  const allTags = await TagModel.find({ imageId: this._id })
+// ImageSchema.methods.compareTags = async function (tag: any, ignoreFields: any) {
+//   let numMatch = 1
+//   const allTags = await TagModel.find({ imageId: this._id })
 
-  for (const currentTag of allTags) {
-    const isSame = await compareTags(tag, currentTag.tags, ignoreFields)
+//   for (const currentTag of allTags) {
+//     const isSame = await compareTags(tag, currentTag.tags, ignoreFields)
 
-    if (isSame) {
-      numMatch++
-    }
-  }
+//     if (isSame) {
+//       numMatch++
+//     }
+//   }
 
-  return {
-    numMatch: numMatch,
-    numberOfMatches: this.numberOfMatches,
-  }
-}
+//   return {
+//     numMatch: numMatch,
+//     numberOfMatches: this.numberOfMatches,
+//   }
+// }
 
 //Document middleware
 ImageSchema.post<ImageDocument>('save', async function (this: ImageDocument) {

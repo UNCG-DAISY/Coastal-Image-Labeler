@@ -45,8 +45,8 @@ const tagImage = asyncHandler(
     }
 
     //check if any matching tags: DO BEFORE ADDING TAG
-    const compareResult = await image.compareTags(tags, ['Additional Comments'])
-    const finalizable = compareResult.numMatch === compareResult.numberOfMatches
+    // const compareResult = await image.compareTags(tags, ['Additional Comments'])
+    // const finalizable = compareResult.numMatch === compareResult.numberOfMatches
 
     //create
     const newTag = await TagModel.create({
@@ -54,22 +54,22 @@ const tagImage = asyncHandler(
       imageId: imageId,
       userId: req.user.data._id,
       tags: tags,
-      final: finalizable,
+      //final: finalizable,
     })
 
     res.newTag = newTag
 
     //If finalized, update imageDoc to have this new tag
-    if (finalizable) {
-      log({
-        message: `Image ${imageId} is finalizable`,
-        type: 'info',
-      })
-      await ImageModel.updateOne(
-        { _id: imageId },
-        { finalTag: newTag._id, taggable: true }
-      )
-    }
+    // if (finalizable) {
+    //   log({
+    //     message: `Image ${imageId} is finalizable`,
+    //     type: 'info',
+    //   })
+    //   await ImageModel.updateOne(
+    //     { _id: imageId },
+    //     { finalTag: newTag._id, taggable: true }
+    //   )
+    // }
 
     next()
   }

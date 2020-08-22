@@ -63,11 +63,9 @@ test('Test getCurrentlyAssignedImage: Already assigned image', async () => {
       _id: '5f336c1de9aea42d24bf0f23',
       archive: '5f336c1de9aea42d24bf0f22',
       name: 'm1a2_abrams.jpg',
-      numberOfMatches: 2,
       taggable: true,
       dateAdded: '2020-08-12T04:12:13.441Z',
       __v: 0,
-      finalTag: null,
       id: '5f336c1de9aea42d24bf0f23',
     },
   })

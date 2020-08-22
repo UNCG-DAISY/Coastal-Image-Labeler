@@ -84,7 +84,7 @@ test('Test tagImage Controller: Valid Id', async () => {
   //await res.newTag.remove()
 })
 
-test('Test tagImage Controller: Tag twice', async () => {
+test('Test tagImage Controller: Tag same image twice', async () => {
   //create mocks
   const req = httpMocks.createRequest()
   req.body = {
@@ -123,51 +123,51 @@ test('Test tagImage Controller: Tag twice', async () => {
   expect(res.newTag).toBe(undefined)
 })
 
-test('Test tagImage Controller: Finalized', async () => {
-  //create mocks
-  const req = httpMocks.createRequest()
-  req.body = {
-    userId: '5f39cf33e0ceea4f6c11c046',
-    imageId: '5f336c1de9aea42d24bf0f23',
-    tags: {
-      tankFeatures: ['highCaliber', 'heavyArmor', 'highViewRange'],
-      equipmentTypes: ['coaxMg', 'turretMg'],
-      'Additional Comments': 'tier 10',
-      tankClass: 'heavy',
-    },
-  }
-  const userData = await UserModel.findById('5f39cf33e0ceea4f6c11c046')
-  req.user = {
-    displayName: '',
-    id: '',
-    nickname: '',
-    picture: '',
-    provider: '',
-    user_id: '',
-    data: userData,
-  }
-  const res = httpMocks.createResponse()
+// test('Test tagImage Controller: Finalized', async () => {
+//   //create mocks
+//   const req = httpMocks.createRequest()
+//   req.body = {
+//     userId: '5f39cf33e0ceea4f6c11c046',
+//     imageId: '5f336c1de9aea42d24bf0f23',
+//     tags: {
+//       tankFeatures: ['highCaliber', 'heavyArmor', 'highViewRange'],
+//       equipmentTypes: ['coaxMg', 'turretMg'],
+//       'Additional Comments': 'tier 10',
+//       tankClass: 'heavy',
+//     },
+//   }
+//   const userData = await UserModel.findById('5f39cf33e0ceea4f6c11c046')
+//   req.user = {
+//     displayName: '',
+//     id: '',
+//     nickname: '',
+//     picture: '',
+//     provider: '',
+//     user_id: '',
+//     data: userData,
+//   }
+//   const res = httpMocks.createResponse()
 
-  //execute
-  await tagImage(req, res, () => {
-    return
-  })
-  const image = await ImageModel.findById('5f336c1de9aea42d24bf0f23')
+//   //execute
+//   await tagImage(req, res, () => {
+//     return
+//   })
+//   const image = await ImageModel.findById('5f336c1de9aea42d24bf0f23')
 
-  //assert
-  expect(res.newTag.userId.toString()).toBe('5f39cf33e0ceea4f6c11c046')
-  expect(res.newTag.imageId.toString()).toBe('5f336c1de9aea42d24bf0f23')
-  expect(res.newTag.archiveId.toString()).toBe('5f336c1de9aea42d24bf0f22')
-  expect(res.newTag.catalogId.toString()).toBe('5f336c1de9aea42d24bf0f21')
-  expect(res.newTag.tags).toStrictEqual({
-    tankFeatures: ['highCaliber', 'heavyArmor', 'highViewRange'],
-    equipmentTypes: ['coaxMg', 'turretMg'],
-    'Additional Comments': 'tier 10',
-    tankClass: 'heavy',
-  })
-  expect(res.newTag.final).toBe(true)
-  expect(image.finalTag.toString()).toBe(res.newTag._id.toString())
-})
+//   //assert
+//   expect(res.newTag.userId.toString()).toBe('5f39cf33e0ceea4f6c11c046')
+//   expect(res.newTag.imageId.toString()).toBe('5f336c1de9aea42d24bf0f23')
+//   expect(res.newTag.archiveId.toString()).toBe('5f336c1de9aea42d24bf0f22')
+//   expect(res.newTag.catalogId.toString()).toBe('5f336c1de9aea42d24bf0f21')
+//   expect(res.newTag.tags).toStrictEqual({
+//     tankFeatures: ['highCaliber', 'heavyArmor', 'highViewRange'],
+//     equipmentTypes: ['coaxMg', 'turretMg'],
+//     'Additional Comments': 'tier 10',
+//     tankClass: 'heavy',
+//   })
+//   expect(res.newTag.final).toBe(true)
+//   expect(image.finalTag.toString()).toBe(res.newTag._id.toString())
+// })
 
 test('Test compareTags: Same', async () => {
   const tag1 = {
