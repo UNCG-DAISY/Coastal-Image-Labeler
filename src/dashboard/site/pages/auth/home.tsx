@@ -19,29 +19,8 @@ interface Props {
   resumeTableData: ResumeTaggingDataCatalog[]
   success: boolean
   message?: string
-  hasAssignedImages: boolean
+  hasAssignedImages: any[]
 }
-
-// import List from '@material-ui/core/List'
-// import Divider from '@material-ui/core/Divider'
-// import ListItem from '@material-ui/core/ListItem'
-// import ListItemIcon from '@material-ui/core/ListItemIcon'
-// import ListItemText from '@material-ui/core/ListItemText'
-// import InboxIcon from '@material-ui/icons/MoveToInbox'
-// import MailIcon from '@material-ui/icons/Mail'
-
-// function Test() {
-//   return (
-//     <List>
-//       {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-//         <ListItem button key={text}>
-//           <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-//           <ListItemText primary={text} />
-//         </ListItem>
-//       ))}
-//     </List>
-//   )
-// }
 
 export const Home = (props: Props): JSX.Element => {
   const { user, success, message, hasAssignedImages } = props
@@ -49,10 +28,9 @@ export const Home = (props: Props): JSX.Element => {
 
   async function getResumeObject() {
     //Get resume table data
-    if (hasAssignedImages) {
+    if (hasAssignedImages.length > 0) {
       const getTableResponse = await getResumeTableData()
       setResumeData(getTableResponse.data.taggedCount)
-      //console.log(getTableResponse.data.taggedCount)
     } else {
       setResumeData([])
     }
@@ -82,7 +60,7 @@ export const Home = (props: Props): JSX.Element => {
         ) : (
           <React.Fragment>
             <HomeText displayName={user?.displayName} />
-            {hasAssignedImages ? (
+            {hasAssignedImages.length > 0 ? (
               <ResumeTagging data={resumeData} />
             ) : (
               <React.Fragment>

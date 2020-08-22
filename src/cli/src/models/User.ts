@@ -13,12 +13,6 @@ import { UserDocument } from '../../interfaces/models'
 
 const userSchema: Schema = new Schema(
   {
-    // assignedImages: {
-    //   type: Object,
-    //   default: {
-    //     '': '',
-    //   },
-    // },
     catalogs: {
       type: [Types.ObjectId],
       default: [],
@@ -27,12 +21,6 @@ const userSchema: Schema = new Schema(
       type: Date,
       default: Date.now(),
     },
-    // imagesTagged: {
-    //   type: Object,
-    //   default: {
-    //     '': '',
-    //   },
-    // },
     roles: {
       type: [String],
       default: ['tagger'],
