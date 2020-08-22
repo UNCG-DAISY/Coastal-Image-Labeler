@@ -74,9 +74,9 @@ declare namespace cilDashboard {
     data?: UserDocument
   }
 
-  export interface ResPartOfCatalog extends AdvResultsRes {
-    partOfCatalog: boolean
-  }
+  // export interface ResPartOfCatalog extends AdvResultsRes {
+  //   partOfCatalog: boolean
+  // }
 
   export interface ExtenedResponse extends Response {
     advancedResults?: {
@@ -108,7 +108,7 @@ declare namespace cilDashboard {
     _id?: string
   }
   export interface AssignedImageTagAggregate {
-    catalogInfo?: cilDashboard.CatalogInfo
+    catalogInfo?: CatalogInfo
     totalImages?: number
     name?: string
     catalogId?: any
@@ -172,13 +172,13 @@ declare module 'node-mocks-http' {
 
     cookies: { [name: string]: ResponseCookie }
 
-    archive?: cilDashboard.ArchiveDocument
-    catalog?: cilDashboard.CatalogDocument
-    newTag?: cilDashboard.TagDocument
-    assignedImage?: cilDashboard.ImageDocument
-    questionSet?: cilDashboard.QuestionSetDocument
+    archive?: ArchiveDocument
+    catalog?: CatalogDocument
+    newTag?: TagDocument
+    assignedImage?: ImageDocument
+    questionSet?: QuestionSetDocument
     membershipCatalog?: boolean
-    taggedCount?: cilDashboard.AssignedImageTagAggregate[]
+    taggedCount?: AssignedImageTagAggregate[]
     advancedResults?: {
       success: boolean
       count: number

@@ -1,14 +1,17 @@
 {
     "catalogs":[
+       
         {
-            "path":"C:/Users/Namenai/Documents/GitHub/v3_dashboard/src/cli_test_data/testCatalogs/tanks",
-            "compressedPath":"C:/Users/Namenai/Documents/GitHub/v3_dashboard/src/cli_test_data/testCatalogs/tanks",
-            "name":"Tanks",
+            "path":{
+                "original":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/animals",
+                "compressed":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/animals"
+            },
+            "name":"Animals",
             "taggable":true,
             "catalogInfo":{
-                "year": 1916,
-                "link":"https://en.wikipedia.org/wiki/Tank",
-                "description":"Tanks are tracked fighting vehicles with armor and large caliber guns."
+                "year": 2020,
+                "link":"https://en.wikipedia.org/wiki/Cats_%26_Dogs",
+                "description":"Furry friends that make ppl happy."
             }, 
             "imageFormat":[".jpg",".jpeg"],
             "questionSet":"5ee3a8d801091b0dd1d62d3a",

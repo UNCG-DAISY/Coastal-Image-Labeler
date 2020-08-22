@@ -41,21 +41,19 @@ const catalog = {
 
       const catalog = file.catalogs[i]
       const {
-        path: catalogPath,
-        compressedPath,
+        path: catalogPathInfo,
         imageFormat,
         name,
         questionSet,
         catalogInfo,
         taggable,
-        imageServeOrder
+        imageServeOrder,
       } = catalog
 
       const res = await createCatalog({
-        compressedCatalogPath: compressedPath,
+        path: catalogPathInfo,
         imageFormat: imageFormat,
         name: name,
-        catalogPath: catalogPath,
         questionSet: questionSet,
         taggable: taggable,
         catalogInfo: {
@@ -63,7 +61,7 @@ const catalog = {
           link: catalogInfo.link as string,
           year: catalogInfo.year as number,
         },
-        imageServeOrder:imageServeOrder
+        imageServeOrder: imageServeOrder,
       })
 
       if (!res.success) {

@@ -30,7 +30,7 @@ export async function createImage(params: Params) {
           original: imagePath,
           compressed: imagePath,
         },
-        numberOfMatches: 2,
+        //numberOfMatches: 2,
         taggable: true,
         dateAdded: Date.now(),
       })

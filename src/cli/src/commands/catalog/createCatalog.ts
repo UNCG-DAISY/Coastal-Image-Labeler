@@ -5,8 +5,10 @@ import colorize from '../../utils/colorize'
 import { createArchives } from './createArchive'
 
 interface Params {
-  catalogPath: string
-  compressedCatalogPath: string
+  path: {
+    original: string
+    compressed: string
+  }
   imageFormat: [string]
   name: string
   questionSet: string
@@ -15,46 +17,39 @@ interface Params {
     link: string
     description: string
   }
-  taggable: boolean,
+  taggable: boolean
   imageServeOrder: string
 }
 
 export async function createCatalog(catalogData: Params) {
   const {
-    compressedCatalogPath,
+    path,
     catalogInfo,
     imageFormat,
     name,
-    catalogPath,
     questionSet,
     taggable,
-    imageServeOrder
+    imageServeOrder,
   } = catalogData
 
   //check if catalog exists. If it does dont create it.
   let catalogEntry = await CatalogModel.findOne({
     name: name,
-    path: {
-      original: catalogPath,
-      compressed: compressedCatalogPath,
-    },
+    path: path,
   })
 
   if (!catalogEntry) {
     try {
       catalogEntry = await CatalogModel.create({
         name: name,
-        path: {
-          original: catalogPath,
-          compressed: compressedCatalogPath,
-        },
+        path: path,
         questionSet: questionSet,
         taggable: taggable,
         catalogInfo: {
           ...catalogInfo,
         },
         dateAdded: Date.now(),
-        imageServeOrder: imageServeOrder
+        imageServeOrder: imageServeOrder,
       })
     } catch (error) {
       return {
@@ -66,14 +61,14 @@ export async function createCatalog(catalogData: Params) {
     colorize.info('Catalog already exists')
   }
 
-  const archiveFolders = getDirectories(catalogPath)
+  const archiveFolders = getDirectories(path.original)
 
   //For each archive of a catalog
   for (const archiveName of archiveFolders) {
     const res = await createArchives({
       archiveName: archiveName,
       catalogEntry: catalogEntry,
-      catalogPath: catalogPath,
+      catalogPath: path.original,
       imageFormat: imageFormat,
     })
 

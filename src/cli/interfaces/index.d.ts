@@ -74,9 +74,9 @@ declare namespace cilDashboard {
     data?: UserDocument
   }
 
-  export interface ResPartOfCatalog extends AdvResultsRes {
-    partOfCatalog: boolean
-  }
+  // export interface ResPartOfCatalog extends AdvResultsRes {
+  //   partOfCatalog: boolean
+  // }
 
   export interface ExtenedResponse extends Response {
     advancedResults?: {
@@ -97,6 +97,8 @@ declare namespace cilDashboard {
     membershipCatalog?: boolean
     newTag?: TagDocument
     taggedCount?: AssignedImageTagAggregate[]
+    imagePath?: string
+    altImagePath?: string
   }
 
   export interface AssignedImageTagAggregateArchive {
@@ -106,13 +108,22 @@ declare namespace cilDashboard {
     _id?: string
   }
   export interface AssignedImageTagAggregate {
-    catalogInfo?: cilDashboard.CatalogInfo
+    catalogInfo?: CatalogInfo
     totalImages?: number
     name?: string
     catalogId?: any
     archives?: AssignedImageTagAggregateArchive[]
     tagged?: any[]
   }
+
+  export interface NavItem {
+    route: string
+    name: string
+    icon?: any
+    style?: any
+  }
+
+  export type ImagePathTypes = 'Compressed' | 'Original'
 }
 
 declare global {
@@ -138,45 +149,6 @@ declare global {
       }
       /* eslint-disable @typescript-eslint/no-unused-vars */
       data?: UserDocument
-    }
-  }
-}
-
-declare module 'node-mocks-http' {
-  export type MockResponse<T extends Response> = T & {
-    _isEndCalled: () => boolean
-    _getHeaders: () => Headers
-    _getData: () => any
-    _getJSONData: () => cilDashboard.ResponseType
-    _getBuffer: () => Buffer
-    _getLocals: () => any
-    _getStatusCode: () => number
-    _getStatusMessage: () => string
-    _isJSON: () => boolean
-    _isUTF8: () => boolean
-    _isDataLengthValid: () => boolean
-    _getRedirectUrl: () => string
-    _getRenderData: () => any
-    _getRenderView: () => string
-
-    cookies: { [name: string]: ResponseCookie }
-
-    archive?: cilDashboard.ArchiveDocument
-    catalog?: cilDashboard.CatalogDocument
-    newTag?: cilDashboard.TagDocument
-    assignedImage?: cilDashboard.ImageDocument
-    questionSet?: cilDashboard.QuestionSetDocument
-    membershipCatalog?: boolean
-    taggedCount?: cilDashboard.AssignedImageTagAggregate[]
-    advancedResults?: {
-      success: boolean
-      count: number
-      message: string
-      pagination: {
-        page: number
-        limit: number
-      }
-      data: AllDocuments[]
     }
   }
 }
