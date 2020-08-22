@@ -97,6 +97,8 @@ declare namespace cilDashboard {
     membershipCatalog?: boolean
     newTag?: TagDocument
     taggedCount?: AssignedImageTagAggregate[]
+    imagePath?: string
+    altImagePath?: string
   }
 
   export interface AssignedImageTagAggregateArchive {

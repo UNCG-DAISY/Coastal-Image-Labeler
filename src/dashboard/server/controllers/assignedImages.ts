@@ -197,8 +197,6 @@ const insertTaggedCount = asyncHandler(
     }
 
     res.taggedCount = dataObj ?? []
-    // const t2 = performance.now()
-    // console.log(`Server: Time ${t2 - t1} ms`)
     next()
   }
 )
