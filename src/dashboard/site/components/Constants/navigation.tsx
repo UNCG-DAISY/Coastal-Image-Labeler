@@ -7,6 +7,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import * as Colors from '@material-ui/core/colors'
 
 import { NavItem } from '../../../interfaces'
+import { theme } from '../theme'
 
 export const login: NavItem = {
   name: 'Login',
@@ -31,16 +32,25 @@ export const home: NavItem = {
   name: 'Home',
   route: '/auth/home',
   icon: (props) => <HomeIcon {...props} />,
+  style: {
+    color: theme.palette.secondary.main,
+  },
 }
 export const startTagging: NavItem = {
   name: 'Label New Archive',
   route: '/auth/startTagging',
   icon: (props) => <LabelIcon {...props} />,
+  style: {
+    color: theme.palette.secondary.main,
+  },
 }
 export const admin: NavItem = {
   name: 'Admin',
   route: '/auth/admin',
   icon: (props) => <SecurityIcon {...props} />,
+  style: {
+    color: theme.palette.secondary.main,
+  },
 }
 
 const defaultNavItems = {

@@ -3,15 +3,9 @@ import { useForm } from 'react-hook-form'
 import { Typography, Divider, FormControl } from '@material-ui/core'
 
 import { generateRadioDefaults } from './generate/Radio'
-// import { generateCheckbox } from './generate/Checkbox'
-// import { generateTextField } from './generate/Textfield'
-// import { generateQuickSubmitButton } from './generate/QuickSubmit'
-
-// import { ResponseType } from '../../../interfaces'
 import { QuestionSetDocument } from '../../../interfaces/models'
 import determineQuestionType from './determineQuestionType'
-// import { SubmitButton, SkipButton } from '../Button/premadeButtons'
-import Button from '@material-ui/core/Button'
+import { SubmitButton, SkipButton } from '../Button/premadeButtons'
 
 interface Props {
   questionSetData: QuestionSetDocument
@@ -90,7 +84,7 @@ export default function GenericHookForm(props: Props) {
             }}
           >
             <div>
-              <Button
+              <SkipButton
                 variant="outlined"
                 onClick={() => {
                   setGlobalDisable(true)
@@ -99,17 +93,17 @@ export default function GenericHookForm(props: Props) {
                 disabled={globalDisable}
               >
                 Skip
-              </Button>
+              </SkipButton>
             </div>
             <div>
-              <Button
+              <SubmitButton
                 type="submit"
-                variant="outlined"
-                color="default"
+                // variant="outlined"
+                // color="default"
                 disabled={globalDisable}
               >
                 Submit
-              </Button>
+              </SubmitButton>
             </div>
           </div>
         </FormControl>

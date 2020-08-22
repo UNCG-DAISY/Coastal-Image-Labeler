@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button'
 
 // import { CatalogSelectionData } from '../../../../../interfaces'
 import { theme } from '../../../theme'
-import { useRowStyles } from '../Styles'
+import { useRowStyles } from '../../Styles'
 import { SubTable } from './Subtable'
 
 import { ResumeTaggingDataCatalog } from '../../../../../interfaces'

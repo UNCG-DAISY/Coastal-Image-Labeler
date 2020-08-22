@@ -7,9 +7,8 @@ import {
 } from '@material-ui/core'
 import { generateLabel } from './Label'
 
-// import { YesNoCheckbox } from '../../Button/Checkbox/premadeCheckboxButtons'
-import Checkbox from '@material-ui/core/Checkbox'
 import { errorText } from './ErrorText'
+import { YesNoCheckbox } from '../../Button/Checkbox/premadeCheckboxButtons'
 
 function generateCheckbox(checkboxQuestions, values) {
   const {
@@ -34,7 +33,7 @@ function generateCheckbox(checkboxQuestions, values) {
             key={checkboxButton.value}
             label={`${checkboxButton.name}`}
             control={
-              <Checkbox
+              <YesNoCheckbox
                 disabled={false}
                 color="primary"
                 name={key}

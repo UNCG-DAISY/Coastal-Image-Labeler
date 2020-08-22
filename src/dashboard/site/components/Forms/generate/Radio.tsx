@@ -7,8 +7,7 @@ import {
   FormLabel,
   // Radio
 } from '@material-ui/core'
-// import { YesNoRadio } from '../../Button/Radio/premadeRadioButtons'
-import Radio from '@material-ui/core/Radio'
+import { YesNoRadio } from '../../Button/Radio/premadeRadioButtons'
 import { generateLabel } from './Label'
 import { errorText } from './ErrorText'
 
@@ -34,7 +33,7 @@ function generateRadio(radioQuestions, values) {
               {buttons.map((radioButton) => (
                 <FormControlLabel
                   value={radioButton.value}
-                  control={<Radio />}
+                  control={<YesNoRadio />}
                   label={radioButton.name}
                   key={radioButton.value}
                   disabled={globalDisable}

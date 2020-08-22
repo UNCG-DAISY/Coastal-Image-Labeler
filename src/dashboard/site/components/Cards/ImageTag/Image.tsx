@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import CardActions from '@material-ui/core/CardActions'
 import IconButton from '@material-ui/core/IconButton'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
@@ -7,9 +6,8 @@ import Collapse from '@material-ui/core/Collapse'
 import clsx from 'clsx'
 import CardMedia from '@material-ui/core/CardMedia'
 import { makeStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
 
-// import { ViewImage } from '../../Button/premadeButtons'
+import { ViewImage } from '../../Button/premadeButtons'
 import { theme } from '../../theme'
 
 interface Props {
@@ -30,21 +28,21 @@ export function ImageContainer(props: Props) {
   return (
     <React.Fragment>
       <CardActions disableSpacing className={classes.dropdownStyles}>
-        <Button
+        <ViewImage
           style={{ marginRight: 10 }}
           onClick={() => {
             window.open(compressedLink, 'Compressed Image')
           }}
         >
           View compressed image
-        </Button>
-        <Button
+        </ViewImage>
+        <ViewImage
           onClick={() => {
             window.open(originalLink, 'Full Image')
           }}
         >
           View full image
-        </Button>
+        </ViewImage>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,

@@ -1,4 +1,4 @@
-import { theme } from '../../theme'
+import { theme, customColors } from '../theme'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useRowStyles = makeStyles({
@@ -11,7 +11,7 @@ const useRowStyles = makeStyles({
     color: theme.palette.secondary.main,
   },
   header: {
-    backgroundColor: '#002132', //theme.palette.common.black,
+    backgroundColor: customColors.darkerBackground,
   },
 })
 

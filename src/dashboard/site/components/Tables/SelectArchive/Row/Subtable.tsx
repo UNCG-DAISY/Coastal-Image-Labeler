@@ -5,7 +5,7 @@ import TableRow from '@material-ui/core/TableRow'
 import TableHead from '@material-ui/core/TableHead'
 import Button from '@material-ui/core/Button'
 
-import { useRowStyles } from '../Styles'
+import { useRowStyles } from '../../Styles'
 import { CatalogSelectionData } from '../../../../../interfaces'
 
 interface Props {

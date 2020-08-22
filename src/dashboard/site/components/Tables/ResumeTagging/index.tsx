@@ -8,9 +8,9 @@ import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 
 import { ResumeTaggingDataCatalog } from '../../../../interfaces'
-import { useRowStyles } from './Styles'
+import { useRowStyles } from '../Styles'
 import { Row } from './Row'
-import { SkeletonTable } from './skeleton'
+import { SkeletonTable } from '../skeleton'
 
 interface Props {
   data: ResumeTaggingDataCatalog[]
