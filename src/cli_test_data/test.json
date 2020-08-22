@@ -1,6 +1,21 @@
 {
     "catalogs":[
-       
+        {
+            "path":{
+                "original":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/tanks",
+                "compressed":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/tanks"
+            },
+            "name":"Tanks",
+            "taggable":true,
+            "catalogInfo":{
+                "year": 1916,
+                "link":"https://en.wikipedia.org/wiki/Tank",
+                "description":"Tanks are tracked fighting vehicles with armor and large caliber guns."
+            }, 
+            "imageFormat":[".jpg",".jpeg"],
+            "questionSet":"5f36cee346891c0348c77d24",
+            "imageServeOrder": "5f3197417264d3213420c20e"
+        },      
         {
             "path":{
                 "original":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/animals",
@@ -14,7 +29,7 @@
                 "description":"Furry friends that make ppl happy."
             }, 
             "imageFormat":[".jpg",".jpeg"],
-            "questionSet":"5ee3a8d801091b0dd1d62d3a",
+            "questionSet":"5f41950feefcc91e48c9e226",
             "imageServeOrder": "5f3197417264d3213420c20e"
         }      
     ]

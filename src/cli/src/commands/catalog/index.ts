@@ -56,11 +56,7 @@ const catalog = {
         name: name,
         questionSet: questionSet,
         taggable: taggable,
-        catalogInfo: {
-          description: catalogInfo.descripton as string,
-          link: catalogInfo.link as string,
-          year: catalogInfo.year as number,
-        },
+        catalogInfo: catalogInfo,
         imageServeOrder: imageServeOrder,
       })
 
