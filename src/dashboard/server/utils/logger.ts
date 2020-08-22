@@ -1,9 +1,10 @@
 import colors from 'colors'
 colors
+import moment from 'moment'
 
 interface LogType {
   message?: string | any
-  type?: '' | 'info' | 'ok' | 'error'
+  type?: '' | 'info' | 'ok' | 'error' | 'time'
 }
 
 function log({ message = '', type = '' }: LogType) {
@@ -14,23 +15,27 @@ function log({ message = '', type = '' }: LogType) {
     return
   }
 
+  const time = moment().format()
   if (process.env.NODE_ENV === 'development') {
     switch (type) {
       case 'info':
-        console.log(message.cyan)
+        console.log(time, '>', message.cyan)
         break
       case 'ok':
-        console.log(message.green)
+        console.log(time, '>', message.green)
         break
       case 'error':
-        console.log(message.red)
+        console.log(time, '>', message.red)
+        break
+      case 'time':
+        console.log(time, '>', message.yellow)
         break
       default:
-        console.log(message)
+        console.log(time, '>', message)
         break
     }
   } else {
-    console.log(message)
+    console.log(time, '>', message)
   }
 }
 

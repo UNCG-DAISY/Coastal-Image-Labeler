@@ -46,6 +46,7 @@
     "jsonschema": "^1.2.6",
     "lodash": "^4.17.19",
     "memorystore": "^1.6.2",
+    "moment": "^2.27.0",
     "mongoose": "^5.9.24",
     "next": "9.4.1",
     "passport": "^0.4.1",
@@ -54,6 +55,7 @@
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.0.6",
     "react-json-pretty": "^2.2.0",
+    "response-time": "^2.3.2",
     "uid-safe": "^2.1.5"
   },
   "devDependencies": {

@@ -30,6 +30,9 @@ import { RegisterRoutes } from './routes'
 //Security
 import { initAuthentication } from './auth'
 
+import responseTime from 'response-time'
+import { displayResponseTime } from './middlewares/logResTime'
+
 const dev = process.env.NODE_ENV !== 'production'
 
 const app = next({
@@ -56,6 +59,10 @@ const port = ((process.env.NEXT_PUBLIC_PORT as unknown) as number) ?? 3000
     //register models
     RegisterModels()
 
+    //Time API calls
+    server.use(responseTime())
+    server.use(displayResponseTime)
+
     //Register api routes first
     RegisterRoutes(server)
 
@@ -74,7 +81,7 @@ const port = ((process.env.NEXT_PUBLIC_PORT as unknown) as number) ?? 3000
     const serverObj = server.listen(port, (err?: any) => {
       if (err) throw err
       log({
-        message: `> Ready on ${process.env.NEXT_PUBLIC_PROTOCOL}://${
+        message: `Ready on ${process.env.NEXT_PUBLIC_PROTOCOL}://${
           process.env.NEXT_PUBLIC_DOMAIN_NAME
         }  at port = ${port} - env: ${process.env.NODE_ENV ?? 'dev'} mode
         `,
