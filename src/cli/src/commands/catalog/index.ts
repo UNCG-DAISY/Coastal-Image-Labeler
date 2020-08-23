@@ -16,7 +16,7 @@ unhandledRejection
 
 import { createCatalog } from './createCatalog'
 import colorize from '../../utils/colorize'
-// import { ImageModel } from '../../models/Image'
+import { ImageServeOrderModel } from '../../models/ImageServeOrder'
 // import { ArchiveModel } from '../../models/Archive'
 
 interface Options {
@@ -48,7 +48,16 @@ const catalog = {
         catalogInfo,
         taggable,
         imageServeOrder,
+        sequentialOrder,
       } = catalog
+
+      let newServeOrder
+      if (sequentialOrder) {
+        newServeOrder = await ImageServeOrderModel.create({
+          type: 'sequential',
+          data: sequentialOrder,
+        })
+      }
 
       const res = await createCatalog({
         path: catalogPathInfo,
@@ -57,7 +66,7 @@ const catalog = {
         questionSet: questionSet,
         taggable: taggable,
         catalogInfo: catalogInfo,
-        imageServeOrder: imageServeOrder,
+        imageServeOrder: newServeOrder?._id ?? imageServeOrder,
       })
 
       if (!res.success) {

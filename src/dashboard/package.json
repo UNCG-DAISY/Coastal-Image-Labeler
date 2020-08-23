@@ -9,7 +9,7 @@
     "build:next": "next build ./site",
     "build": "npm run build:next && npm run build:server",
     "start": "npm run build && npm run prod",
-    "prod": "cross-env NODE_ENV=production node dist/index.js",
+    "prod": "cross-env NODE_ENV=production node dist/server/index.js",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js ",

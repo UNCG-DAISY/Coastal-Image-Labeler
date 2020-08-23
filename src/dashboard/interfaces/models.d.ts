@@ -106,6 +106,7 @@ export interface TagDocument extends Document {
 
 export interface ImageServeOrderDocument extends Document {
   type: 'random' | string
+  data?: any
 }
 
 export interface QuestionSetDocument extends Document {

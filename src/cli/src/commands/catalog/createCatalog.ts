@@ -38,7 +38,6 @@ export async function createCatalog(catalogData: Params) {
     path: path,
   })
 
-  console.log('catalogInfo', catalogInfo)
   if (!catalogEntry) {
     try {
       catalogEntry = await CatalogModel.create({

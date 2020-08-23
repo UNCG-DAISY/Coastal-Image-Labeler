@@ -8,7 +8,7 @@
     "build": "tsc",
     "link": "rimraf dist && tsc && npm link",
     "test:build": "npm run build && npm run test",
-    "test": "node ./dist/bin/cil-dashboard.js catalog add --path C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/test.json",
+    "test": "node ./dist/bin/cil-dashboard.js catalog add --path C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/test2.json",
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js ",
     "lint:fix": "eslint . --ext ts --ext tsx --ext js --fix",

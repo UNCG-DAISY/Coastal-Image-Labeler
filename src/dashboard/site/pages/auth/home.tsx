@@ -30,7 +30,8 @@ export const Home = (props: Props): JSX.Element => {
     //Get resume table data
     if (hasAssignedImages.length > 0) {
       const getTableResponse = await getResumeTableData()
-      setResumeData(getTableResponse.data.taggedCount)
+      console.log('getTableResponse', getTableResponse, '--------')
+      setResumeData(getTableResponse?.data?.taggedCount)
     } else {
       setResumeData([])
     }

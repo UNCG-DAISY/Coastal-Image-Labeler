@@ -12,7 +12,11 @@ const ImageServeOrder: Schema = new Schema(
     type: {
       type: String,
       required: [true, 'Assign Image Id'],
-      enum: ['random'],
+      enum: ['random', 'sequential'],
+    },
+    data: {
+      type: Object,
+      required: [false],
     },
   },
   {
