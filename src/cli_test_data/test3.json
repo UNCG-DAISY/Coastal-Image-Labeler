@@ -1,0 +1,20 @@
+{
+    "catalogs":[
+        {
+            "path":{
+                "original":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/demo",
+                "compressed":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/demo"
+            },
+            "name":"Demo",
+            "taggable":true,
+            "catalogInfo":{
+                "year": 2020,
+                "link":"https://github.com/UNCG-DAISY/Coastal-Image-Labeler",
+                "description":"Demo Catalog."
+            }, 
+            "imageFormat":[".jpg",".jpeg"],
+            "questionSet":"5f41950feefcc91e48c9e226",
+            "imageServeOrder": "5f3197417264d3213420c20e"
+        }      
+    ]
+}
