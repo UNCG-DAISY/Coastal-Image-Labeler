@@ -1,49 +1,61 @@
 import { ImageModel } from '../../models/Image'
-// import { TagModel } from "../../models/Tag"
 import { AssignedImageModel } from '../../models/AssignedImages'
-// import { log } from "../logger"
-// import { ObjectID } from "mongodb"
+import { log } from '../logger'
 import {
   ImageServeOrderDocument,
   ArchiveDocument,
   TagDocument,
 } from '../../../interfaces/models'
+import { RandomOrder } from './random'
 
 interface Params {
   archive: ArchiveDocument
   imagesTaggedByUser: TagDocument[]
+  taggedImageIdOnly: string[]
   user: Express.User
   imageServeOrder: ImageServeOrderDocument
 }
 
 async function SequentialOrder(params: Params) {
-  const { archive, imagesTaggedByUser, imageServeOrder, user } = params
+  const {
+    archive,
+    imagesTaggedByUser,
+    imageServeOrder,
+    user,
+    taggedImageIdOnly,
+  } = params
 
   //first get the order for the archive
   const orderOfArchive = imageServeOrder?.data[archive.name]
   if (!orderOfArchive) {
-    return {
-      success: false,
-      message: 'No order for archive',
-    }
+    log({
+      type: 'error',
+      message: `No serve order found for archive ${archive.name} at serve order ${imageServeOrder._id}`,
+    })
+    log({
+      type: 'info',
+      message: `Trying random serve`,
+    })
+    return await RandomOrder({
+      archiveId: archive._id,
+      taggedImageIdOnly: taggedImageIdOnly,
+      user: user,
+    })
   }
 
   let firstNonTaggedImage = undefined
   //Find the first image in the order that is not tagged
   for (const orderdImage of orderOfArchive) {
-    let isImageTagged = false
-    for (const taggedImage of imagesTaggedByUser) {
-      const image = await ImageModel.findById(taggedImage.imageId)
-      if (image.name === orderdImage) {
-        isImageTagged = true
-      }
-    }
-    if (!isImageTagged) {
+    const orderdImageTagged = !!imagesTaggedByUser.find((element) => {
+      return element.image.name === orderdImage
+    })
+    if (!orderdImageTagged) {
       firstNonTaggedImage = orderdImage
       break
     }
   }
 
+  //If there is a taggable image
   if (firstNonTaggedImage) {
     const selectedImageDocument = await ImageModel.findOne({
       name: firstNonTaggedImage,
@@ -62,6 +74,7 @@ async function SequentialOrder(params: Params) {
     }
   }
 
+  //if no taggable image
   return {
     success: false,
     message: `No more images to tag in archive ${archive._id}`,

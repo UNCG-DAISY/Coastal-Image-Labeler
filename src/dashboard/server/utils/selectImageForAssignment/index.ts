@@ -27,6 +27,8 @@ async function selectImageForAssignment({
     message: `Selecting image for assignment for user ${user.data._id} for archive ${archiveId}`,
     type: 'info',
   })
+
+  //Get the serve order of the catalog
   const archive = await ArchiveModel.findById(archiveId)
   const catalog = await CatalogModel.findById(archive.catalog)
   const imageServeOrder = await ImageServeOrderModel.findById(
@@ -36,8 +38,9 @@ async function selectImageForAssignment({
   //Get all images tagged by the user
   const imagesTaggedByUser = await TagModel.find({
     userId: user.data._id,
-  })
+  }).populate('image')
 
+  //filter to just ids
   const taggedImageIdOnly = imagesTaggedByUser.map((imageTag) =>
     imageTag.imageId.toString()
   )
@@ -61,6 +64,7 @@ async function selectImageForAssignment({
       archive: archive,
       imagesTaggedByUser: imagesTaggedByUser,
       imageServeOrder: imageServeOrder,
+      taggedImageIdOnly: taggedImageIdOnly,
       user: user,
     })
     return result

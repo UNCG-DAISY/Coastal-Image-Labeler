@@ -62,4 +62,12 @@ TagSchema.pre<TagDocument>('save', async function (next: HookNextFunction) {
 
 TagSchema.index({ imageId: 1, userId: 1 }, { unique: true })
 
+// Reverse populate with virtuals
+TagSchema.virtual('image', {
+  ref: 'Image',
+  localField: 'imageId',
+  foreignField: '_id',
+  justOne: true,
+})
+
 export const TagModel: Model<TagDocument> = model('Tag', TagSchema)

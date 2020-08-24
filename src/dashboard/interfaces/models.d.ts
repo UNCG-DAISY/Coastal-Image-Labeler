@@ -102,6 +102,7 @@ export interface TagDocument extends Document {
   date: Date
   ignoreFields?: string[]
   final?: boolean
+  image?: ImageDocument
 }
 
 export interface ImageServeOrderDocument extends Document {

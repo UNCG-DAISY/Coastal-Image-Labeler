@@ -65,6 +65,7 @@ const assignImage = asyncHandler(
       type: 'info',
     })
 
+    //select an image for assignment
     const selectedImage = await selectImageForAssignment({
       user: user,
       archiveId: archiveId,
@@ -72,7 +73,7 @@ const assignImage = asyncHandler(
 
     log({
       message: `Selected image ${selectedImage.success}`,
-      type: 'info',
+      type: selectedImage.success ? 'info' : 'error',
     })
 
     if (selectedImage.success) {
