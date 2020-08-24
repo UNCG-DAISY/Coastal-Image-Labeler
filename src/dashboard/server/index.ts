@@ -42,8 +42,8 @@ const app = next({
 const handle = app.getRequestHandler()
 const port = ((process.env.NEXT_PUBLIC_PORT as unknown) as number) ?? 3000
 
-let x = 5
-console.log(x)
+let y = 5
+console.log(y)
 
 ;(async () => {
   try {
