@@ -106,7 +106,7 @@ export interface TagDocument extends Document {
 }
 
 export interface ImageServeOrderDocument extends Document {
-  type: 'random' | string
+  type: 'random' | 'sequential' | string
   data?: any
 }
 

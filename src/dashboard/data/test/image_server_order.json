@@ -1,5 +1,8 @@
 [{
   "_id": "5f3197417264d3213420c20e",
-  "type": "random",
+  "type": "sequential",
+  "data":{
+    "german":["luchs.jpg","tiger_1.jpg","tiger_2.jpg","e25.jpg","e50.jpg","e75.jpg","e100.jpg"]
+  },
   "__v": 0
 }]
