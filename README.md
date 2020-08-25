@@ -10,7 +10,7 @@ https://github.com/UNCG-DAISY/Coastal-Image-Labeler/commits/master)
 
 ### It's a labeling tool for Coastal Images!
 
-![Labeler](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/blob/master/doc/static/img/labeler.gif)
+![Labeler](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/blob/master/docs/static/img/labeler.gif)
 
 The labeler is deployed here: www.coastalimagelabeler.science
 
@@ -21,3 +21,4 @@ https://uncg-daisy.github.io/Coastal-Image-Labeler/)
 
 We hope to foster an inclusive and respectful environment surrounding the contribution and discussion of our project.
 Make sure you understand our [**Code of Conduct**](https://Coastal-Image-Labeler.readthedocs.io/en/latest/code_of_conduct/).
+ 
