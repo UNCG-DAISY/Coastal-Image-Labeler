@@ -3,6 +3,7 @@ import HomeIcon from '@material-ui/icons/Home'
 import LabelIcon from '@material-ui/icons/Label'
 import SecurityIcon from '@material-ui/icons/Security'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 
 import * as Colors from '@material-ui/core/colors'
 
@@ -45,9 +46,9 @@ export const startTagging: NavItem = {
   },
 }
 export const exportTags: NavItem = {
-  name: 'exportTags',
+  name: 'Export Tags',
   route: '/auth/export',
-  icon: (props) => <LabelIcon {...props} />,
+  icon: (props) => <CloudDownloadIcon {...props} />,
   style: {
     color: theme.palette.secondary.main,
   },
