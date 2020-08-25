@@ -56,6 +56,7 @@ async function (user, context, callback) {
     useUnifiedTopology: true,
   });
 
+  //finds the demo catalog to add
   const demoCatalog = await CatalogModel.findOne({name: "Demo"});
   
   await UserModel.create({

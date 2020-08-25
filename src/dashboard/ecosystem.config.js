@@ -5,12 +5,12 @@ const date = new Date()
 const timestamp = `${date.getMonth()}-${date.getDate()}-${date.getFullYear()}_${date.getHours()}.${date.getMinutes()}.${date.getSeconds()}`
 const root = `../../../../pm2Logs/${timestamp}/`
 
-fs.mkdir(path.join(__dirname, 'test'), (err) => {
-  if (err) {
-    return console.error(err)
-  }
-  console.log('Directory created successfully!')
-})
+// await fs.mkdirSync(path.join(__dirname, root), (err) => {
+//   if (err) {
+//     return console.error(err)
+//   }
+//   console.log('Directory created successfully!')
+// })
 
 module.exports = {
   apps: [

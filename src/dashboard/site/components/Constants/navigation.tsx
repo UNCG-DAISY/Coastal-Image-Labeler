@@ -69,7 +69,7 @@ const defaultNavItems = {
 export const navigationItems = {
   defaultNavItems: defaultNavItems,
   landingPage: {
-    center: [],
-    right: [login],
+    center: [login],
+    right: [],
   },
 }

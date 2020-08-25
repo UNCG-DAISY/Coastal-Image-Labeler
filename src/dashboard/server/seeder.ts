@@ -81,6 +81,7 @@ async function createAll() {
   await ArchiveModel.create(archiveData)
   await ImageModel.create(imagesData)
   await AssignedImageModel.create(assingedData)
+  //@ts-ignore
   await ImageServeOrderModel.create(serveOrderData)
   await QuestionSetModel.create(questionSetData)
   //@ts-ignore for some reason typescript is crying here

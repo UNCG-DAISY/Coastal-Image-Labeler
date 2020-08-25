@@ -20,21 +20,31 @@ function log({ message = '', type = '' }: LogType) {
   const time = moment().format()
 
   let output = message
+  const typeMessage = {
+    info: '[INFO]',
+    ok: '[OK]',
+    error: '[ERROR]',
+    time: '[TIME]',
+  }
 
   //add color when in dev mode
   if (process.env.NODE_ENV === 'development') {
     switch (type) {
       case 'info':
         output = message.cyan
+        typeMessage.info = typeMessage.info.cyan
         break
       case 'ok':
         output = message.green
+        typeMessage.ok = typeMessage.ok.green
         break
       case 'error':
         output = message.red
+        typeMessage.error = typeMessage.error.red
         break
       case 'time':
         output = message.yellow
+        typeMessage.time = typeMessage.time.yellow
         break
       default:
         break
@@ -43,16 +53,16 @@ function log({ message = '', type = '' }: LogType) {
 
   switch (type) {
     case 'info':
-      console.log(time, '[INFO]', '>', output)
+      console.log(time, typeMessage.info, '>', output)
       break
     case 'ok':
-      console.log(time, '[OK]', '>', output)
+      console.log(time, typeMessage.ok, '>', output)
       break
     case 'error':
-      console.log(time, '[ERROR]', '>', output)
+      console.log(time, typeMessage.error, '>', output)
       break
     case 'time':
-      console.log(time, '[TIME]', '>', output)
+      console.log(time, typeMessage.time, '>', output)
       break
     default:
       console.log(time, '>', output)
