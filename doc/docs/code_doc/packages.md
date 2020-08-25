@@ -4,11 +4,12 @@ title: Packages
 sidebar_label: Packages
 ---
 
-This is an explanation of the more important packages in the project.
+This is an explanation of the more important packages in the project Seperated by Server/Site and CLI packages.
 
-## Overview of packages
 
-I will be providing a short few sentences on some of the more important packages of the library
+## Server/Site
+
+These are the noteable packages that are used in the project. A full list can be found in the corresponding `package.json` files.
 
 ### @material-ui/core
 
@@ -20,7 +21,7 @@ material UI principles laid out by Google.
 
 This package allows for the use of `.env` files which contain environment
 variables such as database passwords, which ports the host server is on,
-or if the server is in development or production mode.
+or if the server is in development or production mode. However the main `.env` files are loaded by Nextjs where `dotenv` is used for unit testing.
 
 ### express
 
@@ -30,6 +31,10 @@ that simplifies code alot. It's great, so much so I will link it [here](https://
 ### express-session
 
 Related to express package [here](#express). Handles session management and tokens.
+
+### express-validator
+
+This packages help abstract out request body and param validation to ensure that the correct data is sent. 
 
 ### mongoose
 
@@ -53,3 +58,45 @@ Related to the [above](#passport) when using the Auth0 method of signin, which c
 ### react
 
 A JavaScript library for building user interfaces, very important, found [here](https://reactjs.org/)
+
+
+## CLI
+
+Some of the packages carry over from the server/site such as the database packages of MongoDB and Mongoose.
+
+### Commander
+
+The main package that sets up the command line interface.
+
+### Configstore
+
+Allows to store data passed to the CLI, such as the MongoDB URI.
+
+### Inquirer
+
+Allows for user input into the CLI
+
+## Unit Testing, Linting, Formatting
+
+One major change for v3 Dashboard was the addition of unit testing, linting and formatting of code.
+
+### Jest
+
+Unit test package.
+
+### node-mocks-http
+
+Allows to create fake Request and Response Objects for unit testing.
+
+### eslint
+
+Performs linting to help keep code up to good practices and checks syntax.
+
+### prettier
+
+Formats code.
+
+### husky
+
+Runs linting and formatting commands on commits and push events.
+

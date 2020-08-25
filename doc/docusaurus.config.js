@@ -54,7 +54,7 @@ module.exports = {
           items: [
             {
               label: 'Contact Us',
-              href: 'docs/contactUsDoc',
+              href: 'docs/contactUs',
             },
             {
               label: 'Twitter',

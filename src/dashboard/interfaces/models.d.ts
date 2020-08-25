@@ -101,12 +101,12 @@ export interface TagDocument extends Document {
   tags?: any
   date: Date
   ignoreFields?: string[]
-  final?: boolean
+  //final?: boolean
   image?: ImageDocument
 }
 
 export interface ImageServeOrderDocument extends Document {
-  type: 'random' | 'sequential' | string
+  type: 'random' | 'sequential'
   data?: any
 }
 
