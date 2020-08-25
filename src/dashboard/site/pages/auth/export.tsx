@@ -4,14 +4,8 @@ import Layout from '../../components/Layout'
 import { GetServerSideProps } from 'next'
 import getSession from '../../components/Utils/Auth/getSession'
 import { getUserDB } from '../../components/API/post/getUserDB'
-//import ErrorCard from '../../components/ErrorCards'
 import { determineNavItems } from '../../components/Utils/Auth/determineNavItems'
-//import { HomeText, NoAssigned } from '../../components/StaticText/home'
-//import { ResumeTagging } from '../../components/Tables/ResumeTagging'
 import { ResumeTaggingDataCatalog, UserProp } from '../../../interfaces'
-//import { getResumeTableData } from '../../components/API/post/getResumeTableData'
-//import { getHasAssignedImages } from '../../components/API/post/userHasAssignedImages'
-// import { performance } from 'perf_hooks'
 
 interface Props {
   user: UserProp
