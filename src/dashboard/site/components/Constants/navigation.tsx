@@ -44,6 +44,14 @@ export const startTagging: NavItem = {
     color: theme.palette.secondary.main,
   },
 }
+export const exportTags: NavItem = {
+  name: 'exportTags',
+  route: '/auth/export',
+  icon: (props) => <LabelIcon {...props} />,
+  style: {
+    color: theme.palette.secondary.main,
+  },
+}
 export const admin: NavItem = {
   name: 'Admin',
   route: '/auth/admin',
