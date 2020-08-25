@@ -1,0 +1,45 @@
+server {
+	
+	error_page 502 /custom_502.html;
+	location = /custom_502.html {
+			root /usr/share/nginx/html;
+			internal;
+	}
+	
+	# root /usr/share/nginx/html;
+    # index test.html;
+
+    # error_page 404 /test.html;
+	
+	location / {
+       proxy_pass http://localhost:4201; #whatever port your app runs on
+       proxy_http_version 1.1;
+       proxy_set_header Upgrade $http_upgrade;
+       proxy_set_header Connection 'upgrade';
+       proxy_set_header Host $host;
+       proxy_cache_bypass $http_upgrade;
+    }
+
+	server_name dev.coastalimagelabeler.science;
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/dev.coastalimagelabeler.science/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/dev.coastalimagelabeler.science/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+} 
+server {
+    if ($host = dev.coastalimagelabeler.science) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+
+	server_name dev.coastalimagelabeler.science;
+    listen 80;
+    return 404; # managed by Certbot
+
+
+}

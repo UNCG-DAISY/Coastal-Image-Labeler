@@ -1,0 +1,37 @@
+[{
+  "_id": "5f336c1de9aea42d24bf0f21",
+  "catalogInfo": {
+    "year": 1916,
+    "link": "https://en.wikipedia.org/wiki/Tank",
+    "description": "Tanks are armored tracked vehicles with large caliber guns and heavy armor."
+  },
+  "totalImages": 27,
+  "name": "Tanks",
+  "path": {
+    "original": "C:/Users/Namenai/Documents/GitHub/v3_dashboard/src/cli_test_data/testCatalogs/tanks",
+    "compressed": "C:/Users/Namenai/Documents/GitHub/v3_dashboard/src/cli_test_data/testCatalogs/tanks"
+  },
+  "questionSet": "5f36cee346891c0348c77d24",
+  "taggable": true,
+  "dateAdded": "2020-08-12T04:12:13.223Z",
+  "imageServeOrder": "5f3197417264d3213420c20e",
+  "__v": 0
+},{
+  "_id": "5f3b2e7265477a68b819335a",
+  "catalogInfo": {
+    "year": 1916,
+    "link": "https://en.wikipedia.org/wiki/Tank",
+    "description": "Tanks are armored tracked vehicles with large caliber guns and heavy armor."
+  },
+  "totalImages": 0,
+  "name": "Test Catalog",
+  "path": {
+    "original": "/fake/path",
+    "compressed": "/fake/path"
+  },
+  "questionSet": "5f36cee346891c0348c77d24",
+  "taggable": true,
+  "dateAdded": "2020-08-12T04:12:13.223Z",
+  "imageServeOrder": "5f3197417264d3213420c20e",
+  "__v": 0
+}]

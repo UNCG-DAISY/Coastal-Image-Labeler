@@ -1,0 +1,47 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    branches: [master,v3]
+  push:
+    branches: [master,v3]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+        mongodb-version: [4.2]
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.3.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
+        mongodb-replica-set: insert-replica-set-name
+
+    - run: |
+        cd src/dashboard
+        npm install
+      
+    - run: |
+        cd src/dashboard/site
+        (
+          echo NEXT_PUBLIC_LOGGING = true
+          echo MONGO_URI = ${{ secrets.MONGO_URI }}
+        )>".env.test.local"
+        cat .env.test.local
+
+    - run: |
+        cd src/dashboard
+        npm test

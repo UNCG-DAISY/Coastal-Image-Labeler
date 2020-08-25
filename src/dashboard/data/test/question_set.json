@@ -1,0 +1,242 @@
+[{
+  "_id": "5f36cee346891c0348c77d24",
+  "questions": [
+    {
+      "type": "radioGroup",
+      "docLink": "https://uncg-daisy.github.io/Coastal-Image-Labeler/docs/question_sets/stormQuestionSet#radio-groups",
+      "errorMessage": "Please select 1",
+      "required": true,
+      "label": "Tank Type",
+      "key": "tankClass",
+      "buttons": [
+        {
+          "name": "Light",
+          "value": "light"
+        },
+        {
+          "name": "Medium",
+          "value": "medium"
+        },
+        {
+          "name": "Heavy",
+          "value": "heavy"
+        },
+        {
+          "name": "Tank Destroyer",
+          "value": "tankDestroyer"
+        },
+        {
+          "name": "Self Propelled Gun",
+          "value": "spg"
+        }
+      ]
+    },
+    {
+      "type": "checkboxGroup",
+      "errorMessage": "Select 0 or more",
+      "docLink": "https://uncg-daisy.github.io/Coastal-Image-Labeler/docs/question_sets/stormQuestionSet#checkbox-groups",
+      "required": false,
+      "label": "Features(s)",
+      "key": "tankFeatures",
+      "buttons": [
+        {
+          "name": "High Caliber",
+          "value": "highCaliber"
+        },
+        {
+          "name": "High Speed",
+          "value": "highSpeed"
+        },
+        {
+          "name": "Heavy Armor",
+          "value": "heavyArmor"
+        },
+        {
+          "name": "High View Range",
+          "value": "highViewRange"
+        }
+      ]
+    },
+    {
+      "type": "checkboxGroup",
+      "errorMessage": "Select 1 or more",
+      "required": true,
+      "docLink": "https://uncg-daisy.github.io/Coastal-Image-Labeler/docs/question_sets/stormQuestionSet#checkbox-groups",
+      "min": 1,
+      "label": "Equipment Type(s)",
+      "key": "equipmentTypes",
+      "buttons": [
+        {
+          "name": "Co-Axial Mg",
+          "value": "coaxMg"
+        },
+        {
+          "name": "Turret Mg",
+          "value": "turretMg"
+        },
+        {
+          "name": "Double Barrel",
+          "value": "doubleBarrel"
+        },
+        {
+          "name": "Hydro Suspension",
+          "value": "hydroSuspension"
+        }
+      ]
+    },
+    {
+      "type": "textField",
+      "required": false,
+      "label": "Additional Comments",
+      "docLink": "https://uncg-daisy.github.io/Coastal-Image-Labeler/docs/question_sets/stormQuestionSet#textbox",
+      "key": "additionalComments",
+      "multiline": true,
+      "rows": 5
+    }
+  ],
+  "name": "Tank Questions",
+  "description": "👋👋👋👋👋👋",
+  "__v": 0
+},{
+  "_id": "5ed82a588896022158fa0852",
+  "questions": [
+    {
+      "type": "buttonSubmit",
+      "required": false,
+      "label": "Quick Submit",
+      "docLink": "https://uncg-daisy.github.io/Coastal-Image-Labeler/docs/question_sets/stormQuestionSet",
+      "key": "quickSubmitButtons",
+      "tag": {
+        "water": true
+      },
+      "buttons": [
+        {
+          "label": "Label image as all Water and go to next image",
+          "tag": {
+            "water": true
+          },
+          "key": "tagAsWater"
+        }
+      ]
+    },
+    {
+      "type": "radioGroup",
+      "docLink": "https://uncg-daisy.github.io/Coastal-Image-Labeler/docs/question_sets/stormQuestionSet#radio-groups",
+      "errorMessage": "Please select 1",
+      "required": true,
+      "label": "Development Type",
+      "key": "devType",
+      "buttons": [
+        {
+          "name": "Undeveloped",
+          "value": "undeveloped"
+        },
+        {
+          "name": "Developed",
+          "value": "developed"
+        }
+      ]
+    },
+    {
+      "type": "radioGroup",
+      "errorMessage": "Please select 1",
+      "docLink": "https://uncg-daisy.github.io/Coastal-Image-Labeler/docs/question_sets/stormQuestionSet#radio-groups",
+      "required": true,
+      "label": "Washover Type",
+      "key": "washoverType",
+      "buttons": [
+        {
+          "name": "No visible washover",
+          "value": "noWashover"
+        },
+        {
+          "name": "Visible washover",
+          "value": "washover"
+        }
+      ]
+    },
+    {
+      "type": "radioGroup",
+      "errorMessage": "Please select 1",
+      "docLink": "https://uncg-daisy.github.io/Coastal-Image-Labeler/docs/question_sets/stormQuestionSet#radio-groups",
+      "required": true,
+      "label": "Damage Type",
+      "key": "dmgType",
+      "buttons": [
+        {
+          "name": "No visible damage to infrastructure",
+          "value": "noDamage"
+        },
+        {
+          "name": "Visible damage to infrastructure",
+          "value": "damage"
+        }
+      ]
+    },
+    {
+      "type": "checkboxGroup",
+      "errorMessage": "Select 0 or more",
+      "docLink": "https://uncg-daisy.github.io/Coastal-Image-Labeler/docs/question_sets/stormQuestionSet#checkbox-groups",
+      "required": false,
+      "label": "Impact Type(s)",
+      "key": "impactType",
+      "buttons": [
+        {
+          "name": "Swash",
+          "value": "swash"
+        },
+        {
+          "name": "Collision",
+          "value": "collision"
+        },
+        {
+          "name": "Overwash",
+          "value": "overwash"
+        },
+        {
+          "name": "Inundation",
+          "value": "inundation"
+        }
+      ]
+    },
+    {
+      "type": "checkboxGroup",
+      "errorMessage": "Select 1 or more",
+      "required": true,
+      "docLink": "https://uncg-daisy.github.io/Coastal-Image-Labeler/docs/question_sets/stormQuestionSet#checkbox-groups",
+      "min": 1,
+      "label": "Terrain Type(s)",
+      "key": "terrianType",
+      "buttons": [
+        {
+          "name": "Sandy Coastline",
+          "value": "sandyCoastline"
+        },
+        {
+          "name": "Marsh",
+          "value": "marsh"
+        },
+        {
+          "name": "Inland",
+          "value": "inland"
+        },
+        {
+          "name": "River",
+          "value": "river"
+        }
+      ]
+    },
+    {
+      "type": "textField",
+      "required": false,
+      "label": "Additional Comments",
+      "docLink": "https://uncg-daisy.github.io/Coastal-Image-Labeler/docs/question_sets/stormQuestionSet#textbox",
+      "key": "additionalComments",
+      "multiline": true,
+      "rows": 5
+    }
+  ],
+  "name": "Coastal Storm Questions",
+  "description": "🌀",
+  "__v": 0
+}]

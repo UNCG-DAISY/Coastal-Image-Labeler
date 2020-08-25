@@ -1,0 +1,353 @@
+[
+    {
+        "_id": "5f336c1de9aea42d24bf0f28",
+        "archive": "5f336c1de9aea42d24bf0f22",
+        "name": "m4a3e8_sherman.jpg",
+        "path": {
+            "original": "/m4a3e8_sherman.jpg",
+            "compressed": "/m4a3e8_sherman.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:13.891Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f34",
+        "archive": "5f336c1ee9aea42d24bf0f31",
+        "name": "e50.jpg",
+        "path": {
+            "original": "/e50.jpg",
+            "compressed": "/e50.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.710Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1de9aea42d24bf0f23",
+        "archive": "5f336c1de9aea42d24bf0f22",
+        "name": "m1a2_abrams.jpg",
+        "path": {
+            "original": "/m1a2_abrams.jpg",
+            "compressed": "/m1a2_abrams.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:13.441Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1de9aea42d24bf0f27",
+        "archive": "5f336c1de9aea42d24bf0f22",
+        "name": "m3_lee.jpg",
+        "path": {
+            "original": "/m3_lee.jpg",
+            "compressed": "/m3_lee.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:13.813Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f2b",
+        "archive": "5f336c1ee9aea42d24bf0f2a",
+        "name": "centurion.jpg",
+        "path": {
+            "original": "/centurion.jpg",
+            "compressed": "/centurion.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.070Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1de9aea42d24bf0f29",
+        "archive": "5f336c1de9aea42d24bf0f22",
+        "name": "t110e5.jpg",
+        "path": {
+            "original": "/t110e5.jpg",
+            "compressed": "/t110e5.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:13.964Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f2f",
+        "archive": "5f336c1ee9aea42d24bf0f2a",
+        "name": "conqueror.jpg",
+        "path": {
+            "original": "/conqueror.jpg",
+            "compressed": "/conqueror.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.394Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f33",
+        "archive": "5f336c1ee9aea42d24bf0f31",
+        "name": "e25.jpg",
+        "path": {
+            "original": "/e25.jpg",
+            "compressed": "/e25.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.639Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f35",
+        "archive": "5f336c1ee9aea42d24bf0f31",
+        "name": "e75.jpg",
+        "path": {
+            "original": "/e75.jpg",
+            "compressed": "/e75.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.783Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1fe9aea42d24bf0f3d",
+        "archive": "5f336c1fe9aea42d24bf0f39",
+        "name": "kv_1.jpg",
+        "path": {
+            "original": "/kv_1.jpg",
+            "compressed": "/kv_1.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:15.309Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1fe9aea42d24bf0f40",
+        "archive": "5f336c1fe9aea42d24bf0f39",
+        "name": "t_34_85.jpg",
+        "path": {
+            "original": "/t_34_85.jpg",
+            "compressed": "/t_34_85.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:15.532Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f32",
+        "archive": "5f336c1ee9aea42d24bf0f31",
+        "name": "e100.jpg",
+        "path": {
+            "original": "/e100.jpg",
+            "compressed": "/e100.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.564Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1de9aea42d24bf0f26",
+        "archive": "5f336c1de9aea42d24bf0f22",
+        "name": "m36_gmc_jackson.jpg",
+        "path": {
+            "original": "/m36_gmc_jackson.jpg",
+            "compressed": "/m36_gmc_jackson.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:13.737Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f2d",
+        "archive": "5f336c1ee9aea42d24bf0f2a",
+        "name": "charioteer.jpg",
+        "path": {
+            "original": "/charioteer.jpg",
+            "compressed": "/charioteer.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.242Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f30",
+        "archive": "5f336c1ee9aea42d24bf0f2a",
+        "name": "cromwell.jpg",
+        "path": {
+            "original": "/cromwell.jpg",
+            "compressed": "/cromwell.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.470Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1fe9aea42d24bf0f3a",
+        "archive": "5f336c1fe9aea42d24bf0f39",
+        "name": "is-3.jpg",
+        "path": {
+            "original": "/is-3.jpg",
+            "compressed": "/is-3.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:15.090Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1fe9aea42d24bf0f3c",
+        "archive": "5f336c1fe9aea42d24bf0f39",
+        "name": "is_7.jpg",
+        "path": {
+            "original": "/is_7.jpg",
+            "compressed": "/is_7.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:15.237Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1fe9aea42d24bf0f3e",
+        "archive": "5f336c1fe9aea42d24bf0f39",
+        "name": "kv_2.jpg",
+        "path": {
+            "original": "/kv_2.jpg",
+            "compressed": "/kv_2.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:15.380Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1de9aea42d24bf0f24",
+        "archive": "5f336c1de9aea42d24bf0f22",
+        "name": "m26_pershing.jpg",
+        "path": {
+            "original": "/m26_pershing.jpg",
+            "compressed": "/m26_pershing.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:13.583Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f2c",
+        "archive": "5f336c1ee9aea42d24bf0f2a",
+        "name": "challenger_1.jpg",
+        "path": {
+            "original": "/challenger_1.jpg",
+            "compressed": "/challenger_1.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.165Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f36",
+        "archive": "5f336c1ee9aea42d24bf0f31",
+        "name": "luchs.jpg",
+        "path": {
+            "original": "/luchs.jpg",
+            "compressed": "/luchs.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.855Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1fe9aea42d24bf0f3f",
+        "archive": "5f336c1fe9aea42d24bf0f39",
+        "name": "T-14.jpg",
+        "path": {
+            "original": "/T-14.jpg",
+            "compressed": "/T-14.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:15.456Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1de9aea42d24bf0f25",
+        "archive": "5f336c1de9aea42d24bf0f22",
+        "name": "m2_stuart.jpg",
+        "path": {
+            "original": "/m2_stuart.jpg",
+            "compressed": "/m2_stuart.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:13.660Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f2e",
+        "archive": "5f336c1ee9aea42d24bf0f2a",
+        "name": "comet.jpg",
+        "path": {
+            "original": "/comet.jpg",
+            "compressed": "/comet.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.318Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f37",
+        "archive": "5f336c1ee9aea42d24bf0f31",
+        "name": "tiger_1.jpg",
+        "path": {
+            "original": "/tiger_1.jpg",
+            "compressed": "/tiger_1.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.926Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1ee9aea42d24bf0f38",
+        "archive": "5f336c1ee9aea42d24bf0f31",
+        "name": "tiger_2.jpg",
+        "path": {
+            "original": "/tiger_2.jpg",
+            "compressed": "/tiger_2.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:14.997Z",
+        "__v": 0
+    },
+    {
+        "_id": "5f336c1fe9aea42d24bf0f3b",
+        "archive": "5f336c1fe9aea42d24bf0f39",
+        "name": "IS_1.jpg",
+        "path": {
+            "original": "/IS_1.jpg",
+            "compressed": "/IS_1.jpg"
+        },
+        "numberOfMatches": 2,
+        "taggable": true,
+        "dateAdded": "2020-08-12T04:12:15.167Z",
+        "__v": 0
+    }
+]

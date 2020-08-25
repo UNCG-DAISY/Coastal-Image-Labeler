@@ -1,13 +1,31 @@
 {
   "name": "cil-dashboard",
-  "version": "1.0.9",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "bin": "./_dist/bin/cil-dashboard.js",
   "scripts": {
     "build": "tsc",
-    "link": "rimraf _dist && tsc && npm link",
-    "start": "node ./_dist/bin/cil-dashboard.js mongoURI show"
+    "link": "rimraf dist && tsc && npm link",
+    "test:build": "npm run build && npm run test",
+    "test": "node ./dist/bin/cil-dashboard.js catalog add --path C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/test3.json",
+    "format": "prettier --write \"**/*.{js,ts,tsx}\"",
+    "lint": "eslint . --ext ts --ext tsx --ext js ",
+    "lint:fix": "eslint . --ext ts --ext tsx --ext js --fix",
+    "type-check": "tsc --pretty --noEmit",
+    "jest": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged",
+      "pre-push": "npm run type-check"
+    }
+  },
+  "lint-staged": {
+    "*.@(ts|tsx)": [
+      "npm run lint",
+      "npm run format"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -19,12 +37,37 @@
     "commander": "^5.1.0",
     "configstore": "^5.0.1",
     "decompress": "^4.2.1",
-    "lodash.template": ">=4.5.0",
+    "express": "^4.17.1",
     "inquirer": "^7.1.0",
+    "jest-express": "^1.12.0",
+    "lodash": "^4.17.19",
     "moment": "^2.26.0",
-    "mongoose": "^5.9.14",
+    "mongoose": "^5.9.28",
     "rimraf": "^3.0.2",
-    "ts-node": "^8.10.1",
-    "typescript": "^3.9.2"
+    "ts-node": "^8.10.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.7",
+    "@types/jest": "^25.1.4",
+    "@types/lodash": "^4.14.157",
+    "@types/mongodb": "^3.5.25",
+    "@types/mongoose": "^5.7.36",
+    "@types/node": "^13.9.5",
+    "@types/testing-library__react": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "babel-jest": "^25.2.3",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-react": "^7.19.0",
+    "husky": "^4.2.3",
+    "jest": "^25.2.3",
+    "jest-watch-typeahead": "^0.5.0",
+    "lint-staged": "^10.0.10",
+    "node-mocks-http": "^1.9.0",
+    "prettier": "^2.0.2",
+    "ts-jest": "^26.1.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
   }
 }
