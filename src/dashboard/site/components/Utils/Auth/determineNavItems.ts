@@ -1,9 +1,15 @@
-import { home, logout, startTagging, admin } from '../../Constants/navigation'
+import {
+  home,
+  logout,
+  startTagging,
+  admin,
+  exportTags,
+} from '../../Constants/navigation'
 import { UserProp } from '../../../../interfaces'
 
 function determineNavItems(user: UserProp) {
   const res = {
-    center: [home],
+    center: [home, exportTags],
     right: [logout],
   }
 
