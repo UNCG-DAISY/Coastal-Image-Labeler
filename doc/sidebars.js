@@ -16,6 +16,7 @@ module.exports = {
         "code_doc/overview",
         "code_doc/packages",
         "code_doc/projectStructure",
+        "code_doc/cicd",
         {
           type: 'category',
           label: 'Auth0',
