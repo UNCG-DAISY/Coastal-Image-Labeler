@@ -76,4 +76,21 @@ const tagImage = asyncHandler(
   }
 )
 
-export { tagImage }
+const exportUserTags = asyncHandler(
+  async (req: Request, res: ExtenedResponse) => {
+    res.status(200).json({
+      success: true,
+      message: `done`,
+    })
+  }
+)
+
+const exportAllTags = asyncHandler(
+  async (req: Request, res: ExtenedResponse) => {
+    res.status(200).json({
+      success: true,
+      message: `done`,
+    })
+  }
+)
+export { tagImage, exportUserTags, exportAllTags }
