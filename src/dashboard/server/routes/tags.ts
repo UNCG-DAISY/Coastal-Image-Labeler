@@ -6,11 +6,11 @@ import { TagModel } from '../models/Tag'
 
 import { ensureAuthenticated } from '../middlewares/ensureAuth'
 import { insertUser } from '../middlewares/insertUser'
-import { tagImage } from '../controllers/tags'
+import { tagImage, exportUserTags, exportAllTags } from '../controllers/tags'
 import { unassignImage } from '../controllers/assignedImages'
 import { check } from 'express-validator'
 import { bodyValidation } from '../middlewares/bodyValidation'
-
+import { hasRoles } from '../middlewares/hasRoles'
 const router = express.Router()
 
 //✔️
@@ -32,6 +32,7 @@ router.route('/tagImage').post(
     check('imageId').isString(),
     check('tags').exists(),
   ]),
+  hasRoles(['tagger']),
   tagImage,
   unassignImage,
   genericReturn({
@@ -40,6 +41,13 @@ router.route('/tagImage').post(
     success: true,
   })
 )
+
 router.route('/skipImage').post(ensureAuthenticated, insertUser, tagImage)
 
+router
+  .route('/export')
+  .get(ensureAuthenticated, insertUser, hasRoles(['tagger']), exportUserTags)
+router
+  .route('/export/all')
+  .get(ensureAuthenticated, insertUser, hasRoles(['admin']), exportAllTags)
 export default router

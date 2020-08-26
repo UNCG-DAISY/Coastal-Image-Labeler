@@ -70,4 +70,25 @@ TagSchema.virtual('image', {
   justOne: true,
 })
 
+TagSchema.virtual('archive', {
+  ref: 'Archive',
+  localField: 'archiveId',
+  foreignField: '_id',
+  justOne: true,
+})
+
+TagSchema.virtual('catalog', {
+  ref: 'Catalog',
+  localField: 'catalogId',
+  foreignField: '_id',
+  justOne: true,
+})
+
+TagSchema.virtual('user', {
+  ref: 'User',
+  localField: 'userId',
+  foreignField: '_id',
+  justOne: true,
+})
+
 export const TagModel: Model<TagDocument> = model('Tag', TagSchema)
