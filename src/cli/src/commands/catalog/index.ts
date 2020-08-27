@@ -48,15 +48,28 @@ const catalog = {
         catalogInfo,
         taggable,
         imageServeOrder,
-        sequentialOrder,
       } = catalog
 
-      let newServeOrder
-      if (sequentialOrder) {
-        newServeOrder = await ImageServeOrderModel.create({
+      //if an id is given use that
+      let newServeOrderId = { _id: imageServeOrder }
+
+      //if that id is a object, make a new serve order
+      if (typeof imageServeOrder == 'object') {
+        const createdServeOrder = await ImageServeOrderModel.create({
           type: 'sequential',
-          data: sequentialOrder,
+          data: imageServeOrder,
         })
+
+        newServeOrderId = createdServeOrder?._id
+      }
+
+      //if none given, assign the random one
+      if (!imageServeOrder) {
+        const randomOrder = await ImageServeOrderModel.findOne({
+          type: 'random',
+        })
+
+        newServeOrderId = randomOrder?._id
       }
 
       const res = await createCatalog({
@@ -66,7 +79,7 @@ const catalog = {
         questionSet: questionSet,
         taggable: taggable,
         catalogInfo: catalogInfo,
-        imageServeOrder: newServeOrder?._id ?? imageServeOrder,
+        imageServeOrder: newServeOrderId?._id,
       })
 
       if (!res.success) {

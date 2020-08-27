@@ -4,11 +4,12 @@ import { ArchiveDocument } from '../../../interfaces/models'
 interface Params {
   fileName: string
   archiveEntry: ArchiveDocument
+  imagePath: string
 }
 
 export async function createImage(params: Params) {
-  const { fileName, archiveEntry } = params
-  const imagePath = `/${fileName}`
+  const { fileName, archiveEntry, imagePath } = params
+  // const imagePath = `/${fileName}`
 
   let imageEntry = await ImageModel.findOne({
     archive: archiveEntry._id,
