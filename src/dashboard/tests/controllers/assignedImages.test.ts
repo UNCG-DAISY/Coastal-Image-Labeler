@@ -269,3 +269,7 @@ test('Test assignImage sequential order', async () => {
   )
   expect(resAssign2.assignedImage.name).toBe('ordered2.jpg')
 })
+
+test('x', async () => {
+  expect(1).toBe(1)
+})

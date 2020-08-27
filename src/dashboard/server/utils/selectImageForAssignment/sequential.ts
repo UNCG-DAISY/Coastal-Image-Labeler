@@ -30,7 +30,7 @@ async function SequentialOrder(params: Params) {
   if (!orderOfArchive) {
     log({
       type: 'error',
-      message: `No serve order found for archive ${archive.name} at serve order ${imageServeOrder._id}`,
+      message: `No serve order found for archive ${archive.name} at serve order ${imageServeOrder._id}: Defaulting to random assignment`,
     })
     log({
       type: 'info',
