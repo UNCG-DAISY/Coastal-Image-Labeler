@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "ts-node --project tsconfig.server.json server/index.ts",
-    "build:server": "tsc --project tsconfig.server.json",
+    "build:server": "rimraf dist && tsc --project tsconfig.server.json",
     "build:next": "next build ./site",
     "build": "npm run build:next && npm run build:server",
     "start": "npm run build && npm run prod",
@@ -56,6 +56,7 @@
     "react-hook-form": "^6.0.6",
     "react-json-pretty": "^2.2.0",
     "response-time": "^2.3.2",
+    "rimraf": "^3.0.2",
     "uid-safe": "^2.1.5"
   },
   "devDependencies": {

@@ -30,7 +30,7 @@ export function ResumeTagging(props: Props) {
             <TableCell />
             <TableCell className={classes.headerText}>Catalog</TableCell>
             <TableCell className={classes.headerText} align="right">
-              Tagged/Total
+              Total Labeled
             </TableCell>
             <TableCell className={classes.headerText} align="right">
               Year

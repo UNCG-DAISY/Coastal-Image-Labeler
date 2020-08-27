@@ -22,7 +22,7 @@ export function SubTable(props: Props) {
       <TableHead>
         <TableRow className={classes.header}>
           <TableCell className={classes.headerText}>Archive</TableCell>
-          <TableCell className={classes.headerText}>Tag/Total</TableCell>
+          <TableCell className={classes.headerText}>Labeled/Total</TableCell>
           <TableCell></TableCell>
         </TableRow>
       </TableHead>
