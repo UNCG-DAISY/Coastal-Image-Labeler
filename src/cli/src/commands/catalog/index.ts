@@ -17,6 +17,7 @@ unhandledRejection
 import { createCatalog } from './createCatalog'
 import colorize from '../../utils/colorize'
 import { ImageServeOrderModel } from '../../models/ImageServeOrder'
+import { performance } from 'perf_hooks'
 // import { ArchiveModel } from '../../models/Archive'
 
 interface Options {
@@ -37,7 +38,7 @@ const catalog = {
 
     //For each catalog provided
     for (let i = 0; i < file.catalogs.length; i++) {
-      const timeStart = process.hrtime()
+      const t1 = performance.now()
 
       const catalog = file.catalogs[i]
       const {
@@ -88,9 +89,9 @@ const catalog = {
         colorize.success(res.message)
       }
 
-      const timeEnd = process.hrtime(timeStart)
+      const t2 = performance.now()
 
-      console.info(`Catalog ${name} = ${timeEnd[1] / 1000000}ms`)
+      console.info(`Catalog ${name} = ${t2 - t1}ms`)
     }
 
     await mongoConnection.close()

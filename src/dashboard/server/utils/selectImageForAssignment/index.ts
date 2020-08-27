@@ -4,7 +4,10 @@ import { ImageServeOrderModel } from '../../models/ImageServeOrder'
 // import { ImageModel } from '../../models/Image'
 import { TagModel } from '../../models/Tag'
 // import { AssignedImageModel } from '../../models/AssignedImages'
-import { ImageDocument } from '../../../interfaces/models'
+import {
+  ImageDocument,
+  ImageServeOrderDocument,
+} from '../../../interfaces/models'
 import { log } from '../logger'
 import { RandomOrder } from './random'
 import { SequentialOrder } from './sequential'
@@ -31,9 +34,14 @@ async function selectImageForAssignment({
   //Get the serve order of the catalog
   const archive = await ArchiveModel.findById(archiveId)
   const catalog = await CatalogModel.findById(archive.catalog)
-  const imageServeOrder = await ImageServeOrderModel.findById(
-    catalog.imageServeOrder.toString()
-  )
+
+  let imageServeOrder = { type: 'random', _id: 'noId' }
+
+  if (catalog.imageServeOrder) {
+    imageServeOrder = await ImageServeOrderModel.findById(
+      catalog?.imageServeOrder?.toString() ?? ''
+    )
+  }
 
   //Get all images tagged by the user
   const imagesTaggedByUser = await TagModel.find({
@@ -63,7 +71,7 @@ async function selectImageForAssignment({
     const result = await SequentialOrder({
       archive: archive,
       imagesTaggedByUser: imagesTaggedByUser,
-      imageServeOrder: imageServeOrder,
+      imageServeOrder: imageServeOrder as ImageServeOrderDocument,
       taggedImageIdOnly: taggedImageIdOnly,
       user: user,
     })
