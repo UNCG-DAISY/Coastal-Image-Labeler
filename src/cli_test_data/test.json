@@ -30,7 +30,10 @@
             }, 
             "imageFormat":[".jpg",".jpeg"],
             "questionSet":"5f41950feefcc91e48c9e226",
-            "imageServeOrder": "5f3197417264d3213420c20e"
+            "sequentialOrder":{
+                "cats":["cat5.jpeg","cat4.jpeg","cat3.jpeg","cat2.jpeg","cat1.jpeg"],
+                "dogs":["dog1.jpeg","dog2.jpeg","dog3.jpeg","dog4.jpeg","dog5.jpeg"]
+            }
         },
         {
             "path":{
