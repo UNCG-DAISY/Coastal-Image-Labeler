@@ -1,8 +1,20 @@
-[{
-  "_id": "5f3197417264d3213420c20e",
-  "type": "sequential",
-  "data":{
-    "german":["luchs.jpg","tiger_1.jpg","tiger_2.jpg","e25.jpg","e50.jpg","e75.jpg","e100.jpg"]
+[
+  {
+    "_id": "5f3197417264d3213420c20e",
+    "type": "sequential",
+    "data": {
+      "catlog1arc1": [
+        "ordered1.jpg",
+        "ordered2.jpg",
+        "ordered3.jpg",
+        "ordered4.jpg"
+      ]
+    },
+    "__v": 0
   },
-  "__v": 0
-}]
+  {
+    "_id": "5f47eb12c1e6bb34b475be2c",
+    "type": "random",
+    "__v": 0
+  }
+]

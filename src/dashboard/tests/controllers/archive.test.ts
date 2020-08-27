@@ -24,9 +24,9 @@ test('Test archiveExists Controller: Success', async () => {
     return
   })
 
-  expect(res.archive.name).toBe('american')
-  expect(res.archive.catalog.toString()).toBe('5f336c1de9aea42d24bf0f21')
-  expect(res.archive.totalImages).toBe(7)
+  expect(res.archive.name).toBe('catlog2arc1')
+  expect(res.archive.catalog.toString()).toBe('5f3b2e7265477a68b819335a')
+  expect(res.archive.totalImages).toBe(3)
 })
 
 test('Test archiveExists Controller: No Archive with given Id', async () => {

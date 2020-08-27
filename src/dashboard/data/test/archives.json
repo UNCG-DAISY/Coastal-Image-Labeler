@@ -1,49 +1,64 @@
-[{
-  "_id": "5f336c1ee9aea42d24bf0f31",
-  "totalImages": 7,
-  "catalog": "5f336c1de9aea42d24bf0f21",
-  "name": "german",
-  "path": {
-    "original": "/german",
-    "compressed": "/german"
+[
+  {
+    "_id": "5f336c1ee9aea42d24bf0f31",
+    "catalog": "5f336c1de9aea42d24bf0f21",
+    "name": "orderedArchive",
+    "path": {
+      "original": "/orderedArchive",
+      "compressed": "/orderedArchive"
+    },
+    "taggable": true,
+    "dateAdded": "2020-08-12T04:12:14.543Z",
+    "__v": 0
   },
-  "taggable": true,
-  "dateAdded": "2020-08-12T04:12:14.543Z",
-  "__v": 0
-},{
-  "_id": "5f336c1ee9aea42d24bf0f2a",
-  "totalImages": 6,
-  "catalog": "5f336c1de9aea42d24bf0f21",
-  "name": "british",
-  "path": {
-    "original": "/british",
-    "compressed": "/british"
+  {
+    "_id": "5f336c1ee9aea42d24bf0f2a",
+    "catalog": "5f336c1de9aea42d24bf0f21",
+    "name": "randomArchive",
+    "path": {
+      "original": "/randomArchive",
+      "compressed": "/randomArchive"
+    },
+    "taggable": true,
+    "dateAdded": "2020-08-12T04:12:14.042Z",
+    "__v": 0
   },
-  "taggable": true,
-  "dateAdded": "2020-08-12T04:12:14.042Z",
-  "__v": 0
-},{
-  "_id": "5f336c1de9aea42d24bf0f22",
-  "totalImages": 7,
-  "catalog": "5f336c1de9aea42d24bf0f21",
-  "name": "american",
-  "path": {
-    "original": "/american",
-    "compressed": "/american"
+  {
+    "_id": "5f480547ec0ae87524919948",
+    "catalog": "5f336c1de9aea42d24bf0f21",
+    "name": "assignedImageArchive",
+    "path": {
+      "original": "/assignedImageArchive",
+      "compressed": "/assignedImageArchive"
+    },
+    "taggable": true,
+    "dateAdded": "2020-08-12T04:12:14.042Z",
+    "__v": 0
+    
   },
-  "taggable": true,
-  "dateAdded": "2020-08-12T04:12:13.336Z",
-  "__v": 0
-},{
-  "_id": "5f336c1fe9aea42d24bf0f39",
-  "totalImages": 7,
-  "catalog": "5f336c1de9aea42d24bf0f21",
-  "name": "russian",
-  "path": {
-    "original": "/russian",
-    "compressed": "/russian"
+  
+  {
+    "_id": "5f336c1de9aea42d24bf0f22",
+    "catalog": "5f3b2e7265477a68b819335a",
+    "name": "catlog2arc1",
+    "path": {
+      "original": "/someOtherArchive1",
+      "compressed": "/someOtherArchive1"
+    },
+    "taggable": true,
+    "dateAdded": "2020-08-12T04:12:13.336Z",
+    "__v": 0
   },
-  "taggable": true,
-  "dateAdded": "2020-08-12T04:12:15.070Z",
-  "__v": 0
-}]
+  {
+    "_id": "5f336c1fe9aea42d24bf0f39",
+    "catalog": "5f3b2e7265477a68b819335a",
+    "name": "catlog2arc2",
+    "path": {
+      "original": "/someOtherArchive2",
+      "compressed": "/someOtherArchive2"
+    },
+    "taggable": true,
+    "dateAdded": "2020-08-12T04:12:15.070Z",
+    "__v": 0
+  }
+]

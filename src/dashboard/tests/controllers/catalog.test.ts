@@ -34,9 +34,9 @@ test('Test catalogExists Controller: Valid Id', async () => {
   })
 
   //assert
-  expect(res.catalog.name).toBe('Tanks')
-  expect(res.catalog.totalImages).toBe(27)
-  expect(res.catalog.catalogInfo.year).toBe(1916)
+  expect(res.catalog.name).toBe('Catalog 1')
+  expect(res.catalog.totalImages).toBe(8)
+  expect(res.catalog.catalogInfo.year).toBe(2020)
   expect(res.catalog.questionSet.toString()).toBe('5f36cee346891c0348c77d24')
   expect(res.catalog.imageServeOrder.toString()).toBe(
     '5f3197417264d3213420c20e'
@@ -80,9 +80,9 @@ test('Test getCatalogQuestionSet Controller: Valid Id', async () => {
   })
 
   //assert
-  expect(res.questionSet.name).toBe('Tank Questions')
-  expect(res.questionSet.description).toBe('👋👋👋👋👋👋')
-  expect(res.questionSet.questions.length).toBe(4)
+  expect(res.questionSet.name).toBe('Coastal Storm Questions')
+  expect(res.questionSet.description).toBe('🌀')
+  expect(res.questionSet.questions.length).toBe(7)
 })
 
 test('Test getCatalogQuestionSet Controller: Invalid Id', async () => {
@@ -141,29 +141,6 @@ test('Test filterUserCatalogsMiddleware Controller', async () => {
   //assert
   expect(res.advancedResults.data.length).toBe(1)
   expect(testCatalogs.length).toBe(2)
-})
-
-test('Test catalogExists Controller: Valid Id', async () => {
-  //create mocks
-  const req = httpMocks.createRequest()
-  req.body = {
-    catalogId: '5f336c1de9aea42d24bf0f21',
-  }
-  const res = httpMocks.createResponse()
-
-  //execute
-  await catalogExists(req, res, () => {
-    return
-  })
-
-  //assert
-  expect(res.catalog.name).toBe('Tanks')
-  expect(res.catalog.totalImages).toBe(27)
-  expect(res.catalog.catalogInfo.year).toBe(1916)
-  expect(res.catalog.questionSet.toString()).toBe('5f36cee346891c0348c77d24')
-  expect(res.catalog.imageServeOrder.toString()).toBe(
-    '5f3197417264d3213420c20e'
-  )
 })
 
 test('Test membershipCatalogMiddleware Controller: Valid Id', async () => {
