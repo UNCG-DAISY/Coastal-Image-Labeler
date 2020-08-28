@@ -62,6 +62,11 @@ export function ImageTag(props: Props) {
 
     if (resSubmitTag.success) {
       setSnackbarStatus(true)
+      setSnackbarMessage(
+        `${resSubmitTag.message} - Getting new image in ${
+          snackbarTime / 1000
+        } seconds`
+      )
       setTimeout(() => {
         Router.reload()
       }, snackbarTime)

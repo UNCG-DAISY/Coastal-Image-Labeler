@@ -1,0 +1,17 @@
+{
+    "_id":"5f4845b26b26fa1f001359bf",
+    "description":"Default Question Set",
+    "name":"Default Question Set",
+    "questions":[
+        {
+            "type":"buttomSubmit",
+            "required":false,
+            "label": "Default",
+            "docLink":"",
+            "key":"defaultSubmitButton",
+            "tag":{
+                "default":true
+            }
+        }
+    ]
+}
