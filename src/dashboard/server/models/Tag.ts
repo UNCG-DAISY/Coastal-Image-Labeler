@@ -6,6 +6,7 @@ import { Schema, model, Model, Types, HookNextFunction } from 'mongoose'
 import { TagDocument } from '../../interfaces/models'
 import { ImageModel } from './Image'
 import { ArchiveModel } from './Archive'
+import { CatalogModel } from './Catalog'
 
 //import { CatalogModel } from './Catalog'
 
@@ -56,6 +57,10 @@ TagSchema.pre<TagDocument>('save', async function (next: HookNextFunction) {
   //add catalogId
   const archive = await ArchiveModel.findOne({ _id: this.archiveId })
   this.catalogId = archive.catalog
+
+  //add catalog ignoreField
+  const catalog = await CatalogModel.findById(archive.catalog)
+  this.ignoreFields = catalog.ignoreFields ?? []
 
   next()
 })

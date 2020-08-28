@@ -77,4 +77,7 @@ archiveScehma.post('updateOne', async function (this: ArchiveDocument) {
   const archive = await ArchiveModel.findOne(this.getQuery())
   await CatalogModel.updateImageCount(archive.catalog)
 })
+
+//makes it so archive name and catalog id pair are unique
+archiveScehma.index({ name: 1, catalog: 1 }, { unique: true })
 export const ArchiveModel: ArchiveModelType = model('Archive', archiveScehma)

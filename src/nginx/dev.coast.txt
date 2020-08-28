@@ -1,8 +1,8 @@
 server {
 	
-	error_page 502 /custom_502.html;
-	location = /custom_502.html {
-			root /usr/share/nginx/html;
+	error_page 500 502 503 504 404 /production.custom_error.html;
+	location = /production.custom_error.html {
+			root /home/shahnafis/GitHub/Coastal-Image-Labeler/src/html;
 			internal;
 	}
 	

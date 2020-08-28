@@ -31,7 +31,7 @@ export async function createArchives(params: Params) {
   //console.log(images)
 
   let archiveEntry = await ArchiveModel.findOne({
-    catalog: catalogEntry._id,
+    //catalog: catalogEntry._id,
     name: archiveName,
     path: {
       original: archivePath,
@@ -41,6 +41,7 @@ export async function createArchives(params: Params) {
   if (!archiveEntry) {
     try {
       //throw new Error("TESTING ARCHIVE error");
+      colorize.info(`Creating archive ${archiveName}`)
       archiveEntry = await ArchiveModel.create({
         catalog: catalogEntry._id,
         name: archiveName,
@@ -59,6 +60,7 @@ export async function createArchives(params: Params) {
       }
     }
   } else {
+    await archiveEntry.updateOne({ catalog: catalogEntry._id })
     colorize.info('Archive already exists')
   }
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { customColors } from '../../theme'
 interface Props {
   key: string
   errorMessage: string
@@ -12,7 +13,7 @@ const errorText = (
   { errors }
 ) => {
   const text = (
-    <span style={{ color: 'red' }}>
+    <span style={{ color: customColors.red }}>
       {errorMessage ? (
         errorMessage
       ) : (

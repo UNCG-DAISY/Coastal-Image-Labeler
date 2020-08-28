@@ -49,6 +49,7 @@ const catalog = {
         catalogInfo,
         taggable,
         imageServeOrder,
+        ignoreFields,
       } = catalog
 
       const res = await createCatalog({
@@ -59,6 +60,7 @@ const catalog = {
         taggable: taggable,
         catalogInfo: catalogInfo,
         imageServeOrder: imageServeOrder,
+        ignoreFields: ignoreFields,
       })
 
       if (!res.success) {

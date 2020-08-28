@@ -19,6 +19,7 @@ interface Params {
   }
   taggable: boolean
   imageServeOrder: string | any
+  ignoreFields: string[]
 }
 
 export async function createCatalog(catalogData: Params) {
@@ -30,6 +31,7 @@ export async function createCatalog(catalogData: Params) {
     questionSet,
     taggable,
     imageServeOrder,
+    ignoreFields,
   } = catalogData
 
   //check if catalog exists. If it does dont create it.
@@ -50,11 +52,13 @@ export async function createCatalog(catalogData: Params) {
         },
         dateAdded: Date.now(),
         imageServeOrder: undefined,
+        ignoreFields: ignoreFields,
       }
 
       if (imageServeOrder) {
         newCatalogData.imageServeOrder = imageServeOrder
       }
+      colorize.info(`Creating catalog ${name}`)
       catalogEntry = await CatalogModel.create(newCatalogData)
     } catch (error) {
       return {
