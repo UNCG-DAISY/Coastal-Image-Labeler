@@ -38,9 +38,15 @@ test('Test catalogExists Controller: Valid Id', async () => {
   expect(res.catalog.totalImages).toBe(8)
   expect(res.catalog.catalogInfo.year).toBe(2020)
   expect(res.catalog.questionSet.toString()).toBe('5f36cee346891c0348c77d24')
-  expect(res.catalog.imageServeOrder.toString()).toBe(
-    '5f3197417264d3213420c20e'
-  )
+  expect(res.catalog.imageServeOrder.type).toBe('sequential')
+  expect(res.catalog.imageServeOrder.data).toStrictEqual({
+    orderedArchive: [
+      'ordered1.jpg',
+      'ordered2.jpg',
+      'ordered3.jpg',
+      'ordered4.jpg',
+    ],
+  })
 })
 
 test('Test catalogExists Controller: Nonexistant Catalog', async () => {

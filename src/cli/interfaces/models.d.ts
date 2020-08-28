@@ -23,7 +23,10 @@ export interface CatalogDocument extends Document {
   catalogInfo?: CatalogInfo
   taggable: boolean
   questionSet: ObjectID | string
-  imageServeOrder: ObjectID
+  imageServeOrder?: {
+    type?: 'random' | 'sequential'
+    data?: any
+  }
   totalImages?: number
 
   updateImageCount(): Promise<void>
@@ -101,13 +104,14 @@ export interface TagDocument extends Document {
   tags?: any
   date: Date
   ignoreFields?: string[]
-  final?: boolean
+  //final?: boolean
+  image?: ImageDocument
 }
 
-export interface ImageServeOrderDocument extends Document {
-  type: 'random' | string | 'sequential'
-  data: any
-}
+// export interface ImageServeOrderDocument extends Document {
+//   type: 'random' | 'sequential'
+//   data?: any
+// }
 
 export interface QuestionSetDocument extends Document {
   name: string
@@ -122,5 +126,4 @@ export type AllDocuments =
   | ImageDocument
   | AssingedImageDocument
   | TagDocument
-  | ImageServeOrderDocument
   | QuestionSetDocument

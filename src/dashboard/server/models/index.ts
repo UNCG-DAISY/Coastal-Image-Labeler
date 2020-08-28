@@ -2,12 +2,12 @@ import { ArchiveModel } from './Archive'
 import { AssignedImageModel } from './AssignedImages'
 import { CatalogModel } from './Catalog'
 import { ImageModel } from './Image'
-import { ImageServeOrderModel } from './ImageServeOrder'
+//import { ImageServeOrderModel } from './ImageServeOrder'
 import { TagModel } from './Tag'
 import { UserModel } from './User'
 import { QuestionSetModel } from './QuestionSet'
 import { log } from '../utils/logger'
-import imageServeOrderDefault from '../../data/default/imageServeOrder.json'
+// import imageServeOrderDefault from '../../data/default/imageServeOrder.json'
 import questionSetDefault from '../../data/default/questionSet.json'
 
 export function RegisterModels() {
@@ -16,7 +16,7 @@ export function RegisterModels() {
     AssignedImageModel,
     CatalogModel,
     ImageModel,
-    ImageServeOrderModel,
+    //ImageServeOrderModel,
     TagModel,
     UserModel,
     QuestionSetModel,
@@ -43,13 +43,13 @@ export async function RegisterModelDefaults() {
     })
   }
 
-  const defaultServeExists = await ImageServeOrderModel.findOne({
-    type: 'random',
-  })
-  if (!defaultServeExists) {
-    await ImageServeOrderModel.create({
-      type: imageServeOrderDefault.type as 'random',
-      _id: imageServeOrderDefault._id,
-    })
-  }
+  // const defaultServeExists = await ImageServeOrderModel.findOne({
+  //   type: 'random',
+  // })
+  // if (!defaultServeExists) {
+  //   await ImageServeOrderModel.create({
+  //     type: imageServeOrderDefault.type as 'random',
+  //     _id: imageServeOrderDefault._id,
+  //   })
+  // }
 }
