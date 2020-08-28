@@ -16,7 +16,7 @@ unhandledRejection
 
 import { createCatalog } from './createCatalog'
 import colorize from '../../utils/colorize'
-import { ImageServeOrderModel } from '../../models/ImageServeOrder'
+
 import { performance } from 'perf_hooks'
 // import { ArchiveModel } from '../../models/Archive'
 
@@ -51,28 +51,6 @@ const catalog = {
         imageServeOrder,
       } = catalog
 
-      //if an id is given use that
-      let newServeOrderId = { _id: imageServeOrder }
-
-      //if that id is a object, make a new serve order
-      if (typeof imageServeOrder == 'object') {
-        const createdServeOrder = await ImageServeOrderModel.create({
-          type: 'sequential',
-          data: imageServeOrder,
-        })
-
-        newServeOrderId = createdServeOrder?._id
-      }
-
-      //if none given, assign the random one
-      if (!imageServeOrder) {
-        const randomOrder = await ImageServeOrderModel.findOne({
-          type: 'random',
-        })
-
-        newServeOrderId = randomOrder?._id
-      }
-
       const res = await createCatalog({
         path: catalogPathInfo,
         imageFormat: imageFormat,
@@ -80,7 +58,7 @@ const catalog = {
         questionSet: questionSet,
         taggable: taggable,
         catalogInfo: catalogInfo,
-        imageServeOrder: newServeOrderId?._id,
+        imageServeOrder: imageServeOrder,
       })
 
       if (!res.success) {

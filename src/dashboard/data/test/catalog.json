@@ -14,7 +14,17 @@
     "questionSet": "5f36cee346891c0348c77d24",
     "taggable": true,
     "dateAdded": "2020-08-12T04:12:13.223Z",
-    "imageServeOrder": "5f3197417264d3213420c20e",
+    "imageServeOrder": {
+      "type": "sequential",
+      "data": {
+        "orderedArchive": [
+          "ordered1.jpg",
+          "ordered2.jpg",
+          "ordered3.jpg",
+          "ordered4.jpg"
+        ]
+      }
+    },
     "__v": 0
   },{
     "_id": "5f3b2e7265477a68b819335a",
@@ -32,7 +42,6 @@
     "questionSet": "5f36cee346891c0348c77d24",
     "taggable": true,
     "dateAdded": "2020-08-12T04:12:13.223Z",
-    "imageServeOrder": "5f47eb12c1e6bb34b475be2c",
     "__v": 0
   }
 ]
