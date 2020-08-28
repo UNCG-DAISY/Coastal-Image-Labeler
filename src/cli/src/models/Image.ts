@@ -18,9 +18,6 @@ const ImageSchema: Schema = new Schema(
     dateAdded: {
       type: Date,
     },
-    // finalTag: {
-    //   type: Types.ObjectId,
-    // },
     name: {
       type: String,
       required: [true, 'Please add a name of image with its extension'],
@@ -32,12 +29,12 @@ const ImageSchema: Schema = new Schema(
       original: {
         type: String,
         required: [true, 'Please provide image path'],
-        unique: true,
+        unique: false,
         maxlength: [128, 'Path can not be longer than 128 characters'],
       },
       compressed: {
         type: String,
-        unique: true,
+        unique: false,
         maxlength: [128, 'Path can not be longer than 128 characters'],
       },
     },
@@ -45,19 +42,6 @@ const ImageSchema: Schema = new Schema(
       type: Boolean,
       required: [true, 'Please tell if this image is taggable or not'],
     },
-    // tags: {
-    //   type: [Object],
-    // },
-    // numberOfTags: {
-    //   type: Number,
-    // },
-    // numberOfMatches: {
-    //   type: Number,
-    //   required: [
-    //     true,
-    //     'Please tell how many times two or more taggers must agree till complete',
-    //   ],
-    // },
   },
   {
     toJSON: { virtuals: true },

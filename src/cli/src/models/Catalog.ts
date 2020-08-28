@@ -69,6 +69,10 @@ const catalogScheme: Schema = new Schema(
       type: Number,
       default: 0,
     },
+    ignoreFields: {
+      type: [String],
+      required: [true, 'Please provide if storm is taggable or not.'],
+    },
   },
   {
     toJSON: { virtuals: true, minimize: false },

@@ -12,7 +12,7 @@ export async function createImage(params: Params) {
   // const imagePath = `/${fileName}`
 
   let imageEntry = await ImageModel.findOne({
-    archive: archiveEntry._id,
+    //archive: archiveEntry._id,
     path: {
       original: imagePath,
       compressed: imagePath,
@@ -46,6 +46,7 @@ export async function createImage(params: Params) {
       }
     }
   } else {
+    await imageEntry.updateOne({ archive: archiveEntry._id })
     return {
       success: true,
       message: 'Image already exists',

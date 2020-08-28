@@ -28,6 +28,7 @@ export interface CatalogDocument extends Document {
     data?: any
   }
   totalImages?: number
+  ignoreFields: string[]
 
   updateImageCount(): Promise<void>
 }
@@ -113,10 +114,69 @@ export interface TagDocument extends Document {
 //   data?: any
 // }
 
+interface QSetButtonSubmit {
+  type: 'butttonSubmit'
+  required: boolean
+  label: string
+  docLink: string
+  key: string
+  buttons: {
+    label: string
+    key: string
+    tag: any
+  }[]
+}
+
+interface QSetRadioQuestion {
+  type: 'radioGroup'
+  errorMessage: string
+  required: boolean
+  label: string
+  docLink: string
+  key: string
+  buttons: {
+    name: string
+    value: string
+  }[]
+}
+
+interface QSetCheckboxQuestion {
+  type: 'checkboxGroup'
+  errorMessage: string
+  required: boolean
+  label: string
+  docLink: string
+  key: string
+  min?: number
+  max?: number
+  buttons: {
+    name: string
+    value: string
+  }[]
+}
+
+interface QSetTextboxQuestion {
+  type: 'textfield'
+  required: boolean
+  label: string
+  docLink: string
+  key: string
+  multiline: boolean
+  rows: number
+}
+
+export type QSetQuestions =
+  | QSetButtonSubmit
+  | QSetRadioQuestion
+  | QSetCheckboxQuestion
+  | QSetTextboxQuestion
+
 export interface QuestionSetDocument extends Document {
   name: string
   description: string
-  questions: [any]
+  //This type is added for user reference, its not ment to be enforced by ts
+  //thats why any[] is added to remove any warnings
+  questions: QSetQuestions[] | any[]
 }
 
 export type AllDocuments =
