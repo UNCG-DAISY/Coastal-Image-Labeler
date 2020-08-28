@@ -42,9 +42,7 @@ export function Row(props: Props) {
         <TableCell component="th" scope="row">
           {row.name}
         </TableCell>
-        <TableCell align="right">
-          {row.tagged}/{row.totalImages}
-        </TableCell>
+        <TableCell align="right">{row.tagged}</TableCell>
         <TableCell align="right">{row.catalogInfo.year}</TableCell>
         <TableCell align="right">
           <Button

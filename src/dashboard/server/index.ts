@@ -22,7 +22,7 @@ import { log } from './utils/logger'
 import { errorHandler } from './middlewares/error'
 
 //register models
-import { RegisterModels } from './models'
+import { RegisterModels, RegisterModelDefaults } from './models'
 
 //routes
 import { RegisterRoutes } from './routes'
@@ -65,6 +65,7 @@ const port = ((process.env.NEXT_PUBLIC_PORT as unknown) as number) ?? 3000
 
     //Register api routes first
     RegisterRoutes(server)
+    await RegisterModelDefaults()
 
     // This handles errors that happen during API calls
     server.use(errorHandler)

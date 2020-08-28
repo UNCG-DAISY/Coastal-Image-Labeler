@@ -16,7 +16,7 @@ dotenv.config({
 import { tagImage } from '../../server/controllers/tags'
 import { UserModel } from '../../server/models/User'
 import { TagModel } from '../../server/models/Tag'
-import { ImageModel } from '../../server/models/Image'
+//import { ImageModel } from '../../server/models/Image'
 
 import { compareTags } from '../../server/utils/compareTags'
 beforeAll(async () => {
@@ -25,13 +25,13 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await TagModel.deleteMany({})
-  await ImageModel.updateOne(
-    { _id: '5f336c1de9aea42d24bf0f23' },
-    {
-      finalTag: undefined,
-      taggable: true,
-    }
-  )
+  // await ImageModel.updateOne(
+  //   { _id: '5f336c1de9aea42d24bf0f23' },
+  //   {
+  //     finalTag: undefined,
+  //     taggable: true,
+  //   }
+  // )
 
   await closeConnection()
 })
@@ -41,12 +41,13 @@ test('Test tagImage Controller: Valid Id', async () => {
   const req = httpMocks.createRequest()
   req.body = {
     userId: '5f2f65cd363ae5001670164b',
-    imageId: '5f336c1de9aea42d24bf0f23',
+    imageId: '5f336c1ee9aea42d24bf0f2f',
     tags: {
-      tankFeatures: ['highCaliber', 'heavyArmor', 'highViewRange'],
-      equipmentTypes: ['coaxMg', 'turretMg'],
-      'Additional Comments': 'tier 10',
-      tankClass: 'heavy',
+      imageFeatures: ['field1', 'field2', 'field13'],
+      otherFeatures: ['other1', 'other2'],
+      'Additional Comments': 'Hello Word',
+      isImage: true,
+      classType: 'class1',
     },
   }
   const userData = await UserModel.findById('5f2f65cd363ae5001670164b')
@@ -69,14 +70,15 @@ test('Test tagImage Controller: Valid Id', async () => {
 
   //assert
   expect(res.newTag.userId.toString()).toBe('5f2f65cd363ae5001670164b')
-  expect(res.newTag.imageId.toString()).toBe('5f336c1de9aea42d24bf0f23')
-  expect(res.newTag.archiveId.toString()).toBe('5f336c1de9aea42d24bf0f22')
+  expect(res.newTag.imageId.toString()).toBe('5f336c1ee9aea42d24bf0f2f')
+  expect(res.newTag.archiveId.toString()).toBe('5f336c1ee9aea42d24bf0f2a')
   expect(res.newTag.catalogId.toString()).toBe('5f336c1de9aea42d24bf0f21')
   expect(res.newTag.tags).toStrictEqual({
-    tankFeatures: ['highCaliber', 'heavyArmor', 'highViewRange'],
-    equipmentTypes: ['coaxMg', 'turretMg'],
-    'Additional Comments': 'tier 10',
-    tankClass: 'heavy',
+    imageFeatures: ['field1', 'field2', 'field13'],
+    otherFeatures: ['other1', 'other2'],
+    'Additional Comments': 'Hello Word',
+    isImage: true,
+    classType: 'class1',
   })
   //expect(res.newTag.final).toBe(false)
 
@@ -89,7 +91,7 @@ test('Test tagImage Controller: Tag same image twice', async () => {
   const req = httpMocks.createRequest()
   req.body = {
     userId: '5f2f65cd363ae5001670164b',
-    imageId: '5f336c1de9aea42d24bf0f23',
+    imageId: '5f336c1ee9aea42d24bf0f2f',
     tags: {
       tankFeatures: ['highCaliber', 'heavyArmor', 'highViewRange'],
       equipmentTypes: ['coaxMg', 'turretMg'],
@@ -99,8 +101,8 @@ test('Test tagImage Controller: Tag same image twice', async () => {
   }
   const userData = await UserModel.findById('5f2f65cd363ae5001670164b')
   req.user = {
-    displayName: 'Shah Nafis Rafique',
-    id: '',
+    displayName: 'User 1',
+    id: 'userId1',
     nickname: '',
     picture: '',
     provider: '',
@@ -118,7 +120,7 @@ test('Test tagImage Controller: Tag same image twice', async () => {
   //assert
   expect(resData.success).toBe(false)
   expect(resData.message).toBe(
-    'User 5f2f65cd363ae5001670164b has already tagged image 5f336c1de9aea42d24bf0f23'
+    'User 5f2f65cd363ae5001670164b has already tagged image 5f336c1ee9aea42d24bf0f2f'
   )
   expect(res.newTag).toBe(undefined)
 })

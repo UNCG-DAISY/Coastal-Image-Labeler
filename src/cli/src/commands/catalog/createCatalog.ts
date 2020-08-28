@@ -18,7 +18,7 @@ interface Params {
     description: string
   }
   taggable: boolean
-  imageServeOrder: string
+  imageServeOrder: string | any
 }
 
 export async function createCatalog(catalogData: Params) {
@@ -40,7 +40,7 @@ export async function createCatalog(catalogData: Params) {
 
   if (!catalogEntry) {
     try {
-      catalogEntry = await CatalogModel.create({
+      const newCatalogData = {
         name: name,
         path: path,
         questionSet: questionSet,
@@ -49,8 +49,13 @@ export async function createCatalog(catalogData: Params) {
           ...catalogInfo,
         },
         dateAdded: Date.now(),
-        imageServeOrder: imageServeOrder,
-      })
+        imageServeOrder: undefined,
+      }
+
+      if (imageServeOrder) {
+        newCatalogData.imageServeOrder = imageServeOrder
+      }
+      catalogEntry = await CatalogModel.create(newCatalogData)
     } catch (error) {
       return {
         success: false,

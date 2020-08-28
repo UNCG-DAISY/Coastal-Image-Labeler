@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 import { RegisterModels } from './models'
 import { connectDB, closeConnection } from './db'
 import { log } from './utils/logger'
-import { ImageServeOrderModel } from './models/ImageServeOrder'
+//import { ImageServeOrderModel } from './models/ImageServeOrder'
 // import fs from 'fs'
 import { ArchiveModel } from './models/Archive'
 import { AssignedImageModel } from './models/AssignedImages'
@@ -14,10 +14,10 @@ import { ImageModel } from './models/Image'
 import { TagModel } from './models/Tag'
 import { UserModel } from './models/User'
 import { QuestionSetModel } from './models/QuestionSet'
+
 import archiveData from '../data/test/archives.json'
 import assingedData from '../data/test/assigned_images.json'
 import catalogData from '../data/test/catalog.json'
-import serveOrderData from '../data/test/image_server_order.json'
 import imagesData from '../data/test/images.json'
 import questionSetData from '../data/test/question_set.json'
 import usersData from '../data/test/users.json'
@@ -66,7 +66,7 @@ async function deleteAll() {
     AssignedImageModel.deleteMany({}),
     CatalogModel.deleteMany({}),
     ImageModel.deleteMany({}),
-    ImageServeOrderModel.deleteMany({}),
+    //ImageServeOrderModel.deleteMany({}),
     TagModel.deleteMany({}),
     UserModel.deleteMany({}),
     QuestionSetModel.deleteMany({}),
@@ -77,12 +77,13 @@ async function deleteAll() {
   await Promise.all(models)
 }
 async function createAll() {
+  //@ts-ignore
   await CatalogModel.create(catalogData)
   await ArchiveModel.create(archiveData)
   await ImageModel.create(imagesData)
   await AssignedImageModel.create(assingedData)
   //@ts-ignore
-  await ImageServeOrderModel.create(serveOrderData)
+  //await ImageServeOrderModel.create(serveOrderData)
   await QuestionSetModel.create(questionSetData)
   //@ts-ignore for some reason typescript is crying here
   await UserModel.create(usersData)

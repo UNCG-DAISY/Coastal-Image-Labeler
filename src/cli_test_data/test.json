@@ -2,51 +2,18 @@
     "catalogs":[
         {
             "path":{
-                "original":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/tanks",
-                "compressed":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/tanks"
+                "original":"/datadrive/Michael",
+                "compressed":"/datadrive/Michael"
             },
-            "name":"Tanks",
+            "name":"Hurricane Michael",
             "taggable":true,
             "catalogInfo":{
-                "year": 1916,
-                "link":"https://en.wikipedia.org/wiki/Tank",
-                "description":"Tanks are tracked fighting vehicles with armor and large caliber guns."
+                "year": 2018,
+                "link":"https://en.wikipedia.org/wiki/Hurricane_Michael",
+                "description":"Hurricane Michael was a very powerful and destructive tropical cyclone that became the first Category 5 hurricane to strike the contiguous United States since Andrew in 1992. In addition, it was the third-most intense Atlantic hurricane to make landfall in the contiguous United States in terms of pressure, behind the 1935 Labor Day hurricane and Hurricane Camille in 1969."
             }, 
             "imageFormat":[".jpg",".jpeg"],
-            "questionSet":"5f36cee346891c0348c77d24",
-            "imageServeOrder": "5f3197417264d3213420c20e"
-        },      
-        {
-            "path":{
-                "original":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/animals",
-                "compressed":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/animals"
-            },
-            "name":"Animals",
-            "taggable":true,
-            "catalogInfo":{
-                "year": 2020,
-                "link":"https://en.wikipedia.org/wiki/Cats_%26_Dogs",
-                "description":"Furry friends that make ppl happy."
-            }, 
-            "imageFormat":[".jpg",".jpeg"],
-            "questionSet":"5f41950feefcc91e48c9e226",
-            "imageServeOrder": "5f3197417264d3213420c20e"
-        },
-        {
-            "path":{
-                "original":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/demo",
-                "compressed":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/demo"
-            },
-            "name":"Demo",
-            "taggable":true,
-            "catalogInfo":{
-                "year": 2020,
-                "link":"https://github.com/UNCG-DAISY/Coastal-Image-Labeler",
-                "description":"Demo Catalog."
-            }, 
-            "imageFormat":[".jpg",".jpeg"],
-            "questionSet":"5f41950feefcc91e48c9e226",
-            "imageServeOrder": "5f3197417264d3213420c20e"
-        }      
+            "questionSet":"5f36cee346891c0348c77d24" 
+        }
     ]
 }

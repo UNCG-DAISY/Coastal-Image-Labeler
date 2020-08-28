@@ -65,14 +65,14 @@ async function (user, context, callback) {
     const userExists = await UserModel.findOne({
       userId: user.user_id,
       userName: user.name,
-    })
+    });
 
     //if user doesnt exist, create them
     if (!userExists) {
-      let catalogDefault = []
+      let catalogDefault = [];
       //if demo catalog is found, add it
       if (demoCatalog) {
-        catalogs.push(demoCatalog._id)
+        catalogDefault.push(demoCatalog._id);
       }
 
       //create
@@ -84,7 +84,7 @@ async function (user, context, callback) {
       });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 
   // TODO: implement your rule

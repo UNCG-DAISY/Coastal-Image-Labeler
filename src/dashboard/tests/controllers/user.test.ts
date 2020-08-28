@@ -54,8 +54,8 @@ test('Test getUser', async () => {
 
   const userData = await UserModel.findById('5f2f65cd363ae5001670164b')
   req.user = {
-    displayName: 'Shah Nafis Rafique',
-    id: 'google-oauth2|116302372331153157667',
+    displayName: 'User 1',
+    id: 'userId1',
     nickname: '',
     picture: '',
     provider: '',
@@ -79,8 +79,8 @@ test('Test getUser', async () => {
       dateAdded: '2020-08-09T02:56:13.591Z',
       roles: ['tagger', 'admin'],
       _id: '5f2f65cd363ae5001670164b',
-      userId: 'google-oauth2|116302372331153157667',
-      userName: 'Nafis Shah',
+      userId: 'userId1',
+      userName: 'User 1',
       __v: 0,
       id: '5f2f65cd363ae5001670164b',
     },

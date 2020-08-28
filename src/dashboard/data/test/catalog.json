@@ -1,37 +1,47 @@
-[{
-  "_id": "5f336c1de9aea42d24bf0f21",
-  "catalogInfo": {
-    "year": 1916,
-    "link": "https://en.wikipedia.org/wiki/Tank",
-    "description": "Tanks are armored tracked vehicles with large caliber guns and heavy armor."
-  },
-  "totalImages": 27,
-  "name": "Tanks",
-  "path": {
-    "original": "C:/Users/Namenai/Documents/GitHub/v3_dashboard/src/cli_test_data/testCatalogs/tanks",
-    "compressed": "C:/Users/Namenai/Documents/GitHub/v3_dashboard/src/cli_test_data/testCatalogs/tanks"
-  },
-  "questionSet": "5f36cee346891c0348c77d24",
-  "taggable": true,
-  "dateAdded": "2020-08-12T04:12:13.223Z",
-  "imageServeOrder": "5f3197417264d3213420c20e",
-  "__v": 0
-},{
-  "_id": "5f3b2e7265477a68b819335a",
-  "catalogInfo": {
-    "year": 1916,
-    "link": "https://en.wikipedia.org/wiki/Tank",
-    "description": "Tanks are armored tracked vehicles with large caliber guns and heavy armor."
-  },
-  "totalImages": 0,
-  "name": "Test Catalog",
-  "path": {
-    "original": "/fake/path",
-    "compressed": "/fake/path"
-  },
-  "questionSet": "5f36cee346891c0348c77d24",
-  "taggable": true,
-  "dateAdded": "2020-08-12T04:12:13.223Z",
-  "imageServeOrder": "5f3197417264d3213420c20e",
-  "__v": 0
-}]
+[
+  {
+    "_id": "5f336c1de9aea42d24bf0f21",
+    "catalogInfo": {
+      "year": 2020,
+      "link": "https://github.com/UNCG-DAISY/Coastal-Image-Labeler",
+      "description": "This is Catalog #1 with 1 archive in random order and 1 archive in sequential order"
+    },
+    "name": "Catalog 1",
+    "path": {
+      "original": "Path/To/Catalog1",
+      "compressed": "Compressed/Path/To/Catalog1"
+    },
+    "questionSet": "5f36cee346891c0348c77d24",
+    "taggable": true,
+    "dateAdded": "2020-08-12T04:12:13.223Z",
+    "imageServeOrder": {
+      "type": "sequential",
+      "data": {
+        "orderedArchive": [
+          "ordered1.jpg",
+          "ordered2.jpg",
+          "ordered3.jpg",
+          "ordered4.jpg"
+        ]
+      }
+    },
+    "__v": 0
+  },{
+    "_id": "5f3b2e7265477a68b819335a",
+    "catalogInfo": {
+      "year": 2020,
+      "link": "https://github.com/UNCG-DAISY/Coastal-Image-Labeler",
+      "description": "This is catalog #2 in random order"
+    },
+    "totalImages": 0,
+    "name": "Catalog 2",
+    "path": {
+      "original": "Path/To/Catalog2",
+      "compressed": "Compressed/Path/To/Catalog2"
+    },
+    "questionSet": "5f36cee346891c0348c77d24",
+    "taggable": true,
+    "dateAdded": "2020-08-12T04:12:13.223Z",
+    "__v": 0
+  }
+]

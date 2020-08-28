@@ -1,6 +1,6 @@
 import { CatalogModel } from '../../models/Catalog'
 import { ArchiveModel } from '../../models/Archive'
-import { ImageServeOrderModel } from '../../models/ImageServeOrder'
+//import { ImageServeOrderModel } from '../../models/ImageServeOrder'
 // import { ImageModel } from '../../models/Image'
 import { TagModel } from '../../models/Tag'
 // import { AssignedImageModel } from '../../models/AssignedImages'
@@ -31,9 +31,7 @@ async function selectImageForAssignment({
   //Get the serve order of the catalog
   const archive = await ArchiveModel.findById(archiveId)
   const catalog = await CatalogModel.findById(archive.catalog)
-  const imageServeOrder = await ImageServeOrderModel.findById(
-    catalog.imageServeOrder.toString()
-  )
+  const imageServeOrder = catalog.imageServeOrder || { type: 'random' }
 
   //Get all images tagged by the user
   const imagesTaggedByUser = await TagModel.find({
@@ -46,10 +44,11 @@ async function selectImageForAssignment({
   )
 
   log({
-    message: `Serve order = ${imageServeOrder.type} for catalog ${catalog._id} with server order doc = ${imageServeOrder._id}`,
+    message: `Serve order = ${imageServeOrder.type} for catalog ${catalog._id}`,
     type: 'info',
   })
 
+  //see which serve order the catalog is
   if (imageServeOrder.type === 'random') {
     const result = await RandomOrder({
       archiveId: archiveId,
@@ -62,14 +61,15 @@ async function selectImageForAssignment({
   if (imageServeOrder.type === 'sequential') {
     const result = await SequentialOrder({
       archive: archive,
+      catalog: catalog,
       imagesTaggedByUser: imagesTaggedByUser,
-      imageServeOrder: imageServeOrder,
       taggedImageIdOnly: taggedImageIdOnly,
       user: user,
     })
     return result
   }
 
+  //if no serve order is found, return error
   log({
     message: `No image serve order found for catalog ${catalog._id} of archive ${archiveId}`,
     type: 'info',

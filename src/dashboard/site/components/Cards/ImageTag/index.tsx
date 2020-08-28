@@ -40,7 +40,7 @@ export function ImageTag(props: Props) {
   const [openModal, setOpenModal] = React.useState(false)
 
   const [openSnackbar, setSnackbar] = React.useState(false)
-  const [snackbarTime, setSnackbarTime] = React.useState(6000)
+  const [snackbarTime, setSnackbarTime] = React.useState(2000)
   const [snackbarStatus, setSnackbarStatus] = React.useState(false)
   const [snackbarMessage, setSnackbarMessage] = React.useState('')
   const handleClick = () => {
@@ -62,6 +62,11 @@ export function ImageTag(props: Props) {
 
     if (resSubmitTag.success) {
       setSnackbarStatus(true)
+      setSnackbarMessage(
+        `${resSubmitTag.message} - Getting new image in ${
+          snackbarTime / 1000
+        } seconds`
+      )
       setTimeout(() => {
         Router.reload()
       }, snackbarTime)

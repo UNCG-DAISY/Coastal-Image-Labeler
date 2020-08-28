@@ -55,8 +55,15 @@ const catalogScheme: Schema = new Schema(
       required: [true, 'Please provide ID of question set'],
     },
     imageServeOrder: {
-      type: Types.ObjectId,
-      required: false,
+      type: {
+        type: String,
+        enum: ['random', 'sequential'],
+        default: 'random',
+      },
+      data: {
+        type: Object,
+        default: {},
+      },
     },
     totalImages: {
       type: Number,
@@ -64,7 +71,7 @@ const catalogScheme: Schema = new Schema(
     },
   },
   {
-    toJSON: { virtuals: true },
+    toJSON: { virtuals: true, minimize: false },
     toObject: { virtuals: true },
   }
 )
