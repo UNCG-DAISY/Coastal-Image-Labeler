@@ -95,7 +95,7 @@ module.exports = {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/UNCG-DAISY/Coastal-Image-Labeler/edit/master/docs/blog/',
+            'https://github.com/UNCG-DAISY/Coastal-Image-Labeler/edit/master/docs/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
