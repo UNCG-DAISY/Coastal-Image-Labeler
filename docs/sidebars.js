@@ -37,7 +37,7 @@ module.exports = {
           type: 'category',
           label: 'CLI',
           items: [
-            "code_doc/cli/cli",
+            "code_doc/cli/setup",
             "code_doc/cli/addImages"
           ],
         },
