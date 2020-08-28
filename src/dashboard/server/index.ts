@@ -22,10 +22,10 @@ import { log } from './utils/logger'
 import { errorHandler } from './middlewares/error'
 
 //register models
-import { RegisterModels } from './models'
+import { RegisterModels, RegisterModelDefaults } from './models'
 
 //routes
-import { RegisterRoutes, RegisterModelDefaults } from './routes'
+import { RegisterRoutes } from './routes'
 
 //Security
 import { initAuthentication } from './auth'
