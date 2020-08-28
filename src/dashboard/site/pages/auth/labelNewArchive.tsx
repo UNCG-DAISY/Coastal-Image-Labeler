@@ -12,6 +12,7 @@ import { CatalogSelectionData } from '../../../interfaces'
 import { checkUserRole } from '../../components/Utils/Auth/checkRole'
 import { generateUnAuthObj } from '../../components/Utils/Auth/unAuthError'
 import ErrorCard from '../../components/ErrorCards'
+import { tabLogoURL } from '../../components/Constants'
 
 interface Props {
   user: any
@@ -25,8 +26,8 @@ const StartTagging = (props: Props): JSX.Element => {
   return (
     <div className="container">
       <Head>
-        <title>Start Tagging</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Label New Archive</title>
+        <link rel="icon" href={tabLogoURL} />
       </Head>
 
       <Layout

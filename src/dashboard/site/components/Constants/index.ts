@@ -28,4 +28,15 @@ const uiConstants = {
 
 const defaultTitle = 'Coastal Image Labeler'
 
-export { protocal, apiCall, uiConstants, navigationItems, defaultTitle, routes }
+const tabLogoURL =
+  'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/209/water-wave_1f30a.png'
+
+export {
+  protocal,
+  apiCall,
+  uiConstants,
+  navigationItems,
+  defaultTitle,
+  routes,
+  tabLogoURL,
+}

@@ -4,9 +4,10 @@ import { apiRequest } from '../'
 interface Params {
   cookie: string
   res: any
+  redirect?: boolean
 }
 
-async function getUserDB({ cookie, res }: Params) {
+async function getUserDB({ cookie, res, redirect = true }: Params) {
   const data = await apiRequest({
     method: 'POST',
     route: routes.postReq.getUser,
@@ -22,7 +23,10 @@ async function getUserDB({ cookie, res }: Params) {
 
   //For whatever reasons, if fail redirect to landing page
   console.log(data.message)
-  res.redirect('/')
+  if (redirect) {
+    res.redirect('/')
+  }
+
   return undefined
 }
 

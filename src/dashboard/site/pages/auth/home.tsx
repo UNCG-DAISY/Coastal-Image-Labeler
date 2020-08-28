@@ -12,7 +12,7 @@ import { ResumeTagging } from '../../components/Tables/ResumeTagging'
 import { ResumeTaggingDataCatalog, UserProp } from '../../../interfaces'
 import { getResumeTableData } from '../../components/API/post/getResumeTableData'
 import { getHasAssignedImages } from '../../components/API/post/userHasAssignedImages'
-// import { performance } from 'perf_hooks'
+import { tabLogoURL } from '../../components/Constants'
 
 interface Props {
   user: UserProp
@@ -30,7 +30,6 @@ export const Home = (props: Props): JSX.Element => {
     //Get resume table data
     if (hasAssignedImages.length > 0) {
       const getTableResponse = await getResumeTableData()
-      console.log('getTableResponse', getTableResponse, '--------')
       setResumeData(getTableResponse?.data?.taggedCount)
     } else {
       setResumeData([])
@@ -47,7 +46,7 @@ export const Home = (props: Props): JSX.Element => {
     <div className="container">
       <Head>
         <title>Home</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={tabLogoURL} />
       </Head>
 
       <Layout
