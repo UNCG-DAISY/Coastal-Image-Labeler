@@ -41,6 +41,7 @@ export async function createArchives(params: Params) {
   if (!archiveEntry) {
     try {
       //throw new Error("TESTING ARCHIVE error");
+      colorize.info(`Creating archive ${archiveName}`)
       archiveEntry = await ArchiveModel.create({
         catalog: catalogEntry._id,
         name: archiveName,

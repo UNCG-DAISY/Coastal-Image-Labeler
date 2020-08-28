@@ -55,6 +55,7 @@ export async function createCatalog(catalogData: Params) {
       if (imageServeOrder) {
         newCatalogData.imageServeOrder = imageServeOrder
       }
+      colorize.info(`Creating catalog ${name}`)
       catalogEntry = await CatalogModel.create(newCatalogData)
     } catch (error) {
       return {
