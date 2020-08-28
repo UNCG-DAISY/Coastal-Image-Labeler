@@ -89,13 +89,13 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/UNCG-DAISY/Coastal-Image-Labeler/edit/master',
+            'https://github.com/UNCG-DAISY/Coastal-Image-Labeler/edit/master/docs/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/UNCG-DAISY/Coastal-Image-Labeler/edit/master/website/blog/',
+            'https://github.com/UNCG-DAISY/Coastal-Image-Labeler/edit/master/docs/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
