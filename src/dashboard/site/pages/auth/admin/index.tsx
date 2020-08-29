@@ -10,15 +10,19 @@ import { checkUserRole } from '../../../components/Utils/Auth/checkRole'
 import { generateUnAuthObj } from '../../../components/Utils/Auth/unAuthError'
 import ErrorCard from '../../../components/ErrorCards'
 import { determineNavItems } from '../../../components/Utils/Auth/determineNavItems'
-
 export const Admin = (props): JSX.Element => {
   const { user, success, message } = props
 
   return (
     <div className="container">
       <Head>
-        <title>Home</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Admin</title>
+        <link
+          rel="icon"
+          href={
+            'https://emojipedia.org/google/android-10.0-march-2020-feature-drop/shield/'
+          }
+        />
       </Head>
 
       <Layout
@@ -35,6 +39,7 @@ export const Admin = (props): JSX.Element => {
             {process.env.NEXT_PUBLIC_NODE_ENV} mode.
             <br />
             Admin: {user.displayName}
+            <br />
           </React.Fragment>
         )}
       </Layout>

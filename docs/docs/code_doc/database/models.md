@@ -41,12 +41,50 @@ export interface CatalogDocument extends Document {
   catalogInfo?: CatalogInfo
   taggable: boolean
   questionSet: ObjectID | string
-  imageServeOrder: ObjectID
+  imageServeOrder?: {
+    type?: 'random' | 'sequential'
+    data?: any
+  }
   totalImages?: number
 
   updateImageCount(): Promise<void> //Function to update totalImages
 }
 ```
+
+There is a new noteable field called `imageServeOrder` that defines how to serve imags. By
+default it is "random" however if the json file used for import via the CLI is like so
+```js
+{
+    "path":{
+        "original":"xxx",
+        "compressed":"xxx"
+    },
+    "name":"xxx",
+    "taggable":true,
+    "catalogInfo":{
+        "year": 2020,
+        "link":"xxx",
+        "description":"xxx"
+    }, 
+    "imageFormat":[".jpg",".jpeg"],
+    "questionSet":"xxx",
+    //This part right here
+    "imageServeOrder":{
+        "type":"sequential",
+        "data": {
+            //archive name
+            "archive1":["image1.jpg","image2.jpg","image3.jpg","image4.jpg"]
+        }
+    }
+},
+```
+
+Then images of `archive1` will be assigned in that order (image1 is assigned first, then image2 then image3 and so on). **NOTE** 
+
+:::caution 
+If there are other archives such
+as `archive2` that isnt defined then that archive will use random assignment.
+:::
 
 #### Archives
 
@@ -103,6 +141,20 @@ export interface QuestionSetDocument extends Document {
 }
 ```
 
+### User
+
+Finally there is the user model which is more or less the same
+
+```js title="User model"
+export interface UserDocument extends Document {
+  username: string
+  catalogs: [ObjectID]
+  dateAdded: Date
+  roles: string[]
+  userId: string
+}
+```
+
 
 ### Assigned Image
 
@@ -134,38 +186,6 @@ export interface TagDocument extends Document {
   date: Date
   ignoreFields?: string[]
   image?: ImageDocument
-}
-```
-
-### Image Serve Order
-
-The final new model. This model stores data about how to serve images for a catalog. If the order is random there isnt anything to special. However if the order is sequential, then a 2nd field must be filled, called `data`. This will contain the order of the images to serve. For example:
-
-```js
-data: {
-    "arc1":['image1.jpg','image2.jpg','image3.jpg','image4.jpg']
-}
-```
-If an archive isnt on the list, the system will default to using random order.
-
-```js title="Image Serve Order model"
-export interface ImageServeOrderDocument extends Document {
-  type: 'random' | 'sequential'
-  data?: any
-}
-```
-
-### User
-
-Finally there is the user model which is more or less the same
-
-```js title="User model"
-export interface UserDocument extends Document {
-  username: string
-  catalogs: [ObjectID]
-  dateAdded: Date
-  roles: string[]
-  userId: string
 }
 ```
 

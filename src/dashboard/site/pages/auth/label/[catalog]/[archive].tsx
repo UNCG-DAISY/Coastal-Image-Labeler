@@ -15,8 +15,7 @@ import { generateUnAuthObj } from '../../../../components/Utils/Auth/unAuthError
 //import { isValidArchive } from '../../../../components/API/post/isValidArchive'
 import { getUserAssignedImage } from '../../../../components/API/post/getUserAssignedImage'
 import { catalogQuestionSet } from '../../../../components/API/post/getCatalogQuestionSet'
-
-//import { performance } from 'perf_hooks'
+import { tabLogoURL } from '../../../../components/Constants'
 
 import { ImageDocument } from '../../../../../interfaces/models'
 
@@ -28,7 +27,7 @@ export default function TagImage(props) {
     <React.Fragment>
       <Head>
         <title>Tag Image: {imageDocument?.name}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={tabLogoURL} />
       </Head>
 
       <Layout

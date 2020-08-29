@@ -12,14 +12,13 @@ sudo ln -s /etc/nginx/sites-available/coast /etc/nginx/sites-enabled/coast
 
 ```cpp title="/etc/nginx/sites-available/coast NGINX"
 server {
-	# Error page
-	error_page 502 /custom_502.html;
-	location = /custom_502.html {
-			root /usr/share/nginx/html;
+	
+	error_page 500 502 503 504 404 /production.custom_error.html;
+	location = /production.custom_error.html {
+			root /home/shahnafis/GitHub/Coastal-Image-Labeler/src/html;
 			internal;
 	}
-		
-    # For all routes
+
 	location / {
        proxy_pass http://localhost:4201; #whatever port your app runs on
        proxy_http_version 1.1;
@@ -30,8 +29,12 @@ server {
     }
 
 	server_name dev.coastalimagelabeler.science;
-} 
+}
 ```
+:::caution Server Name and Error Page
+Remember to change the `server_name` at the bottom if on a different domain/subdomain and
+the Error html files up top depending if on the production or development VM.
+:::
 
 This is all you have to type in for now. [Certbot](./certbot) will edit this file later based on the `server_name`
 

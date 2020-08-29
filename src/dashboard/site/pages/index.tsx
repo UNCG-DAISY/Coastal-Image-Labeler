@@ -7,13 +7,13 @@ import Typography from '@material-ui/core/Typography'
 
 import Layout from '../components/Layout'
 import { RepoLink, EmailLink } from '../components/ColoredLink'
-import { navigationItems } from '../components/Constants'
+import { navigationItems, tabLogoURL } from '../components/Constants'
 
 export const Home = (): JSX.Element => (
   <div className="container">
     <Head>
-      <title>Welcome to Coastal Image Labeler</title>
-      <link rel="icon" href="/favicon.ico" />
+      <title>Coastal Image Labeler</title>
+      <link rel="icon" href={tabLogoURL} />
     </Head>
     <Layout navItems={navigationItems.landingPage} drawer>
       <Box my={4}>

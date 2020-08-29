@@ -6,6 +6,7 @@ import getSession from '../../components/Utils/Auth/getSession'
 import { getUserDB } from '../../components/API/post/getUserDB'
 import { determineNavItems } from '../../components/Utils/Auth/determineNavItems'
 import { ResumeTaggingDataCatalog, UserProp } from '../../../interfaces'
+import { tabLogoURL } from '../../components/Constants'
 
 import JSONPretty from 'react-json-pretty'
 import { theme, customColors } from '../../components/theme'
@@ -24,8 +25,8 @@ export const Home = (props: Props): JSX.Element => {
   return (
     <div className="container">
       <Head>
-        <title>Home</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Export Tags</title>
+        <link rel="icon" href={tabLogoURL} />
       </Head>
 
       <Layout

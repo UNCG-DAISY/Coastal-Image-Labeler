@@ -33,6 +33,9 @@ import { initAuthentication } from './auth'
 import responseTime from 'response-time'
 import { displayResponseTime } from './middlewares/logResTime'
 
+//backup
+import { startCronJob } from './utils/dbBackup'
+
 const dev = process.env.NODE_ENV !== 'production'
 
 const app = next({
@@ -58,6 +61,9 @@ const port = ((process.env.NEXT_PUBLIC_PORT as unknown) as number) ?? 3000
 
     //register models
     RegisterModels()
+
+    //cron job
+    startCronJob(process.env.BACKUP_TIME ?? '00 16 * * *')
 
     //Time API calls
     server.use(responseTime())

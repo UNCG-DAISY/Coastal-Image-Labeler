@@ -38,7 +38,7 @@ export function SubTable(props: Props) {
             </TableCell>
             <TableCell>
               <Button
-                href={`/auth/tag/${row.catalogId}/${archiveRow._id}`}
+                href={`/auth/label/${row.catalogId}/${archiveRow._id}`}
                 color="primary"
                 size="small"
                 variant="contained"
