@@ -53,12 +53,12 @@
                 "original":"/datadrive/archives/Tairua",
                 "compressed":"/datadrive2/compressed/archives/Tairua"
             },
-            "name":"Town of Tairua",
+            "name":"Tairua Beach",
             "taggable":true,
-            "catalogInfo":{
+            "catalogInfo": {
                 "year": 2020,
-                "link":"https://en.wikipedia.org/wiki/Tairua",
-                "description":"The town of Tairua is on the east coast of the Coromandel Peninsula in the North Island of New Zealand. It lies at the mouth of the Tairua River on its north bank and on the small Paku Peninsula. Tairua is a Māori name which translates literally as tai: tides, rua: two."
+                "link": "https://storms.ngs.noaa.gov/",
+                "description": "This is the demonstration catalog given to all users to display the labelers capabilities. Pictures are Publicly available NOAA Emergency Response Images from Hurricane Florence and Hurricane Michael"
             }, 
             "imageFormat":[".jpg",".jpeg",".JPG"],
             "questionSet":"5f4ad631f3006c4764d62918", 
