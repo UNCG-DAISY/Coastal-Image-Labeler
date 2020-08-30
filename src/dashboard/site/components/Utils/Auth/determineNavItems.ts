@@ -5,13 +5,21 @@ import {
   admin,
   exportTags,
   contactUs,
+  login,
 } from '../../Constants/navigation'
 import { UserProp } from '../../../../interfaces'
 
 function determineNavItems(user: UserProp) {
   const res = {
-    center: [home],
-    right: [logout],
+    center: [],
+    right: [],
+  }
+
+  if (user) {
+    res.center.push(home)
+    res.right.push(logout)
+  } else {
+    res.center.push(login)
   }
 
   if (user?.data?.roles.includes('tagger')) {

@@ -49,7 +49,8 @@ export interface ArchiveDocument extends Document {
   taggable: boolean
   totalImages?: number
 
-  updateImageCount(): Promise<void>
+  // updateImageCount(): Promise<void>
+  updateArchiveImageCount(): Promise<void>
 }
 
 export interface ArchiveModelType extends Model<ArchiveDocument> {

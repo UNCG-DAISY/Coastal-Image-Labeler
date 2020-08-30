@@ -1,6 +1,6 @@
 {
   "name": "cil-import",
-  "version": "0.0.7",
+  "version": "0.0.24",
   "description": "",
   "main": "index.js",
   "bin": "./dist/bin/cil-import.js",
@@ -34,6 +34,7 @@
   "dependencies": {
     "@types/node": "^14.0.1",
     "braces": ">=2.3.1",
+    "cli-progress": "^3.8.2",
     "colors": "^1.4.0",
     "commander": "^5.1.0",
     "configstore": "^5.0.1",

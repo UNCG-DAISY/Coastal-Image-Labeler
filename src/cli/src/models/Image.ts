@@ -21,7 +21,6 @@ const ImageSchema: Schema = new Schema(
     name: {
       type: String,
       required: [true, 'Please add a name of image with its extension'],
-      unique: false,
       trim: true,
       maxlength: [128, 'Name can not be longer than 128 characters'],
     },
@@ -79,6 +78,6 @@ ImageSchema.post<ImageDocument>('remove', async function (this: ImageDocument) {
 })
 
 //This makes it so that the name and archive pair are unique
-ImageSchema.index({ name: 1, archive: 1 }, { unique: true })
+//ImageSchema.index({ name: 1, archive: 1 }, { unique: true })
 
 export const ImageModel: Model<ImageDocument> = model('Image', ImageSchema)

@@ -50,7 +50,8 @@ export interface ArchiveDocument extends Document {
   taggable: boolean
   totalImages?: number
 
-  updateImageCount(): Promise<void>
+  // updateImageCount(): Promise<void>
+  updateArchiveImageCount(): Promise<void>
 }
 
 export interface ArchiveModelType extends Model<ArchiveDocument> {
@@ -114,69 +115,10 @@ export interface TagDocument extends Document {
 //   data?: any
 // }
 
-interface QSetButtonSubmit {
-  type: 'butttonSubmit'
-  required: boolean
-  label: string
-  docLink: string
-  key: string
-  buttons: {
-    label: string
-    key: string
-    tag: any
-  }[]
-}
-
-interface QSetRadioQuestion {
-  type: 'radioGroup'
-  errorMessage: string
-  required: boolean
-  label: string
-  docLink: string
-  key: string
-  buttons: {
-    name: string
-    value: string
-  }[]
-}
-
-interface QSetCheckboxQuestion {
-  type: 'checkboxGroup'
-  errorMessage: string
-  required: boolean
-  label: string
-  docLink: string
-  key: string
-  min?: number
-  max?: number
-  buttons: {
-    name: string
-    value: string
-  }[]
-}
-
-interface QSetTextboxQuestion {
-  type: 'textfield'
-  required: boolean
-  label: string
-  docLink: string
-  key: string
-  multiline: boolean
-  rows: number
-}
-
-export type QSetQuestions =
-  | QSetButtonSubmit
-  | QSetRadioQuestion
-  | QSetCheckboxQuestion
-  | QSetTextboxQuestion
-
 export interface QuestionSetDocument extends Document {
   name: string
   description: string
-  //This type is added for user reference, its not ment to be enforced by ts
-  //thats why any[] is added to remove any warnings
-  questions: QSetQuestions[] | any[]
+  questions: [any]
 }
 
 export type AllDocuments =

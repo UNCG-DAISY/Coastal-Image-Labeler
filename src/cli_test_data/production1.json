@@ -1,0 +1,84 @@
+{
+    "catalogs":[
+        {
+            "path":{
+                "original":"/datadrive/archives/Dorian",
+                "compressed":"/datadrive2/compressed/archives/Dorian"
+            },
+            "name":"Hurricane Dorian",
+            "taggable":true,
+            "catalogInfo":{
+                "year": 2019,
+                "link":"https://en.wikipedia.org/wiki/Hurricane_Dorian",
+                "description":"Hurricane Dorian was an extremely powerful and devastating Category 5 Atlantic hurricane, that became the most intense tropical cyclone on record to strike the Bahamas, and is regarded as the worst natural disaster in the country's history. It was also one of the most powerful hurricanes recorded in the Atlantic Ocean in terms of 1-minute sustained winds, with these winds peaking at 185 mph (295 km/h)."
+            }, 
+            "imageFormat":[".jpg",".jpeg"],
+            "questionSet":"5f4940b703e72c8380a713d2", 
+            "ignoreFields": ["Additional Comments"]
+        },
+        {
+            "path":{
+                "original":"/datadrive/archives/Florence",
+                "compressed":"/datadrive2/compressed/archives/Florence"
+            },
+            "name":"Hurricane Florence",
+            "taggable":true,
+            "catalogInfo":{
+                "year": 2018,
+                "link":"https://en.wikipedia.org/wiki/Hurricane_Florence",
+                "description":"Hurricane Florence was a powerful and long-lived Cape Verde hurricane that caused catastrophic damage in the Carolinas in September 2018, primarily as a result of freshwater flooding due to torrential rain. The sixth named storm, third hurricane, and the first major hurricane of the 2018 Atlantic hurricane season, Florence originated from a strong tropical wave that emerged off the west coast of Africa on August 30, 2018. "
+            }, 
+            "imageFormat":[".jpg",".jpeg"],
+            "questionSet":"5f4940b703e72c8380a713d2", 
+            "ignoreFields": ["Additional Comments"]
+        },
+        {
+            "path":{
+                "original":"/datadrive/archives/Michael",
+                "compressed":"/datadrive2/compressed/archives/Michael"
+            },
+            "name":"Hurricane Michael",
+            "taggable":true,
+            "catalogInfo":{
+                "year": 2018,
+                "link":"https://en.wikipedia.org/wiki/Hurricane_Michael",
+                "description":"Hurricane Michael was a very powerful and destructive tropical cyclone that became the first Category 5 hurricane to strike the contiguous United States since Andrew in 1992. In addition, it was the third-most intense Atlantic hurricane to make landfall in the contiguous United States in terms of pressure, behind the 1935 Labor Day hurricane and Hurricane Camille in 1969."
+            }, 
+            "imageFormat":[".jpg",".jpeg"],
+            "questionSet":"5f36cee346891c0348c77d24", 
+            "ignoreFields": ["Additional Comments"]
+        },
+        {
+            "path":{
+                "original":"/datadrive/archives/Tairua",
+                "compressed":"/datadrive2/compressed/archives/Tairua"
+            },
+            "name":"Town of Tairua",
+            "taggable":true,
+            "catalogInfo":{
+                "year": 2020,
+                "link":"https://en.wikipedia.org/wiki/Tairua",
+                "description":"The town of Tairua is on the east coast of the Coromandel Peninsula in the North Island of New Zealand. It lies at the mouth of the Tairua River on its north bank and on the small Paku Peninsula. Tairua is a Māori name which translates literally as tai: tides, rua: two."
+            }, 
+            "imageFormat":[".jpg",".jpeg",".JPG"],
+            "questionSet":"5f4ad631f3006c4764d62918", 
+            "ignoreFields": ["Additional Comments"]
+        },
+        {
+            "path":{
+                "original":"/datadrive/archives/Demo",
+                "compressed":"/datadrive/archives/Demo"
+            },
+            "name":"Demo",
+            "taggable":true,
+            "catalogInfo":{
+                "year": 2020,
+                "link":"#1",
+                "description":"This is the Demo default catalog given to all users to display the labelers capabilities"
+            }, 
+            "imageFormat":[".jpg",".jpeg",".JPG"],
+            "questionSet":"5f4940b703e72c8380a713d2", 
+            "ignoreFields": ["Additional Comments"]
+        }
+    ]
+}
