@@ -78,6 +78,6 @@ ImageSchema.post<ImageDocument>('remove', async function (this: ImageDocument) {
 })
 
 //This makes it so that the name and archive pair are unique
-//ImageSchema.index({ name: 1, archive: 1 }, { unique: true })
+ImageSchema.index({ name: 1, archive: 1 }, { unique: true })
 
 export const ImageModel: Model<ImageDocument> = model('Image', ImageSchema)
