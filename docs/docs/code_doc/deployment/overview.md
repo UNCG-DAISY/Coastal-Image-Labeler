@@ -30,7 +30,12 @@ This will require node js to be installed. [PM2](https://pm2.keymetrics.io/) is 
 
 ```bash title="Install PM2 globally"
 npm i pm2 -g
+pm2 install pm2-logrotate
 ```
+
+:::caution Log Folder
+Looking at `src/dashboard/ecosystem.config.js` Log files will be created at `../../../../pm2Logs/${timestamp}/` where `timestamp` is  `month-day-year_hour.minutes.seconds`. Please make sure to create the folder `../../../../pm2Logs/`. PM2 will do the rest.
+:::
 
 ### Code-Server
 **Optional**

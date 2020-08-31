@@ -22,7 +22,8 @@ module.exports = {
           label: 'Auth0',
           items: [
             "code_doc/auth0/auth0",
-            "code_doc/auth0/auth0Values"
+            "code_doc/auth0/auth0Values",
+            "code_doc/auth0/rules"
           ],
         },
         {

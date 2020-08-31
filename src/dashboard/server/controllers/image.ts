@@ -75,7 +75,7 @@ function getImagePath({ imagePath }: Params) {
           message: error.message,
           type: 'error',
         })
-        res.sendFile(process.env.NEXT_PUBLIC_Error_Image)
+        res.sendFile('../Error.png')
       }
     }
   )
