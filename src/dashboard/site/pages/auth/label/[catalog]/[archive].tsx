@@ -16,6 +16,8 @@ import { generateUnAuthObj } from '../../../../components/Utils/Auth/unAuthError
 import { getUserAssignedImage } from '../../../../components/API/post/getUserAssignedImage'
 import { catalogQuestionSet } from '../../../../components/API/post/getCatalogQuestionSet'
 import { tabLogoURL } from '../../../../components/Constants'
+import { getCatalog } from '../../../../components/API/post/getCatalog'
+import { getArchive } from '../../../../components/API/post/getArchive'
 
 import { ImageDocument } from '../../../../../interfaces/models'
 
@@ -26,7 +28,7 @@ export default function TagImage(props) {
   return (
     <React.Fragment>
       <Head>
-        <title>Tag Image: {imageDocument?.name}</title>
+        <title>Coastal Image Labeler</title>
         <link rel="icon" href={tabLogoURL} />
       </Head>
 
@@ -34,7 +36,7 @@ export default function TagImage(props) {
         user={props.user}
         navItems={determineNavItems(user)}
         drawer
-        title={`Welcome ${user?.displayName}`}
+        title={`You're labeling image ${imageDocument.name} now! 👍`}
       >
         {!success ? (
           <ErrorCard message={message} title="Error" />
@@ -44,6 +46,8 @@ export default function TagImage(props) {
               user={user}
               imageDocument={imageDocument}
               questionSetDocument={questionSetDocument}
+              catalog={props.catalog}
+              archive={props.archive}
             />
           </React.Fragment>
         )}
@@ -96,20 +100,33 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
 
   //Get assigned Image and catalog question
 
-  const [resGetUserAssignedImage, resGetCatalogQuestionSet] = await Promise.all(
-    [
-      getUserAssignedImage({
-        cookie: context?.req?.headers?.cookie,
-        res: context.res,
-        archiveId: archive as string,
-      }),
-      catalogQuestionSet({
-        cookie: context?.req?.headers?.cookie,
-        res: context.res,
-        catalogId: catalog as string,
-      }),
-    ]
-  )
+  const [
+    resGetUserAssignedImage,
+    resGetCatalogQuestionSet,
+    resGetCatalog,
+    resGetArchive,
+  ] = await Promise.all([
+    getUserAssignedImage({
+      cookie: context?.req?.headers?.cookie,
+      res: context.res,
+      archiveId: archive as string,
+    }),
+    catalogQuestionSet({
+      cookie: context?.req?.headers?.cookie,
+      res: context.res,
+      catalogId: catalog as string,
+    }),
+    getCatalog({
+      cookie: context?.req?.headers?.cookie,
+      res: context.res,
+      catalogId: catalog as string,
+    }),
+    getArchive({
+      cookie: context?.req?.headers?.cookie,
+      res: context.res,
+      archiveId: archive as string,
+    }),
+  ])
 
   if (!resGetUserAssignedImage.success) {
     return {
@@ -131,15 +148,38 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
       },
     }
   }
+  if (!resGetCatalog.success) {
+    return {
+      props: {
+        user,
+        ...generateUnAuthObj({
+          message: resGetCatalog.message,
+        }),
+      },
+    }
+  }
+  if (!resGetArchive.success) {
+    return {
+      props: {
+        user,
+        ...generateUnAuthObj({
+          message: resGetArchive.message,
+        }),
+      },
+    }
+  }
 
   // const t2 = performance.now()
   // console.log(`Time ${t2 - t1} ms`)
+  console.log(resGetCatalog.data?.advancedResults.data[0])
   return {
     props: {
       success: true,
       user,
       imageDocument: resGetUserAssignedImage.data.assignedImage ?? {},
       questionSetDocument: resGetCatalogQuestionSet.data.questionSet ?? {},
+      catalog: resGetCatalog.data?.advancedResults.data[0],
+      archive: resGetArchive.data?.advancedResults.data[0],
     },
   }
 }

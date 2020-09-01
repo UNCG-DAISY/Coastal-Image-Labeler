@@ -16,6 +16,9 @@ const routes = {
     hasAssignedImages: apiCall('/api/user/hasAssignedImages'),
     getCatalogQuestionSet: apiCall('/api/catalog/questionSet'),
     tagImage: apiCall('/api/tags/tagImage'),
+
+    getCatalog: apiCall('/api/catalog'),
+    getArchive: apiCall('/api/archive'),
   },
   getReq: {
     showImage: (type: ImagePathTypes, id: any) =>

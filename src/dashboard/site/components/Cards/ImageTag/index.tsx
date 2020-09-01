@@ -1,5 +1,5 @@
 import Card from '@material-ui/core/Card'
-import { useRouter } from 'next/router'
+//import { useRouter } from 'next/router'
 
 import { theme } from '../../theme'
 import CardContent from '@material-ui/core/CardContent'
@@ -15,6 +15,8 @@ import { ShowTagData } from '../../Modal/showTagData'
 import {
   ImageDocument,
   QuestionSetDocument,
+  CatalogDocument,
+  ArchiveDocument,
 } from '../../../../interfaces/models'
 import React from 'react'
 import Router from 'next/router'
@@ -28,13 +30,15 @@ interface Props {
   user: UserProp
   imageDocument: ImageDocument
   questionSetDocument: QuestionSetDocument
+  catalog: CatalogDocument
+  archive: ArchiveDocument
 }
 
 export function ImageTag(props: Props) {
-  const router = useRouter()
-  const { catalog = '', archive = '' } = router.query
+  //const router = useRouter()
+  //const { catalog = '', archive = '' } = router.query
 
-  const { imageDocument, questionSetDocument, user } = props
+  const { imageDocument, questionSetDocument, user, catalog, archive } = props
 
   const [tag, setTag] = React.useState({})
   const [openModal, setOpenModal] = React.useState(false)
@@ -83,8 +87,8 @@ export function ImageTag(props: Props) {
   return (
     <Card>
       <Header
-        title={`Catalog ${catalog}`}
-        subheader={`Archive ${archive} - ${imageDocument?.name}`}
+        title={`Catalog ${catalog?.name}`}
+        subheader={`Archive ${archive?.name} - ${imageDocument?.name}`}
         style={{ color: theme.palette.primary.light }}
         subheaderStyle={{ color: theme.palette.secondary.main }}
       />
