@@ -3,7 +3,7 @@
 */
 
 import { Schema, model, Model, Types } from 'mongoose'
-import { ImageDocument } from '../../interfaces/models'
+import { ImageDocument } from '@/interfaces/models'
 import { ArchiveModel } from './Archive'
 // import { TagModel } from './Tag'
 // import { compareTags } from '../utils/compareTags'

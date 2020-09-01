@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { log } from '../utils/logger'
+import { log } from '@/server/utils/logger'
 
 function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
   if (req.isAuthenticated()) {

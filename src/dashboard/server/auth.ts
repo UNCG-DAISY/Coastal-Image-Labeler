@@ -6,7 +6,7 @@ const MemoryStore = require('memorystore')(session)
 import passport from 'passport'
 import Auth0Strategy from 'passport-auth0'
 import uid from 'uid-safe'
-import { authRoutes } from './utils/auth-routes' //Handles login and logout
+import { authRoutes } from '@/server/utils/auth-routes' //Handles login and logout
 
 function initAuthentication(server: Express) {
   // 2 - add session management to Express

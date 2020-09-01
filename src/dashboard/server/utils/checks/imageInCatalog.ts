@@ -1,8 +1,8 @@
-import { ArchiveModel } from '../../models/Archive'
-import { CatalogModel } from '../../models/Catalog'
-import { ImageDocument } from '../../../interfaces/models'
+import { ArchiveModel } from '@/server/models/Archive'
+import { CatalogModel } from '@/server/models/Catalog'
+import { ImageDocument } from '@/interfaces/models'
 import { ObjectID } from 'mongodb'
-import { log } from '../logger'
+import { log } from '@/server/utils/logger'
 
 //✔️
 export async function imageInCatalog(

@@ -6,8 +6,8 @@
 */
 
 import { Request, NextFunction } from 'express'
-import { AllDocuments } from '../../interfaces/models'
-import { ExtenedResponse } from '../../interfaces'
+import { AllDocuments } from '@/interfaces/models'
+import { ExtenedResponse } from '@/interfaces/index'
 import { DocumentQuery, Model } from 'mongoose'
 
 const advancedResults = (

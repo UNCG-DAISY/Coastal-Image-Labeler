@@ -1,12 +1,12 @@
 import express from 'express'
-import { genericReturn } from '../middlewares/genericReturn'
+import { genericReturn } from '@/server/middlewares/genericReturn'
 //Perform advanced results which means filtering, pagination, and query parameters
-import { advancedResults } from '../middlewares/advancedResults'
-import { ImageModel } from '../models/Image'
-import { showImage } from '../middlewares/showImage'
+import { advancedResults } from '@/server/middlewares/advancedResults'
+import { ImageModel } from '@/server/models/Image'
+import { showImage } from '@/server/middlewares/showImage'
 import { param } from 'express-validator'
-import { bodyValidation } from '../middlewares/bodyValidation'
-import { getImagePath } from '../controllers/image'
+import { bodyValidation } from '@/server/middlewares/bodyValidation'
+import { getImagePath } from '@/server/controllers/image'
 const router = express.Router()
 
 //✔️

@@ -1,5 +1,5 @@
-import { ImageModel } from '../../models/Image'
-import { AssignedImageModel } from '../../models/AssignedImages'
+import { ImageModel } from '@/server/models/Image'
+import { AssignedImageModel } from '@/server/models/AssignedImages'
 import { log } from '../logger'
 import { ObjectID } from 'mongodb'
 

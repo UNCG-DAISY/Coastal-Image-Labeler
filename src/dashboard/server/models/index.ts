@@ -6,9 +6,9 @@ import { ImageModel } from './Image'
 import { TagModel } from './Tag'
 import { UserModel } from './User'
 import { QuestionSetModel } from './QuestionSet'
-import { log } from '../utils/logger'
+import { log } from '@/server/utils/logger'
 // import imageServeOrderDefault from '../../data/default/imageServeOrder.json'
-import questionSetDefault from '../../data/default/questionSet.json'
+import questionSetDefault from '@/data/default/questionSet.json'
 
 export function RegisterModels() {
   const models = [

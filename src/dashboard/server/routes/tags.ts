@@ -1,16 +1,20 @@
 import express from 'express'
-import { genericReturn } from '../middlewares/genericReturn'
+import { genericReturn } from '@/server/middlewares/genericReturn'
 //Perform advanced results which means filtering, pagination, and query parameters
-import { advancedResults } from '../middlewares/advancedResults'
-import { TagModel } from '../models/Tag'
+import { advancedResults } from '@/server/middlewares/advancedResults'
+import { TagModel } from '@/server/models/Tag'
 
-import { ensureAuthenticated } from '../middlewares/ensureAuth'
-import { insertUser } from '../middlewares/insertUser'
-import { tagImage, exportUserTags, exportAllTags } from '../controllers/tags'
-import { unassignImage } from '../controllers/assignedImages'
+import { ensureAuthenticated } from '@/server/middlewares/ensureAuth'
+import { insertUser } from '@/server/middlewares/insertUser'
+import {
+  tagImage,
+  exportUserTags,
+  exportAllTags,
+} from '@/server/controllers/tags'
+import { unassignImage } from '@/server/controllers/assignedImages'
 import { check } from 'express-validator'
-import { bodyValidation } from '../middlewares/bodyValidation'
-import { hasRoles } from '../middlewares/hasRoles'
+import { bodyValidation } from '@/server/middlewares/bodyValidation'
+import { hasRoles } from '@/server/middlewares/hasRoles'
 const router = express.Router()
 
 //✔️

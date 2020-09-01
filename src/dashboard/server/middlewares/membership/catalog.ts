@@ -1,11 +1,11 @@
-import { asyncHandler } from '../async'
-// import { ResPartOfCatalog } from '../../../interfaces'
+import { asyncHandler } from '@/server/middlewares/async'
+// import { ResPartOfCatalog } from '@/interfaces/'
 import { Request, NextFunction } from 'express'
 import { ObjectId } from 'mongodb'
-import { ArchiveModel } from '../../models/Archive'
-import { ImageModel } from '../../models/Image'
-import { ExtenedResponse } from '../../../interfaces'
-import { log } from '../../utils/logger'
+import { ArchiveModel } from '@/server/models/Archive'
+import { ImageModel } from '@/server//models/Image'
+import { ExtenedResponse } from '@/interfaces/index'
+import { log } from '@/server/utils/logger'
 
 //✔️
 //checks if a given catalogId exists in a given user catalog

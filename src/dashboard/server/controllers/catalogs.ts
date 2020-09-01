@@ -1,9 +1,9 @@
 import { Request, NextFunction } from 'express'
-import { asyncHandler } from '../middlewares/async' //to avoid putting try catch everywhere
-import { ExtenedResponse } from '../../interfaces'
-import { CatalogModel } from '../models/Catalog'
-import { QuestionSetModel } from '../models/QuestionSet'
-import { log } from '../utils/logger'
+import { asyncHandler } from '@/server/middlewares/async' //to avoid putting try catch everywhere
+import { ExtenedResponse } from '@/interfaces/index'
+import { CatalogModel } from '@/server/models/Catalog'
+import { QuestionSetModel } from '@/server/models/QuestionSet'
+import { log } from '@/server/utils/logger'
 
 //✔️
 const catalogExists = asyncHandler(

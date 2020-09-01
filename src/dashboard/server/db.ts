@@ -1,5 +1,5 @@
 import { connect, Mongoose, connection } from 'mongoose'
-import { log } from './utils/logger'
+import { log } from '@/server/utils/logger'
 
 export const connectDB = async () => {
   //Get the uri to connect from the enviroment variables. Assume by default to use the development db

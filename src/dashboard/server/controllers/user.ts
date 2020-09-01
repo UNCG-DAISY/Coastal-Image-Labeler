@@ -1,8 +1,8 @@
-import { asyncHandler } from '../middlewares/async'
-import { UserModel } from '../models/User'
+import { asyncHandler } from '@/server/middlewares/async'
+import { UserModel } from '@/server/models/User'
 import { Request, Response } from 'express'
-import { AssignedImageModel } from '../models/AssignedImages'
-import { log } from '../utils/logger'
+import { AssignedImageModel } from '@/server/models/AssignedImages'
+import { log } from '@/server/utils/logger'
 
 //✔️
 const getUser = asyncHandler(async (req: Request, res: Response) => {

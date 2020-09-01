@@ -1,10 +1,10 @@
 import express from 'express'
-import { testExpVal } from '../controllers/test'
+import { testExpVal } from '@/server/controllers/test'
 import { check } from 'express-validator'
-import { bodyValidation } from '../middlewares/bodyValidation'
-import { advancedResults } from '../middlewares/advancedResults'
-import { genericReturn } from '../middlewares/genericReturn'
-import { TagModel } from '../models/Tag'
+import { bodyValidation } from '@/server/middlewares/bodyValidation'
+import { advancedResults } from '@/server/middlewares/advancedResults'
+import { genericReturn } from '@/server/middlewares/genericReturn'
+import { TagModel } from '@/server/models/Tag'
 
 const router = express.Router()
 

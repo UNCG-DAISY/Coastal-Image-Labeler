@@ -1,10 +1,10 @@
 import express from 'express'
-import { archiveExists } from '../controllers/archives'
-import { advancedResults } from '../middlewares/advancedResults'
-import { ArchiveModel } from '../models/Archive'
-import { genericReturn } from '../middlewares/genericReturn'
+import { archiveExists } from '@/server/controllers/archives'
+import { advancedResults } from '@/server/middlewares/advancedResults'
+import { ArchiveModel } from '@/server/models/Archive'
+import { genericReturn } from '@/server/middlewares/genericReturn'
 import { check } from 'express-validator'
-import { bodyValidation } from '../middlewares/bodyValidation'
+import { bodyValidation } from '@/server/middlewares/bodyValidation'
 
 const router = express.Router()
 

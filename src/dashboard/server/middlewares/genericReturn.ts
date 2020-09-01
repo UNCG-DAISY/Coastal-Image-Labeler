@@ -1,6 +1,6 @@
 import { asyncHandler } from './async'
 import { Request } from 'express'
-import { ExtenedResponse } from '../../interfaces'
+import { ExtenedResponse } from '@/interfaces/index'
 
 interface Params {
   keys: string[]

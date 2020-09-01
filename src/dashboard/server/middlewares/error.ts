@@ -3,8 +3,8 @@
 */
 
 import { Request, Response, NextFunction } from 'express'
-import { ErrorResponse } from '../utils/errorResponse'
-import { log } from '../utils/logger'
+import { ErrorResponse } from '@/server/utils/errorResponse'
+import { log } from '@/server/utils/logger'
 export const errorHandler = (
   err: any,
   req: Request,

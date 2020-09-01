@@ -3,7 +3,7 @@
 */
 
 import { Schema, model, Model, Types, HookNextFunction } from 'mongoose'
-import { AssingedImageDocument } from '../../interfaces/models'
+import { AssingedImageDocument } from '@/interfaces/models'
 import { ImageModel } from './Image'
 // import { CatalogModel } from './Catalog'
 import { ArchiveModel } from './Archive'

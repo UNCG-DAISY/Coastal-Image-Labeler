@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { log } from '../utils/logger'
+import { log } from '@/server/utils/logger'
 function displayResponseTime(req: Request, res: Response, next: NextFunction) {
   const startHrTime = process.hrtime()
 

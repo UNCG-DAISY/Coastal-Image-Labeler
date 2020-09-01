@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node --project tsconfig.server.json server/index.ts",
     "build:server": "rimraf dist && tsc --project tsconfig.server.json",
-    "build:next": "next build ./site",
+    "build:next": "next build",
     "build": "npm run build:next && npm run build:server",
     "start": "npm run build && npm run prod",
     "prod": "cross-env NODE_ENV=production node dist/server/index.js",
@@ -47,9 +47,10 @@
     "jsonschema": "^1.2.6",
     "lodash": "^4.17.19",
     "memorystore": "^1.6.2",
+    "module-alias": "^2.2.2",
     "moment": "^2.27.0",
     "mongoose": "^5.9.24",
-    "next": "9.4.1",
+    "next": "9.5.2",
     "node-schedule": "^1.3.2",
     "passport": "^0.4.1",
     "passport-auth0": "^1.3.3",
@@ -90,5 +91,10 @@
     "ts-jest": "^26.1.2",
     "ts-node": "^8.10.2",
     "typescript": "3.8.3"
+  },
+  "_moduleAliases": {
+    "@/server": "dist/server",
+    "@/intefaces": "intefaces",
+    "@/data": "dist/data"
   }
 }

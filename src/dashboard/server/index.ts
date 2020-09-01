@@ -1,6 +1,7 @@
+import 'module-alias/register'
 //Registers the types
 // eslint-disable-next-line
-import * as Types from '../interfaces'
+import * as Types from '@/interfaces/index'
 
 import dotenv from 'dotenv'
 
@@ -13,34 +14,34 @@ import express, { Request, Response } from 'express'
 import next from 'next'
 
 //import db connection
-import { connectDB, closeConnection } from './db'
+import { connectDB, closeConnection } from '@/server/db'
 
 //logged with or without color depending on env
-import { log } from './utils/logger'
+//import { log } from '@/server/utils/logger'
+import { log } from '@/server/utils/logger'
 
 //Generic function to handle erros
-import { errorHandler } from './middlewares/error'
+import { errorHandler } from '@/server/middlewares/error'
 
 //register models
-import { RegisterModels, RegisterModelDefaults } from './models'
+import { RegisterModels, RegisterModelDefaults } from '@/server/models'
 
 //routes
-import { RegisterRoutes } from './routes'
+import { RegisterRoutes } from '@/server/routes'
 
 //Security
-import { initAuthentication } from './auth'
+import { initAuthentication } from '@/server/auth'
 
 import responseTime from 'response-time'
-import { displayResponseTime } from './middlewares/logResTime'
+import { displayResponseTime } from '@/server/middlewares/logResTime'
 
 //backup
-import { startCronJob } from './utils/dbBackup'
+import { startCronJob } from '@/server/utils/dbBackup'
 
 const dev = process.env.NODE_ENV !== 'production'
 
 const app = next({
   dev,
-  dir: './site',
 })
 const handle = app.getRequestHandler()
 const port = ((process.env.NEXT_PUBLIC_PORT as unknown) as number) ?? 3000
