@@ -2,7 +2,7 @@
   "name": "with-typescript-eslint-jest",
   "author": "@erikdstock",
   "license": "MIT",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "scripts": {
     "dev": "ts-node --project tsconfig.server.json server/index.ts",
     "build:server": "rimraf dist && tsc --project tsconfig.server.json",
