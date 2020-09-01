@@ -1,4 +1,4 @@
-import { TagModel } from '@/server/models/Tag'
+import { TagModel } from '../models/Tag'
 import { log } from './logger'
 
 interface Params {

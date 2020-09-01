@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { log } from '@/server/utils/logger'
+import { log } from '../utils/logger'
 import { asyncHandler } from './async'
 
 function hasRoles(roles: string[]) {

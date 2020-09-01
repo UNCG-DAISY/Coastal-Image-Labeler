@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
-import { UserModel } from '@/server/models/User'
-import { log } from '@/server/utils/logger'
+import { UserModel } from '../models/User'
+import { log } from '../utils/logger'
 
 async function insertUser(req: Request, res: Response, next: NextFunction) {
   const id: string = req.user.id

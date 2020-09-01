@@ -14,7 +14,6 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
-
   //https://mongoosejs.com/docs/jest.html
   testEnvironment: 'node',
 }

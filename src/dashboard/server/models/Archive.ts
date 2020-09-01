@@ -3,7 +3,7 @@
 */
 
 import { Schema, model, Types } from 'mongoose'
-import { ArchiveModelType, ArchiveDocument } from '@/interfaces/models'
+import { ArchiveModelType, ArchiveDocument } from '../../interfaces/models'
 import { CatalogModel } from './Catalog'
 
 const archiveScehma: Schema = new Schema(

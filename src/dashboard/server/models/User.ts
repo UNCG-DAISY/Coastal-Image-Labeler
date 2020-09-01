@@ -9,7 +9,7 @@ import {
   Types,
   //HookNextFunction, SchemaDefinition
 } from 'mongoose'
-import { UserDocument } from '@/interfaces/models'
+import { UserDocument } from '../../interfaces/models'
 
 const userSchema: Schema = new Schema(
   {

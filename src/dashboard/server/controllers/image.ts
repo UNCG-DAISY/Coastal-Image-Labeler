@@ -1,10 +1,10 @@
-import { asyncHandler } from '@/server/middlewares/async'
+import { asyncHandler } from '../middlewares/async'
 import { Request, NextFunction } from 'express'
-import { ExtenedResponse, ImagePathTypes } from '@/interfaces/index'
-import { ImageModel } from '@/server/models/Image'
-import { log } from '@/server/utils/logger'
-import { ArchiveModel } from '@/server/models/Archive'
-import { CatalogModel } from '@/server/models/Catalog'
+import { ExtenedResponse, ImagePathTypes } from '../../interfaces/index'
+import { ImageModel } from '../models/Image'
+import { log } from '../utils/logger'
+import { ArchiveModel } from '../models/Archive'
+import { CatalogModel } from '../models/Catalog'
 import fs from 'fs'
 
 interface Params {

@@ -94,7 +94,12 @@
   },
   "_moduleAliases": {
     "@/server": "dist/server",
-    "@/intefaces": "intefaces",
+    "@/intefaces": "interfaces",
     "@/data": "dist/data"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "@(.*)$": "<rootDir>/server/$1"
+    }
   }
 }

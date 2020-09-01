@@ -1,5 +1,6 @@
 // import * as Types from '../interfaces'
 // Types
+import 'module-alias/register'
 
 import dotenv from 'dotenv'
 import { RegisterModels } from './models'
@@ -15,12 +16,12 @@ import { TagModel } from './models/Tag'
 import { UserModel } from './models/User'
 import { QuestionSetModel } from './models/QuestionSet'
 
-import archiveData from '@/data/test/archives.json'
-import assingedData from '@/data/test/assigned_images.json'
-import catalogData from '@/data/test/catalog.json'
-import imagesData from '@/data/test/images.json'
-import questionSetData from '@/data/test/question_set.json'
-import usersData from '@/data/test/users.json'
+import archiveData from '../data/test/archives.json'
+import assingedData from '../data/test/assigned_images.json'
+import catalogData from '../data/test/catalog.json'
+import imagesData from '../data/test/images.json'
+import questionSetData from '../data/test/question_set.json'
+import usersData from '../data/test/users.json'
 //const archiveData = fs.readFileSync(`${__dirname}/data/test/archives.json`,'utf-8')
 
 const env = process.env.NODE_ENV ?? 'development'
@@ -28,27 +29,28 @@ const env = process.env.NODE_ENV ?? 'development'
 switch (env) {
   case 'development':
     dotenv.config({
-      path: '../env.development.local',
+      path: './.env.development.local',
     })
     break
   case 'production':
     dotenv.config({
-      path: '../env.production.local',
+      path: './.env.production.local',
     })
     break
   case 'test':
     dotenv.config({
-      path: '../env.test.local',
+      path: './.env.test.local',
     })
     break
   default:
     dotenv.config({
-      path: '../.env',
+      path: '.env',
     })
     break
 }
 
 async function main() {
+  console.log(process.env.MONGO_URI)
   await connectDB()
   RegisterModels()
 

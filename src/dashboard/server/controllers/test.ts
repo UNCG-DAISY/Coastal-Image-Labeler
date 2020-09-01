@@ -1,4 +1,4 @@
-import { asyncHandler } from '@/server/middlewares/async'
+import { asyncHandler } from '../middlewares/async'
 import { Request, Response } from 'express'
 
 const testExpVal = asyncHandler(async (req: Request, res: Response) => {

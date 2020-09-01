@@ -1,5 +1,5 @@
 import { Schema, model, Model } from 'mongoose'
-import { QuestionSetDocument } from '@/interfaces/models'
+import { QuestionSetDocument } from '../../interfaces/models'
 
 const questionSetSchema: Schema = new Schema(
   {

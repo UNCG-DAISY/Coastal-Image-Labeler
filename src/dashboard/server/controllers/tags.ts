@@ -1,10 +1,10 @@
-import { asyncHandler } from '@/server/middlewares/async' //to avoid putting try catch everywhere
-import { ExtenedResponse } from '@/interfaces/index'
+import { asyncHandler } from '../middlewares/async' //to avoid putting try catch everywhere
+import { ExtenedResponse } from '../../interfaces/index'
 import { Request, NextFunction } from 'express'
-import { TagModel } from '@/server/models/Tag'
-import { ImageModel } from '@/server/models/Image'
-import { imageInCatalog } from '@/server/utils/checks/imageInCatalog'
-import { log } from '@/server/utils/logger'
+import { TagModel } from '../models/Tag'
+import { ImageModel } from '../models/Image'
+import { imageInCatalog } from '../utils/checks/imageInCatalog'
+import { log } from '../utils/logger'
 
 //✔️
 const tagImage = asyncHandler(

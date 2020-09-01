@@ -2,8 +2,8 @@ import { CatalogDocument, AllDocuments } from '@/interfaces/models'
 import { ExtenedResponse } from '@/interfaces/index'
 import { Request, NextFunction } from 'express'
 import { ObjectID } from 'mongodb'
-import { asyncHandler } from '@/server/middlewares/async'
-import { log } from '@/server/utils/logger'
+import { asyncHandler } from '../../async'
+import { log } from '../../../utils/logger'
 //✔️
 const filterUserCatalogsMiddleware = asyncHandler(
   async (req: Request, res: ExtenedResponse, next: NextFunction) => {

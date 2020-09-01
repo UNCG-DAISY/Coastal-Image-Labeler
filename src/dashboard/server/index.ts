@@ -1,7 +1,7 @@
 import 'module-alias/register'
 //Registers the types
 // eslint-disable-next-line
-import * as Types from '@/interfaces/index'
+import * as Types from '../interfaces/index'
 
 import dotenv from 'dotenv'
 
@@ -14,29 +14,29 @@ import express, { Request, Response } from 'express'
 import next from 'next'
 
 //import db connection
-import { connectDB, closeConnection } from '@/server/db'
+import { connectDB, closeConnection } from './db'
 
 //logged with or without color depending on env
 //import { log } from '@/server/utils/logger'
-import { log } from '@/server/utils/logger'
+import { log } from './utils/logger'
 
 //Generic function to handle erros
-import { errorHandler } from '@/server/middlewares/error'
+import { errorHandler } from './middlewares/error'
 
 //register models
-import { RegisterModels, RegisterModelDefaults } from '@/server/models'
+import { RegisterModels, RegisterModelDefaults } from './models'
 
 //routes
-import { RegisterRoutes } from '@/server/routes'
+import { RegisterRoutes } from './routes'
 
 //Security
-import { initAuthentication } from '@/server/auth'
+import { initAuthentication } from './auth'
 
 import responseTime from 'response-time'
-import { displayResponseTime } from '@/server/middlewares/logResTime'
+import { displayResponseTime } from './middlewares/logResTime'
 
 //backup
-import { startCronJob } from '@/server/utils/dbBackup'
+import { startCronJob } from './utils/dbBackup'
 
 const dev = process.env.NODE_ENV !== 'production'
 

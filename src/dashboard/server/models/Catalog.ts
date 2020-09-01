@@ -3,7 +3,7 @@
 */
 
 import { Schema, model, Types } from 'mongoose'
-import { CatalogModelType } from '@/interfaces/models'
+import { CatalogModelType } from '../../interfaces/models'
 
 const catalogScheme: Schema = new Schema(
   {

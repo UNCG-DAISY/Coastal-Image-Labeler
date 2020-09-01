@@ -1,11 +1,11 @@
-import { ImageModel } from '@/server/models/Image'
-import { AssignedImageModel } from '@/server/models/AssignedImages'
-import { log } from '@/server/utils/logger'
+import { ImageModel } from '../../models/Image'
+import { AssignedImageModel } from '../../models/AssignedImages'
+import { log } from '../../utils/logger'
 import {
   ArchiveDocument,
   TagDocument,
   CatalogDocument,
-} from '@/interfaces/models'
+} from '../../../interfaces/models'
 import { RandomOrder } from './random'
 
 interface Params {
