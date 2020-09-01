@@ -19,7 +19,7 @@
     "test": "npm run seeder && npm run jest",
     "test-all": "npm run lint && npm run type-check && npm run test",
     "testFile": "ts-node --project tsconfig.server.json tests/index.ts",
-    "pm2": "npm run build && pm2 start ecosystem.config.js"
+    "pm2": "pm2 stop all && pm2 delete all && npm run build && pm2 start ecosystem.config.js"
   },
   "husky": {
     "hooks": {
