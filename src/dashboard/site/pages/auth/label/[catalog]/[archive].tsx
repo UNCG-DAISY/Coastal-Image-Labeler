@@ -171,7 +171,7 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
 
   // const t2 = performance.now()
   // console.log(`Time ${t2 - t1} ms`)
-  console.log(resGetCatalog.data?.advancedResults.data[0])
+  //console.log(resGetCatalog.data?.advancedResults.data[0])
   return {
     props: {
       success: true,
