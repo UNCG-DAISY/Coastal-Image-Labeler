@@ -28,22 +28,22 @@ const env = process.env.NODE_ENV ?? 'development'
 switch (env) {
   case 'development':
     dotenv.config({
-      path: './site/.env.development.local',
+      path: '../env.development.local',
     })
     break
   case 'production':
     dotenv.config({
-      path: './site/.env.production.local',
+      path: '../env.production.local',
     })
     break
   case 'test':
     dotenv.config({
-      path: './site/.env.test.local',
+      path: '../env.test.local',
     })
     break
   default:
     dotenv.config({
-      path: './site/.env',
+      path: '../.env',
     })
     break
 }

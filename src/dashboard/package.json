@@ -4,7 +4,7 @@
   "license": "MIT",
   "version": "3.1.0",
   "scripts": {
-    "dev": "ts-node --project tsconfig.server.json server/index.ts",
+    "dev": "npm run build:server && ts-node --project tsconfig.server.json server/index.ts",
     "build:server": "rimraf dist && tsc --project tsconfig.server.json",
     "build:next": "next build",
     "build": "npm run build:next && npm run build:server",
