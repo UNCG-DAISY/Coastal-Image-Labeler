@@ -134,10 +134,62 @@ It serves simply as a guideline for admins to use. Due to this nature it is
 and is best to copy an existing one
 
 ```js title="Question Set model"
+
 export interface QuestionSetDocument extends Document {
-    name:string,
-    description:string,
-    questions:[any]
+  name: string
+  description: string
+  questions: any[] | QuestionSetQuestions[]
+}
+```
+
+These are some Typescript type annotations to help understand the structre of each question type. Anything with `?:` means its optional, else its required
+
+```ts 
+type QuestionSetQuestions = TextFieldQuestion | ButtonSubmitQuestion | CheckboxQuestion | RadioQuestion
+
+type RadioQuestion = {
+  type: "radioGroup",
+  required: boolean,
+  label: string,
+  docLink: string,
+  key: string,
+  errorMessage: string,
+
+  buttons: {
+    name: string,
+    value: string
+  }[]
+}
+
+type CheckboxQuestion = {
+  type: "checkboxGroup",
+  required: boolean,
+  label: string,
+  docLink: string,
+  key: string,
+  errorMessage: string,
+
+  min?: number,
+  max?: number
+
+  buttons: {
+    name: string,
+    value: string
+  }[]
+}
+
+
+type ButtonSubmitQuestion = {
+  type: "buttomSubmit",
+  required: boolean,
+  label: string,
+  docLink: string,
+  key: string,
+  buttons: {
+    label: string,
+    tag: any,
+    key: string
+  }[]
 }
 ```
 

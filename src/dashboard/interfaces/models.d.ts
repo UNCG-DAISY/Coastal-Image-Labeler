@@ -115,10 +115,71 @@ export interface TagDocument extends Document {
 //   data?: any
 // }
 
+//Not ment to be used, ment as reference
+type RadioQuestion = {
+  type: 'radioGroup'
+  required: boolean
+  label: string
+  docLink: string
+  key: string
+  errorMessage: string
+
+  buttons: {
+    name: string
+    value: string
+  }[]
+}
+
+type CheckboxQuestion = {
+  type: 'checkboxGroup'
+  required: boolean
+  label: string
+  docLink: string
+  key: string
+  errorMessage: string
+
+  min?: number
+  max?: number
+
+  buttons: {
+    name: string
+    value: string
+  }[]
+}
+
+type ButtonSubmitQuestion = {
+  type: 'buttomSubmit'
+  required: boolean
+  label: string
+  docLink: string
+  key: string
+  buttons: {
+    label: string
+    tag: any
+    key: string
+  }[]
+}
+
+type TextFieldQuestion = {
+  type: 'textField'
+  required: boolean
+  label: string
+  docLink: string
+  key: string
+  multiline: boolean
+  rows: number
+}
+
+type QuestionSetQuestions =
+  | TextFieldQuestion
+  | ButtonSubmitQuestion
+  | CheckboxQuestion
+  | RadioQuestion
+
 export interface QuestionSetDocument extends Document {
   name: string
   description: string
-  questions: [any]
+  questions: any[] | QuestionSetQuestions[]
 }
 
 export type AllDocuments =
