@@ -2,7 +2,9 @@ const fs = require('fs')
 const path = require('path')
 
 const date = new Date()
-const timestamp = `${date.getMonth()}-${date.getDate()}-${date.getFullYear()}_${date.getHours()}.${date.getMinutes()}.${date.getSeconds()}`
+const timestamp = `${
+  date.getMonth() + 1
+}-${date.getDate()}-${date.getFullYear()}_${date.getHours()}.${date.getMinutes()}.${date.getSeconds()}`
 const root = `../../../../pm2Logs/${timestamp}/`
 
 fs.mkdirSync(path.join(__dirname, root), (err) => {

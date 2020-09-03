@@ -59,7 +59,7 @@ export const labelNewArchive: NavItem = {
   },
 }
 export const exportTags: NavItem = {
-  name: 'Export Tags',
+  name: 'Export Labels',
   route: '/auth/export',
   icon: (props) => <CloudDownloadIcon {...props} />,
   style: {

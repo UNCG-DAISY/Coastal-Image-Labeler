@@ -39,6 +39,9 @@ const getCurrentlyAssignedImage = asyncHandler(
         message: `Currently assigned image is ${image._id}`,
         type: 'info',
       })
+      log({
+        message: image,
+      })
 
       return res.status(200).json({
         success: true,

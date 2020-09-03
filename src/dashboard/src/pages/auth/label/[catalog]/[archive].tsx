@@ -20,6 +20,7 @@ import { getCatalog } from '@/site/components/API/post/getCatalog'
 import { getArchive } from '@/site/components/API/post/getArchive'
 
 import { ImageDocument } from '@/interfaces/models'
+import { log } from '@/site/components/Utils/logger'
 
 export default function TagImage(props) {
   const { user, success, message, questionSetDocument } = props
@@ -36,7 +37,7 @@ export default function TagImage(props) {
         user={props.user}
         navItems={determineNavItems(user)}
         drawer
-        title={`You're labeling image ${imageDocument.name} now! 👍`}
+        title={`You're labeling now! 👍`}
       >
         {!success ? (
           <ErrorCard message={message} title="Error" />
@@ -168,10 +169,13 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
       },
     }
   }
+  log({
+    message: 'Data for tagging image',
+    type: 'info',
+  })
+  log({ message: '--- image ---' })
+  log({ message: resGetUserAssignedImage.data.assignedImage })
 
-  // const t2 = performance.now()
-  // console.log(`Time ${t2 - t1} ms`)
-  //console.log(resGetCatalog.data?.advancedResults.data[0])
   return {
     props: {
       success: true,

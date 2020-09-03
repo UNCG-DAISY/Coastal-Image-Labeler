@@ -24,7 +24,7 @@ function getImagePath({ imagePath }: Params) {
         const image = await ImageModel.findById(imageId)
         if (!image) {
           log({
-            message: `Image not found`,
+            message: `Image not found in DB`,
             type: 'error',
           })
           throw `Image id ${imageId} does not exist`

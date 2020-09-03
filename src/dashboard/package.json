@@ -4,7 +4,7 @@
   "license": "MIT",
   "version": "3.1.0",
   "scripts": {
-    "dev": "npm run build:server && ts-node --project tsconfig.server.json server/index.ts",
+    "dev": "npm run build:server && node dist/server/index.js",
     "build:server": "rimraf dist && tsc --project tsconfig.server.json",
     "build:next": "next build",
     "build": "npm run build:next && npm run build:server",
@@ -19,7 +19,8 @@
     "test": "npm run seeder && npm run jest",
     "test-all": "npm run lint && npm run type-check && npm run test",
     "testFile": "ts-node --project tsconfig.server.json tests/index.ts",
-    "pm2": "pm2 stop all && pm2 delete all && npm run build && pm2 start ecosystem.config.js"
+    "pm2": "npm run build && pm2 start ecosystem.config.js",
+    "pm2:restart":"pm2 stop all && pm2 delete all && npm run pm2"
   },
   "husky": {
     "hooks": {

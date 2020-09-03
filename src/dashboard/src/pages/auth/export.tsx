@@ -8,8 +8,8 @@ import { determineNavItems } from '@/site/components/Utils/Auth/determineNavItem
 import { ResumeTaggingDataCatalog, UserProp } from '../../../interfaces'
 import { tabLogoURL } from '@/site/components/Constants'
 
-import JSONPretty from 'react-json-pretty'
-import { theme, customColors } from '@/site/components/theme'
+// import JSONPretty from 'react-json-pretty'
+// import { theme, customColors } from '@/site/components/theme'
 import { ViewImage } from '@/site/components/Button/premadeButtons'
 interface Props {
   user: UserProp
@@ -41,7 +41,7 @@ export const Home = (props: Props): JSX.Element => {
             <ViewImage variant="contained">Export all tags</ViewImage>
           )}
         </div>
-        <JSONPretty
+        {/* <JSONPretty
           id="json-pretty"
           data={user}
           style={{
@@ -57,7 +57,7 @@ export const Home = (props: Props): JSX.Element => {
             value: `color:${customColors.orange};`,
             boolean: `color:${customColors.purple};`,
           }}
-        />
+        /> */}
       </Layout>
     </div>
   )
