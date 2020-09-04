@@ -13,9 +13,8 @@ const features = [
     description: (
       <>
         Labeled images are important for supervised machine learning research. 
-        There are many well known labeled image databases, 
-        but these existing databases tend to focus on general features . 
-        Our goal with this project is to develop a discipline-specific 
+        There are many well known labeled image databases that focus on general features. 
+        Our goal here is to develop a discipline-specific 
         database of labeled images that is relevant for coastal scientists.
       </>
     ),
@@ -36,10 +35,9 @@ const features = [
     stylesClass:'featureImage2',
     description: (
       <>
-        A server that provides users with images to be labeled using a given 
-        set of questions. We designed the labeler to be hosted on a virtual 
-        machine, exposed via a web address. Users interactively label images, 
-        with labels written to a database and exported later by an admin.
+        We provide users with images to be labeled using a given 
+        set of questions.  Users interactively label images, 
+        and results are written to a database to be exported later.
       </>
     ),
   },

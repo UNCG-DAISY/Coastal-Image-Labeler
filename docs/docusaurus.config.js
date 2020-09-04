@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'Coastal-Image-Labeler Dashboard',
-  tagline: 'A labeling tool for Coastal Images',
+  title: 'Coastal Image Labeler',
+  tagline: '',
 
   url: 'https://uncg-daisy.github.io/Coastal-Image-Labeler/',
   baseUrl: '/Coastal-Image-Labeler/',
@@ -13,7 +13,7 @@ module.exports = {
   themeConfig: {
     defaultDarkMode: true,
     navbar: {
-      title: 'Coastal-Image-Labeler Dashboard',
+      title: 'Coastal Image Labeler',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
