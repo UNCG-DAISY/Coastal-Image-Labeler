@@ -6,17 +6,17 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
 import { GetServerSideProps } from 'next'
-import Layout from '@/site/components/Layout'
+import Layout from '@/components/Layout'
 import {
   TwitterLink,
   EmailLink,
   EmailLinkShah,
   LinkedinShah,
-} from '@/site/components/ColoredLink'
-import { tabLogoURL } from '@/site/components/Constants'
-import { determineNavItems } from '@/site/components/Utils/Auth/determineNavItems'
-import { getUserDB } from '@/site/components/API/post/getUserDB'
-import getSession from '@/site/components/Utils/Auth/getSession'
+} from '@/components/ColoredLink'
+import { tabLogoURL } from '@/components/Constants'
+import { determineNavItems } from '@/components/Utils/Auth/determineNavItems'
+import { getUserDB } from '@/components/API/post/getUserDB'
+import getSession from '@/components/Utils/Auth/getSession'
 
 export const Home = (props): JSX.Element => (
   <div className="container">

@@ -1,4 +1,4 @@
-import { theme, customColors } from '@/site/components/theme'
+import { theme, customColors } from '@/components/theme'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useRowStyles = makeStyles({

@@ -6,10 +6,10 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
 //import Layout from '../components/Layout'
-import Layout from '@/site/components/Layout'
+import Layout from '@/components/Layout'
 
-import { RepoLink, EmailLink } from '@/site/components/ColoredLink'
-import { navigationItems, tabLogoURL } from '@/site/components/Constants'
+import { RepoLink, EmailLink } from '@/components/ColoredLink'
+import { navigationItems, tabLogoURL } from '@/components/Constants'
 
 export const Home = (): JSX.Element => (
   <div className="container">

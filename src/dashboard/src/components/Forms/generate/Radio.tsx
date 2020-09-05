@@ -7,7 +7,7 @@ import {
   FormLabel,
   // Radio
 } from '@material-ui/core'
-import { YesNoRadio } from '@/site/components/Button/Radio/premadeRadioButtons'
+import { YesNoRadio } from '@/components/Button/Radio/premadeRadioButtons'
 import { generateLabel } from './Label'
 import { errorText } from './ErrorText'
 

@@ -7,7 +7,7 @@ import Appbar from './Appbar'
 import MobileDrawer from './Drawer/mobile'
 import DesktopDrawer from './Drawer/desktop'
 import { DrawerItemContent } from './Drawer/drawerItemList'
-import { uiConstants, navigationItems } from '@/site/components/Constants'
+import { uiConstants, navigationItems } from '@/components/Constants'
 
 const drawerWidth = uiConstants.drawerWidth
 

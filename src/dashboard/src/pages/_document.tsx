@@ -1,7 +1,7 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/core/styles'
-import { theme } from '@/site/components/theme'
+import { theme } from '@/components/theme'
 
 // No need to worry about this, its boiler code
 export default class MyDocument extends Document {

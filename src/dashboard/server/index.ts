@@ -1,7 +1,7 @@
 import 'module-alias/register'
 //Registers the types
 // eslint-disable-next-line
-import * as Types from '../interfaces/index'
+import * as Types from '@/interfaces/index'
 
 import dotenv from 'dotenv'
 
@@ -18,22 +18,22 @@ import { connectDB, closeConnection } from './db'
 
 //logged with or without color depending on env
 //import { log } from '@/server/utils/logger'
-import { log } from './utils/logger'
+import { log } from '@/utils/logger'
 
 //Generic function to handle erros
-import { errorHandler } from './middlewares/error'
+import { errorHandler } from '@/middlewares/error'
 
 //register models
-import { RegisterModels, RegisterModelDefaults } from './models'
+import { RegisterModels, RegisterModelDefaults } from '@/models/index'
 
 //routes
-import { RegisterRoutes } from './routes'
+import { RegisterRoutes } from '@/routes/index'
 
 //Security
 import { initAuthentication } from './auth'
 
 import responseTime from 'response-time'
-import { displayResponseTime } from './middlewares/logResTime'
+import { displayResponseTime } from '@/middlewares/logResTime'
 
 //backup
 import { startCronJob } from './utils/dbBackup'

@@ -9,7 +9,7 @@ import HelpIcon from '@material-ui/icons/Help'
 import * as Colors from '@material-ui/core/colors'
 
 import { NavItem } from '@/interfaces/index'
-import { theme } from '@/site/components/theme'
+import { theme } from '@/components/theme'
 
 export const contactUs: NavItem = {
   name: 'Contact Us',

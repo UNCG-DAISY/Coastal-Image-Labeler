@@ -4,8 +4,8 @@ import React from 'react'
 import Hidden from '@material-ui/core/Hidden'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import { uiConstants } from '@/site/components/Constants'
-import { theme } from '@/site/components/theme'
+import { uiConstants } from '@/components/Constants'
+import { theme } from '@/components/theme'
 import { Divider } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({

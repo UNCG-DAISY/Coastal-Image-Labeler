@@ -1,5 +1,5 @@
 import ColoredButton from './coloredButton'
-import { theme, customColors } from '@/site/components/theme'
+import { theme, customColors } from '@/components/theme'
 
 function CyanButton(props) {
   return (

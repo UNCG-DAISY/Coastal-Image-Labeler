@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 
-import Layout from '@/site/components/Layout'
+import Layout from '@/components/Layout'
 import { GetServerSideProps } from 'next'
-import getSession from '@/site/components/Utils/Auth/getSession'
-import { getUserDB } from '@/site/components/API/post/getUserDB'
-import ErrorCard from '@/site/components/ErrorCards'
-import { determineNavItems } from '@/site/components/Utils/Auth/determineNavItems'
-import { HomeText, NoAssigned } from '@/site/components/StaticText/home'
-import { ResumeTagging } from '@/site/components/Tables/ResumeTagging'
+import getSession from '@/components/Utils/Auth/getSession'
+import { getUserDB } from '@/components/API/post/getUserDB'
+import ErrorCard from '@/components/ErrorCards'
+import { determineNavItems } from '@/components/Utils/Auth/determineNavItems'
+import { HomeText, NoAssigned } from '@/components/StaticText/home'
+import { ResumeTagging } from '@/components/Tables/ResumeTagging'
 import { ResumeTaggingDataCatalog, UserProp } from '../../../interfaces'
-import { getResumeTableData } from '@/site/components/API/post/getResumeTableData'
-import { getHasAssignedImages } from '@/site/components/API/post/userHasAssignedImages'
-import { tabLogoURL } from '@/site/components/Constants'
+import { getResumeTableData } from '@/components/API/post/getResumeTableData'
+import { getHasAssignedImages } from '@/components/API/post/userHasAssignedImages'
+import { tabLogoURL } from '@/components/Constants'
 
 interface Props {
   user: UserProp

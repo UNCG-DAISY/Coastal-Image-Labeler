@@ -1,6 +1,6 @@
 // import { ResponseType } from '../../../../interfaces'
-import { routes } from '@/site/components/Constants'
-import { apiRequest } from '@/site/components/API/index'
+import { routes } from '@/components/Constants'
+import { apiRequest } from '@/components/API/index'
 
 interface Params {
   cookie: string

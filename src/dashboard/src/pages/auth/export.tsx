@@ -1,16 +1,16 @@
 import React from 'react'
 import Head from 'next/head'
-import Layout from '@/site/components/Layout'
+import Layout from '@/components/Layout'
 import { GetServerSideProps } from 'next'
-import getSession from '@/site/components/Utils/Auth/getSession'
-import { getUserDB } from '@/site/components/API/post/getUserDB'
-import { determineNavItems } from '@/site/components/Utils/Auth/determineNavItems'
+import getSession from '@/components/Utils/Auth/getSession'
+import { getUserDB } from '@/components/API/post/getUserDB'
+import { determineNavItems } from '@/components/Utils/Auth/determineNavItems'
 import { ResumeTaggingDataCatalog, UserProp } from '../../../interfaces'
-import { tabLogoURL } from '@/site/components/Constants'
+import { tabLogoURL } from '@/components/Constants'
 
 // import JSONPretty from 'react-json-pretty'
-// import { theme, customColors } from '@/site/components/theme'
-import { ViewImage } from '@/site/components/Button/premadeButtons'
+// import { theme, customColors } from '@/components/theme'
+import { ViewImage } from '@/components/Button/premadeButtons'
 interface Props {
   user: UserProp
   resumeTableData: ResumeTaggingDataCatalog[]

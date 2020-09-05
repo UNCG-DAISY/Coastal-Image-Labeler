@@ -1,5 +1,5 @@
 import React from 'react'
-import { customColors } from '@/site/components/theme'
+import { customColors } from '@/components/theme'
 interface Props {
   key: string
   errorMessage: string

@@ -4,13 +4,13 @@ import Modal from '@material-ui/core/Modal'
 import Backdrop from '@material-ui/core/Backdrop'
 import Fade from '@material-ui/core/Fade'
 import JSONPretty from 'react-json-pretty'
-import { theme, customColors } from '@/site/components/theme'
+import { theme, customColors } from '@/components/theme'
 // import Typography from '@material-ui/core/Typography';
 // import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container'
 import Button from '@material-ui/core/Button'
 
-import { ReviewBeforeSubmit } from '@/site/components/StaticText/home'
+import { ReviewBeforeSubmit } from '@/components/StaticText/home'
 import Router from 'next/router'
 
 const useStyles = makeStyles((theme: Theme) =>

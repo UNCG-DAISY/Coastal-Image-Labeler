@@ -1,18 +1,18 @@
 import React from 'react'
 import Head from 'next/head'
 
-import Layout from '@/site/components/Layout'
+import Layout from '@/components/Layout'
 import { GetServerSideProps } from 'next'
-import getSession from '@/site/components/Utils/Auth/getSession'
-import { getUserDB } from '@/site/components/API/post/getUserDB'
-import { getStartTaggingTableData } from '@/site/components/API/post/startTaggingData'
-import { determineNavItems } from '@/site/components/Utils/Auth/determineNavItems'
-import { SelectArchive } from '@/site/components/Tables/SelectArchive'
+import getSession from '@/components/Utils/Auth/getSession'
+import { getUserDB } from '@/components/API/post/getUserDB'
+import { getStartTaggingTableData } from '@/components/API/post/startTaggingData'
+import { determineNavItems } from '@/components/Utils/Auth/determineNavItems'
+import { SelectArchive } from '@/components/Tables/SelectArchive'
 import { CatalogSelectionData } from '../../../interfaces'
-import { checkUserRole } from '@/site/components/Utils/Auth/checkRole'
-import { generateUnAuthObj } from '@/site/components/Utils/Auth/unAuthError'
-import ErrorCard from '@/site/components/ErrorCards'
-import { tabLogoURL } from '@/site/components/Constants'
+import { checkUserRole } from '@/components/Utils/Auth/checkRole'
+import { generateUnAuthObj } from '@/components/Utils/Auth/unAuthError'
+import ErrorCard from '@/components/ErrorCards'
+import { tabLogoURL } from '@/components/Constants'
 
 interface Props {
   user: any

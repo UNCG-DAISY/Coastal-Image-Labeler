@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography, Paper, Box } from '@material-ui/core'
-import { EmailLink, RepoLink, DocLink } from '@/site/components/ColoredLink'
+import { EmailLink, RepoLink, DocLink } from '@/components/ColoredLink'
 
 interface Props {
   displayName: string

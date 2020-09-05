@@ -5,10 +5,7 @@ import { Typography, Divider, FormControl } from '@material-ui/core'
 import { generateRadioDefaults } from './generate/Radio'
 import { QuestionSetDocument } from '@/interfaces/models'
 import determineQuestionType from './determineQuestionType'
-import {
-  SubmitButton,
-  SkipButton,
-} from '@/site/components/Button/premadeButtons'
+import { SubmitButton, SkipButton } from '@/components/Button/premadeButtons'
 
 interface Props {
   questionSetData: QuestionSetDocument

@@ -6,7 +6,7 @@ import {
   exportTags,
   contactUs,
   login,
-} from '@/site/components/Constants/navigation'
+} from '@/components/Constants/navigation'
 import { UserProp } from '@/interfaces/index'
 
 function determineNavItems(user: UserProp) {

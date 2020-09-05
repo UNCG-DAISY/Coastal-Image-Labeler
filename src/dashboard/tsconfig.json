@@ -19,10 +19,18 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/site/*":["src/*"],
-      "@/server/*":["server/*"],
-      "@/interfaces/*":["interfaces/*"],
-      "@/data/*":["data/*"]
+      //"@/site/*":["src/*"],
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/server/*": ["server/*"],
+      "@/models/*": ["server/models/*"],
+      "@/utils/*":["server/utils/*"],
+      "@/routes/*":["server/routes/*"],
+      "@/middlewares/*":["server/middlewares/*"],
+      "@/controllers/*":["server/controllers/*"],
+      "@/data/*":["data/*"],
+      "@/interfaces/*":["interfaces/*"]
     }
   },
   "exclude": [

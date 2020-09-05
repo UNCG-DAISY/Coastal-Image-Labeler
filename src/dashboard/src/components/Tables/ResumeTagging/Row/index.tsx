@@ -12,8 +12,8 @@ import { Alert, AlertTitle } from '@material-ui/lab'
 import Button from '@material-ui/core/Button'
 
 // import { CatalogSelectionData } from '../../../../../interfaces'
-import { theme } from '@/site/components/theme'
-import { useRowStyles } from '@/site/components/Tables/Styles'
+import { theme } from '@/components/theme'
+import { useRowStyles } from '@/components/Tables/Styles'
 import { SubTable } from './Subtable'
 
 import { ResumeTaggingDataCatalog } from '@/interfaces/index'

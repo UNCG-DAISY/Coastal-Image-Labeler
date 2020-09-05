@@ -95,12 +95,12 @@
   },
   "_moduleAliases": {
     "@/server": "dist/server",
-    "@/intefaces": "interfaces",
-    "@/data": "dist/data"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "@(.*)$": "<rootDir>/server/$1"
-    }
+    "@/models": "dist/server/models",
+    "@/utils": "dist/server/utils",
+    "@/routes": "dist/server/routes",
+    "@/middlewares": "dist/server/middlewares",
+    "@/controllers": "dist/server/controllers",
+    "@/data": "data",
+    "@/interfaces/*": "interfaces"
   }
 }

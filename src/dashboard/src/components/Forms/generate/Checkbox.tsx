@@ -8,7 +8,7 @@ import {
 import { generateLabel } from './Label'
 
 import { errorText } from './ErrorText'
-import { YesNoCheckbox } from '@/site/components/Button/Checkbox/premadeCheckboxButtons'
+import { YesNoCheckbox } from '@/components/Button/Checkbox/premadeCheckboxButtons'
 
 function generateCheckbox(checkboxQuestions, values) {
   const {

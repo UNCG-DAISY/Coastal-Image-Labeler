@@ -3,13 +3,13 @@ import React from 'react'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 
-import getSession from '@/site/components/Utils/Auth/getSession'
-import { getUserDB } from '@/site/components/API/post/getUserDB'
-import Layout from '@/site/components/Layout'
-import { checkUserRole } from '@/site/components/Utils/Auth/checkRole'
-import { generateUnAuthObj } from '@/site/components/Utils/Auth/unAuthError'
-import ErrorCard from '@/site/components/ErrorCards'
-import { determineNavItems } from '@/site/components/Utils/Auth/determineNavItems'
+import getSession from '@/components/Utils/Auth/getSession'
+import { getUserDB } from '@/components/API/post/getUserDB'
+import Layout from '@/components/Layout'
+import { checkUserRole } from '@/components/Utils/Auth/checkRole'
+import { generateUnAuthObj } from '@/components/Utils/Auth/unAuthError'
+import ErrorCard from '@/components/ErrorCards'
+import { determineNavItems } from '@/components/Utils/Auth/determineNavItems'
 export const Admin = (props): JSX.Element => {
   const { user, success, message } = props
 

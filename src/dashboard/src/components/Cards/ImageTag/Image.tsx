@@ -7,8 +7,8 @@ import clsx from 'clsx'
 import CardMedia from '@material-ui/core/CardMedia'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { ViewImage } from '@/site/components/Button/premadeButtons'
-import { theme } from '@/site/components/theme'
+import { ViewImage } from '@/components/Button/premadeButtons'
+import { theme } from '@/components/theme'
 
 interface Props {
   originalLink: string
