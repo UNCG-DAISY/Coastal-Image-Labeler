@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 //import Layout from '../components/Layout'
 import Layout from '@/components/Layout'
 
-import { RepoLink, EmailLink } from '@/components/ColoredLink'
+import { RepoLink, EmailLink, DocsLink } from '@/components/ColoredLink'
 import { navigationItems, tabLogoURL } from '@/components/Constants'
 
 export const Home = (): JSX.Element => (
@@ -22,8 +22,8 @@ export const Home = (): JSX.Element => (
         <Typography variant="body1" component="h1" gutterBottom>
           <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
             Welcome to Coastal Image Labeler, please login. You can read about
-            the project <RepoLink />. If you have questions, please contact Evan
-            Goldstein: {<EmailLink />}
+            the project <RepoLink /> or view the <DocsLink />. If you have
+            questions, please contact Evan Goldstein: {<EmailLink />}
           </Paper>
         </Typography>
       </Box>

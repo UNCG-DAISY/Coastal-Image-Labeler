@@ -26,6 +26,16 @@ const RepoLink = () => (
   </ColoredLink>
 )
 
+const DocsLink = () => (
+  <ColoredLink
+    style={{ color: theme.palette.secondary.main }}
+    href="https://uncg-daisy.github.io/Coastal-Image-Labeler/"
+    target="_blank"
+  >
+    docs
+  </ColoredLink>
+)
+
 const EmailLink = () => (
   <ColoredLink
     style={{ color: theme.palette.secondary.main }}
@@ -82,4 +92,5 @@ export {
   TwitterLink,
   EmailLinkShah,
   LinkedinShah,
+  DocsLink,
 }

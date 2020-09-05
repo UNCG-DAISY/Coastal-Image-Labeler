@@ -12,6 +12,7 @@ import {
   EmailLink,
   EmailLinkShah,
   LinkedinShah,
+  DocsLink,
 } from '@/components/ColoredLink'
 import { tabLogoURL } from '@/components/Constants'
 import { determineNavItems } from '@/components/Utils/Auth/determineNavItems'
@@ -26,6 +27,16 @@ export const Home = (props): JSX.Element => (
     </Head>
     <Layout navItems={determineNavItems(props?.user)} drawer>
       <Typography variant="h5" component="h1" gutterBottom>
+        Shah Nafis Rafique
+      </Typography>
+      <Typography variant="body1" component="h1" gutterBottom>
+        <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
+          Shah Nafis Rafique is the main developer. You can contact him via
+          Email {<EmailLinkShah />} or via his {<LinkedinShah />} page.
+        </Paper>
+      </Typography>
+
+      <Typography variant="h5" component="h1" gutterBottom>
         Dr.Evan Goldstein
       </Typography>
       <Typography variant="body1" component="h1" gutterBottom>
@@ -36,12 +47,11 @@ export const Home = (props): JSX.Element => (
       </Typography>
 
       <Typography variant="h5" component="h1" gutterBottom>
-        Shah Nafis Rafique
+        Documentation
       </Typography>
       <Typography variant="body1" component="h1" gutterBottom>
         <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
-          Shah Nafis Rafique is the main developer. You can contact him via
-          Email {<EmailLinkShah />} or via his {<LinkedinShah />} page.
+          Project documentation can be found at the <DocsLink /> site.
         </Paper>
       </Typography>
     </Layout>
