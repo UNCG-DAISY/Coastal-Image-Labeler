@@ -59,6 +59,7 @@ module.exports = {
           ],
         },
         "code_doc/tools",
+        "code_doc/future"
       ],
     },
     {
@@ -72,23 +73,10 @@ module.exports = {
       type: 'category',
       label: 'Question Sets',
       items: [
-        "question_sets/overview"
+        "question_sets/overview",
+        "question_sets/qsets/beach",
+        "question_sets/qsets/coastal"
       ],
     },
-    // {
-    //   type: 'category',
-    //   label: 'Other',
-    //   items: [
-    //     "other/styleGuide",
-    //     "other/mdx"
-    //   ],
-    // },
-    // {
-    //   type: 'category',
-    //   label: 'Docing the Docs',
-    //   items: [
-    //     "docing_the_docs/indexId",
-    //   ],
-    // }
   ],
 };
