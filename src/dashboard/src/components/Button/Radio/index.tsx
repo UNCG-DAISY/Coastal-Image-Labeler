@@ -1,8 +1,6 @@
 import React, { ReactNode } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Radio, { RadioProps } from '@material-ui/core/Radio'
-// import * as colors from '@material-ui/core/colors/';
-
 interface Props extends RadioProps {
   children?: ReactNode
   styles?: {

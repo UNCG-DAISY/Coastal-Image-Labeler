@@ -6,12 +6,10 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
-
-import { ResumeTaggingDataCatalog } from '../../../../interfaces'
+import { ResumeTaggingDataCatalog } from '@/interfaces/index'
 import { useRowStyles } from '../Styles'
 import { Row } from './Row'
 import { SkeletonTable } from '../skeleton'
-
 interface Props {
   data: ResumeTaggingDataCatalog[]
 }

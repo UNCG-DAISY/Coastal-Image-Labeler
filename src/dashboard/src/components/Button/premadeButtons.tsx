@@ -5,10 +5,7 @@ function CyanButton(props) {
   return (
     <ColoredButton
       color={customColors.cyan}
-      //backgroundColor='white'
       borderColor={customColors.cyan}
-      //hoverBackgroundColor="red"
-      //hovercolor="white"
       variant="outlined"
       {...props}
     >

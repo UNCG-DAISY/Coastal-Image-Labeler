@@ -1,3 +1,7 @@
+/*
+  A bunch of links that have styles.
+*/
+
 import { FunctionComponent } from 'react'
 import { theme } from './theme'
 

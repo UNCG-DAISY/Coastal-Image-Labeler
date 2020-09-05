@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
-// import * as colors from '@material-ui/core/colors/';
 
 interface Props extends CheckboxProps {
   children?: ReactNode

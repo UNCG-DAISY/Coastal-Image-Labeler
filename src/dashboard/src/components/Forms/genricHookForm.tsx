@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Typography, Divider, FormControl } from '@material-ui/core'
-
 import { generateRadioDefaults } from './generate/Radio'
 import { QuestionSetDocument } from '@/interfaces/models'
 import determineQuestionType from './determineQuestionType'

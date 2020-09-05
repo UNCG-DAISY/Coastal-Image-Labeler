@@ -1,17 +1,11 @@
 import Card from '@material-ui/core/Card'
-//import { useRouter } from 'next/router'
-
 import { theme } from '@/components/theme'
 import CardContent from '@material-ui/core/CardContent'
-
-// import { questionSetData } from '../../data/testQuestions'
 import { UserProp } from '@/interfaces/index'
 import GenericHookForm from '@/components/Forms/genricHookForm'
 import { Header } from './Header'
 import { ImageContainer } from './Image'
-
 import { ShowTagData } from '@/components/Modal/showTagData'
-
 import {
   ImageDocument,
   QuestionSetDocument,
@@ -20,10 +14,8 @@ import {
 } from '@/interfaces/models'
 import React from 'react'
 import Router from 'next/router'
-
 import { SuccessErrorBar } from '@/components/Snackbar'
 import { submitImageTags } from '@/components/API/post/submitTags'
-
 import { routes } from '@/components/Constants'
 
 interface Props {
@@ -35,9 +27,6 @@ interface Props {
 }
 
 export function ImageTag(props: Props) {
-  //const router = useRouter()
-  //const { catalog = '', archive = '' } = router.query
-
   const { imageDocument, questionSetDocument, user, catalog, archive } = props
 
   const [tag, setTag] = React.useState({})

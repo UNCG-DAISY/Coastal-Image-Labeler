@@ -5,7 +5,6 @@ import {
   FormControlLabel,
   FormControl,
   FormLabel,
-  // Radio
 } from '@material-ui/core'
 import { YesNoRadio } from '@/components/Button/Radio/premadeRadioButtons'
 import { generateLabel } from './Label'

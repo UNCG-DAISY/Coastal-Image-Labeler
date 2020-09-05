@@ -1,6 +1,4 @@
 import { withStyles } from '@material-ui/core/styles'
-// import theme from '../theme';
-// import * as colors from '@material-ui/core/colors/';
 import Button from '@material-ui/core/Button'
 
 interface Props {

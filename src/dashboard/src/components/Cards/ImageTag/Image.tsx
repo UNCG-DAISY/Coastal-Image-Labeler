@@ -6,7 +6,6 @@ import Collapse from '@material-ui/core/Collapse'
 import clsx from 'clsx'
 import CardMedia from '@material-ui/core/CardMedia'
 import { makeStyles } from '@material-ui/core/styles'
-
 import { ViewImage } from '@/components/Button/premadeButtons'
 import { theme } from '@/components/theme'
 

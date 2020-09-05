@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles'
-// import { Button } from '@material-ui/core'
 import ColoredButton from '../../../Button/coloredButton'
 import { NavItem } from '../../../../../interfaces'
 interface Props {
@@ -14,10 +13,6 @@ export function NavButtonLink(props: Props) {
     <ColoredButton
       className={classes.spacedButton}
       style={{}}
-      // color={item?.style?.color}
-      // borderColor={item?.style?.borderColor}
-      // hoverBackgroundColor={item?.style?.hoverBackgroundColor}
-      // hoverTextColor={item?.style?.hoverBackgroundColor}
       {...item?.style}
       variant="outlined"
       href={item.route}

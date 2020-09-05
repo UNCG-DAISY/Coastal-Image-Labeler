@@ -1,24 +1,19 @@
 import React from 'react'
 import Head from 'next/head'
-
 import Layout from '@/components/Layout'
 import { GetServerSideProps } from 'next'
 import getSession from '@/components/Utils/Auth/getSession'
 import { getUserDB } from '@/components/API/post/getUserDB'
-//import { catalogMembership } from '@/components/API/post/catalogMembership'
 import ErrorCard from '@/components/ErrorCards'
 import { determineNavItems } from '@/components/Utils/Auth/determineNavItems'
 import { ImageTag } from '@/components/Cards/ImageTag'
-
 import { checkUserRole } from '@/components/Utils/Auth/checkRole'
 import { generateUnAuthObj } from '@/components/Utils/Auth/unAuthError'
-//import { isValidArchive } from '@/components/API/post/isValidArchive'
 import { getUserAssignedImage } from '@/components/API/post/getUserAssignedImage'
 import { catalogQuestionSet } from '@/components/API/post/getCatalogQuestionSet'
 import { tabLogoURL } from '@/components/Constants'
 import { getCatalog } from '@/components/API/post/getCatalog'
 import { getArchive } from '@/components/API/post/getArchive'
-
 import { ImageDocument } from '@/interfaces/models'
 import { log } from '@/components/Utils/logger'
 

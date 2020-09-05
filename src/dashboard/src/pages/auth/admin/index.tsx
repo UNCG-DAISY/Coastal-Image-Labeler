@@ -1,8 +1,6 @@
 import React from 'react'
-
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
-
 import getSession from '@/components/Utils/Auth/getSession'
 import { getUserDB } from '@/components/API/post/getUserDB'
 import Layout from '@/components/Layout'
@@ -10,9 +8,9 @@ import { checkUserRole } from '@/components/Utils/Auth/checkRole'
 import { generateUnAuthObj } from '@/components/Utils/Auth/unAuthError'
 import ErrorCard from '@/components/ErrorCards'
 import { determineNavItems } from '@/components/Utils/Auth/determineNavItems'
+
 export const Admin = (props): JSX.Element => {
   const { user, success, message } = props
-
   return (
     <div className="container">
       <Head>

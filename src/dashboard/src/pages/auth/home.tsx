@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
-
 import Layout from '@/components/Layout'
 import { GetServerSideProps } from 'next'
 import getSession from '@/components/Utils/Auth/getSession'
@@ -75,7 +74,6 @@ export const Home = (props: Props): JSX.Element => {
 }
 
 export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
-  // const t1 = performance.now()
   //Add user data from db
   const user: any = getSession(context.req)
   user.data =
@@ -98,13 +96,10 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
     res: context.res,
   })
 
-  // const t2 = performance.now()
-  // console.log(`Time ${t2 - t1} ms`)
   return {
     props: {
       success: true,
       user,
-      //resumeTableData: resumeData.data,
       hasAssignedImages: hasAssignedImages.data,
     },
   }

@@ -4,9 +4,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import TableHead from '@material-ui/core/TableHead'
 import Button from '@material-ui/core/Button'
-
 import { useRowStyles } from '@/components/Tables/Styles'
-
 import { ResumeTaggingDataCatalog } from '@/interfaces/index'
 
 interface Props {

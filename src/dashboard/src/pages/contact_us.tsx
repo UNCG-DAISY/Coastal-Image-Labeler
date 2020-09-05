@@ -1,10 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
-
-//import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-
 import { GetServerSideProps } from 'next'
 import Layout from '@/components/Layout'
 import {

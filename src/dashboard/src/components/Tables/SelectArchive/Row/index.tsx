@@ -7,10 +7,8 @@ import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
-
 import { Alert, AlertTitle } from '@material-ui/lab'
 import Button from '@material-ui/core/Button'
-
 import { CatalogSelectionData } from '@/interfaces/index'
 import { theme } from '@/components/theme'
 import { useRowStyles } from '@/components/Tables/Styles'

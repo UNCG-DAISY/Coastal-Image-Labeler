@@ -3,7 +3,6 @@ import { ImagePathTypes } from '@/interfaces/index'
 const protocal = process?.env?.NEXT_PUBLIC_PROTOCOL
 const apiCall = (route) => {
   return `${protocal}://${process?.env?.NEXT_PUBLIC_DOMAIN_NAME}${route}`
-  //return `${route}`
 }
 const routes = {
   postReq: {

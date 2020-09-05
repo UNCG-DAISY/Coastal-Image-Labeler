@@ -1,13 +1,9 @@
 import React from 'react'
 import Head from 'next/head'
-
 import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-
-//import Layout from '../components/Layout'
 import Layout from '@/components/Layout'
-
 import { RepoLink, EmailLink, DocsLink } from '@/components/ColoredLink'
 import { navigationItems, tabLogoURL } from '@/components/Constants'
 

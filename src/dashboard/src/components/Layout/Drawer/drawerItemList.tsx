@@ -5,7 +5,6 @@ import Divider from '@material-ui/core/Divider'
 import Box from '@material-ui/core/Box'
 import { DrawerItem } from './drawerItem'
 const pkg = require('../../../../package.json')
-// const drawerWidth = uiConstants.drawerWidth
 
 const DevText = () => {
   if (process.env.NEXT_PUBLIC_NODE_ENV === 'production') {
