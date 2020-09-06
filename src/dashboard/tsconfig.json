@@ -12,18 +12,32 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      //"@/site/*":["src/*"],
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/server/*": ["server/*"],
+      "@/models/*": ["server/models/*"],
+      "@/utils/*":["server/utils/*"],
+      "@/routes/*":["server/routes/*"],
+      "@/middlewares/*":["server/middlewares/*"],
+      "@/controllers/*":["server/controllers/*"],
+      "@/data/*":["data/*"],
+      "@/interfaces/*":["interfaces/*"]
+    }
   },
   "exclude": [
     "node_modules"
   ],
   "include": [
-    "site/next-env.d.ts",
-    "server/index.d.ts",
+    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
   ]

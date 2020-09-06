@@ -1,5 +1,5 @@
 import { ArchiveModel } from '../../models/Archive'
-import { log } from '../logger'
+import { log } from '../../utils/logger'
 
 interface Param {
   _id?: string

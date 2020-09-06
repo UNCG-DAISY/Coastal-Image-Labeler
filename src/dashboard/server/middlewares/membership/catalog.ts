@@ -1,10 +1,10 @@
-import { asyncHandler } from '../async'
-// import { ResPartOfCatalog } from '../../../interfaces'
+import { asyncHandler } from '../../middlewares/async'
+// import { ResPartOfCatalog } from '@/interfaces/'
 import { Request, NextFunction } from 'express'
 import { ObjectId } from 'mongodb'
 import { ArchiveModel } from '../../models/Archive'
-import { ImageModel } from '../../models/Image'
-import { ExtenedResponse } from '../../../interfaces'
+import { ImageModel } from '../..//models/Image'
+import { ExtenedResponse } from '../../../interfaces/index'
 import { log } from '../../utils/logger'
 
 //✔️

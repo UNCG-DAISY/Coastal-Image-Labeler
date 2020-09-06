@@ -30,7 +30,12 @@ This will require node js to be installed. [PM2](https://pm2.keymetrics.io/) is 
 
 ```bash title="Install PM2 globally"
 npm i pm2 -g
+pm2 install pm2-logrotate
 ```
+
+:::caution Log Folder
+Looking at `src/dashboard/ecosystem.config.js` Log files will be created at `../../../../pm2Logs/${timestamp}/` where `timestamp` is  `month-day-year_hour.minutes.seconds`. Please make sure to create the folder `../../../../pm2Logs/`. PM2 will do the rest.
+:::
 
 ### Code-Server
 **Optional**
@@ -87,9 +92,20 @@ sudo apt-get install python-certbot-nginx
 3. Create the `.env.*.local` files like [here](../auth0/auth0), get their values like [here](../auth0/auth0Values).
 4. Run the server with `npm run pm2` which will build and start the site in production mode. If need to run the site in development mode, run `npm run dev`.
 
-As a note, `sudo pm2 list` will show all pm2 processes. To stop the server type 
+As a note, `sudo pm2 list` will show all pm2 processes. To stop/delete the server type 
 ```bash
 sudo pm2 stop all
 sudo pm2 delete all
 ``` 
 so that next time theres a clean restart.
+
+## Restarting Server With New Changes 
+
+After running `git pull` you can simply run 
+
+```bash
+sudo npm run pm2:restart
+```
+
+which will end the current pm2 process (stops and deletes) and then
+builds and starts the site/server.

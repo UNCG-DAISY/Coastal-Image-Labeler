@@ -1,6 +1,6 @@
 import { asyncHandler } from '../middlewares/async'
 import { Request, NextFunction } from 'express'
-import { ExtenedResponse, ImagePathTypes } from '../../interfaces'
+import { ExtenedResponse, ImagePathTypes } from '../../interfaces/index'
 import { ImageModel } from '../models/Image'
 import { log } from '../utils/logger'
 import { ArchiveModel } from '../models/Archive'
@@ -24,7 +24,7 @@ function getImagePath({ imagePath }: Params) {
         const image = await ImageModel.findById(imageId)
         if (!image) {
           log({
-            message: `Image not found`,
+            message: `Image not found in DB`,
             type: 'error',
           })
           throw `Image id ${imageId} does not exist`

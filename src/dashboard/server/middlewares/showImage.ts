@@ -1,6 +1,6 @@
 import { Request } from 'express'
 import { log } from '../utils/logger'
-import { ExtenedResponse } from '../../interfaces'
+import { ExtenedResponse } from '../../interfaces/index'
 
 async function showImage(req: Request, res: ExtenedResponse) {
   const { imagePath } = res

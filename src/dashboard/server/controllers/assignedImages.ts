@@ -3,7 +3,7 @@ import {
   ExtenedResponse,
   AssignedImageTagAggregate,
   AssignedImageTagAggregateArchive,
-} from '../../interfaces'
+} from '../../interfaces/index'
 import { Request, NextFunction } from 'express'
 import { AssignedImageModel } from '../models/AssignedImages'
 import { selectImageForAssignment } from '../utils/selectImageForAssignment'
@@ -38,6 +38,9 @@ const getCurrentlyAssignedImage = asyncHandler(
       log({
         message: `Currently assigned image is ${image._id}`,
         type: 'info',
+      })
+      log({
+        message: image,
       })
 
       return res.status(200).json({

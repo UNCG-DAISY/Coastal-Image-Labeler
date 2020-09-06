@@ -2,7 +2,7 @@ import { ArchiveModel } from '../../models/Archive'
 import { CatalogModel } from '../../models/Catalog'
 import { ImageDocument } from '../../../interfaces/models'
 import { ObjectID } from 'mongodb'
-import { log } from '../logger'
+import { log } from '../../utils/logger'
 
 //✔️
 export async function imageInCatalog(

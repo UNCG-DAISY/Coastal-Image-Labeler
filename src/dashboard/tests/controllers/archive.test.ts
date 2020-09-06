@@ -5,15 +5,18 @@ import * as Types from '../../interfaces'
 
 import dotenv from 'dotenv'
 
+//load env variables
 dotenv.config({
-  path: './site/.env.test.local',
+  path: './.env.test.local',
 })
 dotenv.config({
-  path: './site/.env',
+  path: './.env',
 })
 import { archiveExists } from '../../server/controllers/archives'
 
+//Test to see if an archive exists
 test('Test archiveExists Controller: Success', async () => {
+  //create mocks
   const req = httpMocks.createRequest()
   req.body = {
     archiveId: '5f336c1de9aea42d24bf0f22',
@@ -24,12 +27,15 @@ test('Test archiveExists Controller: Success', async () => {
     return
   })
 
+  //assert result
   expect(res.archive.name).toBe('catlog2arc1')
   expect(res.archive.catalog.toString()).toBe('5f3b2e7265477a68b819335a')
   expect(res.archive.totalImages).toBe(3)
 })
 
+//test to see what would happen if an archive doesnt exist
 test('Test archiveExists Controller: No Archive with given Id', async () => {
+  //create mock
   const req = httpMocks.createRequest()
   req.body = {
     archiveId: '5f336c1de9aea42d24bf0f21',
@@ -41,6 +47,7 @@ test('Test archiveExists Controller: No Archive with given Id', async () => {
   })
   const resData = res._getJSONData()
 
+  //assert
   expect(res.archive).toBe(undefined)
   expect(resData.success).toBe(false)
   expect(resData.message).toBe(
@@ -48,6 +55,7 @@ test('Test archiveExists Controller: No Archive with given Id', async () => {
   )
 })
 
+//what would happen if an invalid Id is given
 test('Test archiveExists Controller: Invalid Id', async () => {
   //create mocks
   const req = httpMocks.createRequest()
@@ -70,6 +78,7 @@ test('Test archiveExists Controller: Invalid Id', async () => {
   )
 })
 
+//open and close db connection on start/end of this file
 beforeAll(async () => {
   await connectDB()
 })

@@ -1,5 +1,6 @@
 // import * as Types from '../interfaces'
 // Types
+import 'module-alias/register'
 
 import dotenv from 'dotenv'
 import { RegisterModels } from './models'
@@ -28,27 +29,28 @@ const env = process.env.NODE_ENV ?? 'development'
 switch (env) {
   case 'development':
     dotenv.config({
-      path: './site/.env.development.local',
+      path: './.env.development.local',
     })
     break
   case 'production':
     dotenv.config({
-      path: './site/.env.production.local',
+      path: './.env.production.local',
     })
     break
   case 'test':
     dotenv.config({
-      path: './site/.env.test.local',
+      path: './.env.test.local',
     })
     break
   default:
     dotenv.config({
-      path: './site/.env',
+      path: '.env',
     })
     break
 }
 
 async function main() {
+  console.log(process.env.MONGO_URI)
   await connectDB()
   RegisterModels()
 

@@ -5,6 +5,7 @@ sidebar_label: Packages
 ---
 
 This is an explanation of the more important packages in the project Seperated by Server/Site and CLI packages.
+Additionally you can read more about the packages on the blog post [here](../../blog/tools).
 
 
 ## Server/Site

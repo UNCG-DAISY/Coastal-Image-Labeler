@@ -52,10 +52,11 @@ For ease of use, a JSON file is needed to help create the catalogs. The format i
     "imageFormat":[".jpg",".jpeg"],
     //Make sure this question set exists
     "questionSet":"xxx",
-    //Either left this field out to have random order, or define it like so
+    //Either leave this field out to have random order, or define it like so
     "imageServeOrder":{
         "type":"sequential",
         "data": {
+            //If an archive doesnt appear in this json, it will use random order
             "nameOfArchive":["nameOfImage.ext"]
         }
     }

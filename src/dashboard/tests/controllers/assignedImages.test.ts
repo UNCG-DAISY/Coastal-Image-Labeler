@@ -5,12 +5,14 @@ import * as Types from '../../interfaces'
 
 import dotenv from 'dotenv'
 
+//get env vars
 dotenv.config({
-  path: './site/.env.test.local',
+  path: './.env.test.local',
 })
 dotenv.config({
-  path: './site/.env',
+  path: './.env',
 })
+
 import { UserModel } from '../../server/models/User'
 import {
   getCurrentlyAssignedImage,
@@ -20,6 +22,8 @@ import {
 } from '../../server/controllers/assignedImages'
 import { AssignedImageModel } from '../../server/models/AssignedImages'
 import { tagImage } from '../../server/controllers/tags'
+
+//open & close db
 beforeAll(async () => {
   await connectDB()
 })
@@ -268,8 +272,4 @@ test('Test assignImage sequential order', async () => {
     '5f336c1ee9aea42d24bf0f31'
   )
   expect(resAssign2.assignedImage.name).toBe('ordered2.jpg')
-})
-
-test('x', async () => {
-  expect(1).toBe(1)
 })

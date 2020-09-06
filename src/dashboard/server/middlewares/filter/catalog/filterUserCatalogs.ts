@@ -1,5 +1,5 @@
-import { CatalogDocument, AllDocuments } from '../../../../interfaces/models'
-import { ExtenedResponse } from '../../../../interfaces'
+import { CatalogDocument, AllDocuments } from '@/interfaces/models'
+import { ExtenedResponse } from '@/interfaces/index'
 import { Request, NextFunction } from 'express'
 import { ObjectID } from 'mongodb'
 import { asyncHandler } from '../../async'

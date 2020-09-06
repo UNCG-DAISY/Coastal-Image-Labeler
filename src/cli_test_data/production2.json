@@ -1,0 +1,20 @@
+{
+    "catalogs":[
+        {
+            "path":{
+                "original":"/datadrive/archives/Florence",
+                "compressed":"/datadrive2/compressed/archives/Florence"
+            },
+            "name":"Hurricane Florence",
+            "taggable":true,
+            "catalogInfo":{
+                "year": 2018,
+                "link":"https://en.wikipedia.org/wiki/Hurricane_Florence",
+                "description":"Hurricane Florence was a powerful and long-lived Cape Verde hurricane that caused catastrophic damage in the Carolinas in September 2018, primarily as a result of freshwater flooding due to torrential rain. The sixth named storm, third hurricane, and the first major hurricane of the 2018 Atlantic hurricane season, Florence originated from a strong tropical wave that emerged off the west coast of Africa on August 30, 2018. "
+            }, 
+            "imageFormat":[".jpg",".jpeg"],
+            "questionSet":"5f4940b703e72c8380a713d2", 
+            "ignoreFields": ["Additional Comments"]
+        }
+    ]
+}

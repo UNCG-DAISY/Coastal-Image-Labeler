@@ -1,8 +1,8 @@
 import express from 'express'
-import { getUser, hasAssignedImages } from '../controllers/user'
+import { getUser, hasAssignedImages } from '@/server/controllers/user'
 
-import { ensureAuthenticated } from '../middlewares/ensureAuth'
-import { insertUser } from '../middlewares/insertUser'
+import { ensureAuthenticated } from '@/server/middlewares/ensureAuth'
+import { insertUser } from '@/server/middlewares/insertUser'
 const router = express.Router()
 
 //✔️

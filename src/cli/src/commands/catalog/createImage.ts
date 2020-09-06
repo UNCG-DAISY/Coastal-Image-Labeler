@@ -1,5 +1,6 @@
-import { ImageModel } from '../../models/Image'
+//import { ImageModel } from '../../models/Image'
 import { ArchiveDocument } from '../../../interfaces/models'
+import { CreateImageReturn } from '../../../interfaces'
 
 interface Params {
   fileName: string
@@ -7,49 +8,17 @@ interface Params {
   imagePath: string
 }
 
-export async function createImage(params: Params) {
+export function createImage(params: Params): CreateImageReturn {
   const { fileName, archiveEntry, imagePath } = params
-  // const imagePath = `/${fileName}`
-
-  let imageEntry = await ImageModel.findOne({
-    //archive: archiveEntry._id,
+  return {
+    archive: archiveEntry._id,
+    name: fileName,
     path: {
       original: imagePath,
       compressed: imagePath,
     },
-    name: fileName,
-  })
-
-  if (!imageEntry) {
-    try {
-      //throw new Error("Testing image error");
-
-      imageEntry = await ImageModel.create({
-        archive: archiveEntry._id,
-        name: fileName,
-        path: {
-          original: imagePath,
-          compressed: imagePath,
-        },
-        //numberOfMatches: 2,
-        taggable: true,
-        dateAdded: Date.now(),
-      })
-      return {
-        success: true,
-        message: 'Created new image',
-      }
-    } catch (error) {
-      return {
-        success: false,
-        message: error.message,
-      }
-    }
-  } else {
-    await imageEntry.updateOne({ archive: archiveEntry._id })
-    return {
-      success: true,
-      message: 'Image already exists',
-    }
+    //numberOfMatches: 2,
+    taggable: true,
+    dateAdded: Date.now(),
   }
 }

@@ -14,7 +14,16 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
-
   //https://mongoosejs.com/docs/jest.html
   testEnvironment: 'node',
+  moduleNameMapper: {
+    '^@/models/(.*)': '<rootDir>/server/models/$1',
+    '^@/server/(.*)': '<rootDir>/server/$1',
+    '^@/utils/(.*)': '<rootDir>/server/utils/$1',
+    '^@/routes/(.*)': '<rootDir>/server/routes/$1',
+    '^@/middlewares/(.*)': '<rootDir>/server/middlewares/$1',
+    '^@/controllers/(.*)': '<rootDir>/server/controllers/$1',
+    '^@/data/(.*)': '<rootDir>/data/$1',
+    '@/interfaces/(.*)': '<rootDir>/interfaces/$1',
+  },
 }

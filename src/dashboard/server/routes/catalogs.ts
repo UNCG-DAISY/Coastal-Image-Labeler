@@ -1,19 +1,22 @@
 import express from 'express'
 
-import { catalogExists, getCatalogQuestionSet } from '../controllers/catalogs'
+import {
+  catalogExists,
+  getCatalogQuestionSet,
+} from '@/server/controllers/catalogs'
 
 //Perform advanced results which means filtering, pagination, and query parameters
-import { advancedResults } from '../middlewares/advancedResults'
+import { advancedResults } from '@/server/middlewares/advancedResults'
 
-import { ensureAuthenticated } from '../middlewares/ensureAuth'
-import { CatalogModel } from '../models/Catalog'
-import { insertUser } from '../middlewares/insertUser'
-import { membershipCatalogMiddleware } from '../middlewares/membership/catalog'
+import { ensureAuthenticated } from '@/server/middlewares/ensureAuth'
+import { CatalogModel } from '@/server/models/Catalog'
+import { insertUser } from '@/server/middlewares/insertUser'
+import { membershipCatalogMiddleware } from '@/server/middlewares/membership/catalog'
 
-import { filterUserCatalogsMiddleware } from '../middlewares/filter/catalog/filterUserCatalogs'
-import { genericReturn } from '../middlewares/genericReturn'
+import { filterUserCatalogsMiddleware } from '@/server/middlewares/filter/catalog/filterUserCatalogs'
+import { genericReturn } from '@/server/middlewares/genericReturn'
 import { check } from 'express-validator'
-import { bodyValidation } from '../middlewares/bodyValidation'
+import { bodyValidation } from '@/server/middlewares/bodyValidation'
 
 const router = express.Router()
 

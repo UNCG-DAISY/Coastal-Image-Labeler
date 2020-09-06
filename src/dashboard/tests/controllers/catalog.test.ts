@@ -5,12 +5,14 @@ import * as Types from '../../interfaces'
 
 import dotenv from 'dotenv'
 
+//get env vars
 dotenv.config({
-  path: './site/.env.test.local',
+  path: './.env.test.local',
 })
 dotenv.config({
-  path: './site/.env',
+  path: './.env',
 })
+
 import {
   catalogExists,
   getCatalogQuestionSet,

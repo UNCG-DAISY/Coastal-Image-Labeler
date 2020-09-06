@@ -21,7 +21,6 @@ const ImageSchema: Schema = new Schema(
     name: {
       type: String,
       required: [true, 'Please add a name of image with its extension'],
-      unique: false,
       trim: true,
       maxlength: [128, 'Name can not be longer than 128 characters'],
     },

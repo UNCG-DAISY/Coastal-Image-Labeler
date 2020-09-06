@@ -71,6 +71,14 @@ archiveScehma.statics.updateImageCount = async function (
   )
 }
 
+archiveScehma.methods.updateArchiveImageCount = async function () {
+  const images = await this.model('Image').find({ archive: this._id })
+  await this.model('Archive').updateOne(
+    { _id: this._id },
+    { totalImages: images.length }
+  )
+}
+
 //Query Middleware
 archiveScehma.post('updateOne', async function (this: ArchiveDocument) {
   //@ts-ignore

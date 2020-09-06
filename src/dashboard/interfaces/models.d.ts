@@ -50,7 +50,8 @@ export interface ArchiveDocument extends Document {
   taggable: boolean
   totalImages?: number
 
-  updateImageCount(): Promise<void>
+  // updateImageCount(): Promise<void>
+  updateArchiveImageCount(): Promise<void>
 }
 
 export interface ArchiveModelType extends Model<ArchiveDocument> {
@@ -114,49 +115,53 @@ export interface TagDocument extends Document {
 //   data?: any
 // }
 
-interface QSetButtonSubmit {
-  type: 'butttonSubmit'
+//Not ment to be used, ment as reference
+type RadioQuestion = {
+  type: 'radioGroup'
+  required: boolean
+  label: string
+  docLink: string
+  key: string
+  errorMessage: string
+
+  buttons: {
+    name: string
+    value: string
+  }[]
+}
+
+type CheckboxQuestion = {
+  type: 'checkboxGroup'
+  required: boolean
+  label: string
+  docLink: string
+  key: string
+  errorMessage: string
+
+  min?: number
+  max?: number
+
+  buttons: {
+    name: string
+    value: string
+  }[]
+}
+
+type ButtonSubmitQuestion = {
+  type: 'buttomSubmit'
   required: boolean
   label: string
   docLink: string
   key: string
   buttons: {
     label: string
-    key: string
     tag: any
+    key: string
   }[]
 }
 
-interface QSetRadioQuestion {
-  type: 'radioGroup'
-  errorMessage: string
-  required: boolean
-  label: string
-  docLink: string
-  key: string
-  buttons: {
-    name: string
-    value: string
-  }[]
-}
-
-interface QSetCheckboxQuestion {
-  type: 'checkboxGroup'
-  errorMessage: string
-  required: boolean
-  label: string
-  docLink: string
-  key: string
-  min?: number
-  max?: number
-  buttons: {
-    name: string
-    value: string
-  }[]
-}
-
-interface QSetTextboxQuestion {
-  type: 'textfield'
+type TextFieldQuestion = {
+  type: 'textField'
   required: boolean
   label: string
   docLink: string
@@ -165,18 +170,16 @@ interface QSetTextboxQuestion {
   rows: number
 }
 
-export type QSetQuestions =
-  | QSetButtonSubmit
-  | QSetRadioQuestion
-  | QSetCheckboxQuestion
-  | QSetTextboxQuestion
+type QuestionSetQuestions =
+  | TextFieldQuestion
+  | ButtonSubmitQuestion
+  | CheckboxQuestion
+  | RadioQuestion
 
 export interface QuestionSetDocument extends Document {
   name: string
   description: string
-  //This type is added for user reference, its not ment to be enforced by ts
-  //thats why any[] is added to remove any warnings
-  questions: QSetQuestions[] | any[]
+  questions: any[] | QuestionSetQuestions[]
 }
 
 export type AllDocuments =

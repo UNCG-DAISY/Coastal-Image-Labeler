@@ -124,6 +124,17 @@ declare namespace cilDashboard {
   }
 
   export type ImagePathTypes = 'Compressed' | 'Original'
+
+  export interface CreateImageReturn {
+    archive: any
+    name: string
+    path: {
+      original: string
+      compressed: string
+    }
+    taggable: boolean
+    dateAdded: number
+  }
 }
 
 declare global {
