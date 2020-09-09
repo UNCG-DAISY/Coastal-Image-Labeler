@@ -3,6 +3,7 @@ import colorize from '../../utils/colorize'
 import { ArchiveDocument } from '../../../interfaces/models'
 import MongoConnection from '../../lib/MongoConnection'
 import UriManager from '../../lib/UriManager'
+import { performance } from 'perf_hooks'
 
 const archive = {
   async delete({ id }: { id: string }) {
@@ -16,7 +17,10 @@ const archive = {
     try {
       archive = await ArchiveModel.findById(id)
       if (archive) {
+        const t1 = performance.now()
         await archive.remove()
+        const t2 = performance.now()
+        console.info(`Archive deletion ${name} = ${t2 - t1}ms`)
       } else {
         throw `Archive doesnt exist with id ${id}`
       }
