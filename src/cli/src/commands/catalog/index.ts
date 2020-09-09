@@ -18,6 +18,8 @@ import { createCatalog } from './createCatalog'
 import colorize from '../../utils/colorize'
 
 import { performance } from 'perf_hooks'
+import { CatalogDocument } from '../../../interfaces/models'
+import { CatalogModel } from '../../models/Catalog'
 // import { ArchiveModel } from '../../models/Archive'
 
 interface Options {
@@ -72,6 +74,27 @@ const catalog = {
       const t2 = performance.now()
 
       console.info(`Catalog ${name} = ${t2 - t1}ms`)
+    }
+
+    await mongoConnection.close()
+  },
+  async delete({ id }: { id: string }) {
+    //connect to db
+    const uriManager = new UriManager()
+    const mongoConnection = new MongoConnection(uriManager.getKey())
+    await mongoConnection.connect()
+
+    let catalog: CatalogDocument
+    //check to see if archive exists.
+    try {
+      catalog = await CatalogModel.findById(id)
+      if (catalog) {
+        await catalog.remove()
+      } else {
+        throw `Catalog doesnt exist with id ${id}`
+      }
+    } catch (error) {
+      colorize.error(error)
     }
 
     await mongoConnection.close()
