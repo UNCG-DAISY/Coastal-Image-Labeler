@@ -89,7 +89,10 @@ const catalog = {
     try {
       catalog = await CatalogModel.findById(id)
       if (catalog) {
+        const t1 = performance.now()
         await catalog.remove()
+        const t2 = performance.now()
+        console.info(`Catalog deletion ${name} = ${t2 - t1}ms`)
       } else {
         throw `Catalog doesnt exist with id ${id}`
       }
