@@ -20,11 +20,12 @@ const archive = {
         const t1 = performance.now()
         await archive.remove()
         const t2 = performance.now()
-        console.info(`Archive deletion ${name} = ${t2 - t1}ms`)
+        console.log(`Archive deletion ${name} = ${t2 - t1}ms`)
       } else {
         throw `Archive doesnt exist with id ${id}`
       }
     } catch (error) {
+      console.log('---Error---')
       colorize.error(error)
     }
 
