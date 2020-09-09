@@ -92,12 +92,13 @@ const catalog = {
         const t1 = performance.now()
         await catalog.remove()
         const t2 = performance.now()
-        console.info(`Catalog deletion ${name} = ${t2 - t1}ms`)
+        console.log(`Catalog deletion = ${t2 - t1}ms`)
       } else {
         throw `Catalog doesnt exist with id ${id}`
       }
     } catch (error) {
-      colorize.error(error)
+      console.log('---Error---')
+      console.log(error)
     }
 
     await mongoConnection.close()

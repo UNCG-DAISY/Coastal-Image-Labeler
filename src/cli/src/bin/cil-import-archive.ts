@@ -16,4 +16,18 @@ program
     archive.delete({ id: cmd.id })
   })
 
+program
+  .command('add')
+  .description('Add Archive to catalog .')
+  .option('-p, --path <type>', 'Give path to JSON file for archive insertion.', undefined)
+  .action((cmd) => {
+    const { path } = cmd
+
+    if (!path) {
+      colorize.error('No path provided')
+      return
+    }
+    //archive.delete({ path: cmd.path })
+  })
+
 program.parse(process.argv)
