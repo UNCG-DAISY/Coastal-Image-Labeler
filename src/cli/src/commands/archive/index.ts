@@ -56,7 +56,7 @@ const archive = {
       //get the file
       const file = JSON.parse(fs.readFileSync(path, 'utf8'))
       const archives: ArchiveDataType[] = file.archives
-      //archiveCreationBar.start(archives.length, 0)
+      archiveCreationBar.start(archives.length, 0)
 
       let count = 0
       for (const archiveData of archives) {

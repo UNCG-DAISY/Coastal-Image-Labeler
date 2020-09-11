@@ -94,11 +94,13 @@ archiveScehma.pre('remove', async function (next: HookNextFunction) {
 
   console.log(`Deleting ${images.length} images`)
 
-  const deletePromises = []
-  for (const image of images) {
-    deletePromises.push(image.remove())
-  }
-  await Promise.all(deletePromises)
+  // const deletePromises = []
+  // for (const image of images) {
+  //   deletePromises.push(image.remove())
+  // }
+  // await Promise.all(deletePromises)
+  await ImageModel.deleteMany({archive:this._id})
+  await ArchiveModel.updateImageCount(this._id)
 
   next()
 })
