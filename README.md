@@ -11,7 +11,7 @@ https://github.com/UNCG-DAISY/Coastal-Image-Labeler/commits/master)
 
 ![Labeler](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/blob/master/docs/static/img/labeler.gif)
 
-The labeler is deployed here: www.coastalimagelabeler.science
+The labeler is deployed here: [https://coastalimagelabeler.science/](https://coastalimagelabeler.science/)
 
 Check out the docs for more info. [![Documentation](https://img.shields.io/badge/Documentation-Click%20Me-brightgreen)](
 https://uncg-daisy.github.io/Coastal-Image-Labeler/)
