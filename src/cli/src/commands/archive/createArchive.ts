@@ -8,17 +8,17 @@ import { ImageModel } from '../../models/Image'
 import { CreateImageReturn } from '../../../interfaces'
 
 interface Params {
-  catalogPath: string
+  catalogPath?: string
   archiveName: string
   catalogEntry: CatalogDocument
-  imageFormat: [string]
+  imageFormat: string[]
 }
 
 export async function createArchives(params: Params) {
-  const { archiveName, catalogPath, catalogEntry, imageFormat } = params
+  const { archiveName, catalogEntry, imageFormat } = params
 
   const archivePath = `/${archiveName}`
-  const totalPath = `${catalogPath}${archivePath}`
+  const totalPath = `${catalogEntry.path.original}${archivePath}`
 
   //get all images
   const images = Glob.sync(`${totalPath}/**/*{${imageFormat.toString()}}`).map(
@@ -53,14 +53,7 @@ export async function createArchives(params: Params) {
         })
       )
     }
-    // ///////////
-    // const test = imageCreationObj.filter((element)=> {
-    //   return element.name === 'P25959646.jpg'
-    // })
-    // if(test.length>0) {
-    //   console.log("test",test,"test")
-    // }
-    // ///////////
+
     await ImageModel.insertMany(imageCreationObj)
     await archiveEntry.updateArchiveImageCount()
 

@@ -19,7 +19,11 @@ program
 program
   .command('add')
   .description('Add Archive to catalog .')
-  .option('-p, --path <type>', 'Give path to JSON file for archive insertion.', undefined)
+  .option(
+    '-p, --path <type>',
+    'Give path to JSON file for archive insertion.',
+    undefined
+  )
   .action((cmd) => {
     const { path } = cmd
 
@@ -27,7 +31,7 @@ program
       colorize.error('No path provided')
       return
     }
-    //archive.delete({ path: cmd.path })
+    archive.add({ path: cmd.path })
   })
 
 program.parse(process.argv)
