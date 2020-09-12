@@ -16,45 +16,35 @@ https://github.com/UNCG-DAISY/Coastal-Image-Labeler/commits/master)
 [![Actions Status2](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/workflows/Deploy%20Docusaurus/badge.svg)](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/actions)
 
 
-Generally, the the Coastal Image Labeler is server that provides users with
-images to be labeled using a given set of questions. We designed the labeler to
-be hosted on a virtual machine, exposed via a web address. Users interactively
-label images, with labels written to a database and exported later by an admin.
+Generally, the Coastal Image Labeler presents users with
+coastal images to be labeled using a given set of questions. We designed the labeler to be hosted on a virtual machine and exposed via a web address. Labels provided by the user are written to a database and exported later by a user or admin.
 
-There are two general roles in this project. 
-- First, an admin — who controls
-uploading of images, developing questions for the labeler to ask, assigning
-roles to users, managing the VM host of the project, and exporting data from
-the database. 
-- Second, a labeler — who logs onto the server and labels images.
+There are two general roles in this project: 
+- An Admin — who uploads images to be labeled, developing questions for the labeler to ask, assigning sets of images to users, managing the VM that hosts the project, and exporting data from the database. 
+- A Labeler  — who navigates to the website, logs on to the server, labels images, and can download their individual labels.
 
 The Coastal Image Labeler Documentation is focused on:
 - Describing the goals of the project and our [Code of Conduct](code_of_conduct.md).
-- Documenting the underlying source code for the labeling tool and how to
-deal with any admin tasks — see the [Code Documentation](code_documentation/overview.md) section.
-- Documenting how to interact with the labeling tool as a User — see the [User Documentation](user_documentation/overview.md) section.
+- Documenting the underlying source code for the labeling tool. This is intended to be most useful for an Admin — see the [Code Documentation](code_documentation/overview.md) section.
+- Documenting how to interact with the labeling tool  — his is intended to be most useful for a labeler — see the [User Documentation](user_documentation/overview.md) section.
 
 ## Project Goals
 
-- The Coastal Image Labeler (CILabel) is designed to collaboratively label
+- The Coastal Image Labeler is designed to collaboratively label
 coastal images and then provide these labeled images as open data (FAIR) for
 general community use.
 
+## Some FAQs:
+
 - **Why labeling images?**
-    - Labeled images are important for supervised machine learning research. There are
-    many well known labeled image databases (e.g., [ImageNet](http://www.image-net.org)),
-    but these existing databases tend to focus on general features (e.g., cats, dogs, horses, etc.). Our goal with this project is to develop a discipline-specific
-    database of labeled images that is relevant for coastal scientists.
+    - Labeled images are important for supervised machine learning research. There are many well known labeled image databases (e.g., [ImageNet](http://www.image-net.org)), but these existing databases tend to focus on general features (e.g., cats, dogs, horses, etc.). Our goal with this project is to develop a discipline-specific database of labeled images that is relevant for coastal scientists. 
 
 - **Why not use an existing tool for labeling?**  
     - Many good labeling tools already exist, but our goal with this project is to
-    create a tool for *collaboratively* labeling coastal images. Additionally,
+    create a tool for collaborative, asynchronous labeling. Additionally,
     we wanted a tool to easily accommodate multiple users labeling a single
     images (to ensure correct labeling via consensus).
 
-- The Coastal Image Labeler Documentation is focused on:
-    - Describing the goals of the project and our [Code of Conduct](code_of_conduct.md).
-    - Documenting the underlying source code for the labeling tool — see the [Code Documentation](code_documentation/overview.md) section.
-    - Documenting how to interact with the labeling tool as a User — see the [User Documentation](user_documentation/overview.md) section.
-
+- **Isn't this similar to iCOAST from the USGS?**
+    - Yes — it is definitely one of the inspirations for this project. The [USGS iCOAST](https://www.usgs.gov/centers/spcmsc/science/icoast-did-coast-change?qt-science_center_objects=0#qt-science_center_objects) project is an example of a labeled coastal database for storm impacts that was labeled collaboratively. We are extending this idea in atleast 2 ways: First, the Coastal Image Labeler does currently host NOAA post-storm images (we have [released some data already](https://doi.org/10.6084/m9.figshare.11604192.v1)), but any image can be loaded and any question set can be created (for example, we have already labeled [wave-scarp interaction images](https://doi.org/10.6084/m9.figshare.12765494.v1), and images of beach state). Second, this project is very closely tied to machine learning — crowdsourcing labels for coastal images to advance ML applications to Coastal science. One clear example of this linkage is — for some image catalogs — the images a user labels are shown to them in a specific order to help the ML algorithm learn samples that are confusing (i.e., [active learning](https://en.wikipedia.org/wiki/Active_learning_(machine_learning))).
 

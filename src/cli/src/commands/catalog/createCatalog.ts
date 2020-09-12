@@ -1,7 +1,7 @@
 import { CatalogModel } from '../../models/Catalog'
 import { getDirectories } from '../../utils/file'
 import colorize from '../../utils/colorize'
-import { createArchives } from './createArchive'
+import { createArchives } from '../archive/createArchive'
 
 import cliProgress from 'cli-progress'
 

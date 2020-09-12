@@ -2,8 +2,9 @@
     Model for storms.
 */
 
-import { Schema, model, Types } from 'mongoose'
+import { Schema, model, Types, HookNextFunction } from 'mongoose'
 import { CatalogModelType } from '../../interfaces/models'
+import { ArchiveModel } from './Archive'
 
 const catalogScheme: Schema = new Schema(
   {
@@ -104,6 +105,20 @@ catalogScheme.statics.updateImageCount = async function (
     console.error(err)
   }
 }
+
+catalogScheme.pre('remove', async function (next: HookNextFunction) {
+  const archives = await ArchiveModel.find({ catalog: this._id })
+
+  console.log(`Deleting ${archives.length} archives`)
+
+  const deletePromises = []
+  for (const archive of archives) {
+    deletePromises.push(archive.remove())
+  }
+  await Promise.all(deletePromises)
+
+  next()
+})
 
 // Reverse populate with virtuals
 catalogScheme.virtual('archives', {

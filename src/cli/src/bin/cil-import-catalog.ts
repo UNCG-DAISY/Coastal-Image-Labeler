@@ -16,4 +16,17 @@ program
     catalog.add({ path: cmd.path })
   })
 
+program
+  .command('delete')
+  .description('Delete Catalog by ID.')
+  .option('-i, --id <type>', 'Give ID of Catalog to deelete', undefined)
+  .action((cmd) => {
+    const { id } = cmd
+
+    if (!id) {
+      colorize.error('No ID provided')
+      return
+    }
+    catalog.delete({ id: cmd.id })
+  })
 program.parse(process.argv)

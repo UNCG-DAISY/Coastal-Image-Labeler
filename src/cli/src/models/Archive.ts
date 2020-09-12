@@ -2,9 +2,10 @@
     Model for archives. Contains a link to the storm it falls under
 */
 
-import { Schema, model, Types } from 'mongoose'
+import { Schema, model, Types, HookNextFunction } from 'mongoose'
 import { ArchiveModelType, ArchiveDocument } from '../../interfaces/models'
 import { CatalogModel } from './Catalog'
+import { ImageModel } from './Image'
 
 const archiveScehma: Schema = new Schema(
   {
@@ -84,6 +85,24 @@ archiveScehma.post('updateOne', async function (this: ArchiveDocument) {
   //@ts-ignore
   const archive = await ArchiveModel.findOne(this.getQuery())
   await CatalogModel.updateImageCount(archive.catalog)
+})
+
+//delete images when this gets deleted
+//document, doc.remove()
+archiveScehma.pre('remove', async function (next: HookNextFunction) {
+  const images = await ImageModel.find({ archive: this._id })
+
+  console.log(`Deleting ${images.length} images`)
+
+  // const deletePromises = []
+  // for (const image of images) {
+  //   deletePromises.push(image.remove())
+  // }
+  // await Promise.all(deletePromises)
+  await ImageModel.deleteMany({archive:this._id})
+  await ArchiveModel.updateImageCount(this._id)
+
+  next()
 })
 
 //makes it so archive name and catalog id pair are unique
