@@ -1,9 +1,9 @@
 // import { ArchiveModel } from '../models/Archive'
-import { asyncHandler } from '../middlewares/async' //to avoid putting try catch everywhere
-import { ExtenedResponse } from '../../interfaces/index'
+import { asyncHandler } from '@/middlewares/async' //to avoid putting try catch everywhere
+import { ExtenedResponse } from '@/interfaces/index'
 import { Request, NextFunction } from 'express'
-import { isValidArchive } from '../utils/checks/isValidArchive'
-import { log } from '../utils/logger'
+import { isValidArchive } from '@/utils/checks/isValidArchive'
+import { log } from '@/utils/logger'
 
 //✔️
 const archiveExists = asyncHandler(
