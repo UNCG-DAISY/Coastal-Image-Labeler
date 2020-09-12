@@ -59,7 +59,7 @@ async function (user, context, callback) {
     });
 
     //finds the demo catalog to add
-    const demoCatalog = await CatalogModel.findOne({ name: "Demo" });
+    const demoCatalog = await CatalogModel.findOne({ name: "Priority" });
 
     //check if user has been created already
     const userExists = await UserModel.findOne({
