@@ -38,8 +38,8 @@ module.exports = {
           type: 'category',
           label: 'CLI',
           items: [
-            "code_doc/cli/setup",
-            "code_doc/cli/addImages"
+            "code_doc/cli/overview",
+            "code_doc/cli/setup"
           ],
         },
         {
