@@ -1,19 +1,19 @@
-import { asyncHandler } from '../middlewares/async' //to avoid putting try catch everywhere
+import { asyncHandler } from '@/middlewares/async' //to avoid putting try catch everywhere
 import {
   ExtenedResponse,
   AssignedImageTagAggregate,
   AssignedImageTagAggregateArchive,
-} from '../../interfaces/index'
+} from '@/interfaces/index'
 import { Request, NextFunction } from 'express'
-import { AssignedImageModel } from '../models/AssignedImages'
-import { selectImageForAssignment } from '../utils/selectImageForAssignment'
-import { ImageModel } from '../models/Image'
-import { TagModel } from '../models/Tag'
-import { CatalogModel } from '../models/Catalog'
-import { ArchiveModel } from '../models/Archive'
+import { AssignedImageModel } from '@/models/AssignedImages'
+import { selectImageForAssignment } from '@/utils/selectImageForAssignment'
+import { ImageModel } from '@/models/Image'
+import { TagModel } from '@/models/Tag'
+import { CatalogModel } from '@/models/Catalog'
+import { ArchiveModel } from '@/models/Archive'
 // import { performance } from 'perf_hooks'
-import { tagModelAggregate } from '../utils/tagModelAggregate'
-import { log } from '../utils/logger'
+import { tagModelAggregate } from '@/utils/tagModelAggregate'
+import { log } from '@/utils/logger'
 
 //✔️
 const getCurrentlyAssignedImage = asyncHandler(
