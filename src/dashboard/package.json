@@ -2,7 +2,7 @@
   "name": "with-typescript-eslint-jest",
   "author": "@erikdstock",
   "license": "MIT",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "scripts": {
     "dev": "npm run build:server && node dist/server/index.js",
     "build:server": "rimraf dist && tsc --project tsconfig.server.json",
@@ -20,7 +20,7 @@
     "test-all": "npm run lint && npm run type-check && npm run test",
     "testFile": "ts-node --project tsconfig.server.json tests/index.ts",
     "pm2": "npm run build && pm2 start ecosystem.config.js",
-    "pm2:restart":"pm2 stop all && pm2 delete all && npm run pm2"
+    "pm2:restart": "pm2 stop all && pm2 delete all && npm run pm2"
   },
   "husky": {
     "hooks": {
@@ -56,6 +56,7 @@
     "passport": "^0.4.1",
     "passport-auth0": "^1.3.3",
     "react": "^16.13.1",
+    "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.0.6",
     "react-json-pretty": "^2.2.0",

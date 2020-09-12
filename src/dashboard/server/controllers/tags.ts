@@ -1,10 +1,10 @@
-import { asyncHandler } from '../middlewares/async' //to avoid putting try catch everywhere
-import { ExtenedResponse } from '../../interfaces/index'
+import { asyncHandler } from '@/middlewares/async' //to avoid putting try catch everywhere
+import { ExtenedResponse } from '@/interfaces/index'
 import { Request, NextFunction } from 'express'
-import { TagModel } from '../models/Tag'
-import { ImageModel } from '../models/Image'
-import { imageInCatalog } from '../utils/checks/imageInCatalog'
-import { log } from '../utils/logger'
+import { TagModel } from '@/models/Tag'
+import { ImageModel } from '@/models/Image'
+import { imageInCatalog } from '@/utils/checks/imageInCatalog'
+import { log } from '@/utils/logger'
 
 //✔️
 const tagImage = asyncHandler(
@@ -78,8 +78,15 @@ const tagImage = asyncHandler(
 
 const exportUserTags = asyncHandler(
   async (req: Request, res: ExtenedResponse) => {
+    const tags = await TagModel.find({ userId: req.user.data._id })
+      .populate('archive')
+      .populate('user')
+      .populate('catalog')
+      .populate('image')
+    // console.log("tags :", tags);
     res.status(200).json({
       success: true,
+      data: tags,
       message: `done`,
     })
   }
@@ -87,9 +94,15 @@ const exportUserTags = asyncHandler(
 
 const exportAllTags = asyncHandler(
   async (req: Request, res: ExtenedResponse) => {
+    const allTags = await TagModel.find({})
+      .populate('archive')
+      .populate('user')
+      .populate('catalog')
+      .populate('image')
     res.status(200).json({
       success: true,
       message: `done`,
+      data: allTags,
     })
   }
 )
