@@ -1,4 +1,4 @@
-// import * as Types from '../interfaces'
+//Seeder function for adding data, bypasses the CLI for test.
 // Types
 import 'module-alias/register'
 
@@ -6,8 +6,6 @@ import dotenv from 'dotenv'
 import { RegisterModels } from './models'
 import { connectDB, closeConnection } from './db'
 import { log } from './utils/logger'
-//import { ImageServeOrderModel } from './models/ImageServeOrder'
-// import fs from 'fs'
 import { ArchiveModel } from './models/Archive'
 import { AssignedImageModel } from './models/AssignedImages'
 import { CatalogModel } from './models/Catalog'
@@ -22,7 +20,6 @@ import catalogData from '../data/test/catalog.json'
 import imagesData from '../data/test/images.json'
 import questionSetData from '../data/test/question_set.json'
 import usersData from '../data/test/users.json'
-//const archiveData = fs.readFileSync(`${__dirname}/data/test/archives.json`,'utf-8')
 
 const env = process.env.NODE_ENV ?? 'development'
 

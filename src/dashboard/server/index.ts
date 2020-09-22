@@ -17,7 +17,6 @@ import next from 'next'
 import { connectDB, closeConnection } from './db'
 
 //logged with or without color depending on env
-//import { log } from '@/server/utils/logger'
 import { log } from '@/utils/logger'
 
 //Generic function to handle erros

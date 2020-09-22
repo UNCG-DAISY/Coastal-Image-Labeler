@@ -1,3 +1,5 @@
+//ordered serve, falls back to random
+
 import { ImageModel } from '../../models/Image'
 import { AssignedImageModel } from '../../models/AssignedImages'
 import { log } from '../../utils/logger'
