@@ -1,3 +1,5 @@
+//Class obj for connection and close of db connection
+
 import { connect, Mongoose, connection } from 'mongoose'
 import colorize from '../utils/colorize'
 class MongoConnection {

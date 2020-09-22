@@ -1,3 +1,5 @@
+//command for mongoURI
+
 import program from 'commander'
 import mongoURI from '../commands/mongoURI'
 

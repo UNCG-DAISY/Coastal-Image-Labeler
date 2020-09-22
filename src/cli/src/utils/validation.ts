@@ -1,3 +1,5 @@
+//Checks user input
+
 const yes = ['y', 'yes']
 const no = ['n', 'no']
 const yesNoList = [...yes, ...no]

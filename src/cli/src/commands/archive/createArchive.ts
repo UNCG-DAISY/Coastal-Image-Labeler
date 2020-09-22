@@ -1,7 +1,7 @@
+//functions for making archives
+
 import { ArchiveModel } from '../../models/Archive'
-//import { getFiles } from '../../utils/file'
 import { CatalogDocument } from '../../../interfaces/models'
-//import colorize from '../../utils/colorize'
 import { createImage } from '../catalog/createImage'
 import Glob from 'glob-promise'
 import { ImageModel } from '../../models/Image'

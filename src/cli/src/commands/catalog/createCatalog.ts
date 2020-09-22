@@ -1,8 +1,9 @@
+//function for making catalogs
+
 import { CatalogModel } from '../../models/Catalog'
 import { getDirectories } from '../../utils/file'
 import colorize from '../../utils/colorize'
 import { createArchives } from '../archive/createArchive'
-
 import cliProgress from 'cli-progress'
 
 interface Params {

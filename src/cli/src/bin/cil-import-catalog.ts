@@ -1,7 +1,9 @@
+//command catalog
+
 import program from 'commander'
 import catalog from '../commands/catalog'
-
 import colorize from '../utils/colorize'
+
 program
   .command('add')
   .description('Add Catalogs from JSON file.')

@@ -1,7 +1,7 @@
-//import { ImageModel } from '../../models/Image'
+//function for making images
+
 import { ArchiveDocument } from '../../../interfaces/models'
 import { CreateImageReturn } from '../../../interfaces'
-
 interface Params {
   fileName: string
   archiveEntry: ArchiveDocument
