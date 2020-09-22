@@ -15,6 +15,38 @@
             "imageFormat":[".jpg",".jpeg"],
             "questionSet":"5f36cee346891c0348c77d24", 
             "ignoreFields": ["Additional Comments"]
+        },
+        {
+            "path":{
+                "original":"/datadrive/archives/Demo",
+                "compressed":"/datadrive/archives/Demo"
+            },
+            "name":"Demo",
+            "taggable":true,
+            "catalogInfo":{
+                "year": 2018,
+                "link":"#demo",
+                "description":"Demo catalog"
+            }, 
+            "imageFormat":[".jpg",".jpeg"],
+            "questionSet":"5f4940b703e72c8380a713d2", 
+            "ignoreFields": ["Additional Comments"]
+        },
+        {
+            "path":{
+                "original":"/datadrive/archives/Tairua",
+                "compressed":"/datadrive/archives/Tairua"
+            },
+            "name":"Tairua",
+            "taggable":true,
+            "catalogInfo":{
+                "year": 2018,
+                "link":"#demo",
+                "description":"Tairua catalog"
+            }, 
+            "imageFormat":[".jpg",".jpeg",".JPG"],
+            "questionSet":"5f4ad631f3006c4764d62918", 
+            "ignoreFields": ["Additional Comments"]
         }
     ]
 }
