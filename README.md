@@ -9,11 +9,11 @@ https://github.com/UNCG-DAISY/Coastal-Image-Labeler/commits/master)
 [![Actions Status2](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/workflows/Deploy%20Docusaurus/badge.svg)](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/actions)
 ### It's a labeling tool!
 
-Labeled images are important for supervised machine learning. The Coastal Image Labeler is focused on easily accommodating multiple users labeling the same images to ensure consensus for (potential ambiguous) discipline-specific labels. This tool allows us to crowdsource the development of a labeled image dataset that is relevant for coastal scientists.
-
 ![Labeler](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/blob/master/docs/static/img/labeler.gif)
 
-The labeler is deployed here: [https://coastalimagelabeler.science/](https://coastalimagelabeler.science/). You can log on and start labeling post Hurricane iages collected by [NOAA NGS](https://storms.ngs.noaa.gov/).
+Labeled images are important for supervised machine learning. The Coastal Image Labeler is focused on easily accommodating multiple users labeling the same images to ensure consensus for (potential ambiguous) discipline-specific labels. This tool allows us to crowdsource the development of a labeled image dataset that is relevant for coastal scientists.
+
+The labeler is deployed here: [https://coastalimagelabeler.science/](https://coastalimagelabeler.science/). You can log on and start labeling post Hurricane images collected by [NOAA NGS](https://storms.ngs.noaa.gov/).
 
 You can check out the Coastal Image Labeler documentation for more info: 
 [![Documentation](https://img.shields.io/badge/Documentation-Click%20Me-brightgreen)](
