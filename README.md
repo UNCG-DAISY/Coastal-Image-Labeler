@@ -22,8 +22,7 @@ You can check out the Coastal Image Labeler documentation for more info:
 https://uncg-daisy.github.io/Coastal-Image-Labeler/)
 
 A data release of labeled [Hurricane Florence images is already available](https://doi.org/10.6084/m9.figshare.11604192.v1). You can merge these labels with post-storm 
-images, which can be downloaded from [NOAA NGS](https://storms.ngs.noaa.gov/) or using [this nifty python command line downloading tool](https://github.com/UNCG-DAISY/psi-
-collect). We are using these labeled images to [detect washover](https://github.com/UNCG-DAISY/WashoverML).
+images, which can be downloaded from [NOAA NGS](https://storms.ngs.noaa.gov/) or using [this nifty python command line downloading tool](https://github.com/UNCG-DAISY/psi-collect). We are using these labeled images to [detect washover](https://github.com/UNCG-DAISY/WashoverML).
 
 ### Code of Conduct
 
