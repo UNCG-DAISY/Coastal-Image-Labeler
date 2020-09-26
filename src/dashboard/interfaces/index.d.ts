@@ -126,8 +126,10 @@ declare namespace cilDashboard {
   export type ImagePathTypes =
     | 'original'
     | 'compressed'
+    | 'gradcam'
     | 'Compressed'
     | 'Original'
+    | 'Gradcam'
 }
 
 declare global {
