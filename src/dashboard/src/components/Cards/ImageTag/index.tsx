@@ -83,10 +83,10 @@ export function ImageTag(props: Props) {
       />
       <ImageContainer
         compressedLink={routes.getReq.showImage(
-          'Compressed',
+          'compressed',
           imageDocument._id
         )}
-        originalLink={routes.getReq.showImage('Original', imageDocument._id)}
+        originalLink={routes.getReq.showImage('original', imageDocument._id)}
       />
       <CardContent>
         <GenericHookForm

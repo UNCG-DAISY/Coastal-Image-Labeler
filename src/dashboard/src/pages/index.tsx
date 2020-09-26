@@ -17,9 +17,10 @@ export const Home = (): JSX.Element => (
       <Box my={4}>
         <Typography variant="body1" component="h1" gutterBottom>
           <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
-            Welcome to the Coastal Image Labeler! Please log in to begin labeling 
-            images. Check out the GitHub <RepoLink /> and/or the <DocsLink /> to learn
-            more about the project. If you have questions, please contact Evan Goldstein: {<EmailLink />}
+            Welcome to the Coastal Image Labeler! Please log in to begin
+            labeling images. Check out the GitHub <RepoLink /> and/or the{' '}
+            <DocsLink /> to learn more about the project. If you have questions,
+            please contact Evan Goldstein: {<EmailLink />}
           </Paper>
         </Typography>
       </Box>

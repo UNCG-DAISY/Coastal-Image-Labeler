@@ -21,7 +21,7 @@ const routes = {
   },
   getReq: {
     showImage: (type: ImagePathTypes, id: any) =>
-      apiCall(`/api/image/show/${type}/${id}`),
+      apiCall(`/api/image/${id}/${type}`),
     exportUserTag: apiCall('/api/tags/export'),
     exportAllUserTag: apiCall('/api/tags/export/all'),
   },
