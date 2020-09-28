@@ -6,7 +6,7 @@ import { ImageModel } from '@/server/models/Image'
 import { showImage } from '@/server/middlewares/showImage'
 import { param } from 'express-validator'
 import { bodyValidation } from '@/server/middlewares/bodyValidation'
-import { getImagePath, getImage } from '@/server/controllers/image'
+import { getImage } from '@/server/controllers/image'
 const router = express.Router()
 
 //✔️
@@ -18,22 +18,6 @@ router.route('/').post(
     success: true,
   })
 )
-
-router
-  .route('/show/compressed/:imageId')
-  .get(
-    ...bodyValidation([param('imageId').isString()]),
-    getImagePath({ imagePath: 'Compressed' }),
-    showImage
-  )
-
-router
-  .route('/show/original/:imageId')
-  .get(
-    ...bodyValidation([param('imageId').isString()]),
-    getImagePath({ imagePath: 'Original' }),
-    showImage
-  )
 
 router
   .route('/:imageId/:type')
