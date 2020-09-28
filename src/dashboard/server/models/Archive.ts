@@ -21,19 +21,20 @@ const archiveScehma: Schema = new Schema(
       unique: true,
       maxlength: [128, 'Name can not be longer than 128 characters'],
     },
-    path: {
-      original: {
-        type: String,
-        required: [true, 'Please provide archive path'],
-        unique: true,
-        maxlength: [128, 'Path can not be longer than 128 characters'],
-      },
-      compressed: {
-        type: String,
-        unique: true,
-        maxlength: [128, 'Path can not be longer than 128 characters'],
-      },
-    },
+    path: Object,
+    // {
+    //   original: {
+    //     type: String,
+    //     required: [true, 'Please provide archive path'],
+    //     unique: true,
+    //     maxlength: [128, 'Path can not be longer than 128 characters'],
+    //   },
+    //   compressed: {
+    //     type: String,
+    //     unique: true,
+    //     maxlength: [128, 'Path can not be longer than 128 characters'],
+    //   },
+    // },
     catalog: {
       type: Types.ObjectId,
       required: true,

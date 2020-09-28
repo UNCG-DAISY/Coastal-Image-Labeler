@@ -24,23 +24,24 @@ const ImageSchema: Schema = new Schema(
       trim: true,
       maxlength: [128, 'Name can not be longer than 128 characters'],
     },
-    path: {
-      original: {
-        type: String,
-        required: [true, 'Please provide image path'],
-        unique: false,
-        maxlength: [128, 'Path can not be longer than 128 characters'],
-      },
-      compressed: {
-        type: String,
-        unique: false,
-        maxlength: [128, 'Path can not be longer than 128 characters'],
-      },
-    },
-    taggable: {
-      type: Boolean,
-      required: [true, 'Please tell if this image is taggable or not'],
-    },
+    path: Object,
+    // {
+    //   original: {
+    //     type: String,
+    //     required: [true, 'Please provide image path'],
+    //     unique: false,
+    //     maxlength: [128, 'Path can not be longer than 128 characters'],
+    //   },
+    //   compressed: {
+    //     type: String,
+    //     unique: false,
+    //     maxlength: [128, 'Path can not be longer than 128 characters'],
+    //   },
+    // },
+    // taggable: {
+    //   type: Boolean,
+    //   required: [true, 'Please tell if this image is taggable or not'],
+    // },
   },
   {
     toJSON: { virtuals: true },
