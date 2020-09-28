@@ -104,11 +104,11 @@ Tairua 22 seconds 3851 images = 175 img/sec
 
 #### Delete
 
-:::info Deletes a catalog with given ID
+:::info Deletes a catalog with given _ID
 
 Deleting catalog
 ```bash
-cil-import catalog delete --id
+cil-import catalog delete --id CATALOG_ID
 ```
 
 `--id` - is required, ID of catalog
@@ -145,12 +145,12 @@ The JSON file is as follows
 
 #### Delete
 
-:::info Deletes a archive with given ID
+:::info Deletes a archive with given _ID
 
 ```bash
-cil-import archive delete --id
+cil-import archive delete --id ARCHIVE_ID
 ```
 
-`--id` - is required, ID of catalog
+`--id` - is required, ID of archive
 :::
 
