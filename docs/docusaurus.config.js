@@ -12,6 +12,11 @@ module.exports = {
 
   themeConfig: {
     defaultDarkMode: true,
+    algolia: {
+      apiKey: 'apiKey',
+      indexName: 'coastal-image-labeler',
+      searchParameters: {}, 
+    },
     navbar: {
       title: 'Coastal Image Labeler',
       logo: {
