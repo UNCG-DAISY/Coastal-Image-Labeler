@@ -1,6 +1,6 @@
 {
   "name": "cil-import",
-  "version": "0.0.31",
+  "version": "0.0.33",
   "description": "",
   "main": "index.js",
   "bin": "./dist/bin/cil-import.js",
@@ -9,7 +9,7 @@
     "link": "rimraf dist && tsc && npm link",
     "test:build": "npm run build && npm run test",
     "test2": "node ./dist/bin/cil-import.js mongoURI show",
-    "test": "node ./dist/bin/cil-import.js catalog add --path C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/local_test_json/test.json",
+    "test": "node ./dist/bin/cil-import.js catalog add --path C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/local_test_json/catalog.json",
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js ",
     "lint:fix": "eslint . --ext ts --ext tsx --ext js --fix",

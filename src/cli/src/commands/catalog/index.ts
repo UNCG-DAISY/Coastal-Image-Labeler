@@ -43,6 +43,8 @@ const catalog = {
         ignoreFields,
       } = catalog
 
+      //console.log(catalogPathInfo)
+
       const res = await createCatalog({
         path: catalogPathInfo,
         imageFormat: imageFormat,

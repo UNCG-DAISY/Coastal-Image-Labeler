@@ -17,19 +17,7 @@ const catalogScheme: Schema = new Schema(
       unique: true,
       maxlength: [128, 'Name can not be longer than 128 characters'],
     },
-    path: {
-      original: {
-        type: String,
-        required: [true, 'Please provide catalog path'],
-        unique: true,
-        maxlength: [128, 'Path can not be longer than 128 characters'],
-      },
-      compressed: {
-        type: String,
-        unique: true,
-        maxlength: [128, 'Path can not be longer than 128 characters'],
-      },
-    },
+    path: Object,
     catalogInfo: {
       year: {
         type: Number,
