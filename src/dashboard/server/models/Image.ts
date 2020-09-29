@@ -38,10 +38,10 @@ const ImageSchema: Schema = new Schema(
     //     maxlength: [128, 'Path can not be longer than 128 characters'],
     //   },
     // },
-    // taggable: {
-    //   type: Boolean,
-    //   required: [true, 'Please tell if this image is taggable or not'],
-    // },
+    taggable: {
+      type: Boolean,
+      required: [true, 'Please tell if this image is taggable or not'],
+    },
   },
   {
     toJSON: { virtuals: true },
