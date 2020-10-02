@@ -13,7 +13,7 @@ module.exports = {
   themeConfig: {
     defaultDarkMode: true,
     algolia: {
-      apiKey: 'apiKey',
+      apiKey: '29427c1dcc88f48e3a32542fcee50c8c',
       indexName: 'coastal-image-labeler',
       searchParameters: {}, 
     },
