@@ -6,6 +6,7 @@ import { Schema, model, Types, HookNextFunction } from 'mongoose'
 import { ArchiveModelType, ArchiveDocument } from '../../interfaces/models'
 import { CatalogModel } from './Catalog'
 import { ImageModel } from './Image'
+import pathValidation from '../utils/pathSchema'
 
 const archiveScehma: Schema = new Schema(
   {
@@ -21,7 +22,7 @@ const archiveScehma: Schema = new Schema(
       unique: true,
       maxlength: [128, 'Name can not be longer than 128 characters'],
     },
-    path: Object,
+    path: pathValidation,
     catalog: {
       type: Types.ObjectId,
       required: true,
@@ -87,7 +88,7 @@ archiveScehma.pre('remove', async function (next: HookNextFunction) {
   //   deletePromises.push(image.remove())
   // }
   // await Promise.all(deletePromises)
-  await ImageModel.deleteMany({archive:this._id})
+  await ImageModel.deleteMany({ archive: this._id })
   await ArchiveModel.updateImageCount(this._id)
 
   next()

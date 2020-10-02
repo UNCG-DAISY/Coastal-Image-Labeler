@@ -28,17 +28,16 @@ export async function createArchives(params: Params) {
   )
 
   try {
-
     //To allow for variable keys in path field, get the keys of the catalog
     //since that determines that keys.
     const catalogPathKeys = Object.keys(catalogEntry.path)
     const archivePaths = {
-      original: undefined
+      original: undefined,
     }
-    for(const key of catalogPathKeys) {
+    for (const key of catalogPathKeys) {
       archivePaths[key] = archivePath
-    } 
-    
+    }
+
     const archiveEntry = await ArchiveModel.create({
       catalog: catalogEntry._id,
       name: archiveName,
@@ -57,7 +56,7 @@ export async function createArchives(params: Params) {
           archiveEntry: archiveEntry,
           fileName: imageNameSplit[imageNameSplit.length - 1],
           imagePath: image,
-          catalogPathKeys:catalogPathKeys
+          catalogPathKeys: catalogPathKeys,
         })
       )
     }

@@ -10,14 +10,14 @@ interface Params {
 }
 
 export function createImage(params: Params): CreateImageReturn {
-  const { fileName, archiveEntry, imagePath,catalogPathKeys } = params
+  const { fileName, archiveEntry, imagePath, catalogPathKeys } = params
 
   const imagePaths = {
-    original: undefined
+    original: undefined,
   }
-  for(const key of catalogPathKeys) {
+  for (const key of catalogPathKeys) {
     imagePaths[key] = imagePath
-  } 
+  }
 
   return {
     archive: archiveEntry._id,

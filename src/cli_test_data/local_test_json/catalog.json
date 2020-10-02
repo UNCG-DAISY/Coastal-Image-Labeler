@@ -4,7 +4,7 @@
             "path":{
                 "original":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/tanks",
                 "compressed":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/tanks",
-                "auxiliary":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/tanks"
+                "gradcam":"C:/Users/Skool/Documents/GitHub/Coastal-Image-Labeler/src/cli_test_data/testCatalogs/tanks"
             },
             "name":"Tanks",
             "taggable":true,
