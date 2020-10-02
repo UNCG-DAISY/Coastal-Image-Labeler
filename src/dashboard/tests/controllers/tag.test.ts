@@ -45,7 +45,7 @@ test('Test tagImage Controller: Valid Id', async () => {
     tags: {
       imageFeatures: ['field1', 'field2', 'field13'],
       otherFeatures: ['other1', 'other2'],
-      'Additional Comments': 'Hello Word',
+      additionalComments: 'Hello Word',
       isImage: true,
       classType: 'class1',
     },
@@ -76,9 +76,16 @@ test('Test tagImage Controller: Valid Id', async () => {
   expect(res.newTag.tags).toStrictEqual({
     imageFeatures: ['field1', 'field2', 'field13'],
     otherFeatures: ['other1', 'other2'],
-    'Additional Comments': 'Hello Word',
+    additionalComments: 'Hello Word',
     isImage: true,
     classType: 'class1',
+    devType: 'NaN',
+    dmgType: 'NaN',
+    impactType: 'NaN',
+    terrianType: 'NaN',
+    unusable: 'NaN',
+    washoverType: 'NaN',
+    water: 'NaN',
   })
   //expect(res.newTag.final).toBe(false)
 
