@@ -63,6 +63,7 @@ module.exports = {
           label: 'Miscellaneous',
           items: [
             "code_doc/misc/path",
+            "code_doc/misc/tags",
           ],
         },
         "code_doc/tools",

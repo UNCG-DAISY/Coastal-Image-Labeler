@@ -2,7 +2,7 @@ const keys = ['compressed', 'gradcam']
 
 const validationObj = {
   type: String,
-  unique: true,
+  unique: false,
   maxlength: [128, 'Path can not be longer than 128 characters'],
 }
 
@@ -10,7 +10,7 @@ const fullPathValidationObj = {
   original: {
     type: String,
     required: [true, 'Please provide catalog path'],
-    unique: true,
+    unique: false,
     maxlength: [128, 'Path can not be longer than 128 characters'],
   },
 }

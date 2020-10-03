@@ -5,7 +5,7 @@
 import { Schema, model, Types, HookNextFunction } from 'mongoose'
 import { CatalogModelType } from '../../interfaces/models'
 import { ArchiveModel } from './Archive'
-import pathValidation from '@/utils/pathSchema'
+import pathValidation from '../utils/pathSchema'
 
 const catalogScheme: Schema = new Schema(
   {

@@ -5,6 +5,7 @@
 import { Schema, model, Model, Types } from 'mongoose'
 import { ImageDocument } from '../../interfaces/models'
 import { ArchiveModel } from './Archive'
+import pathValidation from '../utils/pathSchema'
 // import { TagModel } from './Tag'
 // import { compareTags } from '../utils/compareTags'
 //import { CatalogModel } from './Catalog'
@@ -24,7 +25,7 @@ const ImageSchema: Schema = new Schema(
       trim: true,
       maxlength: [128, 'Name can not be longer than 128 characters'],
     },
-    path: Object,
+    path: pathValidation,
     // {
     //   original: {
     //     type: String,

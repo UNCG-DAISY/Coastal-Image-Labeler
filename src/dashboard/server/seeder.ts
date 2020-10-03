@@ -1,4 +1,3 @@
-import 'module-alias/register'
 //Seeder function for adding data, bypasses the CLI for test.
 // Types
 import 'module-alias/register'
