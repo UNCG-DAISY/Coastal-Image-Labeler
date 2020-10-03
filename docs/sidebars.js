@@ -64,6 +64,7 @@ module.exports = {
           items: [
             "code_doc/misc/path",
             "code_doc/misc/tags",
+            "code_doc/misc/sandbox",
           ],
         },
         "code_doc/tools",
