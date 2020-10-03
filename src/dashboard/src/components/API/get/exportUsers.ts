@@ -1,14 +1,13 @@
-import { routes } from '@/components/Constants/index'
-import { apiRequest } from '../'
-//import _ from 'lodash'
+import { routes } from '../../Constants'
+import { fileDownload } from '../'
 
-// interface Params {
-//     cookie: string
-//     res: any
-// }
+interface Params {
+  cookie: string
+  res: any
+}
 
-async function exportUserTag() {
-  return await apiRequest({
+async function exportUser() {
+  return await fileDownload({
     method: 'GET',
     route: routes.getReq.exportUserTag,
     headers: {
@@ -17,8 +16,8 @@ async function exportUserTag() {
   })
 }
 
-async function exportAllUserTags() {
-  return await apiRequest({
+async function exportAllUser() {
+  return await fileDownload({
     method: 'GET',
     route: routes.getReq.exportAllUserTag,
     headers: {
@@ -27,4 +26,4 @@ async function exportAllUserTags() {
   })
 }
 
-export { exportUserTag, exportAllUserTags }
+export { exportUser, exportAllUser }
