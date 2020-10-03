@@ -60,6 +60,19 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'Routes',
+          items: [
+            "code_doc/routes/overview",
+            "code_doc/routes/catalog",
+            "code_doc/routes/archive",
+            "code_doc/routes/assignedImages",
+            "code_doc/routes/image",
+            "code_doc/routes/tags",
+            "code_doc/routes/qset",
+          ],
+        },
+        {
+          type: 'category',
           label: 'Miscellaneous',
           items: [
             "code_doc/misc/path",
