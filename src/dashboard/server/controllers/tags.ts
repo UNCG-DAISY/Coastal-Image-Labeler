@@ -9,6 +9,9 @@ import { log } from '@/utils/logger'
 import { ArchiveModel } from '../models/Archive'
 import { CatalogModel } from '../models/Catalog'
 import { QuestionSetModel } from '../models/QuestionSet'
+import fs from 'fs'
+import path from 'path'
+import archiver from 'archiver'
 
 //✔️
 const tagImage = asyncHandler(
@@ -227,7 +230,7 @@ async function createCsvFile(fileName, data) {
   return new Promise((resolve, reject) => {
     try {
       fs.createWriteStream(path.join(__dirname, fileName))
-      stringify(data, (err, output) => {
+      JSON.stringify(data, (err, output) => {
         if (err) throw err
         fs.writeFile(path.join(__dirname, fileName), output, (err) => {
           if (err) throw err
