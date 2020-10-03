@@ -1,16 +1,16 @@
 import React from 'react'
 import Head from 'next/head'
-import Layout from '@/components/Layout'
+import Layout from '../../components/Layout'
 import { GetServerSideProps } from 'next'
-import getSession from '@/components/Utils/Auth/getSession'
-import { getUserDB } from '@/components/API/post/getUserDB'
-import { determineNavItems } from '@/components/Utils/Auth/determineNavItems'
-import { ResumeTaggingDataCatalog, UserProp } from '@/interfaces/index'
-import { tabLogoURL } from '@/components/Constants'
+import getSession from '../../components/Utils/Auth/getSession'
+import { getUserDB } from '../../components/API/post/getUserDB'
+import { determineNavItems } from '../../components/Utils/Auth/determineNavItems'
+import { ResumeTaggingDataCatalog, UserProp } from '../../../interfaces'
+import { tabLogoURL } from '../../components/Constants'
 
-//import JSONPretty from 'react-json-pretty'
-//import {theme, customColors} from '@/components/theme'
-import { ViewImage } from '@/components/Button/premadeButtons'
+/*import JSONPretty from 'react-json-pretty'
+import {theme, customColors} from '../../components/theme'*/
+import { ViewImage } from '../../components/Button/premadeButtons'
 
 interface Props {
   user: UserProp
@@ -19,17 +19,10 @@ interface Props {
   message?: string
   hasAssignedImages: any[]
 }
-
-import { CSVLink } from 'react-csv'
-import {
-  exportUserTag,
-  exportAllUserTags,
-} from '@/components/API/get/exportUsers'
+import { exportUser, exportAllUser } from '../../components/API/get/exportUsers'
 
 export const Home = (props: Props): JSX.Element => {
   const { user } = props
-  const [userData, setUserData] = React.useState({ data: [], filename: '' })
-  const [csvLinkButton, setcsvLinkButton] = React.useState(null)
   return (
     <div className="container">
       <Head>
@@ -47,55 +40,39 @@ export const Home = (props: Props): JSX.Element => {
           <ViewImage
             variant="contained"
             onClick={async () => {
-              const data = await exportUserTag()
-              console.log('backend dada view :', data.data)
-              if (data && data.success && data.data) {
-                setUserData({
-                  data: prepareCsvData(data.data),
-                  filename: 'user.csv',
-                })
-
-                if (csvLinkButton) {
-                  csvLinkButton.link.click()
-                }
-              }
-              // console.log("datadata", data);
+              console.log('Exporting User tags')
+              const backendReponse: any = await exportUser() //calling backend to get theuser tags
+              const url = window.URL.createObjectURL(backendReponse)
+              const a = document.createElement('a')
+              a.href = url
+              a.download = 'user.zip'
+              a.click()
+              window.URL.revokeObjectURL(url)
             }}
           >
-            Export user tags
+            Export Your Labels
           </ViewImage>
-          <CSVLink
-            style={{ textDecoration: 'none' }}
-            data={userData.data}
-            ref={(input) => setcsvLinkButton(input)}
-            filename={userData.filename}
-            target="_blank"
-          />
+          {/*  <CSVLink style={{textDecoration: 'none'}} data={userData.data}
+                             ref={input => setcsvLinkButton(input)} filename={userData.filename} target="_blank"/>*/}
           {user.data.roles.includes('admin') && (
             <ViewImage
               variant="contained"
               onClick={async () => {
-                console.log('I AM CLICK')
-                const data = await exportAllUserTags()
-                if (data && data.success && data.data) {
-                  setUserData({
-                    data: prepareCsvData(data.data),
-                    filename: 'admin.csv',
-                  })
-
-                  if (csvLinkButton) {
-                    csvLinkButton.link.click()
-                  }
-                }
-
-                console.log('datadata', data)
+                console.log('Exporting admin tags!!!')
+                const blob: any = await exportAllUser()
+                const url = window.URL.createObjectURL(blob)
+                const a = document.createElement('a')
+                a.href = url
+                a.download = 'admin.zip'
+                a.click()
+                window.URL.revokeObjectURL(url)
               }}
             >
-              Export all tags
+              Export All Labels
             </ViewImage>
           )}
         </div>
-        {/* <JSONPretty
+        {/*<JSONPretty
                     id="json-pretty"
                     data={user}
                     style={{
@@ -111,63 +88,12 @@ export const Home = (props: Props): JSX.Element => {
                         value: `color:${customColors.orange};`,
                         boolean: `color:${customColors.purple};`,
                     }}
-                /> */}
+                />*/}
       </Layout>
     </div>
   )
 }
 
-const prepareCsvData = function (data: any): any[] {
-  const headerDetail = [
-    'userId',
-    'imageId',
-    'image.name',
-    'catalogId',
-    'catalog.name',
-    'archiveId',
-    'archive.name',
-    'date',
-    'tags.terrianType',
-    'devType',
-    'washoverType',
-    'dmgType',
-    'tag.impactType',
-  ]
-  const csvData = []
-  csvData.push(headerDetail)
-  for (let index = 0; index < data.length; index++) {
-    const singleData = []
-    singleData.push(data[index]['userId'] || '')
-    singleData.push(data[index]['imageId'] || '')
-    singleData.push(data[index]?.image?.name || '')
-    singleData.push(data[index]['catalogId'] || '')
-    singleData.push(data[index]?.catalog?.name || '')
-    singleData.push(data[index]['archiveId'] || '')
-    singleData.push(data[index]?.archive?.name || '')
-    singleData.push(data[index]['date'] || '')
-    let terrianType = ''
-    let impactType = ''
-    const tags: any = data[index]['tags']
-    if (tags && tags.terrianType) {
-      for (let count = 0; count < tags.terrianType.length; count++) {
-        terrianType = terrianType + tags.terrianType[count] + ','
-      }
-    }
-    if (tags && tags.impactType) {
-      for (let count = 0; count < tags.impactType.length; count++) {
-        impactType = impactType + tags.impactType[count] + ','
-      }
-    }
-
-    singleData.push(terrianType)
-    singleData.push(tags?.devType || '')
-    singleData.push(tags?.washoverType || '')
-    singleData.push(tags?.dmgType || '')
-    singleData.push(impactType)
-    csvData.push(singleData)
-  }
-  return csvData
-}
 export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
   //Add user data from db
   const user: any = getSession(context.req)
