@@ -39,16 +39,19 @@ export const Home = (props: Props): JSX.Element => {
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <ViewImage
             variant="contained"
-            onClick={async () => {
-              console.log('Exporting User tags')
-              const backendReponse: any = await exportUser() //calling backend to get theuser tags
-              const url = window.URL.createObjectURL(backendReponse)
-              const a = document.createElement('a')
-              a.href = url
-              a.download = 'user.zip'
-              a.click()
-              window.URL.revokeObjectURL(url)
-            }}
+            href="/api/tags/export"
+            // onClick={async () => {
+            //   console.log('Exporting User tags')
+            //   const backendReponse: any = await exportUser() //calling backend to get theuser tags
+            //   console.log("backendReponse",backendReponse)
+            //   // const url = window.URL.createObjectURL(backendReponse)
+            //   // const a = document.createElement('a')
+            //   // a.href = url
+            //   // a.download = 'user.zip'
+            //   // console.log("url",url)
+            //   //a.click()
+            //   //window.URL.revokeObjectURL(url)
+            // }}
           >
             Export Your Labels
           </ViewImage>
