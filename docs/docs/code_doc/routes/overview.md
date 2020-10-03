@@ -4,9 +4,8 @@ title: Overview
 sidebar_label: Overview
 ---
 
-These are the overall routes availible
+These are the overall routes availible.
 
-[`/api/user`](user)  
 [`/api/catalog`](catalog)  
 [`/api/archive`](archive)  
 [`/api/assignedImages`](assignedImages)  
