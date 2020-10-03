@@ -58,6 +58,13 @@ module.exports = {
             "code_doc/deployment/overview",
           ],
         },
+        {
+          type: 'category',
+          label: 'Miscellaneous',
+          items: [
+            "code_doc/misc/path",
+          ],
+        },
         "code_doc/tools",
         "code_doc/future"
       ],
