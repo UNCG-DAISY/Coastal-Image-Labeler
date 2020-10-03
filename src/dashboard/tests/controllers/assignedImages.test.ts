@@ -229,7 +229,7 @@ test('Test assignImage sequential order', async () => {
     tags: {
       imageFeatures: ['field1', 'field2', 'field13'],
       otherFeatures: ['other1', 'other2'],
-      'Additional Comments': 'Hello Word',
+      additionalComments: 'Hello Word',
       isImage: true,
       classType: 'class1',
     },
@@ -247,9 +247,16 @@ test('Test assignImage sequential order', async () => {
   expect(resTag.newTag.archiveId.toString()).toBe('5f336c1ee9aea42d24bf0f31')
   expect(resTag.newTag.catalogId.toString()).toBe('5f336c1de9aea42d24bf0f21')
   expect(resTag.newTag.tags).toStrictEqual({
+    devType: 'NaN',
+    washoverType: 'NaN',
+    dmgType: 'NaN',
+    impactType: 'NaN',
+    terrianType: 'NaN',
+    additionalComments: 'Hello Word',
+    water: 'NaN',
+    unusable: 'NaN',
     imageFeatures: ['field1', 'field2', 'field13'],
     otherFeatures: ['other1', 'other2'],
-    'Additional Comments': 'Hello Word',
     isImage: true,
     classType: 'class1',
   })

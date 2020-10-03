@@ -1,9 +1,8 @@
+//function to select image for assignment
+
 import { CatalogModel } from '../../models/Catalog'
 import { ArchiveModel } from '../../models/Archive'
-//import { ImageServeOrderModel } from '../../models/ImageServeOrder'
-// import { ImageModel } from '../../models/Image'
 import { TagModel } from '../../models/Tag'
-// import { AssignedImageModel } from '../../models/AssignedImages'
 import { ImageDocument } from '../../../interfaces/models'
 import { log } from '../logger'
 import { RandomOrder } from './random'

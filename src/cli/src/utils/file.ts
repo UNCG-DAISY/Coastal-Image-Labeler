@@ -1,3 +1,5 @@
+//These functions are used to get files and directories of a given path
+
 const { readdirSync } = require('fs')
 const path = require('path')
 

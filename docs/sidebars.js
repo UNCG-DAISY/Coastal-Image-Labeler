@@ -58,6 +58,28 @@ module.exports = {
             "code_doc/deployment/overview",
           ],
         },
+        {
+          type: 'category',
+          label: 'Routes',
+          items: [
+            "code_doc/routes/overview",
+            "code_doc/routes/catalog",
+            "code_doc/routes/archive",
+            "code_doc/routes/assignedImages",
+            "code_doc/routes/image",
+            "code_doc/routes/tags",
+            "code_doc/routes/qset",
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Miscellaneous',
+          items: [
+            "code_doc/misc/path",
+            "code_doc/misc/tags",
+            "code_doc/misc/sandbox",
+          ],
+        },
         "code_doc/tools",
         "code_doc/future"
       ],

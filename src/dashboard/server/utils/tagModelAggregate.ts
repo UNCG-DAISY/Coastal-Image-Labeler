@@ -1,3 +1,5 @@
+//Used to aggregate tag model
+
 import { TagModel } from '../models/Tag'
 import { log } from './logger'
 

@@ -1,3 +1,5 @@
+//function used to compare tags
+
 import _ from 'lodash'
 import { log } from './logger'
 //✔️

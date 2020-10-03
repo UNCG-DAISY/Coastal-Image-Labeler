@@ -130,7 +130,7 @@ declare namespace cilDashboard {
     name: string
     path: {
       original: string
-      compressed: string
+      compressed?: string
     }
     taggable: boolean
     dateAdded: number

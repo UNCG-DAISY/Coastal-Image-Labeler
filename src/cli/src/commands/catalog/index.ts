@@ -1,27 +1,16 @@
-//import inquirer from 'inquirer'
+//functions for catalog command
 import colors from 'colors'
 colors
-// import {yesNoOnly,translateYesNoToBool} from '../utils/validation'
-
 import MongoConnection from '../../lib/MongoConnection'
 import UriManager from '../../lib/UriManager'
-
-// import colorize from '../utils/colorize'
-
-//import {isRequired} from '../utils/validation'
 import fs from 'fs'
-
 import unhandledRejection from '../../utils/unhandledRejection'
 unhandledRejection
-
 import { createCatalog } from './createCatalog'
 import colorize from '../../utils/colorize'
-
 import { performance } from 'perf_hooks'
 import { CatalogDocument } from '../../../interfaces/models'
 import { CatalogModel } from '../../models/Catalog'
-// import { ArchiveModel } from '../../models/Archive'
-
 interface Options {
   path: string
 }
@@ -53,6 +42,8 @@ const catalog = {
         imageServeOrder,
         ignoreFields,
       } = catalog
+
+      //console.log(catalogPathInfo)
 
       const res = await createCatalog({
         path: catalogPathInfo,

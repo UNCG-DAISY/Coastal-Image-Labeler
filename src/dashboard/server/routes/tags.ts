@@ -18,14 +18,24 @@ import { hasRoles } from '@/server/middlewares/hasRoles'
 const router = express.Router()
 
 //✔️
-router.route('/').post(
-  advancedResults(TagModel),
-  genericReturn({
-    keys: ['advancedResults'],
-    message: 'Advanced Results',
-    success: true,
-  })
-)
+router
+  .route('/')
+  .post(
+    advancedResults(TagModel),
+    genericReturn({
+      keys: ['advancedResults'],
+      message: 'Advanced Results',
+      success: true,
+    })
+  )
+  .get(
+    advancedResults(TagModel),
+    genericReturn({
+      keys: ['advancedResults'],
+      message: 'Advanced Results',
+      success: true,
+    })
+  )
 
 //✔️
 router.route('/tagImage').post(

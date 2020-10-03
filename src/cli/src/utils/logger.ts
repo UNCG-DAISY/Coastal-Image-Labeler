@@ -1,3 +1,5 @@
+//Used to log, similiar to the one in the dashboard.
+
 import colors from 'colors'
 colors
 import moment from 'moment'

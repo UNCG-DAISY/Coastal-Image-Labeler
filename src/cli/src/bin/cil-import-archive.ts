@@ -1,7 +1,9 @@
+//command archive
+
 import program from 'commander'
 import archive from '../commands/archive'
-
 import colorize from '../utils/colorize'
+
 program
   .command('delete')
   .description('Delete Archive by ID.')

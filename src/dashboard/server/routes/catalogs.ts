@@ -21,14 +21,24 @@ import { bodyValidation } from '@/server/middlewares/bodyValidation'
 const router = express.Router()
 
 //✔️
-router.route('/').post(
-  advancedResults(CatalogModel, ['archives']),
-  genericReturn({
-    keys: ['advancedResults'],
-    message: 'Advanced Results',
-    success: true,
-  })
-)
+router
+  .route('/')
+  .post(
+    advancedResults(CatalogModel, ['archives']),
+    genericReturn({
+      keys: ['advancedResults'],
+      message: 'Advanced Results',
+      success: true,
+    })
+  )
+  .get(
+    advancedResults(CatalogModel, ['archives']),
+    genericReturn({
+      keys: ['advancedResults'],
+      message: 'Advanced Results',
+      success: true,
+    })
+  )
 
 //✔️
 router.route('/userCatalogs').post(

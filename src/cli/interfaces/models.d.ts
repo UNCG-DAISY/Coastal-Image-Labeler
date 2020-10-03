@@ -19,6 +19,7 @@ export interface CatalogDocument extends Document {
   path: {
     original: string
     compressed?: string
+    [id: string]: string
   }
   catalogInfo?: CatalogInfo
   taggable: boolean
@@ -44,6 +45,7 @@ export interface ArchiveDocument extends Document {
   path: {
     original: string
     compressed?: string
+    [id: string]: string
   }
   catalog: ObjectID
   taggable: boolean
@@ -67,6 +69,7 @@ export interface ImageDocument extends Document {
   path: {
     original: string
     compressed?: string
+    [id: string]: string
   }
   taggable: boolean
   // tags?: [Record<string, any>]

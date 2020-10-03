@@ -4,7 +4,11 @@ import { Request, NextFunction } from 'express'
 import { TagModel } from '@/models/Tag'
 import { ImageModel } from '@/models/Image'
 import { imageInCatalog } from '@/utils/checks/imageInCatalog'
+import { getQSetKeys } from '@/utils/getQuestionSetKeys'
 import { log } from '@/utils/logger'
+import { ArchiveModel } from '../models/Archive'
+import { CatalogModel } from '../models/Catalog'
+import { QuestionSetModel } from '../models/QuestionSet'
 
 //✔️
 const tagImage = asyncHandler(
@@ -49,12 +53,53 @@ const tagImage = asyncHandler(
     // const compareResult = await image.compareTags(tags, ['Additional Comments'])
     // const finalizable = compareResult.numMatch === compareResult.numberOfMatches
 
+    //Now we add in the keys from the overall question set
+
+    //get archive and catalog to get question set
+    const archive = await ArchiveModel.findById(image.archive)
+    if (!archive) {
+      log({
+        message: `Archive ${image.archive} of image ${image._id} does not exist`,
+        type: 'error',
+      })
+      return res.status(400).json({
+        success: false,
+        message: `Archive ${image.archive} of image ${image._id} does not exist`,
+      })
+    }
+
+    const catalog = await CatalogModel.findById(archive.catalog)
+    if (!catalog) {
+      log({
+        message: `Catalog ${archive.catalog} of archive ${archive._id} does not exist`,
+        type: 'error',
+      })
+      return res.status(400).json({
+        success: false,
+        message: `Catalog ${archive.catalog} of archive ${archive._id} does not exist`,
+      })
+    }
+    const questionSet = await QuestionSetModel.findById(catalog.questionSet)
+    //get keys from question set
+    const tagKeys = await getQSetKeys(questionSet?._id)
+
+    //create default tag from keys
+    const tagWithDefault = {}
+    tagKeys.forEach((key) => {
+      tagWithDefault[key] = 'NaN'
+    })
+
+    //add in the values from the tag
+    Object.keys(tags).forEach((key) => {
+      tagWithDefault[key] = tags[key]
+    })
+
     //create
     const newTag = await TagModel.create({
       date: Date.now(),
       imageId: imageId,
       userId: req.user.data._id,
-      tags: tags,
+      tags: tagWithDefault,
       //final: finalizable,
     })
 

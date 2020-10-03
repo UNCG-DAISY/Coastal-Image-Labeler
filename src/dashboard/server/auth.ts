@@ -1,3 +1,5 @@
+//Auth setup
+
 import { Request, Response, NextFunction, Express } from 'express'
 
 // 1 - importing dependencies

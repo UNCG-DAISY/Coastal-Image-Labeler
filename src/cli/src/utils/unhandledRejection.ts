@@ -1,3 +1,5 @@
+//Handles uncaught errors
+
 import MongoConnection from '../lib/MongoConnection'
 import UriManager from '../lib/UriManager'
 

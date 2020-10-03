@@ -37,6 +37,8 @@ export interface CatalogDocument extends Document {
   path: {
     original: string
     compressed?: string
+    //This is here so that any path can be added, for example like gradcam or aux paths
+    [id: string]: string
   }
   catalogInfo?: CatalogInfo
   taggable: boolean
@@ -57,7 +59,9 @@ default it is "random" however if the json file used for import via the CLI is l
 {
     "path":{
         "original":"xxx",
-        "compressed":"xxx"
+        "compressed":"xxx",
+        "gradcam": "XXX",
+        "aux": "XXX"
     },
     "name":"xxx",
     "taggable":true,

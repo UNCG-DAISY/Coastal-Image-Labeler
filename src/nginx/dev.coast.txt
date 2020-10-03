@@ -1,5 +1,6 @@
 server {
 	
+    # Errors to catch to show error html for
 	error_page 500 502 503 504 404 /production.custom_error.html;
 	location = /production.custom_error.html {
 			root /home/shahnafis/GitHub/Coastal-Image-Labeler/src/html;
