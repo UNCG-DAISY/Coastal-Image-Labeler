@@ -1,3 +1,4 @@
+import 'module-alias/register'
 //Seeder function for adding data, bypasses the CLI for test.
 // Types
 import 'module-alias/register'
@@ -14,12 +15,12 @@ import { TagModel } from './models/Tag'
 import { UserModel } from './models/User'
 import { QuestionSetModel } from './models/QuestionSet'
 
-import archiveData from '../data/test/archives.json'
-import assingedData from '../data/test/assigned_images.json'
-import catalogData from '../data/test/catalog.json'
-import imagesData from '../data/test/images.json'
-import questionSetData from '../data/test/question_set.json'
-import usersData from '../data/test/users.json'
+import archiveData from '@/data/test/archives.json'
+import assingedData from '@/data/test/assigned_images.json'
+import catalogData from '@/data/test/catalog.json'
+import imagesData from '@/data/test/images.json'
+import questionSetData from '@/data/test/question_set.json'
+import usersData from '@/data/test/users.json'
 
 const env = process.env.NODE_ENV ?? 'development'
 
