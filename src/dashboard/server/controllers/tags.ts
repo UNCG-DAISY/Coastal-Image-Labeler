@@ -1,16 +1,16 @@
-import { asyncHandler } from '../middlewares/async' //to avoid putting try catch everywhere
-import { ExtenedResponse } from '../../interfaces'
-import { NextFunction, Request } from 'express'
-import { TagModel } from '../models/Tag'
-import { ImageModel } from '../models/Image'
-import { imageInCatalog } from '../utils/checks/imageInCatalog'
-import { log } from '../utils/logger'
-import * as path from 'path'
-import stringify from 'csv-stringify'
-import archiver from 'archiver'
-import fs from 'fs'
+import { asyncHandler } from '@/middlewares/async' //to avoid putting try catch everywhere
+import { ExtenedResponse } from '@/interfaces/index'
+import { Request, NextFunction } from 'express'
+import { TagModel } from '@/models/Tag'
+import { ImageModel } from '@/models/Image'
+import { imageInCatalog } from '@/utils/checks/imageInCatalog'
+import { getQSetKeys } from '@/utils/getQuestionSetKeys'
+import { log } from '@/utils/logger'
+import { ArchiveModel } from '../models/Archive'
+import { CatalogModel } from '../models/Catalog'
+import { QuestionSetModel } from '../models/QuestionSet'
 
-//￼
+//✔️
 const tagImage = asyncHandler(
   async (req: Request, res: ExtenedResponse, next: NextFunction) => {
     const { userId, imageId, tags } = req.body
@@ -53,12 +53,53 @@ const tagImage = asyncHandler(
     // const compareResult = await image.compareTags(tags, ['Additional Comments'])
     // const finalizable = compareResult.numMatch === compareResult.numberOfMatches
 
+    //Now we add in the keys from the overall question set
+
+    //get archive and catalog to get question set
+    const archive = await ArchiveModel.findById(image.archive)
+    if (!archive) {
+      log({
+        message: `Archive ${image.archive} of image ${image._id} does not exist`,
+        type: 'error',
+      })
+      return res.status(400).json({
+        success: false,
+        message: `Archive ${image.archive} of image ${image._id} does not exist`,
+      })
+    }
+
+    const catalog = await CatalogModel.findById(archive.catalog)
+    if (!catalog) {
+      log({
+        message: `Catalog ${archive.catalog} of archive ${archive._id} does not exist`,
+        type: 'error',
+      })
+      return res.status(400).json({
+        success: false,
+        message: `Catalog ${archive.catalog} of archive ${archive._id} does not exist`,
+      })
+    }
+    const questionSet = await QuestionSetModel.findById(catalog.questionSet)
+    //get keys from question set
+    const tagKeys = await getQSetKeys(questionSet?._id)
+
+    //create default tag from keys
+    const tagWithDefault = {}
+    tagKeys.forEach((key) => {
+      tagWithDefault[key] = 'NaN'
+    })
+
+    //add in the values from the tag
+    Object.keys(tags).forEach((key) => {
+      tagWithDefault[key] = tags[key]
+    })
+
     //create
     const newTag = await TagModel.create({
       date: Date.now(),
       imageId: imageId,
       userId: req.user.data._id,
-      tags: tags,
+      tags: tagWithDefault,
       //final: finalizable,
     })
 
@@ -106,7 +147,7 @@ function getCsvObject(data) {
   }
   for (const key in tags) {
     // if (tags.hasOwnProperty(key)) {
-    result[key] = tags[key]
+    result[`tags_${key}`] = tags[key]
     // }
   }
   result['catalogYear'] =

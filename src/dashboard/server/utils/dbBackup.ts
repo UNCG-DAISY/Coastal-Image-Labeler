@@ -1,3 +1,5 @@
+//cron job function that backups db
+
 import schedule from 'node-schedule'
 import moment from 'moment'
 import fs from 'fs'

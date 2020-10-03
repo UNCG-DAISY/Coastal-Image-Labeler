@@ -1,3 +1,5 @@
+//Functions for the subcommands of the command mongoURI
+
 import colors from 'colors'
 colors
 import inquirer from 'inquirer'

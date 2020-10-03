@@ -1,8 +1,8 @@
 {
-  "name": "with-typescript-eslint-jest",
-  "author": "@erikdstock",
+  "name": "uncg-daisy-labeller-dashboard",
+  "author": "UNCG-DAISY",
   "license": "MIT",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "scripts": {
     "dev": "npm run build:server && node dist/server/index.js",
     "build:server": "rimraf dist && tsc --project tsconfig.server.json",
@@ -15,6 +15,7 @@
     "lint": "eslint . --ext ts --ext tsx --ext js ",
     "lint:fix": "eslint . --ext ts --ext tsx --ext js --fix",
     "seeder": "cross-env NODE_ENV=test ts-node --project tsconfig.server.json server/seeder.ts",
+    "sandbox": "npm run build:server && node dist/server/sandbox.js",
     "jest": "jest",
     "test": "npm run seeder && npm run jest",
     "test-all": "npm run lint && npm run type-check && npm run test",

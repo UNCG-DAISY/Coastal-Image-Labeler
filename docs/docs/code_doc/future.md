@@ -24,6 +24,10 @@ As great of a jump V3 was from V2 there are always things that can be improved o
 - Auto inser user db data via express
 - Enforce user tag role checks on server rather then on the nextjs server from `getServerSideProps`.
 
+## Improve data/resource sharing between CLI and dashboard
+- One issue noted was there was duplicate code in the CLI and dashboard.
+- There should be a way to make it so they share the code (other then using symlinks, which is not sustainable as what happens if someone forgets to add the symlink)
+
 ## GitHub Actions
 - Create file for unit testing configs, such as user data and archives that will be used through out the test to unsure none of the tests step on each other.
 - Auto deploy site whenever master get pushed to.
@@ -35,7 +39,6 @@ As great of a jump V3 was from V2 there are always things that can be improved o
 
 ## TypeScript
 - Improve the way types are shared across the dashboard and CLI.
-
 
 ## Experimental
 

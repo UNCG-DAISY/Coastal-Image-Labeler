@@ -1,3 +1,5 @@
+//function in auth0 for adding user to the DB on signup
+// REMEBER TO REPLACE THE DB URI, AND DONT COMMIT IT.
 
 async function (user, context, callback) {
 

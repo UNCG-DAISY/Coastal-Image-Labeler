@@ -6,6 +6,7 @@ import { Schema, model, Types, HookNextFunction } from 'mongoose'
 import { ArchiveModelType, ArchiveDocument } from '../../interfaces/models'
 import { CatalogModel } from './Catalog'
 import { ImageModel } from './Image'
+import pathValidation from '../utils/pathSchema'
 
 const archiveScehma: Schema = new Schema(
   {
@@ -21,19 +22,20 @@ const archiveScehma: Schema = new Schema(
       unique: true,
       maxlength: [128, 'Name can not be longer than 128 characters'],
     },
-    path: {
-      original: {
-        type: String,
-        required: [true, 'Please provide archive path'],
-        unique: true,
-        maxlength: [128, 'Path can not be longer than 128 characters'],
-      },
-      compressed: {
-        type: String,
-        unique: true,
-        maxlength: [128, 'Path can not be longer than 128 characters'],
-      },
-    },
+    path: pathValidation,
+    // {
+    //   original: {
+    //     type: String,
+    //     required: [true, 'Please provide archive path'],
+    //     unique: true,
+    //     maxlength: [128, 'Path can not be longer than 128 characters'],
+    //   },
+    //   compressed: {
+    //     type: String,
+    //     unique: true,
+    //     maxlength: [128, 'Path can not be longer than 128 characters'],
+    //   },
+    // },
     catalog: {
       type: Types.ObjectId,
       required: true,

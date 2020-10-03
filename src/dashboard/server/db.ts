@@ -1,3 +1,5 @@
+//Handles DB connection
+
 import { connect, Mongoose, connection } from 'mongoose'
 import { log } from './utils/logger'
 

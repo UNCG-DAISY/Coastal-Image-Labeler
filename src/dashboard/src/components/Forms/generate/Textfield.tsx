@@ -7,7 +7,7 @@ function generateTextField(textFieldInfo, values) {
     <TextField
       fullWidth
       type="text"
-      name={textFieldInfo.label}
+      name={textFieldInfo.key}
       id="filled-required"
       label={textFieldInfo.label}
       variant="filled"

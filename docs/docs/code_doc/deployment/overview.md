@@ -58,7 +58,7 @@ Make sure the port is setup in the firewall
 
 ### Jpegoptim 
 [repo](https://github.com/tjko/jpegoptim) and
-[useage](https://vitux.com/optimize-jpeg-jpg-images-in-ubuntu-with-jpegoptim/).
+[usage](https://vitux.com/optimize-jpeg-jpg-images-in-ubuntu-with-jpegoptim/).
 The rest of the jpegoptim stuff is handled by the bash scripts in `Coastal-Image-Labeler\src\cli\bash`
 
 

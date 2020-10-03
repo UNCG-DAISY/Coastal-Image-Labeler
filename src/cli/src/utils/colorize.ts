@@ -1,3 +1,5 @@
+// This function colorizes strings given
+
 import colors from 'colors'
 colors
 

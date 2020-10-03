@@ -1,3 +1,5 @@
+//Allows for storage, retrevial and deletion of the mongoURI key
+
 import Configstore from 'configstore'
 const pkg = require('../../package.json')
 

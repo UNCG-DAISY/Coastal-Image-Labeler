@@ -1,7 +1,7 @@
+//functions for making archives
+
 import { ArchiveModel } from '../../models/Archive'
-//import { getFiles } from '../../utils/file'
 import { CatalogDocument } from '../../../interfaces/models'
-//import colorize from '../../utils/colorize'
 import { createImage } from '../catalog/createImage'
 import Glob from 'glob-promise'
 import { ImageModel } from '../../models/Image'
@@ -28,14 +28,20 @@ export async function createArchives(params: Params) {
   )
 
   try {
-    //colorize.info(`Creating archive ${archiveName}`)
+    //To allow for variable keys in path field, get the keys of the catalog
+    //since that determines that keys.
+    const catalogPathKeys = Object.keys(catalogEntry.path)
+    const archivePaths = {
+      original: undefined,
+    }
+    for (const key of catalogPathKeys) {
+      archivePaths[key] = archivePath
+    }
+
     const archiveEntry = await ArchiveModel.create({
       catalog: catalogEntry._id,
       name: archiveName,
-      path: {
-        original: archivePath,
-        compressed: archivePath,
-      },
+      path: archivePaths,
       taggable: true,
       dateAdded: Date.now(),
     })
@@ -50,6 +56,7 @@ export async function createArchives(params: Params) {
           archiveEntry: archiveEntry,
           fileName: imageNameSplit[imageNameSplit.length - 1],
           imagePath: image,
+          catalogPathKeys: catalogPathKeys,
         })
       )
     }

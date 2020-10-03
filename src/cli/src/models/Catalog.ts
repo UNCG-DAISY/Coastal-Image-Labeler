@@ -5,6 +5,7 @@
 import { Schema, model, Types, HookNextFunction } from 'mongoose'
 import { CatalogModelType } from '../../interfaces/models'
 import { ArchiveModel } from './Archive'
+import pathValidation from '../utils/pathSchema'
 
 const catalogScheme: Schema = new Schema(
   {
@@ -17,19 +18,7 @@ const catalogScheme: Schema = new Schema(
       unique: true,
       maxlength: [128, 'Name can not be longer than 128 characters'],
     },
-    path: {
-      original: {
-        type: String,
-        required: [true, 'Please provide catalog path'],
-        unique: true,
-        maxlength: [128, 'Path can not be longer than 128 characters'],
-      },
-      compressed: {
-        type: String,
-        unique: true,
-        maxlength: [128, 'Path can not be longer than 128 characters'],
-      },
-    },
+    path: pathValidation,
     catalogInfo: {
       year: {
         type: Number,
