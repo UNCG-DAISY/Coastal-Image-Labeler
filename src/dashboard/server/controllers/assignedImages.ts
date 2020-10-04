@@ -159,10 +159,17 @@ const insertTaggedCount = asyncHandler(
       const catalog: AssignedImageTagAggregate = {}
       const doc = await CatalogModel.findById(assignedCatalog._id)
 
-      catalog.catalogInfo = doc.catalogInfo
-      catalog.totalImages = doc.totalImages
-      catalog.name = doc.name
-      catalog.catalogId = doc._id
+      if(!doc) {
+        continue;
+      }
+      catalog.catalogInfo = doc?.catalogInfo ?? {
+        year: -1,
+        link: '#NaN',
+        description: "NaN"
+      }
+      catalog.totalImages = doc?.totalImages ?? -1
+      catalog.name = doc?.name ?? 'NaN'
+      catalog.catalogId = doc?._id ?? 'NaN'
 
       //get how many images tagged of this catalog
       catalog.tagged =
