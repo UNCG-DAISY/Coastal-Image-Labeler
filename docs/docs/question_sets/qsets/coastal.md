@@ -27,6 +27,11 @@ Choices
 - Inundation
 :::
 
+for reference: 
+
+![Goslin and Clemmensen Figure3](/static/img/SallengerRegime.png)
+from https://doi.org/10.1016/j.quascirev.2017.08.026
+
 ### Terrain Types
 
 :::info
@@ -49,15 +54,6 @@ Choices
 Choices
 - No visible damage to infrastructure
 - Visible damage to infrastructure
-:::
-
-### Are there People on the Beach
-
-:::info
-**Require**: True  
-Choices
-- People
-- No People
 :::
 
 ### Washover Type
