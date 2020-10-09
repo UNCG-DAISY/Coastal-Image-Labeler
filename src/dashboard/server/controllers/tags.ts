@@ -12,7 +12,7 @@ import { QuestionSetModel } from '../models/QuestionSet'
 import fs from 'fs'
 import path from 'path'
 import archiver from 'archiver'
-
+import stringify from 'csv-stringify'
 //✔️
 const tagImage = asyncHandler(
   async (req: Request, res: ExtenedResponse, next: NextFunction) => {
@@ -53,8 +53,6 @@ const tagImage = asyncHandler(
     }
 
     //check if any matching tags: DO BEFORE ADDING TAG
-    // const compareResult = await image.compareTags(tags, ['Additional Comments'])
-    // const finalizable = compareResult.numMatch === compareResult.numberOfMatches
 
     //Now we add in the keys from the overall question set
 
@@ -103,22 +101,9 @@ const tagImage = asyncHandler(
       imageId: imageId,
       userId: req.user.data._id,
       tags: tagWithDefault,
-      //final: finalizable,
     })
 
     res.newTag = newTag
-
-    //If finalized, update imageDoc to have this new tag
-    // if (finalizable) {
-    // log({
-    // message: `Image ${imageId} is finalizable`,
-    // type: 'info',
-    // })
-    // await ImageModel.updateOne(
-    // { _id: imageId },
-    // { finalTag: newTag._id, taggable: true }
-    // )
-    // }
 
     next()
   }
@@ -133,42 +118,50 @@ function getCsvObject(data) {
 
   const result = {
     userId: data['userId'] || '',
-    userName: user && user['userName'] ? user['userName'] : 'NaN',
-    roles: user && user['roles'] ? user['roles'].join('-') : 'NaN',
-    archiveName: archive && archive['name'] ? archive['name'] : 'NaN',
+    userName: user && user['userName'] ? user['userName'] : '',
+    roles: user && user['roles'] ? user['roles'].join('-') : '',
+    archiveName: archive && archive['name'] ? archive['name'] : '',
     archiveId: data['archiveId'] || '',
     archiveTaggable: archive && archive['taggable'] ? 'true' : 'false',
     archiveDateAdded:
-      archive && archive['dateAdded'] ? archive['dateAdded'] : 'NaN',
-    imageName: image && image['name'] ? image['name'] : 'NaN',
+      archive && archive['dateAdded']
+        ? JSON.stringify(archive['dateAdded'])
+        : '',
+    imageName: image && image['name'] ? image['name'] : '',
     imageId: data['imageId'] || '',
     imageTaggable: image && image['taggable'] ? 'true' : 'false',
-    imageDateAdded: image && image['dateAdded'] ? image['dateAdded'] : 'NaN',
+    imageDateAdded:
+      image && image['dateAdded'] ? JSON.stringify(image['dateAdded']) : '',
 
-    catalogName: catalog && catalog['name'] ? catalog['name'] : 'NaN',
-    catalogId: data['catalogId'] || 'NaN',
+    catalogName: catalog && catalog['name'] ? catalog['name'] : '',
+    catalogId: data['catalogId'] || '',
+    catalogYear:
+      catalog.catalogInfo && catalog.catalogInfo.year
+        ? JSON.stringify(catalog.catalogInfo.year)
+        : '',
+    catalogLink:
+      catalog.catalogInfo && catalog.catalogInfo.link
+        ? catalog.catalogInfo.link
+        : '',
   }
+
   for (const key in tags) {
-    // if (tags.hasOwnProperty(key)) {
-    result[`tag_${key}`] = tags[key]
-    // }
+    if (typeof tags[key] === 'boolean' && tags[key]) {
+      result[`tag_${key}`] = 'true'
+    } else if (typeof tags[key] === 'boolean' && !tags[key]) {
+      result[`tag_${key}`] = 'false'
+    } else {
+      result[`tag_${key}`] = tags[key]
+    }
   }
-  result['catalogYear'] =
-    catalog.catalogInfo && catalog.catalogInfo.year
-      ? catalog.catalogInfo.year
-      : ''
-  result['catalogLink'] =
-    catalog.catalogInfo && catalog.catalogInfo.link
-      ? catalog.catalogInfo.link
-      : ''
-  result['catalogDescription'] =
-    catalog.catalogInfo && catalog.catalogInfo.description
-      ? catalog.catalogInfo.description
-      : ''
+
   return result
 }
 
-async function processCollectionData(collections) {
+async function processCollectionData(
+  collections,
+  catalogNamesFilter: { filter: boolean; catalogNames: any[] }
+) {
   const csvPath = []
   const catalogData = {}
   for (let index = 0; index < collections.length; index++) {
@@ -176,16 +169,33 @@ async function processCollectionData(collections) {
       ? collections[index]['catalog'].name
       : undefined
     if (catalogName) {
-      // const catalogDataArray = catalogData[catalogName]
-      // catalogDataArray.push(getCsvObject(collections[index]))
-      // catalogData[catalogName] = catalogDataArray
-      catalogData[catalogName] = [getCsvObject(collections[index])];
+      if (catalogNamesFilter.filter) {
+        if (catalogNamesFilter.catalogNames.indexOf(catalogName) >= 0) {
+          if (
+            catalogName &&
+            Object.prototype.hasOwnProperty.call(catalogData, catalogName)
+          ) {
+            const catalogDataArray = catalogData[catalogName]
+            catalogDataArray.push(getCsvObject(collections[index]))
+            catalogData[catalogName] = catalogDataArray
+          } else if (catalogName) {
+            catalogData[catalogName] = [getCsvObject(collections[index])]
+          }
+        }
+      } else {
+        if (
+          catalogName &&
+          Object.prototype.hasOwnProperty.call(catalogData, catalogName)
+        ) {
+          const catalogDataArray = catalogData[catalogName]
+          catalogDataArray.push(getCsvObject(collections[index]))
+          catalogData[catalogName] = catalogDataArray
+        } else if (catalogName) {
+          catalogData[catalogName] = [getCsvObject(collections[index])]
+        }
+      }
     }
-    //  else if (catalogName) {
-    //     catalogData[catalogName] = [getCsvObject(collections[index])];
-    // }
   }
-
   for (const key in catalogData) {
     const catalogFileName =
       key.split(' ').join('').split('.').join('') + '_' + Date.now()
@@ -195,89 +205,116 @@ async function processCollectionData(collections) {
 }
 
 async function extractCollectionData(collection, csvName) {
-  const csvHeaders = new Set()
+  const csvHeaders = []
   const composedCSVData = []
-  let terrianType = ''
-  if (collection) {
-    for (let index = 0; index < collection.length; index++) {
-      const data = collection[index]
-      const csvRows = []
-      for (const key in data) {
-        csvHeaders.add(key)
-        if (Array.isArray(data[key])) {
-          terrianType = ''
-          for (let count = 0; count < data[key].length; count++) {
-            terrianType = terrianType + data[key][count] + ','
-          }
-          csvRows.push(terrianType)
-        } else {
-          csvRows.push(data[key])
-        }
+  for (let index = 0; index < collection.length; index++) {
+    const data = collection[index]
+    const csvRows = []
+
+    for (const key in data) {
+      let singleData = ''
+      if (csvHeaders.indexOf(key) < 0) {
+        csvHeaders.push(key)
       }
-      composedCSVData.push(csvRows)
+      if (Array.isArray(data[key])) {
+        singleData = data[key][0]
+        for (let count = 1; count < data[key].length; count++) {
+          singleData = singleData + ',' + data[key][count]
+        }
+      } else {
+        singleData = data[key]
+      }
+      csvRows[csvHeaders.indexOf(key)] = singleData
     }
 
-    composedCSVData.splice(0, 0, Array.from(csvHeaders))
- 
-    const fileName =  path.join(__dirname,'../../../../../../../exportFiles',csvName + '.csv')
-    await createCsvFile(fileName, composedCSVData)
-    return {
-      path: fileName,
-      name: csvName + '.csv',
-    }
+    composedCSVData.push(csvRows)
+  }
+  composedCSVData.splice(0, 0, csvHeaders)
+  const fileName = csvName + '.csv'
+  await createCsvFile(fileName, composedCSVData)
+  return {
+    path: fileName,
+    name: csvName + '.csv',
   }
 }
 
 async function createCsvFile(fileName, data) {
-
-  try {
-    log({
-      message:`Trying to create file at ${fileName}`,
-      type:'info'
-    })
-
-    const file = fs.createWriteStream(fileName);
-    file.on('error', function(err) { /* error handling */ });
-    data.forEach(value => {
-      // console.log("row")
-      // console.log(value)
-      // console.log('-------------------End row')
-
-      file.write(`${value.join(', ')}\r\n`)
-    });
-    file.end();
-
-    log({
-      message:`Created file at ${fileName}`,
-      type:'ok'
-    })
-  } catch(error) {
-    console.log(error)
-    log({
-      message:`Failed to create file at ${fileName}`,
-      type:'error'
-    })
-  }
-  // return new Promise((resolve, reject) => {
-  //   try {
-  //     fs.createWriteStream(path.join(__dirname, fileName))
-  //     JSON.stringify(data, (err, output) => {
-  //       if (err) throw err
-  //       fs.writeFile(path.join(__dirname, fileName), output, (err) => {
-  //         if (err) throw err
-  //         console.log(fileName + ' saved.')
-  //         resolve(data)
-  //       })
-  //     })
-  //   } catch (e) {
-  //     console.log(
-  //       'unable to process the create csv operations some exception occurred :',
-  //       e
-  //     )
-  //     reject(e)
-  //   }
-  // })
+  return new Promise((resolve, reject) => {
+    try {
+      log({
+        message: `Trying to create file at ${fileName}`,
+        type: 'info',
+      })
+      fs.createWriteStream(path.join(__dirname, fileName))
+      stringify(data, (err, output) => {
+        if (err) throw err
+        fs.writeFile(path.join(__dirname, fileName), output, (err) => {
+          if (err) throw err
+          log({
+            message: `Created file at ${fileName}`,
+            type: 'ok',
+          })
+          resolve(data)
+        })
+      })
+    } catch (e) {
+      console.log(
+        'unable to process the create csv operations some exception occurred :',
+        e
+      )
+      reject(e)
+    }
+  })
 }
+
+/*async function createCsvFile(fileName, data) {
+
+    try {
+
+
+        const file = fs.createWriteStream(fileName);
+        file.on('error', function (err) { /!* error handling *!/
+        });
+        data.forEach(value => {
+            // console.log("row")
+            // console.log(value)
+            // console.log('-------------------End row')
+
+            file.write(`${value.join(', ')}\r\n`)
+        });
+        file.end();
+
+        log({
+            message: `Created file at ${fileName}`,
+            type: 'ok'
+        })
+    } catch (error) {
+        console.log(error)
+        log({
+            message: `Failed to create file at ${fileName}`,
+            type: 'error'
+        })
+    }*/
+// return new Promise((resolve, reject) => {
+//   try {
+//     fs.createWriteStream(path.join(__dirname, fileName))
+//     JSON.stringify(data, (err, output) => {
+//       if (err) throw err
+//       fs.writeFile(path.join(__dirname, fileName), output, (err) => {
+//         if (err) throw err
+//         console.log(fileName + ' saved.')
+//         resolve(data)
+//       })
+//     })
+//   } catch (e) {
+//     console.log(
+//       'unable to process the create csv operations some exception occurred :',
+//       e
+//     )
+//     reject(e)
+//   }
+// })
+//}
 
 function createZip(res: any, csvs: any) {
   const archive = archiver('zip', {
@@ -293,9 +330,8 @@ function createZip(res: any, csvs: any) {
   })
   archive.pipe(res)
   for (let index = 0; index < csvs.length; index++) {
-    //console.log("csvs[index].path",csvs[index].path,path.join(__dirname, csvs[index].path))
     archive.append(
-      fs.createReadStream(csvs[index].path),
+      fs.createReadStream(path.join(__dirname, csvs[index].path)),
       { name: csvs[index].name }
     )
     fs.unlink(path.join(__dirname, csvs[index].path), (_err) => {
@@ -314,10 +350,20 @@ const exportAllTags = asyncHandler(
       .populate('user')
       .populate('catalog')
       .populate('image')
-
+    const catalogNamesFilter = {
+      filter: req.body.filter === 'true' || req.body.filter == true,
+      catalogNames: req.body.catalogNames || [],
+    }
     //console.log('tags :', tagsAndRelatedCollections.length)
-    const data = await processCollectionData(tagsAndRelatedCollections) //this processCollectionData function will extract the collection data and create the csv file for each collection
-    await createZip(res, data) // once all the csv created zip them and send to client/browser
+    const data = await processCollectionData(
+      tagsAndRelatedCollections,
+      catalogNamesFilter
+    ) //this processCollectionData function will extract the collection data and create the csv file for each collection
+    if (data.length) {
+      await createZip(res, data) // once all the csv created zip them and send to client/browser
+    } else {
+      return data
+    }
   }
 )
 const exportUserTags = asyncHandler(
@@ -333,9 +379,20 @@ const exportUserTags = asyncHandler(
       .populate('user')
       .populate('catalog')
       .populate('image')
-    //console.log('tags :', tagsAndRelatedCollections)
-    const data = await processCollectionData(tagsAndRelatedCollections) //this processCollectionData function will extract the collection data and create the csv file for each collection
-    await createZip(res, data) // once all the csv created zip them and send to client/browser
+    const catalogNamesFilter = {
+      filter: req.body.filter === 'true' || req.body.filter == true,
+      catalogNames: req.body.catalogNames || [],
+    }
+    console.log('catalogNamesFilter :', catalogNamesFilter)
+    const data = await processCollectionData(
+      tagsAndRelatedCollections,
+      catalogNamesFilter
+    ) //this processCollectionData function will extract the collection data and create the csv file for each collection
+    if (data.length) {
+      await createZip(res, data) // once all the csv created zip them and send to client/browser
+    } else {
+      return data
+    } // once all the csv created zip them and send to client/browser
   }
 )
 export { tagImage, exportUserTags, exportAllTags }

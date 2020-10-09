@@ -6,9 +6,10 @@ interface Params {
   res: any
 }
 
-async function exportUser() {
+async function exportUser(body = {}) {
   return await fileDownload({
-    method: 'GET',
+    method: 'POST',
+    body: body,
     route: routes.getReq.exportUserTag,
     headers: {
       credentials: 'include',
@@ -16,9 +17,10 @@ async function exportUser() {
   })
 }
 
-async function exportAllUser() {
+async function exportAllUser(body = {}) {
   return await fileDownload({
-    method: 'GET',
+    method: 'POST',
+    body: body,
     route: routes.getReq.exportAllUserTag,
     headers: {
       credentials: 'include',

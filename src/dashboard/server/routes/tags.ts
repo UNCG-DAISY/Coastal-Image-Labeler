@@ -15,6 +15,7 @@ import { unassignImage } from '@/server/controllers/assignedImages'
 import { check } from 'express-validator'
 import { bodyValidation } from '@/server/middlewares/bodyValidation'
 import { hasRoles } from '@/server/middlewares/hasRoles'
+
 const router = express.Router()
 
 //✔️
@@ -60,8 +61,8 @@ router.route('/skipImage').post(ensureAuthenticated, insertUser, tagImage)
 
 router
   .route('/export')
-  .get(ensureAuthenticated, insertUser, hasRoles(['tagger']), exportUserTags)
+  .post(ensureAuthenticated, insertUser, hasRoles(['tagger']), exportUserTags)
 router
   .route('/export/all')
-  .get(ensureAuthenticated, insertUser, hasRoles(['admin']), exportAllTags)
+  .post(ensureAuthenticated, insertUser, hasRoles(['admin']), exportAllTags)
 export default router

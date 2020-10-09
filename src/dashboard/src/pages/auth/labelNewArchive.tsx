@@ -1,17 +1,18 @@
 import React from 'react'
 import Head from 'next/head'
-import Layout from '@/components/Layout'
+
+import Layout from '../../components/Layout'
 import { GetServerSideProps } from 'next'
-import getSession from '@/components/Utils/Auth/getSession'
-import { getUserDB } from '@/components/API/post/getUserDB'
-import { getStartTaggingTableData } from '@/components/API/post/startTaggingData'
-import { determineNavItems } from '@/components/Utils/Auth/determineNavItems'
-import { SelectArchive } from '@/components/Tables/SelectArchive'
+import getSession from '../../components/Utils/Auth/getSession'
+import { getUserDB } from '../../components/API/post/getUserDB'
+import { getStartTaggingTableData } from '../../components/API/post/startTaggingData'
+import { determineNavItems } from '../../components/Utils/Auth/determineNavItems'
+import { SelectArchive } from '../../components/Tables/SelectArchive'
 import { CatalogSelectionData } from '../../../interfaces'
-import { checkUserRole } from '@/components/Utils/Auth/checkRole'
-import { generateUnAuthObj } from '@/components/Utils/Auth/unAuthError'
-import ErrorCard from '@/components/ErrorCards'
-import { tabLogoURL } from '@/components/Constants'
+import { checkUserRole } from '../../components/Utils/Auth/checkRole'
+import { generateUnAuthObj } from '../../components/Utils/Auth/unAuthError'
+import ErrorCard from '../../components/ErrorCards'
+import { tabLogoURL } from '../../components/Constants'
 
 interface Props {
   user: any
@@ -22,6 +23,7 @@ interface Props {
 
 const StartTagging = (props: Props): JSX.Element => {
   const { user, selectionData, success, message } = props
+  console.log('selectionData', selectionData)
   return (
     <div className="container">
       <Head>
