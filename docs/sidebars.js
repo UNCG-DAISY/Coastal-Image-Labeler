@@ -86,13 +86,6 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'User Documentation',
-      items: [
-        "user_doc/overview",
-      ],
-    },
-    {
-      type: 'category',
       label: 'Question Sets',
       items: [
         "question_sets/overview",
