@@ -159,13 +159,13 @@ const insertTaggedCount = asyncHandler(
       const catalog: AssignedImageTagAggregate = {}
       const doc = await CatalogModel.findById(assignedCatalog._id)
 
-      if(!doc) {
-        continue;
+      if (!doc) {
+        continue
       }
       catalog.catalogInfo = doc?.catalogInfo ?? {
         year: -1,
         link: '#NaN',
-        description: "NaN"
+        description: 'NaN',
       }
       catalog.totalImages = doc?.totalImages ?? -1
       catalog.name = doc?.name ?? 'NaN'

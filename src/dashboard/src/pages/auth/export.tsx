@@ -1,16 +1,16 @@
 import React from 'react'
 import Head from 'next/head'
-import Layout from '../../components/Layout'
+import Layout from '@/components/Layout'
 import { GetServerSideProps } from 'next'
-import getSession from '../../components/Utils/Auth/getSession'
-import { getUserDB } from '../../components/API/post/getUserDB'
-import { determineNavItems } from '../../components/Utils/Auth/determineNavItems'
-import { ResumeTaggingDataCatalog, UserProp } from '../../../interfaces'
-import { tabLogoURL } from '../../components/Constants'
+import getSession from '@/components/Utils/Auth/getSession'
+import { getUserDB } from '@/components/API/post/getUserDB'
+import { determineNavItems } from '@/components/Utils/Auth/determineNavItems'
+import { ResumeTaggingDataCatalog, UserProp } from '@/interfaces/index'
+import { tabLogoURL } from '@/components/Constants'
 
 /*import JSONPretty from 'react-json-pretty'
 import {theme, customColors} from '../../components/theme'*/
-import { ViewImage } from '../../components/Button/premadeButtons'
+import { ViewImage } from '@/components/Button/premadeButtons'
 
 interface Props {
   user: UserProp
@@ -19,7 +19,6 @@ interface Props {
   message?: string
   hasAssignedImages: any[]
 }
-import { exportUser, exportAllUser } from '../../components/API/get/exportUsers'
 
 export const Home = (props: Props): JSX.Element => {
   const { user } = props
@@ -40,58 +39,20 @@ export const Home = (props: Props): JSX.Element => {
           <ViewImage
             variant="contained"
             href="/api/tags/export"
-            // onClick={async () => {
-            //   console.log('Exporting User tags')
-            //   const backendReponse: any = await exportUser() //calling backend to get theuser tags
-            //   console.log("backendReponse",backendReponse)
-            //   // const url = window.URL.createObjectURL(backendReponse)
-            //   // const a = document.createElement('a')
-            //   // a.href = url
-            //   // a.download = 'user.zip'
-            //   // console.log("url",url)
-            //   //a.click()
-            //   //window.URL.revokeObjectURL(url)
-            // }}
+            target="_blank"
           >
             Export Your Labels
           </ViewImage>
-          {/*  <CSVLink style={{textDecoration: 'none'}} data={userData.data}
-                             ref={input => setcsvLinkButton(input)} filename={userData.filename} target="_blank"/>*/}
           {user.data.roles.includes('admin') && (
             <ViewImage
               variant="contained"
-              onClick={async () => {
-                console.log('Exporting admin tags!!!')
-                const blob: any = await exportAllUser()
-                const url = window.URL.createObjectURL(blob)
-                const a = document.createElement('a')
-                a.href = url
-                a.download = 'admin.zip'
-                a.click()
-                window.URL.revokeObjectURL(url)
-              }}
+              href="/api/tags/export/all"
+              target="_blank"
             >
               Export All Labels
             </ViewImage>
           )}
         </div>
-        {/*<JSONPretty
-                    id="json-pretty"
-                    data={user}
-                    style={{
-                        fontSize: '2.0em',
-                        backgroundColor: `${theme.palette.background.default}`,
-                        paddingLeft: '0.1em',
-                    }}
-                    theme={{
-                        main: `color:#ffffff;background:${theme.palette.background.default}:#;overflow:auto;`,
-                        error: 'color:#ffffff;background:#272822;overflow:auto;',
-                        key: `color:${theme.palette.primary.light};`,
-                        string: `color:${theme.palette.secondary.light};`,
-                        value: `color:${customColors.orange};`,
-                        boolean: `color:${customColors.purple};`,
-                    }}
-                />*/}
       </Layout>
     </div>
   )

@@ -3,7 +3,7 @@ import { ObjectID } from 'mongodb'
 import { CatalogInfo } from './index'
 
 export interface UserDocument extends Document {
-  username: string
+  userName: string
   //assignedImages: Record<string, any>
   catalogs: [ObjectID]
   dateAdded: Date

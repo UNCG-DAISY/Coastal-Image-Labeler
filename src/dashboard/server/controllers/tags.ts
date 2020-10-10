@@ -10,8 +10,9 @@ import { ArchiveModel } from '../models/Archive'
 import { CatalogModel } from '../models/Catalog'
 import { QuestionSetModel } from '../models/QuestionSet'
 import fs from 'fs'
-import path from 'path'
 import archiver from 'archiver'
+import { TagDocument } from '@/interfaces/models'
+import { createObjectCsvWriter } from 'csv-writer'
 
 //✔️
 const tagImage = asyncHandler(
@@ -124,218 +125,129 @@ const tagImage = asyncHandler(
   }
 )
 
-function getCsvObject(data) {
-  const tags: any = data['tags']
-  const archive: any = data['archive']
-  const user: any = data['user']
-  const catalog: any = data['catalog']
-  const image: any = data['image']
-
-  const result = {
-    userId: data['userId'] || '',
-    userName: user && user['userName'] ? user['userName'] : 'NaN',
-    roles: user && user['roles'] ? user['roles'].join('-') : 'NaN',
-    archiveName: archive && archive['name'] ? archive['name'] : 'NaN',
-    archiveId: data['archiveId'] || '',
-    archiveTaggable: archive && archive['taggable'] ? 'true' : 'false',
-    archiveDateAdded:
-      archive && archive['dateAdded'] ? archive['dateAdded'] : 'NaN',
-    imageName: image && image['name'] ? image['name'] : 'NaN',
-    imageId: data['imageId'] || '',
-    imageTaggable: image && image['taggable'] ? 'true' : 'false',
-    imageDateAdded: image && image['dateAdded'] ? image['dateAdded'] : 'NaN',
-
-    catalogName: catalog && catalog['name'] ? catalog['name'] : 'NaN',
-    catalogId: data['catalogId'] || 'NaN',
-  }
-  for (const key in tags) {
-    // if (tags.hasOwnProperty(key)) {
-    result[`tag_${key}`] = tags[key]
-    // }
-  }
-  result['catalogYear'] =
-    catalog.catalogInfo && catalog.catalogInfo.year
-      ? catalog.catalogInfo.year
-      : ''
-  result['catalogLink'] =
-    catalog.catalogInfo && catalog.catalogInfo.link
-      ? catalog.catalogInfo.link
-      : ''
-  result['catalogDescription'] =
-    catalog.catalogInfo && catalog.catalogInfo.description
-      ? catalog.catalogInfo.description
-      : ''
-  return result
+type tagExportType = {
+  _id: string
+  numTags: number
+  tags: TagDocument[]
 }
 
-async function processCollectionData(collections) {
-  const csvPath = []
-  const catalogData = {}
-  for (let index = 0; index < collections.length; index++) {
-    const catalogName = collections[index]['catalog']
-      ? collections[index]['catalog'].name
-      : undefined
-    if (catalogName) {
-      // const catalogDataArray = catalogData[catalogName]
-      // catalogDataArray.push(getCsvObject(collections[index]))
-      // catalogData[catalogName] = catalogDataArray
-      catalogData[catalogName] = [getCsvObject(collections[index])];
-    }
-    //  else if (catalogName) {
-    //     catalogData[catalogName] = [getCsvObject(collections[index])];
-    // }
-  }
+function exportTest(userOnly = true) {
+  return asyncHandler(async (req: Request, res: ExtenedResponse) => {
+    const query = userOnly ? { userId: req.user.data._id } : {}
 
-  for (const key in catalogData) {
-    const catalogFileName =
-      key.split(' ').join('').split('.').join('') + '_' + Date.now()
-    csvPath.push(await extractCollectionData(catalogData[key], catalogFileName))
-  }
-  return csvPath
-}
+    //get tags and group by catalog ID
+    const tagsToExport: tagExportType[] = await TagModel.aggregate([
+      {
+        $match: query,
+      },
+      {
+        $group: {
+          _id: '$catalogId',
+          numTags: { $sum: 1 },
+          tags: { $push: '$$ROOT' },
+        },
+      },
+    ])
 
-async function extractCollectionData(collection, csvName) {
-  const csvHeaders = new Set()
-  const composedCSVData = []
-  let terrianType = ''
-  if (collection) {
-    for (let index = 0; index < collection.length; index++) {
-      const data = collection[index]
-      const csvRows = []
-      for (const key in data) {
-        csvHeaders.add(key)
-        if (Array.isArray(data[key])) {
-          terrianType = ''
-          for (let count = 0; count < data[key].length; count++) {
-            terrianType = terrianType + data[key][count] + ','
+    log({
+      message: `Number of files ${tagsToExport.length}`,
+      type: 'info',
+    })
+
+    const fileNames = []
+
+    //for each group of tags
+    for (let i = 0; i < tagsToExport.length; i++) {
+      const tagGroup = tagsToExport[i]
+
+      //get catalog
+      const catalog = await CatalogModel.findById(tagGroup._id)
+      if (!catalog) {
+        continue
+      }
+
+      //get qset
+      const qSet = await QuestionSetModel.findById(catalog.questionSet)
+      if (!qSet) {
+        continue
+      }
+
+      //get headers
+      const qSetHeaders = await getQSetKeys(qSet._id)
+
+      const constantHeaders = [
+        '_id',
+        'userId',
+        'catalogId',
+        'archiveId',
+        'imageId',
+        'date',
+      ]
+
+      const formattedTags = []
+
+      //for each tag of the groupped up tags
+      for (let j = 0; j < tagGroup.tags.length; j++) {
+        const formattedTag = {}
+        const tag = tagGroup?.tags[j]
+
+        constantHeaders.forEach((key) => {
+          formattedTag[key] = tag[key] ?? 'NaN'
+        })
+        qSetHeaders.forEach((key) => {
+          formattedTag[key] = tag.tags[key] ?? 'NaN'
+        })
+
+        formattedTags.push(formattedTag)
+      }
+
+      const csvWriterHeader = [...constantHeaders, ...qSetHeaders].map(
+        (element) => {
+          return {
+            id: element,
+            title: element,
           }
-          csvRows.push(terrianType)
-        } else {
-          csvRows.push(data[key])
         }
-      }
-      composedCSVData.push(csvRows)
+      )
+
+      //create file for zipping
+      const fileName = `${process.env.TAG_EXPORT_FOLDER}${
+        catalog.name
+      }_${Date.now()}.csv`
+      fileNames.push(fileName)
+      const csvWriter = createObjectCsvWriter({
+        path: fileName,
+        header: csvWriterHeader,
+      })
+
+      await csvWriter.writeRecords(formattedTags) // returns a promise
     }
 
-    composedCSVData.splice(0, 0, Array.from(csvHeaders))
- 
-    const fileName =  path.join(__dirname,'../../../../../../../exportFiles',csvName + '.csv')
-    await createCsvFile(fileName, composedCSVData)
-    return {
-      path: fileName,
-      name: csvName + '.csv',
+    //start archiving all the exports
+    const archive = archiver('zip')
+
+    archive.on('error', function (err) {
+      res.status(500).send({ error: err.message })
+    })
+
+    //on stream closed we can end the request
+    archive.on('end', function () {
+      console.log('Archive wrote %d bytes', archive.pointer())
+    })
+
+    const zipFileUserName = req.user.data.userName.replace(/\s/g, '')
+    const zipFileName = `${zipFileUserName}_export_${Date.now()}.zip`
+    res.attachment(zipFileName)
+
+    archive.pipe(res)
+
+    //create zip archive
+    for (let i = 0; i < fileNames.length; i++) {
+      let tempFileName = fileNames[i].split('/')
+      tempFileName = tempFileName[tempFileName.length - 1]
+      archive.append(fs.createReadStream(fileNames[i]), { name: tempFileName })
     }
-  }
-}
-
-async function createCsvFile(fileName, data) {
-
-  try {
-    log({
-      message:`Trying to create file at ${fileName}`,
-      type:'info'
-    })
-
-    const file = fs.createWriteStream(fileName);
-    file.on('error', function(err) { /* error handling */ });
-    data.forEach(value => {
-      // console.log("row")
-      // console.log(value)
-      // console.log('-------------------End row')
-
-      file.write(`${value.join(', ')}\r\n`)
-    });
-    file.end();
-
-    log({
-      message:`Created file at ${fileName}`,
-      type:'ok'
-    })
-  } catch(error) {
-    console.log(error)
-    log({
-      message:`Failed to create file at ${fileName}`,
-      type:'error'
-    })
-  }
-  // return new Promise((resolve, reject) => {
-  //   try {
-  //     fs.createWriteStream(path.join(__dirname, fileName))
-  //     JSON.stringify(data, (err, output) => {
-  //       if (err) throw err
-  //       fs.writeFile(path.join(__dirname, fileName), output, (err) => {
-  //         if (err) throw err
-  //         console.log(fileName + ' saved.')
-  //         resolve(data)
-  //       })
-  //     })
-  //   } catch (e) {
-  //     console.log(
-  //       'unable to process the create csv operations some exception occurred :',
-  //       e
-  //     )
-  //     reject(e)
-  //   }
-  // })
-}
-
-function createZip(res: any, csvs: any) {
-  const archive = archiver('zip', {
-    zlib: { level: 9 }, // Sets the compression level.
+    archive.finalize()
   })
-  archive.on('warning', (err) => {
-    console.log('error2', err)
-    throw err
-  })
-  archive.on('error', (err) => {
-    console.log('error1', err)
-    throw err
-  })
-  archive.pipe(res)
-  for (let index = 0; index < csvs.length; index++) {
-    //console.log("csvs[index].path",csvs[index].path,path.join(__dirname, csvs[index].path))
-    archive.append(
-      fs.createReadStream(csvs[index].path),
-      { name: csvs[index].name }
-    )
-    fs.unlink(path.join(__dirname, csvs[index].path), (_err) => {
-      if (_err) {
-        //
-      }
-    })
-  }
-  archive.finalize()
 }
-
-const exportAllTags = asyncHandler(
-  async (req: Request, res: ExtenedResponse) => {
-    const tagsAndRelatedCollections = await TagModel.find({})
-      .populate('archive')
-      .populate('user')
-      .populate('catalog')
-      .populate('image')
-
-    //console.log('tags :', tagsAndRelatedCollections.length)
-    const data = await processCollectionData(tagsAndRelatedCollections) //this processCollectionData function will extract the collection data and create the csv file for each collection
-    await createZip(res, data) // once all the csv created zip them and send to client/browser
-  }
-)
-const exportUserTags = asyncHandler(
-  async (req: Request, res: ExtenedResponse) => {
-    console.log(
-      'UserID -------------------------------------> ',
-      req.user.data._id
-    )
-    const tagsAndRelatedCollections = await TagModel.find({
-      userId: req.user.data._id,
-    })
-      .populate('archive')
-      .populate('user')
-      .populate('catalog')
-      .populate('image')
-    //console.log('tags :', tagsAndRelatedCollections)
-    const data = await processCollectionData(tagsAndRelatedCollections) //this processCollectionData function will extract the collection data and create the csv file for each collection
-    await createZip(res, data) // once all the csv created zip them and send to client/browser
-  }
-)
-export { tagImage, exportUserTags, exportAllTags }
+export { tagImage, exportTest }
