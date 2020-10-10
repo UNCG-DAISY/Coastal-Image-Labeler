@@ -59,7 +59,7 @@ export const Home = (props: Props): JSX.Element => {
         ) : (
           <React.Fragment>
             <HomeText displayName={user?.displayName} />
-            {hasAssignedImages.length > 0 ? (
+            {hasAssignedImages.length > 0 && resumeData.length > 0 ? (
               <ResumeTagging data={resumeData} />
             ) : (
               <React.Fragment>

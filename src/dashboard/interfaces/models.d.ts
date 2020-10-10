@@ -30,6 +30,7 @@ export interface CatalogDocument extends Document {
   }
   totalImages?: number
   ignoreFields: string[]
+  archives?: ArchiveDocument[]
 
   updateImageCount(): Promise<void>
 }

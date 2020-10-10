@@ -1,4 +1,8 @@
-import { CatalogDocument, AllDocuments } from '@/interfaces/models'
+import {
+  CatalogDocument,
+  AllDocuments,
+  ArchiveDocument,
+} from '@/interfaces/models'
 import { ExtenedResponse } from '@/interfaces/index'
 import { Request, NextFunction } from 'express'
 import { ObjectID } from 'mongodb'
@@ -14,6 +18,10 @@ const filterUserCatalogsMiddleware = asyncHandler(
       userCatalogs
     )
 
+    res.advancedResults.data = filterTaggableArchives(
+      res?.advancedResults?.data as CatalogDocument[]
+    )
+
     next()
   }
 )
@@ -23,16 +31,35 @@ function filterToUserCatalog(
   catalogs: AllDocuments[],
   userCatalogs: [ObjectID]
 ) {
-  let res: AllDocuments[] = []
+  let res: CatalogDocument[] = []
   log({
     message: `Filtering ${
       catalogs.length
     } catalog against [${userCatalogs.toString()}]`,
     type: 'info',
   })
+
   res = catalogs.filter((catalog: CatalogDocument) => {
-    return userCatalogs.includes(catalog._id.toString())
+    return userCatalogs.includes(catalog._id.toString()) && catalog.taggable
+  }) as CatalogDocument[]
+
+  return res
+}
+
+function filterTaggableArchives(catalogs: CatalogDocument[]) {
+  const res: CatalogDocument[] = []
+  log({
+    message: `Only allowing taggable archives`,
+    type: 'info',
   })
+
+  for (let i = 0; i < catalogs.length; i++) {
+    const catalog = catalogs[i]
+    catalog.archives = catalog.archives.filter((archive: ArchiveDocument) => {
+      return archive.taggable
+    })
+    res.push(catalog)
+  }
 
   return res
 }
