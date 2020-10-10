@@ -26,7 +26,7 @@ There are two general roles in this project:
 The Coastal Image Labeler Documentation is focused on:
 - Describing the goals of the project and our [Code of Conduct](code_of_conduct.md).
 - Documenting the underlying source code for the labeling tool. This is intended to be most useful for an Admin — see the [Code Documentation](code_documentation/overview.md) section.
-- Documenting how to interact with the labeling tool  — his is intended to be most useful for a labeler — see the [User Documentation](user_documentation/overview.md) section.
+- The [deployed labeler](https://coastalimagelabeler.science/) — and not this doc site — provides instructions for researchers interested in labeling images.
 
 ## Project Goals
 

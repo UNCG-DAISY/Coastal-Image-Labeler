@@ -14,8 +14,7 @@ export function HomeText(props: Props) {
         Archive&quot; on the left, or resume labeling a catalog you have started
         using the table below. If you want to label more images, please contact
         Evan Goldstein at {<EmailLink />}. To learn more about this project,
-        check out the code {<RepoLink />}
-        and the project {<DocLink />}.
+        check out the code {<RepoLink />} and the project {<DocLink />}.
       </Paper>
     </Typography>
   )

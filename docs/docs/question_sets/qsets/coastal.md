@@ -27,6 +27,12 @@ Choices
 - Inundation
 :::
 
+for reference: 
+
+![Goslin and Clemmensen Figure3](https://www.researchgate.net/profile/Jerome_Goslin2/publication/319954890/figure/fig3/AS:568850036662272@1512635825824/Schematic-illustrations-of-barrier-systems-under-the-four-storminess-regimes-of-Sallenger.png)
+
+from https://doi.org/10.1016/j.quascirev.2017.08.026
+
 ### Terrain Types
 
 :::info
@@ -49,15 +55,6 @@ Choices
 Choices
 - No visible damage to infrastructure
 - Visible damage to infrastructure
-:::
-
-### Are there People on the Beach
-
-:::info
-**Require**: True  
-Choices
-- People
-- No People
 :::
 
 ### Washover Type
