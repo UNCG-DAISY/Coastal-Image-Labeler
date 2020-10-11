@@ -2,7 +2,7 @@
   "name": "uncg-daisy-labeller-dashboard",
   "author": "UNCG-DAISY",
   "license": "MIT",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "scripts": {
     "dev": "npm run build:server && node dist/server/index.js",
     "build:server": "rimraf dist && tsc --project tsconfig.server.json",
