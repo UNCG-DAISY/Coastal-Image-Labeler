@@ -60,6 +60,7 @@
     "passport": "^0.4.1",
     "passport-auth0": "^1.3.3",
     "react": "^16.13.1",
+    "react-cool-img": "^1.2.4",
     "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.0.6",
