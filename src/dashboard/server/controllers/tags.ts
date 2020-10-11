@@ -140,6 +140,30 @@ function exportTest(userOnly = true) {
       {
         $match: query,
       },
+      //reverse pop archive
+      {
+        $lookup: {
+          from: ArchiveModel.collection.name,
+          localField: 'archiveId',
+          foreignField: '_id',
+          as: 'archive',
+        },
+      },
+      {
+        $unwind: { path: '$archive', preserveNullAndEmptyArrays: true },
+      },
+      //reverse pop image
+      {
+        $lookup: {
+          from: ImageModel.collection.name,
+          localField: 'imageId',
+          foreignField: '_id',
+          as: 'image',
+        },
+      },
+      {
+        $unwind: { path: '$image', preserveNullAndEmptyArrays: true },
+      },
       {
         $group: {
           _id: '$catalogId',
@@ -156,7 +180,7 @@ function exportTest(userOnly = true) {
 
     const fileNames = []
 
-    //for each group of tags
+    //for each group of tags (grouped by catalog)
     for (let i = 0; i < tagsToExport.length; i++) {
       const tagGroup = tagsToExport[i]
 
@@ -175,7 +199,7 @@ function exportTest(userOnly = true) {
       //get headers
       const qSetHeaders = await getQSetKeys(qSet._id)
 
-      const constantHeaders = [
+      let constantHeaders = [
         '_id',
         'userId',
         'catalogId',
@@ -188,18 +212,33 @@ function exportTest(userOnly = true) {
 
       //for each tag of the groupped up tags
       for (let j = 0; j < tagGroup.tags.length; j++) {
-        const formattedTag = {}
-        const tag = tagGroup?.tags[j]
+        const formattedTag = {
+          catalog: 'NaN',
+          archive: 'NaN',
+          image: 'NaN',
+        }
+        const tagData = tagGroup?.tags[j]
 
+        //add in the constant headers data
         constantHeaders.forEach((key) => {
-          formattedTag[key] = tag[key] ?? 'NaN'
+          formattedTag[key] = tagData[key] ?? 'NaN'
         })
+
+        //add in the qset headers data
         qSetHeaders.forEach((key) => {
-          formattedTag[key] = tag.tags[key] ?? 'NaN'
+          formattedTag[key] = tagData.tags[key] ?? 'NaN'
         })
+
+        //add catalog,archive, and image names
+        formattedTag.catalog = catalog.name
+        formattedTag.archive = tagData.archive.name
+        formattedTag.image = tagData.image.name
 
         formattedTags.push(formattedTag)
       }
+
+      //We add thse id's after because we dont want to look into the tag for them.
+      constantHeaders = [...constantHeaders, 'catalog', 'archive', 'image']
 
       const csvWriterHeader = [...constantHeaders, ...qSetHeaders].map(
         (element) => {

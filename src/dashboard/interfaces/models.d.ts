@@ -112,6 +112,7 @@ export interface TagDocument extends Document {
   ignoreFields?: string[]
   //final?: boolean
   image?: ImageDocument
+  archive?: ArchiveDocument
 }
 
 // export interface ImageServeOrderDocument extends Document {
