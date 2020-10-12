@@ -1,4 +1,4 @@
-import { Request, NextFunction } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { asyncHandler } from '../middlewares/async' //to avoid putting try catch everywhere
 import { ExtenedResponse } from '../../interfaces/index'
 import { CatalogModel } from '../models/Catalog'
@@ -19,7 +19,7 @@ const catalogExists = asyncHandler(
       log({
         message: `${catalogId} false exist`,
         type: 'info',
-      })
+      }) // @typescript-eslint/no-unused-vars
       return res.status(200).json({
         success: false,
         message: `No catalog with catalogId: ${catalogId}`,
@@ -34,6 +34,16 @@ const catalogExists = asyncHandler(
     next()
   }
 )
+const allCatalogDetails = asyncHandler(async (req: Request, res: Response) => {
+  const catalog = await CatalogModel.find({})
+  res.status(200).json({
+    success: true,
+    message: `Catalog found`,
+    data: {
+      catalog,
+    },
+  })
+})
 
 //✔️
 const getCatalogQuestionSet = asyncHandler(
@@ -64,4 +74,4 @@ const getCatalogQuestionSet = asyncHandler(
   }
 )
 
-export { catalogExists, getCatalogQuestionSet }
+export { catalogExists, getCatalogQuestionSet, allCatalogDetails }

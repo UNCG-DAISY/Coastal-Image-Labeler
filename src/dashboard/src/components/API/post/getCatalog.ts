@@ -8,7 +8,7 @@ interface Params {
 }
 
 export async function getCatalog({ cookie, catalogId }: Params) {
-  const data = await apiRequest({
+  return await apiRequest({
     body: {
       catalogId: catalogId,
     },
@@ -19,6 +19,15 @@ export async function getCatalog({ cookie, catalogId }: Params) {
       cookie: cookie ?? null,
     },
   })
+}
 
-  return data
+export async function getCatalogDetails(cookie) {
+  return await apiRequest({
+    method: 'POST',
+    route: routes.postReq.getCatalogDetails,
+    headers: {
+      credentials: 'include',
+      cookie: cookie ?? null,
+    },
+  })
 }

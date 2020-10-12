@@ -1,10 +1,8 @@
 import { navigationItems } from './navigation'
-import { ImagePathTypes } from '../../../interfaces'
-
+import { ImagePathTypes } from '@/interfaces/index'
 const protocal = process?.env?.NEXT_PUBLIC_PROTOCOL
 const apiCall = (route) => {
   return `${protocal}://${process?.env?.NEXT_PUBLIC_DOMAIN_NAME}${route}`
-  //return `${route}`
 }
 const routes = {
   postReq: {
@@ -17,12 +15,14 @@ const routes = {
     hasAssignedImages: apiCall('/api/user/hasAssignedImages'),
     getCatalogQuestionSet: apiCall('/api/catalog/questionSet'),
     tagImage: apiCall('/api/tags/tagImage'),
-    getCatalog: apiCall('/api/catalog/userCatalogs'),
-    getArchive: apiCall('/api/archiv/'),
+
+    getCatalog: apiCall('/api/catalog'),
+    getCatalogDetails: apiCall('/api/catalog/detail'),
+    getArchive: apiCall('/api/archive'),
   },
   getReq: {
     showImage: (type: ImagePathTypes, id: any) =>
-      apiCall(`/api/image/show/${type}/${id}`),
+      apiCall(`/api/image/${id}/${type}`),
     exportUserTag: apiCall('/api/tags/export'),
     exportAllUserTag: apiCall('/api/tags/export/all'),
   },

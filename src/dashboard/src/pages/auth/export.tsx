@@ -21,10 +21,10 @@ interface Props {
 
 import { exportUser, exportAllUser } from '@/components/API/get/exportUsers'
 import { getStartTaggingTableData } from '@/components/API/post/startTaggingData'
+import { getCatalogDetails } from '@/components/API/post/getCatalog'
 
 export const Home = (props: Props): JSX.Element => {
   const { user, catalogs } = props
-
   //catalogs.push("all");
   const exportUserData: any = []
   for (let index = 0; index < catalogs.length; index++) {
@@ -33,6 +33,7 @@ export const Home = (props: Props): JSX.Element => {
   exportUserData.push('all')
   const [selectedCatalogsData, selectedCatalogs] = useState(exportUserData)
   const [random, setRandom] = useState(Math.random())
+  console.log('random value :', random)
   const selectedCheckBox = (id) => {
     let catalogsData = selectedCatalogsData || []
     if (id == 'all') {
@@ -55,7 +56,6 @@ export const Home = (props: Props): JSX.Element => {
     }
 
     selectedCatalogs(catalogsData)
-    console.log('Stetting random number here..', random)
     setRandom(Math.random)
   }
   const setDownloadCsvButton = (role) => {
@@ -125,7 +125,39 @@ export const Home = (props: Props): JSX.Element => {
         navItems={determineNavItems(user)}
         drawer
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}></div>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <ViewImage
+            variant="contained"
+            onClick={async () => {
+              const blob: any = await exportUser()
+              const url = window.URL.createObjectURL(blob)
+              const a = document.createElement('a')
+              a.href = url
+              a.download = 'user.zip'
+              a.click()
+              window.URL.revokeObjectURL(url)
+            }}
+          >
+            {' '}
+            Export Your Labels
+          </ViewImage>
+          {user.data.roles.includes('admin') && (
+            <ViewImage
+              variant="contained"
+              onClick={async () => {
+                const blob: any = await exportAllUser()
+                const url = window.URL.createObjectURL(blob)
+                const a = document.createElement('a')
+                a.href = url
+                a.download = 'admin.zip'
+                a.click()
+                window.URL.revokeObjectURL(url)
+              }}
+            >
+              Export All Labels
+            </ViewImage>
+          )}
+        </div>
         <React.Fragment>
           <ShowExportData
             data={catalogs}
@@ -141,16 +173,8 @@ export const Home = (props: Props): JSX.Element => {
 export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
   //Add user data from db
   const user: any = getSession(context.req)
-  const selectionData = await getStartTaggingTableData({
-    cookie: context?.req?.headers?.cookie,
-    res: context.res,
-  })
-  const UserCatalogs = selectionData.data.advancedResults.data ?? []
+  //
   const catalogs: any[] = []
-  for (let index = 0; index < UserCatalogs.length; index++) {
-    catalogs.push(UserCatalogs[index].name)
-  }
-  console.log('selectionData', selectionData)
   user.data =
     (await getUserDB({
       cookie: context?.req?.headers?.cookie,
@@ -164,6 +188,23 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
         success: false,
         message: 'Error getting User data',
       },
+    }
+  }
+  if (user.data.roles.includes('admin')) {
+    const selectionData = await getCatalogDetails(context?.req?.headers?.cookie)
+    console.log('selectionData', selectionData)
+    const UserCatalogs = selectionData?.data?.catalog || []
+    for (let index = 0; index < UserCatalogs.length; index++) {
+      catalogs.push(UserCatalogs[index].name)
+    }
+  } else {
+    const selectionData = await getStartTaggingTableData({
+      cookie: context?.req?.headers?.cookie,
+      res: context.res,
+    })
+    const UserCatalogs = selectionData.data.advancedResults.data ?? []
+    for (let index = 0; index < UserCatalogs.length; index++) {
+      catalogs.push(UserCatalogs[index].name)
     }
   }
 

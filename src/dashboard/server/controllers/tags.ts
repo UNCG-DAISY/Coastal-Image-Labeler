@@ -52,10 +52,6 @@ const tagImage = asyncHandler(
       })
     }
 
-    //check if any matching tags: DO BEFORE ADDING TAG
-
-    //Now we add in the keys from the overall question set
-
     //get archive and catalog to get question set
     const archive = await ArchiveModel.findById(image.archive)
     if (!archive) {
@@ -267,55 +263,6 @@ async function createCsvFile(fileName, data) {
   })
 }
 
-/*async function createCsvFile(fileName, data) {
-
-    try {
-
-
-        const file = fs.createWriteStream(fileName);
-        file.on('error', function (err) { /!* error handling *!/
-        });
-        data.forEach(value => {
-            // console.log("row")
-            // console.log(value)
-            // console.log('-------------------End row')
-
-            file.write(`${value.join(', ')}\r\n`)
-        });
-        file.end();
-
-        log({
-            message: `Created file at ${fileName}`,
-            type: 'ok'
-        })
-    } catch (error) {
-        console.log(error)
-        log({
-            message: `Failed to create file at ${fileName}`,
-            type: 'error'
-        })
-    }*/
-// return new Promise((resolve, reject) => {
-//   try {
-//     fs.createWriteStream(path.join(__dirname, fileName))
-//     JSON.stringify(data, (err, output) => {
-//       if (err) throw err
-//       fs.writeFile(path.join(__dirname, fileName), output, (err) => {
-//         if (err) throw err
-//         console.log(fileName + ' saved.')
-//         resolve(data)
-//       })
-//     })
-//   } catch (e) {
-//     console.log(
-//       'unable to process the create csv operations some exception occurred :',
-//       e
-//     )
-//     reject(e)
-//   }
-// })
-//}
-
 function createZip(res: any, csvs: any) {
   const archive = archiver('zip', {
     zlib: { level: 9 }, // Sets the compression level.
@@ -336,7 +283,7 @@ function createZip(res: any, csvs: any) {
     )
     fs.unlink(path.join(__dirname, csvs[index].path), (_err) => {
       if (_err) {
-        //
+        console.log('_err', _err)
       }
     })
   }
@@ -358,9 +305,9 @@ const exportAllTags = asyncHandler(
     const data = await processCollectionData(
       tagsAndRelatedCollections,
       catalogNamesFilter
-    ) //this processCollectionData function will extract the collection data and create the csv file for each collection
+    ) //processCollectionData function extracts the collection data and createscsv file for each collection
     if (data.length) {
-      await createZip(res, data) // once all the csv created zip them and send to client/browser
+      await createZip(res, data)
     } else {
       return data
     }
@@ -368,10 +315,6 @@ const exportAllTags = asyncHandler(
 )
 const exportUserTags = asyncHandler(
   async (req: Request, res: ExtenedResponse) => {
-    console.log(
-      'UserID -------------------------------------> ',
-      req.user.data._id
-    )
     const tagsAndRelatedCollections = await TagModel.find({
       userId: req.user.data._id,
     })
@@ -383,16 +326,16 @@ const exportUserTags = asyncHandler(
       filter: req.body.filter === 'true' || req.body.filter == true,
       catalogNames: req.body.catalogNames || [],
     }
-    console.log('catalogNamesFilter :', catalogNamesFilter)
+
     const data = await processCollectionData(
       tagsAndRelatedCollections,
       catalogNamesFilter
-    ) //this processCollectionData function will extract the collection data and create the csv file for each collection
+    ) // processCollectionData function extracts collection data and creates a csv file for each collection
     if (data.length) {
-      await createZip(res, data) // once all the csv created zip them and send to client/browser
+      await createZip(res, data)
     } else {
       return data
-    } // once all the csv created zip them and send to client/browser
+    }
   }
 )
 export { tagImage, exportUserTags, exportAllTags }

@@ -1,6 +1,7 @@
 import express from 'express'
 
 import {
+  allCatalogDetails,
   catalogExists,
   getCatalogQuestionSet,
 } from '@/server/controllers/catalogs'
@@ -17,7 +18,7 @@ import { filterUserCatalogsMiddleware } from '@/server/middlewares/filter/catalo
 import { genericReturn } from '@/server/middlewares/genericReturn'
 import { check } from 'express-validator'
 import { bodyValidation } from '@/server/middlewares/bodyValidation'
-
+import { hasRoles } from '@/middlewares/hasRoles'
 const router = express.Router()
 
 //✔️
@@ -78,6 +79,9 @@ router.route('/exists').post(
   })
 )
 
+router
+  .route('/detail')
+  .post(ensureAuthenticated, insertUser, hasRoles(['admin']), allCatalogDetails)
 //✔️
 router.route('/questionSet').post(
   ...bodyValidation([check('catalogId').isString()]),

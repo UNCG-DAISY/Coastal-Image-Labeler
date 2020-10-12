@@ -11,21 +11,12 @@ interface Props {
 
 export function Row(props: Props) {
   const { row, selectedCheckBox, selectedCatalogsData } = props
-  // const [open, setOpen] = React.useState(false);
+
   const classes = useRowStyles()
 
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
-        {/*       <TableCell>
-                    <IconButton
-                        aria-label="expand row"
-                        size="small"
-                        onClick={() => setOpen(!open)}
-                    >
-                        {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
-                    </IconButton>
-                </TableCell>*/}
         <TableCell component="th" scope="row">
           {console.log(
             'selectedCatalogsData',
