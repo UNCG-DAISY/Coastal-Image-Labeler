@@ -126,7 +126,7 @@ export const Home = (props: Props): JSX.Element => {
         drawer
       >
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <ViewImage
+          {/* {(<ViewImage
             variant="contained"
             onClick={async () => {
               const blob: any = await exportUser()
@@ -140,8 +140,8 @@ export const Home = (props: Props): JSX.Element => {
           >
             {' '}
             Export Your Labels
-          </ViewImage>
-          {user.data.roles.includes('admin') && (
+          </ViewImage>)}  */}
+          {/* {user.data.roles.includes('admin') && (
             <ViewImage
               variant="contained"
               onClick={async () => {
@@ -156,7 +156,7 @@ export const Home = (props: Props): JSX.Element => {
             >
               Export All Labels
             </ViewImage>
-          )}
+          )} */}
         </div>
         <React.Fragment>
           <ShowExportData
