@@ -95,7 +95,7 @@ const tagImage = asyncHandler(
 
     //add in the values from the tag
     Object.keys(tags).forEach((key) => {
-      tagWithDefault[key] = tags[key]
+      tagWithDefault[key] = tags[key] ?? 'NaN'
     })
 
     //create

@@ -52,7 +52,18 @@ router.route('/tagImage').post(
   })
 )
 
-router.route('/skipImage').post(ensureAuthenticated, insertUser, tagImage)
+router.route('/skipImage').post(
+  ensureAuthenticated,
+  insertUser, 
+  hasRoles(['tagger']),
+  tagImage,
+  unassignImage,
+  genericReturn({
+    keys: [],
+    message: 'Skipped Image',
+    success: true,
+  })
+)
 
 router
   .route('/export')
