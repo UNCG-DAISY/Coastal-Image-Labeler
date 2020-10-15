@@ -5,6 +5,7 @@ import { generateRadioDefaults } from './generate/Radio'
 import { QuestionSetDocument } from '@/interfaces/models'
 import determineQuestionType from './determineQuestionType'
 import { SubmitButton, SkipButton } from '@/components/Button/premadeButtons'
+import Box from '@material-ui/core/Box'
 
 interface Props {
   questionSetData: QuestionSetDocument
@@ -13,6 +14,7 @@ interface Props {
     submitTags: (tags: any) => void
   }
   setTag: React.Dispatch<React.SetStateAction<{}>>
+  imageId: string
 }
 
 export default function GenericHookForm(props: Props) {
@@ -29,6 +31,7 @@ export default function GenericHookForm(props: Props) {
       skipImage: () => {},
       submitTags: () => {},
     },
+    imageId,
   } = props
 
   const { skipImage, submitTags } = formFunctions
@@ -105,6 +108,9 @@ export default function GenericHookForm(props: Props) {
               </SubmitButton>
             </div>
           </div>
+          <Typography component="div" variant="overline">
+            <Box color="text.disabled">Image ID: {imageId}</Box>
+          </Typography>
         </FormControl>
       </form>
     </React.Fragment>

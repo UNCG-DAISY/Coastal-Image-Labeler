@@ -70,7 +70,8 @@ export function ImageTag(props: Props) {
   }
 
   function skipImage() {
-    Router.reload()
+    submitTags({})
+    //Router.reload()
   }
 
   return (
@@ -96,6 +97,7 @@ export function ImageTag(props: Props) {
             submitTags: submitTags,
           }}
           setTag={setTag}
+          imageId={imageDocument._id as string}
         />
       </CardContent>
       <ShowTagData tag={tag} open={openModal} setOpen={setOpenModal} />
