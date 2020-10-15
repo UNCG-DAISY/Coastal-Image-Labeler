@@ -54,7 +54,7 @@ router.route('/tagImage').post(
 
 router.route('/skipImage').post(
   ensureAuthenticated,
-  insertUser, 
+  insertUser,
   hasRoles(['tagger']),
   tagImage,
   unassignImage,

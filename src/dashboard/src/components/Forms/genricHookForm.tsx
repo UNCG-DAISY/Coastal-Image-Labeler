@@ -31,7 +31,7 @@ export default function GenericHookForm(props: Props) {
       skipImage: () => {},
       submitTags: () => {},
     },
-    imageId
+    imageId,
   } = props
 
   const { skipImage, submitTags } = formFunctions
@@ -109,9 +109,7 @@ export default function GenericHookForm(props: Props) {
             </div>
           </div>
           <Typography component="div" variant="overline">
-            <Box color="text.disabled">
-              Image ID: {imageId}
-            </Box>
+            <Box color="text.disabled">Image ID: {imageId}</Box>
           </Typography>
         </FormControl>
       </form>
