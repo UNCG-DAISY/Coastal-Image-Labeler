@@ -34,21 +34,21 @@ export const Home = (props): JSX.Element => (
       </Typography>
 
       <Typography variant="h5" component="h1" gutterBottom>
-        Evan Goldstein
+        Evan Goldstein, Ph.D.
       </Typography>
       <Typography variant="body1" component="h1" gutterBottom>
         <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
-          Dr. Goldstein is a Research Scientist in the Dept. of Geography, Environment, and 
+          Evan Goldstein is a Research Scientist in the Dept. of Geography, Environment, and 
           Sustainability at UNCG. You can contact him via email {<EmailLinkEvan />} or via his {<TwitterLinkEvan />} page.
         </Paper>
       </Typography>
 
       <Typography variant="h5" component="h1" gutterBottom>
-        Somya Mohanty
+        Somya Mohanty, Ph.D.
       </Typography>
       <Typography variant="body1" component="h1" gutterBottom>
         <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
-          Dr. Mohanty is an Assistant Profesor in the Dept. of Computer Science at UNCG.
+          Somya Mohanty is an Assistant Profesor in the Dept. of Computer Science at UNCG.
         </Paper>
       </Typography>
 
