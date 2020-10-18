@@ -91,9 +91,9 @@ const LinkedinShah = () => (
 export {
   ColoredLink,
   RepoLink,
-  EmailLink,
+  EmailLinkEvan,
   DocLink,
-  TwitterLink,
+  TwitterLinkEvan,
   EmailLinkShah,
   LinkedinShah,
   DocsLink,

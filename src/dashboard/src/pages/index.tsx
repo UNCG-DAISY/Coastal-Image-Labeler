@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Layout from '@/components/Layout'
-import { RepoLink, EmailLink, DocsLink } from '@/components/ColoredLink'
+import { RepoLink, EmailLinkEvan, DocsLink } from '@/components/ColoredLink'
 import { navigationItems, tabLogoURL } from '@/components/Constants'
 
 export const Home = (): JSX.Element => (
@@ -20,7 +20,7 @@ export const Home = (): JSX.Element => (
             Welcome to the Coastal Image Labeler! Please log in to begin
             labeling images. Check out the GitHub <RepoLink /> and/or the{' '}
             <DocsLink /> to learn more about the project. If you have questions,
-            please contact Evan Goldstein: {<EmailLink />}
+            please contact Evan Goldstein: {<EmailLinkEvan />}
           </Paper>
         </Typography>
       </Box>

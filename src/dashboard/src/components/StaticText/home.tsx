@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography, Paper, Box } from '@material-ui/core'
-import { EmailLink, RepoLink, DocLink } from '@/components/ColoredLink'
+import { EmailLinkEvan, RepoLink, DocLink } from '@/components/ColoredLink'
 
 interface Props {
   displayName: string
@@ -13,7 +13,7 @@ export function HomeText(props: Props) {
         Welcome {displayName}! You can start by clicking &quot;Label New
         Archive&quot; on the left, or resume labeling a catalog you have started
         using the table below. If you want to label more images, please contact
-        Evan Goldstein at {<EmailLink />}. To learn more about this project,
+        Evan Goldstein at {<EmailLinkEvan />}. To learn more about this project,
         check out the code {<RepoLink />} and the project {<DocLink />}.
       </Paper>
     </Typography>
@@ -36,7 +36,7 @@ export function ReviewBeforeSubmit() {
       <Box textAlign="justify" m={1}>
         These are the tags that have been submitted, please review before moving
         on. If there are any errors please contact Evan Goldstein at{' '}
-        {<EmailLink />}
+        {<EmailLinkEvan />}
       </Box>
     </Typography>
   )

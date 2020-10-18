@@ -5,8 +5,8 @@ import Typography from '@material-ui/core/Typography'
 import { GetServerSideProps } from 'next'
 import Layout from '@/components/Layout'
 import {
-  TwitterLink,
-  EmailLink,
+  TwitterLinkEvan,
+  EmailLinkEvan,
   EmailLinkShah,
   LinkedinShah,
   DocsLink,
@@ -38,8 +38,9 @@ export const Home = (props): JSX.Element => (
       </Typography>
       <Typography variant="body1" component="h1" gutterBottom>
         <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
-          Evan Goldstein is a Research Scientist in the Dept. of Geography, Environment, and 
-          Sustainability at UNCG. You can contact him via email {<EmailLinkEvan />} or via his {<TwitterLinkEvan />} page.
+          Evan Goldstein is a Research Scientist in the Dept. of Geography,
+          Environment, and Sustainability at UNCG. You can contact him via email{' '}
+          {<EmailLinkEvan />} or via his {<TwitterLinkEvan />} page.
         </Paper>
       </Typography>
 
@@ -48,7 +49,8 @@ export const Home = (props): JSX.Element => (
       </Typography>
       <Typography variant="body1" component="h1" gutterBottom>
         <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
-          Somya Mohanty is an Assistant Profesor in the Dept. of Computer Science at UNCG.
+          Somya Mohanty is an Assistant Profesor in the Dept. of Computer
+          Science at UNCG.
         </Paper>
       </Typography>
 
