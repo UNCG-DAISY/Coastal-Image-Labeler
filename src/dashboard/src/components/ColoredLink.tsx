@@ -40,7 +40,7 @@ const DocsLink = () => (
   </ColoredLink>
 )
 
-const EmailLink = () => (
+const EmailLinkEvan = () => (
   <ColoredLink
     style={{ color: theme.palette.secondary.main }}
     href="mailto:ebgoldst@uncg.edu"
@@ -59,7 +59,7 @@ const DocLink = () => (
   </ColoredLink>
 )
 
-const TwitterLink = () => (
+const TwitterLinkEvan = () => (
   <ColoredLink
     style={{ color: theme.palette.secondary.main }}
     href="https://twitter.com/ebgoldstein"

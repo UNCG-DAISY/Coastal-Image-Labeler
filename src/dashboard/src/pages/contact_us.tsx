@@ -29,17 +29,26 @@ export const Home = (props): JSX.Element => (
       <Typography variant="body1" component="h1" gutterBottom>
         <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
           Shah Nafis Rafique is the main developer. You can contact him via
-          Email {<EmailLinkShah />} or via his {<LinkedinShah />} page.
+          email {<EmailLinkShah />} or via his {<LinkedinShah />} page.
         </Paper>
       </Typography>
 
       <Typography variant="h5" component="h1" gutterBottom>
-        Dr.Evan Goldstein
+        Evan Goldstein, Ph.D.
       </Typography>
       <Typography variant="body1" component="h1" gutterBottom>
         <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
-          Dr.Evan Goldstein is the Project Supervisor. You can contact him via
-          Email {<EmailLink />} or via his {<TwitterLink />} page.
+          Evan Goldstein is a Research Scientist in the Dept. of Geography, Environment, and 
+          Sustainability at UNCG. You can contact him via email {<EmailLinkEvan />} or via his {<TwitterLinkEvan />} page.
+        </Paper>
+      </Typography>
+
+      <Typography variant="h5" component="h1" gutterBottom>
+        Somya Mohanty, Ph.D.
+      </Typography>
+      <Typography variant="body1" component="h1" gutterBottom>
+        <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
+          Somya Mohanty is an Assistant Profesor in the Dept. of Computer Science at UNCG.
         </Paper>
       </Typography>
 

@@ -21,3 +21,15 @@ sudo certbot --nginx -d dev.coastalimagelabeler.science
 Make sure to select http to https upgrade
 
 In either case Certbot will edit the NGINX config with the matching `server_name`.
+
+## Renew Certificate
+
+To renew the certificate simply run
+```bash title="Renew cert"
+sudo certbot renew --nginx
+```
+
+Or to just dry run it
+```bash title="Dry run"
+sudo certbot renew --dryrun
+```
