@@ -76,22 +76,26 @@ export const Home = (props: Props): JSX.Element => {
             <HomeText displayName={user?.displayName} />
             <Divider />
 
-            <Typography
-              variant="h5"
-              component="h1"
-              gutterBottom
-              style={{ padding: 10 }}
-            >
-              Messages
-            </Typography>
+            {notifications.length > 0 && (
+              <React.Fragment>
+                <Typography
+                  variant="h5"
+                  component="h1"
+                  gutterBottom
+                  style={{ padding: 10 }}
+                >
+                  Messages
+                </Typography>
 
-            {notifications.map((notification, index) => {
-              return (
-                <TextBox date={notification.dateAdded} key={index}>
-                  {notification.message}
-                </TextBox>
-              )
-            })}
+                {notifications.map((notification, index) => {
+                  return (
+                    <TextBox date={notification.dateAdded} key={index}>
+                      {notification.message}
+                    </TextBox>
+                  )
+                })}
+              </React.Fragment>
+            )}
             {hasAssignedImages.length > 0 && resumeData?.length > 0 ? (
               <React.Fragment>
                 <Divider />
