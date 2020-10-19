@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { Typography, Paper, Box } from '@material-ui/core'
 import { EmailLinkEvan, RepoLink, DocLink } from '@/components/ColoredLink'
-
+import moment from 'moment'
 interface Props {
   displayName: string
 }
@@ -15,6 +15,18 @@ export function HomeText(props: Props) {
         using the table below. If you want to label more images, please contact
         Evan Goldstein at {<EmailLinkEvan />}. To learn more about this project,
         check out the code {<RepoLink />} and the project {<DocLink />}.
+      </Paper>
+    </Typography>
+  )
+}
+
+export function TextBox(props: { children: ReactNode; date: Date }) {
+  const { children, date } = props
+  return (
+    <Typography variant="body1" component="h1" gutterBottom>
+      <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
+        Date: {moment(date).format('MMM Do YYYY')} <br />
+        {children}
       </Paper>
     </Typography>
   )

@@ -10,6 +10,7 @@ import image from './image'
 //import imageServeOrder from './imageServeOrder'
 import tags from './tags'
 import questionSet from './questionSet'
+import notification from './notifications'
 
 export function RegisterRoutes(server: Express) {
   //Register routes
@@ -22,4 +23,5 @@ export function RegisterRoutes(server: Express) {
   //server.use(`/api/imageServeOrder`, imageServeOrder)
   server.use(`/api/tags`, tags)
   server.use(`/api/qset`, questionSet)
+  server.use(`/api/notifications`, notification)
 }

@@ -11,9 +11,14 @@ import { makeStyles } from '@material-ui/core/styles'
 import { errorText } from './ErrorText'
 import { YesNoCheckbox } from '@/components/Button/Checkbox/premadeCheckboxButtons'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
 }))
 
@@ -28,6 +33,7 @@ function generateCheckbox(checkboxQuestions, values) {
     errorMessage,
     docLink,
   } = checkboxQuestions
+  const spacing = checkboxQuestions?.spacing ?? {}
 
   const classes = useStyles()
 
@@ -39,9 +45,10 @@ function generateCheckbox(checkboxQuestions, values) {
         {generateLabel({ label, link: docLink })} {errorMessage}
       </FormLabel>
       <FormGroup row className={classes.root}>
-        <Grid container>
+        {/* <div className={classes.root}> */}
+        <Grid container spacing={2}>
           {buttons.map((checkboxButton, index) => (
-            <Grid item xs={2} key={`${key}-checkbox-${index}`}>
+            <Grid item {...spacing} key={`${key}-checkbox-${index}`}>
               <FormControlLabel
                 key={checkboxButton.value}
                 label={`${checkboxButton.name}`}
@@ -73,6 +80,7 @@ function generateCheckbox(checkboxQuestions, values) {
             </Grid>
           ))}
         </Grid>
+        {/* </div> */}
       </FormGroup>
       {errorText({ key, errorMessage, label, min, max }, { errors })}
     </FormControl>
