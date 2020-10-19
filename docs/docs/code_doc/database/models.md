@@ -182,6 +182,27 @@ type CheckboxQuestion = {
     name: string,
     value: string
   }[]
+
+  //This spacing is option. If you have this, it makes it so that the checkboxes 
+  //show up in a nice organized grid pattern. For example you would something like
+  //spacing: {lg:3} which is probably the best one the number has to be 
+  //between 1 and 12 (1 usually doesnt work) and the lg,md,sm,and xs is a breakpoint.
+  //lg is large, it will apply the spacing on large screens, if the screen gets 
+  //smaller then it doesnt apply it and so the checkboxes try to just fit
+  //on the screen rather then try to be organized in straight columns and rows.
+  spacing?:
+    | {
+        lg: number
+      }
+    | {
+        md: number
+      }
+    | {
+        sm: number
+      }
+    | {
+        xs: number
+      }
 }
 
 
@@ -254,6 +275,28 @@ export interface TagDocument extends Document {
   date: Date
   ignoreFields?: string[]
   image?: ImageDocument
+}
+```
+
+
+### Notification
+
+This is global messages to show to users. 
+
+```js title="Notification model"
+export interface NotificationDocument extends Document {
+  message: string
+  dateAdded: Date
+}
+```
+
+It just has a message and the date of the message. On the home page it shows the recent message as the top one.
+The message can even have html and css inside it, for example like so.
+
+```json title="Example notification"
+{
+  "dateAdded": "2020-10-19T02:50:20.406+00:00",
+  "message": "<a href='/#123' style='text-decoration: none; color: #ffe59e'>test</a>."
 }
 ```
 

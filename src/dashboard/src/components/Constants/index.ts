@@ -24,6 +24,7 @@ const routes = {
       apiCall(`/api/image/${id}/${type}`),
     exportUserTag: apiCall('/api/tags/export'),
     exportAllUserTag: apiCall('/api/tags/export/all'),
+    getGlobalNotifications: apiCall('/api/notifications'),
   },
 }
 const uiConstants = {

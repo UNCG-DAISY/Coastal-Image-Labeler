@@ -6,6 +6,7 @@ import { ImageModel } from './Image'
 import { TagModel } from './Tag'
 import { UserModel } from './User'
 import { QuestionSetModel } from './QuestionSet'
+import { NotificationModel } from './Notification'
 import { log } from '../utils/logger'
 // import imageServeOrderDefault from '../../data/default/imageServeOrder.json'
 import questionSetDefault from '../../data/default/questionSet.json'
@@ -20,6 +21,7 @@ export function RegisterModels() {
     TagModel,
     UserModel,
     QuestionSetModel,
+    NotificationModel,
   ]
   const names = []
   models.map((model) => names.push(model.modelName))

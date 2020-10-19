@@ -115,6 +115,11 @@ export interface TagDocument extends Document {
   archive?: ArchiveDocument
 }
 
+export interface NotificationDocument extends Document {
+  message: string
+  dateAdded: Date
+}
+
 // export interface ImageServeOrderDocument extends Document {
 //   type: 'random' | 'sequential'
 //   data?: any
@@ -145,6 +150,20 @@ type CheckboxQuestion = {
 
   min?: number
   max?: number
+
+  spacing?:
+    | {
+        lg: number
+      }
+    | {
+        md: number
+      }
+    | {
+        sm: number
+      }
+    | {
+        xs: number
+      }
 
   buttons: {
     name: string

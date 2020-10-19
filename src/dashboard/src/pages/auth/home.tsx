@@ -6,12 +6,15 @@ import getSession from '@/components/Utils/Auth/getSession'
 import { getUserDB } from '@/components/API/post/getUserDB'
 import ErrorCard from '@/components/ErrorCards'
 import { determineNavItems } from '@/components/Utils/Auth/determineNavItems'
-import { HomeText, NoAssigned } from '@/components/StaticText/home'
+import { HomeText, NoAssigned, TextBox } from '@/components/StaticText/home'
 import { ResumeTagging } from '@/components/Tables/ResumeTagging'
 import { ResumeTaggingDataCatalog, UserProp } from '@/interfaces/index'
 import { getResumeTableData } from '@/components/API/post/getResumeTableData'
 import { getHasAssignedImages } from '@/components/API/post/userHasAssignedImages'
 import { tabLogoURL } from '@/components/Constants'
+import { getGlobalNotifications } from '@/components/API/get/getGlobalNotifications'
+import { NotificationDocument } from '@/interfaces/models'
+import { Typography, Divider } from '@material-ui/core'
 
 interface Props {
   user: UserProp
@@ -19,10 +22,11 @@ interface Props {
   success: boolean
   message?: string
   hasAssignedImages: any[]
+  notifications: NotificationDocument[]
 }
 
 export const Home = (props: Props): JSX.Element => {
-  const { user, success, message, hasAssignedImages } = props
+  const { user, success, message, hasAssignedImages, notifications } = props
   const [resumeData, setResumeData] = useState<ResumeTaggingDataCatalog[]>(null)
 
   async function getResumeObject() {
@@ -58,9 +62,53 @@ export const Home = (props: Props): JSX.Element => {
           <ErrorCard message={message} title="Error" />
         ) : (
           <React.Fragment>
+            <Typography
+              variant="h5"
+              component="h1"
+              gutterBottom
+              style={{ padding: 10 }}
+            >
+              Welcome
+            </Typography>
+
             <HomeText displayName={user?.displayName} />
+            <Divider />
+
+            {notifications.length > 0 && (
+              <React.Fragment>
+                <Typography
+                  variant="h5"
+                  component="h1"
+                  gutterBottom
+                  style={{ padding: 10 }}
+                >
+                  Messages
+                </Typography>
+
+                {notifications.map((notification, index) => {
+                  return (
+                    <TextBox
+                      date={notification.dateAdded}
+                      key={index}
+                      message={notification.message}
+                    />
+                  )
+                })}
+              </React.Fragment>
+            )}
             {hasAssignedImages.length > 0 && resumeData?.length > 0 ? (
-              <ResumeTagging data={resumeData} />
+              <React.Fragment>
+                <Divider />
+                <Typography
+                  variant="h5"
+                  component="h1"
+                  gutterBottom
+                  style={{ padding: 10 }}
+                >
+                  Images to Resume Tagging
+                </Typography>
+                <ResumeTagging data={resumeData} />
+              </React.Fragment>
             ) : (
               <React.Fragment>
                 <NoAssigned />
@@ -76,6 +124,7 @@ export const Home = (props: Props): JSX.Element => {
 export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
   //Add user data from db
   const user: any = getSession(context.req)
+
   user.data =
     (await getUserDB({
       cookie: context?.req?.headers?.cookie,
@@ -96,11 +145,14 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
     res: context.res,
   })
 
+  const notifications = await getGlobalNotifications()
+
   return {
     props: {
       success: true,
       user,
       hasAssignedImages: hasAssignedImages.data,
+      notifications: notifications.data.notifications,
     },
   }
 }
