@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import { Typography, Paper, Box } from '@material-ui/core'
 import { EmailLinkEvan, RepoLink, DocLink } from '@/components/ColoredLink'
 import moment from 'moment'
@@ -20,13 +20,13 @@ export function HomeText(props: Props) {
   )
 }
 
-export function TextBox(props: { children: ReactNode; date: Date }) {
-  const { children, date } = props
+export function TextBox(props: { message: string; date: Date }) {
+  const { message, date } = props
   return (
     <Typography variant="body1" component="h1" gutterBottom>
       <Paper elevation={3} variant="outlined" style={{ padding: 10 }}>
-        Date: {moment(date).format('MMM Do YYYY')} <br />
-        {children}
+        Date: {moment(date).format('MMMM Do YYYY, h:mm:ss a')} <br />
+        <div dangerouslySetInnerHTML={{ __html: message }} />
       </Paper>
     </Typography>
   )

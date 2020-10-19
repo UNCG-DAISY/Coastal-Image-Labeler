@@ -29,8 +29,6 @@ export const Home = (props: Props): JSX.Element => {
   const { user, success, message, hasAssignedImages, notifications } = props
   const [resumeData, setResumeData] = useState<ResumeTaggingDataCatalog[]>(null)
 
-  console.log(notifications)
-
   async function getResumeObject() {
     //Get resume table data
     if (hasAssignedImages.length > 0) {
@@ -89,9 +87,11 @@ export const Home = (props: Props): JSX.Element => {
 
                 {notifications.map((notification, index) => {
                   return (
-                    <TextBox date={notification.dateAdded} key={index}>
-                      {notification.message}
-                    </TextBox>
+                    <TextBox
+                      date={notification.dateAdded}
+                      key={index}
+                      message={notification.message}
+                    />
                   )
                 })}
               </React.Fragment>
