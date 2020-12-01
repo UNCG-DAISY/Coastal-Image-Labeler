@@ -1,7 +1,3 @@
-/*
-    Model for storms.
-*/
-
 import { Schema, model, Types, HookNextFunction } from 'mongoose'
 import { CatalogModelType } from '../../interfaces/models'
 import { ArchiveModel } from './Archive'
@@ -19,6 +15,8 @@ const catalogScheme: Schema = new Schema(
       maxlength: [128, 'Name can not be longer than 128 characters'],
     },
     path: pathValidation,
+    zenodoInfo: [Object],
+    zenodoData: Object,
     catalogInfo: {
       year: {
         type: Number,

@@ -10,6 +10,7 @@ import {
   tagImage,
   exportUserTags,
   exportAllTags,
+  exportZenodoTags,
 } from '@/server/controllers/tags'
 import { unassignImage } from '@/server/controllers/assignedImages'
 import { check } from 'express-validator'
@@ -65,4 +66,8 @@ router
 router
   .route('/export/all')
   .post(ensureAuthenticated, insertUser, hasRoles(['admin']), exportAllTags)
+
+router
+  .route('/export/zenodo')
+  .post(ensureAuthenticated, insertUser, hasRoles(['admin']), exportZenodoTags)
 export default router

@@ -5,10 +5,11 @@ import { TagModel } from '@/models/Tag'
 import { ImageModel } from '@/models/Image'
 import { imageInCatalog } from '@/utils/checks/imageInCatalog'
 import { getQSetKeys } from '@/utils/getQuestionSetKeys'
+import { upload } from '@/utils/zenodo'
 import { log } from '@/utils/logger'
-import { ArchiveModel } from '../models/Archive'
-import { CatalogModel } from '../models/Catalog'
-import { QuestionSetModel } from '../models/QuestionSet'
+import { ArchiveModel } from '@/models/Archive'
+import { CatalogModel } from '@/models/Catalog'
+import { QuestionSetModel } from '@/models/QuestionSet'
 import fs from 'fs'
 import path from 'path'
 import archiver from 'archiver'
@@ -301,7 +302,7 @@ const exportAllTags = asyncHandler(
       filter: req.body.filter === 'true' || req.body.filter == true,
       catalogNames: req.body.catalogNames || [],
     }
-    //console.log('tags :', tagsAndRelatedCollections.length)
+
     const data = await processCollectionData(
       tagsAndRelatedCollections,
       catalogNamesFilter
@@ -338,4 +339,171 @@ const exportUserTags = asyncHandler(
     }
   }
 )
-export { tagImage, exportUserTags, exportAllTags }
+
+async function UpdateCatalogs(calalogsId, zenodoData) {
+  try {
+    await CatalogModel.updateOne({ _id: calalogsId }, { $set: zenodoData })
+  } catch (error) {
+    console.log('UploadToZenodoUploadToZenodo--->', error)
+  }
+}
+
+async function UploadToZenodo(
+  res,
+  data: {
+    metadata: any
+    filePath: string
+    fileName: string
+    calalogsId: string
+    compaireData: any
+    catalogData: any
+  }
+) {
+  try {
+    const contents = fs.createReadStream(data.filePath, {})
+    if (data.metadata.Keyword) {
+      data.metadata.Keyword = data.metadata.Keyword.split(',')
+    }
+    const result: any = await upload(data.metadata, {
+      fileName: data.fileName,
+      value: contents,
+    })
+    //here we are checking if we have catalog and its zenodo publised data it will return that otherwise empty data
+    const zenodoInfo = data.catalogData.zenodoInfo || []
+    const zenodoData = data.catalogData.zenodoData || {}
+    zenodoInfo.push({
+      doi: result.doi,
+      id: result.id,
+      created: result.created,
+      links: result.links.record_html,
+    })
+    zenodoData[result.doi] = JSON.stringify(data.compaireData)
+    //here once we uploaded the data to zenodo we are updating catolg collection into backend
+    UpdateCatalogs(data.calalogsId, {
+      zenodoInfo: zenodoInfo,
+      zenodoData: zenodoData,
+    })
+    log({
+      message: `error in upload zenodo`,
+      type: 'info',
+    })
+    return res.status(200).json({
+      success: true,
+      data: {
+        doi: result.doi,
+        id: result.id,
+        created: result.created,
+        links: result.links.record_html,
+      },
+    })
+  } catch (error) {
+    console.log('UploadToZenodoUploadToZenodo--->', error)
+    return res.status(400).json({
+      success: false,
+      data: { error },
+    })
+  }
+}
+
+function getZenodoCollectionData(collections, catalogName) {
+  //
+  const catalogData = {}
+  catalogData[catalogName] = []
+  for (let index = 0; index < collections.length; index++) {
+    catalogData[catalogName].push(getCsvObject(collections[index]))
+  }
+  return catalogData
+}
+
+async function processZenodoCollectionData(catalogData, catalogName) {
+  const catalogFileName =
+    catalogName.split(' ').join('').split('.').join('') + '_' + Date.now()
+  return await extractCollectionData(catalogData[catalogName], catalogFileName)
+}
+
+function compareAndGetData(tagsAndRelatedCollections, object) {
+  let data = null
+  if (tagsAndRelatedCollections.zenodoData) {
+    const zenodo = tagsAndRelatedCollections.zenodoData
+    for (const key in zenodo) {
+      if (Object.prototype.hasOwnProperty.call(zenodo, key)) {
+        if (JSON.stringify(object) === zenodo[key]) {
+          const doiData = ArrayIntoObject(
+            tagsAndRelatedCollections.zenodoInfo,
+            'doi'
+          )
+          data = doiData[key]
+          data['already'] = true
+        }
+      }
+    }
+  }
+
+  return data
+}
+
+function ArrayIntoObject(data, key) {
+  const result = {}
+  for (let index = 0; index < data.length; index++) {
+    if (data[index][key]) {
+      result[data[index][key]] = data[index]
+    }
+  }
+
+  return result
+}
+
+//calling zenodo tag
+const exportZenodoTags = asyncHandler(
+  async (req: Request, res: ExtenedResponse) => {
+    const tagsAndRelatedCollections = await TagModel.find({
+      catalogId: req.body.catalogId,
+    })
+      .populate('archive')
+      .populate('user')
+      .populate('catalog')
+      .populate('image')
+
+    if (tagsAndRelatedCollections && tagsAndRelatedCollections.length) {
+      const catalogName = tagsAndRelatedCollections[0]['catalog']
+        ? tagsAndRelatedCollections[0]['catalog'].name
+        : undefined
+      //this method will get the zenodo information from catlaog collection
+      const prevousCatlogZenodoData = getZenodoCollectionData(
+        tagsAndRelatedCollections,
+        catalogName
+      )
+      //this function will compare the data from backend and if we dont have data it will return null.
+      const result = compareAndGetData(
+        tagsAndRelatedCollections[0]['catalog'],
+        prevousCatlogZenodoData
+      )
+
+      if (result) {
+        return res.status(200).json({
+          success: true,
+          data: result,
+        })
+      }
+      const data = await processZenodoCollectionData(
+        prevousCatlogZenodoData,
+        catalogName
+      )
+
+      await UploadToZenodo(res, {
+        metadata: req.body,
+        filePath: path.join(__dirname, data.path),
+        fileName: catalogName + '.csv',
+        calalogsId: req.body.catalogId,
+        compaireData: prevousCatlogZenodoData,
+        catalogData: tagsAndRelatedCollections[0]['catalog'],
+      })
+    } else {
+      return res.status(404).json({
+        success: false,
+        data: { message: 'Invalid catolog ID' },
+      })
+    }
+  }
+)
+export { tagImage, exportUserTags, exportAllTags, exportZenodoTags }

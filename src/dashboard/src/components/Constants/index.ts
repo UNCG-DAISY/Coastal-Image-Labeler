@@ -24,6 +24,7 @@ const routes = {
     showImage: (type: ImagePathTypes, id: any) =>
       apiCall(`/api/image/${id}/${type}`),
     exportUserTag: apiCall('/api/tags/export'),
+    exportZenodoTag: apiCall('/api/tags/export/zenodo'),
     exportAllUserTag: apiCall('/api/tags/export/all'),
   },
 }

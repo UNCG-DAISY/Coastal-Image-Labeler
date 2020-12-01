@@ -33,6 +33,12 @@ declare namespace cilDashboard {
     tagged: number
     archives: ResumeTaggingDataArchive[]
   }
+  export interface ZenodoInfo {
+    doi: string
+    created: string
+    links: string
+    id: number
+  }
 
   export interface CatalogInfo {
     year: number

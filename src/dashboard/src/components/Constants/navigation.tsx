@@ -66,6 +66,16 @@ export const exportTags: NavItem = {
     color: theme.palette.secondary.main,
   },
 }
+
+export const uploadCatalogs: NavItem = {
+  name: 'Upload Zenodo',
+  route: '/auth/uploadZenodo',
+  icon: (props) => <CloudDownloadIcon {...props} />,
+  style: {
+    color: theme.palette.secondary.main,
+  },
+}
+
 export const admin: NavItem = {
   name: 'Admin',
   route: '/auth/admin',

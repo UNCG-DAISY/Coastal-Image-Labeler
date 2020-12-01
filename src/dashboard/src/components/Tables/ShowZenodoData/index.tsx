@@ -11,12 +11,12 @@ import { Row } from './Row'
 
 interface Props {
   data: any[]
-  selectedCheckBox: any
-  selectedCatalogsData: any
+  role: any
+  zenoButton: any
 }
 
-export function ShowExportData(props: Props) {
-  const { data, selectedCheckBox, selectedCatalogsData } = props
+export function ShowZenodoData(props: Props) {
+  const { data, zenoButton, role } = props
   const classes = useRowStyles()
 
   return (
@@ -24,31 +24,17 @@ export function ShowExportData(props: Props) {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow className={classes.header}>
+            <TableCell />
             <TableCell className={classes.headerText}>
-              <input
-                id="all"
-                checked={selectedCatalogsData.indexOf('all') >= 0}
-                onChange={(event) => {
-                  event.stopPropagation()
-                  selectedCheckBox('all')
-                }}
-                type="checkbox"
-              ></input>
-              <label htmlFor="all"></label>
+              {' '}
+              Select A Catalog And Upload To Zenodo
             </TableCell>
-            <TableCell className={classes.headerText}>
-              Select Specific Catalog To Download{' '}
-            </TableCell>
+            <TableCell className={classes.headerText} align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <Row
-              key={row}
-              row={row}
-              selectedCheckBox={selectedCheckBox}
-              selectedCatalogsData={selectedCatalogsData}
-            />
+            <Row key={row.name} row={row} zenoButton={zenoButton} role={role} />
           ))}
         </TableBody>
       </Table>
