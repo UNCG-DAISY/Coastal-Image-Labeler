@@ -10,7 +10,7 @@ Additionally you can read more about the packages on the blog post [here](../../
 
 ## Server/Site
 
-These are the noteable packages that are used in the project. A full list can be found in the corresponding `package.json` files.
+These are the notable packages that are used in the project. A full list can be found in the corresponding `package.json` files.
 
 ### @material-ui/core
 
@@ -35,7 +35,7 @@ Related to express package [here](#express). Handles session management and toke
 
 ### express-validator
 
-This packages help abstract out request body and param validation to ensure that the correct data is sent. 
+This package help abstract out request body and param validation to ensure that the correct data is sent. 
 
 ### mongoose
 
@@ -87,7 +87,7 @@ Unit test package.
 
 ### node-mocks-http
 
-Allows to create fake Request and Response Objects for unit testing.
+Allows creation of fake Request and Response Objects for unit testing.
 
 ### eslint
 
