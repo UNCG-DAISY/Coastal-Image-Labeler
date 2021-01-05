@@ -50,7 +50,7 @@ The Dashboard has 6 important folders under `src/dashboard`.
 - Code for the frontend site.
 - Inside the site folder are the following.
     - `pages` - Which are the pages of the website. <Highlight color="#7db343" text="#000">**Note:**</Highlight> Any page inside `pages/auth/` will require the user to be logged in, this is ensured by the server.
-    - `components`  - Reuseble components for the website such as the tagging form, or various buttons.
+    - `components`  - Reusable components for the website such as the tagging form, or various buttons.
 
 ### tests
 
