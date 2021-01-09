@@ -11,13 +11,15 @@ import {
   QuestionSetDocument,
   CatalogDocument,
   ArchiveDocument,
+  QuestionSetQuestions,
+  DoddleQuestion,
 } from '@/interfaces/models'
 import React from 'react'
 import Router from 'next/router'
 import { SuccessErrorBar } from '@/components/Snackbar'
 import { submitImageTags } from '@/components/API/post/submitTags'
 import { routes } from '@/components/Constants'
-
+import DoddleOnImage from '@/components/Doddle'
 interface Props {
   user: UserProp
   imageDocument: ImageDocument
@@ -36,6 +38,7 @@ export function ImageTag(props: Props) {
   const [snackbarTime, setSnackbarTime] = React.useState(2000)
   const [snackbarStatus, setSnackbarStatus] = React.useState(false)
   const [snackbarMessage, setSnackbarMessage] = React.useState('')
+
   const handleClick = () => {
     setSnackbar(true)
   }
@@ -71,7 +74,49 @@ export function ImageTag(props: Props) {
 
   function skipImage() {
     submitTags({})
-    //Router.reload()
+  }
+
+  const doddleQuestion: DoddleQuestion[] = questionSetDocument.questions.filter(
+    (question: QuestionSetQuestions) => {
+      if (question.type == 'doddleDraw') return true
+    }
+  )
+  const containsDoddle = doddleQuestion.length > 0
+
+  function determineCardContent() {
+    if (containsDoddle) {
+      return (
+        <CardContent>
+          <DoddleOnImage
+            questionSet={questionSetDocument}
+            imageDocument={imageDocument}
+          />
+        </CardContent>
+      )
+    }
+
+    return (
+      <React.Fragment>
+        <ImageContainer
+          compressedLink={routes.getReq.showImage(
+            'compressed',
+            imageDocument._id
+          )}
+          originalLink={routes.getReq.showImage('original', imageDocument._id)}
+        />
+        <CardContent>
+          <GenericHookForm
+            questionSetData={questionSetDocument}
+            formFunctions={{
+              skipImage: skipImage,
+              submitTags: submitTags,
+            }}
+            setTag={setTag}
+            imageId={imageDocument._id as string}
+          />
+        </CardContent>
+      </React.Fragment>
+    )
   }
 
   return (
@@ -82,24 +127,7 @@ export function ImageTag(props: Props) {
         style={{ color: theme.palette.primary.light }}
         subheaderStyle={{ color: theme.palette.secondary.main }}
       />
-      <ImageContainer
-        compressedLink={routes.getReq.showImage(
-          'compressed',
-          imageDocument._id
-        )}
-        originalLink={routes.getReq.showImage('original', imageDocument._id)}
-      />
-      <CardContent>
-        <GenericHookForm
-          questionSetData={questionSetDocument}
-          formFunctions={{
-            skipImage: skipImage,
-            submitTags: submitTags,
-          }}
-          setTag={setTag}
-          imageId={imageDocument._id as string}
-        />
-      </CardContent>
+      {determineCardContent()}
       <ShowTagData tag={tag} open={openModal} setOpen={setOpenModal} />
       {openSnackbar && (
         <SuccessErrorBar

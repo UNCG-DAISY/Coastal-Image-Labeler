@@ -194,11 +194,27 @@ type TextFieldQuestion = {
   rows: number
 }
 
+type DoddleQuestion = {
+  type: 'doddleDraw'
+  required: boolean
+  label: string
+  colors: {
+    label: string
+    color: string
+  }[]
+  largestAxisMaxSize: number
+  initBrushSize: number
+  initLazyRadius: number
+  docLink: string
+  key: string
+}
+
 type QuestionSetQuestions =
   | TextFieldQuestion
   | ButtonSubmitQuestion
   | CheckboxQuestion
   | RadioQuestion
+  | DoddleQuestion
 
 export interface QuestionSetDocument extends Document {
   name: string
