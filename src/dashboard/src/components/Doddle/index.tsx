@@ -143,6 +143,7 @@ export default function DoddleOnImage(props: Props) {
               helperText="Image Size (largest axis)"
               defaultValue={imgMaxSize}
               onChange={(event) => {
+                FIX NEGATIVE VALUE
                 const val = parseInt(event.target.value)
                 setImgMaxSize(parseInt(event.target.value))
                 updateImageRatio(imgHeight, imgWidth, val)
@@ -158,10 +159,13 @@ export default function DoddleOnImage(props: Props) {
                   helperText="Size of brush"
                   defaultValue={doddleQuestion.initBrushSize}
                   onChange={(event) => {
-                    setBrushSize(
+                    let size =
                       parseInt(event.target.value) ??
-                        doddleQuestion.initBrushSize
-                    )
+                      doddleQuestion.initBrushSize
+                    if (size <= 0) {
+                      size = 1
+                    }
+                    setBrushSize(size)
                   }}
                   style={{ maxWidth: 100 }}
                   value={brushSize}
@@ -190,10 +194,13 @@ export default function DoddleOnImage(props: Props) {
                   helperText="Size of lazy radius"
                   defaultValue={doddleQuestion.initLazyRadius}
                   onChange={(event) => {
-                    setLazyRadius(
+                    let radius =
                       parseInt(event.target.value) ??
-                        doddleQuestion.initLazyRadius
-                    )
+                      doddleQuestion.initBrushSize
+                    if (radius <= 0) {
+                      radius = 1
+                    }
+                    setLazyRadius(radius)
                   }}
                   style={{ maxWidth: 140 }}
                   value={lazyRadius}
