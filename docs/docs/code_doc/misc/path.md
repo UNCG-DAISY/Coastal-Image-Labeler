@@ -43,4 +43,4 @@ const keys = ['compressed', 'gradcam','testingCoolNewPath']
 //rest of the file is here
 ```
 
-And thats it, the server and CLI will recognize the new path on restart/rebuild.
+And that's it, the server and CLI will recognize the new path on restart/rebuild.

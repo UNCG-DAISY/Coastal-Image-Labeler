@@ -10,7 +10,7 @@ The following set of documentation is focused on the code base, providing steps 
 
 - TypeScript used across entire project.
 - Expanded frontend components for easier extension.
-- Created more atomic middleswares.
+- Created more atomic middlewares.
 - Utilized Mongoose hooks (on save update image count per archive/catalog or for validation).
 - Addition of new models (Tag, AssignedImages).
 - Use of PM2 for running server and writing logs.

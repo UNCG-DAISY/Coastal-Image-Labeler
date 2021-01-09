@@ -1,6 +1,6 @@
 ---
 id: cicd
-title: CD/CD
+title: CI/CD
 sidebar_label: CI/CD
 ---
 
