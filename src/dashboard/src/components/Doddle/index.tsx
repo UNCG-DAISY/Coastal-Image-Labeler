@@ -17,6 +17,7 @@ import Grid from '@material-ui/core/Grid'
 import ReplayIcon from '@material-ui/icons/Replay'
 import Divider from '@material-ui/core/Divider'
 import CanvasDraw from './canvasDraw'
+import { routes } from '@/components/Constants'
 // const testImage =
 //   'https://nationalinterest.org/sites/default/files/main_images/G69%20%281%29.jpg'
 
@@ -26,9 +27,12 @@ interface Props {
 }
 
 export default function DoddleOnImage(props: Props) {
-  const { questionSet } = props
-  const drawingImage =
-    'https://nationalinterest.org/sites/default/files/main_images/G69%20%281%29.jpg' //imageDocument.path.compressed
+  const { questionSet, imageDocument} = props
+  const drawingImage = routes.getReq.showImage(
+    'compressed',
+    imageDocument._id
+  )
+  
   const doddleQuestion: DoddleQuestion = questionSet.questions.filter(
     (question: QuestionSetQuestions) => {
       if (question.type == 'doddleDraw') return true
@@ -157,7 +161,7 @@ export default function DoddleOnImage(props: Props) {
                   id="brushSizer"
                   type="number"
                   helperText="Size of brush"
-                  defaultValue={doddleQuestion.initBrushSize}
+                  //defaultValue={doddleQuestion.initBrushSize}
                   onChange={(event) => {
                     let size =
                       parseInt(event.target.value) ??
@@ -192,7 +196,7 @@ export default function DoddleOnImage(props: Props) {
                   id="lazySizer"
                   type="number"
                   helperText="Size of lazy radius"
-                  defaultValue={doddleQuestion.initLazyRadius}
+                  //defaultValue={doddleQuestion.initLazyRadius}
                   onChange={(event) => {
                     let radius =
                       parseInt(event.target.value) ??
