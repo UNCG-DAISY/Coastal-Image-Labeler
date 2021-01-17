@@ -10,6 +10,7 @@ interface Props {
   brushColor: string
   lazyRadius: number
   brushSize: number
+  onChange: () => void
 }
 
 export default function MyCanvas(props: Props) {
@@ -22,6 +23,7 @@ export default function MyCanvas(props: Props) {
     brushColor,
     lazyRadius,
     brushSize,
+    onChange,
   } = props
   return (
     <CanvasDraw
@@ -33,6 +35,7 @@ export default function MyCanvas(props: Props) {
       brushColor={brushColor}
       lazyRadius={lazyRadius}
       brushRadius={brushSize}
+      onChange={onChange}
     />
   )
 }

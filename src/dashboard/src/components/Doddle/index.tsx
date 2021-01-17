@@ -12,12 +12,13 @@ import {
 // import Button from '@material-ui/core/Button'
 import ErrorCard from '@/components/ErrorCards'
 import BrushIcon from '@material-ui/icons/Brush'
-import { FormControlLabel, IconButton } from '@material-ui/core'
+import { Button, FormControlLabel, IconButton } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import ReplayIcon from '@material-ui/icons/Replay'
 import Divider from '@material-ui/core/Divider'
 import CanvasDraw from './canvasDraw'
 import { routes } from '@/components/Constants'
+import LineHistoryTable from './lineHistory'
 // const testImage =
 //   'https://nationalinterest.org/sites/default/files/main_images/G69%20%281%29.jpg'
 
@@ -27,12 +28,9 @@ interface Props {
 }
 
 export default function DoddleOnImage(props: Props) {
-  const { questionSet, imageDocument} = props
-  const drawingImage = routes.getReq.showImage(
-    'compressed',
-    imageDocument._id
-  )
-  
+  const { questionSet, imageDocument } = props
+  const drawingImage = routes.getReq.showImage('compressed', imageDocument._id) //testImage
+
   const doddleQuestion: DoddleQuestion = questionSet.questions.filter(
     (question: QuestionSetQuestions) => {
       if (question.type == 'doddleDraw') return true
@@ -49,9 +47,11 @@ export default function DoddleOnImage(props: Props) {
   const [brushColor, setBrushColor] = useState(doddleQuestion.colors[0].color)
   const [brushSize, setBrushSize] = useState(doddleQuestion.initBrushSize)
   const [lazyRadius, setLazyRadius] = useState(doddleQuestion.initLazyRadius)
-  const [saveableCanvas, setSaveableCanvas] = useState(
-    useRef<{ getSaveData: any }>(null)
-  )
+
+  let saveableCanvas: any = null
+  let setSaveableCanvas: any = null
+  ;[saveableCanvas, setSaveableCanvas] = useState(useRef(null))
+  const [lineData, setLineData] = useState([])
   //let saveableCanvas = useRef<{ getSaveData: any }>(null)
   const [loadingImage, setLoadingImage] = useState('loading')
   // let loadableCanvas = useRef<{ getSaveData: any }>(null)
@@ -90,11 +90,11 @@ export default function DoddleOnImage(props: Props) {
       setImgHeight(img.height)
       setImgMaxSize(doddleQuestion.largestAxisMaxSize)
       setLoadingImage('loaded')
+      setLazyRadius(doddleQuestion.initLazyRadius)
     }
     img.onerror = () => {
       setLoadingImage('error')
     }
-    console.log(saveableCanvas)
   }, [])
 
   function determineContent() {
@@ -123,14 +123,6 @@ export default function DoddleOnImage(props: Props) {
           <div>
             {/* @ts-ignore */}
             <CanvasDraw
-              // canvasWidth={imgWidth * imageRatio}
-              // canvasHeight={imgHeight * imageRatio}
-              // loadTimeOffset={10}
-              // imgSrc={drawingImage}
-              // ref={(canvasDraw) => (saveableCanvas = canvasDraw)}
-              // brushColor={brushColor}
-              // lazyRadius={lazyRadius}
-              // brushRadius={brushSize}
               imgWidth={imgWidth}
               imageRatio={imageRatio}
               imgHeight={imgHeight}
@@ -139,6 +131,13 @@ export default function DoddleOnImage(props: Props) {
               brushColor={brushColor}
               lazyRadius={lazyRadius}
               brushSize={brushSize}
+              onChange={() => {
+                const objData = JSON.parse(saveableCanvas.getSaveData() || '{}')
+                console.log(objData.width, objData.height)
+                console.log(objData.lines[0])
+
+                setLineData(objData.lines)
+              }}
             />
             <Divider style={{ marginTop: 10, marginBottom: 20 }} />
             {/* <TextField
@@ -180,6 +179,7 @@ export default function DoddleOnImage(props: Props) {
                       aria-label="Reset size"
                       component="span"
                       size="small"
+                      color="secondary"
                     >
                       <ReplayIcon />
                     </IconButton>
@@ -192,6 +192,19 @@ export default function DoddleOnImage(props: Props) {
                 />
               </div>
               <div>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  startIcon={<ReplayIcon />}
+                  onClick={() => {
+                    saveableCanvas.undo()
+                  }}
+                  style={{ marginTop: 5 }}
+                >
+                  Undo
+                </Button>
+              </div>
+              {/* <div>
                 <TextField
                   id="lazySizer"
                   type="number"
@@ -215,6 +228,7 @@ export default function DoddleOnImage(props: Props) {
                       aria-label="Reset lazy radius"
                       component="span"
                       size="small"
+                      color="secondary"
                     >
                       <ReplayIcon />
                     </IconButton>
@@ -225,8 +239,21 @@ export default function DoddleOnImage(props: Props) {
                   }}
                   style={{ marginLeft: 5, marginTop: 10 }}
                 />
-              </div>
+              </div> */}
             </div>
+
+            {/* <div style={{ display: 'flex', justifyContent: 'center', marginTop: 30, marginBottom: 20 }}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                startIcon={<ReplayIcon />}
+                onClick={() => {
+                  saveableCanvas.undo()
+                }}
+              >
+                Undo
+              </Button>
+            </div> */}
             <Divider style={{ marginTop: 10, marginBottom: 20 }} />
           </div>
         </div>
@@ -258,6 +285,19 @@ export default function DoddleOnImage(props: Props) {
               )
             })}
           </Grid>
+        </div>
+
+        <Divider style={{ marginTop: 10, marginBottom: 20 }} />
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          {lineData.length == 0 ? (
+            <div>Start drawing to see line data</div>
+          ) : (
+            <LineHistoryTable
+              lines={lineData}
+              setLineData={setLineData}
+              saveableCanvas={saveableCanvas}
+            />
+          )}
         </div>
       </div>
     )
