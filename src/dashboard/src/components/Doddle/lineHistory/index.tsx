@@ -52,7 +52,7 @@ export default function LineHistroyTable(props: Props) {
       lines: lines,
     })
 
-    console.log(newSaveData)
+    //console.log(newSaveData)
     saveableCanvas.loadSaveData(newSaveData, true)
   }
   return (

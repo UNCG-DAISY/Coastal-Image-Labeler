@@ -133,8 +133,8 @@ export default function DoddleOnImage(props: Props) {
               brushSize={brushSize}
               onChange={() => {
                 const objData = JSON.parse(saveableCanvas.getSaveData() || '{}')
-                console.log(objData.width, objData.height)
-                console.log(objData.lines[0])
+                // console.log(objData.width, objData.height)
+                // console.log(objData.lines[0])
 
                 setLineData(objData.lines)
               }}
