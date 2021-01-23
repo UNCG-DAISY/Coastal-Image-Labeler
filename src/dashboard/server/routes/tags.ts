@@ -6,7 +6,11 @@ import { TagModel } from '@/server/models/Tag'
 
 import { ensureAuthenticated } from '@/server/middlewares/ensureAuth'
 import { insertUser } from '@/server/middlewares/insertUser'
-import { tagImage, exportTest } from '@/server/controllers/tags'
+import {
+  tagImage,
+  exportTest,
+  genSVGFromDoodler,
+} from '@/server/controllers/tags'
 import { unassignImage } from '@/server/controllers/assignedImages'
 import { check } from 'express-validator'
 import { bodyValidation } from '@/server/middlewares/bodyValidation'
@@ -77,4 +81,23 @@ router
     hasRoles(['tagger', 'admin']),
     exportTest(false)
   )
+
+router.route('/tagDoodleImage').post(
+  ensureAuthenticated,
+  insertUser,
+  ...bodyValidation([
+    check('userId').isString(),
+    check('imageId').isString(),
+    check('tags').exists(),
+  ]),
+  hasRoles(['tagger']),
+  genSVGFromDoodler,
+  tagImage,
+  //unassignImage,
+  genericReturn({
+    keys: [],
+    message: 'Tagged Doodle Image',
+    success: true,
+  })
+)
 export default router

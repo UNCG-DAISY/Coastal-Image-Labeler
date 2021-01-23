@@ -13,6 +13,8 @@ import fs from 'fs'
 import archiver from 'archiver'
 import { TagDocument } from '@/interfaces/models'
 import { createObjectCsvWriter } from 'csv-writer'
+//@ts-ignore
+import { createSVGWindow } from 'svgdom'
 
 //✔️
 const tagImage = asyncHandler(
@@ -289,4 +291,67 @@ function exportTest(userOnly = true) {
     archive.finalize()
   })
 }
-export { tagImage, exportTest }
+
+const genSVGFromDoodler = asyncHandler(
+  async (req: Request, res: ExtenedResponse, next: NextFunction) => {
+    const { tags, imageId, userId } = req.body
+
+    log({
+      message: `Generating SVG from tag`,
+      type: 'info',
+    })
+
+    const window = createSVGWindow()
+    const SVG = require('svg.js')(window)
+    const document = window.document
+
+    try {
+      //Transform data
+      const lines = tags.lines ?? []
+      const arrayOfLines = []
+
+      lines.forEach((line) => {
+        const pointArray = []
+
+        line.points.forEach((point) => {
+          pointArray.push(point.x)
+          pointArray.push(point.y)
+        })
+        arrayOfLines.push(pointArray)
+      })
+
+      //create svg data
+      const canvas = SVG(document.documentElement)
+
+      lines.forEach((dataPoint, index) => {
+        const color = dataPoint.brushColor
+        const lineThickness = dataPoint.brushRadius
+        const linePoints = arrayOfLines[index]
+
+        canvas
+          .polyline(linePoints.join(','))
+          .stroke({ width: lineThickness, color: color })
+          .fill('none')
+      })
+
+      //write file
+      const image = await ImageModel.findById(imageId)
+      const fileName = `${process.env.SVG_OUTPUT_PATH}${
+        image.name
+      }_user_${userId}_time_${Date.now()}.svg`
+      fs.writeFile(fileName, canvas.node.outerHTML, function (err) {
+        if (err) return console.log(err)
+        log({
+          message: `Created SVG for image ${image._id} at ${fileName}`,
+          type: 'info',
+        })
+        canvas.clear()
+      })
+    } catch (error) {
+      console.log(error)
+    }
+
+    next()
+  }
+)
+export { tagImage, exportTest, genSVGFromDoodler }

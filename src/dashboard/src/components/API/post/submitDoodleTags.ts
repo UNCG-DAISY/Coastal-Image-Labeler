@@ -10,11 +10,11 @@ interface Params {
   }
 }
 
-export async function submitDoddleImageTags({ body }: Params) {
+export async function submitDoodleImageTags({ body }: Params) {
   const data = await apiRequest({
     body: body,
     method: 'POST',
-    route: routes.postReq.doddleTagImage,
+    route: routes.postReq.doodleTagImage,
     headers: {
       credentials: 'include',
     },

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from '@material-ui/lab/Skeleton'
 import TextField from '@material-ui/core/TextField'
 import {
-  DoddleQuestion,
+  DoodleQuestion,
   ImageDocument,
   QuestionSetDocument,
   QuestionSetQuestions,
@@ -22,7 +22,8 @@ import LineHistoryTable from './lineHistory'
 import { SubmitButton, SkipButton } from '@/components/Button/premadeButtons'
 import { SuccessErrorBar } from '@/components/Snackbar'
 import { UserProp } from '@/interfaces/index'
-import { submitDoddleImageTags } from '@/components/API/post/submitDoddleTags'
+import { submitDoodleImageTags } from '@/components/API/post/submitDoodleTags'
+import Router from 'next/router'
 // const testImage =
 //   'https://nationalinterest.org/sites/default/files/main_images/G69%20%281%29.jpg'
 
@@ -33,13 +34,13 @@ interface Props {
   // skipImage: ()=>void
 }
 
-export default function DoddleOnImage(props: Props) {
+export default function DoodleOnImage(props: Props) {
   const { questionSet, imageDocument, user } = props
   const drawingImage = routes.getReq.showImage('compressed', imageDocument._id) //testImage
 
-  const doddleQuestion: DoddleQuestion = questionSet.questions.filter(
+  const doodleQuestion: DoodleQuestion = questionSet.questions.filter(
     (question: QuestionSetQuestions) => {
-      if (question.type == 'doddleDraw') return true
+      if (question.type == 'doodleDraw') return true
     }
   )[0]
 
@@ -47,12 +48,12 @@ export default function DoddleOnImage(props: Props) {
   const [imgHeight, setImgHeight] = useState(0)
   const [imageRatio, setRatio] = useState(1)
   const [imgMaxSize, setImgMaxSize] = useState(
-    doddleQuestion.largestAxisMaxSize
+    doodleQuestion.largestAxisMaxSize
   )
 
-  const [brushColor, setBrushColor] = useState(doddleQuestion.colors[0].color)
-  const [brushSize, setBrushSize] = useState(doddleQuestion.initBrushSize)
-  const [lazyRadius, setLazyRadius] = useState(doddleQuestion.initLazyRadius)
+  const [brushColor, setBrushColor] = useState(doodleQuestion.colors[0].color)
+  const [brushSize, setBrushSize] = useState(doodleQuestion.initBrushSize)
+  const [lazyRadius, setLazyRadius] = useState(doodleQuestion.initLazyRadius)
 
   let saveableCanvas: any = null
   let setSaveableCanvas: any = null
@@ -95,26 +96,39 @@ export default function DoddleOnImage(props: Props) {
     return !(lineData.length && !globalDisable)
   }
 
-  async function onSubmitDoddle(doddleData) {
+  async function onSubmitDoodle(doodleData) {
     setGlobalDisable(true)
     const submitData = {
       userId: user.data._id,
       imageId: imageDocument._id as string,
       tags: {
-        type: 'doddle',
-        ...doddleData,
+        type: 'doodle',
+        ...doodleData,
       },
       date: Date.now(),
     }
 
     // do api call
-    await submitDoddleImageTags({ body: submitData })
+    const resSubmitTag = await submitDoodleImageTags({ body: submitData })
 
-    setSnackbar(true)
-    setSnackbarStatus(true)
-    setSnackbarMessage('Image dooddle submited')
-    setSnackbarTime(2000)
-    console.log(submitData)
+    setSnackbarMessage(resSubmitTag.message)
+
+    if (resSubmitTag.success) {
+      setSnackbarStatus(true)
+      setSnackbar(true)
+      setSnackbarMessage(
+        `${resSubmitTag.message} - Getting new image in ${
+          snackbarTime / 1000
+        } seconds`
+      )
+      setTimeout(() => {
+        Router.reload()
+      }, snackbarTime)
+    } else {
+      setSnackbar(true)
+      setSnackbarTime(999999)
+      setSnackbarStatus(false)
+    }
   }
   useEffect(() => {
     const img = new Image()
@@ -123,9 +137,9 @@ export default function DoddleOnImage(props: Props) {
       updateImageRatio(img.height, img.width, imgMaxSize)
       setImgWidth(img.width)
       setImgHeight(img.height)
-      setImgMaxSize(doddleQuestion.largestAxisMaxSize)
+      setImgMaxSize(doodleQuestion.largestAxisMaxSize)
       setLoadingImage('loaded')
-      setLazyRadius(doddleQuestion.initLazyRadius)
+      setLazyRadius(doodleQuestion.initLazyRadius)
     }
     img.onerror = () => {
       setLoadingImage('error')
@@ -183,7 +197,7 @@ export default function DoddleOnImage(props: Props) {
                   onChange={(event) => {
                     let size =
                       parseInt(event.target.value) ??
-                      doddleQuestion.initBrushSize
+                      doodleQuestion.initBrushSize
                     if (size <= 0) {
                       size = 1
                     }
@@ -205,7 +219,7 @@ export default function DoddleOnImage(props: Props) {
                   }
                   label={'reset'}
                   onClick={() => {
-                    setBrushSize(doddleQuestion.initBrushSize)
+                    setBrushSize(doodleQuestion.initBrushSize)
                   }}
                   style={{ marginLeft: 5, marginTop: 10 }}
                 />
@@ -232,7 +246,7 @@ export default function DoddleOnImage(props: Props) {
                 <SkipButton
                   variant="outlined"
                   onClick={() => {
-                    onSubmitDoddle({})
+                    onSubmitDoodle({})
                   }}
                   disabled={globalDisable}
                 >
@@ -243,7 +257,7 @@ export default function DoddleOnImage(props: Props) {
                 <SubmitButton
                   type="submit"
                   onClick={() => {
-                    onSubmitDoddle(JSON.parse(saveableCanvas.getSaveData()))
+                    onSubmitDoodle(JSON.parse(saveableCanvas.getSaveData()))
                   }}
                   disabled={submitButtonDisabled()}
                 >
@@ -265,7 +279,7 @@ export default function DoddleOnImage(props: Props) {
               justifyContent: 'center',
             }}
           >
-            {doddleQuestion.colors.map((color, index) => {
+            {doodleQuestion.colors.map((color, index) => {
               return (
                 <Grid item key={`color-${index}`}>
                   <FormControlLabel
