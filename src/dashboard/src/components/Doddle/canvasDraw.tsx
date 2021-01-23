@@ -11,6 +11,7 @@ interface Props {
   lazyRadius: number
   brushSize: number
   onChange: () => void
+  disabled: boolean
 }
 
 export default function MyCanvas(props: Props) {
@@ -24,6 +25,7 @@ export default function MyCanvas(props: Props) {
     lazyRadius,
     brushSize,
     onChange,
+    disabled,
   } = props
   return (
     <CanvasDraw
@@ -36,6 +38,7 @@ export default function MyCanvas(props: Props) {
       lazyRadius={lazyRadius}
       brushRadius={brushSize}
       onChange={onChange}
+      disabled={disabled}
     />
   )
 }

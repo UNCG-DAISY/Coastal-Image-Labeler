@@ -90,6 +90,7 @@ export function ImageTag(props: Props) {
           <DoddleOnImage
             questionSet={questionSetDocument}
             imageDocument={imageDocument}
+            user={user}
           />
         </CardContent>
       )

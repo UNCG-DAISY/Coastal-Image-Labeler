@@ -19,16 +19,22 @@ import Divider from '@material-ui/core/Divider'
 import CanvasDraw from './canvasDraw'
 import { routes } from '@/components/Constants'
 import LineHistoryTable from './lineHistory'
+import { SubmitButton, SkipButton } from '@/components/Button/premadeButtons'
+import { SuccessErrorBar } from '@/components/Snackbar'
+import { UserProp } from '@/interfaces/index'
+import { submitDoddleImageTags } from '@/components/API/post/submitDoddleTags'
 // const testImage =
 //   'https://nationalinterest.org/sites/default/files/main_images/G69%20%281%29.jpg'
 
 interface Props {
   questionSet: QuestionSetDocument
   imageDocument: ImageDocument
+  user: UserProp
+  // skipImage: ()=>void
 }
 
 export default function DoddleOnImage(props: Props) {
-  const { questionSet, imageDocument } = props
+  const { questionSet, imageDocument, user } = props
   const drawingImage = routes.getReq.showImage('compressed', imageDocument._id) //testImage
 
   const doddleQuestion: DoddleQuestion = questionSet.questions.filter(
@@ -55,7 +61,11 @@ export default function DoddleOnImage(props: Props) {
   //let saveableCanvas = useRef<{ getSaveData: any }>(null)
   const [loadingImage, setLoadingImage] = useState('loading')
   // let loadableCanvas = useRef<{ getSaveData: any }>(null)
-
+  const [globalDisable, setGlobalDisable] = useState(false)
+  const [openSnackbar, setSnackbar] = React.useState(false)
+  const [snackbarTime, setSnackbarTime] = React.useState(2000)
+  const [snackbarStatus, setSnackbarStatus] = React.useState(false)
+  const [snackbarMessage, setSnackbarMessage] = React.useState('')
   // function submitDrawing() {
   //   console.log(imageDocument)
   // }
@@ -81,6 +91,31 @@ export default function DoddleOnImage(props: Props) {
     // setImgHeight(ratio * height)
   }
 
+  function submitButtonDisabled() {
+    return !(lineData.length && !globalDisable)
+  }
+
+  async function onSubmitDoddle(doddleData) {
+    setGlobalDisable(true)
+    const submitData = {
+      userId: user.data._id,
+      imageId: imageDocument._id as string,
+      tags: {
+        type: 'doddle',
+        ...doddleData,
+      },
+      date: Date.now(),
+    }
+
+    // do api call
+    await submitDoddleImageTags({ body: submitData })
+
+    setSnackbar(true)
+    setSnackbarStatus(true)
+    setSnackbarMessage('Image dooddle submited')
+    setSnackbarTime(2000)
+    console.log(submitData)
+  }
   useEffect(() => {
     const img = new Image()
     img.src = drawingImage
@@ -133,26 +168,11 @@ export default function DoddleOnImage(props: Props) {
               brushSize={brushSize}
               onChange={() => {
                 const objData = JSON.parse(saveableCanvas.getSaveData() || '{}')
-                // console.log(objData.width, objData.height)
-                // console.log(objData.lines[0])
-
                 setLineData(objData.lines)
               }}
+              disabled={globalDisable}
             />
             <Divider style={{ marginTop: 10, marginBottom: 20 }} />
-            {/* <TextField
-              id="imgSizer"
-              type="number"
-              helperText="Image Size (largest axis)"
-              defaultValue={imgMaxSize}
-              onChange={(event) => {
-                FIX NEGATIVE VALUE
-                const val = parseInt(event.target.value)
-                setImgMaxSize(parseInt(event.target.value))
-                updateImageRatio(imgHeight, imgWidth, val)
-              }}
-              disabled
-            /> */}
 
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <div>
@@ -160,7 +180,6 @@ export default function DoddleOnImage(props: Props) {
                   id="brushSizer"
                   type="number"
                   helperText="Size of brush"
-                  //defaultValue={doddleQuestion.initBrushSize}
                   onChange={(event) => {
                     let size =
                       parseInt(event.target.value) ??
@@ -204,56 +223,35 @@ export default function DoddleOnImage(props: Props) {
                   Undo
                 </Button>
               </div>
-              {/* <div>
-                <TextField
-                  id="lazySizer"
-                  type="number"
-                  helperText="Size of lazy radius"
-                  //defaultValue={doddleQuestion.initLazyRadius}
-                  onChange={(event) => {
-                    let radius =
-                      parseInt(event.target.value) ??
-                      doddleQuestion.initBrushSize
-                    if (radius <= 0) {
-                      radius = 1
-                    }
-                    setLazyRadius(radius)
-                  }}
-                  style={{ maxWidth: 140 }}
-                  value={lazyRadius}
-                />
-                <FormControlLabel
-                  control={
-                    <IconButton
-                      aria-label="Reset lazy radius"
-                      component="span"
-                      size="small"
-                      color="secondary"
-                    >
-                      <ReplayIcon />
-                    </IconButton>
-                  }
-                  label={'reset'}
-                  onClick={() => {
-                    setLazyRadius(doddleQuestion.initLazyRadius)
-                  }}
-                  style={{ marginLeft: 5, marginTop: 10 }}
-                />
-              </div> */}
             </div>
 
-            {/* <div style={{ display: 'flex', justifyContent: 'center', marginTop: 30, marginBottom: 20 }}>
-              <Button
-                variant="outlined"
-                color="secondary"
-                startIcon={<ReplayIcon />}
-                onClick={() => {
-                  saveableCanvas.undo()
-                }}
-              >
-                Undo
-              </Button>
-            </div> */}
+            <Divider style={{ marginTop: 10, marginBottom: 20 }} />
+
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div>
+                <SkipButton
+                  variant="outlined"
+                  onClick={() => {
+                    onSubmitDoddle({})
+                  }}
+                  disabled={globalDisable}
+                >
+                  Skip
+                </SkipButton>
+              </div>
+              <div>
+                <SubmitButton
+                  type="submit"
+                  onClick={() => {
+                    onSubmitDoddle(JSON.parse(saveableCanvas.getSaveData()))
+                  }}
+                  disabled={submitButtonDisabled()}
+                >
+                  Submit
+                </SubmitButton>
+              </div>
+            </div>
+
             <Divider style={{ marginTop: 10, marginBottom: 20 }} />
           </div>
         </div>
@@ -299,6 +297,14 @@ export default function DoddleOnImage(props: Props) {
             />
           )}
         </div>
+
+        {openSnackbar && (
+          <SuccessErrorBar
+            duration={snackbarTime}
+            message={snackbarMessage}
+            success={snackbarStatus}
+          />
+        )}
       </div>
     )
   }
