@@ -346,6 +346,11 @@ const genSVGFromDoodler = asyncHandler(
           type: 'info',
         })
         canvas.clear()
+
+        req.body.tags = {
+          svg: fileName,
+          ...req.body.tags,
+        }
       })
     } catch (error) {
       console.log(error)
