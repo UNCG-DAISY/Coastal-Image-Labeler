@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import CanvasDraw from 'react-canvas-draw'
 
 import Skeleton from '@material-ui/lab/Skeleton'
@@ -16,14 +16,16 @@ import { Button, FormControlLabel, IconButton } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import ReplayIcon from '@material-ui/icons/Replay'
 import Divider from '@material-ui/core/Divider'
-import CanvasDraw from './canvasDraw'
+// import CanvasDraw from './canvasDraw'
 import { routes } from '@/components/Constants'
-import LineHistoryTable from './lineHistory'
+// import LineHistoryTable from './lineHistory'
 import { SubmitButton, SkipButton } from '@/components/Button/premadeButtons'
 import { SuccessErrorBar } from '@/components/Snackbar'
 import { UserProp } from '@/interfaces/index'
 import { submitDoodleImageTags } from '@/components/API/post/submitDoodleTags'
 import Router from 'next/router'
+import { useSvgDrawing } from 'react-hooks-svgdrawing'
+import { ViewImage } from '@/components/Button/premadeButtons'
 // const testImage =
 //   'https://nationalinterest.org/sites/default/files/main_images/G69%20%281%29.jpg'
 
@@ -51,25 +53,21 @@ export default function DoodleOnImage(props: Props) {
     doodleQuestion.largestAxisMaxSize
   )
 
-  const [brushColor, setBrushColor] = useState(doodleQuestion.colors[0].color)
+  const [brushColor, setBrushColor] = useState(
+    doodleQuestion.colors[0].color ?? '#000000'
+  )
   const [brushSize, setBrushSize] = useState(doodleQuestion.initBrushSize)
-  const [lazyRadius, setLazyRadius] = useState(doodleQuestion.initLazyRadius)
-
-  let saveableCanvas: any = null
-  let setSaveableCanvas: any = null
-  ;[saveableCanvas, setSaveableCanvas] = useState(useRef(null))
-  const [lineData, setLineData] = useState([])
-  //let saveableCanvas = useRef<{ getSaveData: any }>(null)
   const [loadingImage, setLoadingImage] = useState('loading')
-  // let loadableCanvas = useRef<{ getSaveData: any }>(null)
   const [globalDisable, setGlobalDisable] = useState(false)
   const [openSnackbar, setSnackbar] = React.useState(false)
   const [snackbarTime, setSnackbarTime] = React.useState(2000)
   const [snackbarStatus, setSnackbarStatus] = React.useState(false)
   const [snackbarMessage, setSnackbarMessage] = React.useState('')
-  // function submitDrawing() {
-  //   console.log(imageDocument)
-  // }
+
+  const [renderRefDraw, drawingCanvas] = useSvgDrawing({
+    penWidth: brushSize, // pen width
+    penColor: brushColor, // pen color
+  })
 
   function updateImageRatio(
     height: number,
@@ -87,13 +85,10 @@ export default function DoodleOnImage(props: Props) {
       ratio = imgMaxAxisSize / width
     }
     setRatio(ratio)
-
-    // setImgWidth(ratio * width)
-    // setImgHeight(ratio * height)
   }
 
   function submitButtonDisabled() {
-    return !(lineData.length && !globalDisable)
+    return globalDisable
   }
 
   async function onSubmitDoodle(doodleData) {
@@ -103,11 +98,17 @@ export default function DoodleOnImage(props: Props) {
       imageId: imageDocument._id as string,
       tags: {
         type: 'doodle',
+        originalImgWidth: imgWidth,
+        originalImgHeight: imgHeight,
+        imageRatio: imageRatio,
+        imgWidth: imgWidth * imageRatio,
+        imgHeight: imgHeight * imageRatio,
+        imgMaxSize: imgMaxSize,
         ...doodleData,
       },
       date: Date.now(),
     }
-
+    console.log(submitData)
     // do api call
     const resSubmitTag = await submitDoodleImageTags({ body: submitData })
 
@@ -130,6 +131,14 @@ export default function DoodleOnImage(props: Props) {
       setSnackbarStatus(false)
     }
   }
+
+  function updatePenWidth(size: number) {
+    if (size <= 0) {
+      size = 1
+    }
+    setBrushSize(size)
+    drawingCanvas.changePenWidth(size)
+  }
   useEffect(() => {
     const img = new Image()
     img.src = drawingImage
@@ -139,7 +148,6 @@ export default function DoodleOnImage(props: Props) {
       setImgHeight(img.height)
       setImgMaxSize(doodleQuestion.largestAxisMaxSize)
       setLoadingImage('loaded')
-      setLazyRadius(doodleQuestion.initLazyRadius)
     }
     img.onerror = () => {
       setLoadingImage('error')
@@ -170,21 +178,39 @@ export default function DoodleOnImage(props: Props) {
           }}
         >
           <div>
-            {/* @ts-ignore */}
-            <CanvasDraw
-              imgWidth={imgWidth}
-              imageRatio={imageRatio}
-              imgHeight={imgHeight}
-              drawingImage={drawingImage}
-              saveableCanvas={setSaveableCanvas}
-              brushColor={brushColor}
-              lazyRadius={lazyRadius}
-              brushSize={brushSize}
-              onChange={() => {
-                const objData = JSON.parse(saveableCanvas.getSaveData() || '{}')
-                setLineData(objData.lines)
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <ViewImage
+                style={{ marginRight: 10 }}
+                onClick={() => {
+                  window.open(
+                    routes.getReq.showImage('compressed', imageDocument._id),
+                    'Compressed Image'
+                  )
+                }}
+              >
+                View compressed image
+              </ViewImage>
+              <ViewImage
+                onClick={() => {
+                  window.open(
+                    routes.getReq.showImage('original', imageDocument._id),
+                    'Full Image'
+                  )
+                }}
+              >
+                View full image
+              </ViewImage>
+            </div>
+            <Divider style={{ marginTop: 10, marginBottom: 20 }} />
+            <div
+              style={{
+                width: imgWidth * imageRatio,
+                height: imgHeight * imageRatio,
+                backgroundImage: `url(${drawingImage})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
               }}
-              disabled={globalDisable}
+              ref={renderRefDraw}
             />
             <Divider style={{ marginTop: 10, marginBottom: 20 }} />
 
@@ -195,13 +221,10 @@ export default function DoodleOnImage(props: Props) {
                   type="number"
                   helperText="Size of brush"
                   onChange={(event) => {
-                    let size =
+                    const size =
                       parseInt(event.target.value) ??
                       doodleQuestion.initBrushSize
-                    if (size <= 0) {
-                      size = 1
-                    }
-                    setBrushSize(size)
+                    updatePenWidth(size)
                   }}
                   style={{ maxWidth: 100 }}
                   value={brushSize}
@@ -219,7 +242,7 @@ export default function DoodleOnImage(props: Props) {
                   }
                   label={'reset'}
                   onClick={() => {
-                    setBrushSize(doodleQuestion.initBrushSize)
+                    updatePenWidth(doodleQuestion.initBrushSize)
                   }}
                   style={{ marginLeft: 5, marginTop: 10 }}
                 />
@@ -230,7 +253,7 @@ export default function DoodleOnImage(props: Props) {
                   color="secondary"
                   startIcon={<ReplayIcon />}
                   onClick={() => {
-                    saveableCanvas.undo()
+                    drawingCanvas.undo()
                   }}
                   style={{ marginTop: 5 }}
                 >
@@ -239,9 +262,16 @@ export default function DoodleOnImage(props: Props) {
               </div>
             </div>
 
-            <Divider style={{ marginTop: 10, marginBottom: 20 }} />
+            {/* <Divider style={{ marginTop: 10, marginBottom: 20 }} /> */}
 
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginTop: 20,
+                marginBottom: 20,
+              }}
+            >
               <div>
                 <SkipButton
                   variant="outlined"
@@ -257,7 +287,9 @@ export default function DoodleOnImage(props: Props) {
                 <SubmitButton
                   type="submit"
                   onClick={() => {
-                    onSubmitDoodle(JSON.parse(saveableCanvas.getSaveData()))
+                    onSubmitDoodle({
+                      svg: drawingCanvas.getSvgXML(),
+                    })
                   }}
                   disabled={submitButtonDisabled()}
                 >
@@ -282,17 +314,18 @@ export default function DoodleOnImage(props: Props) {
             {doodleQuestion.colors.map((color, index) => {
               return (
                 <Grid item key={`color-${index}`}>
-                  <FormControlLabel
-                    control={
-                      <IconButton aria-label="upload picture" component="span">
-                        <BrushIcon style={{ color: color.color }} />
-                      </IconButton>
-                    }
-                    label={color.label}
+                  <Button
+                    variant="outlined"
+                    color="inherit"
+                    startIcon={<BrushIcon style={{ color: color.color }} />}
+                    style={{ margin: 5 }}
                     onClick={() => {
+                      drawingCanvas.changePenColor(color.color)
                       setBrushColor(color.color)
                     }}
-                  />
+                  >
+                    {color.label}
+                  </Button>
                 </Grid>
               )
             })}
@@ -300,17 +333,6 @@ export default function DoodleOnImage(props: Props) {
         </div>
 
         <Divider style={{ marginTop: 10, marginBottom: 20 }} />
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          {lineData.length == 0 ? (
-            <div>Start drawing to see line data</div>
-          ) : (
-            <LineHistoryTable
-              lines={lineData}
-              setLineData={setLineData}
-              saveableCanvas={saveableCanvas}
-            />
-          )}
-        </div>
 
         {openSnackbar && (
           <SuccessErrorBar

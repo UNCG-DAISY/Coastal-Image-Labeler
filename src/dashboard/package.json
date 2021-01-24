@@ -66,6 +66,7 @@
     "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.0.6",
+    "react-hooks-svgdrawing": "^2.1.2",
     "react-json-pretty": "^2.2.0",
     "response-time": "^2.3.2",
     "rimraf": "^3.0.2",
