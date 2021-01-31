@@ -14,12 +14,35 @@ import { catalogQuestionSet } from '@/components/API/post/getCatalogQuestionSet'
 import { tabLogoURL } from '@/components/Constants'
 import { getCatalog } from '@/components/API/post/getCatalog'
 import { getArchive } from '@/components/API/post/getArchive'
-import { ImageDocument } from '@/interfaces/models'
+import {
+  ImageDocument,
+  QuestionSetDocument,
+  QuestionSetQuestions,
+  ScribbleQuestion,
+} from '@/interfaces/models'
 import { log } from '@/components/Utils/logger'
+import cilDashboard from '@/interfaces/index'
 
 export default function TagImage(props) {
-  const { user, success, message, questionSetDocument } = props
+  const {
+    user,
+    success,
+    message,
+    questionSetDocument,
+  }: {
+    user: cilDashboard.UserProp
+    success: boolean
+    message: string
+    questionSetDocument: QuestionSetDocument
+  } = props
+
   const imageDocument: ImageDocument = props.imageDocument
+
+  const scribbleQuestion: ScribbleQuestion = questionSetDocument.questions.filter(
+    (question: QuestionSetQuestions) => {
+      if (question.type == 'scribble') return true
+    }
+  )[0]
 
   return (
     <React.Fragment>
@@ -32,7 +55,11 @@ export default function TagImage(props) {
         user={props.user}
         navItems={determineNavItems(user)}
         drawer
-        title={`You're labeling now! 👍`}
+        title={
+          scribbleQuestion
+            ? `You're Scribbling now! 👍`
+            : `You're labeling now! 👍`
+        }
       >
         {!success ? (
           <ErrorCard message={message} title="Error" />

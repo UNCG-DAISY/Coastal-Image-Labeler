@@ -24,7 +24,7 @@ const tagImage = asyncHandler(
       type: 'info',
     })
     log({
-      message: tags,
+      message: Object.keys(tags).join(', '),
     })
 
     //check if user has already tagged this image
@@ -289,4 +289,5 @@ function exportTest(userOnly = true) {
     archive.finalize()
   })
 }
+
 export { tagImage, exportTest }
