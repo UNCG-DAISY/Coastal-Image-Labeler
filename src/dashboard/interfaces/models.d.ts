@@ -194,8 +194,8 @@ type TextFieldQuestion = {
   rows: number
 }
 
-type DoodleQuestion = {
-  type: 'doodleDraw'
+type ScribbleQuestion = {
+  type: 'scribble'
   required: boolean
   label: string
   colors: {
@@ -214,7 +214,7 @@ type QuestionSetQuestions =
   | ButtonSubmitQuestion
   | CheckboxQuestion
   | RadioQuestion
-  | DoodleQuestion
+  | ScribbleQuestion
 
 export interface QuestionSetDocument extends Document {
   name: string

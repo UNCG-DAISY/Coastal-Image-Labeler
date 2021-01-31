@@ -15,7 +15,7 @@ const routes = {
     hasAssignedImages: apiCall('/api/user/hasAssignedImages'),
     getCatalogQuestionSet: apiCall('/api/catalog/questionSet'),
     tagImage: apiCall('/api/tags/tagImage'),
-    doodleTagImage: apiCall('/api/tags/tagDoodleImage'),
+    scribbleTagImage: apiCall('/api/tags/tagScribbleImage'),
     getCatalog: apiCall('/api/catalog'),
     getArchive: apiCall('/api/archive'),
   },

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Skeleton from '@material-ui/lab/Skeleton'
 import TextField from '@material-ui/core/TextField'
 import {
-  DoodleQuestion,
+  ScribbleQuestion,
   ImageDocument,
   QuestionSetDocument,
   QuestionSetQuestions,
@@ -22,7 +22,7 @@ import { routes } from '@/components/Constants'
 import { SubmitButton, SkipButton } from '@/components/Button/premadeButtons'
 import { SuccessErrorBar } from '@/components/Snackbar'
 import { UserProp } from '@/interfaces/index'
-import { submitDoodleImageTags } from '@/components/API/post/submitDoodleTags'
+import { submitScribbleImageTags } from '@/components/API/post/submitScribbleTags'
 import Router from 'next/router'
 import { useSvgDrawing } from 'react-hooks-svgdrawing'
 import { ViewImage } from '@/components/Button/premadeButtons'
@@ -36,13 +36,13 @@ interface Props {
   // skipImage: ()=>void
 }
 
-export default function DoodleOnImage(props: Props) {
+export default function ScribbleOnImage(props: Props) {
   const { questionSet, imageDocument, user } = props
   const drawingImage = routes.getReq.showImage('compressed', imageDocument._id) //testImage
 
-  const doodleQuestion: DoodleQuestion = questionSet.questions.filter(
+  const scribbleQuestion: ScribbleQuestion = questionSet.questions.filter(
     (question: QuestionSetQuestions) => {
-      if (question.type == 'doodleDraw') return true
+      if (question.type == 'scribble') return true
     }
   )[0]
 
@@ -50,13 +50,13 @@ export default function DoodleOnImage(props: Props) {
   const [imgHeight, setImgHeight] = useState(0)
   const [imageRatio, setRatio] = useState(1)
   const [imgMaxSize, setImgMaxSize] = useState(
-    doodleQuestion.largestAxisMaxSize
+    scribbleQuestion.largestAxisMaxSize
   )
 
   const [brushColor, setBrushColor] = useState(
-    doodleQuestion.colors[0].color ?? '#000000'
+    scribbleQuestion.colors[0].color ?? '#000000'
   )
-  const [brushSize, setBrushSize] = useState(doodleQuestion.initBrushSize)
+  const [brushSize, setBrushSize] = useState(scribbleQuestion.initBrushSize)
   const [loadingImage, setLoadingImage] = useState('loading')
   const [globalDisable, setGlobalDisable] = useState(false)
   const [openSnackbar, setSnackbar] = React.useState(false)
@@ -91,26 +91,26 @@ export default function DoodleOnImage(props: Props) {
     return globalDisable
   }
 
-  async function onSubmitDoodle(doodleData) {
+  async function onSubmitScribble(scribbleData) {
     setGlobalDisable(true)
     const submitData = {
       userId: user.data._id,
       imageId: imageDocument._id as string,
       tags: {
-        type: 'doodle',
+        type: 'scribble',
         originalImgWidth: imgWidth,
         originalImgHeight: imgHeight,
         imageRatio: imageRatio,
         imgWidth: imgWidth * imageRatio,
         imgHeight: imgHeight * imageRatio,
         imgMaxSize: imgMaxSize,
-        ...doodleData,
+        ...scribbleData,
       },
       date: Date.now(),
     }
     console.log(submitData)
     // do api call
-    const resSubmitTag = await submitDoodleImageTags({ body: submitData })
+    const resSubmitTag = await submitScribbleImageTags({ body: submitData })
 
     setSnackbarMessage(resSubmitTag.message)
 
@@ -146,7 +146,7 @@ export default function DoodleOnImage(props: Props) {
       updateImageRatio(img.height, img.width, imgMaxSize)
       setImgWidth(img.width)
       setImgHeight(img.height)
-      setImgMaxSize(doodleQuestion.largestAxisMaxSize)
+      setImgMaxSize(scribbleQuestion.largestAxisMaxSize)
       setLoadingImage('loaded')
     }
     img.onerror = () => {
@@ -223,7 +223,7 @@ export default function DoodleOnImage(props: Props) {
                   onChange={(event) => {
                     const size =
                       parseInt(event.target.value) ??
-                      doodleQuestion.initBrushSize
+                      scribbleQuestion.initBrushSize
                     updatePenWidth(size)
                   }}
                   style={{ maxWidth: 100 }}
@@ -242,7 +242,7 @@ export default function DoodleOnImage(props: Props) {
                   }
                   label={'reset'}
                   onClick={() => {
-                    updatePenWidth(doodleQuestion.initBrushSize)
+                    updatePenWidth(scribbleQuestion.initBrushSize)
                   }}
                   style={{ marginLeft: 5, marginTop: 10 }}
                 />
@@ -276,7 +276,7 @@ export default function DoodleOnImage(props: Props) {
                 <SkipButton
                   variant="outlined"
                   onClick={() => {
-                    onSubmitDoodle({})
+                    onSubmitScribble({})
                   }}
                   disabled={globalDisable}
                 >
@@ -287,7 +287,7 @@ export default function DoodleOnImage(props: Props) {
                 <SubmitButton
                   type="submit"
                   onClick={() => {
-                    onSubmitDoodle({
+                    onSubmitScribble({
                       svg: drawingCanvas.getSvgXML(),
                     })
                   }}
@@ -311,7 +311,7 @@ export default function DoodleOnImage(props: Props) {
               justifyContent: 'center',
             }}
           >
-            {doodleQuestion.colors.map((color, index) => {
+            {scribbleQuestion.colors.map((color, index) => {
               return (
                 <Grid item key={`color-${index}`}>
                   <Button

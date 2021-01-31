@@ -9,7 +9,7 @@ import { insertUser } from '@/server/middlewares/insertUser'
 import {
   tagImage,
   exportTest,
-  //genSVGFromDoodler,
+  //genSVGFromScribbler,
 } from '@/server/controllers/tags'
 import { unassignImage } from '@/server/controllers/assignedImages'
 import { check } from 'express-validator'
@@ -82,7 +82,7 @@ router
     exportTest(false)
   )
 
-router.route('/tagDoodleImage').post(
+router.route('/tagScribbleImage').post(
   ensureAuthenticated,
   insertUser,
   ...bodyValidation([
@@ -91,12 +91,12 @@ router.route('/tagDoodleImage').post(
     check('tags').exists(),
   ]),
   hasRoles(['tagger']),
-  //genSVGFromDoodler,
+  //genSVGFromScribbler,
   tagImage,
   unassignImage,
   genericReturn({
     keys: [],
-    message: 'Tagged Doodle Image',
+    message: 'Tagged Scribble Image',
     success: true,
   })
 )

@@ -292,7 +292,7 @@ function exportTest(userOnly = true) {
   })
 }
 
-const genSVGFromDoodler = asyncHandler(
+const genSVGFromScribbler = asyncHandler(
   async (req: Request, res: ExtenedResponse, next: NextFunction) => {
     const { tags, imageId, userId } = req.body
 
@@ -359,4 +359,4 @@ const genSVGFromDoodler = asyncHandler(
     next()
   }
 )
-export { tagImage, exportTest, genSVGFromDoodler }
+export { tagImage, exportTest, genSVGFromScribbler }

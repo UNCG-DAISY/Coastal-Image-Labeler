@@ -10,11 +10,11 @@ interface Params {
   }
 }
 
-export async function submitDoodleImageTags({ body }: Params) {
+export async function submitScribbleImageTags({ body }: Params) {
   const data = await apiRequest({
     body: body,
     method: 'POST',
-    route: routes.postReq.doodleTagImage,
+    route: routes.postReq.scribbleTagImage,
     headers: {
       credentials: 'include',
     },

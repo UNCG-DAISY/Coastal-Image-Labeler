@@ -12,14 +12,14 @@ import {
   CatalogDocument,
   ArchiveDocument,
   QuestionSetQuestions,
-  DoodleQuestion,
+  ScribbleQuestion,
 } from '@/interfaces/models'
 import React from 'react'
 import Router from 'next/router'
 import { SuccessErrorBar } from '@/components/Snackbar'
 import { submitImageTags } from '@/components/API/post/submitTags'
 import { routes } from '@/components/Constants'
-import DoodleOnImage from '@/components/Doodle/index'
+import ScribbleOnImage from '@/components/Scribble/index'
 interface Props {
   user: UserProp
   imageDocument: ImageDocument
@@ -76,19 +76,19 @@ export function ImageTag(props: Props) {
     submitTags({})
   }
 
-  const doodleQuestion: DoodleQuestion[] = questionSetDocument.questions.filter(
+  const scribbleQuestion: ScribbleQuestion[] = questionSetDocument.questions.filter(
     (question: QuestionSetQuestions) => {
-      if (question.type == 'doodleDraw') return true
+      if (question.type == 'scribble') return true
     }
   )
 
-  const containsDoodle = doodleQuestion.length > 0
+  const containsScribble = scribbleQuestion.length > 0
 
   function determineCardContent() {
-    if (containsDoodle) {
+    if (containsScribble) {
       return (
         <CardContent>
-          <DoodleOnImage
+          <ScribbleOnImage
             questionSet={questionSetDocument}
             imageDocument={imageDocument}
             user={user}
