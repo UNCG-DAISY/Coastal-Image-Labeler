@@ -86,11 +86,9 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Question Sets',
+      label: 'Labeler Documentation',
       items: [
-        "question_sets/overview",
-        "question_sets/qsets/beach",
-        "question_sets/qsets/coastal"
+        "labeler_doc/overview",
       ],
     },
   ],
