@@ -7,6 +7,9 @@ https://github.com/UNCG-DAISY/Coastal-Image-Labeler/commits/master)
 [![DOI](https://zenodo.org/badge/226252747.svg)](https://zenodo.org/badge/latestdoi/226252747)
 [![Actions Status1](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/workflows/Unit%20Tests/badge.svg)](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/actions)
 [![Actions Status2](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/workflows/Deploy%20Docusaurus/badge.svg)](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/actions)
+[![Earth ArXiv Preprint
+DOI](https://img.shields.io/badge/%F0%9F%8C%8D%F0%9F%8C%8F%F0%9F%8C%8E%20EarthArXiv-doi.org%2F10.31223%2FX5JW23-%23FF7F2A)](https://doi.org/10.31223/X5JW23)
+
 ### It's a labeling tool!
 
 ![Labeler](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/blob/master/docs/static/img/labeler.gif)
