@@ -7,8 +7,6 @@ https://github.com/UNCG-DAISY/Coastal-Image-Labeler/commits/master)
 [![DOI](https://zenodo.org/badge/226252747.svg)](https://zenodo.org/badge/latestdoi/226252747)
 [![Actions Status1](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/workflows/Unit%20Tests/badge.svg)](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/actions)
 [![Actions Status2](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/workflows/Deploy%20Docusaurus/badge.svg)](https://github.com/UNCG-DAISY/Coastal-Image-Labeler/actions)
-[![Earth ArXiv Preprint
-DOI](https://img.shields.io/badge/%F0%9F%8C%8D%F0%9F%8C%8F%F0%9F%8C%8E%20EarthArXiv-doi.org%2F10.31223%2FX5JW23-%23FF7F2A)](https://doi.org/10.31223/X5JW23)
 
 ### It's a labeling tool!
 
@@ -24,11 +22,26 @@ You can check out the Coastal Image Labeler documentation for more info:
 [![Documentation](https://img.shields.io/badge/Documentation-Click%20Me-brightgreen)](
 https://uncg-daisy.github.io/Coastal-Image-Labeler/)
 
-A data release of labeled [Hurricane Florence images is already available](https://doi.org/10.6084/m9.figshare.11604192.v1). You can merge these labels with post-storm 
-images, which can be downloaded from [NOAA NGS](https://storms.ngs.noaa.gov/) or using [this nifty python command line downloading tool](https://github.com/UNCG-DAISY/psi-collect). We are using these labeled images to [detect washover](https://github.com/UNCG-DAISY/WashoverML).
-
 ### Code of Conduct
 
 We hope to foster an inclusive and respectful environment surrounding the contribution and discussion of our project.
 Make sure you understand our [**Code of Conduct**](https://Coastal-Image-Labeler.readthedocs.io/en/latest/code_of_conduct/).
+
+### Projects using the Labeler:
+
+#### Papers:
+
+An Active Learning Pipeline to Detect Hurricane Washover in Post-Storm Aerial Images: [![Earth ArXiv Preprint
+DOI](https://img.shields.io/badge/%F0%9F%8C%8D%F0%9F%8C%8F%F0%9F%8C%8E%20EarthArXiv-doi.org%2F10.31223%2FX5JW23-%23FF7F2A)](https://doi.org/10.31223/X5JW23)
+
+#### Data Releases:
+
+Labels for Hurricane Florence imagery: 343 images, labeled via consensus, [available via figshare](https://doi.org/10.6084/m9.figshare.11604192.v1).
+
+Labels for Hx Florence, Michael and Isaias imagery:
+- v1 (300 labeled images; 2.1k labels): [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4272064.svg)](https://doi.org/10.5281/zenodo.4272064)
+- v1.1 (900 labeled images; 4.5k labels): [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4541480.svg)](https://doi.org/10.5281/zenodo.4541480)
+- v1.2: (soon!) 
+
+You can merge these labels with post-storm images, which can be downloaded from [NOAA NGS](https://storms.ngs.noaa.gov/) or using [this nifty python command line downloading tool](https://github.com/UNCG-DAISY/psi-collect). We are using these labeled images to [detect washover](https://github.com/UNCG-DAISY/WashoverML).
  
