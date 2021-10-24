@@ -34,6 +34,8 @@ Make sure you understand our [**Code of Conduct**](https://Coastal-Image-Labeler
 An Active Learning Pipeline to Detect Hurricane Washover in Post-Storm Aerial Images: [![Earth ArXiv Preprint
 DOI](https://img.shields.io/badge/%F0%9F%8C%8D%F0%9F%8C%8F%F0%9F%8C%8E%20EarthArXiv-doi.org%2F10.31223%2FX5JW23-%23FF7F2A)](https://doi.org/10.31223/X5JW23)
 
+Labeling Poststorm Coastal Imagery for Machine Learning: Measurement of Interrater Agreement: https://doi.org/10.1029/2021EA001896
+
 #### Data Releases:
 
 Labels for Hurricane Florence imagery: 343 images, labeled via consensus, [available via figshare](https://doi.org/10.6084/m9.figshare.11604192.v1).
@@ -42,6 +44,8 @@ Labels for Hx Florence, Hx Michael and Hx Isaias imagery:
 - v1 (300 images; 2.1k labels): [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4272064.svg)](https://doi.org/10.5281/zenodo.4272064)
 - v1.1 (900 images; 4.5k labels): [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4541480.svg)](https://doi.org/10.5281/zenodo.4541480)
 - v1.2: (1500 images; 6.2k labels) : [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4694325.svg)](https://doi.org/10.5281/zenodo.4694325)
+- v1.3: (1500 images; 6.2k labels; 100 image quadrants (smaller scale) w/ 400 labels): [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4967050.svg)](https://doi.org/10.5281/zenodo.4967050)
+- v1.4: (1500 images; 6.2k labels; 100 image quadrants (smaller scale) w/ 400 labels; 100 images labeled by noncoastal experts - 400 labels): [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5172799.svg)](https://doi.org/10.5281/zenodo.5172799)
 
 You can merge these labels with post-storm images, which can be downloaded from [NOAA NGS](https://storms.ngs.noaa.gov/) or using [this nifty python command line downloading tool](https://github.com/UNCG-DAISY/psi-collect). We are using these labeled images to [detect washover](https://github.com/UNCG-DAISY/WashoverML).
  
