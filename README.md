@@ -25,7 +25,7 @@ https://uncg-daisy.github.io/Coastal-Image-Labeler/)
 ### Code of Conduct
 
 We hope to foster an inclusive and respectful environment surrounding the contribution and discussion of our project.
-Make sure you understand our [**Code of Conduct**](https://Coastal-Image-Labeler.readthedocs.io/en/latest/code_of_conduct/).
+Make sure you understand our [**Code of Conduct**](https://uncg-daisy.github.io/Coastal-Image-Labeler/docs/code_of_conduct).
 
 ### Projects using the Labeler:
 
