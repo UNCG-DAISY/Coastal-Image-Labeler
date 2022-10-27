@@ -46,6 +46,7 @@ Labels for Hx Florence, Hx Michael and Hx Isaias imagery:
 - v1.2: (1500 images; 6.2k labels) : [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4694325.svg)](https://doi.org/10.5281/zenodo.4694325)
 - v1.3: (1500 images; 6.2k labels; 100 image quadrants (smaller scale) w/ 400 labels): [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4967050.svg)](https://doi.org/10.5281/zenodo.4967050)
 - v1.4: (1500 images; 6.2k labels; 100 image quadrants (smaller scale) w/ 400 labels; 100 images labeled by noncoastal experts - 400 labels): [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5172799.svg)](https://doi.org/10.5281/zenodo.5172799)
+- v2.0: (4250 images; 10.2k labels; 100 image quadrants (smaller scale) w/ 400 labels; 100 images labeled by noncoastal experts - 400 labels): [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7217621.svg)](https://doi.org/10.5281/zenodo.7217621)
 
 You can merge these labels with post-storm images, which can be downloaded from [NOAA NGS](https://storms.ngs.noaa.gov/) or using [this nifty python command line downloading tool](https://github.com/UNCG-DAISY/psi-collect). We are using these labeled images to [detect washover](https://github.com/UNCG-DAISY/WashoverML).
  
