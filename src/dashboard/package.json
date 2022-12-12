@@ -46,7 +46,7 @@
     "csv-stringify": "^5.5.1",
     "csv-writer": "^1.6.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-session": "^1.17.1",
     "express-validator": "^6.6.1",
     "jest-express": "^1.12.0",
