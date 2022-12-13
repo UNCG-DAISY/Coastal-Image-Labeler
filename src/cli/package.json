@@ -39,7 +39,7 @@
     "commander": "^5.1.0",
     "configstore": "^5.0.1",
     "decompress": "^4.2.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "glob": "^7.1.6",
     "glob-promise": "^3.4.0",
     "inquirer": "^7.1.0",
